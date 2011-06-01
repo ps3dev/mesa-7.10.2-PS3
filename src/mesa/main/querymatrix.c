@@ -77,14 +77,16 @@ fpclassify(double x)
 
 /* fpclassify is available. */
 
+/*
 #elif !defined(_XOPEN_SOURCE) || _XOPEN_SOURCE < 600
 
 enum {FP_NAN, FP_INFINITE, FP_ZERO, FP_SUBNORMAL, FP_NORMAL}
 fpclassify(double x)
 {
-   /* XXX do something better someday */
+   // XXX do something better someday
    return FP_NORMAL;
 }
+*/
 
 #endif
 

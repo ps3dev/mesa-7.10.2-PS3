@@ -134,7 +134,7 @@ typedef union { GLfloat f; GLint i; } fi_type;
 #define exp2f(f) ((float) exp2(f))
 #define floorf(f) ((float) floor(f))
 #define logf(f) ((float) log(f))
-#define log2f(f) ((float) log2(f))
+//#define log2f(f) ((float) log2(f))
 #define powf(x,y) ((float) pow(x,y))
 #define sinf(f) ((float) sin(f))
 #define sinhf(f) ((float) sinh(f))
@@ -518,7 +518,7 @@ _mesa_align_realloc(void *oldBuffer, size_t oldSize, size_t newSize,
 extern void *
 _mesa_exec_malloc( GLuint size );
 
-extern void 
+extern void
 _mesa_exec_free( void *addr );
 
 extern void *
@@ -556,7 +556,7 @@ _mesa_half_to_float(GLhalfARB h);
 
 
 extern void *
-_mesa_bsearch( const void *key, const void *base, size_t nmemb, size_t size, 
+_mesa_bsearch( const void *key, const void *base, size_t nmemb, size_t size,
                int (*compar)(const void *, const void *) );
 
 extern char *

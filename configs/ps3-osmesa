@@ -1,0 +1,32 @@
+##
+## ps3-osmesa
+## by Dan Peori (dan.peori@oopo.net)
+##
+
+include $(TOP)/configs/default
+
+CONFIG_NAME = ps3-osmesa
+
+CC = ppu-gcc
+CFLAGS = -I$(PSL1GHT)/ppu/include -I$(PS3DEV)/portlibs/ppu/include
+
+CXX = ppu-g++
+CXXFLAGS = $(CFLAGS)
+
+LDFLAGS = -L$(PSL1GHT)/ppu/lib -L$(PS3DEV)/portlibs/ppu/lib -lrt -llv2
+
+MKLIB_OPTIONS = -static
+
+OSMESA_LIB_NAME = libOSMesa.a
+
+SRC_DIRS = glsl mapi/glapi mesa glu
+
+DRIVER_DIRS = osmesa
+
+OSMESA_LIB_DEPS = -lm
+
+GLU_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(OSMESA_LIB)
+
+APP_LIB_DEPS = -lOSMesa -lGLU -lm
+
+INSTALL_DIR = $(PS3DEV)/portlibs/ppu
