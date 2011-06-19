@@ -17,6 +17,7 @@ LDFLAGS = -L$(PSL1GHT)/ppu/lib -L$(PS3DEV)/portlibs/ppu/lib -lrt -llv2
 
 MKLIB_OPTIONS = -static
 
+GLU_LIB_NAME = libGLU.a
 OSMESA_LIB_NAME = libOSMesa.a
 
 SRC_DIRS = glsl mapi/glapi mesa glu
