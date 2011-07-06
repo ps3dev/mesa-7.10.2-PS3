@@ -30,4 +30,6 @@ GLU_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(OSMESA_LIB)
 
 APP_LIB_DEPS = -lOSMesa -lGLU -lm
 
+OSMESA_PC_LIB_PRIV = -lstdc++ -lm
+
 INSTALL_DIR = $(PS3DEV)/portlibs/ppu
