@@ -8,10 +8,12 @@ include $(TOP)/configs/default
 CONFIG_NAME = ps3-osmesa
 
 CC = ppu-gcc
-CFLAGS = -I$(PSL1GHT)/ppu/include -I$(PS3DEV)/portlibs/ppu/include
+CFLAGS = $(OPT_FLAGS) -I$(PSL1GHT)/ppu/include -I$(PS3DEV)/portlibs/ppu/include
 
 CXX = ppu-g++
 CXXFLAGS = $(CFLAGS)
+
+OPT_FLAGS = -mcpu=cell -mabi=altivec -maltivec
 
 LDFLAGS = -L$(PSL1GHT)/ppu/lib -L$(PS3DEV)/portlibs/ppu/lib -lrt -llv2
 
