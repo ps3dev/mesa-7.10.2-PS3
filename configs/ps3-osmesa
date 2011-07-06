@@ -15,7 +15,7 @@ CXXFLAGS = $(CFLAGS)
 
 LDFLAGS = -L$(PSL1GHT)/ppu/lib -L$(PS3DEV)/portlibs/ppu/lib -lrt -llv2
 
-MKLIB_OPTIONS = -static
+MKLIB_OPTIONS = -static -arch GNU
 
 GLU_LIB_NAME = libGLU.a
 OSMESA_LIB_NAME = libOSMesa.a
