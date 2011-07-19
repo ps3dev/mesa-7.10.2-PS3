@@ -152,6 +152,7 @@ openbsd \
 osf1 \
 osf1-static \
 ps3-osmesa \
+psl1ght-rsx \
 solaris-x86 \
 solaris-x86-gcc \
 solaris-x86-gcc-static \
