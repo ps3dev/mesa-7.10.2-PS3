@@ -75,6 +75,12 @@ egl_g3d_get_platform(_EGLDriver *drv, _EGLPlatformType plat)
          nplat = native_get_fbdev_platform();
 #endif
          break;
+      case _EGL_PLATFORM_PSL1GHT:
+         plat_name = "PSL1GHT";
+#ifdef HAVE_PSL1GHT_BACKEND
+         nplat = native_get_psl1ght_platform();
+#endif
+         break;
       default:
          break;
       }

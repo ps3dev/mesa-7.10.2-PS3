@@ -98,6 +98,12 @@ typedef Window   EGLNativeWindowType;
 
 #endif /* MESA_EGL_NO_X11_HEADERS */
 
+#elif defined(__PPU__) /* PSL1GHT */
+
+typedef void *EGLNativeDisplayType;
+typedef void *EGLNativePixmapType;
+typedef void *EGLNativeWindowType;
+
 #else
 #error "Platform not recognized"
 #endif

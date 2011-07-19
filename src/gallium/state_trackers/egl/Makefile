@@ -34,8 +34,13 @@ fbdev_SOURCES = $(wildcard fbdev/*.c)
 fbdev_OBJECTS = $(fbdev_SOURCES:.c=.o)
 
 
-ALL_INCLUDES = $(common_INCLUDES) $(x11_INCLUDES) $(drm_INCLUDES) $(fbdev_INCLUDES)
-ALL_SOURCES = $(common_SOURCES) $(x11_SOURCES) $(drm_SOURCES) $(fbdev_SOURCES)
+psl1ght_INCLUDES = -I$(TOP)/src/gallium/winsys
+psl1ght_SOURCES = $(wildcard psl1ght/*.c)
+psl1ght_OBJECTS = $(psl1ght_SOURCES:.c=.o)
+
+
+ALL_INCLUDES = $(common_INCLUDES) $(x11_INCLUDES) $(drm_INCLUDES) $(fbdev_INCLUDES) $(psl1ght_INCLUDES)
+ALL_SOURCES = $(common_SOURCES) $(x11_SOURCES) $(drm_SOURCES) $(fbdev_SOURCES) $(psl1ght_SOURCES)
 
 EGL_OBJECTS = $(common_OBJECTS)
 EGL_CPPFLAGS = $(common_INCLUDES)
@@ -52,6 +57,10 @@ endif
 ifneq ($(findstring fbdev, $(EGL_PLATFORMS)),)
 EGL_OBJECTS += $(fbdev_OBJECTS)
 EGL_CPPFLAGS += -DHAVE_FBDEV_BACKEND
+endif
+ifneq ($(findstring psl1ght, $(EGL_PLATFORMS)),)
+EGL_OBJECTS += $(psl1ght_OBJECTS)
+EGL_CPPFLAGS += -DHAVE_PSL1GHT_BACKEND
 endif
 
 ##### TARGETS #####
@@ -92,5 +101,8 @@ $(drm_OBJECTS): %.o: %.c
 
 $(fbdev_OBJECTS): %.o: %.c
 	$(call egl-cc,fbdev)
+
+$(psl1ght_OBJECTS): %.o: %.c
+	$(call egl-cc,psl1ght)
 
 sinclude depend

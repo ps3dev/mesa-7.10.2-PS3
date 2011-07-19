@@ -89,6 +89,7 @@ library_suffix(void)
 #endif
 
 
+#if !defined(_EGL_OS_PSL1GHT)
 /**
  * Open the named driver and find its bootstrap function: _eglMain().
  */
@@ -145,6 +146,7 @@ _eglOpenLibrary(const char *driverPath, lib_handle *handle)
    *handle = lib;
    return mainFunc;
 }
+#endif
 
 
 /**
@@ -154,17 +156,29 @@ static EGLBoolean
 _eglLoadModule(_EGLModule *mod)
 {
    _EGLMain_t mainFunc;
+#if !defined(_EGL_OS_PSL1GHT)
    lib_handle lib;
+#endif
    _EGLDriver *drv;
 
+#if !defined(_EGL_OS_PSL1GHT)
    mainFunc = _eglOpenLibrary(mod->Path, &lib);
+#else
+   extern _EGLDriver *psl1ght_eglMain(const char *args);
+   if (!strcmp(mod->Path, "egl_gallium"))
+     mainFunc = psl1ght_eglMain;
+   else
+     mainFunc = NULL;
+#endif
    if (!mainFunc)
       return EGL_FALSE;
 
    drv = mainFunc(NULL);
    if (!drv) {
+#if !defined(_EGL_OS_PSL1GHT)
       if (lib)
          close_library(lib);
+#endif
       return EGL_FALSE;
    }
 
@@ -173,7 +187,9 @@ _eglLoadModule(_EGLModule *mod)
       drv->Name = "UNNAMED";
    }
 
+#if !defined(_EGL_OS_PSL1GHT)
    mod->Handle = (void *) lib;
+#endif
    mod->Driver = drv;
 
    return EGL_TRUE;
@@ -189,8 +205,10 @@ _eglUnloadModule(_EGLModule *mod)
    /* destroy the driver */
    if (mod->Driver && mod->Driver->Unload)
       mod->Driver->Unload(mod->Driver);
+#if !defined(_EGL_OS_PSL1GHT)
    if (mod->Handle)
       close_library(mod->Handle);
+#endif
 
    mod->Driver = NULL;
    mod->Handle = NULL;
@@ -258,6 +276,9 @@ _eglFreeModule(void *module)
 static EGLBoolean
 _eglLoaderFile(const char *dir, size_t len, void *loader_data)
 {
+#if defined(_EGL_OS_PSL1GHT)
+   const char *path = (const char *) loader_data;
+#else
    char path[1024];
    const char *filename = (const char *) loader_data;
    size_t flen = strlen(filename);
@@ -293,6 +314,7 @@ _eglLoaderFile(const char *dir, size_t len, void *loader_data)
    /* check if the file exists */
    if (access(path, F_OK))
       return EGL_TRUE;
+#endif
 #endif
 
    _eglAddModule(path);
@@ -500,6 +522,10 @@ _eglAddDefaultDrivers(void)
       "egl_gallium",
       "egl_dri2",
       "egl_glx"
+   };
+#elif defined(_EGL_OS_PSL1GHT)
+   const char *DefaultDriverNames[] = {
+      "egl_gallium"
    };
 #endif
 

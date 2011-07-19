@@ -21,9 +21,10 @@ MKLIB_OPTIONS = -static -arch GNU
 
 GL_LIB_NAME = libGL.a
 GLU_LIB_NAME = libGLU.a
+EGL_LIB_NAME = libEGL.a
 
 SRC_DIRS = glsl mapi/glapi mesa \
-	gallium gallium/targets glu
+	gallium gallium/winsys gallium/targets glu egl
 
 # Build no traditional Mesa drivers:
 DRIVER_DIRS = 
@@ -38,7 +39,13 @@ GL_PC_LIB_PRIV = -lstdc++ -lm
 
 INSTALL_DIR = $(PS3DEV)/portlibs/ppu
 
-GALLIUM_DIRS = auxiliary drivers winsys
 GALLIUM_DRIVERS_DIRS = nouveau nvfx trace
 GALLIUM_WINSYS_DIRS = psl1ght
-GALLIUM_TARGET_DIRS =
+GALLIUM_TARGET_DIRS = egl-psl1ght
+GALLIUM_STATE_TRACKERS_DIRS = egl
+
+EGL_PLATFORMS = psl1ght
+EGL_DRIVERS_DIRS = 
+
+EGL_LIB_DEPS = 	$(TOP)/src/gallium/targets/egl-psl1ght/libeglpsl1ght.a \
+	$(TOP)/src/gallium/state_trackers/egl/libegl.a
