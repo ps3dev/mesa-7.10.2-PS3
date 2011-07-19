@@ -30,17 +30,6 @@
 
 #include "nouveau_private.h"
 
-int
-nouveau_bo_init(struct nouveau_device *dev)
-{
-	return 0;
-}
-
-void
-nouveau_bo_takedown(struct nouveau_device *dev)
-{
-}
-
 static int
 nouveau_bo_info(struct nouveau_bo_priv *nvbo, struct drm_nouveau_gem_info *arg)
 {

@@ -38,20 +38,4 @@ struct nouveau_device_priv {
 };
 #define nouveau_device(n) ((struct nouveau_device_priv *)(n))
 
-int
-nouveau_device_open_existing(struct nouveau_device **, int close,
-			     int fd, void * /*drm_context_t*/ ctx);
-
-int
-nouveau_device_open(struct nouveau_device **, const char *busid);
-
-void
-nouveau_device_close(struct nouveau_device **);
-
-int
-nouveau_device_get_param(struct nouveau_device *, uint64_t param, uint64_t *v);
-
-int
-nouveau_device_set_param(struct nouveau_device *, uint64_t param, uint64_t val);
-
 #endif

@@ -25,8 +25,6 @@
 #ifndef __NOUVEAU_DRM_H__
 #define __NOUVEAU_DRM_H__
 
-#define NOUVEAU_DRM_HEADER_PATCHLEVEL 16
-
 struct drm_nouveau_channel_alloc {
 	uint32_t     fb_ctxdma_handle;
 	uint32_t     tt_ctxdma_handle;
@@ -181,12 +179,6 @@ struct drm_nouveau_gem_cpu_prep {
 
 struct drm_nouveau_gem_cpu_fini {
 	uint32_t handle;
-};
-
-enum nouveau_bus_type {
-	NV_AGP     = 0,
-	NV_PCI     = 1,
-	NV_PCIE    = 2,
 };
 
 struct drm_nouveau_sarea {

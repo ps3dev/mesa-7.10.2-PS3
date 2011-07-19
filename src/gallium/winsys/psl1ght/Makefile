@@ -14,9 +14,9 @@ PSL1GHT_WINSYS_SOURCES = psl1ght_winsys.c
 PSL1GHT_WINSYS_OBJECTS = $(PSL1GHT_WINSYS_SOURCES:.c=.o)
 
 NOUVEAU_SOURCES = nouveau/nouveau_bo.c nouveau/nouveau_channel.c	\
-	nouveau/nouveau_device.c nouveau/nouveau_grobj.c 		\
-	nouveau/nouveau_notifier.c nouveau/nouveau_pushbuf.c		\
-	nouveau/nouveau_reloc.c nouveau/nouveau_resource.c
+	nouveau/nouveau_grobj.c nouveau/nouveau_notifier.c		\
+	nouveau/nouveau_pushbuf.c nouveau/nouveau_reloc.c		\
+	nouveau/nouveau_resource.c
 
 NOUVEAU_OBJECTS = $(NOUVEAU_SOURCES:.c=.o)
 

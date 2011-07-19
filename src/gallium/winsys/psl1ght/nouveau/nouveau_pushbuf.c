@@ -257,8 +257,6 @@ nouveau_pushbuf_flush(struct nouveau_channel *chan, unsigned min)
 	} while (ret == -EAGAIN);
 	nvpb->cal_suffix0 = req.suffix0;
 	nvpb->cal_suffix1 = req.suffix1;
-	nvdev->base.vm_vram_size = req.vram_available;
-	nvdev->base.vm_gart_size = req.gart_available;
 
 	/* Update presumed offset/domain for any buffers that moved.
 	 * Dereference all buffers on validate list

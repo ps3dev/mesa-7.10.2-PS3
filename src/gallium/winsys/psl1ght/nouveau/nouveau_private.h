@@ -124,12 +124,6 @@ struct nouveau_bo_priv {
 };
 #define nouveau_bo(n) ((struct nouveau_bo_priv *)(n))
 
-int
-nouveau_bo_init(struct nouveau_device *);
-
-void
-nouveau_bo_takedown(struct nouveau_device *);
-
 struct drm_nouveau_gem_pushbuf_bo *
 nouveau_bo_emit_buffer(struct nouveau_channel *, struct nouveau_bo *);
 
