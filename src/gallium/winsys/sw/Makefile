@@ -14,6 +14,10 @@ ifneq ($(findstring fbdev, $(EGL_PLATFORMS)),)
 SUBDIRS += fbdev
 endif
 
+ifneq ($(findstring psl1ght, $(EGL_PLATFORMS)),)
+SUBDIRS += psl1ght
+endif
+
 default install clean:
 	@for dir in $(SUBDIRS) ; do \
 		if [ -d $$dir ] ; then \

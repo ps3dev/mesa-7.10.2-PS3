@@ -39,8 +39,8 @@ GL_PC_LIB_PRIV = -lstdc++ -lm
 
 INSTALL_DIR = $(PS3DEV)/portlibs/ppu
 
-GALLIUM_DRIVERS_DIRS = nouveau nvfx trace
-GALLIUM_WINSYS_DIRS = psl1ght
+GALLIUM_DRIVERS_DIRS = nouveau nvfx softpipe trace
+GALLIUM_WINSYS_DIRS = sw psl1ght
 GALLIUM_TARGET_DIRS = egl-psl1ght
 GALLIUM_STATE_TRACKERS_DIRS = egl
 

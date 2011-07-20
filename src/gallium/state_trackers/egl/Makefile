@@ -34,7 +34,7 @@ fbdev_SOURCES = $(wildcard fbdev/*.c)
 fbdev_OBJECTS = $(fbdev_SOURCES:.c=.o)
 
 
-psl1ght_INCLUDES = -I$(TOP)/src/gallium/winsys
+psl1ght_INCLUDES = -I$(TOP)/src/gallium/winsys/sw
 psl1ght_SOURCES = $(wildcard psl1ght/*.c)
 psl1ght_OBJECTS = $(psl1ght_SOURCES:.c=.o)
 

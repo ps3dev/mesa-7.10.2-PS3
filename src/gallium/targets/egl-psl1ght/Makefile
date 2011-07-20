@@ -9,6 +9,8 @@ LIBRARY_INCLUDES = \
 	-I$(TOP)/src/egl/main \
 	-I$(TOP)/src/mesa
 
+LIBRARY_DEFINES = -DGALLIUM_SOFTPIPE
+
 C_SOURCES = egl_psl1ght.c
 
 include ../../Makefile.template

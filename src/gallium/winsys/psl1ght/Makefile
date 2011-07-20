@@ -21,8 +21,10 @@ NOUVEAU_SOURCES = nouveau/nouveau_bo.c nouveau/nouveau_channel.c	\
 NOUVEAU_OBJECTS = $(NOUVEAU_SOURCES:.c=.o)
 
 LIBS = \
+	$(TOP)/src/gallium/winsys/sw/psl1ght/libpsl1ght.a \
 	$(TOP)/src/gallium/drivers/nvfx/libnvfx.a \
 	$(TOP)/src/gallium/drivers/nouveau/libnouveau.a \
+	$(TOP)/src/gallium/drivers/softpipe/libsoftpipe.a \
 	$(TOP)/src/gallium/drivers/trace/libtrace.a \
 	$(TOP)/src/mapi/glapi/libglapi.a \
 	$(TOP)/src/mesa/libmesagallium.a \
