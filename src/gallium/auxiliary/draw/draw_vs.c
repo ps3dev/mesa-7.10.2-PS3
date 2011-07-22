@@ -106,7 +106,7 @@ draw_create_vertex_shader(struct draw_context *draw,
    if (!draw->pt.middle.llvm) {
 #if defined(PIPE_ARCH_X86)
       vs = draw_create_vs_sse( draw, shader );
-#elif defined(PIPE_ARCH_PPC)
+#elif defined(PIPE_ARCH_PPC) && !defined(__PPU__)
       vs = draw_create_vs_ppc( draw, shader );
 #endif
    }
