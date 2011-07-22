@@ -5,11 +5,13 @@
 
 #include "common/native.h"
 #include "common/native_helper.h"
-#include "psl1ght/psl1ght_sw_winsys.h"
 #include "egldefines.h"
 
 #include <stdio.h>
 #include <sysutil/video.h>
+#include <rsx/rsx.h>
+
+#include "psl1ght/psl1ght_sw_winsys.h"
 
 struct psl1ght_mode {
      struct native_mode base;
@@ -37,7 +39,28 @@ struct psl1ght_display {
 
     struct psl1ght_connector primary_connector;
     struct psl1ght_connector secondary_connector;
+
+    struct psl1ght_surface *current_surface;
 };
+
+struct psl1ght_surface {
+   struct native_surface base;
+
+   struct psl1ght_display *psdpy;
+   struct resource_surface *rsurf;
+   int width, height;
+   u8 format;
+
+   unsigned int sequence_number;
+
+   boolean is_current;
+};
+
+static INLINE struct psl1ght_mode *
+psl1ght_mode(const struct native_mode *nmode)
+{
+   return (struct psl1ght_mode *) nmode;
+}
 
 static INLINE struct psl1ght_connector *
 psl1ght_connector(const struct native_connector *nconn)
@@ -49,6 +72,12 @@ static INLINE struct psl1ght_display *
 psl1ght_display(const struct native_display *ndpy)
 {
    return (struct psl1ght_display *) ndpy;
+}
+
+static INLINE struct psl1ght_surface *
+psl1ght_surface(const struct native_surface *nsurf)
+{
+   return (struct psl1ght_surface *) nsurf;
 }
 
 static const struct native_config psl1ght_configs[] =
@@ -75,13 +104,138 @@ static const struct native_config psl1ght_configs[] =
     */
   };
 
+static boolean
+psl1ght_surface_validate(struct native_surface *nsurf, uint attachment_mask,
+			 unsigned int *seq_num, struct pipe_resource **textures,
+			 int *width, int *height)
+{
+   struct psl1ght_surface *pssurf = psl1ght_surface(nsurf);
+
+   if (!resource_surface_add_resources(pssurf->rsurf, attachment_mask))
+      return FALSE;
+   if (textures)
+      resource_surface_get_resources(pssurf->rsurf, textures, attachment_mask);
+
+   if (seq_num)
+      *seq_num = pssurf->sequence_number;
+   if (width)
+      *width = pssurf->width;
+   if (height)
+      *height = pssurf->height;
+
+   return TRUE;
+}
+
+static boolean
+psl1ght_surface_flush_frontbuffer(struct native_surface *nsurf)
+{
+   struct psl1ght_surface *pssurf = psl1ght_surface(nsurf);
+
+   if (!pssurf->is_current)
+      return TRUE;
+
+   return resource_surface_present(pssurf->rsurf,
+         NATIVE_ATTACHMENT_FRONT_LEFT, NULL);
+}
+
+static boolean
+psl1ght_surface_swap_buffers(struct native_surface *nsurf)
+{
+   struct psl1ght_surface *pssurf = psl1ght_surface(nsurf);
+   struct psl1ght_display *psdpy = pssurf->psdpy;
+   boolean ret = TRUE;
+
+   if (pssurf->is_current) {
+      ret = resource_surface_present(pssurf->rsurf,
+            NATIVE_ATTACHMENT_BACK_LEFT, NULL);
+   }
+
+   resource_surface_swap_buffers(pssurf->rsurf,
+         NATIVE_ATTACHMENT_FRONT_LEFT, NATIVE_ATTACHMENT_BACK_LEFT, FALSE);
+   /* the front/back textures are swapped */
+   pssurf->sequence_number++;
+   psdpy->event_handler->invalid_surface(&psdpy->base,
+         &pssurf->base, pssurf->sequence_number);
+
+   return ret;
+}
+
+static boolean
+psl1ght_surface_present(struct native_surface *nsurf,
+			enum native_attachment natt,
+			boolean preserve,
+			uint swap_interval)
+{
+   boolean ret;
+
+   if (preserve || swap_interval)
+      return FALSE;
+
+   switch (natt) {
+   case NATIVE_ATTACHMENT_FRONT_LEFT:
+      ret = psl1ght_surface_flush_frontbuffer(nsurf);
+      break;
+   case NATIVE_ATTACHMENT_BACK_LEFT:
+      ret = psl1ght_surface_swap_buffers(nsurf);
+      break;
+   default:
+      ret = FALSE;
+      break;
+   }
+
+   return ret;
+}
+
+static void
+psl1ght_surface_wait(struct native_surface *nsurf)
+{
+   /* no-op */
+}
+
+static void
+psl1ght_surface_destroy(struct native_surface *nsurf)
+{
+   struct psl1ght_surface *pssurf = psl1ght_surface(nsurf);
+
+   resource_surface_destroy(pssurf->rsurf);
+   FREE(pssurf);
+}
+
 static struct native_surface *
 psl1ght_display_create_scanout_surface(struct native_display *ndpy,
 				       const struct native_config *nconf,
 				       uint width, uint height)
 {
-   printf("psl1ght_display_create_scanout_surface not implemented yet\n");
-   return NULL;
+   struct psl1ght_display *psdpy = psl1ght_display(ndpy);
+   struct psl1ght_surface *pssurf;
+
+   pssurf = CALLOC_STRUCT(psl1ght_surface);
+   if (!pssurf)
+      return NULL;
+
+   pssurf->psdpy = psdpy;
+   pssurf->width = width;
+   pssurf->height = height;
+   pssurf->format = nconf->native_visual_id;
+
+   pssurf->rsurf = resource_surface_create(psdpy->base.screen,
+         nconf->color_format,
+         PIPE_BIND_RENDER_TARGET |
+         PIPE_BIND_DISPLAY_TARGET |
+         PIPE_BIND_SCANOUT);
+   if (!pssurf->rsurf) {
+      FREE(pssurf);
+      return NULL;
+   }
+
+   resource_surface_set_size(pssurf->rsurf, pssurf->width, pssurf->height);
+
+   pssurf->base.destroy = psl1ght_surface_destroy;
+   pssurf->base.present = psl1ght_surface_present;
+   pssurf->base.validate = psl1ght_surface_validate;
+   pssurf->base.wait = psl1ght_surface_wait;
+
+   return &pssurf->base;
 }
 
 static boolean
@@ -90,8 +244,52 @@ psl1ght_display_program(struct native_display *ndpy, int crtc_idx,
 			const struct native_connector **nconns, int num_nconns,
 			const struct native_mode *nmode)
 {
-   printf("psl1ght_display_program not implemented yet\n");
-   return FALSE;
+   struct psl1ght_display *psdpy = psl1ght_display(ndpy);
+   struct psl1ght_surface *pssurf = psl1ght_surface(nsurf);
+   struct psl1ght_mode *psmode = psl1ght_mode(nmode);
+
+   if (x || y)
+      return FALSE;
+
+   if (pssurf) {
+      const videoDisplayMode *vmode = psmode->vmode;
+      videoConfiguration config;
+      int i;
+
+      if(!resource_surface_add_resources(pssurf->rsurf,
+					 (1 << NATIVE_ATTACHMENT_FRONT_LEFT) |
+					 (1 << NATIVE_ATTACHMENT_BACK_LEFT)))
+	 return FALSE;
+
+      memset(&config, 0, sizeof(config));
+      config.resolution = vmode->resolution;
+      config.format = pssurf->format;
+      config.aspect = vmode->aspect;
+      config.pitch  = pssurf->width * 4;
+      /* FIXME: scan mode & refresh rate? */
+
+      for(i=0; i<num_nconns; i++) {
+	 u32 videoOut = psl1ght_connector(nconns[i])->videoOut;
+	 if (videoConfigure(videoOut, &config, NULL, 1))
+	    return FALSE;
+      }
+   }
+
+   if (psdpy->current_surface) {
+      if (psdpy->current_surface == pssurf)
+         return TRUE;
+      /*...*/
+      psdpy->current_surface->is_current = FALSE;
+      psdpy->current_surface = NULL;
+   }
+
+   if (pssurf) {
+      /*...*/
+      pssurf->is_current = TRUE;
+   }
+   psdpy->current_surface = pssurf;
+
+   return TRUE;
 }
 
 static const struct native_mode **
@@ -272,7 +470,7 @@ psl1ght_display_init_connector(struct native_connector *nconn, u32 videoOut)
 }
 
 static boolean
-psl1ght_display_init(struct native_display *ndpy)
+psl1ght_display_init(struct native_display *ndpy, gcmContextData *ctx)
 {
    struct psl1ght_display *psdpy = psl1ght_display(ndpy);
    struct sw_winsys *ws;
@@ -283,26 +481,18 @@ psl1ght_display_init(struct native_display *ndpy)
 				       VIDEO_SECONDARY))
       return FALSE;
 
-   ws = psl1ght_create_sw_winsys(PIPE_FORMAT_X8R8G8B8_UNORM);
+   ws = psl1ght_create_sw_winsys(ctx);
    if (ws) {
       psdpy->base.screen =
          psdpy->event_handler->new_sw_screen(&psdpy->base, ws);
-   }
-
-   if (psdpy->base.screen) {
-      if (!psdpy->base.screen->is_format_supported(psdpy->base.screen,
-               PIPE_FORMAT_X8R8G8B8_UNORM, PIPE_TEXTURE_2D, 0,
-               PIPE_BIND_RENDER_TARGET, 0)) {
-         psdpy->base.screen->destroy(psdpy->base.screen);
-         psdpy->base.screen = NULL;
-      }
    }
 
    return (psdpy->base.screen != NULL);
 }
 
 static struct native_display *
-psl1ght_display_create(void *dpy, struct native_event_handler *event_handler,
+psl1ght_display_create(gcmContextData *ctx,
+		       struct native_event_handler *event_handler,
 		       void *user_data)
 {
    struct psl1ght_display *psdpy;
@@ -314,7 +504,7 @@ psl1ght_display_create(void *dpy, struct native_event_handler *event_handler,
    psdpy->event_handler = event_handler;
    psdpy->base.user_data = user_data;
 
-   if (!psl1ght_display_init(&psdpy->base)) {
+   if (!psl1ght_display_init(&psdpy->base, ctx)) {
       psl1ght_display_destroy(&psdpy->base);
       return NULL;
    }
@@ -333,8 +523,9 @@ native_create_display(void *dpy, struct native_event_handler *event_handler,
                       void *user_data)
 {
    struct native_display *ndpy;
+   gcmContextData *ctx = (gcmContextData *)dpy;
 
-   ndpy = psl1ght_display_create(dpy, event_handler, user_data);
+   ndpy = psl1ght_display_create(ctx, event_handler, user_data);
 
    return ndpy;
 }

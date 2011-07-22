@@ -5,6 +5,6 @@ struct sw_winsys;
 enum pipe_format;
 
 struct sw_winsys *
-psl1ght_create_sw_winsys(enum pipe_format format);
+psl1ght_create_sw_winsys(gcmContextData *ctx);
 
 #endif /* FBDEV_SW_WINSYS */
