@@ -8,7 +8,11 @@
 #ifdef EGL_MESA_screen_surface
 
 
+#if defined(_EGL_OS_PSL1GHT)
+#define _EGL_SCREEN_MAX_MODES 128
+#else
 #define _EGL_SCREEN_MAX_MODES 16
+#endif
 
 
 /**
