@@ -217,7 +217,7 @@ lp_build_undef(struct gallivm_state *gallivm, struct lp_type type)
    LLVMTypeRef vec_type = lp_build_vec_type(gallivm, type);
    return LLVMGetUndef(vec_type);
 }
-               
+
 
 LLVMValueRef
 lp_build_zero(struct gallivm_state *gallivm, struct lp_type type)
@@ -233,7 +233,7 @@ lp_build_zero(struct gallivm_state *gallivm, struct lp_type type)
       return LLVMConstNull(vec_type);
    }
 }
-               
+
 
 LLVMValueRef
 lp_build_one(struct gallivm_state *gallivm, struct lp_type type)
@@ -278,7 +278,7 @@ lp_build_one(struct gallivm_state *gallivm, struct lp_type type)
    else
       return LLVMConstVector(elems, type.length);
 }
-               
+
 
 /**
  * Build constant-valued element from a scalar value.
@@ -346,8 +346,8 @@ lp_build_const_int_vec(struct gallivm_state *gallivm, struct lp_type type,
 
 LLVMValueRef
 lp_build_const_aos(struct gallivm_state *gallivm,
-                   struct lp_type type, 
-                   double r, double g, double b, double a, 
+                   struct lp_type type,
+                   double r, double g, double b, double a,
                    const unsigned char *swizzle)
 {
    const unsigned char default_swizzle[4] = {0, 1, 2, 3};

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -64,7 +64,7 @@ static int brw_set_prim(struct brw_context *brw, unsigned prim )
 
    if (BRW_DEBUG & DEBUG_PRIMS)
       debug_printf("PRIM: %s\n", u_prim_name(prim));
-   
+
    if (prim != brw->primitive) {
       unsigned reduced_prim;
 
@@ -94,7 +94,7 @@ static int brw_emit_prim(struct brw_context *brw,
 
    if (BRW_DEBUG & DEBUG_PRIMS)
       debug_printf("%s start %d count %d indexed %d hw_prim %d\n",
-                   __FUNCTION__, start, count, indexed, hw_prim); 
+                   __FUNCTION__, start, count, indexed, hw_prim);
 
    prim_packet.header.opcode = CMD_3D_PRIM;
    prim_packet.header.length = sizeof(prim_packet)/4 - 2;
@@ -143,7 +143,7 @@ static int brw_emit_prim(struct brw_context *brw,
 static int
 try_draw_range_elements(struct brw_context *brw,
 			boolean indexed,
-			unsigned hw_prim, 
+			unsigned hw_prim,
 			unsigned start, unsigned count)
 {
    int ret;
@@ -164,7 +164,7 @@ try_draw_range_elements(struct brw_context *brw,
    ret = brw_upload_state(brw);
    if (ret)
       return ret;
-   
+
    ret = brw_emit_prim(brw, start, count, indexed, hw_prim);
    if (ret)
       return ret;
@@ -196,8 +196,8 @@ brw_draw_vbo(struct pipe_context *pipe, const struct pipe_draw_info *info)
     * XXX: do we really care?
     */
    if (brw->curr.min_index != info->min_index ||
-       brw->curr.max_index != info->max_index) 
-   { 
+       brw->curr.max_index != info->max_index)
+   {
       brw->curr.min_index = info->min_index;
       brw->curr.max_index = info->max_index;
       brw->state.dirty.mesa |= PIPE_NEW_INDEX_RANGE;
@@ -222,7 +222,7 @@ brw_draw_vbo(struct pipe_context *pipe, const struct pipe_draw_info *info)
 
 boolean brw_draw_init( struct brw_context *brw )
 {
-   /* Register our drawing function: 
+   /* Register our drawing function:
     */
    brw->base.draw_vbo = brw_draw_vbo;
 

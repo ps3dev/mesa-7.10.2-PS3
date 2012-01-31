@@ -134,16 +134,16 @@ void draw_pt_fetch_run( struct pt_fetch *fetch,
    unsigned i;
 
    for (i = 0; i < draw->pt.nr_vertex_buffers; i++) {
-      translate->set_buffer(translate, 
-			    i, 
-			    ((char *)draw->pt.user.vbuffer[i] + 
+      translate->set_buffer(translate,
+			    i,
+			    ((char *)draw->pt.user.vbuffer[i] +
 			     draw->pt.vertex_buffer[i].buffer_offset),
 			    draw->pt.vertex_buffer[i].stride,
 			    draw->pt.vertex_buffer[i].max_index);
    }
 
    translate->run_elts( translate,
-			elts, 
+			elts,
 			count,
                         draw->instance_id,
 			verts );

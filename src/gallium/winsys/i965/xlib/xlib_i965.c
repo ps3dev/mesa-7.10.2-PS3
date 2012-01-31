@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Bismarck, ND., USA
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,20 +10,20 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
  * THE COPYRIGHT HOLDERS, AUTHORS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
- * 
+ *
+ *
  **************************************************************************/
 
 /*
@@ -50,11 +50,11 @@
 
 
 
-extern int brw_disasm (FILE *file, 
+extern int brw_disasm (FILE *file,
                        const struct brw_instruction *inst,
                        unsigned count );
 
-extern int intel_decode(const uint32_t *data, 
+extern int intel_decode(const uint32_t *data,
                         int count,
                         uint32_t hw_offset,
                         uint32_t devid);
@@ -193,7 +193,7 @@ err:
    return PIPE_ERROR_OUT_OF_MEMORY;
 }
 
-static void 
+static void
 xlib_brw_bo_destroy( struct brw_winsys_buffer *buffer )
 {
    struct xlib_brw_buffer *buf = xlib_brw_buffer(buffer);
@@ -201,7 +201,7 @@ xlib_brw_bo_destroy( struct brw_winsys_buffer *buffer )
    FREE(buf);
 }
 
-static int 
+static int
 xlib_brw_bo_emit_reloc( struct brw_winsys_buffer *buffer,
                         enum brw_buffer_usage usage,
                         unsigned delta,
@@ -222,7 +222,7 @@ xlib_brw_bo_emit_reloc( struct brw_winsys_buffer *buffer,
    return 0;
 }
 
-static int 
+static int
 xlib_brw_bo_exec( struct brw_winsys_buffer *buffer,
 		     unsigned bytes_used )
 {
@@ -249,9 +249,9 @@ xlib_brw_bo_subdata(struct brw_winsys_buffer *buffer,
    unsigned i;
 
    if (BRW_DEBUG & DEBUG_WINSYS)
-      debug_printf("%s buf %p off %d sz %d %s relocs: %d\n", 
-                   __FUNCTION__, 
-                   (void *)buffer, offset, size, 
+      debug_printf("%s buf %p off %d sz %d %s relocs: %d\n",
+                   __FUNCTION__,
+                   (void *)buffer, offset, size,
                    data_types[data_type],
                    nr_relocs);
 
@@ -262,18 +262,18 @@ xlib_brw_bo_subdata(struct brw_winsys_buffer *buffer,
     */
    for (i = 0; i < nr_relocs; i++) {
       if (BRW_DEBUG & DEBUG_WINSYS)
-         debug_printf("\treloc[%d] usage %s off %d value %x+%x\n", 
+         debug_printf("\treloc[%d] usage %s off %d value %x+%x\n",
                       i, usages[reloc[i].usage], reloc[i].offset,
                       xlib_brw_buffer(reloc[i].bo)->offset, reloc[i].delta);
 
-      *(unsigned *)(buf->virtual + offset + reloc[i].offset) = 
+      *(unsigned *)(buf->virtual + offset + reloc[i].offset) =
          xlib_brw_buffer(reloc[i].bo)->offset + reloc[i].delta;
    }
 
    if (BRW_DUMP)
       brw_dump_data( xbw->chipset.pci_id,
 		     data_type,
-		     buf->offset + offset, 
+		     buf->offset + offset,
 		     buf->virtual + offset, size );
 
 
@@ -281,7 +281,7 @@ xlib_brw_bo_subdata(struct brw_winsys_buffer *buffer,
 }
 
 
-static boolean 
+static boolean
 xlib_brw_bo_is_busy(struct brw_winsys_buffer *buffer)
 {
    if (BRW_DEBUG & DEBUG_WINSYS)
@@ -289,7 +289,7 @@ xlib_brw_bo_is_busy(struct brw_winsys_buffer *buffer)
    return TRUE;
 }
 
-static boolean 
+static boolean
 xlib_brw_bo_references(struct brw_winsys_buffer *a,
 			  struct brw_winsys_buffer *b)
 {
@@ -310,8 +310,8 @@ xlib_brw_check_aperture_space( struct brw_winsys_screen *iws,
       tot_size += buffers[i]->size;
 
    if (BRW_DEBUG & DEBUG_WINSYS)
-      debug_printf("%s %d bufs, tot_size: %d kb\n", 
-                   __FUNCTION__, count, 
+      debug_printf("%s %d bufs, tot_size: %d kb\n",
+                   __FUNCTION__, count,
                    (tot_size + 1023) / 1024);
 
    return PIPE_OK;
@@ -329,7 +329,7 @@ xlib_brw_bo_map(struct brw_winsys_buffer *buffer,
    struct xlib_brw_buffer *buf = xlib_brw_buffer(buffer);
 
    if (BRW_DEBUG & DEBUG_WINSYS)
-      debug_printf("%s %p %s %s\n", __FUNCTION__, (void *)buffer, 
+      debug_printf("%s %p %s %s\n", __FUNCTION__, (void *)buffer,
                    write ? "read/write" : "read",
                    write ? data_types[data_type] : "");
 
@@ -349,7 +349,7 @@ xlib_brw_bo_flush_range( struct brw_winsys_buffer *buffer,
 }
 
 
-static void 
+static void
 xlib_brw_bo_unmap(struct brw_winsys_buffer *buffer)
 {
    struct xlib_brw_buffer *buf = xlib_brw_buffer(buffer);
@@ -364,7 +364,7 @@ xlib_brw_bo_unmap(struct brw_winsys_buffer *buffer)
        buf->modified) {
 
       buf->modified = 0;
-      
+
       /* Consider dumping new buffer contents here, using the
        * flush-range info to minimize verbosity.
        */
@@ -477,14 +477,14 @@ fail:
 
 
 
-struct xm_driver xlib_i965_driver = 
+struct xm_driver xlib_i965_driver =
 {
    .create_pipe_screen = xlib_create_i965_screen,
    .display_surface = xlib_i965_display_surface
 };
 
 
-/* Register this driver at library load: 
+/* Register this driver at library load:
  */
 static void _init( void ) __attribute__((constructor));
 static void _init( void )

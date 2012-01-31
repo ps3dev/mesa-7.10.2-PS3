@@ -89,7 +89,7 @@ static int emit_rss( struct svga_context *svga,
          EMIT_RS( svga, curr->rt[0].dstblend, DSTBLEND, fail );
          EMIT_RS( svga, curr->rt[0].blendeq, BLENDEQUATION, fail );
 
-         EMIT_RS( svga, curr->rt[0].separate_alpha_blend_enable, 
+         EMIT_RS( svga, curr->rt[0].separate_alpha_blend_enable,
                   SEPARATEALPHABLENDENABLE, fail );
 
          if (curr->rt[0].separate_alpha_blend_enable) {
@@ -113,10 +113,10 @@ static int emit_rss( struct svga_context *svga,
    }
 
    if (dirty & (SVGA_NEW_DEPTH_STENCIL | SVGA_NEW_RAST)) {
-      const struct svga_depth_stencil_state *curr = svga->curr.depth; 
-      const struct svga_rasterizer_state *rast = svga->curr.rast; 
+      const struct svga_depth_stencil_state *curr = svga->curr.depth;
+      const struct svga_rasterizer_state *rast = svga->curr.rast;
 
-      if (!curr->stencil[0].enabled) 
+      if (!curr->stencil[0].enabled)
       {
          /* Stencil disabled
           */
@@ -138,7 +138,7 @@ static int emit_rss( struct svga_context *svga,
          EMIT_RS( svga, curr->stencil_mask, STENCILMASK, fail );
          EMIT_RS( svga, curr->stencil_writemask, STENCILWRITEMASK, fail );
       }
-      else 
+      else
       {
          int cw, ccw;
 
@@ -193,7 +193,7 @@ static int emit_rss( struct svga_context *svga,
 
    if (dirty & (SVGA_NEW_RAST | SVGA_NEW_NEED_PIPELINE))
    {
-      const struct svga_rasterizer_state *curr = svga->curr.rast; 
+      const struct svga_rasterizer_state *curr = svga->curr.rast;
       unsigned cullmode = curr->cullmode;
 
       /* Shademode: still need to rearrange index list to move
@@ -221,7 +221,7 @@ static int emit_rss( struct svga_context *svga,
 
    if (dirty & (SVGA_NEW_RAST | SVGA_NEW_FRAME_BUFFER | SVGA_NEW_NEED_PIPELINE))
    {
-      const struct svga_rasterizer_state *curr = svga->curr.rast; 
+      const struct svga_rasterizer_state *curr = svga->curr.rast;
       float slope = 0.0;
       float bias  = 0.0;
 
@@ -270,7 +270,7 @@ fail:
 }
 
 
-struct svga_tracked_state svga_hw_rss = 
+struct svga_tracked_state svga_hw_rss =
 {
    "hw rss state",
 

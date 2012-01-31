@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -37,7 +37,7 @@
 static void print_writemask( unsigned writemask )
 {
    if (writemask != BRW_WRITEMASK_XYZW)
-      debug_printf(".%s%s%s%s", 
+      debug_printf(".%s%s%s%s",
 		   (writemask & BRW_WRITEMASK_X) ? "x" : "",
 		   (writemask & BRW_WRITEMASK_Y) ? "y" : "",
 		   (writemask & BRW_WRITEMASK_Z) ? "z" : "",
@@ -48,7 +48,7 @@ static void print_swizzle( unsigned swizzle )
 {
    char *swz = "xyzw";
    if (swizzle != BRW_SWIZZLE_XYZW)
-      debug_printf(".%c%c%c%c", 
+      debug_printf(".%c%c%c%c",
 		   swz[BRW_GET_SWZ(swizzle, X)],
 		   swz[BRW_GET_SWZ(swizzle, Y)],
 		   swz[BRW_GET_SWZ(swizzle, Z)],
@@ -95,7 +95,7 @@ void brw_wm_print_value( struct brw_wm_compile *c,
 		       struct brw_wm_value *value )
 {
    assert(value);
-   if (c->state >= PASS2_DONE) 
+   if (c->state >= PASS2_DONE)
       brw_print_reg(value->hw_reg);
    else if( value == &c->undef_value )
       debug_printf("undef");
@@ -111,7 +111,7 @@ void brw_wm_print_value( struct brw_wm_compile *c,
    else if (value - c->payload.depth >= 0 &&
 	    value - c->payload.depth < PIPE_MAX_SHADER_INPUTS)
       debug_printf("d%ld", (long) (value - c->payload.depth));
-   else 
+   else
       debug_printf("?");
 }
 
@@ -150,15 +150,15 @@ void brw_wm_print_insn( struct brw_wm_compile *c,
       }
       else
 	 debug_printf("#");
-      if (i < 3)      
+      if (i < 3)
 	 debug_printf(",");
    }
    debug_printf("]");
    print_writemask(inst->writemask);
-   
+
    debug_printf(" = ");
    print_opcode(inst->opcode);
-  
+
    if (inst->saturate)
       debug_printf("_SAT");
 
@@ -173,7 +173,7 @@ void brw_wm_print_insn( struct brw_wm_compile *c,
 	 else
 	    debug_printf("%%");
 
-	 if (i < 3) 
+	 if (i < 3)
 	    debug_printf(",");
 	 else
 	    debug_printf("]");
@@ -230,7 +230,7 @@ static void brw_wm_print_fp_insn( struct brw_wm_compile *c,
       debug_printf("]");
 
    debug_printf(nr_args ? ", " : "\n");
-   
+
    for (i = 0; i < nr_args; i++) {
       debug_printf("%s%s%s[%d]%s",
                    inst->src[i].negate ? "-" : "",

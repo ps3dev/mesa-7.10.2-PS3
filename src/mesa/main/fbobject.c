@@ -726,7 +726,7 @@ _mesa_test_framebuffer_completeness(struct gl_context *ctx,
             fb->_Status = GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE;
             fbo_incomplete("inconsistant number of samples", i);
             return;
-         }            
+         }
 
       }
    }
@@ -1028,7 +1028,7 @@ _mesa_base_fbo_format(struct gl_context *ctx, GLenum internalFormat)
 
 
 /**
- * Helper function used by _mesa_RenderbufferStorageEXT() and 
+ * Helper function used by _mesa_RenderbufferStorageEXT() and
  * _mesa_RenderbufferStorageMultisample().
  * samples will be NO_SAMPLES if called by _mesa_RenderbufferStorageEXT().
  */
@@ -1541,7 +1541,7 @@ _mesa_DeleteFramebuffersEXT(GLsizei n, const GLuint *framebuffers)
                   /* bind default */
                   ASSERT(fb->RefCount >= 2);
                   _mesa_BindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-               }    
+               }
             }
 
 	    /* remove from hash table immediately, to free the ID */
@@ -1643,7 +1643,7 @@ _mesa_CheckFramebufferStatusEXT(GLenum target)
  * Common code called by glFramebufferTexture1D/2D/3DEXT().
  */
 static void
-framebuffer_texture(struct gl_context *ctx, const char *caller, GLenum target, 
+framebuffer_texture(struct gl_context *ctx, const char *caller, GLenum target,
                     GLenum attachment, GLenum textarget, GLuint texture,
                     GLint level, GLint zoffset)
 {
@@ -1737,7 +1737,7 @@ framebuffer_texture(struct gl_context *ctx, const char *caller, GLenum target,
          }
       }
 
-      if ((level < 0) || 
+      if ((level < 0) ||
           (level >= _mesa_max_texture_levels(ctx, texObj->Target))) {
          _mesa_error(ctx, GL_INVALID_VALUE,
                      "glFramebufferTexture%sEXT(level)", caller);
@@ -2277,7 +2277,7 @@ _mesa_BlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1,
       struct gl_renderbuffer *drawRb = drawFb->_StencilBuffer;
       if (!readRb ||
           !drawRb ||
-          _mesa_get_format_bits(readRb->Format, GL_STENCIL_BITS) != 
+          _mesa_get_format_bits(readRb->Format, GL_STENCIL_BITS) !=
           _mesa_get_format_bits(drawRb->Format, GL_STENCIL_BITS)) {
          _mesa_error(ctx, GL_INVALID_OPERATION,
                      "glBlitFramebufferEXT(stencil buffer size mismatch");
@@ -2290,7 +2290,7 @@ _mesa_BlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1,
       struct gl_renderbuffer *drawRb = drawFb->_DepthBuffer;
       if (!readRb ||
           !drawRb ||
-          _mesa_get_format_bits(readRb->Format, GL_DEPTH_BITS) != 
+          _mesa_get_format_bits(readRb->Format, GL_DEPTH_BITS) !=
           _mesa_get_format_bits(drawRb->Format, GL_DEPTH_BITS)) {
          _mesa_error(ctx, GL_INVALID_OPERATION,
                      "glBlitFramebufferEXT(depth buffer size mismatch");

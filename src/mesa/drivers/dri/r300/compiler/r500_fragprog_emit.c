@@ -524,7 +524,7 @@ static void emit_flowcontrol(struct emit_state * s, struct rc_instruction * inst
 
 		/* actual instruction is filled in at ENDIF time */
 		break;
-	
+
 	case RC_OPCODE_ELSE:
 		if (!s->CurrentBranchDepth) {
 			rc_error(s->C, "%s: got ELSE outside a branch", __FUNCTION__);

@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
- 
+
 
 
 #include "brw_debug.h"
@@ -111,7 +111,7 @@ static int upload_binding_table_pointers(struct brw_context *brw)
    BEGIN_BATCH(6, IGNORE_CLIPRECTS);
    OUT_BATCH(CMD_BINDING_TABLE_PTRS << 16 | (6 - 2));
    if (brw->vs.bind_bo != NULL)
-      OUT_RELOC(brw->vs.bind_bo, 
+      OUT_RELOC(brw->vs.bind_bo,
 		BRW_USAGE_SAMPLER,
 		0); /* vs */
    else
@@ -147,16 +147,16 @@ static int upload_pipelined_state_pointers(struct brw_context *brw )
 {
    BEGIN_BATCH(7, IGNORE_CLIPRECTS);
    OUT_BATCH(CMD_PIPELINED_STATE_POINTERS << 16 | (7 - 2));
-   OUT_RELOC(brw->vs.state_bo, 
+   OUT_RELOC(brw->vs.state_bo,
 	     BRW_USAGE_STATE,
 	     0);
    if (brw->gs.prog_active)
-      OUT_RELOC(brw->gs.state_bo, 
+      OUT_RELOC(brw->gs.state_bo,
 		BRW_USAGE_STATE,
 		1);
    else
       OUT_BATCH(0);
-   OUT_RELOC(brw->clip.state_bo, 
+   OUT_RELOC(brw->clip.state_bo,
 	     BRW_USAGE_STATE,
 	     1);
    OUT_RELOC(brw->sf.state_bo,
@@ -189,7 +189,7 @@ static int prepare_psp_urb_cbs(struct brw_context *brw)
 static int upload_psp_urb_cbs(struct brw_context *brw )
 {
    int ret;
-   
+
    ret = upload_pipelined_state_pointers(brw);
    if (ret)
       return ret;
@@ -209,12 +209,12 @@ const struct brw_tracked_state brw_psp_urb_cbs = {
    .dirty = {
       .mesa = 0,
       .brw = BRW_NEW_URB_FENCE | BRW_NEW_BATCH,
-      .cache = (CACHE_NEW_VS_UNIT | 
-		CACHE_NEW_GS_UNIT | 
-		CACHE_NEW_GS_PROG | 
-		CACHE_NEW_CLIP_UNIT | 
-		CACHE_NEW_SF_UNIT | 
-		CACHE_NEW_WM_UNIT | 
+      .cache = (CACHE_NEW_VS_UNIT |
+		CACHE_NEW_GS_UNIT |
+		CACHE_NEW_GS_PROG |
+		CACHE_NEW_CLIP_UNIT |
+		CACHE_NEW_SF_UNIT |
+		CACHE_NEW_WM_UNIT |
 		CACHE_NEW_CC_UNIT)
    },
    .prepare = prepare_psp_urb_cbs,
@@ -223,7 +223,7 @@ const struct brw_tracked_state brw_psp_urb_cbs = {
 
 
 /***********************************************************************
- * Depth buffer 
+ * Depth buffer
  */
 
 static int prepare_depthbuffer(struct brw_context *brw)
@@ -386,7 +386,7 @@ static int upload_invarient_state( struct brw_context *brw )
       struct brw_global_depth_offset_clamp gdo;
       memset(&gdo, 0, sizeof(gdo));
 
-      /* Disable depth offset clamping. 
+      /* Disable depth offset clamping.
        */
       gdo.header.opcode = CMD_GLOBAL_DEPTH_OFFSET_CLAMP;
       gdo.header.length = sizeof(gdo)/4 - 2;
@@ -413,17 +413,17 @@ static int upload_invarient_state( struct brw_context *brw )
       struct brw_vf_statistics vfs;
       memset(&vfs, 0, sizeof(vfs));
 
-      if (BRW_IS_G4X(brw) || BRW_IS_IGDNG(brw)) 
+      if (BRW_IS_G4X(brw) || BRW_IS_IGDNG(brw))
 	 vfs.opcode = CMD_VF_STATISTICS_GM45;
-      else 
+      else
 	 vfs.opcode = CMD_VF_STATISTICS_965;
 
       if (BRW_DEBUG & DEBUG_STATS)
-	 vfs.statistics_enable = 1; 
+	 vfs.statistics_enable = 1;
 
       BRW_BATCH_STRUCT(brw, &vfs);
    }
-   
+
    if (!BRW_IS_965(brw))
    {
       struct brw_aa_line_parameters balp;
@@ -432,13 +432,13 @@ static int upload_invarient_state( struct brw_context *brw )
       memset(&balp, 0, sizeof(balp));
       balp.header.opcode = CMD_AA_LINE_PARAMETERS;
       balp.header.length = sizeof(balp) / 4 - 2;
-   
+
       BRW_BATCH_STRUCT(brw, &balp);
    }
 
    {
       struct brw_polygon_stipple_offset bpso;
-      
+
       /* This is invarient state in gallium:
        */
       memset(&bpso, 0, sizeof(bpso));
@@ -449,7 +449,7 @@ static int upload_invarient_state( struct brw_context *brw )
 
       BRW_BATCH_STRUCT(brw, &bpso);
    }
-   
+
    return 0;
 }
 
@@ -464,7 +464,7 @@ const struct brw_tracked_state brw_invarient_state = {
 
 
 /***********************************************************************
- * State base address 
+ * State base address
  */
 
 /**

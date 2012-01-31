@@ -8,7 +8,7 @@
 /**
  * called from intelDrawBuffer()
  */
-static void brw_set_framebuffer_state( struct pipe_context *pipe, 
+static void brw_set_framebuffer_state( struct pipe_context *pipe,
 				       const struct pipe_framebuffer_state *fb )
 {
    struct brw_context *brw = brw_context(pipe);
@@ -22,7 +22,7 @@ static void brw_set_framebuffer_state( struct pipe_context *pipe,
       brw->curr.fb.height = fb->height;
       brw->state.dirty.mesa |= PIPE_NEW_FRAMEBUFFER_DIMENSIONS;
    }
-   
+
    /* Z/Stencil
     */
    if (brw->curr.fb.zsbuf != fb->zsbuf) {
@@ -38,7 +38,7 @@ static void brw_set_framebuffer_state( struct pipe_context *pipe,
 	 pipe_surface_reference(&brw->curr.fb.cbufs[i], fb->cbufs[i]);
       }
    }
-   
+
    if (brw->curr.fb.nr_cbufs != fb->nr_cbufs) {
       brw->curr.fb.nr_cbufs = MIN2(BRW_MAX_DRAW_BUFFERS, fb->nr_cbufs);
       brw->state.dirty.mesa |= PIPE_NEW_NR_CBUFS;

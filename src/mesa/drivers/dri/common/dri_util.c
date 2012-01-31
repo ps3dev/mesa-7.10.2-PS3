@@ -6,7 +6,7 @@
  * driver doesn't really \e have to use any of this - it's optional.  But, some
  * useful stuff is done here that otherwise would have to be duplicated in most
  * drivers.
- * 
+ *
  * Basically, these utility functions take care of some of the dirty details of
  * screen initialization, context creation, context binding, DRM setup, etc.
  *
@@ -78,19 +78,19 @@ driIntersectArea( drm_clip_rect_t rect1, drm_clip_rect_t rect2 )
 
 /**
  * Unbind context.
- * 
+ *
  * \param scrn the screen.
  * \param gc context.
  *
  * \return \c GL_TRUE on success, or \c GL_FALSE on failure.
- * 
+ *
  * \internal
  * This function calls __DriverAPIRec::UnbindContext, and then decrements
  * __DRIdrawableRec::refcount which must be non-zero for a successful
  * return.
- * 
+ *
  * While casting the opaque private pointers associated with the parameters
- * into their respective real types it also assures they are not \c NULL. 
+ * into their respective real types it also assures they are not \c NULL.
  */
 static int driUnbindContext(__DRIcontext *pcp)
 {
@@ -208,7 +208,7 @@ static int driBindContext(__DRIcontext *pcp,
  * Update private drawable information.
  *
  * \param pdp pointer to the private drawable information to update.
- * 
+ *
  * This function basically updates the __DRIdrawable struct's
  * cliprect information by calling \c __DRIinterfaceMethods::getDrawableInfo.
  * This is usually called by the DRI_VALIDATE_DRAWABLE_INFO macro which
@@ -221,22 +221,22 @@ __driUtilUpdateDrawableInfo(__DRIdrawable *pdp)
 {
     __DRIscreen *psp = pdp->driScreenPriv;
     __DRIcontext *pcp = pdp->driContextPriv;
-    
-    if (!pcp 
+
+    if (!pcp
 	|| ((pdp != pcp->driDrawablePriv) && (pdp != pcp->driReadablePriv))) {
-	/* ERROR!!! 
+	/* ERROR!!!
 	 * ...but we must ignore it. There can be many contexts bound to a
 	 * drawable.
 	 */
     }
 
     if (pdp->pClipRects) {
-	free(pdp->pClipRects); 
+	free(pdp->pClipRects);
 	pdp->pClipRects = NULL;
     }
 
     if (pdp->pBackClipRects) {
-	free(pdp->pBackClipRects); 
+	free(pdp->pBackClipRects);
 	pdp->pBackClipRects = NULL;
     }
 
@@ -296,10 +296,10 @@ static void driReportDamage(__DRIdrawable *pdp,
  * Swap buffers.
  *
  * \param drawablePrivate opaque pointer to the per-drawable private info.
- * 
+ *
  * \internal
  * This function calls __DRIdrawable::swapBuffers.
- * 
+ *
  * Is called directly from glXSwapBuffers().
  */
 static void driSwapBuffers(__DRIdrawable *dPriv)
@@ -453,7 +453,7 @@ driCreateNewDrawable(__DRIscreen *psp, const __DRIconfig *config,
 
     /* This special default value is replaced with the configured
      * default value when the drawable is first bound to a direct
-     * rendering context. 
+     * rendering context.
      */
     pdp->swap_interval = (unsigned)-1;
 
@@ -520,7 +520,7 @@ static void dri_get_drawable(__DRIdrawable *pdp)
 {
     pdp->refcount++;
 }
-	
+
 static void dri_put_drawable(__DRIdrawable *pdp)
 {
     __DRIscreen *psp;
@@ -560,7 +560,7 @@ driDestroyDrawable(__DRIdrawable *pdp)
 
 /**
  * Destroy the per-context private information.
- * 
+ *
  * \internal
  * This function calls __DriverAPIRec::DestroyContext on \p contextPrivate, calls
  * drmDestroyContext(), and finally frees \p contextPrivate.
@@ -577,14 +577,14 @@ driDestroyContext(__DRIcontext *pcp)
 
 /**
  * Create the per-drawable private driver information.
- * 
+ *
  * \param render_type   Type of rendering target.  \c GLX_RGBA is the only
  *                      type likely to ever be supported for direct-rendering.
  * \param shared        Context with which to share textures, etc. or NULL
  *
  * \returns An opaque pointer to the per-context private information on
  *          success, or \c NULL on failure.
- * 
+ *
  * \internal
  * This function allocates and fills a __DRIcontextRec structure.  It
  * performs some device independent initialization and passes all the
@@ -594,7 +594,7 @@ driDestroyContext(__DRIcontext *pcp)
  */
 static __DRIcontext *
 driCreateNewContext(__DRIscreen *psp, const __DRIconfig *config,
-		    int render_type, __DRIcontext *shared, 
+		    int render_type, __DRIcontext *shared,
 		    drm_context_t hwContext, void *data)
 {
     __DRIcontext *pcp;
@@ -607,7 +607,7 @@ driCreateNewContext(__DRIscreen *psp, const __DRIconfig *config,
     pcp->driScreenPriv = psp;
     pcp->driDrawablePriv = NULL;
     pcp->loaderPrivate = data;
-    
+
     pcp->dri2.draw_stamp = 0;
     pcp->dri2.read_stamp = 0;
 
@@ -662,7 +662,7 @@ dri2CreateNewContextForAPI(__DRIscreen *screen, int api,
     context->driScreenPriv = screen;
     context->driDrawablePriv = NULL;
     context->loaderPrivate = data;
-    
+
     if (!(*screen->DriverAPI.CreateContext)(mesa_api, modes,
 					    context, shareCtx) ) {
         free(context);
@@ -697,7 +697,7 @@ driCopyContext(__DRIcontext *dest, __DRIcontext *src, unsigned long mask)
 
 /**
  * Destroy the per-screen private information.
- * 
+ *
  * \internal
  * This function calls __DriverAPIRec::DestroyScreen on \p screenPrivate, calls
  * drmClose(), and finally frees \p screenPrivate.
@@ -758,7 +758,7 @@ setupLoaderExtensions(__DRIscreen *psp,
  * pbuffers.
  *
  * For legacy DRI.
- * 
+ *
  * \param scrn  Index of the screen
  * \param ddx_version Version of the 2D DDX.  This may not be meaningful for
  *                    all drivers.
@@ -771,7 +771,7 @@ setupLoaderExtensions(__DRIscreen *psp,
  * \param extensions   ??
  * \param driver_modes  Returns modes suppoted by the driver
  * \param loaderPrivate  ??
- * 
+ *
  * \note There is no need to check the minimum API version in this
  * function.  Since the name of this function is versioned, it is
  * impossible for a loader that is too old to even load this driver.
@@ -782,7 +782,7 @@ driCreateNewScreen(int scrn,
 		   const __DRIversion *dri_version,
 		   const __DRIversion *drm_version,
 		   const __DRIframebuffer *frame_buffer,
-		   drmAddress pSAREA, int fd, 
+		   drmAddress pSAREA, int fd,
 		   const __DRIextension **extensions,
 		   const __DRIconfig ***driver_modes,
 		   void *loaderPrivate)
@@ -942,17 +942,17 @@ const __DRI2configQueryExtension dri2ConfigQueryExtension = {
 
 /**
  * Calculate amount of swap interval used between GLX buffer swaps.
- * 
+ *
  * The usage value, on the range [0,max], is the fraction of total swap
  * interval time used between GLX buffer swaps is calculated.
  *
  *            \f$p = t_d / (i * t_r)\f$
- * 
+ *
  * Where \f$t_d\f$ is the time since the last GLX buffer swap, \f$i\f$ is the
  * swap interval (as set by \c glXSwapIntervalSGI), and \f$t_r\f$ time
  * required for a single vertical refresh period (as returned by \c
  * glXGetMscRateOML).
- * 
+ *
  * See the documentation for the GLX_MESA_swap_frame_usage extension for more
  * details.
  *
@@ -964,7 +964,7 @@ const __DRI2configQueryExtension dri2ConfigQueryExtension = {
  *          a number greater than 1.0 will be returned.
  *
  * \sa glXSwapIntervalSGI glXGetMscRateOML
- * 
+ *
  * \todo Instead of caching the \c glXGetMscRateOML function pointer, would it
  *       be possible to cache the sync rate?
  */
@@ -999,7 +999,7 @@ driCalculateSwapUsage( __DRIdrawable *dPriv, int64_t last_swap_ust,
       usage /= (interval * d);
       usage /= 1000000.0;
    }
-   
+
    return usage;
 }
 

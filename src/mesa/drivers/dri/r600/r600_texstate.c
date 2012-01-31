@@ -847,7 +847,7 @@ GLboolean r600ValidateBuffers(struct gl_context * ctx)
 						  rrb->bo, 0,
 						  RADEON_GEM_DOMAIN_VRAM);
 	}
-	
+
 	for (i = 0; i < ctx->Const.MaxTextureImageUnits; ++i) {
 		radeonTexObj *t;
 
@@ -890,7 +890,7 @@ GLboolean r600ValidateBuffers(struct gl_context * ctx)
 	if (pbo) {
 		radeon_cs_space_add_persistent_bo(rmesa->radeon.cmdbuf.cs, pbo,
 						  RADEON_GEM_DOMAIN_GTT, 0);
-	}	
+	}
 
 	ret = radeon_cs_space_check_with_bo(rmesa->radeon.cmdbuf.cs, first_elem(&rmesa->radeon.dma.reserved)->bo, RADEON_GEM_DOMAIN_GTT, 0);
 	if (ret)
@@ -915,7 +915,7 @@ void r600SetTexOffset(__DRIcontext * pDRICtx, GLint texname,
     {
         evergreenSetTexOffset(pDRICtx, texname, offset, depth, pitch);
         return;
-    }    
+    }
 
 	t->image_override = GL_TRUE;
 
@@ -1014,7 +1014,7 @@ void r600SetTexBuffer2(__DRIcontext *pDRICtx, GLint target, GLint glx_texture_fo
     {
         evergreenSetTexBuffer(pDRICtx, target, glx_texture_format, dPriv);
         return;
-    }   
+    }
 
 	rfb = dPriv->driverPrivate;
         texUnit = &radeon->glCtx->Texture.Unit[radeon->glCtx->Texture.CurrentUnit];

@@ -144,7 +144,7 @@ SWRAST_SOURCES = \
 
 SWRAST_SETUP_SOURCES = \
 	swrast_setup/ss_context.c \
-	swrast_setup/ss_triangle.c 
+	swrast_setup/ss_triangle.c
 
 TNL_SOURCES = \
 	tnl/t_context.c \
@@ -163,7 +163,7 @@ TNL_SOURCES = \
 	tnl/t_vp_build.c \
 	tnl/t_vertex.c \
 	tnl/t_vertex_sse.c \
-	tnl/t_vertex_generic.c 
+	tnl/t_vertex_generic.c
 
 VBO_SOURCES = \
 	vbo/vbo_context.c \
@@ -179,7 +179,7 @@ VBO_SOURCES = \
 	vbo/vbo_save.c \
 	vbo/vbo_save_api.c \
 	vbo/vbo_save_draw.c \
-	vbo/vbo_save_loopback.c 
+	vbo/vbo_save_loopback.c
 
 STATETRACKER_SOURCES = \
 	state_tracker/st_atom.c \

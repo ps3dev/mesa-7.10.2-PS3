@@ -120,7 +120,7 @@ SSTH3_SLI_AA_CONFIGURATION
 		"5" - 4-way SLI enabled, AA disabled
 		"6" - 4-way SLI enabled, 2 sample AA enabled
 		"7" - 2-way SLI enabled, 4 sample AA enabled
-		"8" - SLI disabled, 8 sample AA enabled 
+		"8" - SLI disabled, 8 sample AA enabled
 SST_DUALHEAD
 	OS: win32
 	HW: ?
@@ -338,7 +338,7 @@ Linux:
 MacOS:
 ------
 	Check the WEB page at http://valerie.inf.elte.hu/~boga/Mesa.html
-      
+
 MS Windows:
 -----------
 
@@ -394,7 +394,7 @@ Doing more with Mesa & Linux Glide:
 			setenv MESA_GLX_FX fullscreen
 
 	2. As root, run a GLX-based program (any GLUT demo on Linux).
-	
+
 	3. Be careful:  once the 3Dfx screen appears you won't be able
 	to see the GLUT windows on your X display.  This can make using
 	the mouse tricky!  One solution is to hook up your 3Dfx card to
@@ -403,7 +403,7 @@ Doing more with Mesa & Linux Glide:
 
 		setenv SST_VGA_PASS 1
 		setenv SST_NOSHUTDOWN
-	
+
 	or for the Voodoo2:
 
 		setenv SSTV2_VGA_PASS 1
@@ -606,7 +606,7 @@ Know BUGS and Problems:
 		- Using polygon offset or stipple polygons;
 
 	NOTE: this is list is not yet complete.
-		
+
 
 Hints and Special Features:
 ---------------------------
@@ -822,7 +822,7 @@ the Mesa mailing list and my driver WEB page
 
 David Bucciarelli (davibu@tin.it)
 
-Humanware s.r.l. 
+Humanware s.r.l.
 Via XXIV Maggio 62
 Pisa, Italy
 Tel./Fax +39-50-554108

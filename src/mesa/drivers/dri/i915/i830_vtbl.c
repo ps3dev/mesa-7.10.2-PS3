@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "i830_context.h"
@@ -229,7 +229,7 @@ i830_reduced_primitive_state(struct intel_context *intel, GLenum rprim)
 }
 
 /* Pull apart the vertex format registers and figure out how large a
- * vertex is supposed to be. 
+ * vertex is supposed to be.
  */
 static GLboolean
 i830_check_vertex_size(struct intel_context *intel, GLuint expected)
@@ -522,7 +522,7 @@ i830_emit_state(struct intel_context *intel)
       OUT_BATCH(state->Buffer[I830_DESTREG_DRAWRECT5]);
       ADVANCE_BATCH();
    }
-   
+
    if (dirty & I830_UPLOAD_STIPPLE) {
       DBG("I830_UPLOAD_STIPPLE:\n");
       emit(intel, state->Stipple, sizeof(state->Stipple));
@@ -699,7 +699,7 @@ i830_new_batch(struct intel_context *intel)
    i830->state.emitted = 0;
 }
 
-static void 
+static void
 i830_assert_not_dirty( struct intel_context *intel )
 {
    struct i830_context *i830 = i830_context(&intel->ctx);

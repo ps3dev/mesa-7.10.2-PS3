@@ -24,7 +24,7 @@ CFLAGS = -O
 CXXFLAGS = -O
 LDFLAGS =
 HOST_CFLAGS = $(CFLAGS)
-GLU_CFLAGS = 
+GLU_CFLAGS =
 
 # Compiler for building demos/tests/etc
 APP_CC = $(CC)
@@ -33,7 +33,7 @@ APP_CXX = $(CXX)
 # Misc tools and flags
 SHELL = /bin/sh
 MKLIB = $(SHELL) $(TOP)/bin/mklib
-MKLIB_OPTIONS = 
+MKLIB_OPTIONS =
 MKDEP = makedepend
 MKDEP_OPTIONS = -fdepend
 MAKE = make
@@ -83,7 +83,7 @@ GLESv2_LIB_GLOB = $(GLESv2_LIB_NAME)*
 VG_LIB_GLOB = $(VG_LIB_NAME)*
 
 # Optional assembly language optimization files for libGL
-MESA_ASM_SOURCES = 
+MESA_ASM_SOURCES =
 
 # GLw widget sources (Append "GLwMDrawA.c" here and add -lXm to GLW_LIB_DEPS in
 # order to build the Motif widget too)
@@ -101,7 +101,7 @@ DRIVER_DIRS = x11 osmesa
 # EGL drivers to build
 EGL_DRIVERS_DIRS = glx
 
-# Gallium directories and 
+# Gallium directories and
 GALLIUM_DIRS = auxiliary drivers state_trackers
 GALLIUM_AUXILIARIES = $(TOP)/src/gallium/auxiliary/libgallium.a
 GALLIUM_DRIVERS_DIRS = softpipe trace rbug identity galahad i915 i965 svga r300 nvfx nv50 failover

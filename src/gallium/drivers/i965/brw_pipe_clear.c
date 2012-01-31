@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "util/u_pack_color.h"
@@ -109,7 +109,7 @@ try_clear( struct brw_context *brw,
 
 
 
-static void color_clear(struct brw_context *brw, 
+static void color_clear(struct brw_context *brw,
                         struct brw_surface *bsurface,
                         const float *rgba )
 {
@@ -199,7 +199,7 @@ static void zstencil_clear(struct brw_context *brw,
  * Clear the given surface to the specified value.
  * No masking, no scissor (clear entire buffer).
  */
-static void brw_clear(struct pipe_context *pipe, 
+static void brw_clear(struct pipe_context *pipe,
                       unsigned buffers,
                       const float *rgba,
                       double depth,
@@ -210,7 +210,7 @@ static void brw_clear(struct pipe_context *pipe,
 
    if (buffers & PIPE_CLEAR_COLOR) {
       for (i = 0; i < brw->curr.fb.nr_cbufs; i++) {
-         color_clear( brw, 
+         color_clear( brw,
                       brw_surface(brw->curr.fb.cbufs[i]),
                       rgba );
       }

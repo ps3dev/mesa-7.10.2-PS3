@@ -2847,7 +2847,7 @@ static void put_mono_row_pixmap( PUT_MONO_ROW_ARGS )
    y = YFLIP(xrb, y);
 
    /* New code contributed by Jeff Epler and cleaned up by Keith
-    * Whitwell.  
+    * Whitwell.
     */
    for (i = 0; i < n; ) {
       GLuint start = i;
@@ -2857,7 +2857,7 @@ static void put_mono_row_pixmap( PUT_MONO_ROW_ARGS )
       while (i < n && (!mask || mask[i]))
 	 i++;
 
-      if (start < i) 
+      if (start < i)
 	 XMesaFillRectangle( dpy, buffer, gc,
 			     (int)(x+start), (int) y,
 			     (int)(i-start), 1);
@@ -2886,15 +2886,15 @@ put_mono_row_ci_pixmap( PUT_MONO_ROW_ARGS )
 
    for (i = 0 ; i < n ;) {
       GLuint start = i;
-      
-      /* Identify and emit contiguous rendered pixels 
+
+      /* Identify and emit contiguous rendered pixels
        */
       while (i < n && (!mask || mask[i]))
 	 i++;
 
-      if (start < i) 
-	 XMesaFillRectangle( dpy, buffer, gc, 
-			     (int)(x+start), (int) y, 
+      if (start < i)
+	 XMesaFillRectangle( dpy, buffer, gc,
+			     (int)(x+start), (int) y,
 			     (int)(i-start), 1);
 
       /* Eat up non-rendered pixels

@@ -345,7 +345,7 @@ _mesa_PointSizePointer(GLenum type, GLsizei stride, const GLvoid *ptr)
                   "glPointSizePointer(ES 1.x only)");
       return;
    }
-      
+
    update_array(ctx, "glPointSizePointer",
                 &ctx->Array.ArrayObj->PointSize, _NEW_ARRAY_POINT_SIZE,
                 legalTypes, 1, 1,
@@ -1133,7 +1133,7 @@ _mesa_print_arrays(struct gl_context *ctx)
 /**
  * Initialize vertex array state for given context.
  */
-void 
+void
 _mesa_init_varray(struct gl_context *ctx)
 {
    ctx->Array.DefaultArrayObj = _mesa_new_array_object(ctx, 0);
@@ -1160,7 +1160,7 @@ delete_arrayobj_cb(GLuint id, void *data, void *userData)
 /**
  * Free vertex array state for given context.
  */
-void 
+void
 _mesa_free_varray_data(struct gl_context *ctx)
 {
    _mesa_HashDeleteAll(ctx->Array.Objects, delete_arrayobj_cb, ctx);

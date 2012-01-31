@@ -1698,8 +1698,8 @@ void r700InitState(struct gl_context * ctx) //-------------------
 	    SETbit(r700->PA_SC_MODE_CNTL.u32All, FORCE_EOV_CNTDWN_ENABLE_bit);
     }
 
-    /* Do scale XY and Z by 1/W0. */   
-    r700->bEnablePerspective = GL_TRUE;    
+    /* Do scale XY and Z by 1/W0. */
+    r700->bEnablePerspective = GL_TRUE;
 
     CLEARbit(r700->PA_CL_VTE_CNTL.u32All, VTX_XY_FMT_bit);
     CLEARbit(r700->PA_CL_VTE_CNTL.u32All, VTX_Z_FMT_bit);

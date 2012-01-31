@@ -43,7 +43,7 @@
 extern "C" {
 #endif
 
-   
+
 /**
  * Least Recently Used (LRU) cache.
  */
@@ -52,7 +52,7 @@ struct util_cache;
 
 /**
  * Create a cache.
- * 
+ *
  * @param hash hash function
  * @param compare should return 0 for two equal keys
  * @param destroy destruction callback (optional)
@@ -70,7 +70,7 @@ util_cache_set(struct util_cache *cache,
                void *value);
 
 void *
-util_cache_get(struct util_cache *cache, 
+util_cache_get(struct util_cache *cache,
                const void *key);
 
 void

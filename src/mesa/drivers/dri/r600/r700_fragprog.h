@@ -55,13 +55,13 @@ void insert_wpos_code(struct gl_context *ctx, struct gl_fragment_program *fprog)
 
 void Map_Fragment_Program(r700_AssemblerBase         *pAsm,
 			  struct gl_fragment_program *mesa_fp,
-                          struct gl_context *ctx); 
+                          struct gl_context *ctx);
 GLboolean Find_Instruction_Dependencies_fp(struct r700_fragment_program *fp,
 					   struct gl_fragment_program   *mesa_fp);
 
 GLboolean r700TranslateFragmentShader(struct r700_fragment_program *fp,
 				      struct gl_fragment_program   *mesa_vp,
-                                      struct gl_context *ctx); 
+                                      struct gl_context *ctx);
 
 /* Interface */
 extern void r700SelectFragmentShader(struct gl_context *ctx);

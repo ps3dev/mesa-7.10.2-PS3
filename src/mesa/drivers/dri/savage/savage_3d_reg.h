@@ -294,7 +294,7 @@ typedef union
 	/**
 	 * This bit enables \c GL_FUNC_SUBTRACT.  Like most DirectX oriented
 	 * hardware, there's no way to do \c GL_FUNC_REVERSE_SUBTRACT.
-	 * 
+	 *
 	 * \todo
 	 * Add support for \c GL_FUNC_SUBTRACT!
 	 */
@@ -384,7 +384,7 @@ typedef union
  Address Registers
 **********************************/
 
-/* I havn't found a Savage3D equivalent of this reg in the Utah-driver. 
+/* I havn't found a Savage3D equivalent of this reg in the Utah-driver.
  * But Tim Roberts claims that the Savage3D supports DMA vertex and
  * command buffers. */
 typedef union
@@ -399,7 +399,7 @@ typedef union
     uint32_t ui;
 } savageRegVertBufAddr;
 
-/* I havn't found a Savage3D equivalent of this reg in the Utah-driver. 
+/* I havn't found a Savage3D equivalent of this reg in the Utah-driver.
  * But Tim Roberts claims that the Savage3D supports DMA vertex and
  * command buffers. */
 typedef union
@@ -498,7 +498,7 @@ typedef union
         unsigned offset           : 14;
         unsigned reserved         : 11; /* 12-bits in Utah-driver */
         unsigned zBufWidthInTiles : 6;
-       
+
         /**
 	 * 0 selects 16-bit depth buffer.  On Savage4 hardware, 1 selects
 	 * 24-bit depth buffer (with 8-bits for stencil).  Though it has never
@@ -635,7 +635,7 @@ typedef union
 #define SAVAGE_DESTCTRL_S3D           0x34
 #define SAVAGE_SCSTART_S3D            0x35
 #define SAVAGE_SCEND_S3D              0x36
-#define SAVAGE_ZWATERMARK_S3D         0x37 
+#define SAVAGE_ZWATERMARK_S3D         0x37
 #define SAVAGE_DESTTEXRWWATERMARK_S3D 0x38
 
 #define SAVAGE_FIRST_REG 0x18

@@ -31,7 +31,7 @@
 #if defined(USE_X86_ASM) && defined(__GNUC__)
 #   ifdef GLX_USE_TLS
 #      include "entry_x86_tls.h"
-#   else                 
+#   else
 #      include "entry_x86_tsd.h"
 #   endif
 #elif defined(USE_X86_64_ASM) && defined(__GNUC__) && defined(GLX_USE_TLS)

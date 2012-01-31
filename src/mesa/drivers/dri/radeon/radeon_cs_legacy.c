@@ -1,8 +1,8 @@
-/* 
+/*
  * Copyright © 2008 Nicolai Haehnle
  * Copyright © 2008 Jérôme Glisse
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,13 +10,13 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
  * THE COPYRIGHT HOLDERS, AUTHORS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * The above copyright notice and this permission notice (including the
@@ -225,9 +225,9 @@ static int cs_process_relocs(struct radeon_cs_int *cs)
     csm = (struct cs_manager_legacy*)cs->csm;
     relocs = (struct cs_reloc_legacy *)cs->relocs;
 restart:
-    for (i = 0; i < cs->crelocs; i++) 
+    for (i = 0; i < cs->crelocs; i++)
     {
-        for (j = 0; j < relocs[i].cindices; j++) 
+        for (j = 0; j < relocs[i].cindices; j++)
         {
             uint32_t soffset, eoffset;
 
@@ -237,14 +237,14 @@ restart:
             {
 	             goto restart;
             }
-            if (r) 
+            if (r)
             {
                 fprintf(stderr, "validated %p [0x%08X, 0x%08X]\n",
                         relocs[i].base.bo, soffset, eoffset);
                 return r;
             }
             cs->packets[relocs[i].indices[j]] += soffset;
-            if (cs->packets[relocs[i].indices[j]] >= eoffset) 
+            if (cs->packets[relocs[i].indices[j]] >= eoffset)
             {
 	      /*                radeon_bo_debug(relocs[i].base.bo, 12); */
                 fprintf(stderr, "validated %p [0x%08X, 0x%08X]\n",
@@ -287,7 +287,7 @@ static int cs_emit(struct radeon_cs_int *cs)
 
     /* append buffer age */
     if ( IS_R300_CLASS(csm->ctx->radeonScreen) )
-    { 
+    {
       age.scratch.cmd_type = R300_CMD_SCRATCH;
       /* Scratch register 2 corresponds to what radeonGetAge polls */
       csm->pending_age = 0;

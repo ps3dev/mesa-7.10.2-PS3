@@ -27,7 +27,7 @@ SRC_DIRS = glsl mapi/glapi mesa \
 	gallium gallium/winsys gallium/targets glu egl
 
 # Build no traditional Mesa drivers:
-DRIVER_DIRS = 
+DRIVER_DIRS =
 
 GLU_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB)
 
@@ -45,7 +45,7 @@ GALLIUM_TARGET_DIRS = egl-psl1ght
 GALLIUM_STATE_TRACKERS_DIRS = egl
 
 EGL_PLATFORMS = psl1ght
-EGL_DRIVERS_DIRS = 
+EGL_DRIVERS_DIRS =
 
 EGL_LIB_DEPS = 	$(TOP)/src/gallium/targets/egl-psl1ght/libeglpsl1ght.a \
 	$(TOP)/src/gallium/state_trackers/egl/libegl.a

@@ -95,7 +95,7 @@ update_materials(struct gl_context *ctx, struct light_stage_data *store)
       /* increment src vertex color pointer */
       STRIDE_F(store->mat[i].ptr, store->mat[i].stride);
    }
-      
+
    /* recompute derived light/material values */
    _mesa_update_material( ctx, store->mat_bitmask );
    /* XXX we should only call this if we're tracking/changing the specular
@@ -114,7 +114,7 @@ prepare_materials(struct gl_context *ctx,
                   struct vertex_buffer *VB, struct light_stage_data *store)
 {
    GLuint i;
-   
+
    store->mat_count = 0;
    store->mat_bitmask = 0;
 
@@ -192,7 +192,7 @@ static void init_lighting_tables( void )
 }
 
 
-static GLboolean run_lighting( struct gl_context *ctx, 
+static GLboolean run_lighting( struct gl_context *ctx,
 			       struct tnl_pipeline_stage *stage )
 {
    struct light_stage_data *store = LIGHT_STAGE_DATA(stage);
@@ -221,7 +221,7 @@ static GLboolean run_lighting( struct gl_context *ctx,
 	  */
 	 _mesa_vector4f_clean_elem(&store->Input, VB->Count, 2);
       }
-	 
+
       if (input->size <= 1) {
 	 /* Clean y.
 	  */
@@ -230,7 +230,7 @@ static GLboolean run_lighting( struct gl_context *ctx,
 
       input = &store->Input;
    }
-   
+
    idx = 0;
 
    if (prepare_materials( ctx, VB, store ))
@@ -240,7 +240,7 @@ static GLboolean run_lighting( struct gl_context *ctx,
       idx |= LIGHT_TWOSIDE;
 
    /* The individual functions know about replaying side-effects
-    * vs. full re-execution. 
+    * vs. full re-execution.
     */
    store->light_func_tab[idx]( ctx, VB, stage, input );
 

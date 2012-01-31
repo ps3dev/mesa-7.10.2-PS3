@@ -43,7 +43,7 @@ class Mapdesc;
 class Quilt;
 class Curve;
 
-class Curvelist 
+class Curvelist
 {
 friend class Subdivider;
 public:

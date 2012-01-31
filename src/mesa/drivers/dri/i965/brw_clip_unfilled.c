@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -52,9 +52,9 @@ static void compute_tri_direction( struct brw_clip_compile *c )
    struct brw_compile *p = &c->func;
    struct brw_reg e = c->reg.tmp0;
    struct brw_reg f = c->reg.tmp1;
-   struct brw_reg v0 = byte_offset(c->reg.vertex[0], c->offset[VERT_RESULT_HPOS]); 
-   struct brw_reg v1 = byte_offset(c->reg.vertex[1], c->offset[VERT_RESULT_HPOS]); 
-   struct brw_reg v2 = byte_offset(c->reg.vertex[2], c->offset[VERT_RESULT_HPOS]); 
+   struct brw_reg v0 = byte_offset(c->reg.vertex[0], c->offset[VERT_RESULT_HPOS]);
+   struct brw_reg v1 = byte_offset(c->reg.vertex[1], c->offset[VERT_RESULT_HPOS]);
+   struct brw_reg v2 = byte_offset(c->reg.vertex[2], c->offset[VERT_RESULT_HPOS]);
 
 
    struct brw_reg v0n = get_tmp(c);
@@ -79,8 +79,8 @@ static void compute_tri_direction( struct brw_clip_compile *c )
 
    /* Calculate the vectors of two edges of the triangle:
     */
-   brw_ADD(p, e, v0n, negate(v2n)); 
-   brw_ADD(p, f, v1n, negate(v2n)); 
+   brw_ADD(p, e, v0n, negate(v2n));
+   brw_ADD(p, f, v1n, negate(v2n));
 
    /* Take their crossproduct:
     */
@@ -112,7 +112,7 @@ static void cull_direction( struct brw_clip_compile *c )
 	   conditional,
 	   get_element(c->reg.dir, 2),
 	   brw_imm_f(0));
-   
+
    ccw = brw_IF(p, BRW_EXECUTE_1);
    {
       brw_clip_kill_thread(c);
@@ -128,7 +128,7 @@ static void copy_bfc( struct brw_clip_compile *c )
    struct brw_instruction *ccw;
    GLuint conditional;
 
-   /* Do we have any colors to copy? 
+   /* Do we have any colors to copy?
     */
    if (!(c->offset[VERT_RESULT_COL0] && c->offset[VERT_RESULT_BFC0]) &&
        !(c->offset[VERT_RESULT_COL1] && c->offset[VERT_RESULT_BFC1]))
@@ -148,19 +148,19 @@ static void copy_bfc( struct brw_clip_compile *c )
 	   conditional,
 	   get_element(c->reg.dir, 2),
 	   brw_imm_f(0));
-   
+
    ccw = brw_IF(p, BRW_EXECUTE_1);
    {
       GLuint i;
 
       for (i = 0; i < 3; i++) {
 	 if (c->offset[VERT_RESULT_COL0] && c->offset[VERT_RESULT_BFC0])
-	    brw_MOV(p, 
+	    brw_MOV(p,
 		    byte_offset(c->reg.vertex[i], c->offset[VERT_RESULT_COL0]),
 		    byte_offset(c->reg.vertex[i], c->offset[VERT_RESULT_BFC0]));
 
 	 if (c->offset[VERT_RESULT_COL1] && c->offset[VERT_RESULT_BFC1])
-	    brw_MOV(p, 
+	    brw_MOV(p,
 		    byte_offset(c->reg.vertex[i], c->offset[VERT_RESULT_COL1]),
 		    byte_offset(c->reg.vertex[i], c->offset[VERT_RESULT_BFC1]));
       }
@@ -184,14 +184,14 @@ static void compute_offset( struct brw_clip_compile *c )
    struct brw_compile *p = &c->func;
    struct brw_reg off = c->reg.offset;
    struct brw_reg dir = c->reg.dir;
-   
+
    brw_math_invert(p, get_element(off, 2), get_element(dir, 2));
    brw_MUL(p, vec2(off), dir, get_element(off, 2));
 
-   brw_CMP(p, 
-	   vec1(brw_null_reg()), 
+   brw_CMP(p,
+	   vec1(brw_null_reg()),
 	   BRW_CONDITIONAL_GE,
-	   brw_abs(get_element(off, 0)), 
+	   brw_abs(get_element(off, 0)),
 	   brw_abs(get_element(off, 1)));
 
    brw_SEL(p, vec1(off), brw_abs(get_element(off, 0)), brw_abs(get_element(off, 1)));
@@ -208,10 +208,10 @@ static void merge_edgeflags( struct brw_clip_compile *c )
    struct brw_instruction *is_poly;
    struct brw_reg tmp0 = get_element_ud(c->reg.tmp0, 0);
 
-   brw_AND(p, tmp0, get_element_ud(c->reg.R0, 2), brw_imm_ud(PRIM_MASK)); 
-   brw_CMP(p, 
-	   vec1(brw_null_reg()), 
-	   BRW_CONDITIONAL_EQ, 
+   brw_AND(p, tmp0, get_element_ud(c->reg.R0, 2), brw_imm_ud(PRIM_MASK));
+   brw_CMP(p,
+	   vec1(brw_null_reg()),
+	   BRW_CONDITIONAL_EQ,
 	   tmp0,
 	   brw_imm_ud(_3DPRIM_POLYGON));
 
@@ -219,7 +219,7 @@ static void merge_edgeflags( struct brw_clip_compile *c )
     * a _3DPRIM_TRISTRIP_REVERSE:
     */
    is_poly = brw_IF(p, BRW_EXECUTE_1);
-   {   
+   {
       brw_set_conditionalmod(p, BRW_CONDITIONAL_EQ);
       brw_AND(p, vec1(brw_null_reg()), get_element_ud(c->reg.R0, 2), brw_imm_ud(1<<8));
       brw_MOV(p, byte_offset(c->reg.vertex[0], c->offset[VERT_RESULT_EDGE]), brw_imm_f(0));
@@ -271,9 +271,9 @@ static void emit_lines(struct brw_clip_compile *c,
       {
 	 brw_MOV(p, get_addr_reg(v0), deref_1uw(v0ptr, 0));
 	 brw_ADD(p, get_addr_reg(v0ptr), get_addr_reg(v0ptr), brw_imm_uw(2));
-	    
+
 	 apply_one_offset(c, v0);
-	    
+
 	 brw_set_conditionalmod(p, BRW_CONDITIONAL_G);
 	 brw_ADD(p, c->reg.loopcount, c->reg.loopcount, brw_imm_d(-1));
       }
@@ -296,8 +296,8 @@ static void emit_lines(struct brw_clip_compile *c,
       brw_ADD(p, get_addr_reg(v0ptr), get_addr_reg(v0ptr), brw_imm_uw(2));
 
       /* draw edge if edgeflag != 0 */
-      brw_CMP(p, 
-	      vec1(brw_null_reg()), BRW_CONDITIONAL_NZ, 
+      brw_CMP(p,
+	      vec1(brw_null_reg()), BRW_CONDITIONAL_NZ,
 	      deref_1f(v0, c->offset[VERT_RESULT_EDGE]),
 	      brw_imm_f(0));
       draw_edge = brw_IF(p, BRW_EXECUTE_1);
@@ -333,10 +333,10 @@ static void emit_points(struct brw_clip_compile *c,
       brw_MOV(p, get_addr_reg(v0), deref_1uw(v0ptr, 0));
       brw_ADD(p, get_addr_reg(v0ptr), get_addr_reg(v0ptr), brw_imm_uw(2));
 
-      /* draw if edgeflag != 0 
+      /* draw if edgeflag != 0
        */
-      brw_CMP(p, 
-	      vec1(brw_null_reg()), BRW_CONDITIONAL_NZ, 
+      brw_CMP(p,
+	      vec1(brw_null_reg()), BRW_CONDITIONAL_NZ,
 	      deref_1f(v0, c->offset[VERT_RESULT_EDGE]),
 	      brw_imm_f(0));
       draw_point = brw_IF(p, BRW_EXECUTE_1);
@@ -361,7 +361,7 @@ static void emit_points(struct brw_clip_compile *c,
 
 
 static void emit_primitives( struct brw_clip_compile *c,
-			     GLuint mode, 
+			     GLuint mode,
 			     GLboolean do_offset )
 {
    switch (mode) {
@@ -381,7 +381,7 @@ static void emit_primitives( struct brw_clip_compile *c,
       assert(0);
       break;
    }
-} 
+}
 
 
 
@@ -401,7 +401,7 @@ static void emit_unfilled_primitives( struct brw_clip_compile *c )
 	      BRW_CONDITIONAL_GE,
 	      get_element(c->reg.dir, 2),
 	      brw_imm_f(0));
-   
+
       ccw = brw_IF(p, BRW_EXECUTE_1);
       {
 	 emit_primitives(c, c->key.fill_ccw, c->key.offset_ccw);
@@ -415,7 +415,7 @@ static void emit_unfilled_primitives( struct brw_clip_compile *c )
    else if (c->key.fill_cw != CLIP_CULL) {
       emit_primitives(c, c->key.fill_cw, c->key.offset_cw);
    }
-   else if (c->key.fill_ccw != CLIP_CULL) { 
+   else if (c->key.fill_ccw != CLIP_CULL) {
       emit_primitives(c, c->key.fill_ccw, c->key.offset_ccw);
    }
 }
@@ -428,7 +428,7 @@ static void check_nr_verts( struct brw_clip_compile *c )
    struct brw_compile *p = &c->func;
    struct brw_instruction *if_insn;
 
-   brw_CMP(p, vec1(brw_null_reg()), BRW_CONDITIONAL_L, c->reg.nr_verts, brw_imm_d(3));      
+   brw_CMP(p, vec1(brw_null_reg()), BRW_CONDITIONAL_L, c->reg.nr_verts, brw_imm_d(3));
    if_insn = brw_IF(p, BRW_EXECUTE_1);
    {
       brw_clip_kill_thread(c);
@@ -441,7 +441,7 @@ void brw_emit_unfilled_clip( struct brw_clip_compile *c )
 {
    struct brw_compile *p = &c->func;
    struct brw_instruction *do_clip;
-   
+
 
    c->need_direction = ((c->key.offset_ccw || c->key.offset_cw) ||
 			(c->key.fill_ccw != c->key.fill_cw) ||
@@ -464,11 +464,11 @@ void brw_emit_unfilled_clip( struct brw_clip_compile *c )
 
    merge_edgeflags(c);
 
-   /* Need to use the inlist indirection here: 
+   /* Need to use the inlist indirection here:
     */
-   if (c->need_direction) 
+   if (c->need_direction)
       compute_tri_direction(c);
-   
+
    if (c->key.fill_ccw == CLIP_CULL ||
        c->key.fill_cw == CLIP_CULL)
       cull_direction(c);
@@ -485,7 +485,7 @@ void brw_emit_unfilled_clip( struct brw_clip_compile *c )
     */
    if (c->key.do_flat_shading)
       brw_clip_tri_flat_shade(c);
-   
+
    brw_clip_init_clipmask(c);
    brw_CMP(p, vec1(brw_null_reg()), BRW_CONDITIONAL_NZ, c->reg.planemask, brw_imm_ud(0));
    do_clip = brw_IF(p, BRW_EXECUTE_1);
@@ -495,7 +495,7 @@ void brw_emit_unfilled_clip( struct brw_clip_compile *c )
       check_nr_verts(c);
    }
    brw_ENDIF(p, do_clip);
-   
+
    emit_unfilled_primitives(c);
    brw_clip_kill_thread(c);
 }

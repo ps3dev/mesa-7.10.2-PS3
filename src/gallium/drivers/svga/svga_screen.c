@@ -294,7 +294,7 @@ static INLINE SVGA3dDevCapIndex
 svga_translate_format_cap(enum pipe_format format)
 {
    switch(format) {
-   
+
    case PIPE_FORMAT_B8G8R8A8_UNORM:
       return SVGA3D_DEVCAP_SURFACEFMT_A8R8G8B8;
    case PIPE_FORMAT_B8G8R8X8_UNORM:
@@ -352,7 +352,7 @@ svga_is_format_supported( struct pipe_screen *screen,
 
    /* Override host capabilities */
    if (tex_usage & PIPE_BIND_RENDER_TARGET) {
-      switch(format) { 
+      switch(format) {
 
       /* Often unsupported/problematic. This means we end up with the same
        * visuals for all virtual hardware implementations.
@@ -360,7 +360,7 @@ svga_is_format_supported( struct pipe_screen *screen,
       case PIPE_FORMAT_B4G4R4A4_UNORM:
       case PIPE_FORMAT_B5G5R5A1_UNORM:
          return FALSE;
-         
+
       /* Simulate ability to render into compressed textures */
       case PIPE_FORMAT_DXT1_RGB:
       case PIPE_FORMAT_DXT1_RGBA:
@@ -372,14 +372,14 @@ svga_is_format_supported( struct pipe_screen *screen,
          break;
       }
    }
-   
+
    /* Try to query the host */
    index = svga_translate_format_cap(format);
-   if( index < SVGA3D_DEVCAP_MAX && 
+   if( index < SVGA3D_DEVCAP_MAX &&
        sws->get_cap(sws, index, &result) )
    {
       SVGA3dSurfaceFormatCaps mask;
-      
+
       mask.value = 0;
       if (tex_usage & PIPE_BIND_RENDER_TARGET)
          mask.offscreenRenderTarget = 1;
@@ -443,14 +443,14 @@ static void
 svga_destroy_screen( struct pipe_screen *screen )
 {
    struct svga_screen *svgascreen = svga_screen(screen);
-   
+
    svga_screen_cache_cleanup(svgascreen);
 
    pipe_mutex_destroy(svgascreen->swc_mutex);
    pipe_mutex_destroy(svgascreen->tex_mutex);
 
    svgascreen->sws->destroy(svgascreen->sws);
-   
+
    FREE(svgascreen);
 }
 

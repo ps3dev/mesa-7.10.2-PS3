@@ -90,7 +90,7 @@ gdi_screen_create(void)
       goto no_screen;
 
    return screen;
-   
+
 no_screen:
    winsys->destroy(winsys);
 no_winsys:

@@ -73,7 +73,7 @@ llvm_middle_end_prepare( struct draw_pt_middle_end *middle,
    struct draw_llvm_variant_list_item *li;
    unsigned i;
    unsigned instance_id_index = ~0;
-   const unsigned out_prim = (draw->gs.geometry_shader ? 
+   const unsigned out_prim = (draw->gs.geometry_shader ?
                               draw->gs.geometry_shader->output_primitive :
                               in_prim);
 
@@ -130,7 +130,7 @@ llvm_middle_end_prepare( struct draw_pt_middle_end *middle,
 
    /* return even number */
    *max_vertices = *max_vertices & ~1;
-   
+
    key = draw_llvm_make_variant_key(fpme->llvm, store);
 
    /* Search shader's list of variants for the key */
@@ -186,7 +186,7 @@ llvm_middle_end_prepare( struct draw_pt_middle_end *middle,
       (float (*) [12][4]) draw->pt.user.planes[0];
    fpme->llvm->jit_context.viewport =
       (float *)draw->viewport.scale;
-    
+
 }
 
 

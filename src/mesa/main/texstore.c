@@ -70,7 +70,7 @@
 
 
 enum {
-   ZERO = 4, 
+   ZERO = 4,
    ONE = 5
 };
 
@@ -137,7 +137,7 @@ static const struct {
    GLubyte format_idx;
    GLubyte to_rgba[6];
    GLubyte from_rgba[6];
-} mappings[MAX_IDX] = 
+} mappings[MAX_IDX] =
 {
    {
       IDX_LUMINANCE,
@@ -244,7 +244,7 @@ get_map_idx(GLenum value)
       _mesa_problem(NULL, "Unexpected inFormat");
       return 0;
    }
-}   
+}
 
 
 /**
@@ -256,7 +256,7 @@ get_map_idx(GLenum value)
  * \return map[6]  a full 6-component map
  */
 static void
-compute_component_mapping(GLenum inFormat, GLenum outFormat, 
+compute_component_mapping(GLenum inFormat, GLenum outFormat,
 			  GLubyte *map)
 {
    const int inFmt = get_map_idx(inFormat);
@@ -264,23 +264,23 @@ compute_component_mapping(GLenum inFormat, GLenum outFormat,
    const GLubyte *in2rgba = mappings[inFmt].to_rgba;
    const GLubyte *rgba2out = mappings[outFmt].from_rgba;
    int i;
-   
+
    for (i = 0; i < 4; i++)
       map[i] = in2rgba[rgba2out[i]];
 
    map[ZERO] = ZERO;
-   map[ONE] = ONE;   
+   map[ONE] = ONE;
 
 #if 0
    printf("from %x/%s to %x/%s map %d %d %d %d %d %d\n",
 	  inFormat, _mesa_lookup_enum_by_nr(inFormat),
 	  outFormat, _mesa_lookup_enum_by_nr(outFormat),
-	  map[0], 
-	  map[1], 
-	  map[2], 
-	  map[3], 
-	  map[4], 
-	  map[5]); 
+	  map[0],
+	  map[1],
+	  map[2],
+	  map[3],
+	  map[4],
+	  map[5]);
 #endif
 }
 
@@ -669,7 +669,7 @@ _mesa_make_temp_chan_image(struct gl_context *ctx, GLuint dims,
  * \param count  number of pixels to copy/swizzle.
  */
 static void
-swizzle_copy(GLubyte *dst, GLuint dstComponents, const GLubyte *src, 
+swizzle_copy(GLubyte *dst, GLuint dstComponents, const GLubyte *src,
              GLuint srcComponents, const GLubyte *map, GLuint count)
 {
 #define SWZ_CPY(dst, src, count, dstComps, srcComps) \
@@ -815,7 +815,7 @@ static const GLubyte *
 byteswap_mapping( GLboolean swapBytes,
 		  GLenum srcType )
 {
-   if (!swapBytes) 
+   if (!swapBytes)
       return map_identity;
 
    switch (srcType) {
@@ -836,7 +836,7 @@ byteswap_mapping( GLboolean swapBytes,
  * Transfer a GLubyte texture image with component swizzling.
  */
 static void
-_mesa_swizzle_ubyte_image(struct gl_context *ctx, 
+_mesa_swizzle_ubyte_image(struct gl_context *ctx,
 			  GLuint dimensions,
 			  GLenum srcFormat,
 			  GLenum srcType,
@@ -895,7 +895,7 @@ _mesa_swizzle_ubyte_image(struct gl_context *ctx,
       GLubyte *dstImage = (GLubyte *) dstAddr
          + dstYoffset * dstRowStride
          + dstXoffset * dstComponents;
-      swizzle_copy(dstImage, dstComponents, srcImage, srcComponents, map, 
+      swizzle_copy(dstImage, dstComponents, srcImage, srcComponents, map,
 		   srcWidth * srcHeight);
    }
    else {
@@ -1343,7 +1343,7 @@ _mesa_texstore_rgba8888(TEXSTORE_PARAMS)
 	 dstmap[1] = 1;
 	 dstmap[0] = 0;
       }
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -1352,7 +1352,7 @@ _mesa_texstore_rgba8888(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
+				srcPacking);
    }
    else {
       /* general path */
@@ -1516,7 +1516,7 @@ _mesa_texstore_argb8888(TEXSTORE_PARAMS)
 	    (srcType == GL_UNSIGNED_BYTE ||
 	     srcType == GL_UNSIGNED_INT_8_8_8_8 ||
 	     srcType == GL_UNSIGNED_INT_8_8_8_8_REV) &&
-	    can_swizzle(baseInternalFormat) &&	   
+	    can_swizzle(baseInternalFormat) &&
 	    can_swizzle(srcFormat)) {
 
       GLubyte dstmap[4];
@@ -1542,7 +1542,7 @@ _mesa_texstore_argb8888(TEXSTORE_PARAMS)
 	 dstmap[1] = 0;
 	 dstmap[0] = 3;
       }
- 
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -1552,7 +1552,7 @@ _mesa_texstore_argb8888(TEXSTORE_PARAMS)
 				dstRowStride,
                                 dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
+				srcPacking);
    }
    else {
       /* general path */
@@ -1672,7 +1672,7 @@ _mesa_texstore_rgb888(TEXSTORE_PARAMS)
       dstmap[1] = 1;
       dstmap[2] = 0;
       dstmap[3] = ONE;		/* ? */
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -1681,7 +1681,7 @@ _mesa_texstore_rgb888(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
+				srcPacking);
    }
    else {
       /* general path */
@@ -1798,7 +1798,7 @@ _mesa_texstore_bgr888(TEXSTORE_PARAMS)
       dstmap[1] = 1;
       dstmap[2] = 2;
       dstmap[3] = ONE;		/* ? */
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -1807,8 +1807,8 @@ _mesa_texstore_bgr888(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
-   }   
+				srcPacking);
+   }
    else {
       /* general path */
       const GLchan *tempImage = _mesa_make_temp_chan_image(ctx, dims,
@@ -2101,7 +2101,7 @@ _mesa_texstore_unorm88(TEXSTORE_PARAMS)
       }
       dstmap[2] = ZERO;		/* ? */
       dstmap[3] = ONE;		/* ? */
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -2110,8 +2110,8 @@ _mesa_texstore_unorm88(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
-   }   
+				srcPacking);
+   }
    else {
       /* general path */
       const GLchan *tempImage = _mesa_make_temp_chan_image(ctx, dims,
@@ -2529,7 +2529,7 @@ _mesa_texstore_a8(TEXSTORE_PARAMS)
       dstmap[1] = ZERO;		/* ? */
       dstmap[2] = ZERO;		/* ? */
       dstmap[3] = ONE;		/* ? */
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -2538,8 +2538,8 @@ _mesa_texstore_a8(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
-   }   
+				srcPacking);
+   }
    else {
       /* general path */
       const GLchan *tempImage = _mesa_make_temp_chan_image(ctx, dims,
@@ -2703,7 +2703,7 @@ _mesa_texstore_dudv8(TEXSTORE_PARAMS)
       }
       dstmap[2] = ZERO;		/* ? */
       dstmap[3] = ONE;		/* ? */
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				GL_LUMINANCE_ALPHA, /* hack */
 				GL_UNSIGNED_BYTE, /* hack */
@@ -2712,8 +2712,8 @@ _mesa_texstore_dudv8(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
-   }   
+				srcPacking);
+   }
    else {
       /* general path - note this is defined for 2d textures only */
       const GLint components = _mesa_components_in_format(baseInternalFormat);
@@ -2740,7 +2740,7 @@ _mesa_texstore_dudv8(TEXSTORE_PARAMS)
          dst += srcWidth * components;
          src += srcStride;
       }
- 
+
       src = tempImage;
       dst = (GLbyte *) dstAddr
             + dstYoffset * dstRowStride
@@ -2961,7 +2961,7 @@ _mesa_texstore_signed_rgba8888(TEXSTORE_PARAMS)
 	 dstmap[1] = 1;
 	 dstmap[0] = 0;
       }
-      
+
       _mesa_swizzle_ubyte_image(ctx, dims,
 				srcFormat,
 				srcType,
@@ -2970,7 +2970,7 @@ _mesa_texstore_signed_rgba8888(TEXSTORE_PARAMS)
 				dstAddr, dstXoffset, dstYoffset, dstZoffset,
 				dstRowStride, dstImageOffsets,
 				srcWidth, srcHeight, srcDepth, srcAddr,
-				srcPacking);      
+				srcPacking);
    }
    else {
       /* general path */
@@ -3137,7 +3137,7 @@ _mesa_texstore_s8_z24(TEXSTORE_PARAMS)
 	 GLubyte stencil[MAX_WIDTH];
 	 GLint i;
 	 GLboolean keepdepth = GL_FALSE, keepstencil = GL_FALSE;
-	 
+
 	 if (srcFormat == GL_DEPTH_COMPONENT) { /* preserve stencil */
 	    keepstencil = GL_TRUE;
 	 }
@@ -3151,7 +3151,7 @@ _mesa_texstore_s8_z24(TEXSTORE_PARAMS)
 				    GL_UNSIGNED_INT, /* dst type */
 				    keepstencil ? depth : dstRow, /* dst addr */
 				    depthScale,
-				    srcType, src, srcPacking);	 
+				    srcType, src, srcPacking);
 
 	 if (keepstencil == GL_FALSE)
 	    /* get the 8-bit stencil values */
@@ -3203,7 +3203,7 @@ _mesa_texstore_s8(TEXSTORE_PARAMS)
 	 = _mesa_image_row_stride(srcPacking, srcWidth, srcFormat, srcType)
 	 / sizeof(GLuint);
       GLint img, row;
-      
+
       for (img = 0; img < srcDepth; img++) {
          GLubyte *dstRow = (GLubyte *) dstAddr
             + dstImageOffsets[dstZoffset + img]

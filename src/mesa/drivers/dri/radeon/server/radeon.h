@@ -130,7 +130,7 @@ typedef struct {
    drm_handle_t         registerHandle;   /**< \brief MMIO register map handle */
 
    int               IsPCI;            /* Current card is a PCI card */
-   
+
    /**
     * \name AGP
     */
@@ -193,7 +193,7 @@ typedef struct {
    unsigned int      frontPitchOffset;
    unsigned int      backPitchOffset;
    unsigned int      depthPitchOffset;
-   
+
    int               colorTiling;      /**< \brief Enable color tiling */
 
    int               irq;              /**< \brief IRQ number */

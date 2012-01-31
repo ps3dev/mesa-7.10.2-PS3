@@ -30,7 +30,7 @@
 
 #include "main/glheader.h"
 
-#include "defaultendian.h" 
+#include "defaultendian.h"
 #include "sq_micro_reg.h"
 
 #define SQ_ALU_CONSTANT_PS_OFFSET      0x00000000
@@ -54,7 +54,7 @@
 #define SHADERINST_TYPEMASK_TEX 0x40
 #define SHADERINST_TYPEMASK_VTX 0x80
 
-typedef enum ShaderInstType 
+typedef enum ShaderInstType
 {
     SIT_CF = 0x10,            /*SIZE = 0x2*/
         SIT_CF_ALL_EXP = 0x14,    /*SIZE = 0x2, MAX_INSTRUCTIONS = 0x10;*/
@@ -71,7 +71,7 @@ typedef enum ShaderInstType
         SIT_VTX_SEM = 0x82       /*SIZE = 0x4, MEGA_FETCH_BYTES = 0x20*/
 } ShaderInstType;
 
-typedef struct R700ShaderInstruction 
+typedef struct R700ShaderInstruction
 {
     ShaderInstType m_ShaderInstType;
     struct R700ShaderInstruction *pNextInst;
@@ -83,23 +83,23 @@ typedef struct R700ShaderInstruction
 
 typedef R700ShaderInstruction R700ControlFlowInstruction;
 
-typedef struct R700ControlFlowAllocExportClause  
+typedef struct R700ControlFlowAllocExportClause
 {
     ShaderInstType          m_ShaderInstType;
-    R700ShaderInstruction * pNextInst;    
+    R700ShaderInstruction * pNextInst;
     GLuint m_uIndex;
     GLuint useCount;
-		
+
     sq_cf_alloc_export_word0_u      m_Word0;
     sq_cf_alloc_export_word1_u      m_Word1;
 } R700ControlFlowAllocExportClause;
 
-typedef struct R700ControlFlowSXClause 
+typedef struct R700ControlFlowSXClause
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
 	//R700ControlFlowAllocExportClause
-		//R700ControlFlowInstruction 
+		//R700ControlFlowInstruction
 			//R700ShaderInstruction
 	GLuint m_uIndex;
     GLuint useCount;
@@ -112,12 +112,12 @@ typedef struct R700ControlFlowSXClause
     sq_cf_alloc_export_word1_swiz_u m_Word1_SWIZ;
 } R700ControlFlowSXClause;
 
-typedef struct R700ControlFlowSMXClause 
+typedef struct R700ControlFlowSMXClause
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
     //R700ControlFlowAllocExportClause
-		//R700ControlFlowInstruction 
+		//R700ControlFlowInstruction
 			//R700ShaderInstruction
 	GLuint m_uIndex;
     GLuint useCount;
@@ -130,7 +130,7 @@ typedef struct R700ControlFlowSMXClause
     sq_cf_alloc_export_word1_buf_u m_Word1_BUF;
 } R700ControlFlowSMXClause;
 
-typedef struct R700ControlFlowGenericClause 
+typedef struct R700ControlFlowGenericClause
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -148,7 +148,7 @@ typedef struct R700ControlFlowGenericClause
     struct R700TextureInstruction *m_pLinkedTEXInstruction;
 } R700ControlFlowGenericClause;
 
-typedef struct R700ControlFlowALUClause 
+typedef struct R700ControlFlowALUClause
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -161,14 +161,14 @@ typedef struct R700ControlFlowALUClause
 
     sq_cf_alu_word0_u m_Word0;
     sq_cf_alu_word1_u m_Word1;
-    
+
     struct R700ALUInstruction *m_pLinkedALUInstruction;
 } R700ControlFlowALUClause;
 
 // ------------------- End of CF Inst ------------------------
 
 // ------------------- ALU Inst ------------------------------
-typedef struct R700ALUInstruction 
+typedef struct R700ALUInstruction
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -189,7 +189,7 @@ typedef struct R700ALUInstructionHalfLiteral
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
-	//R700ALUInstruction 
+	//R700ALUInstruction
 		//R700ShaderInstruction
 	GLuint m_uIndex;
     GLuint useCount;
@@ -207,11 +207,11 @@ typedef struct R700ALUInstructionHalfLiteral
             m_fLiteralY;
 } R700ALUInstructionHalfLiteral;
 
-typedef struct R700ALUInstructionFullLiteral 
+typedef struct R700ALUInstructionFullLiteral
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
-	//R700ALUInstruction 
+	//R700ALUInstruction
 		//R700ShaderInstruction
 	GLuint m_uIndex;
     GLuint useCount;
@@ -234,7 +234,7 @@ typedef struct R700ALUInstructionFullLiteral
 
 // ------------------- Textuer/Vertex Instruction --------------------
 
-typedef struct R700TextureInstruction 
+typedef struct R700TextureInstruction
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -242,7 +242,7 @@ typedef struct R700TextureInstruction
 	GLuint m_uIndex;
     GLuint useCount;
 	//---------------------
-	
+
     sq_tex_word0_u m_Word0;
     sq_tex_word1_u m_Word1;
     sq_tex_word2_u m_Word2;
@@ -250,7 +250,7 @@ typedef struct R700TextureInstruction
     struct R700ControlFlowGenericClause *m_pLinkedGenericClause;
 } R700TextureInstruction;
 
-typedef struct R700VertexInstruction 
+typedef struct R700VertexInstruction
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -258,7 +258,7 @@ typedef struct R700VertexInstruction
 	GLuint m_uIndex;
     GLuint useCount;
 	//---------------------
-	
+
     sq_vtx_word0_u     m_Word0;
     sq_vtx_word1_u     m_Word1;
     sq_vtx_word2_u     m_Word2;
@@ -266,7 +266,7 @@ typedef struct R700VertexInstruction
     struct R700ControlFlowGenericClause *m_pLinkedGenericClause;
 } R700VertexInstruction;
 //
-typedef struct R700VertexSemanticFetch 
+typedef struct R700VertexSemanticFetch
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -275,7 +275,7 @@ typedef struct R700VertexSemanticFetch
 	GLuint m_uIndex;
     GLuint useCount;
 		//---------------------
-	
+
     sq_vtx_word0_u     m_Word0;
     sq_vtx_word1_u     m_Word1;
     sq_vtx_word2_u     m_Word2;
@@ -286,7 +286,7 @@ typedef struct R700VertexSemanticFetch
     sq_vtx_word1_sem_u m_Word1_SEM;
 } R700VertexSemanticFetch;
 //
-typedef struct R700VertexGenericFetch 
+typedef struct R700VertexGenericFetch
 {
 	ShaderInstType          m_ShaderInstType;
 	R700ShaderInstruction * pNextInst;
@@ -295,7 +295,7 @@ typedef struct R700VertexGenericFetch
 	GLuint m_uIndex;
     GLuint useCount;
 		//---------------------
-	
+
     sq_vtx_word0_u     m_Word0;
     sq_vtx_word1_u     m_Word1;
     sq_vtx_word2_u     m_Word2;

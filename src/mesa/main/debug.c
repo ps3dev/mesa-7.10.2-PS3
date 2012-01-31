@@ -230,7 +230,7 @@ static void add_debug_flags( const char *debug )
 }
 
 
-void 
+void
 _mesa_init_debug( struct gl_context *ctx )
 {
    char *c;
@@ -335,7 +335,7 @@ write_renderbuffer_image(const struct gl_renderbuffer *rb)
    char s[100];
    GLenum format, type;
 
-   if (rb->_BaseFormat == GL_RGB || 
+   if (rb->_BaseFormat == GL_RGB ||
        rb->_BaseFormat == GL_RGBA) {
       format = GL_RGBA;
       type = GL_UNSIGNED_BYTE;

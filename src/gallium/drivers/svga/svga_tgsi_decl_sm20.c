@@ -47,11 +47,11 @@ static boolean ps20_input( struct svga_shader_emitter *emit,
    case TGSI_SEMANTIC_POSITION:
       /* Special case:
        */
-      reg = src_register( SVGA3DREG_MISCTYPE, 
+      reg = src_register( SVGA3DREG_MISCTYPE,
                           SVGA3DMISCREG_POSITION );
       break;
    case TGSI_SEMANTIC_COLOR:
-      reg = src_register( SVGA3DREG_INPUT, 
+      reg = src_register( SVGA3DREG_INPUT,
                           semantic.Index );
       break;
    case TGSI_SEMANTIC_FOG:
@@ -95,7 +95,7 @@ static boolean ps20_output( struct svga_shader_emitter *emit,
          emit->output_map[idx] = dst_register( SVGA3DREG_TEMP,
                                                emit->nr_hw_temp++ );
          emit->temp_col[cbuf] = emit->output_map[idx];
-         emit->true_col[cbuf] = dst_register( SVGA3DREG_COLOROUT, 
+         emit->true_col[cbuf] = dst_register( SVGA3DREG_COLOROUT,
                                               semantic.Index );
       }
       else {
@@ -107,7 +107,7 @@ static boolean ps20_output( struct svga_shader_emitter *emit,
       emit->output_map[idx] = dst_register( SVGA3DREG_TEMP,
                                             emit->nr_hw_temp++ );
       emit->temp_pos = emit->output_map[idx];
-      emit->true_pos = dst_register( SVGA3DREG_DEPTHOUT, 
+      emit->true_pos = dst_register( SVGA3DREG_DEPTHOUT,
                                      semantic.Index );
       break;
    default:
@@ -164,7 +164,7 @@ static boolean vs20_output( struct svga_shader_emitter *emit,
    /* Don't emit dcl instruction for vs20 inputs
     */
 
-   /* Just build the register map table: 
+   /* Just build the register map table:
     */
    switch (semantic.Name) {
    case TGSI_SEMANTIC_POSITION:
@@ -172,7 +172,7 @@ static boolean vs20_output( struct svga_shader_emitter *emit,
       emit->output_map[idx] = dst_register( SVGA3DREG_TEMP,
                                             emit->nr_hw_temp++ );
       emit->temp_pos = emit->output_map[idx];
-      emit->true_pos = dst_register( SVGA3DREG_RASTOUT, 
+      emit->true_pos = dst_register( SVGA3DREG_RASTOUT,
                                      SVGA3DRASTOUT_POSITION);
       break;
    case TGSI_SEMANTIC_PSIZE:
@@ -180,7 +180,7 @@ static boolean vs20_output( struct svga_shader_emitter *emit,
       emit->output_map[idx] = dst_register( SVGA3DREG_TEMP,
                                             emit->nr_hw_temp++ );
       emit->temp_psiz = emit->output_map[idx];
-      emit->true_psiz = dst_register( SVGA3DREG_RASTOUT, 
+      emit->true_psiz = dst_register( SVGA3DREG_RASTOUT,
                                       SVGA3DRASTOUT_PSIZE );
       break;
    case TGSI_SEMANTIC_FOG:
@@ -232,7 +232,7 @@ boolean svga_translate_decl_sm20( struct svga_shader_emitter *emit,
    unsigned semantic = 0;
    unsigned semantic_idx = 0;
    unsigned idx;
-   
+
    if (decl->Declaration.Semantic) {
       semantic = decl->Semantic.Name;
       semantic_idx = decl->Semantic.Index;

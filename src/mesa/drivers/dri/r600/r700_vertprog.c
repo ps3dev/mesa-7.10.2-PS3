@@ -48,7 +48,7 @@
 #include "r700_debug.h"
 #include "r700_vertprog.h"
 
-unsigned int Map_Vertex_Output(r700_AssemblerBase       *pAsm, 
+unsigned int Map_Vertex_Output(r700_AssemblerBase       *pAsm,
 					           struct gl_vertex_program *mesa_vp,
 					           unsigned int unStart)
 {
@@ -124,7 +124,7 @@ unsigned int Map_Vertex_Output(r700_AssemblerBase       *pAsm,
 	return (unTotal - unStart);
 }
 
-unsigned int Map_Vertex_Input(r700_AssemblerBase       *pAsm, 
+unsigned int Map_Vertex_Input(r700_AssemblerBase       *pAsm,
 					  struct gl_vertex_program *mesa_vp,
 					  unsigned int unStart)
 {
@@ -165,7 +165,7 @@ GLboolean Process_Vertex_Program_Vfetch_Instructions(
 						    &vtxFetchMethod);
 		}
 	}
-	
+
 	return GL_TRUE;
 }
 
@@ -375,7 +375,7 @@ struct r700_vertex_program* r700TranslateVertexShader(struct gl_context *ctx,
         return GL_FALSE;
     }
 
-    vp->r700Shader.nRegs = (vp->r700AsmCode.number_used_registers == 0) ? 0 
+    vp->r700Shader.nRegs = (vp->r700AsmCode.number_used_registers == 0) ? 0
                          : (vp->r700AsmCode.number_used_registers - 1);
 
 	vp->r700Shader.nParamExports = vp->r700AsmCode.number_of_exports;
@@ -435,7 +435,7 @@ void r700SelectVertexShader(struct gl_context *ctx)
 
 int getTypeSize(GLenum type)
 {
-    switch (type) 
+    switch (type)
     {
     case GL_DOUBLE:
         return sizeof(GLdouble);
@@ -462,44 +462,44 @@ int getTypeSize(GLenum type)
 static void r700TranslateAttrib(struct gl_context *ctx, GLuint unLoc, int count, const struct gl_client_array *input)
 {
     context_t *context = R700_CONTEXT(ctx);
-    
+
     StreamDesc * pStreamDesc = &(context->stream_desc[context->nNumActiveAos]);
 
 	GLuint stride;
 
-	stride = (input->StrideB == 0) ? getTypeSize(input->Type) * input->Size 
+	stride = (input->StrideB == 0) ? getTypeSize(input->Type) * input->Size
                                    : input->StrideB;
 
     if (input->Type == GL_DOUBLE || input->Type == GL_UNSIGNED_INT || input->Type == GL_INT
 #if MESA_BIG_ENDIAN
         || getTypeSize(input->Type) != 4
 #endif
-       ) 
+       )
     {
         pStreamDesc->type = GL_FLOAT;
 
-        if (input->StrideB == 0) 
+        if (input->StrideB == 0)
         {
 	        pStreamDesc->stride = 0;
-        } 
-        else 
+        }
+        else
         {
 	        pStreamDesc->stride = sizeof(GLfloat) * input->Size;
         }
         pStreamDesc->dwords = input->Size;
         pStreamDesc->is_named_bo = GL_FALSE;
-    } 
-    else 
+    }
+    else
     {
         pStreamDesc->type = input->Type;
         pStreamDesc->dwords = (getTypeSize(input->Type) * input->Size + 3)/ 4;
-        if (!input->BufferObj->Name) 
+        if (!input->BufferObj->Name)
         {
-            if (input->StrideB == 0) 
+            if (input->StrideB == 0)
             {
                 pStreamDesc->stride = 0;
-            } 
-            else 
+            }
+            else
             {
                 pStreamDesc->stride = (getTypeSize(pStreamDesc->type) * input->Size + 3) & ~3;
             }
@@ -513,7 +513,7 @@ static void r700TranslateAttrib(struct gl_context *ctx, GLuint unLoc, int count,
 	pStreamDesc->element = unLoc;
 	pStreamDesc->format = input->Format;
 
-	switch (pStreamDesc->type) 
+	switch (pStreamDesc->type)
 	{ //GetSurfaceFormat
 	case GL_FLOAT:
 		pStreamDesc->_signed = 0;
@@ -538,7 +538,7 @@ static void r700TranslateAttrib(struct gl_context *ctx, GLuint unLoc, int count,
 	default:
 	case GL_INT:
 	case GL_UNSIGNED_INT:
-	case GL_DOUBLE: 
+	case GL_DOUBLE:
 		assert(0);
 		break;
 	}
@@ -561,7 +561,7 @@ void r700SetVertexFormat(struct gl_context *ctx, const struct gl_client_array *a
         unBit |= VERT_BIT_POS;
     }
 
-    while(unBit) 
+    while(unBit)
     {
         if(unBit & 1)
         {
@@ -627,11 +627,11 @@ GLboolean r700SetupVertexProgram(struct gl_context * ctx)
             {
                 unNumParamData = paramList->NumParameters;
                 r600AllocShaderConsts(ctx,
-                               &(vp->constbo0),                       
+                               &(vp->constbo0),
                                unNumParamData *4*4,
                                "VSCON");
             }
-        }        
+        }
 
         vp->loaded = GL_TRUE;
     }
@@ -650,7 +650,7 @@ GLboolean r700SetupVertexProgram(struct gl_context * ctx)
     SETbit(r700->vs.SQ_PGM_RESOURCES_VS.u32All, PGM_RESOURCES__PRIME_CACHE_ON_DRAW_bit);
 
     r700->vs.SQ_ALU_CONST_CACHE_VS_0.u32All = 0; /* set from buffer object. */
-    
+
     r700->vs.SQ_PGM_START_VS.u32All = 0;
 
     SETfield(r700->vs.SQ_PGM_RESOURCES_VS.u32All, vp->r700Shader.nRegs + 1,
@@ -691,10 +691,10 @@ GLboolean r700SetupVertexProgram(struct gl_context * ctx)
     if(NULL != paramList) {
         /* vp->mesa_program was cloned, not updated by glsl shader api. */
         /* _mesa_reference_program has already checked glsl shProg is ok and set ctx->VertexProgem._Current */
-        /* so, use ctx->VertexProgem._Current */       
-        struct gl_program_parameter_list *paramListOrginal = 
+        /* so, use ctx->VertexProgem._Current */
+        struct gl_program_parameter_list *paramListOrginal =
                          ctx->VertexProgram._Current->Base.Parameters;
-         
+
 	    _mesa_load_state_parameters(ctx, paramList);
 
 	    if (paramList->NumParameters > R700_MAX_DX9_CONSTS)
@@ -707,7 +707,7 @@ GLboolean r700SetupVertexProgram(struct gl_context * ctx)
 	    unNumParamData = paramList->NumParameters;
 
 	    for(ui=0; ui<unNumParamData; ui++) {
-            if(paramList->Parameters[ui].Type == PROGRAM_UNIFORM) 
+            if(paramList->Parameters[ui].Type == PROGRAM_UNIFORM)
             {
                 r700->vs.consts[ui][0].f32All = paramListOrginal->ParameterValues[ui][0];
 		        r700->vs.consts[ui][1].f32All = paramListOrginal->ParameterValues[ui][1];

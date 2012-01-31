@@ -391,7 +391,7 @@ tdfxFillInModes(__DRIscreen *psp,
 
 /**
  * This is the driver specific part of the createNewScreen entry point.
- * 
+ *
  * \todo maybe fold this into intelInitDriver
  *
  * \return the struct gl_config supported by this driver
@@ -418,7 +418,7 @@ tdfxInitScreen(__DRIscreen *psp)
 
    if (!tdfxInitDriver(psp))
       return NULL;
-      
+
    return tdfxFillInModes(psp,
 			  bpp, (bpp == 16) ? 16 : 24,
 			  (bpp == 16) ? 0 : 8,

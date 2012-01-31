@@ -31,7 +31,7 @@
 
 /** \file texmem.h
  * Public interface to the DRI texture memory management routines.
- * 
+ *
  * \sa texmem.c
  */
 
@@ -76,7 +76,7 @@ struct dri_texture_object {
 					 */
 
 	unsigned    totalSize;		/**< Total size of the texture,
-					 * including all mipmap levels 
+					 * including all mipmap levels
 					 */
 
 	unsigned    dirty_images[6];	/**< Flags for whether or not images
@@ -92,7 +92,7 @@ struct dri_texture_object {
 					 * synchronize with 3d engine
 					 * in hardware where textures
 					 * are uploaded directly to
-					 * the framebuffer.  
+					 * the framebuffer.
 					 */
 
         unsigned    firstLevel;         /**< Image in \c tObj->Image[0] that
@@ -100,7 +100,7 @@ struct dri_texture_object {
 					 * this texture object.
 					 */
 
-        unsigned    lastLevel;          /**< Last image in \c tObj->Image[0] 
+        unsigned    lastLevel;          /**< Last image in \c tObj->Image[0]
 					 * used by the
 					 * current LOD settings of
 					 * this texture object.  This
@@ -122,11 +122,11 @@ typedef void (destroy_texture_object_t)( void * driverContext,
 
 struct dri_tex_heap {
 
-	/** Client-supplied heap identifier 
+	/** Client-supplied heap identifier
 	 */
-	unsigned heapId;	
+	unsigned heapId;
 
-	/** Pointer to the client's private context 
+	/** Pointer to the client's private context
 	 */
 	void *driverContext;
 
@@ -146,7 +146,7 @@ struct dri_tex_heap {
 	unsigned logGranularity;
 
 	/** \brief Required alignment of allocations in this heap
-	 * 
+	 *
 	 * The alignment shift is supplied to \a mmAllocMem when memory is
 	 * allocated from this heap.  The value of \a alignmentShift will
 	 * typically reflect some require of the hardware.  This value has
@@ -159,7 +159,7 @@ struct dri_tex_heap {
 
 	/** Number of elements in global list (the SAREA).
 	 */
-	unsigned nrRegions;	 
+	unsigned nrRegions;
 
 	/** Pointer to SAREA \a driTexRegion array
 	 */
@@ -182,7 +182,7 @@ struct dri_tex_heap {
 	 * memory.
 	 */
 	driTextureObject     texture_objects;
-    
+
 	/** Pointer to the list of texture objects that are not in
 	 * texture memory.
 	 */
@@ -195,7 +195,7 @@ struct dri_tex_heap {
 
 	/**
 	 * \brief Function to destroy driver-specific texture object data.
-	 * 
+	 *
 	 * This function is supplied by the driver so that the texture manager
 	 * can release all resources associated with a texture object.  This
 	 * function should only release driver-specific data.  That is,
@@ -219,7 +219,7 @@ struct dri_tex_heap {
         /**
 	 * Timestamp used to synchronize with 3d engine in hardware
 	 * where textures are uploaded directly to the
-	 * framebuffer.  
+	 * framebuffer.
 	 */
         unsigned timestamp;
 
@@ -249,7 +249,7 @@ struct dri_tex_heap {
  * been stolen.  If another client has modified a region in which we have
  * textures, then we need to figure out which of our textures have been
  * removed and update our global LRU.
- * 
+ *
  * \param heap Texture heap to be updated
  * \hideinitializer
  */
@@ -277,7 +277,7 @@ void driDestroyTextureObject( driTextureObject * t );
 int driAllocateTexture( driTexHeap * const * heap_array, unsigned nr_heaps,
     driTextureObject * t );
 
-GLboolean driIsTextureResident( struct gl_context * ctx, 
+GLboolean driIsTextureResident( struct gl_context * ctx,
     struct gl_texture_object * texObj );
 
 driTexHeap * driCreateTextureHeap( unsigned heap_id, void * context,

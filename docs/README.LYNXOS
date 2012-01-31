@@ -3,17 +3,17 @@ Mesa 3.0 for LynxOS builds in the following way:
 
 make lynxos
 
-This will build all the libraries and demo applications. You should have 
-around 400 megabytes free for everything since everything is done with 
+This will build all the libraries and demo applications. You should have
+around 400 megabytes free for everything since everything is done with
 static
 libraries.
 
-Before using this make file however, you should perform the following 
+Before using this make file however, you should perform the following
 actions:
 0) cd to the Mesa-3.0 directory
 1) Copy the GL directory under the include directory to /usr/include.
 2) Copy the files in the lib directory to /lib.
-3) Make links so that the Mesa libraries look like ordinary OpenGL 
+3) Make links so that the Mesa libraries look like ordinary OpenGL
 libraries
 in /lib. This is important for compatibility with other OpenGL apps. This
 is done as follows:
@@ -53,7 +53,7 @@ all: $(STANDARD_OFILES)
 
 ----cut here for Makefile-----
 
-I have tested Mesa under LynxOS 3.0 and 3.01. It should build fine under 
+I have tested Mesa under LynxOS 3.0 and 3.01. It should build fine under
 other
 versions as well. Note, however, that LynxOS versions prior to 3.0 are not
 binary compatible, so you will have to rebuild from source.

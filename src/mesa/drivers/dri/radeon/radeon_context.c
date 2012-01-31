@@ -120,7 +120,7 @@ static const struct tnl_pipeline_stage *radeon_pipeline[] = {
 
    /* Try and go straight to t&l
     */
-   &_radeon_tcl_stage,  
+   &_radeon_tcl_stage,
 
    /* Catch any t&l fallbacks
     */
@@ -149,10 +149,10 @@ static void r100_get_lock(radeonContextPtr radeon)
       rmesa->hw.ctx.cmd[CTX_RB3D_COLORPITCH] &=
 	 ~RADEON_COLOR_TILE_ENABLE;
    }
-   
+
    if (sarea->ctx_owner != rmesa->radeon.dri.hwContext) {
       sarea->ctx_owner = rmesa->radeon.dri.hwContext;
-      
+
       if (!radeon->radeonScreen->kernel_mm)
          radeon_bo_legacy_texture_age(radeon->radeonScreen->bom);
    }
@@ -165,7 +165,7 @@ static void r100_vtbl_emit_cs_header(struct radeon_cs *cs, radeonContextPtr rmes
 static void r100_vtbl_pre_emit_state(radeonContextPtr radeon)
 {
    r100ContextPtr rmesa = (r100ContextPtr)radeon;
-   
+
    /* r100 always needs to emit ZBS to avoid TCL lockups */
    rmesa->hw.zbs.dirty = 1;
    radeon->hw.is_dirty = 1;
@@ -236,7 +236,7 @@ r100CreateContext( gl_api api,
 
    /* init exp fog table data */
    radeonInitStaticFogData();
-   
+
    /* Parse configuration files.
     * Do this here so that initialMaxAnisotropy is set before we create
     * the default textures.
@@ -289,7 +289,7 @@ r100CreateContext( gl_api api,
 
    i = driQueryOptioni( &rmesa->radeon.optionCache, "allow_large_textures");
 
-   /* FIXME: When no memory manager is available we should set this 
+   /* FIXME: When no memory manager is available we should set this
     * to some reasonable value based on texture memory pool size */
    ctx->Const.MaxTextureLevels = 12;
    ctx->Const.Max3DTextureLevels = 9;
@@ -316,9 +316,9 @@ r100CreateContext( gl_api api,
     * fit in a single dma buffer for indexed rendering of quad strips,
     * etc.
     */
-   ctx->Const.MaxArrayLockSize = 
-      MIN2( ctx->Const.MaxArrayLockSize, 
- 	    RADEON_BUFFER_SIZE / RADEON_MAX_TCL_VERTSIZE ); 
+   ctx->Const.MaxArrayLockSize =
+      MIN2( ctx->Const.MaxArrayLockSize,
+ 	    RADEON_BUFFER_SIZE / RADEON_MAX_TCL_VERTSIZE );
 
    rmesa->boxes = 0;
 
@@ -387,7 +387,7 @@ r100CreateContext( gl_api api,
    radeonInitState( rmesa );
    radeonInitSwtcl( ctx );
 
-   _mesa_vector4f_alloc( &rmesa->tcl.ObjClean, 0, 
+   _mesa_vector4f_alloc( &rmesa->tcl.ObjClean, 0,
 			 ctx->Const.MaxArrayLockSize, 32 );
 
    fthrottle_mode = driQueryOptioni(&rmesa->radeon.optionCache, "fthrottle_mode");

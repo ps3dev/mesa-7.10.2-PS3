@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -87,7 +87,7 @@ GLuint brw_wm_is_scalar_result( GLuint opcode )
    case TGSI_OPCODE_DPH:
    case TGSI_OPCODE_DST:
       return 1;
-      
+
    default:
       return 0;
    }
@@ -147,7 +147,7 @@ brw_wm_linear_shader_emit(struct brw_context *brw, struct brw_wm_compile *c)
  * we'll use one of two code generators.
  */
 static enum pipe_error do_wm_prog( struct brw_context *brw,
-                                   struct brw_fragment_shader *fp, 
+                                   struct brw_fragment_shader *fp,
                                    struct brw_wm_prog_key *key,
                                    struct brw_winsys_buffer **bo_out)
 {
@@ -158,7 +158,7 @@ static enum pipe_error do_wm_prog( struct brw_context *brw,
 
    if (brw->wm.compile_data == NULL) {
       brw->wm.compile_data = MALLOC(sizeof(*brw->wm.compile_data));
-      if (!brw->wm.compile_data) 
+      if (!brw->wm.compile_data)
          return PIPE_ERROR_OUT_OF_MEMORY;
    }
 
@@ -227,21 +227,21 @@ static void brw_wm_populate_key( struct brw_context *brw,
 
 
    /* PIPE_NEW_RAST
-    * BRW_NEW_REDUCED_PRIMITIVE 
+    * BRW_NEW_REDUCED_PRIMITIVE
     */
    switch (brw->reduced_primitive) {
    case PIPE_PRIM_POINTS:
       line_aa = AA_NEVER;
       break;
    case PIPE_PRIM_LINES:
-      line_aa = (brw->curr.rast->templ.line_smooth ? 
+      line_aa = (brw->curr.rast->templ.line_smooth ?
                  AA_ALWAYS : AA_NEVER);
       break;
    default:
       line_aa = brw->curr.rast->unfilled_aa_line;
       break;
    }
-	 
+
    brw_wm_lookup_iz(line_aa,
 		    lookup,
 		    brw->curr.fragment_shader->uses_depth,
@@ -254,7 +254,7 @@ static void brw_wm_populate_key( struct brw_context *brw,
    /* PIPE_NEW_BOUND_TEXTURES */
    for (i = 0; i < brw->curr.num_fragment_sampler_views; i++) {
       const struct brw_texture *tex = brw_texture(brw->curr.fragment_sampler_views[i]->texture);
-	 
+
       if (tex->b.b.format == PIPE_FORMAT_UYVY)
 	 key->yuvtex_mask |= 1 << i;
 
@@ -283,7 +283,7 @@ static enum pipe_error brw_prepare_wm_prog(struct brw_context *brw)
    struct brw_wm_prog_key key;
    struct brw_fragment_shader *fs = brw->curr.fragment_shader;
    enum pipe_error ret;
-     
+
    brw_wm_populate_key(brw, &key);
 
    /* Make an early check for the key.

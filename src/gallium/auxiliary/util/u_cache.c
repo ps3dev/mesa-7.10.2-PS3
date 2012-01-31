@@ -29,8 +29,8 @@
  * @file
  * Simple cache implementation.
  *
- * We simply have fixed size array, and destroy previous values on collision. 
- * 
+ * We simply have fixed size array, and destroy previous values on collision.
+ *
  * @author Jose Fonseca <jfonseca@vmware.com>
  */
 
@@ -47,7 +47,7 @@ struct util_cache_entry
 {
    void *key;
    void *value;
-   
+
 #ifdef DEBUG
    unsigned count;
 #endif
@@ -58,7 +58,7 @@ struct util_cache
 {
    /** Hash function */
    uint32_t (*hash)(const void *key);
-   
+
    /** Compare two keys */
    int (*compare)(const void *key1, const void *key2);
 
@@ -66,9 +66,9 @@ struct util_cache
    void (*destroy)(void *key, void *value);
 
    uint32_t size;
-   
+
    struct util_cache_entry *entries;
-   
+
 #ifdef DEBUG
    unsigned count;
 #endif
@@ -82,22 +82,22 @@ util_cache_create(uint32_t (*hash)(const void *key),
                   uint32_t size)
 {
    struct util_cache *cache;
-   
+
    cache = CALLOC_STRUCT(util_cache);
    if(!cache)
       return NULL;
-   
+
    cache->hash = hash;
    cache->compare = compare;
    cache->destroy = destroy;
    cache->size = size;
-   
+
    cache->entries = CALLOC(size, sizeof(struct util_cache_entry));
    if(!cache->entries) {
       FREE(cache);
       return NULL;
    }
-   
+
    return cache;
 }
 
@@ -107,7 +107,7 @@ util_cache_entry_get(struct util_cache *cache,
                      const void *key)
 {
    uint32_t hash;
-   
+
    hash = cache->hash(key);
 
    return &cache->entries[hash % cache->size];
@@ -119,10 +119,10 @@ util_cache_entry_destroy(struct util_cache *cache,
 {
    void *key = entry->key;
    void *value = entry->value;
-   
+
    entry->key = NULL;
    entry->value = NULL;
-   
+
    if(key || value)
       if(cache->destroy)
          cache->destroy(key, value);
@@ -142,19 +142,19 @@ util_cache_set(struct util_cache *cache,
 
    entry = util_cache_entry_get(cache, key);
    util_cache_entry_destroy(cache, entry);
-   
+
 #ifdef DEBUG
    ++entry->count;
    ++cache->count;
 #endif
-   
+
    entry->key = key;
    entry->value = value;
 }
 
 
 void *
-util_cache_get(struct util_cache *cache, 
+util_cache_get(struct util_cache *cache,
                const void *key)
 {
    struct util_cache_entry *entry;
@@ -166,15 +166,15 @@ util_cache_get(struct util_cache *cache,
    entry = util_cache_entry_get(cache, key);
    if(!entry->key && !entry->value)
       return NULL;
-   
+
    if(cache->compare(key, entry->key) != 0)
       return NULL;
-   
+
    return entry->value;
 }
 
 
-void 
+void
 util_cache_clear(struct util_cache *cache)
 {
    uint32_t i;
@@ -203,15 +203,15 @@ util_cache_destroy(struct util_cache *cache)
       unsigned i;
       for(i = 0; i < cache->size; ++i) {
          double z = fabs(cache->entries[i].count - mean)/stddev;
-         /* This assert should not fail 99.9999998027% of the times, unless 
+         /* This assert should not fail 99.9999998027% of the times, unless
           * the hash function is a poor one */
          assert(z <= 6.0);
       }
    }
 #endif
-      
+
    util_cache_clear(cache);
-   
+
    FREE(cache->entries);
    FREE(cache);
 }

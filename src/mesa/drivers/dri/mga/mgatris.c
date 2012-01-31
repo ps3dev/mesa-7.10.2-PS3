@@ -108,7 +108,7 @@ static INLINE void mga_draw_point( mgaContextPtr mmesa,
    const int vertex_size = mmesa->vertex_size;
    GLuint *vb = mgaAllocDmaLow( mmesa, 6 * 4 * vertex_size );
    int j;
-   
+
 #if 0
    v0->v.x += PNT_X_OFFSET - TRI_X_OFFSET;
    v0->v.y += PNT_Y_OFFSET - TRI_Y_OFFSET;
@@ -118,37 +118,37 @@ static INLINE void mga_draw_point( mgaContextPtr mmesa,
     */
    *(float *)&vb[0] = tmp->v.x - sz;
    *(float *)&vb[1] = tmp->v.y - sz;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = tmp->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = tmp->v.x + sz;
    *(float *)&vb[1] = tmp->v.y - sz;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = tmp->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = tmp->v.x + sz;
    *(float *)&vb[1] = tmp->v.y + sz;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = tmp->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = tmp->v.x + sz;
    *(float *)&vb[1] = tmp->v.y + sz;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = tmp->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = tmp->v.x - sz;
    *(float *)&vb[1] = tmp->v.y + sz;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = tmp->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = tmp->v.x - sz;
    *(float *)&vb[1] = tmp->v.y - sz;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = tmp->ui[j];
 
 #if 0
@@ -179,7 +179,7 @@ static INLINE void mga_draw_line( mgaContextPtr mmesa,
 
    dx = v0->v.x - v1->v.x;
    dy = v0->v.y - v1->v.y;
-   
+
    ix = width * .5; iy = 0;
    if (dx * dx > dy * dy) {
       iy = ix; ix = 0;
@@ -187,37 +187,37 @@ static INLINE void mga_draw_line( mgaContextPtr mmesa,
 
    *(float *)&vb[0] = v0->v.x - ix;
    *(float *)&vb[1] = v0->v.y - iy;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = v0->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = v1->v.x + ix;
    *(float *)&vb[1] = v1->v.y + iy;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = v1->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = v0->v.x + ix;
    *(float *)&vb[1] = v0->v.y + iy;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = v0->ui[j];
    vb += vertex_size;
-	 
+
    *(float *)&vb[0] = v0->v.x - ix;
    *(float *)&vb[1] = v0->v.y - iy;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = v0->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = v1->v.x - ix;
    *(float *)&vb[1] = v1->v.y - iy;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = v1->ui[j];
    vb += vertex_size;
 
    *(float *)&vb[0] = v1->v.x + ix;
    *(float *)&vb[1] = v1->v.y + iy;
-   for (j = 2 ; j < vertex_size ; j++) 
+   for (j = 2 ; j < vertex_size ; j++)
       vb[j] = v1->ui[j];
    vb += vertex_size;
 
@@ -276,13 +276,13 @@ do {						\
 
 /* This code is hit only when a mix of accelerated and unaccelerated
  * primitives are being drawn, and only for the unaccelerated
- * primitives.  
+ * primitives.
  */
 
-static void 
-mga_fallback_tri( mgaContextPtr mmesa, 
-		   mgaVertex *v0, 
-		   mgaVertex *v1, 
+static void
+mga_fallback_tri( mgaContextPtr mmesa,
+		   mgaVertex *v0,
+		   mgaVertex *v1,
 		   mgaVertex *v2 )
 {
    struct gl_context *ctx = mmesa->glCtx;
@@ -294,7 +294,7 @@ mga_fallback_tri( mgaContextPtr mmesa,
 }
 
 
-static void 
+static void
 mga_fallback_line( mgaContextPtr mmesa,
 		    mgaVertex *v0,
 		    mgaVertex *v1 )
@@ -307,8 +307,8 @@ mga_fallback_line( mgaContextPtr mmesa,
 }
 
 
-static void 
-mga_fallback_point( mgaContextPtr mmesa, 
+static void
+mga_fallback_point( mgaContextPtr mmesa,
 		     mgaVertex *v0 )
 {
    struct gl_context *ctx = mmesa->glCtx;
@@ -611,8 +611,8 @@ static void init_rast_tab( void )
     const GLuint vertex_size = mmesa->vertex_size;       	\
     const GLuint * const elt = TNL_CONTEXT(ctx)->vb.Elts;	\
     (void) elt;
-#define RESET_STIPPLE 
-#define RESET_OCCLUSION 
+#define RESET_STIPPLE
+#define RESET_OCCLUSION
 #define PRESERVE_VB_DEFS
 #define ELT(x) x
 #define TAG(x) mga_##x##_verts
@@ -637,7 +637,7 @@ static void mgaRenderClippedPoly( struct gl_context *ctx, const GLuint *elts, GL
    struct vertex_buffer *VB = &tnl->vb;
    GLuint prim = mmesa->render_primitive;
 
-   /* Render the new vertices as an unclipped polygon. 
+   /* Render the new vertices as an unclipped polygon.
     */
    {
       GLuint *tmp = VB->Elts;
@@ -658,13 +658,13 @@ static void mgaRenderClippedLine( struct gl_context *ctx, GLuint ii, GLuint jj )
    tnl->Driver.Render.Line( ctx, ii, jj );
 }
 
-static void mgaFastRenderClippedPoly( struct gl_context *ctx, const GLuint *elts, 
+static void mgaFastRenderClippedPoly( struct gl_context *ctx, const GLuint *elts,
 				       GLuint n )
 {
    mgaContextPtr mmesa = MGA_CONTEXT( ctx );
    GLuint vertex_size = mmesa->vertex_size;
    GLuint *vb = mgaAllocDmaLow( mmesa, (n-2) * 3 * 4 * vertex_size );
-   GLubyte *vertptr = (GLubyte *)mmesa->verts;			
+   GLubyte *vertptr = (GLubyte *)mmesa->verts;
    const GLuint *start = (const GLuint *)VERT(elts[0]);
    int i,j;
 
@@ -710,15 +710,15 @@ void mgaChooseRenderState(struct gl_context *ctx)
        */
       if (flags & ANY_FALLBACK_FLAGS)
       {
-	 if (flags & POINT_FALLBACK) 
+	 if (flags & POINT_FALLBACK)
 	    mmesa->draw_point = mga_fallback_point;
-	 
-	 if (flags & LINE_FALLBACK) 
+
+	 if (flags & LINE_FALLBACK)
 	    mmesa->draw_line = mga_fallback_line;
-	 
-	 if (flags & TRI_FALLBACK) 
+
+	 if (flags & TRI_FALLBACK)
 	    mmesa->draw_tri = mga_fallback_tri;
-	 
+
 	 index |= MGA_FALLBACK_BIT;
       }
 
@@ -735,7 +735,7 @@ void mgaChooseRenderState(struct gl_context *ctx)
       tnl->Driver.Render.Line = rast_tab[index].line;
       tnl->Driver.Render.Triangle = rast_tab[index].triangle;
       tnl->Driver.Render.Quad = rast_tab[index].quad;
-         
+
       if (index == 0) {
 	 tnl->Driver.Render.PrimTabVerts = mga_render_tab_verts;
 	 tnl->Driver.Render.PrimTabElts = mga_render_tab_elts;
@@ -798,7 +798,7 @@ void mgaRasterPrimitive( struct gl_context *ctx, GLenum prim, GLuint hwprim )
 
 
 
-/* Determine the rasterized primitive when not drawing unfilled 
+/* Determine the rasterized primitive when not drawing unfilled
  * polygons.
  *
  * Used only for the default render stage which always decomposes
@@ -815,7 +815,7 @@ static void mgaRenderPrimitive( struct gl_context *ctx, GLenum prim )
 
    if (rprim == GL_TRIANGLES && (ctx->_TriangleCaps & DD_TRI_UNFILLED))
       return;
-       
+
    if (mmesa->raster_primitive != rprim) {
       mgaRasterPrimitive( ctx, rprim, MGA_WA_TRIANGLES );
    }
@@ -904,9 +904,9 @@ void mgaDDInitTriFuncs( struct gl_context *ctx )
    }
 
    mmesa->RenderIndex = ~0;
-	
+
    tnl->Driver.Render.Start              = mgaCheckTexSizes;
-   tnl->Driver.Render.Finish             = mgaRenderFinish; 
+   tnl->Driver.Render.Finish             = mgaRenderFinish;
    tnl->Driver.Render.PrimitiveNotify    = mgaRenderPrimitive;
    tnl->Driver.Render.ResetLineStipple   = _swrast_ResetLineStipple;
    tnl->Driver.Render.BuildVertices      = mgaBuildVertices;

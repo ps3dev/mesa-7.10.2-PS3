@@ -488,7 +488,7 @@ fprint_dst_reg(FILE * f,
 		      dstReg->Index, mode, dstReg->RelAddr, prog,
                       GL_FALSE, GL_FALSE, 0),
 	   _mesa_writemask_string(dstReg->WriteMask));
-   
+
    if (dstReg->CondMask != COND_TR) {
       fprintf(f, " (%s.%s)",
 	      _mesa_condcode_string(dstReg->CondMask),
@@ -507,7 +507,7 @@ fprint_dst_reg(FILE * f,
 
 static void
 fprint_src_reg(FILE *f,
-               const struct prog_src_register *srcReg, 
+               const struct prog_src_register *srcReg,
                gl_prog_print_mode mode,
                const struct gl_program *prog)
 {
@@ -916,7 +916,7 @@ _mesa_fprint_program_parameters(FILE *f,
    fprintf(f, "InputsRead: 0x%x (0b%s)\n",
                  prog->InputsRead, binary(prog->InputsRead));
    fprintf(f, "OutputsWritten: 0x%llx (0b%s)\n",
-                 (unsigned long long)prog->OutputsWritten, 
+                 (unsigned long long)prog->OutputsWritten,
 		 binary(prog->OutputsWritten));
    fprintf(f, "NumInstructions=%d\n", prog->NumInstructions);
    fprintf(f, "NumTemporaries=%d\n", prog->NumTemporaries);
@@ -941,7 +941,7 @@ _mesa_fprint_program_parameters(FILE *f,
       const GLfloat *p = prog->LocalParams[i];
       fprintf(f, "%2d: %f, %f, %f, %f\n", i, p[0], p[1], p[2], p[3]);
    }
-#endif	
+#endif
    _mesa_print_parameter_list(prog->Parameters);
 }
 

@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-              
+
 
 #ifndef BRW_WM_H
 #define BRW_WM_H
@@ -100,7 +100,7 @@ struct brw_wm_prog_key {
  * are hard to reason about and which we translate away in pass0.  A
  * single fragment program register element (eg. temp[0].x) will be
  * translated to one or more brw_wm_value structs, one for each time
- * that temp[0].x is written to during the program. 
+ * that temp[0].x is written to during the program.
  */
 
 
@@ -115,7 +115,7 @@ struct brw_wm_grf {
 struct brw_wm_value {
    struct brw_reg hw_reg;	/* emitted to this reg, may not always be there */
    struct brw_wm_ref *lastuse;
-   struct brw_wm_grf *resident; 
+   struct brw_wm_grf *resident;
    GLuint contributes_to_output:1;
    GLuint spill_slot:16;	/* if non-zero, spill immediately after calculation */
 };
@@ -230,7 +230,7 @@ struct brw_wm_compile {
       unsigned nr;
    } immediate[BRW_WM_MAX_CONST+3];
    GLuint nr_immediates;
-   
+
    struct brw_fp_instruction fp_instructions[BRW_WM_MAX_INSN];
    GLuint nr_fp_insns;
    GLuint fp_temp;

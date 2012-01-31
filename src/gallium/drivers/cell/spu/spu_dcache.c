@@ -100,7 +100,7 @@ spu_dcache_fetch_unaligned(qword *dst, unsigned ea, unsigned size)
          *(dst++) = si_or((qword) spu_slqwbyte(hi, shift), si_il(0));
       }
    }
-   
+
    ASSERT((ea + i) == last_read);
    ASSERT(dst == last_write);
 }
@@ -114,7 +114,7 @@ spu_dcache_mark_dirty(unsigned ea, unsigned size)
 {
    unsigned i;
    const unsigned aligned_start = (ea & ALIGN_MASK);
-   const unsigned aligned_end = (ea + size + (LINE_SIZE - 1)) 
+   const unsigned aligned_end = (ea + size + (LINE_SIZE - 1))
        & ALIGN_MASK;
 
 

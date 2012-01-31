@@ -53,7 +53,7 @@ void svga_cleanup_tss_binding(struct svga_context *svga)
 
 
 static int
-update_tss_binding(struct svga_context *svga, 
+update_tss_binding(struct svga_context *svga,
                    unsigned dirty )
 {
    boolean reemit = !!(dirty & SVGA_NEW_COMMAND_BUFFER);
@@ -74,7 +74,7 @@ update_tss_binding(struct svga_context *svga,
    } queue;
 
    queue.bind_count = 0;
-   
+
    for (i = 0; i < count; i++) {
       const struct svga_sampler_state *s = svga->curr.sampler[i];
       struct svga_hw_view_state *view = &svga->state.hw_draw.views[i];
@@ -102,8 +102,8 @@ update_tss_binding(struct svga_context *svga,
          view->max_lod = max_lod;
 
          if (texture)
-            view->v = svga_get_tex_sampler_view(&svga->pipe, 
-                                                texture, 
+            view->v = svga_get_tex_sampler_view(&svga->pipe,
+                                                texture,
                                                 min_lod,
                                                 max_lod);
       }
@@ -118,7 +118,7 @@ update_tss_binding(struct svga_context *svga,
          queue.bind[queue.bind_count].unit = i;
          queue.bind[queue.bind_count].view = view;
          queue.bind_count++;
-      } 
+      }
       if (!view->dirty && view->v) {
          svga_validate_sampler_view(svga, view->v);
       }
@@ -150,7 +150,7 @@ update_tss_binding(struct svga_context *svga,
                                        &ts[i].value,
                                        handle,
                                        SVGA_RELOC_READ);
-         
+
          queue.bind[i].view->dirty = FALSE;
       }
 
@@ -200,7 +200,7 @@ do {                                                                    \
 } while (0)
 
 
-static INLINE void 
+static INLINE void
 svga_queue_tss( struct ts_queue *q,
                 unsigned unit,
                 unsigned tss,
@@ -215,7 +215,7 @@ svga_queue_tss( struct ts_queue *q,
 
 
 static int
-update_tss(struct svga_context *svga, 
+update_tss(struct svga_context *svga,
            unsigned dirty )
 {
    unsigned i;
@@ -250,7 +250,7 @@ update_tss(struct svga_context *svga,
 
       }
    }
- 
+
    if (queue.ts_count) {
       SVGA3dTextureState *ts;
 
@@ -262,7 +262,7 @@ update_tss(struct svga_context *svga,
       memcpy( ts,
               queue.ts,
               queue.ts_count * sizeof queue.ts[0]);
-      
+
       SVGA_FIFOCommitAll( svga->swc );
    }
 

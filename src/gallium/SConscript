@@ -1,6 +1,6 @@
 Import('env')
 
-# 
+#
 # Auxiliary modules
 #
 
@@ -11,20 +11,20 @@ SConscript('auxiliary/SConscript')
 #
 
 SConscript([
-    'drivers/failover/SConscript', 
+    'drivers/failover/SConscript',
     'drivers/galahad/SConscript',
-    'drivers/identity/SConscript', 
-    'drivers/llvmpipe/SConscript', 
+    'drivers/identity/SConscript',
+    'drivers/llvmpipe/SConscript',
     'drivers/rbug/SConscript',
     'drivers/softpipe/SConscript',
-    'drivers/svga/SConscript', 
-    'drivers/trace/SConscript', 
+    'drivers/svga/SConscript',
+    'drivers/trace/SConscript',
 ])
 
 if not env['msvc']:
     # These drivers do not build on MSVC compilers
     SConscript([
-        'drivers/i915/SConscript', 
+        'drivers/i915/SConscript',
         'drivers/i965/SConscript',
         'drivers/r300/SConscript',
     ])
@@ -40,8 +40,8 @@ if env['drm']:
     # no nouveau target in scons
     # if env['drm_nouveau']:
     #     SConscript([
-    #         'drivers/nouveau/SConscript', 
-    #         'drivers/nv50/SConscript', 
+    #         'drivers/nouveau/SConscript',
+    #         'drivers/nv50/SConscript',
     #         'drivers/nvfx/SConscript',
     #     ])
 
@@ -73,7 +73,7 @@ if env['platform'] == 'windows':
 
 #
 # Winsys
-# 
+#
 
 SConscript('winsys/SConscript')
 

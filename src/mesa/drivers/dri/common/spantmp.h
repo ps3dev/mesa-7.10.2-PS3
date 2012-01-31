@@ -170,9 +170,9 @@ static void TAG(WriteRGBAPixels)( struct gl_context *ctx,
 }
 
 
-static void TAG(WriteMonoRGBASpan)( struct gl_context *ctx,	
+static void TAG(WriteMonoRGBASpan)( struct gl_context *ctx,
                                     struct gl_renderbuffer *rb,
-				    GLuint n, GLint x, GLint y, 
+				    GLuint n, GLint x, GLint y,
 				    const void *value,
 				    const GLubyte mask[] )
 {
@@ -215,7 +215,7 @@ static void TAG(WriteMonoRGBAPixels)( struct gl_context *ctx,
 				      GLuint n,
                                       const GLint x[], const GLint y[],
 				      const void *value,
-                                      const GLubyte mask[] ) 
+                                      const GLubyte mask[] )
 {
    HW_WRITE_LOCK()
       {

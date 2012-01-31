@@ -75,7 +75,7 @@ extern void
 _mesa_update_stencil(struct gl_context *ctx);
 
 
-extern void 
+extern void
 _mesa_init_stencil( struct gl_context * ctx );
 
 #endif

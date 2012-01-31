@@ -345,8 +345,8 @@ save_glx_visual( Display *dpy, XVisualInfo *vinfo,
        */
       xmvis->vishandle = vinfo;
       /* Allocate more space for additional visual */
-      VisualTable = (XMesaVisual *) _mesa_realloc( VisualTable, 
-                                   sizeof(XMesaVisual) * NumVisuals, 
+      VisualTable = (XMesaVisual *) _mesa_realloc( VisualTable,
+                                   sizeof(XMesaVisual) * NumVisuals,
                                    sizeof(XMesaVisual) * (NumVisuals + 1));
       /* add xmvis to the list */
       VisualTable[NumVisuals] = xmvis;
@@ -1214,8 +1214,8 @@ choose_visual( Display *dpy, int screen, const int *list, GLboolean fbConfig )
          stencil_size = STENCIL_BITS;
       if (accumRedSize > 0 || accumGreenSize > 0 || accumBlueSize > 0 ||
           accumAlphaSize > 0) {
-         accumRedSize = 
-         accumGreenSize = 
+         accumRedSize =
+         accumGreenSize =
          accumBlueSize = default_accum_bits();
          accumAlphaSize = alpha_flag ? accumRedSize : 0;
       }
@@ -2019,7 +2019,7 @@ Fake_glXGetVisualFromFBConfig( Display *dpy, GLXFBConfig config )
 {
    if (dpy && config) {
       XMesaVisual xmvis = (XMesaVisual) config;
-#if 0      
+#if 0
       return xmvis->vishandle;
 #else
       /* create a new vishandle - the cached one may be stale */
@@ -2868,7 +2868,7 @@ Fake_glXAllocateMemoryNV( GLsizei size,
 }
 
 
-static void 
+static void
 Fake_glXFreeMemoryNV( GLvoid *pointer )
 {
    (void) pointer;

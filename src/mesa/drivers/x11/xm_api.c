@@ -174,7 +174,7 @@ static int host_byte_order( void )
  */
 static int check_for_xshm( XMesaDisplay *display )
 {
-#if defined(USE_XSHM) 
+#if defined(USE_XSHM)
    int major, minor, ignore;
    Bool pixmaps;
 
@@ -385,7 +385,7 @@ create_xmesa_buffer(XMesaDrawable d, BufferType type,
       b->backxrb->Parent = b;
       /* determine back buffer implementation */
       b->db_mode = vis->ximage_flag ? BACK_XIMAGE : BACK_PIXMAP;
-      
+
       _mesa_add_renderbuffer(&b->mesa_buffer, BUFFER_BACK_LEFT,
                              &b->backxrb->Base);
    }
@@ -1181,12 +1181,12 @@ xmesa_color_to_pixel(struct gl_context *ctx,
 
 /**
  * Convert an X visual type to a GLX visual type.
- * 
+ *
  * \param visualType X visual type (i.e., \c TrueColor, \c StaticGray, etc.)
  *        to be converted.
  * \return If \c visualType is a valid X visual type, a GLX visual type will
  *         be returned.  Otherwise \c GLX_NONE will be returned.
- * 
+ *
  * \note
  * This code was lifted directly from lib/GL/glx/glcontextmodes.c in the
  * DRI CVS tree.
@@ -1848,7 +1848,7 @@ void XMesaSwapBuffers( XMesaBuffer b )
 #endif
       if (b->backxrb->ximage) {
 	 /* Copy Ximage (back buf) from client memory to server window */
-#if defined(USE_XSHM) 
+#if defined(USE_XSHM)
 	 if (b->shm) {
             /*_glthread_LOCK_MUTEX(_xmesa_lock);*/
 	    XShmPutImage( b->xm_visual->display, b->frontxrb->drawable,
@@ -1905,7 +1905,7 @@ void XMesaCopySubBuffer( XMesaBuffer b, int x, int y, int width, int height )
 
    if (!b->backxrb) {
       /* single buffered */
-      return; 
+      return;
    }
 
    if (b->db_mode) {
@@ -1916,7 +1916,7 @@ void XMesaCopySubBuffer( XMesaBuffer b, int x, int y, int width, int height )
 #endif
       if (b->backxrb->ximage) {
          /* Copy Ximage from host's memory to server's window */
-#if defined(USE_XSHM) 
+#if defined(USE_XSHM)
          if (b->shm) {
             /* XXX assuming width and height aren't too large! */
             XShmPutImage( b->xm_visual->display, b->frontxrb->drawable,

@@ -147,7 +147,7 @@ ifeq ($(CPU), x86)
 	DRIVER_SOURCES += $(addprefix ../../, $(X86_API))
 else
 # No GL API PPC optimization yet
-endif 
+endif
 
 DRIVER_OBJECTS = $(DRIVER_SOURCES:.c=.o)
 DRIVER_OBJECTS := $(DRIVER_OBJECTS:.S=.o)
@@ -191,7 +191,7 @@ $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME): $(OBJECTS) $(MESA_MODULES) $(GLU_MODULES)
 
 depend: $(DRIVER_SOURCES) $(GLU_SOURCES)
 	touch depend
-	$(MKDEP) $(MKDEP_OPTIONS) $(INCLUDES) $(DRIVER_SOURCES) $(GLU_SOURCES) > /dev/null 
+	$(MKDEP) $(MKDEP_OPTIONS) $(INCLUDES) $(DRIVER_SOURCES) $(GLU_SOURCES) > /dev/null
 
 clean:
 	-rm -f depend depend.bak $(OBJECTS)

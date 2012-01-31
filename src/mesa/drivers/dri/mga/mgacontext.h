@@ -106,18 +106,18 @@ typedef struct mga_texture_object_s
     * upto the first 4 offset pointers point to mipmap levels.  The last
     * offset pointer tells how large the preceeding mipmap is.  This value is
     * then used to determine where the remaining mipmaps are.
-    * 
+    *
     * For example, if the first offsets[0] through offsets[2] are used as
     * pointers, then offset[3] will be the size of the mipmap pointed to by
     * offsets[2].  So mipmap level 3 will be at (offsets[2]+offsets[3]).  For
     * each successive mipmap level, offsets[3] is divided by 4 and added to
-    * the previous address.  So mipmap level 4 will be at 
+    * the previous address.  So mipmap level 4 will be at
     * (offsets[2]+offsets[3]+(offsets[3] / 4)).
-    * 
+    *
     * The last pointer is selected by setting TO_texorgoffsetsel in its
     * pointer.  In the previous example, offset[2] would have
     * TO_texorgoffsetsel or'ed in before writing it to the hardware.
-    * 
+    *
     * In the current driver all of the mipmaps are packed together linearly
     * with mipmap level 0.  Therefore offsets[0] points to the base of the
     * texture (and has TO_texorgoffsetsel or'ed in), and offsets[1] is the
@@ -138,7 +138,7 @@ typedef struct mga_texture_object_s
     * ejected from texture memory by other textures and preventing the
     * 4th allocation (for all the smallest mipmap levels) from kicking out
     * any of the first three.
-    * 
+    *
     * This array holds G400_TEX_MAXLEVELS pointers to remove an if-statement
     * in a loop in mgaSetTexImages.  Values past G200_TEX_MAXLEVELS are not
     * used.
@@ -199,12 +199,12 @@ struct mga_context_t {
    /* Map GL texture units onto hardware.
     */
    GLuint tmu_source[2];
-   
+
    int texture_depth;
 
    /* Manage fallbacks
     */
-   GLuint Fallback;  
+   GLuint Fallback;
 
    /* Texture environment color.
     */
@@ -212,22 +212,22 @@ struct mga_context_t {
    GLboolean fcol_used;
    GLboolean force_dualtex;
 
-   /* Rasterization state 
+   /* Rasterization state
     */
    GLuint SetupNewInputs;
    GLuint SetupIndex;
    GLuint RenderIndex;
-   
+
    GLuint hw_primitive;
    GLenum raster_primitive;
    GLenum render_primitive;
 
    GLubyte *verts;
    GLint vertex_stride_shift;
-   GLuint vertex_format;		
+   GLuint vertex_format;
    GLuint vertex_size;
 
-   /* Fallback rasterization functions 
+   /* Fallback rasterization functions
     */
    mga_point_func draw_point;
    mga_line_func draw_line;
@@ -236,7 +236,7 @@ struct mga_context_t {
 
    /* Manage driver and hardware state
     */
-   GLuint        NewGLState; 
+   GLuint        NewGLState;
    GLuint        dirty;
 
    drm_mga_context_regs_t setup;

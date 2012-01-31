@@ -323,7 +323,7 @@ _mesa_set_enable(struct gl_context *ctx, GLenum cap, GLboolean state)
             }
             else {
                ctx->Transform.ClipPlanesEnabled &= ~(1 << p);
-            }               
+            }
          }
          break;
 #endif
@@ -786,7 +786,7 @@ _mesa_set_enable(struct gl_context *ctx, GLenum cap, GLboolean state)
          CHECK_EXTENSION2(ARB_vertex_program, NV_vertex_program, cap);
          if (ctx->VertexProgram.Enabled == state)
             return;
-         FLUSH_VERTICES(ctx, _NEW_PROGRAM); 
+         FLUSH_VERTICES(ctx, _NEW_PROGRAM);
          ctx->VertexProgram.Enabled = state;
          break;
       case GL_VERTEX_PROGRAM_POINT_SIZE_ARB:
@@ -800,7 +800,7 @@ _mesa_set_enable(struct gl_context *ctx, GLenum cap, GLboolean state)
          CHECK_EXTENSION2(ARB_vertex_program, NV_vertex_program, cap);
          if (ctx->VertexProgram.TwoSideEnabled == state)
             return;
-         FLUSH_VERTICES(ctx, _NEW_PROGRAM); 
+         FLUSH_VERTICES(ctx, _NEW_PROGRAM);
          ctx->VertexProgram.TwoSideEnabled = state;
          break;
 #endif

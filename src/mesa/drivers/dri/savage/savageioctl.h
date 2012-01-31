@@ -28,7 +28,7 @@
 
 #include "savagecontext.h"
 
-void savageFlushVertices( savageContextPtr mmesa ); 
+void savageFlushVertices( savageContextPtr mmesa );
 
 unsigned int savageEmitEventLocked( savageContextPtr imesa, unsigned int flags );
 unsigned int savageEmitEvent( savageContextPtr imesa, unsigned int flags );

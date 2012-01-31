@@ -270,7 +270,7 @@ static void radeon_generate_mipmap(struct gl_context *ctx, GLenum target,
 			radeon_miptree_unreference(&image->mt);
 		}
 	}
-	
+
 }
 
 void radeonGenerateMipmap(struct gl_context* ctx, GLenum target, struct gl_texture_object *texObj)

@@ -45,7 +45,7 @@ static void TAG(emit)( struct gl_context *ctx,
    GLfloat (*col)[4];
    GLuint tc0_stride, tc1_stride, col_stride;
    GLuint tc0_size, tc1_size, col_size;
-   GLfloat (*proj)[4] = VB->NdcPtr->data; 
+   GLfloat (*proj)[4] = VB->NdcPtr->data;
    GLuint proj_stride = VB->NdcPtr->stride;
    GLfloat (*fog)[4];
    GLuint fog_stride;
@@ -74,13 +74,13 @@ static void TAG(emit)( struct gl_context *ctx,
       if (IND & TDFX_PTEX_BIT)
 	 tc1_size = VB->AttribPtr[_TNL_ATTRIB_TEX0 + tmu1_source]->size;
    }
-   
+
    if (IND & TDFX_RGBA_BIT) {
       col = VB->AttribPtr[_TNL_ATTRIB_COLOR0]->data;
       col_stride = VB->AttribPtr[_TNL_ATTRIB_COLOR0]->stride;
       col_size = VB->AttribPtr[_TNL_ATTRIB_COLOR0]->size;
    }
-   
+
    if (IND & TDFX_FOGC_BIT) {
       fog = VB->AttribPtr[_TNL_ATTRIB_FOG]->data;
       fog_stride = VB->AttribPtr[_TNL_ATTRIB_FOG]->stride;
@@ -93,11 +93,11 @@ static void TAG(emit)( struct gl_context *ctx,
 	 proj =  (GLfloat (*)[4])((GLubyte *)proj + start * proj_stride);
 	 if (IND & TDFX_TEX0_BIT)
 	    tc0 =  (GLfloat (*)[4])((GLubyte *)tc0 + start * tc0_stride);
-	 if (IND & TDFX_TEX1_BIT) 
+	 if (IND & TDFX_TEX1_BIT)
 	    tc1 =  (GLfloat (*)[4])((GLubyte *)tc1 + start * tc1_stride);
-	 if (IND & TDFX_RGBA_BIT) 
+	 if (IND & TDFX_RGBA_BIT)
 	    STRIDE_4F(col, start * col_stride);
-	 if (IND & TDFX_FOGC_BIT) 
+	 if (IND & TDFX_FOGC_BIT)
 	    STRIDE_4F(fog, start * fog_stride);
       }
 
@@ -108,7 +108,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	       VIEWPORT_X(v->x, proj[0][0]);
 	       VIEWPORT_Y(v->y, proj[0][1]);
 	       VIEWPORT_Z(v->z, proj[0][2]);
-	       v->rhw = proj[0][3];	
+	       v->rhw = proj[0][3];
 	    } else {
                /* clipped */
                v->rhw = 1.0;
@@ -136,9 +136,9 @@ static void TAG(emit)( struct gl_context *ctx,
 	    v->tv0 = tc0[0][1] * v0scale * w;
 	    if (IND & TDFX_PTEX_BIT) {
 	       v->tq0 = w;
-	       if (tc0_size == 4) 
+	       if (tc0_size == 4)
 		  v->tq0 = tc0[0][3] * w;
-	    } 
+	    }
 	    tc0 =  (GLfloat (*)[4])((GLubyte *)tc0 +  tc0_stride);
 	 }
 	 if (IND & TDFX_TEX1_BIT) {
@@ -147,11 +147,11 @@ static void TAG(emit)( struct gl_context *ctx,
 	    v->tv1 = tc1[0][1] * v1scale * w;
 	    if (IND & TDFX_PTEX_BIT) {
 	       v->tq1 = w;
-	       if (tc1_size == 4) 
+	       if (tc1_size == 4)
 		  v->tq1 = tc1[0][3] * w;
 	    }
 	    tc1 =  (GLfloat (*)[4])((GLubyte *)tc1 +  tc1_stride);
-	 } 
+	 }
       }
    }
 }
@@ -163,14 +163,14 @@ static GLboolean TAG(check_tex_sizes)( struct gl_context *ctx )
 
    if (IND & TDFX_PTEX_BIT)
       return GL_TRUE;
-   
+
    if (IND & TDFX_TEX0_BIT) {
       struct vertex_buffer *VB = &TNL_CONTEXT(ctx)->vb;
 
       if (IND & TDFX_TEX1_BIT) {
 	 if (VB->AttribPtr[_TNL_ATTRIB_TEX0] == 0)
 	    VB->AttribPtr[_TNL_ATTRIB_TEX0] = VB->AttribPtr[_TNL_ATTRIB_TEX1];
-	 
+
 	 if (VB->AttribPtr[_TNL_ATTRIB_TEX1]->size == 4)
 	    return GL_FALSE;
       }
@@ -184,7 +184,7 @@ static GLboolean TAG(check_tex_sizes)( struct gl_context *ctx )
 
 
 static void TAG(interp)( struct gl_context *ctx,
-			 GLfloat t, 
+			 GLfloat t,
 			 GLuint edst, GLuint eout, GLuint ein,
 			 GLboolean force_boundary )
 {
@@ -246,7 +246,7 @@ static void TAG(init)( void )
       else {
 	 setup_tab[IND].vertex_format = TDFX_LAYOUT_MULTI;
       }
-   } 
+   }
    else if (IND & TDFX_TEX0_BIT) {
       if (IND & TDFX_PTEX_BIT) {
 	 setup_tab[IND].vertex_format = TDFX_LAYOUT_PROJ1;

@@ -36,7 +36,7 @@
 
 #define Y_FLIP(_y) (height - _y - 1)
 
-#define HW_LOCK() 
+#define HW_LOCK()
 
 #define HW_UNLOCK()
 
@@ -85,7 +85,7 @@
     GLuint height = dPriv->h;                                       \
     char *buf = (char *)(vrb->map)
 
-#define LOCAL_STENCIL_VARS LOCAL_DEPTH_VARS 
+#define LOCAL_STENCIL_VARS LOCAL_DEPTH_VARS
 
 #define VALUE_TYPE GLushort
 
@@ -151,7 +151,7 @@
  */
 void viaSpanRenderStart( struct gl_context *ctx )
 {
-   struct via_context *vmesa = VIA_CONTEXT(ctx);     
+   struct via_context *vmesa = VIA_CONTEXT(ctx);
    viaWaitIdle(vmesa, GL_FALSE);
    LOCK_HARDWARE(vmesa);
 }
@@ -167,7 +167,7 @@ void viaInitSpanFuncs(struct gl_context *ctx)
 {
     struct swrast_device_driver *swdd = _swrast_GetDeviceDriverReference(ctx);
     swdd->SpanRenderStart = viaSpanRenderStart;
-    swdd->SpanRenderFinish = viaSpanRenderFinish; 
+    swdd->SpanRenderFinish = viaSpanRenderFinish;
 }
 
 

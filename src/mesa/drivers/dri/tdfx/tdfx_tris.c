@@ -129,13 +129,13 @@ do {						\
  *              Fallback to swrast for basic primitives                *
  ***********************************************************************/
 
-/* Build an SWvertex from a hardware vertex. 
+/* Build an SWvertex from a hardware vertex.
  *
  * This code is hit only when a mix of accelerated and unaccelerated
  * primitives are being drawn, and only for the unaccelerated
- * primitives.  
+ * primitives.
  */
-static void 
+static void
 tdfx_translate_vertex( struct gl_context *ctx, const tdfxVertex *src, SWvertex *dst)
 {
    tdfxContextPtr fxMesa = TDFX_CONTEXT(ctx);
@@ -150,7 +150,7 @@ tdfx_translate_vertex( struct gl_context *ctx, const tdfxVertex *src, SWvertex *
       dst->color[1] = src->color[1];
       dst->color[2] = src->color[0];
       dst->color[3] = src->color[3];
-   } 
+   }
    else {
       GLfloat w = 1.0 / src->rhw;
 
@@ -187,10 +187,10 @@ tdfx_translate_vertex( struct gl_context *ctx, const tdfxVertex *src, SWvertex *
 }
 
 
-static void 
-tdfx_fallback_tri( tdfxContextPtr fxMesa, 
-		   tdfxVertex *v0, 
-		   tdfxVertex *v1, 
+static void
+tdfx_fallback_tri( tdfxContextPtr fxMesa,
+		   tdfxVertex *v0,
+		   tdfxVertex *v1,
 		   tdfxVertex *v2 )
 {
    struct gl_context *ctx = fxMesa->glCtx;
@@ -202,7 +202,7 @@ tdfx_fallback_tri( tdfxContextPtr fxMesa,
 }
 
 
-static void 
+static void
 tdfx_fallback_line( tdfxContextPtr fxMesa,
 		    tdfxVertex *v0,
 		    tdfxVertex *v1 )
@@ -215,8 +215,8 @@ tdfx_fallback_line( tdfxContextPtr fxMesa,
 }
 
 
-static void 
-tdfx_fallback_point( tdfxContextPtr fxMesa, 
+static void
+tdfx_fallback_point( tdfxContextPtr fxMesa,
 		     tdfxVertex *v0 )
 {
    struct gl_context *ctx = fxMesa->glCtx;
@@ -237,17 +237,17 @@ static void tdfx_print_vertex( struct gl_context *ctx, const tdfxVertex *v )
 
    if (tmesa->vertexFormat == TDFX_LAYOUT_TINY) {
       fprintf(stderr, "x %f y %f z %f\n", v->x, v->y, v->z);
-   } 
+   }
    else {
-      fprintf(stderr, "x %f y %f z %f oow %f\n", 
+      fprintf(stderr, "x %f y %f z %f oow %f\n",
 	      v->x, v->y, v->z, v->rhw);
    }
-   fprintf(stderr, "r %d g %d b %d a %d\n", 
+   fprintf(stderr, "r %d g %d b %d a %d\n",
 	      v->color[0],
 	      v->color[1],
 	      v->color[2],
 	      v->color[3]);
-   
+
    fprintf(stderr, "\n");
 }
 
@@ -638,8 +638,8 @@ static void tdfx_render_vb_line_loop( struct gl_context *ctx,
    fxMesa->Glide.grDrawVertexArrayContiguous( GR_LINE_STRIP, count-j,
                                               fxVB + j, sizeof(tdfxVertex));
 
-   if (flags & PRIM_END) 
-      fxMesa->Glide.grDrawLine( fxVB + (count - 1), 
+   if (flags & PRIM_END)
+      fxMesa->Glide.grDrawLine( fxVB + (count - 1),
                                 fxVB + start );
 
    /* restore line coords */
@@ -756,7 +756,7 @@ static void tdfx_render_vb_quads( struct gl_context *ctx,
    (void) flags;
 
    INIT(GL_QUADS);
-   
+
    for (i = start + 3 ; i < count ; i += 4 ) {
 #define VERT(x) (fxVB + (x))
       tdfxVertex *_v_[4];
@@ -798,7 +798,7 @@ static void tdfx_render_vb_poly( struct gl_context *ctx,
    (void) flags;
 
    INIT(GL_POLYGON);
-   
+
    fxMesa->Glide.grDrawVertexArrayContiguous( GR_POLYGON, count-start,
                                               fxVB + start, sizeof(tdfxVertex));
 }
@@ -814,7 +814,7 @@ static void tdfx_render_vb_noop( struct gl_context *ctx,
 static void (*tdfx_render_tab_verts[GL_POLYGON+2])(struct gl_context *,
 						   GLuint,
 						   GLuint,
-						   GLuint) = 
+						   GLuint) =
 {
    tdfx_render_vb_points,
    tdfx_render_vb_lines,
@@ -869,8 +869,8 @@ static void (*tdfx_render_tab_verts[GL_POLYGON+2])(struct gl_context *,
     const GLuint * const elt = TNL_CONTEXT(ctx)->vb.Elts;	\
     (void) elt;
 
-#define RESET_STIPPLE 
-#define RESET_OCCLUSION 
+#define RESET_STIPPLE
+#define RESET_OCCLUSION
 #define PRESERVE_VB_DEFS
 
 /* Elts, no clipping.
@@ -897,7 +897,7 @@ static void (*tdfx_render_tab_verts[GL_POLYGON+2])(struct gl_context *,
 
 
 
-static void tdfxRenderClippedPoly( struct gl_context *ctx, const GLuint *elts, 
+static void tdfxRenderClippedPoly( struct gl_context *ctx, const GLuint *elts,
 				   GLuint n )
 {
    tdfxContextPtr fxMesa = TDFX_CONTEXT(ctx);
@@ -905,7 +905,7 @@ static void tdfxRenderClippedPoly( struct gl_context *ctx, const GLuint *elts,
    struct vertex_buffer *VB = &tnl->vb;
    GLuint prim = fxMesa->render_primitive;
 
-   /* Render the new vertices as an unclipped polygon. 
+   /* Render the new vertices as an unclipped polygon.
     */
    {
       GLuint *tmp = VB->Elts;
@@ -926,7 +926,7 @@ static void tdfxRenderClippedLine( struct gl_context *ctx, GLuint ii, GLuint jj 
    tnl->Driver.Render.Line( ctx, ii, jj );
 }
 
-static void tdfxFastRenderClippedPoly( struct gl_context *ctx, const GLuint *elts, 
+static void tdfxFastRenderClippedPoly( struct gl_context *ctx, const GLuint *elts,
 				       GLuint n )
 {
    int i;
@@ -1058,7 +1058,7 @@ static void tdfxChooseRenderState(struct gl_context *ctx)
 
 
 /* TODO: Benchmark this.
- * TODO: Use single back-buffer cliprect where possible.  
+ * TODO: Use single back-buffer cliprect where possible.
  * NOTE: <pass> starts at 1, not zero!
  */
 static GLboolean multipass_cliprect( struct gl_context *ctx, GLuint pass )
@@ -1066,12 +1066,12 @@ static GLboolean multipass_cliprect( struct gl_context *ctx, GLuint pass )
    tdfxContextPtr fxMesa = TDFX_CONTEXT(ctx);
    if (pass >= fxMesa->numClipRects)
       return GL_FALSE;
-   else {   
+   else {
       fxMesa->Glide.grClipWindow(fxMesa->pClipRects[pass].x1,
 		   fxMesa->screen_height - fxMesa->pClipRects[pass].y2,
 		   fxMesa->pClipRects[pass].x2,
 		   fxMesa->screen_height - fxMesa->pClipRects[pass].y1);
-      
+
       return GL_TRUE;
    }
 }
@@ -1092,10 +1092,10 @@ static void tdfxRunPipeline( struct gl_context *ctx )
    if (!fxMesa->Fallback && fxMesa->new_gl_state) {
       if (fxMesa->new_gl_state & _TDFX_NEW_RASTERSETUP)
 	 tdfxChooseVertexState( ctx );
-      
+
       if (fxMesa->new_gl_state & _TDFX_NEW_RENDERSTATE)
 	 tdfxChooseRenderState( ctx );
-      
+
       fxMesa->new_gl_state = 0;
    }
 
@@ -1113,7 +1113,7 @@ static void tdfxRenderStart( struct gl_context *ctx )
    LOCK_HARDWARE(fxMesa);
 
    /* Make sure vertex format changes get uploaded before we start
-    * sending triangles.  
+    * sending triangles.
     */
    if (fxMesa->dirty) {
       tdfxEmitHwStateLocked( fxMesa );
@@ -1162,7 +1162,7 @@ static void tdfxRasterPrimitive( struct gl_context *ctx, GLenum prim )
 
 
 
-/* Determine the rasterized primitive when not drawing unfilled 
+/* Determine the rasterized primitive when not drawing unfilled
  * polygons.
  *
  * Used only for the default render stage which always decomposes
@@ -1179,7 +1179,7 @@ static void tdfxRenderPrimitive( struct gl_context *ctx, GLenum prim )
 
    if (rprim == GL_TRIANGLES && (ctx->_TriangleCaps & DD_TRI_UNFILLED))
       return;
-       
+
    if (fxMesa->raster_primitive != rprim) {
       tdfxRasterPrimitive( ctx, rprim );
    }
@@ -1278,10 +1278,10 @@ void tdfxDDInitTriFuncs( struct gl_context *ctx )
    }
 
    fxMesa->RenderIndex = ~0;
-	
+
    tnl->Driver.RunPipeline              = tdfxRunPipeline;
    tnl->Driver.Render.Start             = tdfxRenderStart;
-   tnl->Driver.Render.Finish            = tdfxRenderFinish; 
+   tnl->Driver.Render.Finish            = tdfxRenderFinish;
    tnl->Driver.Render.PrimitiveNotify   = tdfxRenderPrimitive;
    tnl->Driver.Render.ResetLineStipple  = _swrast_ResetLineStipple;
    tnl->Driver.Render.BuildVertices     = tdfxBuildVertices;

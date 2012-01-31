@@ -1062,7 +1062,7 @@ lp_build_sample_aos(struct lp_build_sample_context *bld,
       lp_build_else(&if_ctx);
       {
          /* Use the magnification filter */
-         lp_build_sample_mipmap(bld, 
+         lp_build_sample_mipmap(bld,
                                 mag_filter, PIPE_TEX_MIPFILTER_NONE,
                                 s, t, r,
                                 i32t_zero, NULL, NULL,

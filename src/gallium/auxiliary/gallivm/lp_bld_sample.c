@@ -533,7 +533,7 @@ lp_build_lod_selector(struct lp_build_sample_context *bld,
  * mipmap level index.
  * Note: this is all scalar code.
  * \param lod  scalar float texture level of detail
- * \param level_out  returns integer 
+ * \param level_out  returns integer
  */
 void
 lp_build_nearest_mip_level(struct lp_build_sample_context *bld,

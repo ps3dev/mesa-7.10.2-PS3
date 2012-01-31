@@ -340,7 +340,7 @@ nv50_draw_elements_instanced(struct pipe_context *pipe,
 		if (indexSize == 4) {
 			BEGIN_RING(chan, tesla, NV50TCL_VB_ELEMENT_U32 | 0x30000, 0);
 			OUT_RING  (chan, count);
-			nouveau_pushbuf_submit(chan, 
+			nouveau_pushbuf_submit(chan,
 					       nv50_resource(indexBuffer)->bo,
 					       start << 2, count << 2);
 		} else

@@ -64,7 +64,7 @@ static INLINE void *r128AllocDmaLow( r128ContextPtr rmesa, int count,
    head = (uint32_t *)((char *)rmesa->vert_buf->address + rmesa->vert_buf->used);
    rmesa->vert_buf->used += bytes;
    rmesa->num_verts += count;
-   
+
    return head;
 }
 

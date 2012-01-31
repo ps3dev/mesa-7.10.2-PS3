@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -97,12 +97,12 @@ static void pass0_set_fpreg_ref( struct brw_wm_compile *c,
    c->pass0_fp_reg[file][idx][component] = src_ref;
 }
 
-static const struct brw_wm_ref *get_param_ref( struct brw_wm_compile *c, 
+static const struct brw_wm_ref *get_param_ref( struct brw_wm_compile *c,
 					       unsigned idx,
                                                unsigned component)
 {
    GLuint i = idx * 4 + component;
-   
+
    if (i >= BRW_WM_MAX_PARAM) {
       debug_printf("%s: out of params\n", __FUNCTION__);
       c->prog_data.error = 1;
@@ -147,13 +147,13 @@ static const struct brw_wm_ref *pass0_get_reg( struct brw_wm_compile *c,
 	 break;
 
       case TGSI_FILE_CONSTANT:
-	 ref = get_param_ref(c, 
+	 ref = get_param_ref(c,
                              c->fp->info.immediate_count + idx,
                              component);
 	 break;
 
       case TGSI_FILE_IMMEDIATE:
-	 ref = get_param_ref(c, 
+	 ref = get_param_ref(c,
                              idx,
                              component);
 	 break;
@@ -273,7 +273,7 @@ translate_insn(struct brw_wm_compile *c,
 
 /***********************************************************************
  * Optimize moves and swizzles away:
- */ 
+ */
 static void pass0_precalc_mov( struct brw_wm_compile *c,
 			       const struct brw_fp_instruction *inst )
 {
@@ -293,7 +293,7 @@ static void pass0_precalc_mov( struct brw_wm_compile *c,
       refs[i] = get_new_ref(c, inst->src[0], i, NULL);
    }
    for (i = 0; i < 4; i++) {
-      if (writemask & (1 << i)) {	    
+      if (writemask & (1 << i)) {
          pass0_set_fpreg_ref( c, dst.file, dst.index, i, refs[i]);
       }
    }
@@ -308,13 +308,13 @@ static void pass0_init_payload( struct brw_wm_compile *c )
 
    for (i = 0; i < 4; i++) {
       GLuint j = i >= c->key.nr_depth_regs ? 0 : i;
-      pass0_set_fpreg_value( c, BRW_FILE_PAYLOAD, PAYLOAD_DEPTH, i, 
+      pass0_set_fpreg_value( c, BRW_FILE_PAYLOAD, PAYLOAD_DEPTH, i,
 			     &c->payload.depth[j] );
    }
 
    for (i = 0; i < c->key.nr_inputs; i++)
-      pass0_set_fpreg_value( c, BRW_FILE_PAYLOAD, i, 0, 
-			     &c->payload.input_interp[i] );      
+      pass0_set_fpreg_value( c, BRW_FILE_PAYLOAD, i, 0,
+			     &c->payload.input_interp[i] );
 }
 
 
@@ -344,9 +344,9 @@ void brw_wm_pass0( struct brw_wm_compile *c )
       const struct brw_fp_instruction *inst = &c->fp_instructions[insn];
 
       /* Optimize away moves, otherwise emit translated instruction:
-       */      
+       */
       switch (inst->opcode) {
-      case TGSI_OPCODE_MOV: 
+      case TGSI_OPCODE_MOV:
 	 if (!inst->dst.saturate) {
 	    pass0_precalc_mov(c, inst);
 	 }
@@ -359,7 +359,7 @@ void brw_wm_pass0( struct brw_wm_compile *c )
 	 break;
       }
    }
- 
+
    if (BRW_DEBUG & DEBUG_WM) {
       brw_wm_print_program(c, "pass0");
    }

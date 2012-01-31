@@ -188,7 +188,7 @@ struct util_strbuf
 
 
 static INLINE void
-util_strbuf_init(struct util_strbuf *sbuf, char *str, size_t size) 
+util_strbuf_init(struct util_strbuf *sbuf, char *str, size_t size)
 {
    sbuf->str = str;
    sbuf->str[0] = 0;

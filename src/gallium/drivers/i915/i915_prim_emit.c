@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -45,7 +45,7 @@
 struct setup_stage {
    struct draw_stage stage; /**< This must be first (base class) */
 
-   struct i915_context *i915;   
+   struct i915_context *i915;
 };
 
 
@@ -124,8 +124,8 @@ emit_hw_vertex( struct i915_context *i915,
 
 
 
-static INLINE void 
-emit_prim( struct draw_stage *stage, 
+static INLINE void
+emit_prim( struct draw_stage *stage,
 	   struct prim_header *prim,
 	   unsigned hwprim,
 	   unsigned nr )
@@ -147,7 +147,7 @@ emit_prim( struct draw_stage *stage,
    if (!BEGIN_BATCH( 1 + nr * vertex_size / 4, 0 )) {
       FLUSH_BATCH(NULL);
 
-      /* Make sure state is re-emitted after a flush: 
+      /* Make sure state is re-emitted after a flush:
        */
       i915_update_derived( i915 );
       i915_emit_hardware_state( i915 );
@@ -161,7 +161,7 @@ emit_prim( struct draw_stage *stage,
    /* Emit each triangle as a single primitive.  I told you this was
     * simple.
     */
-   OUT_BATCH(_3DPRIMITIVE | 
+   OUT_BATCH(_3DPRIMITIVE |
 	     hwprim |
 	     ((4 + vertex_size * nr)/4 - 2));
 
@@ -170,7 +170,7 @@ emit_prim( struct draw_stage *stage,
 }
 
 
-static void 
+static void
 setup_tri( struct draw_stage *stage, struct prim_header *prim )
 {
    emit_prim( stage, prim, PRIM3D_TRILIST, 3 );

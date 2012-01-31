@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -137,7 +137,7 @@ intelGetString(struct gl_context * ctx, GLenum name)
 	 break;
       case PCI_CHIP_GM45_GM:
 	 chipset = "Mobile Intel® GM45 Express Chipset";
-	 break; 
+	 break;
       case PCI_CHIP_IGD_E_G:
 	 chipset = "Intel(R) Integrated Graphics Device";
 	 break;
@@ -380,7 +380,7 @@ intel_update_renderbuffers(__DRIcontext *context, __DRIdrawable *drawable)
 		  "attaching buffer %d, at %d, cpp %d, pitch %d\n",
 		  buffers[i].name, buffers[i].attachment,
 		  buffers[i].cpp, buffers[i].pitch);
-       
+
        if (buffers[i].attachment == __DRI_BUFFER_STENCIL && depth_region) {
 	  if (unlikely(INTEL_DEBUG & DEBUG_DRI))
 	     fprintf(stderr, "(reusing depth buffer as stencil)\n");
@@ -752,7 +752,7 @@ intelInitContext(struct intel_context *intel,
    _vbo_CreateContext(ctx);
    _tnl_CreateContext(ctx);
    _swsetup_CreateContext(ctx);
- 
+
    /* Configure swrast to match hardware characteristics: */
    _swrast_allow_pixel_fog(ctx, GL_FALSE);
    _swrast_allow_vertex_fog(ctx, GL_TRUE);
@@ -907,7 +907,7 @@ intelMakeCurrent(__DRIcontext * driContextPriv,
 
    if (driContextPriv) {
       struct gl_framebuffer *fb, *readFb;
-      
+
       if (driDrawPriv == NULL && driReadPriv == NULL) {
 	 fb = _mesa_get_incomplete_framebuffer();
 	 readFb = _mesa_get_incomplete_framebuffer();
@@ -920,7 +920,7 @@ intelMakeCurrent(__DRIcontext * driContextPriv,
 
       intel_prepare_render(intel);
       _mesa_make_current(&intel->ctx, fb, readFb);
-      
+
       /* We do this in intel_prepare_render() too, but intel->ctx.DrawBuffer
        * is NULL at that point.  We can't call _mesa_makecurrent()
        * first, since we need the buffer size for the initial

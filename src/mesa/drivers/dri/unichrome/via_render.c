@@ -52,7 +52,7 @@
 #define HAVE_LINE_LOOP   1
 #define HAVE_TRIANGLES   1
 #define HAVE_TRI_STRIPS  1
-#define HAVE_TRI_STRIP_1 0  
+#define HAVE_TRI_STRIP_1 0
 #define HAVE_TRI_FANS    1
 #define HAVE_POLYGONS    1
 #define HAVE_QUADS       0
@@ -73,8 +73,8 @@
     viaExtendPrimitive( vmesa, (nr) * vmesa->vertexSize * 4)
 
 #define EMIT_VERTS(ctx, j, nr, buf) \
-    _tnl_emit_vertices_to_buffer(ctx, j, (j)+(nr), buf )  
-    
+    _tnl_emit_vertices_to_buffer(ctx, j, (j)+(nr), buf )
+
 #define FLUSH() VIA_FINISH_PRIM( vmesa )
 
 #define TAG(x) via_fast##x
@@ -93,12 +93,12 @@ static GLboolean via_run_fastrender(struct gl_context *ctx,
     TNLcontext *tnl = TNL_CONTEXT(ctx);
     struct vertex_buffer *VB = &tnl->vb;
     GLuint i;
-    
+
 
     tnl->Driver.Render.Start(ctx);
-    
-    if (VB->ClipOrMask || 
-	vmesa->renderIndex != 0 || 
+
+    if (VB->ClipOrMask ||
+	vmesa->renderIndex != 0 ||
 	!via_fastvalidate_render( ctx, VB )) {
 	tnl->Driver.Render.Finish(ctx);
         return GL_TRUE;

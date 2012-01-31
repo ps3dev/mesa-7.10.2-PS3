@@ -69,7 +69,7 @@ static void r128RenderPrimitive( struct gl_context *ctx, GLenum prim );
 /***********************************************************************
  *                    Emit primitives as inline vertices               *
  ***********************************************************************/
-	
+
 #define HAVE_QUADS 0
 #define HAVE_LINES 1
 #define HAVE_POINTS 1
@@ -536,7 +536,7 @@ static void r128SetupAntialias( struct gl_context *ctx, GLenum prim )
    r128ContextPtr rmesa = R128_CONTEXT(ctx);
 
    GLuint currAA, wantAA;
-   
+
    currAA = (rmesa->setup.pm4_vc_fpu_setup & R128_EDGE_ANTIALIAS) != 0;
    if( prim >= GL_TRIANGLES )
       wantAA = ctx->Polygon.SmoothFlag;
@@ -544,7 +544,7 @@ static void r128SetupAntialias( struct gl_context *ctx, GLenum prim )
       wantAA = ctx->Line.SmoothFlag;
    else
       wantAA = 0;
-      
+
    if( wantAA != currAA )
    {
      FLUSH_BATCH( rmesa );
@@ -560,7 +560,7 @@ static void r128RenderPrimitive( struct gl_context *ctx, GLenum prim )
    rmesa->render_primitive = prim;
 
    r128SetupAntialias( ctx, prim );
-   
+
    if (prim >= GL_TRIANGLES && (ctx->_TriangleCaps & DD_TRI_UNFILLED))
       return;
    r128RasterPrimitive( ctx, hw );
@@ -610,7 +610,7 @@ static void r128RenderStart( struct gl_context *ctx )
       EMIT_ATTR( _TNL_ATTRIB_POS, EMIT_3F_VIEWPORT, 0, 3 );
 
    rmesa->coloroffset = offset;
-#if MESA_LITTLE_ENDIAN 
+#if MESA_LITTLE_ENDIAN
    EMIT_ATTR( _TNL_ATTRIB_COLOR0, EMIT_4UB_4F_BGRA,
       R128_CCE_VC_FRMT_DIFFUSE_ARGB, 4 );
 #else
@@ -625,7 +625,7 @@ static void r128RenderStart( struct gl_context *ctx )
 	 rmesa->specoffset = offset;
 	 EMIT_ATTR( _TNL_ATTRIB_COLOR1, EMIT_3UB_3F_BGR,
 	    R128_CCE_VC_FRMT_SPEC_FRGB, 3 );
-      } else 
+      } else
 	 EMIT_PAD( 3 );
 
       if (RENDERINPUTS_TEST( index_bitset, _TNL_ATTRIB_FOG ))
@@ -644,7 +644,7 @@ static void r128RenderStart( struct gl_context *ctx )
 	 rmesa->specoffset = offset;
 	 EMIT_ATTR( _TNL_ATTRIB_COLOR1, EMIT_3UB_3F_RGB,
 	    R128_CCE_VC_FRMT_SPEC_FRGB, 3 );
-      } else 
+      } else
 	 EMIT_PAD( 3 );
 #endif
    }
@@ -670,9 +670,9 @@ static void r128RenderStart( struct gl_context *ctx )
       FLUSH_BATCH( rmesa );
       rmesa->dirty |= R128_UPLOAD_CONTEXT;
 
-      rmesa->vertex_size = 
-	 _tnl_install_attrs( ctx, 
-			     rmesa->vertex_attrs, 
+      rmesa->vertex_size =
+	 _tnl_install_attrs( ctx,
+			     rmesa->vertex_attrs,
 			     rmesa->vertex_attr_count,
 			     rmesa->hw_viewport, 0 );
       rmesa->vertex_size >>= 2;
@@ -749,10 +749,10 @@ void r128Fallback( struct gl_context *ctx, GLuint bit, GLboolean mode )
 
 	 _tnl_invalidate_vertex_state( ctx, ~0 );
 	 _tnl_invalidate_vertices( ctx, ~0 );
-	 _tnl_install_attrs( ctx, 
-			     rmesa->vertex_attrs, 
+	 _tnl_install_attrs( ctx,
+			     rmesa->vertex_attrs,
 			     rmesa->vertex_attr_count,
-			     rmesa->hw_viewport, 0 ); 
+			     rmesa->hw_viewport, 0 );
 
 	 rmesa->NewGLState |= _R128_NEW_RENDER_STATE;
 	 if ( R128_DEBUG & DEBUG_VERBOSE_FALL ) {
@@ -788,7 +788,7 @@ void r128InitTriFuncs( struct gl_context *ctx )
    tnl->Driver.Render.CopyPV = _tnl_copy_pv;
    tnl->Driver.Render.Interp = _tnl_interp;
 
-   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12, 
+   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12,
 		       (6 + 2 * ctx->Const.MaxTextureUnits) * sizeof(GLfloat) );
    rmesa->verts = (char *)tnl->clipspace.vertex_buf;
    RENDERINPUTS_ONES( rmesa->tnl_state_bitset );

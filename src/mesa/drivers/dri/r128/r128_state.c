@@ -58,7 +58,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /**
  * Calculate the hardware blend factor setting.  This same function is used
- * for source and destination of both alpha and RGB.  
+ * for source and destination of both alpha and RGB.
  *
  * \returns
  * The hardware register value for the specified blend factor.  This value
@@ -120,7 +120,7 @@ static int blend_factor( r128ContextPtr rmesa, GLenum factor, GLboolean is_src )
       func = (is_src) ? R128_ALPHA_BLEND_ONE : R128_ALPHA_BLEND_ZERO;
       break;
    }
-   
+
    return func;
 }
 
@@ -178,9 +178,9 @@ static void r128UpdateAlphaMode( struct gl_context *ctx )
 	     (R128_ALPHA_BLEND_MASK << R128_ALPHA_BLEND_DST_SHIFT)
 	     | R128_ALPHA_COMB_FCN_MASK);
 
-      a |= blend_factor( rmesa, ctx->Color.BlendSrcRGB, GL_TRUE ) 
+      a |= blend_factor( rmesa, ctx->Color.BlendSrcRGB, GL_TRUE )
 	  << R128_ALPHA_BLEND_SRC_SHIFT;
-      a |= blend_factor( rmesa, ctx->Color.BlendDstRGB, GL_FALSE ) 
+      a |= blend_factor( rmesa, ctx->Color.BlendDstRGB, GL_FALSE )
 	  << R128_ALPHA_BLEND_DST_SHIFT;
 
       switch (ctx->Color.BlendEquationRGB) {
@@ -217,7 +217,7 @@ static void r128DDAlphaFunc( struct gl_context *ctx, GLenum func, GLfloat ref )
    rmesa->new_state |= R128_NEW_ALPHA;
 }
 
-static void r128DDBlendEquationSeparate( struct gl_context *ctx, 
+static void r128DDBlendEquationSeparate( struct gl_context *ctx,
 					 GLenum modeRGB, GLenum modeA )
 {
    r128ContextPtr rmesa = R128_CONTEXT(ctx);
@@ -260,7 +260,7 @@ r128DDStencilFuncSeparate( struct gl_context *ctx, GLenum face, GLenum func,
    r128ContextPtr rmesa = R128_CONTEXT(ctx);
    GLuint refmask = (((ctx->Stencil.Ref[0] & 0xff) << 0) |
 		     ((ctx->Stencil.ValueMask[0] & 0xff) << 16) |
-		     ((ctx->Stencil.WriteMask[0] & 0xff) << 24)); 
+		     ((ctx->Stencil.WriteMask[0] & 0xff) << 24));
    GLuint z = rmesa->setup.z_sten_cntl_c;
 
    z &= ~R128_STENCIL_TEST_MASK;
@@ -307,7 +307,7 @@ r128DDStencilMaskSeparate( struct gl_context *ctx, GLenum face, GLuint mask )
    r128ContextPtr rmesa = R128_CONTEXT(ctx);
    GLuint refmask = (((ctx->Stencil.Ref[0] & 0xff) << 0) |
 		     ((ctx->Stencil.ValueMask[0] & 0xff) << 16) |
-		     ((ctx->Stencil.WriteMask[0] & 0xff) << 24)); 
+		     ((ctx->Stencil.WriteMask[0] & 0xff) << 24));
 
    if ( rmesa->setup.sten_ref_mask_c != refmask ) {
       rmesa->setup.sten_ref_mask_c = refmask;
@@ -948,7 +948,7 @@ static void r128DDPolygonStipple( struct gl_context *ctx, const GLubyte *mask )
    LOCK_HARDWARE( rmesa );
 
    stippleRec.mask = stipple;
-   drmCommandWrite( rmesa->driFd, DRM_R128_STIPPLE, 
+   drmCommandWrite( rmesa->driFd, DRM_R128_STIPPLE,
                     &stippleRec, sizeof(stippleRec) );
 
    UNLOCK_HARDWARE( rmesa );
@@ -1147,7 +1147,7 @@ void r128EmitHwStateLocked( r128ContextPtr rmesa )
 			R128_UPLOAD_WINDOW |
 			R128_UPLOAD_CORE) ) {
       memcpy( &sarea->context_state, regs, sizeof(sarea->context_state) );
-      
+
       if( rmesa->dirty & R128_UPLOAD_CONTEXT )
       {
          /* One possible side-effect of uploading a new context is the

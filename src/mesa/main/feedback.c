@@ -150,14 +150,14 @@ _mesa_feedback_vertex(struct gl_context *ctx,
 
 /**
  * Establish a buffer for selection mode values.
- * 
+ *
  * \param size buffer size.
  * \param buffer buffer.
  *
  * \sa glSelectBuffer().
- * 
+ *
  * \note this function can't be put in a display list.
- * 
+ *
  * Verifies we're not in selection mode, flushes the vertices and initialize
  * the fields in __struct gl_contextRec::Select with the given buffer.
  */
@@ -172,7 +172,7 @@ _mesa_SelectBuffer( GLsizei size, GLuint *buffer )
       return;			/* KW: added return */
    }
 
-   FLUSH_VERTICES(ctx, _NEW_RENDERMODE); 
+   FLUSH_VERTICES(ctx, _NEW_RENDERMODE);
    ctx->Select.Buffer = buffer;
    ctx->Select.BufferSize = size;
    ctx->Select.BufferCount = 0;
@@ -184,7 +184,7 @@ _mesa_SelectBuffer( GLsizei size, GLuint *buffer )
 
 /**
  * Write a value of a record into the selection buffer.
- * 
+ *
  * \param ctx GL context.
  * \param value value.
  *
@@ -230,7 +230,7 @@ _mesa_update_hitflag(struct gl_context *ctx, GLfloat z)
  *
  * Write the hit record, i.e., the number of names in the stack, the minimum and
  * maximum depth values and the number of names in the name stack at the time
- * of the event. Resets the hit flag. 
+ * of the event. Resets the hit flag.
  *
  * \sa gl_selection.
  */
@@ -405,7 +405,7 @@ _mesa_PopName( void )
  * \note this function can't be put in a display list.
  *
  * \sa glRenderMode().
- * 
+ *
  * Flushes the vertices and do the necessary cleanup according to the previous
  * rasterization mode, such as writing the hit record or resent the select
  * buffer index when exiting the select mode. Updates

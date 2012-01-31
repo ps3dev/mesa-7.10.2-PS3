@@ -79,7 +79,7 @@ static const GLubyte *i810GetString( struct gl_context *ctx, GLenum name )
    case GL_RENDERER: {
       i810ContextPtr imesa = I810_CONTEXT(ctx);
       const char * chipset;
-      
+
       switch (imesa->i810Screen->deviceID) {
       case PCI_CHIP_I810:       chipset = "i810"; break;
       case PCI_CHIP_I810_DC100: chipset = "i810 DC-100"; break;
@@ -213,7 +213,7 @@ i810CreateContext( gl_api api,
 
    (void) memset( imesa->texture_heaps, 0, sizeof( imesa->texture_heaps ) );
    make_empty_list( & imesa->swapped );
-   
+
    imesa->nr_heaps = 1;
    imesa->texture_heaps[0] = driCreateTextureHeap( 0, imesa,
 	    i810Screen->textureSize,
@@ -485,11 +485,11 @@ i810UpdatePageFlipping( i810ContextPtr imesa )
       return;
    }
 
-   if ( imesa->sarea->pf_current_page == 1 ) 
+   if ( imesa->sarea->pf_current_page == 1 )
      front ^= 1;
 
    driFlipRenderbuffers(ctx->WinSysDrawBuffer, front);
-   
+
    if (front) {
       imesa->BufferSetup[I810_DESTREG_DI1] = imesa->i810Screen->fbOffset | imesa->i810Screen->backPitchBits;
    } else {
@@ -534,7 +534,7 @@ void i810GetLock( i810ContextPtr imesa, GLuint flags )
    /* Shared texture managment - if another client has played with
     * texture space, figure out which if any of our textures have been
     * ejected, and update our global LRU.
-    */ 
+    */
    for ( i = 0 ; i < imesa->nr_heaps ; i++ ) {
       DRI_AGE_TEXTURES( imesa->texture_heaps[ i ] );
    }

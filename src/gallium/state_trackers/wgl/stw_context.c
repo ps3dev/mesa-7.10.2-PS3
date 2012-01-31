@@ -66,11 +66,11 @@ DrvCopyContext(
       return FALSE;
 
    pipe_mutex_lock( stw_dev->ctx_mutex );
-   
+
    src = stw_lookup_context_locked( dhrcSource );
    dst = stw_lookup_context_locked( dhrcDest );
 
-   if (src && dst) { 
+   if (src && dst) {
       /* FIXME */
       assert(0);
       (void) src;
@@ -79,7 +79,7 @@ DrvCopyContext(
    }
 
    pipe_mutex_unlock( stw_dev->ctx_mutex );
-   
+
    return ret;
 }
 
@@ -96,7 +96,7 @@ DrvShareLists(
       return FALSE;
 
    pipe_mutex_lock( stw_dev->ctx_mutex );
-   
+
    ctx1 = stw_lookup_context_locked( dhglrc1 );
    ctx2 = stw_lookup_context_locked( dhglrc2 );
 
@@ -104,7 +104,7 @@ DrvShareLists(
       ret = ctx2->st->share(ctx2->st, ctx1->st);
 
    pipe_mutex_unlock( stw_dev->ctx_mutex );
-   
+
    return ret;
 }
 
@@ -124,19 +124,19 @@ DrvCreateLayerContext(
    const struct stw_pixelformat_info *pfi;
    struct st_context_attribs attribs;
    struct stw_context *ctx = NULL;
-   
+
    if(!stw_dev)
       return 0;
-   
+
    if (iLayerPlane != 0)
       return 0;
 
    iPixelFormat = GetPixelFormat(hdc);
    if(!iPixelFormat)
       return 0;
-   
+
    pfi = stw_pixelformat_get_info( iPixelFormat - 1 );
-   
+
    ctx = CALLOC_STRUCT( stw_context );
    if (ctx == NULL)
       goto no_ctx;
@@ -150,7 +150,7 @@ DrvCreateLayerContext(
 
    ctx->st = stw_dev->stapi->create_context(stw_dev->stapi,
          stw_dev->smapi, &attribs, NULL);
-   if (ctx->st == NULL) 
+   if (ctx->st == NULL)
       goto no_st_ctx;
 
    ctx->st->st_manager_private = (void *) ctx;
@@ -177,7 +177,7 @@ DrvDeleteContext(
 {
    struct stw_context *ctx ;
    BOOL ret = FALSE;
-   
+
    if (!stw_dev)
       return FALSE;
 
@@ -188,7 +188,7 @@ DrvDeleteContext(
 
    if (ctx) {
       struct stw_context *curctx = stw_current_context();
-      
+
       /* Unbind current if deleting current context. */
       if (curctx == ctx)
          stw_dev->stapi->make_current(stw_dev->stapi, NULL, NULL, NULL);
@@ -217,7 +217,7 @@ DrvReleaseContext(
 
    if (!ctx)
       return FALSE;
-   
+
    /* The expectation is that ctx is the same context which is
     * current for this thread.  We should check that and return False
     * if not the case.
@@ -240,7 +240,7 @@ stw_get_current_context( void )
    ctx = stw_current_context();
    if(!ctx)
       return 0;
-   
+
    return ctx->dhglrc;
 }
 
@@ -252,7 +252,7 @@ stw_get_current_dc( void )
    ctx = stw_current_context();
    if(!ctx)
       return NULL;
-   
+
    return ctx->hdc;
 }
 
@@ -304,7 +304,7 @@ stw_make_current(
          if (!fb)
             goto fail;
       }
-   
+
       if (fb->iPixelFormat != ctx->iPixelFormat) {
          SetLastError(ERROR_INVALID_PIXEL_FORMAT);
          goto fail;
@@ -318,7 +318,7 @@ stw_make_current(
    } else {
       ret = stw_dev->stapi->make_current(stw_dev->stapi, NULL, NULL, NULL);
    }
-   
+
 fail:
 
    if (fb) {
@@ -352,7 +352,7 @@ stw_flush_current_locked( struct stw_framebuffer *fb )
 
    if (ctx && ctx->current_framebuffer == fb) {
       ctx->st->flush(ctx->st,
-            PIPE_FLUSH_RENDER_CACHE | 
+            PIPE_FLUSH_RENDER_CACHE |
             PIPE_FLUSH_SWAPBUFFERS |
             PIPE_FLUSH_FRAME,
             NULL);

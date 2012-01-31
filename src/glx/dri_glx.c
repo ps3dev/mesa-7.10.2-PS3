@@ -304,7 +304,7 @@ static const __DRIextension *loader_extensions[] = {
 /**
  * Perform the required libGL-side initialization and call the client-side
  * driver's \c __driCreateNewScreen function.
- * 
+ *
  * \param dpy    Display pointer.
  * \param scrn   Screen number on the display.
  * \param psc    DRI screen information.
@@ -715,7 +715,7 @@ driDrawableGetMSC(struct glx_screen *base, __GLXDRIdrawable *pdraw,
 
    if (pdp && psc->sbc && psc->msc)
       return ( (*psc->msc->getMSC)(psc->driScreen, msc) == 0 &&
-	       (*psc->sbc->getSBC)(pdp->driDrawable, sbc) == 0 && 
+	       (*psc->sbc->getSBC)(pdp->driDrawable, sbc) == 0 &&
 	       __glXGetUST(ust) == 0 );
 }
 

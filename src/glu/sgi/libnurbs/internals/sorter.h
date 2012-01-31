@@ -39,10 +39,10 @@ public:
     virtual             ~Sorter() { /* silence warning*/ }
     void		qsort( void *a, int n );
 
-protected:	
+protected:
     virtual int		qscmp( char *, char * );
-    virtual void	qsexc( char *i, char *j );	// i<-j, j<-i 
-    virtual void	qstexc( char *i, char *j, char *k ); // i<-k, k<-j, j<-i 
+    virtual void	qsexc( char *i, char *j );	// i<-j, j<-i
+    virtual void	qstexc( char *i, char *j, char *k ); // i<-k, k<-j, j<-i
 
 private:
     void		qs1( char *, char * );

@@ -155,7 +155,7 @@ lp_scene_begin_rasterization(struct lp_scene *scene)
       struct pipe_surface *zsbuf = scene->fb.zsbuf;
       assert(zsbuf->u.tex.first_layer == zsbuf->u.tex.last_layer);
       scene->zsbuf.stride = llvmpipe_resource_stride(zsbuf->texture, zsbuf->u.tex.level);
-      scene->zsbuf.blocksize = 
+      scene->zsbuf.blocksize =
          util_format_get_blocksize(zsbuf->texture->format);
 
       scene->zsbuf.map = llvmpipe_resource_map(zsbuf->texture,
@@ -304,7 +304,7 @@ lp_scene_new_data_block( struct lp_scene *scene )
       struct data_block *block = MALLOC_STRUCT(data_block);
       if (block == NULL)
          return NULL;
-      
+
       scene->scene_size += sizeof *block;
 
       block->used = 0;

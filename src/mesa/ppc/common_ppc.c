@@ -47,7 +47,7 @@ unsigned long _mesa_ppc_cpu_features = 0;
  * Detect CPU features and install optimized transform and lighting routines.
  * Currently, CPU features are only detected.  The optimized routines have
  * yet to be written.
- * 
+ *
  * \bug
  * This routine is highly specific to Linux kernel 2.6.  I'm still waiting
  * to hear back from the glibc folk on how to do this "right".
@@ -83,7 +83,7 @@ void _mesa_init_all_ppc_transform_asm( void )
 
       fclose( f );
    }
-   
+
 # ifndef USE_VMX_ASM
    _mesa_ppc_cpu_features &= ~PPC_FEATURE_HAS_ALTIVEC;
 # endif

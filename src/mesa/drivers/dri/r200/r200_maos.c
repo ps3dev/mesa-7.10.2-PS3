@@ -5,7 +5,7 @@
  * To get an idea how the verts path works, look at the radeon implementation.
  */
 #include <string.h>
- 
+
 #include "r200_context.h"
 #define R200_MAOS_VERTS 0
 #if (R200_MAOS_VERTS)

@@ -51,7 +51,7 @@ mgaDestroyTexObj( mgaContextPtr mmesa, mgaTextureObjectPtr t )
      */
 
     if ( mmesa != NULL )
-    { 
+    {
 	if ( t->age > mmesa->dirtyAge )
 	    mmesa->dirtyAge = t->age;
 
@@ -72,14 +72,14 @@ mgaDestroyTexObj( mgaContextPtr mmesa, mgaTextureObjectPtr t )
  * updates.
  *
  * Performed with the hardware lock held.
- * 
+ *
  * Even though this function is named "upload subimage," the entire image
  * is uploaded.
- * 
+ *
  * \param mmesa  Driver context.
  * \param t      Texture to be uploaded.
  * \param hwlevel  Mipmap level of the texture to be uploaded.
- * 
+ *
  * \bug As mentioned above, this fuction actually copies the entier mipmap
  *      level.  There should be a version of this function that performs
  *      sub-rectangle uploads.  This will perform quite a bit better if only
@@ -97,8 +97,8 @@ static void mgaUploadSubImage( mgaContextPtr mmesa,
    const int level = hwlevel + t->base.firstLevel;
 
 
-   if ( (hwlevel < 0) 
-	|| (hwlevel >= (MGA_IS_G200(mmesa) 
+   if ( (hwlevel < 0)
+	|| (hwlevel >= (MGA_IS_G200(mmesa)
 		      ? G200_TEX_MAXLEVELS : G400_TEX_MAXLEVELS)) ) {
       fprintf( stderr, "[%s:%d] level = %d\n", __FILE__, __LINE__, level );
       return;
@@ -177,7 +177,7 @@ static void mgaUploadSubImage( mgaContextPtr mmesa,
       /* This works, is slower for uploads to card space and needs
        * additional synchronization with the dma stream.
        */
-       
+
       UPDATE_LOCK(mmesa, DRM_LOCK_FLUSH | DRM_LOCK_QUIESCENT);
 
       memcpy( mmesa->mgaScreen->texVirtual[t->base.heap->heapId] + offset,
@@ -186,7 +186,7 @@ static void mgaUploadSubImage( mgaContextPtr mmesa,
       if ( MGA_DEBUG & DEBUG_VERBOSE_TEXTURE )
 	 fprintf(stderr, "[%s:%d] address/size = 0x%08lx/%d\n",
 		 __FILE__, __LINE__,
-		 (long) (mmesa->mgaScreen->texVirtual[t->base.heap->heapId] 
+		 (long) (mmesa->mgaScreen->texVirtual[t->base.heap->heapId]
 			 + offset),
 		 length);
    }
@@ -196,7 +196,7 @@ static void mgaUploadSubImage( mgaContextPtr mmesa,
 /**
  * Upload the texture images associated with texture \a t.  This might
  * require the allocation of texture memory.
- * 
+ *
  * \param mmesa Context pointer
  * \param t Texture to be uploaded
  */

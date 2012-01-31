@@ -21,7 +21,7 @@
 
 /*
  * Authors:
- *   Richard Li <RichardZ.Li@amd.com>, <richardradeon@gmail.com> 
+ *   Richard Li <RichardZ.Li@amd.com>, <richardradeon@gmail.com>
  */
 
 #ifndef _EVERGREEN_SQ_H_
@@ -68,7 +68,7 @@ enum{
     EG_CF_INST_PUSH                  = 11,
     EG_CF_INST_Reserved_12           = 12,
     EG_CF_INST_ELSE                  = 13,
-    EG_CF_INST_POP                   = 14, 
+    EG_CF_INST_POP                   = 14,
     EG_CF_INST_Reserved_15           = 15,
     EG_CF_INST_Reserved_16           = 16,
     EG_CF_INST_Reserved_17           = 17,
@@ -358,17 +358,17 @@ enum{
     EG_ALU_WORD0__LAST_shift                = 31,//1 bit
     EG_ALU_WORD0__LAST_bit                  = 1 << 31,
 
-    EG_ALU_WORD1_OP2__SRC0_ABS_shift        = 0, //1 bit 
+    EG_ALU_WORD1_OP2__SRC0_ABS_shift        = 0, //1 bit
     EG_ALU_WORD1_OP2__SRC0_ABS_bit          = 1,
-    EG_ALU_WORD1_OP2__SRC1_ABS_shift        = 1, //1 bit 
+    EG_ALU_WORD1_OP2__SRC1_ABS_shift        = 1, //1 bit
     EG_ALU_WORD1_OP2__SRC1_ABS_bit          = 1 << 1,
-    EG_ALU_WORD1_OP2__UEM_shift             = 2, //1 bit 
+    EG_ALU_WORD1_OP2__UEM_shift             = 2, //1 bit
     EG_ALU_WORD1_OP2__UEM_bit               = 1 << 2,
-    EG_ALU_WORD1_OP2__UPDATE_PRED_shift     = 3, //1 bit 
+    EG_ALU_WORD1_OP2__UPDATE_PRED_shift     = 3, //1 bit
     EG_ALU_WORD1_OP2__UPDATE_PRED_bit       = 1 << 3,
-    EG_ALU_WORD1_OP2__WRITE_MASK_shift      = 4, //1 bit 
+    EG_ALU_WORD1_OP2__WRITE_MASK_shift      = 4, //1 bit
     EG_ALU_WORD1_OP2__WRITE_MASK_bit        = 1 << 4,
-    EG_ALU_WORD1_OP2__OMOD_shift            = 5, //2 bits 
+    EG_ALU_WORD1_OP2__OMOD_shift            = 5, //2 bits
     EG_ALU_WORD1_OP2__OMOD_mask             = 0x3 << 5,
     EG_ALU_WORD1_OP2__ALU_INST_shift        = 7, //11 bits
     EG_ALU_WORD1_OP2__ALU_INST_mask         = 0x7FF << 7,
@@ -646,7 +646,7 @@ enum{
     EG_SRC_SEL__ALU_SRC_PS                   = 255,
 
 //ALLOC_EXPORT
-    EG_CF_ALLOC_EXPORT_WORD0__ARRAY_BASE_shift = 0, //13 bits 
+    EG_CF_ALLOC_EXPORT_WORD0__ARRAY_BASE_shift = 0, //13 bits
     EG_CF_ALLOC_EXPORT_WORD0__ARRAY_BASE_mask  = 0x1FFF,
     EG_CF_ALLOC_EXPORT_WORD0__TYPE_shift       = 13,//2 bits
     EG_CF_ALLOC_EXPORT_WORD0__TYPE_mask        = 0x3 << 13,
@@ -676,7 +676,7 @@ enum{
     EG_CF_ALLOC_EXPORT_WORD1_SWIZ__Resreve_mask     = 0xF << 12,
 
     EG_CF_ALLOC_EXPORT_WORD1__BURST_COUNT_shift = 16, //4 bits
-    EG_CF_ALLOC_EXPORT_WORD1__BURST_COUNT_mask  = 0xF << 16, 
+    EG_CF_ALLOC_EXPORT_WORD1__BURST_COUNT_mask  = 0xF << 16,
     EG_CF_ALLOC_EXPORT_WORD1__VPM_shift         = 20, //1 bit
     EG_CF_ALLOC_EXPORT_WORD1__VPM_bit           = 1 << 20,
     EG_CF_ALLOC_EXPORT_WORD1__EOP_shift         = 21, //1 bit

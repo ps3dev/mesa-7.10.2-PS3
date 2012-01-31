@@ -229,12 +229,12 @@ struct brw_winsys_screen {
    void (*bo_unmap)(struct brw_winsys_buffer *buffer);
    /*@}*/
 
-   
+
    /* Wait for buffer to go idle.  Similar to map+unmap, but doesn't
     * mark buffer contents as dirty.
     */
    void (*bo_wait_idle)(struct brw_winsys_buffer *buffer);
-   
+
    /**
     * Destroy the winsys.
     */
@@ -272,7 +272,7 @@ bo_reference(struct brw_winsys_buffer **ptr, struct brw_winsys_buffer *buf)
 extern int BRW_DUMP;
 #else
 #define BRW_DUMP 0
-#endif 
+#endif
 
 #define DUMP_ASM	        0x1
 #define DUMP_STATE	        0x2

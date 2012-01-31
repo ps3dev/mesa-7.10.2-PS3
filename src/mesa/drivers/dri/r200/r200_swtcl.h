@@ -51,8 +51,8 @@ extern void r200BuildVertices( struct gl_context *ctx, GLuint start, GLuint coun
 extern void r200PrintSetupFlags(char *msg, GLuint flags );
 
 
-extern void r200_translate_vertex( struct gl_context *ctx, 
-				     const radeonVertex *src, 
+extern void r200_translate_vertex( struct gl_context *ctx,
+				     const radeonVertex *src,
 				     SWvertex *dst );
 
 extern void r200_print_vertex( struct gl_context *ctx, const radeonVertex *v );

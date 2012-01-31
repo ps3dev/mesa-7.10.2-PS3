@@ -134,7 +134,7 @@ static GLboolean i810_run_render( struct gl_context *ctx,
 
    /* Don't handle clipping or indexed vertices.
     */
-   if (imesa->RenderIndex != 0 || 
+   if (imesa->RenderIndex != 0 ||
        !i810_validate_render( ctx, VB )) {
       return GL_TRUE;
    }

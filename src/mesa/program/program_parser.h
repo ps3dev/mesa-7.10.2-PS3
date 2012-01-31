@@ -47,7 +47,7 @@ struct asm_symbol {
     */
    unsigned param_binding_type;
 
-   /** 
+   /**
     * Offset into the program_parameter_list where the tokens representing our
     * bound state (or constants) start.
     */

@@ -714,11 +714,11 @@ tdfxUpdateTexturePalette(struct gl_context * ctx, struct gl_texture_object *tObj
     if (tObj) {
         /* per-texture palette */
         tdfxTexInfo *ti;
-        
+
         /* This might be a proxy texture. */
         if (!tObj->Palette.TableUB)
             return;
-            
+
         if (!tObj->DriverData)
             tObj->DriverData = fxAllocTexObjData(fxMesa);
         ti = TDFX_TEXTURE_DATA(tObj);
@@ -1650,10 +1650,10 @@ tdfxCompressedTexImage2D (struct gl_context *ctx, GLenum target,
         */
        const GLuint mesaFormat = texImage->TexFormat;
        GLuint srcRowStride = _mesa_format_row_stride(mesaFormat, width);
- 
+
        GLuint destRowStride = _mesa_format_row_stride(mesaFormat,
                                                    mml->width);
- 
+
        _mesa_upscale_teximage2d(srcRowStride, (height+3) / 4,
                                 destRowStride, (mml->height+3) / 4,
                                 1, data, srcRowStride,
@@ -1717,7 +1717,7 @@ tdfxCompressedTexSubImage2D( struct gl_context *ctx, GLenum target,
      */
     if (mml->wScale != 1 || mml->hScale != 1) {
        srcRowStride = _mesa_format_row_stride(mesaFormat, texImage->Width);
- 
+
        destRowStride = _mesa_format_row_stride(mesaFormat, mml->width);
        _mesa_upscale_teximage2d(srcRowStride, texImage->Height / 4,
                                 destRowStride, mml->height / 4,

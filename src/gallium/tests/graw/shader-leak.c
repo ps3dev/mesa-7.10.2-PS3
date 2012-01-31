@@ -176,15 +176,15 @@ static void init( void )
     * Also, no easy way of querying supported formats if the screen
     * cannot be created first.
     */
-   for (i = 0; 
+   for (i = 0;
         window == NULL && formats[i] != PIPE_FORMAT_NONE;
         i++) {
-      
+
       screen = graw_create_window_and_screen(0,0,300,300,
                                              formats[i],
                                              &window);
    }
-   
+
    ctx = screen->context_create(screen, NULL);
    if (ctx == NULL)
       exit(3);
@@ -198,7 +198,7 @@ static void init( void )
    templat.nr_samples = 1;
    templat.bind = (PIPE_BIND_RENDER_TARGET |
                    PIPE_BIND_DISPLAY_TARGET);
-   
+
    tex = screen->resource_create(screen, &templat);
    if (tex == NULL) {
       fprintf(stderr, "Unable to create screen texture!\n");
@@ -223,7 +223,7 @@ static void init( void )
    fb.cbufs[0] = surf;
 
    ctx->set_framebuffer_state(ctx, &fb);
-   
+
    {
       struct pipe_blend_state blend;
       void *handle;

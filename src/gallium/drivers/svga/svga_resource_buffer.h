@@ -60,36 +60,36 @@ struct svga_buffer_range
 /**
  * SVGA pipe buffer.
  */
-struct svga_buffer 
+struct svga_buffer
 {
    struct u_resource b;
 
    /**
     * Regular (non DMA'able) memory.
-    * 
+    *
     * Used for user buffers or for buffers which we know before hand that can
     * never be used by the virtual hardware directly, such as constant buffers.
     */
    void *swbuf;
-   
-   /** 
+
+   /**
     * Whether swbuf was created by the user or not.
     */
    boolean user;
-   
+
    /**
     * Creation key for the host surface handle.
-    * 
-    * This structure describes all the host surface characteristics so that it 
+    *
+    * This structure describes all the host surface characteristics so that it
     * can be looked up in cache, since creating a host surface is often a slow
     * operation.
     */
    struct svga_host_surface_cache_key key;
-   
+
    /**
     * Host surface handle.
-    * 
-    * This is a platform independent abstraction for host SID. We create when 
+    *
+    * This is a platform independent abstraction for host SID. We create when
     * trying to bind
     */
    struct svga_winsys_surface *handle;
@@ -200,7 +200,7 @@ svga_buffer(struct pipe_resource *buffer)
  * Returns TRUE for user buffers.  We may
  * decide to use an alternate upload path for these buffers.
  */
-static INLINE boolean 
+static INLINE boolean
 svga_buffer_is_user_buffer( struct pipe_resource *buffer )
 {
    return svga_buffer(buffer)->user;
@@ -239,7 +239,7 @@ svga_context_flush_buffers(struct svga_context *svga);
 
 struct svga_winsys_buffer *
 svga_winsys_buffer_create(struct svga_context *svga,
-                          unsigned alignment, 
+                          unsigned alignment,
                           unsigned usage,
                           unsigned size);
 

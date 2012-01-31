@@ -45,14 +45,14 @@ class gridWrap{
   Real u_min, u_max;
   Real v_min, v_max;
 
-  /*cache the coordinate values for efficiency. 
-   *these are redundant information when 
+  /*cache the coordinate values for efficiency.
+   *these are redundant information when
    *the grid is uniform.
    */
   Real* u_values; /*size is n_ulines*/
   Real* v_values; /*size is n_vlines*/
 
-  Int is_uniform; 
+  Int is_uniform;
 
 public:
   //uniform grid constructor
@@ -66,7 +66,7 @@ public:
 	   Int nVlines, Real *vvlas
 	   );
   ~gridWrap();
-  
+
   void print();
   Int get_n_ulines() {return n_ulines;}
   Int get_n_vlines() {return n_vlines;}
@@ -75,17 +75,17 @@ public:
   Real get_v_min() {return v_min;}
   Real get_v_max() {return v_max;}
 
-  Real get_u_value(Int i) 
+  Real get_u_value(Int i)
     {
       assert(i<n_ulines);
-      /*if(i>=n_ulines){printf("ERROR, n_ulines=%i,i=%i\n",n_ulines,i);exit(0);}*/      
+      /*if(i>=n_ulines){printf("ERROR, n_ulines=%i,i=%i\n",n_ulines,i);exit(0);}*/
       return u_values[i];}
   Real get_v_value(Int j) {return v_values[j];}
 
   Real* get_u_values() {return u_values;}
   Real* get_v_values() {return v_values;}
 
-  void outputFanWithPoint(Int v, Int uleft, Int uright, 
+  void outputFanWithPoint(Int v, Int uleft, Int uright,
 			  Real vert[2], primStream* pStream);
 
   void draw();

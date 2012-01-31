@@ -50,8 +50,8 @@ typedef struct savage_texture_object_t *savageTextureObjectPtr;
 #define SAVAGE_FALLBACK_TEXTURE        0x1
 #define SAVAGE_FALLBACK_DRAW_BUFFER    0x2
 #define SAVAGE_FALLBACK_READ_BUFFER    0x4
-#define SAVAGE_FALLBACK_COLORMASK      0x8  
-#define SAVAGE_FALLBACK_SPECULAR       0x10 
+#define SAVAGE_FALLBACK_COLORMASK      0x8
+#define SAVAGE_FALLBACK_SPECULAR       0x10
 #define SAVAGE_FALLBACK_LOGICOP        0x20
 /*frank 2001/11/12 add the stencil fallbak*/
 #define SAVAGE_FALLBACK_STENCIL        0x40
@@ -71,7 +71,7 @@ typedef struct savage_texture_object_t *savageTextureObjectPtr;
 /* What needs to be changed for the current vertex dma buffer?
  * This will go away!
  */
-#define SAVAGE_UPLOAD_LOCAL	0x1  /* DrawLocalCtrl (S4) or 
+#define SAVAGE_UPLOAD_LOCAL	0x1  /* DrawLocalCtrl (S4) or
 					DrawCtrl and ZBufCtrl (S3D) */
 #define SAVAGE_UPLOAD_TEX0	0x2  /* texture unit 0 */
 #define SAVAGE_UPLOAD_TEX1	0x4  /* texture unit 1 (S4 only) */
@@ -162,7 +162,7 @@ struct savage_context_t {
     savageRegisters regs, oldRegs, globalRegMask;
 
     /* Manage our own state */
-    GLuint new_state; 
+    GLuint new_state;
     GLuint new_gl_state;
     GLboolean ptexHack;
 
@@ -190,19 +190,19 @@ struct savage_context_t {
     GLuint LcsCullMode;
     GLuint texEnvColor;
 
-   /* Vertex state 
+   /* Vertex state
     */
    GLuint vertex_size;
    struct tnl_attr_map vertex_attrs[VERT_ATTRIB_MAX];
    GLuint vertex_attr_count;
    char *verts;			/* points to tnl->clipspace.vertex_buf */
 
-   /* Rasterization state 
+   /* Rasterization state
     */
    GLuint SetupNewInputs;
    GLuint SetupIndex;
    GLuint RenderIndex;
-   
+
    GLuint hw_primitive;
    GLenum raster_primitive;
    GLenum render_primitive;
@@ -211,7 +211,7 @@ struct savage_context_t {
    GLubyte HwPrim;
    GLuint HwVertexSize;
 
-   /* Fallback rasterization functions 
+   /* Fallback rasterization functions
     */
    savage_point_func draw_point;
    savage_line_func draw_line;
@@ -227,7 +227,7 @@ struct savage_context_t {
     GLuint bufferSize;
 
     struct gl_framebuffer *glBuffer;
-   
+
     /* Two flags to keep track of fallbacks. */
     GLuint Fallback;
 
@@ -243,7 +243,7 @@ struct savage_context_t {
 
     /*  use this bit to support single/double buffer */
     GLuint IsDouble;
-    /*  use this to indicate Fullscreen mode */   
+    /*  use this to indicate Fullscreen mode */
     GLuint IsFullScreen; /* FIXME - open/close fullscreen is gone, is this needed? */
     GLuint backup_frontOffset;
     GLuint backup_backOffset;
@@ -251,7 +251,7 @@ struct savage_context_t {
     GLuint toggle;
     GLuint backup_streamFIFO;
     GLuint NotFirstFrame;
-   
+
     GLboolean inSwap;
     GLuint lastSwap;
     GLuint ctxAge;
@@ -275,7 +275,7 @@ struct savage_context_t {
     __DRIdrawable *driReadable;
 
     __DRIscreen *driScreen;
-    savageScreenPrivate *savageScreen; 
+    savageScreenPrivate *savageScreen;
     drm_savage_sarea_t *sarea;
 
     GLboolean hw_stencil;
@@ -298,7 +298,7 @@ struct savage_context_t {
 #define SAVAGE_CONTEXT(ctx) ((savageContextPtr)(ctx->DriverCtx))
 
 /* To remove all debugging, make sure SAVAGE_DEBUG is defined as a
- * preprocessor symbol, and equal to zero.  
+ * preprocessor symbol, and equal to zero.
  */
 #ifndef SAVAGE_DEBUG
 extern int SAVAGE_DEBUG;

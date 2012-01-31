@@ -72,7 +72,7 @@ mgaWaitFence( mgaContextPtr mmesa, uint32_t fence, uint32_t * curr_fence )
 
     if ( mmesa->driScreen->drm_version.minor >= 2 ) {
 	uint32_t temp = fence;
-	
+
 	ret = drmCommandWriteRead( mmesa->driScreen->fd,
 				   DRM_MGA_WAIT_FENCE,
 				   & temp, sizeof( uint32_t ));
@@ -115,7 +115,7 @@ static void mga_iload_dma_ioctl(mgaContextPtr mmesa,
 
    i = 0;
    do {
-      ret = drmCommandWrite( mmesa->driFd, DRM_MGA_ILOAD, 
+      ret = drmCommandWrite( mmesa->driFd, DRM_MGA_ILOAD,
                              &iload, sizeof(iload) );
    } while ( ret == -EBUSY && i++ < DRM_MGA_IDLE_RETRY );
 
@@ -329,14 +329,14 @@ mgaClear( struct gl_context *ctx, GLbitfield mask )
       mmesa->dirty |= MGA_UPLOAD_CLIPRECTS|MGA_UPLOAD_CONTEXT;
    }
 
-   if (mask) 
+   if (mask)
       _swrast_Clear( ctx, mask );
 }
 
 
 /**
  * Wait for the previous frame of rendering has completed.
- * 
+ *
  * \param mmesa  Hardware context pointer.
  *
  * \bug
@@ -364,12 +364,12 @@ static void mgaWaitForFrameCompletion( mgaContextPtr mmesa )
 	 * has "wrapped" around is tracked in last_wrap.  In addition, the
 	 * wrap count and the buffer position at the end of the last frame are
 	 * stored in last_frame.wrap and last_frame.head.
-	 * 
+	 *
 	 * By comparing the wrap counts and the current DMA pointer value
 	 * (read directly from the hardware) to last_frame.head, we can
 	 * determine when the graphics processor has processed all of the
 	 * commands for the last frame.
-	 * 
+	 *
 	 * In this case "last frame" means the frame of the *previous* swap-
 	 * buffers call.  This is done to prevent queuing a second buffer swap
 	 * before the previous swap is executed.
@@ -474,7 +474,7 @@ void mgaCopyBuffer( __DRIdrawable *dPriv )
  * Implement the hardware-specific portion of \c glFinish.
  *
  * Flushes all pending commands to the hardware and wait for them to finish.
- * 
+ *
  * \param ctx  Context where the \c glFinish command was issued.
  *
  * \sa glFinish, mgaFlush, mgaFlushDMA
@@ -591,7 +591,7 @@ void mgaFlushVerticesLocked( mgaContextPtr mmesa )
       vertex.idx = buffer->idx;
       vertex.used = buffer->used;
       vertex.discard = 1;
-      drmCommandWrite( mmesa->driFd, DRM_MGA_VERTEX, 
+      drmCommandWrite( mmesa->driFd, DRM_MGA_VERTEX,
                        &vertex, sizeof(drmMGAVertex) );
 
       age_mmesa(mmesa, mmesa->sarea->last_enqueue);
@@ -710,7 +710,7 @@ int mgaFlushDMA( int fd, drmLockFlags flags )
 
    memset( &lock, 0, sizeof(lock) );
 
-   lock.flags = flags & (DRM_LOCK_QUIESCENT | DRM_LOCK_FLUSH 
+   lock.flags = flags & (DRM_LOCK_QUIESCENT | DRM_LOCK_FLUSH
 			 | DRM_LOCK_FLUSH_ALL);
 
    do {

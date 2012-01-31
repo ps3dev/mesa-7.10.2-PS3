@@ -370,7 +370,7 @@ void r300RunRenderPrimitive(struct gl_context * ctx, int start, int end, int pri
 					WARN_ONCE("did the impossible happen? we never aligned nr to dword\n");
 					return;
 				}
-					
+
 			}
 			r300FireEB(rmesa, nr, type, offset);
 

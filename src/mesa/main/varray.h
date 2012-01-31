@@ -230,7 +230,7 @@ _mesa_print_arrays(struct gl_context *ctx);
 extern void
 _mesa_init_varray( struct gl_context * ctx );
 
-extern void 
+extern void
 _mesa_free_varray_data(struct gl_context *ctx);
 
 #else

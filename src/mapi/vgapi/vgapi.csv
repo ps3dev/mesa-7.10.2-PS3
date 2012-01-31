@@ -33,7 +33,7 @@ VGfloat,                GetParameterf,             VGHandle object, VGint paramT
 void,                   GetParameterfv,            VGHandle object, VGint paramType, VGint count, VGfloat *values
 VGint,                  GetParameteri,             VGHandle object, VGint paramType
 void,                   GetParameteriv,            VGHandle object, VGint paramType, VGint count, VGint *values
-VGImage,                GetParent,                 VGImage image 
+VGImage,                GetParent,                 VGImage image
 VGbitfield,             GetPathCapabilities,       VGPath path
 void,                   GetPixels,                 VGImage dst, VGint dx, VGint dy, VGint sx, VGint sy, VGint width, VGint height
 const VGubyte *,        GetString,                 VGStringID name

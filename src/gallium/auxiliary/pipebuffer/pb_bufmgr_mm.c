@@ -28,7 +28,7 @@
 /**
  * \file
  * Buffer manager using the old texture memory manager.
- * 
+ *
  * \author Jose Fonseca <jrfonseca@tungstengraphics.com>
  */
 
@@ -52,14 +52,14 @@
 struct mm_pb_manager
 {
    struct pb_manager base;
-   
+
    pipe_mutex mutex;
-   
+
    pb_size size;
    struct mem_block *heap;
-   
+
    pb_size align2;
-   
+
    struct pb_buffer *buffer;
    void *map;
 };
@@ -76,9 +76,9 @@ mm_pb_manager(struct pb_manager *mgr)
 struct mm_buffer
 {
    struct pb_buffer base;
-   
+
    struct mm_pb_manager *mgr;
-   
+
    struct mem_block *block;
 };
 
@@ -96,9 +96,9 @@ mm_buffer_destroy(struct pb_buffer *buf)
 {
    struct mm_buffer *mm_buf = mm_buffer(buf);
    struct mm_pb_manager *mm = mm_buf->mgr;
-   
+
    assert(!pipe_is_referenced(&mm_buf->base.base.reference));
-   
+
    pipe_mutex_lock(mm->mutex);
    u_mmFreeMem(mm_buf->block);
    FREE(mm_buf);
@@ -127,8 +127,8 @@ mm_buffer_unmap(struct pb_buffer *buf)
 }
 
 
-static enum pipe_error 
-mm_buffer_validate(struct pb_buffer *buf, 
+static enum pipe_error
+mm_buffer_validate(struct pb_buffer *buf,
                    struct pb_validate *vl,
                    unsigned flags)
 {
@@ -139,7 +139,7 @@ mm_buffer_validate(struct pb_buffer *buf,
 
 
 static void
-mm_buffer_fence(struct pb_buffer *buf, 
+mm_buffer_fence(struct pb_buffer *buf,
                 struct pipe_fence_handle *fence)
 {
    struct mm_buffer *mm_buf = mm_buffer(buf);
@@ -160,7 +160,7 @@ mm_buffer_get_base_buffer(struct pb_buffer *buf,
 }
 
 
-static const struct pb_vtbl 
+static const struct pb_vtbl
 mm_buffer_vtbl = {
       mm_buffer_destroy,
       mm_buffer_map,
@@ -172,7 +172,7 @@ mm_buffer_vtbl = {
 
 
 static struct pb_buffer *
-mm_bufmgr_create_buffer(struct pb_manager *mgr, 
+mm_bufmgr_create_buffer(struct pb_manager *mgr,
                         pb_size size,
                         const struct pb_desc *desc)
 {
@@ -183,7 +183,7 @@ mm_bufmgr_create_buffer(struct pb_manager *mgr,
    assert(pb_check_alignment(desc->alignment, (pb_size)1 << mm->align2));
    if(!pb_check_alignment(desc->alignment, (pb_size)1 << mm->align2))
       return NULL;
-   
+
    pipe_mutex_lock(mm->mutex);
 
    mm_buf = CALLOC_STRUCT(mm_buffer);
@@ -196,11 +196,11 @@ mm_bufmgr_create_buffer(struct pb_manager *mgr,
    mm_buf->base.base.alignment = desc->alignment;
    mm_buf->base.base.usage = desc->usage;
    mm_buf->base.base.size = size;
-   
+
    mm_buf->base.vtbl = &mm_buffer_vtbl;
-   
+
    mm_buf->mgr = mm;
-   
+
    mm_buf->block = u_mmAllocMem(mm->heap, (int)size, (int)mm->align2, 0);
    if(!mm_buf->block) {
 #if 0
@@ -211,11 +211,11 @@ mm_bufmgr_create_buffer(struct pb_manager *mgr,
       pipe_mutex_unlock(mm->mutex);
       return NULL;
    }
-   
+
    /* Some sanity checks */
    assert(0 <= (pb_size)mm_buf->block->ofs && (pb_size)mm_buf->block->ofs < mm->size);
    assert(size <= (pb_size)mm_buf->block->size && (pb_size)mm_buf->block->ofs + (pb_size)mm_buf->block->size <= mm->size);
-   
+
    pipe_mutex_unlock(mm->mutex);
    return SUPER(mm_buf);
 }
@@ -232,29 +232,29 @@ static void
 mm_bufmgr_destroy(struct pb_manager *mgr)
 {
    struct mm_pb_manager *mm = mm_pb_manager(mgr);
-   
+
    pipe_mutex_lock(mm->mutex);
 
    u_mmDestroy(mm->heap);
-   
+
    pb_unmap(mm->buffer);
    pb_reference(&mm->buffer, NULL);
-   
+
    pipe_mutex_unlock(mm->mutex);
-   
+
    FREE(mgr);
 }
 
 
 struct pb_manager *
-mm_bufmgr_create_from_buffer(struct pb_buffer *buffer, 
-                             pb_size size, pb_size align2) 
+mm_bufmgr_create_from_buffer(struct pb_buffer *buffer,
+                             pb_size size, pb_size align2)
 {
    struct mm_pb_manager *mm;
 
    if(!buffer)
       return NULL;
-   
+
    mm = CALLOC_STRUCT(mm_pb_manager);
    if (!mm)
       return NULL;
@@ -268,20 +268,20 @@ mm_bufmgr_create_from_buffer(struct pb_buffer *buffer,
 
    pipe_mutex_init(mm->mutex);
 
-   mm->buffer = buffer; 
+   mm->buffer = buffer;
 
-   mm->map = pb_map(mm->buffer, 
+   mm->map = pb_map(mm->buffer,
 		    PB_USAGE_CPU_READ |
 		    PB_USAGE_CPU_WRITE, NULL);
    if(!mm->map)
       goto failure;
 
-   mm->heap = u_mmInit(0, (int)size); 
+   mm->heap = u_mmInit(0, (int)size);
    if (!mm->heap)
       goto failure;
 
    return SUPER(mm);
-   
+
 failure:
 if(mm->heap)
    u_mmDestroy(mm->heap);
@@ -294,8 +294,8 @@ if(mm->heap)
 
 
 struct pb_manager *
-mm_bufmgr_create(struct pb_manager *provider, 
-                 pb_size size, pb_size align2) 
+mm_bufmgr_create(struct pb_manager *provider,
+                 pb_size size, pb_size align2)
 {
    struct pb_buffer *buffer;
    struct pb_manager *mgr;
@@ -303,14 +303,14 @@ mm_bufmgr_create(struct pb_manager *provider,
 
    if(!provider)
       return NULL;
-   
+
    memset(&desc, 0, sizeof(desc));
    desc.alignment = 1 << align2;
-   
-   buffer = provider->create_buffer(provider, size, &desc); 
+
+   buffer = provider->create_buffer(provider, size, &desc);
    if (!buffer)
       return NULL;
-   
+
    mgr = mm_bufmgr_create_from_buffer(buffer, size, align2);
    if (!mgr) {
       pb_reference(&buffer, NULL);

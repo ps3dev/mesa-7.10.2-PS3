@@ -65,7 +65,7 @@ void mach64GetLock( mach64ContextPtr mmesa, GLuint flags )
     * Since the hardware state depends on having the latest drawable
     * clip rects, all state checking must be done _after_ this call.
     */
-   DRI_VALIDATE_DRAWABLE_INFO( sPriv, dPriv ); 
+   DRI_VALIDATE_DRAWABLE_INFO( sPriv, dPriv );
 
    if ( mmesa->lastStamp != dPriv->lastStamp ) {
       mmesa->lastStamp = dPriv->lastStamp;

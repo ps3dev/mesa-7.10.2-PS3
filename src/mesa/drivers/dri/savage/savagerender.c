@@ -57,7 +57,7 @@
 
 #define HAVE_ELTS        1
 
-#define LOCAL_VARS savageContextPtr imesa = SAVAGE_CONTEXT(ctx) 
+#define LOCAL_VARS savageContextPtr imesa = SAVAGE_CONTEXT(ctx)
 #define INIT( prim ) do {						\
    if (0) fprintf(stderr, "%s\n", __FUNCTION__);			\
    savageFlushVertices(imesa);						\
@@ -147,7 +147,7 @@ static GLboolean savage_run_render( struct gl_context *ctx,
 {
    savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
    TNLcontext *tnl = TNL_CONTEXT(ctx);
-   struct vertex_buffer *VB = &tnl->vb; 
+   struct vertex_buffer *VB = &tnl->vb;
    tnl_render_func *tab, *tab_elts;
    GLboolean valid;
    GLuint i;
@@ -171,7 +171,7 @@ static GLboolean savage_run_render( struct gl_context *ctx,
    if (imesa->RenderIndex != 0 || !valid) {
       return GL_TRUE;
    }
-   
+
    tnl->Driver.Render.Start( ctx );
    /* Check RenderIndex again. The ptexHack is detected late in RenderStart.
     * Also check for ptex fallbacks detected late.
@@ -212,8 +212,8 @@ static GLboolean savage_run_render( struct gl_context *ctx,
    return GL_FALSE;		/* finished the pipe */
 }
 
-struct tnl_pipeline_stage _savage_render_stage = 
-{ 
+struct tnl_pipeline_stage _savage_render_stage =
+{
    "savage render",
    NULL,
    NULL,
@@ -321,7 +321,7 @@ static GLboolean alloc_texnorm_data( struct gl_context *ctx,
 
    for (i = 0 ; i < ctx->Const.MaxTextureUnits ; i++)
       _mesa_vector4f_alloc( &store->texcoord[i], 0, VB->Size, 32 );
-   
+
    return GL_TRUE;
 }
 

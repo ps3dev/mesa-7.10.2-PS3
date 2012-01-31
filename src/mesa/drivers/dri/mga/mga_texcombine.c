@@ -286,7 +286,7 @@ GLboolean mgaUpdateTextureEnvCombine( struct gl_context *ctx, int unit )
        * no way to get alpha out by itself (GL_REPLACE).
        *
        * Keep the Arg2 == alpha cases first because only alpha has the
-       * capabilities to function as Arg2 (GL_INTERPOLATE). Also good for 
+       * capabilities to function as Arg2 (GL_INTERPOLATE). Also good for
        * GL_ADD, GL_ADD_SIGNED, GL_SUBTRACT since we can't get alpha to the
        * adder.
        *
@@ -668,5 +668,5 @@ GLboolean mgaUpdateTextureEnvCombine( struct gl_context *ctx, int unit )
 
    return GL_TRUE;
 }
-   
-   
+
+

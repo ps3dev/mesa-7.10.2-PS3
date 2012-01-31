@@ -38,7 +38,7 @@ nv50_buffer_transfer_map( struct pipe_context *pipe,
 					   nouveau_screen_transfer_flags(transfer->usage) );
 	if (map == NULL)
 		return NULL;
-	
+
 	return map + transfer->box.x;
 }
 
@@ -141,7 +141,7 @@ nv50_user_buffer_create(struct pipe_screen *pscreen,
 	buffer->bo = nouveau_screen_bo_user(pscreen, ptr, bytes);
 	if (!buffer->bo)
 		goto fail;
-	
+
 	return &buffer->base;
 
 fail:

@@ -405,7 +405,7 @@ int main(int argc, char **argv)
 
       write_tsv_header(fp);
    }
-      
+
    if (single)
       success = test_single(gallivm, verbose, fp);
    else if (n)

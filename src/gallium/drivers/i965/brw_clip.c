@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -59,7 +59,7 @@ compile_clip_prog( struct brw_context *brw,
    GLuint delta;
 
    memset(&c, 0, sizeof(c));
-   
+
    /* Begin the compilation:
     */
    brw_init_compile(brw, &c.func);
@@ -96,7 +96,7 @@ compile_clip_prog( struct brw_context *brw,
 
    if (c.key.output_edgeflag != BRW_OUTPUT_NOT_PRESENT)
       c.offset_edgeflag = delta + c.key.output_edgeflag * ATTR_SIZE;
-   
+
    if (BRW_IS_IGDNG(brw))
        c.nr_regs = (c.key.nr_attrs + 1) / 2 + 3;  /* are vertices packed, or reg-aligned? */
    else
@@ -107,7 +107,7 @@ compile_clip_prog( struct brw_context *brw,
    c.prog_data.clip_mode = c.key.clip_mode; /* XXX */
 
    /* For some reason the thread is spawned with only 4 channels
-    * unmasked.  
+    * unmasked.
     */
    brw_set_mask_control(&c.func, BRW_MASK_DISABLE);
 
@@ -116,7 +116,7 @@ compile_clip_prog( struct brw_context *brw,
     * do all three:
     */
    switch (key->primitive) {
-   case PIPE_PRIM_TRIANGLES: 
+   case PIPE_PRIM_TRIANGLES:
       if (key->do_unfilled)
 	 brw_emit_unfilled_clip( &c );
       else
@@ -133,7 +133,7 @@ compile_clip_prog( struct brw_context *brw,
       return PIPE_ERROR_BAD_INPUT;
    }
 
-	 
+
 
    /* get the program
     */
@@ -167,12 +167,12 @@ upload_clip_prog(struct brw_context *brw)
    enum pipe_error ret;
 
    /* Populate the key, starting from the almost-complete version from
-    * the rast state. 
+    * the rast state.
     */
 
    /* PIPE_NEW_RAST */
    key = brw->curr.rast->clip_key;
-   
+
    /* BRW_NEW_REDUCED_PRIMITIVE */
    key.primitive = brw->reduced_primitive;
 
@@ -214,7 +214,7 @@ upload_clip_prog(struct brw_context *brw)
 
 const struct brw_tracked_state brw_clip_prog = {
    .dirty = {
-      .mesa  = (PIPE_NEW_RAST | 
+      .mesa  = (PIPE_NEW_RAST |
 		PIPE_NEW_CLIP),
       .brw   = (BRW_NEW_REDUCED_PRIMITIVE),
       .cache = CACHE_NEW_VS_PROG

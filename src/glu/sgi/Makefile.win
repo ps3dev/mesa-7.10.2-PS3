@@ -113,7 +113,7 @@ LFLAGS	= $(dlllflags) $(lcommon) $(LFLAGS)
 LIBS	= ../lib/$(MESALIB) winmm.lib $(guilibsdll)
 
 OBJS	= $(GLU_SRCS_CC:.cc=.obj) $(GLU_SRCS:.c=.obj)
-NURBSINC = -Ilibnurbs\interface -Ilibnurbs\internals -Ilibnurbs\nurbtess 
+NURBSINC = -Ilibnurbs\interface -Ilibnurbs\internals -Ilibnurbs\nurbtess
 CFLAGS  = $(CFLAGS) $(NURBSINC)
 
 $(GLUDLL): $(OBJS) glu.def
@@ -132,12 +132,12 @@ install	: $(GLUDLL) $(GLULIB)
 	-copy $(GLULIB) $(LIBINSTALL)
 
 clean	::
-	@del /f libtess\*.obj libutil\*.obj 
-	@del /f libnurbs\interface\*.obj libnurbs\internals\*.obj 
+	@del /f libtess\*.obj libutil\*.obj
+	@del /f libnurbs\interface\*.obj libnurbs\internals\*.obj
 	@del /f libnurbs\nurbtess\*.obj
 
 # override default inference rule with one that writes the object to
-# the same subdir as the c file. 
+# the same subdir as the c file.
 
 .c.obj	:
 	$(cc) $(CFLAGS) -I. $< /Fo$*.obj

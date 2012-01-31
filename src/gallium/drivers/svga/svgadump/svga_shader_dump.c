@@ -26,7 +26,7 @@
 /**
  * @file
  * SVGA Shader Dump Facilities
- * 
+ *
  * @author Michal Krol <michal@vmware.com>
  */
 

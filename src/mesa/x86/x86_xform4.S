@@ -671,7 +671,7 @@ LLBL(x86_p4_ir_done):
 	POP_L( EDI )
 	POP_L( ESI )
 	RET
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

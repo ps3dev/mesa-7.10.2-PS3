@@ -190,8 +190,8 @@ static void evergreenInvalidateState(struct gl_context * ctx, GLuint new_state) 
         CLEARbit(evergreen->SPI_PS_IN_CONTROL_0.u32All, LINEAR_GRADIENT_ENA_bit);
 
         SETfield(evergreen->SPI_BARYC_CNTL.u32All, 1,
-		         EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_shift, 
-                 EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_mask);        
+		         EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_shift,
+                 EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_mask);
     }
     else
     {
@@ -200,13 +200,13 @@ static void evergreenInvalidateState(struct gl_context * ctx, GLuint new_state) 
         SETbit(evergreen->PA_CL_VTE_CNTL.u32All, VTX_Z_FMT_bit);
 
         SETbit(evergreen->PA_CL_VTE_CNTL.u32All, VTX_W0_FMT_bit);
-       
+
         CLEARbit(evergreen->SPI_PS_IN_CONTROL_0.u32All, PERSP_GRADIENT_ENA_bit);
         SETbit(evergreen->SPI_PS_IN_CONTROL_0.u32All, LINEAR_GRADIENT_ENA_bit);
-        
+
         SETfield(evergreen->SPI_BARYC_CNTL.u32All, 1,
-		         EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_shift, 
-                 EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_mask);        
+		         EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_shift,
+                 EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_mask);
     }
 
     context->radeon.NewGLState |= new_state;
@@ -455,8 +455,8 @@ static void evergreenSetBlendState(struct gl_context * ctx) //diff : CB_COLOR_CO
 	SETbit(blend_reg, SEPARATE_ALPHA_BLEND_bit);
 
     SETbit(blend_reg, EG_CB_BLENDX_CONTROL_ENABLE_bit);
-	
-    evergreen->CB_BLEND0_CONTROL.u32All = blend_reg;	
+
+    evergreen->CB_BLEND0_CONTROL.u32All = blend_reg;
 }
 
 static void evergreenBlendEquationSeparate(struct gl_context * ctx,
@@ -522,16 +522,16 @@ static void evergreenSetLogicOpState(struct gl_context *ctx) //diff : CB_COLOR_C
 
 	if (RGBA_LOGICOP_ENABLED(ctx))
 		SETfield(evergreen->CB_COLOR_CONTROL.u32All,
-			 evergreen_translate_logicop(ctx->Color.LogicOp), 
-             EG_CB_COLOR_CONTROL__ROP3_shift, 
+			 evergreen_translate_logicop(ctx->Color.LogicOp),
+             EG_CB_COLOR_CONTROL__ROP3_shift,
              EG_CB_COLOR_CONTROL__ROP3_mask);
 	else
-		SETfield(evergreen->CB_COLOR_CONTROL.u32All, 0xCC, 
-             EG_CB_COLOR_CONTROL__ROP3_shift, 
+		SETfield(evergreen->CB_COLOR_CONTROL.u32All, 0xCC,
+             EG_CB_COLOR_CONTROL__ROP3_shift,
              EG_CB_COLOR_CONTROL__ROP3_mask);
 }
 
-static void evergreenClipPlane( struct gl_context *ctx, GLenum plane, const GLfloat *eq ) //same , but PA_CL_UCP_0_ offset diff 
+static void evergreenClipPlane( struct gl_context *ctx, GLenum plane, const GLfloat *eq ) //same , but PA_CL_UCP_0_ offset diff
 {
 	context_t *context = EVERGREEN_CONTEXT(ctx);
 	EVERGREEN_CHIP_CONTEXT *evergreen = GET_EVERGREEN_CHIP(context);
@@ -570,41 +570,41 @@ static void evergreenSetClipPlaneState(struct gl_context * ctx, GLenum cap, GLbo
 }
 
 static void evergreenSetDBRenderState(struct gl_context * ctx)
-{    
+{
     context_t *context = EVERGREEN_CONTEXT(ctx);
     EVERGREEN_CHIP_CONTEXT *evergreen = GET_EVERGREEN_CHIP(context);
     struct evergreen_fragment_program *fp =
             (struct evergreen_fragment_program *)(ctx->FragmentProgram._Current);
-	
+
     EVERGREEN_STATECHANGE(context, db);
 
-    SETbit(evergreen->DB_SHADER_CONTROL.u32All, 
+    SETbit(evergreen->DB_SHADER_CONTROL.u32All,
            DUAL_EXPORT_ENABLE_bit);
-    SETfield(evergreen->DB_SHADER_CONTROL.u32All, EARLY_Z_THEN_LATE_Z, 
-             Z_ORDER_shift, 
+    SETfield(evergreen->DB_SHADER_CONTROL.u32All, EARLY_Z_THEN_LATE_Z,
+             Z_ORDER_shift,
              Z_ORDER_mask);
 	/* XXX need to enable htile for hiz/s */
-    SETfield(evergreen->DB_RENDER_OVERRIDE.u32All, FORCE_DISABLE, 
-             FORCE_HIZ_ENABLE_shift, 
+    SETfield(evergreen->DB_RENDER_OVERRIDE.u32All, FORCE_DISABLE,
+             FORCE_HIZ_ENABLE_shift,
              FORCE_HIZ_ENABLE_mask);
-    SETfield(evergreen->DB_RENDER_OVERRIDE.u32All, FORCE_DISABLE, 
-             FORCE_HIS_ENABLE0_shift, 
+    SETfield(evergreen->DB_RENDER_OVERRIDE.u32All, FORCE_DISABLE,
+             FORCE_HIS_ENABLE0_shift,
              FORCE_HIS_ENABLE0_mask);
-    SETfield(evergreen->DB_RENDER_OVERRIDE.u32All, FORCE_DISABLE, 
-             FORCE_HIS_ENABLE1_shift, 
+    SETfield(evergreen->DB_RENDER_OVERRIDE.u32All, FORCE_DISABLE,
+             FORCE_HIS_ENABLE1_shift,
              FORCE_HIS_ENABLE1_mask);
 
     if (context->radeon.query.current)
     {
-        SETbit(evergreen->DB_RENDER_OVERRIDE.u32All, NOOP_CULL_DISABLE_bit);        
-        SETbit(evergreen->DB_COUNT_CONTROL.u32All, 
-               EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_bit);        
+        SETbit(evergreen->DB_RENDER_OVERRIDE.u32All, NOOP_CULL_DISABLE_bit);
+        SETbit(evergreen->DB_COUNT_CONTROL.u32All,
+               EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_bit);
     }
     else
     {
-        CLEARbit(evergreen->DB_RENDER_OVERRIDE.u32All, NOOP_CULL_DISABLE_bit);        
-        CLEARbit(evergreen->DB_COUNT_CONTROL.u32All, 
-                 EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_bit);        
+        CLEARbit(evergreen->DB_RENDER_OVERRIDE.u32All, NOOP_CULL_DISABLE_bit);
+        CLEARbit(evergreen->DB_COUNT_CONTROL.u32All,
+                 EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_bit);
     }
 
     if (fp)
@@ -626,7 +626,7 @@ static void evergreenSetDBRenderState(struct gl_context * ctx)
         {
             CLEARbit(evergreen->DB_SHADER_CONTROL.u32All, Z_EXPORT_ENABLE_bit);
         }
-    }    
+    }
 }
 
 void evergreenUpdateShaderStates(struct gl_context * ctx)
@@ -694,7 +694,7 @@ static void evergreenSetDepthState(struct gl_context * ctx) //same
             break;
         }
     }
-    else    
+    else
     {
         CLEARbit(evergreen->DB_DEPTH_CONTROL.u32All, Z_ENABLE_bit);
         CLEARbit(evergreen->DB_DEPTH_CONTROL.u32All, Z_WRITE_ENABLE_bit);
@@ -941,7 +941,7 @@ static void evergreenUpdateWindow(struct gl_context * ctx, int id) //diff in cal
 	GLfloat tz = v[MAT_TZ] * depthScale;
 
 	EVERGREEN_STATECHANGE(context, pa);
-	
+
 
 	evergreen->viewport[id].PA_CL_VPORT_XSCALE.f32All  = sx;
 	evergreen->viewport[id].PA_CL_VPORT_XOFFSET.f32All = tx;
@@ -1232,7 +1232,7 @@ static void evergreenStencilFuncSeparate(struct gl_context * ctx, GLenum face,
 	EVERGREEN_CHIP_CONTEXT *evergreen = GET_EVERGREEN_CHIP(context);
 	const unsigned back = ctx->Stencil._BackFace;
 
-	
+
 	EVERGREEN_STATECHANGE(context, db);
 
 	//front
@@ -1411,15 +1411,15 @@ static void evergreenRenderMode(struct gl_context * ctx, GLenum mode) //same
 static void evergreenInitSQConfig(struct gl_context * ctx)
 {
     context_t *context = EVERGREEN_CONTEXT(ctx);
-    EVERGREEN_CHIP_CONTEXT *evergreen = GET_EVERGREEN_CHIP(context); 
-    
+    EVERGREEN_CHIP_CONTEXT *evergreen = GET_EVERGREEN_CHIP(context);
+
     uint32_t  uSqNumCfInsts, uMaxGPRs, uMaxThreads, uMaxStackEntries, uPSThreadCount, uOtherThreadCount;
     uint32_t  NUM_PS_GPRS, NUM_VS_GPRS, NUM_GS_GPRS, NUM_ES_GPRS, NUM_HS_GPRS, NUM_LS_GPRS, NUM_CLAUSE_TEMP_GPRS;
     GLboolean bVC_ENABLE = GL_TRUE;
 
     R600_STATECHANGE(context, sq);
 
-    switch (context->radeon.radeonScreen->chip_family) 
+    switch (context->radeon.radeonScreen->chip_family)
     {
     case CHIP_FAMILY_CEDAR:
 	    uSqNumCfInsts       = 1;
@@ -1507,54 +1507,54 @@ static void evergreenInitSQConfig(struct gl_context * ctx)
 
     evergreen->evergreen_config.SPI_CONFIG_CNTL.u32All   = 0;
     evergreen->evergreen_config.SPI_CONFIG_CNTL_1.u32All = 0;
-    SETfield(evergreen->evergreen_config.SPI_CONFIG_CNTL_1.u32All, 4, 
-             EG_SPI_CONFIG_CNTL_1__VTX_DONE_DELAY_shift, 
+    SETfield(evergreen->evergreen_config.SPI_CONFIG_CNTL_1.u32All, 4,
+             EG_SPI_CONFIG_CNTL_1__VTX_DONE_DELAY_shift,
              EG_SPI_CONFIG_CNTL_1__VTX_DONE_DELAY_mask);
 
     evergreen->evergreen_config.CP_PERFMON_CNTL.u32All = 0;
-    
+
     evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All = 0;
-    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 16 * uSqNumCfInsts, 
-             EG_SQ_MS_FIFO_SIZES__CACHE_FIFO_SIZE_shift, 
+    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 16 * uSqNumCfInsts,
+             EG_SQ_MS_FIFO_SIZES__CACHE_FIFO_SIZE_shift,
              EG_SQ_MS_FIFO_SIZES__CACHE_FIFO_SIZE_mask);
-    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 0x4, 
-             EG_SQ_MS_FIFO_SIZES__FETCH_FIFO_HIWATER_shift, 
+    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 0x4,
+             EG_SQ_MS_FIFO_SIZES__FETCH_FIFO_HIWATER_shift,
              EG_SQ_MS_FIFO_SIZES__FETCH_FIFO_HIWATER_mask);
-    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 0xE0, 
-             EG_SQ_MS_FIFO_SIZES__DONE_FIFO_HIWATER_shift, 
+    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 0xE0,
+             EG_SQ_MS_FIFO_SIZES__DONE_FIFO_HIWATER_shift,
              EG_SQ_MS_FIFO_SIZES__DONE_FIFO_HIWATER_mask);
-    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 0x8, 
-             EG_SQ_MS_FIFO_SIZES__ALU_UPDATE_FIFO_HIWATER_shift, 
+    SETfield(evergreen->evergreen_config.SQ_MS_FIFO_SIZES.u32All, 0x8,
+             EG_SQ_MS_FIFO_SIZES__ALU_UPDATE_FIFO_HIWATER_shift,
              EG_SQ_MS_FIFO_SIZES__ALU_UPDATE_FIFO_HIWATER_mask);
-    
+
     if(bVC_ENABLE == GL_TRUE)
     {
-        SETbit(evergreen->evergreen_config.SQ_CONFIG.u32All, 
+        SETbit(evergreen->evergreen_config.SQ_CONFIG.u32All,
                EG_SQ_CONFIG__VC_ENABLE_bit);
     }
     else
     {
-        CLEARbit(evergreen->evergreen_config.SQ_CONFIG.u32All, 
+        CLEARbit(evergreen->evergreen_config.SQ_CONFIG.u32All,
                  EG_SQ_CONFIG__VC_ENABLE_bit);
     }
-    SETbit(evergreen->evergreen_config.SQ_CONFIG.u32All, 
+    SETbit(evergreen->evergreen_config.SQ_CONFIG.u32All,
            EG_SQ_CONFIG__EXPORT_SRC_C_bit);
-    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 0, 
-             EG_SQ_CONFIG__PS_PRIO_shift, 
+    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 0,
+             EG_SQ_CONFIG__PS_PRIO_shift,
              EG_SQ_CONFIG__PS_PRIO_mask);
-    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 1, 
-             EG_SQ_CONFIG__VS_PRIO_shift, 
+    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 1,
+             EG_SQ_CONFIG__VS_PRIO_shift,
              EG_SQ_CONFIG__VS_PRIO_mask);
-    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 2, 
-             EG_SQ_CONFIG__GS_PRIO_shift, 
+    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 2,
+             EG_SQ_CONFIG__GS_PRIO_shift,
              EG_SQ_CONFIG__GS_PRIO_mask);
-    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 3, 
-             EG_SQ_CONFIG__ES_PRIO_shift, 
+    SETfield(evergreen->evergreen_config.SQ_CONFIG.u32All, 3,
+             EG_SQ_CONFIG__ES_PRIO_shift,
              EG_SQ_CONFIG__ES_PRIO_mask);
 
-    NUM_CLAUSE_TEMP_GPRS = 4; 
+    NUM_CLAUSE_TEMP_GPRS = 4;
     NUM_PS_GPRS = ((uMaxGPRs-(4*2))*12/32); // 93
-    NUM_VS_GPRS = ((uMaxGPRs-(4*2))*6/32);  // 46    
+    NUM_VS_GPRS = ((uMaxGPRs-(4*2))*6/32);  // 46
     NUM_GS_GPRS = ((uMaxGPRs-(4*2))*4/32);  // 31
     NUM_ES_GPRS = ((uMaxGPRs-(4*2))*4/32);  // 31
     NUM_HS_GPRS = ((uMaxGPRs-(4*2))*3/32);  // 23
@@ -1564,19 +1564,19 @@ static void evergreenInitSQConfig(struct gl_context * ctx)
     evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_2.u32All = 0;
     evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_3.u32All = 0;
 
-    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_1.u32All, NUM_PS_GPRS, 
+    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_1.u32All, NUM_PS_GPRS,
              NUM_PS_GPRS_shift, NUM_PS_GPRS_mask);
-    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_1.u32All, NUM_VS_GPRS, 
+    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_1.u32All, NUM_VS_GPRS,
              NUM_VS_GPRS_shift, NUM_VS_GPRS_mask);
     SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_1.u32All, NUM_CLAUSE_TEMP_GPRS,
 	         NUM_CLAUSE_TEMP_GPRS_shift, NUM_CLAUSE_TEMP_GPRS_mask);
-    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_2.u32All, NUM_GS_GPRS, 
+    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_2.u32All, NUM_GS_GPRS,
              NUM_GS_GPRS_shift, NUM_GS_GPRS_mask);
-    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_2.u32All, NUM_ES_GPRS, 
+    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_2.u32All, NUM_ES_GPRS,
              NUM_ES_GPRS_shift, NUM_ES_GPRS_mask);
-    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_3.u32All, NUM_HS_GPRS, 
+    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_3.u32All, NUM_HS_GPRS,
              NUM_PS_GPRS_shift, NUM_PS_GPRS_mask);
-    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_3.u32All, NUM_LS_GPRS, 
+    SETfield(evergreen->evergreen_config.SQ_GPR_RESOURCE_MGMT_3.u32All, NUM_LS_GPRS,
              NUM_VS_GPRS_shift, NUM_VS_GPRS_mask);
 
     uOtherThreadCount = (((uMaxThreads-uPSThreadCount)/6)/8)*8;
@@ -1602,7 +1602,7 @@ static void evergreenInitSQConfig(struct gl_context * ctx)
     SETfield(evergreen->evergreen_config.SQ_STACK_RESOURCE_MGMT_1.u32All, uMaxStackEntries,
 	         NUM_PS_STACK_ENTRIES_shift, NUM_PS_STACK_ENTRIES_mask);
     SETfield(evergreen->evergreen_config.SQ_STACK_RESOURCE_MGMT_1.u32All, uMaxStackEntries,
-	         NUM_VS_STACK_ENTRIES_shift, NUM_VS_STACK_ENTRIES_mask);    
+	         NUM_VS_STACK_ENTRIES_shift, NUM_VS_STACK_ENTRIES_mask);
     SETfield(evergreen->evergreen_config.SQ_STACK_RESOURCE_MGMT_2.u32All, uMaxStackEntries,
 	         NUM_GS_STACK_ENTRIES_shift, NUM_GS_STACK_ENTRIES_mask);
     SETfield(evergreen->evergreen_config.SQ_STACK_RESOURCE_MGMT_2.u32All, uMaxStackEntries,
@@ -1610,34 +1610,34 @@ static void evergreenInitSQConfig(struct gl_context * ctx)
     SETfield(evergreen->evergreen_config.SQ_STACK_RESOURCE_MGMT_3.u32All, uMaxStackEntries,
 	         NUM_PS_STACK_ENTRIES_shift, NUM_PS_STACK_ENTRIES_mask);
     SETfield(evergreen->evergreen_config.SQ_STACK_RESOURCE_MGMT_3.u32All, uMaxStackEntries,
-	         NUM_VS_STACK_ENTRIES_shift, NUM_VS_STACK_ENTRIES_mask); 
+	         NUM_VS_STACK_ENTRIES_shift, NUM_VS_STACK_ENTRIES_mask);
 
     evergreen->evergreen_config.PA_SC_FORCE_EOV_MAX_CNTS.u32All = 0;
     SETfield(evergreen->evergreen_config.PA_SC_FORCE_EOV_MAX_CNTS.u32All, 4095,
-	         EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_CLK_CNT_shift, 
-             EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_CLK_CNT_mask); 
+	         EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_CLK_CNT_shift,
+             EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_CLK_CNT_mask);
     SETfield(evergreen->evergreen_config.PA_SC_FORCE_EOV_MAX_CNTS.u32All, 255,
-	         EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_REZ_CNT_shift, 
-             EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_REZ_CNT_mask); 
-    
+	         EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_REZ_CNT_shift,
+             EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_REZ_CNT_mask);
+
     evergreen->evergreen_config.VGT_CACHE_INVALIDATION.u32All = 0;
     SETfield(evergreen->evergreen_config.VGT_CACHE_INVALIDATION.u32All, 2,
-	         EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_shift, 
-             EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_mask); 
-   
+	         EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_shift,
+             EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_mask);
+
     evergreen->evergreen_config.VGT_GS_VERTEX_REUSE.u32All = 0;
     SETfield(evergreen->evergreen_config.VGT_GS_VERTEX_REUSE.u32All, 16,
-	         VERT_REUSE_shift, 
-             VERT_REUSE_mask); 
+	         VERT_REUSE_shift,
+             VERT_REUSE_mask);
 
     evergreen->evergreen_config.PA_SC_LINE_STIPPLE_STATE.u32All = 0;
 
     evergreen->evergreen_config.PA_CL_ENHANCE.u32All = 0;
-    SETbit(evergreen->evergreen_config.PA_CL_ENHANCE.u32All, 
+    SETbit(evergreen->evergreen_config.PA_CL_ENHANCE.u32All,
            CLIP_VTX_REORDER_ENA_bit);
     SETfield(evergreen->evergreen_config.PA_CL_ENHANCE.u32All, 3,
-	         NUM_CLIP_SEQ_shift, 
-             NUM_CLIP_SEQ_mask);     
+	         NUM_CLIP_SEQ_shift,
+             NUM_CLIP_SEQ_mask);
 }
 
 void evergreenInitState(struct gl_context * ctx) //diff
@@ -1646,39 +1646,39 @@ void evergreenInitState(struct gl_context * ctx) //diff
     EVERGREEN_CHIP_CONTEXT *evergreen = GET_EVERGREEN_CHIP(context);
 
     int id = 0;
-    
+
     //calloc should have done this
     memset(evergreen, 0, sizeof(EVERGREEN_CHIP_CONTEXT));
-    
+
     // Disable window clipping and offset:
     SETfield(evergreen->PA_SC_WINDOW_OFFSET.u32All, 0,
 		 EG_PA_SC_WINDOW_OFFSET__WINDOW_X_OFFSET_shift, EG_PA_SC_WINDOW_OFFSET__WINDOW_X_OFFSET_mask);
     SETfield(evergreen->PA_SC_WINDOW_OFFSET.u32All, 0,
 		 EG_PA_SC_WINDOW_OFFSET__WINDOW_Y_OFFSET_shift, EG_PA_SC_WINDOW_OFFSET__WINDOW_Y_OFFSET_mask);
 
-    SETbit(evergreen->PA_SC_WINDOW_SCISSOR_TL.u32All, WINDOW_OFFSET_DISABLE_bit);    
-        
+    SETbit(evergreen->PA_SC_WINDOW_SCISSOR_TL.u32All, WINDOW_OFFSET_DISABLE_bit);
+
     evergreen->PA_SC_CLIPRECT_RULE.u32All = 0x0000FFFF;
 
     evergreen->PA_SC_EDGERULE.u32All = 0xAAAAAAAA;
 
     // Set up Z min/max:
-    evergreen->viewport[id].PA_SC_VPORT_ZMIN_0.f32All = 0.0; 
+    evergreen->viewport[id].PA_SC_VPORT_ZMIN_0.f32All = 0.0;
     evergreen->viewport[id].PA_SC_VPORT_ZMAX_0.f32All = 1.0;
 
     SETfield(evergreen->CB_TARGET_MASK.u32All, 0xF, TARGET0_ENABLE_shift, TARGET0_ENABLE_mask);
     SETfield(evergreen->CB_SHADER_MASK.u32All, 0xF, OUTPUT0_ENABLE_shift, OUTPUT0_ENABLE_mask);
-    
+
     SETfield(evergreen->SPI_BARYC_CNTL.u32All, 1,
-		 EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_shift, 
+		 EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_shift,
          EG_SPI_BARYC_CNTL__PERSP_CENTROID_ENA_mask);
     SETfield(evergreen->SPI_BARYC_CNTL.u32All, 1,
-		 EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_shift, 
+		 EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_shift,
          EG_SPI_BARYC_CNTL__LINEAR_CENTROID_ENA_mask);
-    
+
     // Turn off vgt reuse:
     evergreen->VGT_REUSE_OFF.u32All = 0;
-    SETbit(evergreen->VGT_REUSE_OFF.u32All, REUSE_OFF_bit);    
+    SETbit(evergreen->VGT_REUSE_OFF.u32All, REUSE_OFF_bit);
 
     // Specify offsetting and clamp values for vertices:
     evergreen->VGT_MAX_VTX_INDX.u32All      = 0xFFFFFF;
@@ -1690,21 +1690,21 @@ void evergreenInitState(struct gl_context * ctx) //diff
     // Do not alpha blend:
     SETfield(evergreen->SX_ALPHA_TEST_CONTROL.u32All, REF_NEVER,
 			 ALPHA_FUNC_shift, ALPHA_FUNC_mask);
-    CLEARbit(evergreen->SX_ALPHA_TEST_CONTROL.u32All, ALPHA_TEST_ENABLE_bit);    
+    CLEARbit(evergreen->SX_ALPHA_TEST_CONTROL.u32All, ALPHA_TEST_ENABLE_bit);
 
     evergreen->SPI_VS_OUT_ID_0.u32All  = 0x03020100;
     evergreen->SPI_VS_OUT_ID_1.u32All  = 0x07060504;
-    
+
     evergreen->SPI_PS_INPUT_CNTL[0].u32All  = 0x00000800;
     evergreen->SPI_PS_INPUT_CNTL[1].u32All  = 0x00000801;
     evergreen->SPI_PS_INPUT_CNTL[2].u32All  = 0x00000802;
 
 
-    // Depth buffer currently disabled:    
+    // Depth buffer currently disabled:
     evergreen->DB_DEPTH_CONTROL.u32All = 0;
     SETbit(evergreen->DB_DEPTH_CONTROL.u32All, Z_WRITE_ENABLE_bit);
     SETfield(evergreen->DB_DEPTH_CONTROL.u32All, FRAG_ALWAYS,
-                     ZFUNC_shift, ZFUNC_mask);    
+                     ZFUNC_shift, ZFUNC_mask);
 
     evergreen->DB_Z_READ_BASE.u32All = 0;
     evergreen->DB_Z_WRITE_BASE.u32All = 0;
@@ -1714,7 +1714,7 @@ void evergreenInitState(struct gl_context * ctx) //diff
     evergreen->DB_DEPTH_VIEW.u32All = 0;
 
     evergreen->DB_SHADER_CONTROL.u32All = 0;
-    SETbit(evergreen->DB_SHADER_CONTROL.u32All, EG_DB_SHADER_CONTROL__DUAL_EXPORT_ENABLE_bit);    
+    SETbit(evergreen->DB_SHADER_CONTROL.u32All, EG_DB_SHADER_CONTROL__DUAL_EXPORT_ENABLE_bit);
 
     evergreen->DB_Z_INFO.u32All = 0;
     SETfield(evergreen->DB_Z_INFO.u32All   , ARRAY_1D_TILED_THIN1,
@@ -1752,21 +1752,21 @@ void evergreenInitState(struct gl_context * ctx) //diff
 			                   ctx->Stencil.ZPassFunc[0]);
 
     // Disable ROP3 modes by setting src to dst copy:
-    SETfield(evergreen->CB_COLOR_CONTROL.u32All, 0xCC, 
-             EG_CB_COLOR_CONTROL__ROP3_shift, 
-             EG_CB_COLOR_CONTROL__ROP3_mask);    
+    SETfield(evergreen->CB_COLOR_CONTROL.u32All, 0xCC,
+             EG_CB_COLOR_CONTROL__ROP3_shift,
+             EG_CB_COLOR_CONTROL__ROP3_mask);
     SETfield(evergreen->CB_COLOR_CONTROL.u32All, EG_CB_NORMAL,
              EG_CB_COLOR_CONTROL__MODE_shift,
              EG_CB_COLOR_CONTROL__MODE_mask);
 
     SETfield(evergreen->CB_BLEND0_CONTROL.u32All,
 			 BLEND_ONE, COLOR_SRCBLEND_shift, COLOR_SRCBLEND_mask);
-	
+
 	SETfield(evergreen->CB_BLEND0_CONTROL.u32All,
 		     BLEND_ONE, ALPHA_SRCBLEND_shift, ALPHA_SRCBLEND_mask);
 
     //evergreen->PA_CL_CLIP_CNTL.CLIP_DISABLE = 1;
-    
+
     SETbit(evergreen->PA_CL_CLIP_CNTL.u32All, DX_LINEAR_ATTR_CLIP_ENA_bit);
 
     // Set up the culling control register:
@@ -1774,10 +1774,10 @@ void evergreenInitState(struct gl_context * ctx) //diff
              POLYMODE_FRONT_PTYPE_shift, POLYMODE_FRONT_PTYPE_mask); // draw using triangles
     SETfield(evergreen->PA_SU_SC_MODE_CNTL.u32All, 2,
 				 POLYMODE_BACK_PTYPE_shift, POLYMODE_BACK_PTYPE_mask); // draw using triangles
-        
-    // Do scale XY or X by 1/W0. eg:    
+
+    // Do scale XY or X by 1/W0. eg:
     evergreen->bEnablePerspective = GL_TRUE;
-    
+
     CLEARbit(evergreen->PA_CL_VTE_CNTL.u32All, VTX_XY_FMT_bit);
     CLEARbit(evergreen->PA_CL_VTE_CNTL.u32All, VTX_Z_FMT_bit);
     SETbit(evergreen->PA_CL_VTE_CNTL.u32All, VTX_W0_FMT_bit);
@@ -1798,27 +1798,27 @@ void evergreenInitState(struct gl_context * ctx) //diff
     CLEARfield(evergreen->PA_SU_POINT_MINMAX.u32All, MIN_SIZE_mask);
     SETfield(evergreen->PA_SU_POINT_MINMAX.u32All, 0x8000, MAX_SIZE_shift, MAX_SIZE_mask);
     SETfield(evergreen->PA_SU_LINE_CNTL.u32All,0x8,
-	     PA_SU_LINE_CNTL__WIDTH_shift, PA_SU_LINE_CNTL__WIDTH_mask);   
+	     PA_SU_LINE_CNTL__WIDTH_shift, PA_SU_LINE_CNTL__WIDTH_mask);
 
     // Set up line control:
     evergreen->PA_SC_LINE_CNTL.u32All = 0;
     CLEARbit(evergreen->PA_SC_LINE_CNTL.u32All, EXPAND_LINE_WIDTH_bit);
-    SETbit(evergreen->PA_SC_LINE_CNTL.u32All, LAST_PIXEL_bit);    
+    SETbit(evergreen->PA_SC_LINE_CNTL.u32All, LAST_PIXEL_bit);
 
     // Set up vertex control:
     evergreen->PA_SU_VTX_CNTL.u32All               = 0;
-    CLEARfield(evergreen->PA_SU_VTX_CNTL.u32All, QUANT_MODE_mask);  
+    CLEARfield(evergreen->PA_SU_VTX_CNTL.u32All, QUANT_MODE_mask);
     SETbit(evergreen->PA_SU_VTX_CNTL.u32All, PIX_CENTER_bit);
     SETfield(evergreen->PA_SU_VTX_CNTL.u32All, X_ROUND_TO_EVEN,
              PA_SU_VTX_CNTL__ROUND_MODE_shift, PA_SU_VTX_CNTL__ROUND_MODE_mask);
-        
+
     // to 1.0 = no guard band:
     evergreen->PA_CL_GB_VERT_CLIP_ADJ.u32All  = 0x3F800000;  // 1.0
     evergreen->PA_CL_GB_VERT_DISC_ADJ.u32All  = 0x3F800000;  // 1.0
     evergreen->PA_CL_GB_HORZ_CLIP_ADJ.u32All  = 0x3F800000;  // 1.0
     evergreen->PA_CL_GB_HORZ_DISC_ADJ.u32All  = 0x3F800000;  // 1.0
 
-    // Diable color compares:    
+    // Diable color compares:
     SETfield(evergreen->CB_CLRCMP_CONTROL.u32All, CLRCMP_DRAW_ALWAYS,
              CLRCMP_FCN_SRC_shift, CLRCMP_FCN_SRC_mask);
     SETfield(evergreen->CB_CLRCMP_CONTROL.u32All, CLRCMP_DRAW_ALWAYS,
@@ -1839,12 +1839,12 @@ void evergreenInitState(struct gl_context * ctx) //diff
     evergreen->PA_SC_AA_MASK.u32All = 0xFFFFFFFF;
     // Turn off AA:
     evergreen->PA_SC_AA_CONFIG.u32All = 0;
-    
+
     SETfield(evergreen->VGT_OUT_DEALLOC_CNTL.u32All, 16,
              DEALLOC_DIST_shift, DEALLOC_DIST_mask);
     SETfield(evergreen->VGT_VERTEX_REUSE_BLOCK_CNTL.u32All, 14,
              VTX_REUSE_DEPTH_shift, VTX_REUSE_DEPTH_mask);
-        
+
     evergreen->SX_MISC.u32All = 0;
 
     SETfield(evergreen->render_target[id].CB_COLOR0_INFO.u32All, 1,
@@ -1852,14 +1852,14 @@ void evergreenInitState(struct gl_context * ctx) //diff
     SETbit(evergreen->render_target[id].CB_COLOR0_INFO.u32All, EG_CB_COLOR0_INFO__BLEND_CLAMP_bit);
     SETfield(evergreen->render_target[id].CB_COLOR0_INFO.u32All, 0,
              EG_CB_COLOR0_INFO__NUMBER_TYPE_shift, EG_CB_COLOR0_INFO__NUMBER_TYPE_mask);
-    
+
     SETfield(evergreen->render_target[id].CB_COLOR0_INFO.u32All, SWAP_STD,
              EG_CB_COLOR0_INFO__COMP_SWAP_shift, EG_CB_COLOR0_INFO__COMP_SWAP_mask);
 
     evergreen->render_target[id].CB_COLOR0_VIEW.u32All   = 0;
     evergreen->render_target[id].CB_COLOR0_CMASK.u32All   = 0;
     evergreen->render_target[id].CB_COLOR0_FMASK.u32All  = 0;
-    evergreen->render_target[id].CB_COLOR0_FMASK_SLICE.u32All   = 0; 
+    evergreen->render_target[id].CB_COLOR0_FMASK_SLICE.u32All   = 0;
 
     evergreenInitSQConfig(ctx);
 

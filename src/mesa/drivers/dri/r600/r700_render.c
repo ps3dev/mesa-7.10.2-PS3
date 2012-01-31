@@ -501,8 +501,8 @@ static GLuint r700PredictRenderSize(struct gl_context* ctx,
  * Convert attribute data type to float
  * If the attribute uses named buffer object replace the bo with newly allocated bo
  */
-static void r700ConvertAttrib(struct gl_context *ctx, int count, 
-                              const struct gl_client_array *input, 
+static void r700ConvertAttrib(struct gl_context *ctx, int count,
+                              const struct gl_client_array *input,
                               struct StreamDesc *attr)
 {
     context_t *context = R700_CONTEXT(ctx);
@@ -519,22 +519,22 @@ static void r700ConvertAttrib(struct gl_context *ctx, int count,
         count = 1;
     }
 
-    if (input->BufferObj->Name) 
+    if (input->BufferObj->Name)
     {
-        if (!input->BufferObj->Pointer) 
+        if (!input->BufferObj->Pointer)
         {
             ctx->Driver.MapBuffer(ctx, GL_ARRAY_BUFFER, GL_READ_ONLY_ARB, input->BufferObj);
             mapped_named_bo = GL_TRUE;
         }
 
         src_ptr = ADD_POINTERS(input->BufferObj->Pointer, input->Ptr);
-    } 
-    else 
+    }
+    else
     {
         src_ptr = input->Ptr;
     }
 
-    radeonAllocDmaRegion(&context->radeon, &attr->bo, &attr->bo_offset, 
+    radeonAllocDmaRegion(&context->radeon, &attr->bo, &attr->bo_offset,
                          sizeof(GLfloat) * input->Size * count, 32);
 
     radeon_bo_map(attr->bo, 1);
@@ -543,7 +543,7 @@ static void r700ConvertAttrib(struct gl_context *ctx, int count,
 
     assert(src_ptr != NULL);
 
-    switch (input->Type) 
+    switch (input->Type)
     {
         case GL_DOUBLE:
             CONVERT(GLdouble, (GLfloat));
@@ -574,15 +574,15 @@ static void r700ConvertAttrib(struct gl_context *ctx, int count,
 
     radeon_bo_unmap(attr->bo);
 
-    if (mapped_named_bo) 
+    if (mapped_named_bo)
     {
         ctx->Driver.UnmapBuffer(ctx, GL_ARRAY_BUFFER, input->BufferObj);
     }
 }
 
-static void r700AlignDataToDword(struct gl_context *ctx, 
-                                 const struct gl_client_array *input, 
-                                 int count, 
+static void r700AlignDataToDword(struct gl_context *ctx,
+                                 const struct gl_client_array *input,
+                                 int count,
                                  struct StreamDesc *attr)
 {
     context_t *context = R700_CONTEXT(ctx);
@@ -594,7 +594,7 @@ static void r700AlignDataToDword(struct gl_context *ctx,
 
     radeon_bo_map(attr->bo, 1);
 
-    if (!input->BufferObj->Pointer) 
+    if (!input->BufferObj->Pointer)
     {
         ctx->Driver.MapBuffer(ctx, GL_ARRAY_BUFFER, GL_READ_ONLY_ARB, input->BufferObj);
         mapped_named_bo = GL_TRUE;
@@ -605,7 +605,7 @@ static void r700AlignDataToDword(struct gl_context *ctx,
         GLvoid *dst_ptr = ADD_POINTERS(attr->bo->ptr, attr->bo_offset);
         int i;
 
-        for (i = 0; i < count; ++i) 
+        for (i = 0; i < count; ++i)
         {
             memcpy(dst_ptr, src_ptr, input->StrideB);
             src_ptr += input->StrideB;
@@ -614,7 +614,7 @@ static void r700AlignDataToDword(struct gl_context *ctx,
     }
 
     radeon_bo_unmap(attr->bo);
-    if (mapped_named_bo) 
+    if (mapped_named_bo)
     {
         ctx->Driver.UnmapBuffer(ctx, GL_ARRAY_BUFFER, input->BufferObj);
     }
@@ -631,7 +631,7 @@ static void r700SetupStreams(struct gl_context *ctx, const struct gl_client_arra
 
     R600_STATECHANGE(context, vtx);
 
-    for(index = 0; index < context->nNumActiveAos; index++) 
+    for(index = 0; index < context->nNumActiveAos; index++)
     {
         struct radeon_aos *aos = &context->radeon.tcl.aos[index];
         i = context->stream_desc[index].element;
@@ -642,62 +642,62 @@ static void r700SetupStreams(struct gl_context *ctx, const struct gl_client_arra
 #if MESA_BIG_ENDIAN
             || getTypeSize(input[i]->Type) != 4
 #endif
-            ) 
+            )
         {
             assert(count);
             r700ConvertAttrib(ctx, count, input[i], &context->stream_desc[index]);
-        } 
-        else 
+        }
+        else
         {
-            if (input[i]->BufferObj->Name) 
+            if (input[i]->BufferObj->Name)
             {
                 context->stream_desc[index].stride = input[i]->StrideB;
                 context->stream_desc[index].bo_offset = (intptr_t) input[i]->Ptr;
                 context->stream_desc[index].bo = get_radeon_buffer_object(input[i]->BufferObj)->bo;
                 context->stream_desc[index].is_named_bo = GL_TRUE;
-            } 
-            else 
+            }
+            else
             {
                 int size;
                 int local_count = count;
                 uint32_t *dst;
 
-                if (input[i]->StrideB == 0) 
+                if (input[i]->StrideB == 0)
                 {
                     size = getTypeSize(input[i]->Type) * input[i]->Size;
                     local_count = 1;
-                } 
-                else 
+                }
+                else
                 {
                     size = getTypeSize(input[i]->Type) * input[i]->Size * local_count;
                 }
 
-                radeonAllocDmaRegion(&context->radeon, &context->stream_desc[index].bo, 
+                radeonAllocDmaRegion(&context->radeon, &context->stream_desc[index].bo,
                                      &context->stream_desc[index].bo_offset, size, 32);
 
                 radeon_bo_map(context->stream_desc[index].bo, 1);
                 assert(context->stream_desc[index].bo->ptr != NULL);
 
 
-                dst = (uint32_t *)ADD_POINTERS(context->stream_desc[index].bo->ptr, 
+                dst = (uint32_t *)ADD_POINTERS(context->stream_desc[index].bo->ptr,
                                                context->stream_desc[index].bo_offset);
 
-                switch (context->stream_desc[index].dwords) 
+                switch (context->stream_desc[index].dwords)
                 {
-                case 1:                     
+                case 1:
                     radeonEmitVec4(dst, input[i]->Ptr, input[i]->StrideB, local_count);
                     break;
-                case 2: 
-                    radeonEmitVec8(dst, input[i]->Ptr, input[i]->StrideB, local_count); 
+                case 2:
+                    radeonEmitVec8(dst, input[i]->Ptr, input[i]->StrideB, local_count);
                     break;
-                case 3: 
-                    radeonEmitVec12(dst, input[i]->Ptr, input[i]->StrideB, local_count); 
+                case 3:
+                    radeonEmitVec12(dst, input[i]->Ptr, input[i]->StrideB, local_count);
                     break;
-                case 4: 
-                    radeonEmitVec16(dst, input[i]->Ptr, input[i]->StrideB, local_count); 
+                case 4:
+                    radeonEmitVec16(dst, input[i]->Ptr, input[i]->StrideB, local_count);
                     break;
-                default: 
-                    assert(0); 
+                default:
+                    assert(0);
                     break;
                 }
 		radeon_bo_unmap(context->stream_desc[index].bo);
@@ -710,17 +710,17 @@ static void r700SetupStreams(struct gl_context *ctx, const struct gl_client_arra
         aos->bo = context->stream_desc[index].bo;
         aos->offset = context->stream_desc[index].bo_offset;
 
-        if(context->stream_desc[index].is_named_bo) 
+        if(context->stream_desc[index].is_named_bo)
         {
-            radeon_cs_space_add_persistent_bo(context->radeon.cmdbuf.cs, 
-                                              context->stream_desc[index].bo, 
+            radeon_cs_space_add_persistent_bo(context->radeon.cmdbuf.cs,
+                                              context->stream_desc[index].bo,
                                               RADEON_GEM_DOMAIN_GTT, 0);
         }
     }
 
-    ret = radeon_cs_space_check_with_bo(context->radeon.cmdbuf.cs, 
-                                        first_elem(&context->radeon.dma.reserved)->bo, 
-                                        RADEON_GEM_DOMAIN_GTT, 0);    
+    ret = radeon_cs_space_check_with_bo(context->radeon.cmdbuf.cs,
+                                        first_elem(&context->radeon.dma.reserved)->bo,
+                                        RADEON_GEM_DOMAIN_GTT, 0);
 }
 
 static void r700FreeData(struct gl_context *ctx)
@@ -994,7 +994,7 @@ static void r700DrawPrims(struct gl_context *ctx,
 	if (!vbo_all_varyings_in_vbos(arrays)) {
 	    if (!index_bounds_valid)
 		vbo_get_minmax_index(ctx, prim, ib, &min_index, &max_index);
-	    /* do we want to rebase, minimizes the 
+	    /* do we want to rebase, minimizes the
 	     * amount of data to upload? */
 	    if (min_index) {
 		vbo_rebase_prims( ctx, arrays, prim, nr_prims, ib, min_index, max_index, r700DrawPrims );

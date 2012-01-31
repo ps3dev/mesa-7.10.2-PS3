@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,13 +22,13 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
 /**
  * @file
- * 
+ *
  * Abstract graphics pipe state objects.
  *
  * Basic notes:
@@ -102,13 +102,13 @@ struct pipe_rasterizer_state
    unsigned line_stipple_pattern:16;
    unsigned line_last_pixel:1;
 
-   /** 
+   /**
     * Use the first vertex of a primitive as the provoking vertex for
     * flat shading.
     */
-   unsigned flatshade_first:1;   
+   unsigned flatshade_first:1;
 
-   /** 
+   /**
     * When true, triangle rasterization uses (0.5, 0.5) pixel centers
     * for determining pixel ownership.
     *
@@ -164,7 +164,7 @@ struct pipe_shader_state
 };
 
 
-struct pipe_depth_state 
+struct pipe_depth_state
 {
    unsigned enabled:1;         /**< depth test enabled? */
    unsigned writemask:1;       /**< allow depth buffer writes? */
@@ -430,7 +430,7 @@ struct pipe_vertex_element
     * this attribute live in?
     */
    unsigned vertex_buffer_index;
- 
+
    enum pipe_format src_format;
 };
 
@@ -479,5 +479,5 @@ struct pipe_draw_info
 #ifdef __cplusplus
 }
 #endif
-   
+
 #endif

@@ -226,7 +226,7 @@ upload_sf_state(struct brw_context *brw)
    }
 
    if (ctx->Point.PointSprite) {
-       for (i = 0; i < 8; i++) { 
+       for (i = 0; i < 8; i++) {
 	   if (ctx->Point.CoordReplace[i])
 	       dw16 |= (1 << i);
        }

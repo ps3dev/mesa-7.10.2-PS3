@@ -5,9 +5,9 @@
 #include "util/u_math.h"
 #include "util/u_memory.h"
 
-/* Generic ringbuffer: 
+/* Generic ringbuffer:
  */
-struct util_ringbuffer 
+struct util_ringbuffer
 {
    struct util_packet *buf;
    unsigned mask;
@@ -28,7 +28,7 @@ struct util_ringbuffer *util_ringbuffer_create( unsigned dwords )
       return NULL;
 
    assert(util_is_power_of_two(dwords));
-   
+
    ring->buf = MALLOC( dwords * sizeof(unsigned) );
    if (ring->buf == NULL)
       goto fail;

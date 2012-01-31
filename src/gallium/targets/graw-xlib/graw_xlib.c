@@ -123,7 +123,7 @@ graw_create_window_and_screen( int x,
 	 break;
       }
    }
-   
+
    xlib_handle->visual = visinfo->visual;
    xlib_handle->drawable = (Drawable)win;
    xlib_handle->depth = visinfo->depth;
@@ -153,7 +153,7 @@ fail:
 }
 
 
-void 
+void
 graw_set_display_func( void (*draw)( void ) )
 {
    graw.draw = draw;

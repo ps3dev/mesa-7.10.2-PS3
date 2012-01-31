@@ -40,7 +40,7 @@ LIBS = \
 	$(TOP)/src/gallium/state_trackers/glx/xlib/libxlib.a \
 	$(TOP)/src/mapi/glapi/libglapi.a \
 	$(TOP)/src/mesa/libmesagallium.a \
-	$(GALLIUM_AUXILIARIES) 
+	$(GALLIUM_AUXILIARIES)
 
 #	$(TOP)/src/gallium/drivers/i965/lib/libi9xx.a \
 

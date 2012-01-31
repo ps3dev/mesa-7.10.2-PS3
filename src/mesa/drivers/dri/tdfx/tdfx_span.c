@@ -1339,7 +1339,7 @@ void tdfxDDInitSpanFuncs( struct gl_context *ctx )
 {
    struct swrast_device_driver *swdd = _swrast_GetDeviceDriverReference( ctx );
    swdd->SpanRenderStart          = tdfxSpanRenderStart;
-   swdd->SpanRenderFinish         = tdfxSpanRenderFinish; 
+   swdd->SpanRenderFinish         = tdfxSpanRenderFinish;
 }
 
 

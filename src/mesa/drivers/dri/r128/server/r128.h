@@ -61,7 +61,7 @@
 #define R128_ARRAY_SIZE(x)  (sizeof(x)/sizeof(x[0]))
 #define R128_ALIGN(x,bytes) (((x) + ((bytes) - 1)) & ~((bytes) - 1))
 #define R128PTR(pScrn) ((R128InfoPtr)(pScrn)->driverPrivate)
-    
+
 /**
  * \brief Chip families.
  */
@@ -183,7 +183,7 @@ typedef struct {
     int               VSyncWidth;
     int               VBlank;
     int               PanelPwrDly;
-    
+
     unsigned long     cursor_start;
     unsigned long     cursor_end;
 
@@ -374,7 +374,7 @@ do {									\
     }									\
 } while (0)
 
-    
+
 #define CCE_PACKET0( reg, n )						\
 	(R128_CCE_PACKET0 | ((n) << 16) | ((reg) >> 2))
 #define CCE_PACKET1( reg0, reg1 )					\
@@ -460,5 +460,5 @@ do {									\
    }									\
 } while (0)
 
-    
+
 #endif

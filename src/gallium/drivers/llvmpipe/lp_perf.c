@@ -51,7 +51,7 @@ lp_print_counters(void)
       debug_printf("llvmpipe: nr_triangles:                 %9u\n", lp_count.nr_tris);
       debug_printf("llvmpipe: nr_culled_triangles:          %9u\n", lp_count.nr_culled_tris);
 
-      total_64 = (lp_count.nr_empty_64 + 
+      total_64 = (lp_count.nr_empty_64 +
                   lp_count.nr_fully_covered_64 +
                   lp_count.nr_partially_covered_64);
 
@@ -70,7 +70,7 @@ lp_print_counters(void)
       debug_printf("llvmpipe:   nr_partially_covered_64x64: %9u (%3.0f%% of %u)\n", lp_count.nr_partially_covered_64, p3, total_64);
       debug_printf("llvmpipe:   nr_empty_64x64:             %9u (%3.0f%% of %u)\n", lp_count.nr_empty_64, p1, total_64);
 
-      total_16 = (lp_count.nr_empty_16 + 
+      total_16 = (lp_count.nr_empty_16 +
                   lp_count.nr_fully_covered_16 +
                   lp_count.nr_partially_covered_16);
 

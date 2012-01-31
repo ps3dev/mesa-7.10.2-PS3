@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2008-2010 VMware, Inc.  All rights reserved.
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -672,8 +672,8 @@ get_texel_2d(const struct sp_sampler_varient *samp,
  */
 static INLINE void
 get_texel_quad_2d_no_border_single_tile(const struct sp_sampler_varient *samp,
-					union tex_tile_address addr, 
-					unsigned x, unsigned y, 
+					union tex_tile_address addr,
+					unsigned x, unsigned y,
 					const float *out[4])
 {
    const struct softpipe_tex_cached_tile *tile;
@@ -684,7 +684,7 @@ get_texel_quad_2d_no_border_single_tile(const struct sp_sampler_varient *samp,
    x %= TILE_SIZE;
 
    tile = sp_get_cached_tile_tex(samp->cache, addr);
-      
+
    out[0] = &tile->data.color[y  ][x  ][0];
    out[1] = &tile->data.color[y  ][x+1][0];
    out[2] = &tile->data.color[y+1][x  ][0];
@@ -697,7 +697,7 @@ get_texel_quad_2d_no_border_single_tile(const struct sp_sampler_varient *samp,
 static INLINE void
 get_texel_quad_2d_no_border(const struct sp_sampler_varient *samp,
 			    union tex_tile_address addr,
-			    int x0, int y0, 
+			    int x0, int y0,
 			    int x1, int y1,
 			    const float *out[4])
 {
@@ -712,7 +712,7 @@ get_texel_quad_2d_no_border(const struct sp_sampler_varient *samp,
 static INLINE void
 get_texel_quad_2d(const struct sp_sampler_varient *samp,
 		  union tex_tile_address addr,
-		  int x0, int y0, 
+		  int x0, int y0,
 		  int x1, int y1,
 		  const float *out[4])
 {
@@ -827,8 +827,8 @@ img_filter_2d_linear_repeat_POT(struct tgsi_sampler *tgsi_sampler,
       int x0 = uflr & (xpot - 1);
       int y0 = vflr & (ypot - 1);
 
-      const float *tx[4];      
-      
+      const float *tx[4];
+
       /* Can we fetch all four at once:
        */
       if (x0 < xmax && y0 < ymax) {
@@ -842,8 +842,8 @@ img_filter_2d_linear_repeat_POT(struct tgsi_sampler *tgsi_sampler,
 
       /* interpolate R, G, B, A */
       for (c = 0; c < 4; c++) {
-         rgba[c][j] = lerp_2d(xw, yw, 
-                              tx[0][c], tx[1][c], 
+         rgba[c][j] = lerp_2d(xw, yw,
+                              tx[0][c], tx[1][c],
                               tx[2][c], tx[3][c]);
       }
    }
@@ -927,17 +927,17 @@ img_filter_2d_nearest_clamp_POT(struct tgsi_sampler *tgsi_sampler,
       const float *out;
 
       x0 = util_ifloor(u);
-      if (x0 < 0) 
+      if (x0 < 0)
          x0 = 0;
       else if (x0 > xpot - 1)
          x0 = xpot - 1;
 
       y0 = util_ifloor(v);
-      if (y0 < 0) 
+      if (y0 < 0)
          y0 = 0;
       else if (y0 > ypot - 1)
          y0 = ypot - 1;
-      
+
       out = get_texel_2d_no_border(samp, addr, x0, y0);
 
       for (c = 0; c < 4; c++) {
@@ -1014,7 +1014,7 @@ img_filter_2d_nearest(struct tgsi_sampler *tgsi_sampler,
 
    assert(width > 0);
    assert(height > 0);
- 
+
    addr.value = 0;
    addr.bits.level = samp->level;
 
@@ -1066,7 +1066,7 @@ img_filter_cube_nearest(struct tgsi_sampler *tgsi_sampler,
 
    assert(width > 0);
    assert(height > 0);
- 
+
    addr.value = 0;
    addr.bits.level = samp->level;
 
@@ -1124,7 +1124,7 @@ img_filter_3d_nearest(struct tgsi_sampler *tgsi_sampler,
       int c;
       for (c = 0; c < 4; c++) {
          rgba[c][j] = out[c];
-      }      
+      }
    }
 }
 
@@ -1305,12 +1305,12 @@ img_filter_3d_linear(struct tgsi_sampler *tgsi_sampler,
       const float *tx01 = get_texel_3d(samp, addr, x1[j], y0[j], z0[j]);
       const float *tx02 = get_texel_3d(samp, addr, x0[j], y1[j], z0[j]);
       const float *tx03 = get_texel_3d(samp, addr, x1[j], y1[j], z0[j]);
-      
+
       const float *tx10 = get_texel_3d(samp, addr, x0[j], y0[j], z1[j]);
       const float *tx11 = get_texel_3d(samp, addr, x1[j], y0[j], z1[j]);
       const float *tx12 = get_texel_3d(samp, addr, x0[j], y1[j], z1[j]);
       const float *tx13 = get_texel_3d(samp, addr, x1[j], y1[j], z1[j]);
-      
+
       /* interpolate R, G, B, A */
       for (c = 0; c < 4; c++) {
          rgba[c][j] = lerp_3d(xw[j], yw[j], zw[j],
@@ -1370,7 +1370,7 @@ mip_filter_linear(struct tgsi_sampler *tgsi_sampler,
    lambda = lod[0];
    level0 = (int)lambda;
 
-   if (lambda < 0.0) { 
+   if (lambda < 0.0) {
       samp->level = 0;
       samp->mag_img_filter(tgsi_sampler, s, t, p, NULL, tgsi_sampler_lod_bias, rgba);
    }
@@ -1435,7 +1435,7 @@ mip_filter_nearest(struct tgsi_sampler *tgsi_sampler,
     */
    lambda = lod[0];
 
-   if (lambda < 0.0) { 
+   if (lambda < 0.0) {
       samp->level = 0;
       samp->mag_img_filter(tgsi_sampler, s, t, p, NULL, tgsi_sampler_lod_bias, rgba);
    }
@@ -1477,7 +1477,7 @@ mip_filter_none(struct tgsi_sampler *tgsi_sampler,
     */
    lambda = lod[0];
 
-   if (lambda < 0.0) { 
+   if (lambda < 0.0) {
       samp->mag_img_filter(tgsi_sampler, s, t, p, NULL, tgsi_sampler_lod_bias, rgba);
    }
    else {
@@ -1523,7 +1523,7 @@ mip_filter_linear_2d_linear_repeat_POT(
 
    /* Catches both negative and large values of level0:
     */
-   if ((unsigned)level0 >= texture->last_level) { 
+   if ((unsigned)level0 >= texture->last_level) {
       if (level0 < 0)
          samp->level = 0;
       else
@@ -1825,7 +1825,7 @@ get_lambda_func(const union sp_sampler_key key)
 {
    if (key.bits.processor == TGSI_PROCESSOR_VERTEX)
       return compute_lambda_vert;
-   
+
    switch (key.bits.target) {
    case PIPE_TEXTURE_1D:
       return compute_lambda_1d;
@@ -1849,7 +1849,7 @@ get_img_filter(const union sp_sampler_key key,
 {
    switch (key.bits.target) {
    case PIPE_TEXTURE_1D:
-      if (filter == PIPE_TEX_FILTER_NEAREST) 
+      if (filter == PIPE_TEX_FILTER_NEAREST)
          return img_filter_1d_nearest;
       else
          return img_filter_1d_linear;
@@ -1860,7 +1860,7 @@ get_img_filter(const union sp_sampler_key key,
        */
       if (key.bits.is_pot &&
           sampler->wrap_s == sampler->wrap_t &&
-          sampler->normalized_coords) 
+          sampler->normalized_coords)
       {
          switch (sampler->wrap_s) {
          case PIPE_TEX_WRAP_REPEAT:
@@ -1884,19 +1884,19 @@ get_img_filter(const union sp_sampler_key key,
       }
       /* Otherwise use default versions:
        */
-      if (filter == PIPE_TEX_FILTER_NEAREST) 
+      if (filter == PIPE_TEX_FILTER_NEAREST)
          return img_filter_2d_nearest;
       else
          return img_filter_2d_linear;
       break;
    case PIPE_TEXTURE_CUBE:
-      if (filter == PIPE_TEX_FILTER_NEAREST) 
+      if (filter == PIPE_TEX_FILTER_NEAREST)
          return img_filter_cube_nearest;
       else
          return img_filter_cube_linear;
       break;
    case PIPE_TEXTURE_3D:
-      if (filter == PIPE_TEX_FILTER_NEAREST) 
+      if (filter == PIPE_TEX_FILTER_NEAREST)
          return img_filter_3d_nearest;
       else
          return img_filter_3d_linear;
@@ -1955,7 +1955,7 @@ sp_create_sampler_varient( const struct pipe_sampler_state *sampler,
       samp->linear_texcoord_s = get_linear_wrap( sampler->wrap_s );
       samp->linear_texcoord_t = get_linear_wrap( sampler->wrap_t );
       samp->linear_texcoord_p = get_linear_wrap( sampler->wrap_r );
-      
+
       samp->nearest_texcoord_s = get_nearest_wrap( sampler->wrap_s );
       samp->nearest_texcoord_t = get_nearest_wrap( sampler->wrap_t );
       samp->nearest_texcoord_p = get_nearest_wrap( sampler->wrap_r );
@@ -1964,12 +1964,12 @@ sp_create_sampler_varient( const struct pipe_sampler_state *sampler,
       samp->linear_texcoord_s = get_linear_unorm_wrap( sampler->wrap_s );
       samp->linear_texcoord_t = get_linear_unorm_wrap( sampler->wrap_t );
       samp->linear_texcoord_p = get_linear_unorm_wrap( sampler->wrap_r );
-      
+
       samp->nearest_texcoord_s = get_nearest_unorm_wrap( sampler->wrap_s );
       samp->nearest_texcoord_t = get_nearest_unorm_wrap( sampler->wrap_t );
       samp->nearest_texcoord_p = get_nearest_unorm_wrap( sampler->wrap_r );
    }
-   
+
    samp->compute_lambda = get_lambda_func( key );
 
    samp->min_img_filter = get_img_filter(key, sampler->min_img_filter, sampler);
@@ -1977,8 +1977,8 @@ sp_create_sampler_varient( const struct pipe_sampler_state *sampler,
 
    switch (sampler->min_mip_filter) {
    case PIPE_TEX_MIPFILTER_NONE:
-      if (sampler->min_img_filter == sampler->mag_img_filter) 
-         samp->mip_filter = samp->min_img_filter;         
+      if (sampler->min_img_filter == sampler->mag_img_filter)
+         samp->mip_filter = samp->min_img_filter;
       else
          samp->mip_filter = mip_filter_none;
       break;
@@ -1997,7 +1997,7 @@ sp_create_sampler_varient( const struct pipe_sampler_state *sampler,
       {
          samp->mip_filter = mip_filter_linear_2d_linear_repeat_POT;
       }
-      else 
+      else
       {
          samp->mip_filter = mip_filter_linear;
       }
@@ -2013,7 +2013,7 @@ sp_create_sampler_varient( const struct pipe_sampler_state *sampler,
        */
       samp->compare = samp->mip_filter;
    }
-   
+
    if (key.bits.target == PIPE_TEXTURE_CUBE) {
       samp->base.get_samples = sample_cube;
    }

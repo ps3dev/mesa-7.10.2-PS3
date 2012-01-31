@@ -66,7 +66,7 @@ lp_get_printf_arg_count(const char *fmt)
    return count;
 }
 
-LLVMValueRef 
+LLVMValueRef
 lp_build_const_string_variable(LLVMModuleRef module,
                                LLVMContextRef context,
                                const char *str, int len)
@@ -77,7 +77,7 @@ lp_build_const_string_variable(LLVMModuleRef module,
    LLVMSetInitializer(string, LLVMConstStringInContext(context, str, len + 1, TRUE));
    return string;
 }
- 
+
 
 /**
  * lp_build_printf.

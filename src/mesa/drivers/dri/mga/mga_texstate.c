@@ -120,7 +120,7 @@ mgaSetTexImages( mgaContextPtr mmesa,
 
    totalSize = 0;
    for ( i = 0 ; i < numLevels ; i++ ) {
-      const struct gl_texture_image * const texImage = 
+      const struct gl_texture_image * const texImage =
 	  tObj->Image[0][ i + t->base.firstLevel ];
       int size;
 
@@ -154,7 +154,7 @@ mgaSetTexImages( mgaContextPtr mmesa,
    t->base.totalSize = totalSize;
 
    /* setup hardware register values */
-   t->setup.texctl &= (TMC_tformat_MASK & TMC_tpitch_MASK 
+   t->setup.texctl &= (TMC_tformat_MASK & TMC_tpitch_MASK
 		       & TMC_tpitchext_MASK);
    t->setup.texctl |= txformat;
 
@@ -279,7 +279,7 @@ static const GLuint g400_color_combine[][MGA_MAX_COMBFUNC] =
       (TD0_color_sel_arg1 |
        TD0_alpha_arg2_diffuse |
        TD0_alpha_sel_arg2),
-      
+
       /* GL_MODULATE
        * Cv = Cf Cs
        * Av = Af
@@ -288,7 +288,7 @@ static const GLuint g400_color_combine[][MGA_MAX_COMBFUNC] =
        TD0_color_sel_mul |
        TD0_alpha_arg2_diffuse |
        TD0_alpha_sel_arg2),
-      
+
       /* GL_DECAL
        * Cv = Cs
        * Av = Af
@@ -296,7 +296,7 @@ static const GLuint g400_color_combine[][MGA_MAX_COMBFUNC] =
       (TD0_color_sel_arg1 |
        TD0_alpha_arg2_diffuse |
        TD0_alpha_sel_arg2),
-      
+
       /* GL_ADD
        * Cv = Cf + Cs
        * Av = Af
@@ -307,7 +307,7 @@ static const GLuint g400_color_combine[][MGA_MAX_COMBFUNC] =
        TD0_alpha_arg2_diffuse |
        TD0_alpha_sel_arg2),
    },
-   
+
    /* Unit 1:
     */
    {
@@ -318,7 +318,7 @@ static const GLuint g400_color_combine[][MGA_MAX_COMBFUNC] =
       (TD0_color_sel_arg1 |
        TD0_alpha_arg2_prevstage |
        TD0_alpha_sel_arg2),
-      
+
       /* GL_MODULATE
        * Cv = Cp Cs
        * Av = Ap
@@ -335,7 +335,7 @@ static const GLuint g400_color_combine[][MGA_MAX_COMBFUNC] =
       (TD0_color_sel_arg1 |
        TD0_alpha_arg2_prevstage |
        TD0_alpha_sel_arg2),
-      
+
       /* GL_ADD
        * Cv = Cp + Cs
        * Av = Ap
@@ -359,7 +359,7 @@ static const GLuint g400_color_alpha_combine[][MGA_MAX_COMBFUNC] =
        */
       (TD0_color_sel_arg1 |
        TD0_alpha_sel_arg1),
-      
+
       /* GL_MODULATE
        * Cv = Cf Cs
        * Av = Af As
@@ -368,7 +368,7 @@ static const GLuint g400_color_alpha_combine[][MGA_MAX_COMBFUNC] =
        TD0_color_sel_mul |
        TD0_alpha_arg2_diffuse |
        TD0_alpha_sel_mul),
-      
+
       /* GL_DECAL
        * tmp = Cf ( 1 - As )
        * Cv = tmp + Cs As
@@ -396,7 +396,7 @@ static const GLuint g400_color_alpha_combine[][MGA_MAX_COMBFUNC] =
        TD0_alpha_arg2_diffuse |
        TD0_alpha_sel_mul),
    },
-   
+
    /* Unit 1:
     */
    {
@@ -406,7 +406,7 @@ static const GLuint g400_color_alpha_combine[][MGA_MAX_COMBFUNC] =
        */
       (TD0_color_sel_arg1 |
        TD0_alpha_sel_arg1),
-      
+
       /* GL_MODULATE
        * Cv = Cp Cs
        * Av = Ap As
@@ -432,7 +432,7 @@ static const GLuint g400_color_alpha_combine[][MGA_MAX_COMBFUNC] =
        TD0_color_sel_add |
        TD0_alpha_arg2_prevstage |
        TD0_alpha_sel_arg2),
-      
+
       /* GL_ADD
        * Cv = Cp + Cs
        * Av = Ap As
@@ -457,7 +457,7 @@ static const GLuint g400_alpha_combine[][MGA_MAX_COMBFUNC] =
       (TD0_color_arg2_diffuse |
        TD0_color_sel_arg2 |
        TD0_alpha_sel_arg1),
-      
+
       /* GL_MODULATE
        * Cv = Cf
        * Av = Af As
@@ -496,7 +496,7 @@ static const GLuint g400_alpha_combine[][MGA_MAX_COMBFUNC] =
       (TD0_color_arg2_prevstage |
        TD0_color_sel_arg2 |
        TD0_alpha_sel_arg1),
-      
+
       /* GL_MODULATE
        * Cv = Cp
        * Av = Ap As
@@ -568,7 +568,7 @@ static GLboolean mgaUpdateTextureEnvBlend( struct gl_context *ctx, int unit )
                TD0_alpha_arg2_diffuse |
                TD0_alpha_sel_mul);
    }
-   
+
    if (RGB_ZERO(mmesa->envcolor[source]) &&
        (format != GL_INTENSITY || ALPHA_ZERO(mmesa->envcolor[source])))
       return GL_TRUE; /* all done */
@@ -874,7 +874,7 @@ void mgaUpdateTextureState( struct gl_context *ctx )
    mmesa->force_dualtex = GL_FALSE;
    mmesa->fcol_used = GL_FALSE;
 
-   /* This works around a quirk with the MGA hardware.  If only OpenGL 
+   /* This works around a quirk with the MGA hardware.  If only OpenGL
     * TEXTURE1 is enabled, then the hardware TEXTURE0 must be used.  The
     * hardware TEXTURE1 can ONLY be used when hardware TEXTURE0 is also used.
     */
@@ -888,7 +888,7 @@ void mgaUpdateTextureState( struct gl_context *ctx )
       mmesa->tmu_source[1] = 0;
    }
 
-   for ( i = 0, ok = GL_TRUE 
+   for ( i = 0, ok = GL_TRUE
 	 ; (i < ctx->Const.MaxTextureUnits) && ok
 	 ; i++ ) {
       ok = updateTextureUnit( ctx, i );

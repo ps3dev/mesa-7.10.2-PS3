@@ -61,7 +61,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define RADEON_MAX_TNL_VERTEX_SIZE (15 * sizeof(GLfloat))	/* for mesa _tnl stage */
 
 /***********************************************************************
- *                         Initialization 
+ *                         Initialization
  ***********************************************************************/
 
 #define EMIT_ATTR( ATTR, STYLE, F0 )					\
@@ -115,19 +115,19 @@ static void radeonSetVertexFormat( struct gl_context *ctx )
     */
    if ( !rmesa->swtcl.needproj ||
         RENDERINPUTS_TEST_RANGE( index_bitset, _TNL_FIRST_TEX, _TNL_LAST_TEX )) {	/* for projtex */
-      EMIT_ATTR( _TNL_ATTRIB_POS, EMIT_4F, 
+      EMIT_ATTR( _TNL_ATTRIB_POS, EMIT_4F,
 		 RADEON_CP_VC_FRMT_XY |	RADEON_CP_VC_FRMT_Z | RADEON_CP_VC_FRMT_W0 );
       offset = 4;
    }
    else {
-      EMIT_ATTR( _TNL_ATTRIB_POS, EMIT_3F, 
+      EMIT_ATTR( _TNL_ATTRIB_POS, EMIT_3F,
 		 RADEON_CP_VC_FRMT_XY |	RADEON_CP_VC_FRMT_Z );
       offset = 3;
    }
 
    rmesa->swtcl.coloroffset = offset;
-#if MESA_LITTLE_ENDIAN 
-   EMIT_ATTR( _TNL_ATTRIB_COLOR0, EMIT_4UB_4F_RGBA, 
+#if MESA_LITTLE_ENDIAN
+   EMIT_ATTR( _TNL_ATTRIB_COLOR0, EMIT_4UB_4F_RGBA,
 	      RADEON_CP_VC_FRMT_PKCOLOR );
 #else
    EMIT_ATTR( _TNL_ATTRIB_COLOR0, EMIT_4UB_4F_ABGR,
@@ -139,7 +139,7 @@ static void radeonSetVertexFormat( struct gl_context *ctx )
    if (RENDERINPUTS_TEST( index_bitset, _TNL_ATTRIB_COLOR1 ) ||
        RENDERINPUTS_TEST( index_bitset, _TNL_ATTRIB_FOG )) {
 
-#if MESA_LITTLE_ENDIAN 
+#if MESA_LITTLE_ENDIAN
       if (RENDERINPUTS_TEST( index_bitset, _TNL_ATTRIB_COLOR1 )) {
 	 rmesa->swtcl.specoffset = offset;
 	 EMIT_ATTR( _TNL_ATTRIB_COLOR1, EMIT_3UB_3F_RGB,
@@ -212,7 +212,7 @@ static void radeonSetVertexFormat( struct gl_context *ctx )
       rmesa->swtcl.vertex_format = fmt_0;
       rmesa->radeon.swtcl.vertex_size =
 	  _tnl_install_attrs( ctx,
-			      rmesa->radeon.swtcl.vertex_attrs, 
+			      rmesa->radeon.swtcl.vertex_attrs,
 			      rmesa->radeon.swtcl.vertex_attr_count,
 			      NULL, 0 );
       rmesa->radeon.swtcl.vertex_size /= 4;
@@ -266,7 +266,7 @@ void radeonChooseVertexState( struct gl_context *ctx )
    TNLcontext *tnl = TNL_CONTEXT(ctx);
 
    GLuint se_coord_fmt = rmesa->hw.set.cmd[SET_SE_COORDFMT];
-   
+
    se_coord_fmt &= ~(RADEON_VTX_XY_PRE_MULT_1_OVER_W0 |
 		     RADEON_VTX_Z_PRE_MULT_1_OVER_W0 |
 		     RADEON_VTX_W0_IS_NOT_1_OVER_W0);
@@ -314,7 +314,7 @@ void r100_swtcl_flush(struct gl_context *ctx, uint32_t current_offset)
 			rmesa->radeon.swtcl.bo,
 			current_offset);
 
-		      
+
    radeonEmitVbufPrim( rmesa,
 		       rmesa->swtcl.vertex_format,
 		       rmesa->radeon.swtcl.hw_primitive,
@@ -407,9 +407,9 @@ static GLboolean radeon_run_render( struct gl_context *ctx,
    tnl_render_func *tab = TAG(render_tab_verts);
    GLuint i;
 
-   if (rmesa->radeon.swtcl.RenderIndex != 0 ||   
+   if (rmesa->radeon.swtcl.RenderIndex != 0 ||
        !radeon_dma_validate_render( ctx, VB ))
-      return GL_TRUE;		
+      return GL_TRUE;
 
    radeon_prepare_render(&rmesa->radeon);
    if (rmesa->radeon.NewGLState)
@@ -428,7 +428,7 @@ static GLboolean radeon_run_render( struct gl_context *ctx,
 
       radeon_print(RADEON_SWRENDER, RADEON_NORMAL,
 	  "radeon_render.c: prim %s %d..%d\n",
-		 _mesa_lookup_enum_by_nr(prim & PRIM_MODE_MASK), 
+		 _mesa_lookup_enum_by_nr(prim & PRIM_MODE_MASK),
 		 start, start+length);
 
       if (length)
@@ -488,7 +488,7 @@ static void radeonResetLineStipple( struct gl_context *ctx );
    r100ContextPtr rmesa = R100_CONTEXT(ctx);		\
    const char *radeonverts = (char *)rmesa->radeon.swtcl.verts;
 #define VERT(x) (radeonVertex *)(radeonverts + ((x) * (vertsize) * sizeof(int)))
-#define VERTEX radeonVertex 
+#define VERTEX radeonVertex
 #undef TAG
 #define TAG(x) radeon_##x
 #include "tnl_dd/t_dd_triemit.h"
@@ -687,7 +687,7 @@ void radeonChooseRenderState( struct gl_context *ctx )
    GLuint index = 0;
    GLuint flags = ctx->_TriangleCaps;
 
-   if (!rmesa->radeon.TclFallback || rmesa->radeon.Fallback) 
+   if (!rmesa->radeon.TclFallback || rmesa->radeon.Fallback)
       return;
 
    if (flags & DD_TRI_LIGHT_TWOSIDE) index |= RADEON_TWOSIDE_BIT;
@@ -734,7 +734,7 @@ static void radeonRenderPrimitive( struct gl_context *ctx, GLenum prim )
 {
    r100ContextPtr rmesa = R100_CONTEXT(ctx);
    rmesa->radeon.swtcl.render_primitive = prim;
-   if (prim < GL_TRIANGLES || !(ctx->_TriangleCaps & DD_TRI_UNFILLED)) 
+   if (prim < GL_TRIANGLES || !(ctx->_TriangleCaps & DD_TRI_UNFILLED))
       radeonRasterPrimitive( ctx, reduced_hw_prim[prim] );
 }
 
@@ -853,9 +853,9 @@ void radeonInitSwtcl( struct gl_context *ctx )
    tnl->Driver.Render.CopyPV = _tnl_copy_pv;
    tnl->Driver.Render.Interp = _tnl_interp;
 
-   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12, 
+   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12,
 		       RADEON_MAX_TNL_VERTEX_SIZE);
-   
+
    rmesa->radeon.swtcl.verts = (GLubyte *)tnl->clipspace.vertex_buf;
    rmesa->radeon.swtcl.RenderIndex = ~0;
    rmesa->radeon.swtcl.render_primitive = GL_TRIANGLES;

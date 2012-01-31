@@ -96,7 +96,7 @@ userclip( struct gl_context *ctx,
          GLuint count = clip->count;
 
 	 for (nr = 0, i = 0 ; i < count ; i++) {
-	    GLfloat dp = (coord[0] * a + 
+	    GLfloat dp = (coord[0] * a +
 			  coord[1] * b +
 			  coord[2] * c +
 			  coord[3] * d);
@@ -404,9 +404,9 @@ run_vp( struct gl_context *ctx, struct tnl_pipeline_stage *stage )
 #endif
 #if 0
       printf("HPOS: %f %f %f %f\n",
-             machine->Outputs[0][0], 
-             machine->Outputs[0][1], 
-             machine->Outputs[0][2], 
+             machine->Outputs[0][0],
+             machine->Outputs[0][1],
+             machine->Outputs[0][2],
              machine->Outputs[0][3]);
 #endif
    }

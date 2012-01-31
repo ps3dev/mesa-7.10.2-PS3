@@ -45,7 +45,7 @@ nv50_miptree(struct pipe_resource *pt)
 }
 
 
-static INLINE 
+static INLINE
 struct nv50_resource *nv50_resource(struct pipe_resource *resource)
 {
 	return (struct nv50_resource *)resource;

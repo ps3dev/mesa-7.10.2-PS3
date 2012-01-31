@@ -55,7 +55,7 @@ POT=xmlpool.pot
 all: options.h
 
 # Only intermediate files are cleaned up. options.h is not deleted because
-# it's in CVS. 
+# it's in CVS.
 clean:
 	-rm -f $(POT) *~
 	-rm -rf $(LANGS)

@@ -193,7 +193,7 @@ static void mach64DDAlphaFunc( struct gl_context *ctx, GLenum func, GLfloat ref 
    mmesa->new_state |= MACH64_NEW_ALPHA;
 }
 
-static void mach64DDBlendEquationSeparate( struct gl_context *ctx, 
+static void mach64DDBlendEquationSeparate( struct gl_context *ctx,
 					   GLenum modeRGB, GLenum modeA )
 {
    mach64ContextPtr mmesa = MACH64_CONTEXT(ctx);
@@ -335,7 +335,7 @@ static void mach64UpdateFogAttrib( struct gl_context *ctx )
       /* From Utah-glx: "fog color is now dest and fog factor is alpha, so
        * use GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA"
        */
-      s |= (MACH64_ALPHA_BLEND_SRC_SRCALPHA | 
+      s |= (MACH64_ALPHA_BLEND_SRC_SRCALPHA |
 	    MACH64_ALPHA_BLEND_DST_INVSRCALPHA);
       /* From Utah-glx: "can't use texture alpha when fogging" */
       s &= ~MACH64_TEX_MAP_AEN;
@@ -343,7 +343,7 @@ static void mach64UpdateFogAttrib( struct gl_context *ctx )
       s &= ~(MACH64_ALPHA_BLEND_SRC_MASK |
 	     MACH64_ALPHA_BLEND_DST_MASK |
 	     MACH64_ALPHA_BLEND_SAT);
-      s |= (MACH64_ALPHA_BLEND_SRC_ONE | 
+      s |= (MACH64_ALPHA_BLEND_SRC_ONE |
 	    MACH64_ALPHA_BLEND_DST_ZERO);
       s &= ~MACH64_ALPHA_FOG_EN_FOG;
    }
@@ -662,7 +662,7 @@ static void mach64DDClearColor( struct gl_context *ctx,
 {
    mach64ContextPtr mmesa = MACH64_CONTEXT(ctx);
    GLubyte c[4];
-   
+
    CLAMPED_FLOAT_TO_UBYTE(c[0], color[0]);
    CLAMPED_FLOAT_TO_UBYTE(c[1], color[1]);
    CLAMPED_FLOAT_TO_UBYTE(c[2], color[2]);
@@ -675,7 +675,7 @@ static void mach64DDClearColor( struct gl_context *ctx,
 static void mach64DDLogicOpCode( struct gl_context *ctx, GLenum opcode )
 {
    mach64ContextPtr mmesa = MACH64_CONTEXT(ctx);
-   
+
    if ( ctx->Color.ColorLogicOpEnabled ) {
       FLUSH_BATCH( mmesa );
 
@@ -920,7 +920,7 @@ void mach64EmitHwStateLocked( mach64ContextPtr mmesa )
    }
 
    if ( t0 && t1 && mmesa->mach64Screen->numTexHeaps > 1 ) {
-      if (t0->heap != t1->heap || 
+      if (t0->heap != t1->heap ||
 	     (mmesa->dirty & MACH64_UPLOAD_TEX0IMAGE) ||
 	     (mmesa->dirty & MACH64_UPLOAD_TEX1IMAGE))
 	 mach64UploadMultiTexImages( mmesa, t0, t1 );
@@ -1137,7 +1137,7 @@ void mach64DDInitState( mach64ContextPtr mmesa )
 			    MACH64_COMP_FILTER_NEAREST |
 			    /* MACH64_TEXTURE_TILING | */
 #ifdef MACH64_PREMULT_TEXCOORDS
-			    MACH64_TEX_ST_DIRECT | 
+			    MACH64_TEX_ST_DIRECT |
 #endif
 			    MACH64_TEX_SRC_LOCAL |
 			    MACH64_TEX_UNCOMPRESSED |
@@ -1180,7 +1180,7 @@ void mach64DDInitStateFuncs( struct gl_context *ctx )
    ctx->Driver.RenderMode		= mach64DDRenderMode;
    ctx->Driver.Scissor			= mach64DDScissor;
    ctx->Driver.ShadeModel		= mach64DDShadeModel;
-   
+
    ctx->Driver.DepthRange		= mach64DepthRange;
    ctx->Driver.Viewport			= mach64Viewport;
 }

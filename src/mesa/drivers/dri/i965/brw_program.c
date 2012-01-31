@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-  
+
 #include "main/imports.h"
 #include "main/enums.h"
 #include "main/shaderobj.h"
@@ -42,13 +42,13 @@
 #include "brw_wm.h"
 
 static void brwBindProgram( struct gl_context *ctx,
-			    GLenum target, 
+			    GLenum target,
 			    struct gl_program *prog )
 {
    struct brw_context *brw = brw_context(ctx);
 
    switch (target) {
-   case GL_VERTEX_PROGRAM_ARB: 
+   case GL_VERTEX_PROGRAM_ARB:
       brw->state.dirty.brw |= BRW_NEW_VERTEX_PROGRAM;
       break;
    case GL_FRAGMENT_PROGRAM_ARB:
@@ -58,7 +58,7 @@ static void brwBindProgram( struct gl_context *ctx,
 }
 
 static struct gl_program *brwNewProgram( struct gl_context *ctx,
-				      GLenum target, 
+				      GLenum target,
 				      GLuint id )
 {
    struct brw_context *brw = brw_context(ctx);
@@ -101,7 +101,7 @@ static void brwDeleteProgram( struct gl_context *ctx,
 
 
 static GLboolean brwIsProgramNative( struct gl_context *ctx,
-				     GLenum target, 
+				     GLenum target,
 				     struct gl_program *prog )
 {
    return GL_TRUE;
@@ -141,7 +141,7 @@ static GLboolean brwProgramStringNotify( struct gl_context *ctx,
 
       if (newFP == curFP)
 	 brw->state.dirty.brw |= BRW_NEW_FRAGMENT_PROGRAM;
-      newFP->id = brw->program_id++;      
+      newFP->id = brw->program_id++;
 
       /* Don't reject fragment shaders for their Mesa IR state when we're
        * using the new FS backend.
@@ -163,7 +163,7 @@ static GLboolean brwProgramStringNotify( struct gl_context *ctx,
       if (newVP->program.IsPositionInvariant) {
 	 _mesa_insert_mvp_code(ctx, &newVP->program);
       }
-      newVP->id = brw->program_id++;      
+      newVP->id = brw->program_id++;
 
       /* Also tell tnl about it:
        */
@@ -233,7 +233,7 @@ static GLboolean brwProgramStringNotify( struct gl_context *ctx,
 
 void brwInitFragProgFuncs( struct dd_function_table *functions )
 {
-   assert(functions->ProgramStringNotify == _tnl_program_string); 
+   assert(functions->ProgramStringNotify == _tnl_program_string);
 
    functions->BindProgram = brwBindProgram;
    functions->NewProgram = brwNewProgram;

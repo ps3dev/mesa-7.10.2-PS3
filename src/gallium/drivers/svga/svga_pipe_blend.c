@@ -81,7 +81,7 @@ svga_create_blend_state(struct pipe_context *pipe,
    struct svga_blend_state *blend = CALLOC_STRUCT( svga_blend_state );
    unsigned i;
 
- 
+
    /* Fill in the per-rendertarget blend state.  We currently only
     * have one rendertarget.
     */

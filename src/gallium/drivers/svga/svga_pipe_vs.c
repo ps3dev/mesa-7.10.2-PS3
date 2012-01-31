@@ -39,7 +39,7 @@
 #include "svga_debug.h"
 
 
-static const struct tgsi_token *substitute_vs( 
+static const struct tgsi_token *substitute_vs(
    unsigned shader_id,
    const struct tgsi_token *old_tokens )
 {
@@ -47,7 +47,7 @@ static const struct tgsi_token *substitute_vs(
    if (shader_id == 12) {
    static struct tgsi_token tokens[300];
 
-   const char *text = 
+   const char *text =
       "VERT\n"
       "DCL IN[0]\n"
       "DCL IN[1]\n"
@@ -93,7 +93,7 @@ static const struct tgsi_token *substitute_vs(
 
 
 /***********************************************************************
- * Vertex shaders 
+ * Vertex shaders
  */
 
 static void *
@@ -157,16 +157,16 @@ static void svga_delete_vs_state(struct pipe_context *pipe, void *shader)
    svga_hwtnl_flush_retry( svga );
 
    draw_delete_vertex_shader(svga->swtnl.draw, vs->draw_shader);
-   
+
    for (result = vs->base.results; result; result = tmp ) {
       tmp = result->next;
 
-      ret = SVGA3D_DestroyShader(svga->swc, 
+      ret = SVGA3D_DestroyShader(svga->swc,
                                  result->id,
                                  SVGA3D_SHADERTYPE_VS );
       if(ret != PIPE_OK) {
          svga_context_flush(svga, NULL);
-         ret = SVGA3D_DestroyShader(svga->swc, 
+         ret = SVGA3D_DestroyShader(svga->swc,
                                     result->id,
                                     SVGA3D_SHADERTYPE_VS );
          assert(ret == PIPE_OK);

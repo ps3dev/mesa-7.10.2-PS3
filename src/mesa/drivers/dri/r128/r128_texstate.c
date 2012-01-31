@@ -488,7 +488,7 @@ static void disable_tex( struct gl_context *ctx, int unit )
    }
 
    rmesa->setup.tex_cntl_c &= ~(R128_TEXMAP_ENABLE << unit);
-   rmesa->setup.tex_size_pitch_c &= ~(R128_TEX_SIZE_PITCH_MASK << 
+   rmesa->setup.tex_size_pitch_c &= ~(R128_TEX_SIZE_PITCH_MASK <<
 				      (R128_SEC_TEX_SIZE_PITCH_SHIFT * unit));
    rmesa->dirty |= R128_UPLOAD_CONTEXT;
 
@@ -517,7 +517,7 @@ static GLboolean enable_tex_2d( struct gl_context *ctx, int unit )
 
       r128SetTexImages( rmesa, tObj );
       r128UploadTexImages( rmesa, t );
-      if ( !t->base.memBlock ) 
+      if ( !t->base.memBlock )
 	  return GL_FALSE;
    }
 
@@ -548,7 +548,7 @@ static GLboolean update_tex_common( struct gl_context *ctx, int unit )
 	  * Mark it as such.
 	  */
 
-	 rmesa->CurrentTexObj[unit]->base.bound &= 
+	 rmesa->CurrentTexObj[unit]->base.bound &=
 	     ~(1UL << unit);
       }
 
@@ -567,7 +567,7 @@ static GLboolean update_tex_common( struct gl_context *ctx, int unit )
    rmesa->dirty |= R128_UPLOAD_TEX0 << unit;
 
    /* register setup */
-   rmesa->setup.tex_size_pitch_c &= ~(R128_TEX_SIZE_PITCH_MASK << 
+   rmesa->setup.tex_size_pitch_c &= ~(R128_TEX_SIZE_PITCH_MASK <<
 				      (R128_SEC_TEX_SIZE_PITCH_SHIFT * unit));
 
    if ( unit == 0 ) {
@@ -624,7 +624,7 @@ void r128UpdateTextureState( struct gl_context *ctx )
    GLboolean ok;
 
 
-   /* This works around a quirk with the R128 hardware.  If only OpenGL 
+   /* This works around a quirk with the R128 hardware.  If only OpenGL
     * TEXTURE1 is enabled, then the hardware TEXTURE0 must be used.  The
     * hardware TEXTURE1 can ONLY be used when hardware TEXTURE0 is also used.
     */

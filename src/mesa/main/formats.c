@@ -450,7 +450,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_SRGBA8,
       "MESA_FORMAT_SRGBA8",
       GL_RGBA,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       8, 8, 8, 8,
       0, 0, 0, 0, 0,
       1, 1, 4
@@ -459,7 +459,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_SARGB8,
       "MESA_FORMAT_SARGB8",
       GL_RGBA,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       8, 8, 8, 8,
       0, 0, 0, 0, 0,
       1, 1, 4
@@ -468,7 +468,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_SL8,
       "MESA_FORMAT_SL8",
       GL_LUMINANCE,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       0, 0, 0, 0,
       8, 0, 0, 0, 0,
       1, 1, 1
@@ -477,7 +477,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_SLA8,
       "MESA_FORMAT_SLA8",
       GL_LUMINANCE_ALPHA,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       0, 0, 0, 8,
       8, 0, 0, 0, 0,
       1, 1, 2
@@ -551,7 +551,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_RGBA_DXT1,
       "MESA_FORMAT_RGBA_DXT1",
       GL_RGBA,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       4, 4, 4, 4,
       0, 0, 0, 0, 0,
       4, 4, 8                      /* 8 bytes per 4x4 block */
@@ -560,7 +560,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_RGBA_DXT3,
       "MESA_FORMAT_RGBA_DXT3",
       GL_RGBA,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       4, 4, 4, 4,
       0, 0, 0, 0, 0,
       4, 4, 16                     /* 16 bytes per 4x4 block */
@@ -569,7 +569,7 @@ static struct gl_format_info format_info[MESA_FORMAT_COUNT] =
       MESA_FORMAT_RGBA_DXT5,
       "MESA_FORMAT_RGBA_DXT5",
       GL_RGBA,
-      GL_UNSIGNED_NORMALIZED,    
+      GL_UNSIGNED_NORMALIZED,
       4, 4, 4, 4,
       0, 0, 0, 0, 0,
       4, 4, 16                     /* 16 bytes per 4x4 block */

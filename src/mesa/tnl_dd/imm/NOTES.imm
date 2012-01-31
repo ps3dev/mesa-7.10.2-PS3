@@ -32,15 +32,15 @@ A crude diagram:
 			 \     			/
 			  \    		       /
 			   ---------   --------
-			       	   |   |      
-			       	   v   v     
-	+--------+   +--------+  +--------+  +--------+ 
-	| vert-0 |   | vert-1 |  | vert-2 |  | vert-3 |		       	 
-	+--------+   +--------+  +--------+  +--------+		       	 
+			       	   |   |
+			       	   v   v
+	+--------+   +--------+  +--------+  +--------+
+	| vert-0 |   | vert-1 |  | vert-2 |  | vert-3 |
+	+--------+   +--------+  +--------+  +--------+
 				     |
 				     |
 				     v
-				     
+
 				    DMA
 
 
@@ -55,7 +55,7 @@ the hardware (window) coordinates.  This information allows clipping
 to take place directly on these vertices, if need be.
 
 t_dd_imm_capi.h
-	
+
 	Color{34}{fub}{v}() implementations.  These update both
 	ctx->Current (unclamped float colors) and current-HW-vertex
 	with hardware-specific color values (typically unsigned

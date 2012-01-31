@@ -60,7 +60,7 @@
  *    sext <4 x i1> %C to <4 x i32>
  *
  * is valid and supported (e.g., llvm/test/CodeGen/X86/vec_compare.ll), but
- * it causes assertion failures in LLVM 2.6. It appears to work correctly on 
+ * it causes assertion failures in LLVM 2.6. It appears to work correctly on
  * LLVM 2.7.
  */
 

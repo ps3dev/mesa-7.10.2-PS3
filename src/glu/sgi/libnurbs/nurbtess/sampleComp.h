@@ -37,7 +37,7 @@
 #include "rectBlock.h"
 
 void sampleConnectedComp(Real* topVertex, Real* botVertex,
-		    vertexArray* leftChain, 
+		    vertexArray* leftChain,
 		    Int leftStartIndex, Int botLeftIndex,
 		    vertexArray* rightChain,
 		    Int rightStartIndex, Int botRightIndex,
@@ -82,5 +82,5 @@ void sampleLeftSingleTrimEdgeRegionGen(Real topVert[2], Real botVert[2],
 				       Int rightDownBegin,
 				       Int rightDownEnd,
 				       primStream* pStream);
-		    
+
 #endif

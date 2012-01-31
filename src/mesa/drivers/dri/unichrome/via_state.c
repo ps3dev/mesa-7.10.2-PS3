@@ -84,27 +84,27 @@ void viaEmitState(struct via_context *vmesa)
    RING_VARS;
 
    viaCheckDma(vmesa, 0x110);
-    
+
    BEGIN_RING(5);
    OUT_RING( HC_HEADER2 );
    OUT_RING( (HC_ParaType_NotTex << 16) );
    OUT_RING( ((HC_SubA_HEnable << 24) | vmesa->regEnable) );
-   OUT_RING( ((HC_SubA_HFBBMSKL << 24) | vmesa->regHFBBMSKL) );    
-   OUT_RING( ((HC_SubA_HROP << 24) | vmesa->regHROP) );        
+   OUT_RING( ((HC_SubA_HFBBMSKL << 24) | vmesa->regHFBBMSKL) );
+   OUT_RING( ((HC_SubA_HROP << 24) | vmesa->regHROP) );
    ADVANCE_RING();
-    
+
    if (vmesa->have_hw_stencil) {
       GLuint pitch, format, offset;
-	
-      format = HC_HZWBFM_24;	    	
+
+      format = HC_HZWBFM_24;
       offset = vmesa->depth.offset;
       pitch = vmesa->depth.pitch;
-	
+
       BEGIN_RING(6);
       OUT_RING( (HC_SubA_HZWBBasL << 24) | (offset & 0xFFFFFF) );
-      OUT_RING( (HC_SubA_HZWBBasH << 24) | ((offset & 0xFF000000) >> 24) );	
+      OUT_RING( (HC_SubA_HZWBBasH << 24) | ((offset & 0xFF000000) >> 24) );
       OUT_RING( (HC_SubA_HZWBType << 24) | HC_HDBLoc_Local | HC_HZONEasFF_MASK |
-	         format | pitch );            
+	         format | pitch );
       OUT_RING( (HC_SubA_HZWTMD << 24) | vmesa->regHZWTMD );
       OUT_RING( (HC_SubA_HSTREF << 24) | vmesa->regHSTREF );
       OUT_RING( (HC_SubA_HSTMD << 24) | vmesa->regHSTMD );
@@ -112,18 +112,18 @@ void viaEmitState(struct via_context *vmesa)
    }
    else if (vmesa->hasDepth) {
       GLuint pitch, format, offset;
-	
+
       if (vmesa->depthBits == 16) {
 	 format = HC_HZWBFM_16;
-      }	    
+      }
       else {
 	 format = HC_HZWBFM_32;
       }
-	    
-	    
+
+
       offset = vmesa->depth.offset;
       pitch = vmesa->depth.pitch;
-	
+
       BEGIN_RING(4);
       OUT_RING( (HC_SubA_HZWBBasL << 24) | (offset & 0xFFFFFF) );
       OUT_RING( (HC_SubA_HZWBBasH << 24) | ((offset & 0xFF000000) >> 24) );
@@ -132,54 +132,54 @@ void viaEmitState(struct via_context *vmesa)
       OUT_RING( (HC_SubA_HZWTMD << 24) | vmesa->regHZWTMD );
       ADVANCE_RING();
    }
-    
+
    if (ctx->Color.AlphaEnabled) {
       BEGIN_RING(1);
       OUT_RING( (HC_SubA_HATMD << 24) | vmesa->regHATMD );
       ADVANCE_RING();
       i++;
-   }   
+   }
 
    if (ctx->Color.BlendEnabled) {
       BEGIN_RING(11);
       OUT_RING( (HC_SubA_HABLCsat << 24) | vmesa->regHABLCsat );
-      OUT_RING( (HC_SubA_HABLCop  << 24) | vmesa->regHABLCop ); 
-      OUT_RING( (HC_SubA_HABLAsat << 24) | vmesa->regHABLAsat );        
-      OUT_RING( (HC_SubA_HABLAop  << 24) | vmesa->regHABLAop ); 
-      OUT_RING( (HC_SubA_HABLRCa  << 24) | vmesa->regHABLRCa ); 
-      OUT_RING( (HC_SubA_HABLRFCa << 24) | vmesa->regHABLRFCa );        
-      OUT_RING( (HC_SubA_HABLRCbias << 24) | vmesa->regHABLRCbias ); 
-      OUT_RING( (HC_SubA_HABLRCb  << 24) | vmesa->regHABLRCb ); 
-      OUT_RING( (HC_SubA_HABLRFCb << 24) | vmesa->regHABLRFCb );        
-      OUT_RING( (HC_SubA_HABLRAa  << 24) | vmesa->regHABLRAa ); 
-      OUT_RING( (HC_SubA_HABLRAb  << 24) | vmesa->regHABLRAb ); 
+      OUT_RING( (HC_SubA_HABLCop  << 24) | vmesa->regHABLCop );
+      OUT_RING( (HC_SubA_HABLAsat << 24) | vmesa->regHABLAsat );
+      OUT_RING( (HC_SubA_HABLAop  << 24) | vmesa->regHABLAop );
+      OUT_RING( (HC_SubA_HABLRCa  << 24) | vmesa->regHABLRCa );
+      OUT_RING( (HC_SubA_HABLRFCa << 24) | vmesa->regHABLRFCa );
+      OUT_RING( (HC_SubA_HABLRCbias << 24) | vmesa->regHABLRCbias );
+      OUT_RING( (HC_SubA_HABLRCb  << 24) | vmesa->regHABLRCb );
+      OUT_RING( (HC_SubA_HABLRFCb << 24) | vmesa->regHABLRFCb );
+      OUT_RING( (HC_SubA_HABLRAa  << 24) | vmesa->regHABLRAa );
+      OUT_RING( (HC_SubA_HABLRAb  << 24) | vmesa->regHABLRAb );
       ADVANCE_RING();
    }
-    
+
    if (ctx->Fog.Enabled) {
       BEGIN_RING(3);
-      OUT_RING( (HC_SubA_HFogLF << 24) | vmesa->regHFogLF ); 
-      OUT_RING( (HC_SubA_HFogCL << 24) | vmesa->regHFogCL ); 
-      OUT_RING( (HC_SubA_HFogCH << 24) | vmesa->regHFogCH ); 
+      OUT_RING( (HC_SubA_HFogLF << 24) | vmesa->regHFogLF );
+      OUT_RING( (HC_SubA_HFogCL << 24) | vmesa->regHFogCL );
+      OUT_RING( (HC_SubA_HFogCH << 24) | vmesa->regHFogCH );
       ADVANCE_RING();
    }
-    
+
    if (ctx->Line.StippleFlag) {
       BEGIN_RING(2);
-      OUT_RING( (HC_SubA_HLP << 24) | ctx->Line.StipplePattern ); 
+      OUT_RING( (HC_SubA_HLP << 24) | ctx->Line.StipplePattern );
       OUT_RING( (HC_SubA_HLPRF << 24) | ctx->Line.StippleFactor );
       ADVANCE_RING();
    }
 
    BEGIN_RING(1);
-   OUT_RING( (HC_SubA_HPixGC << 24) | 0x0 ); 
+   OUT_RING( (HC_SubA_HPixGC << 24) | 0x0 );
    ADVANCE_RING();
-    
+
    QWORD_PAD_RING();
 
 
    if (ctx->Texture._EnabledUnits) {
-    
+
       struct gl_texture_unit *texUnit0 = &ctx->Texture.Unit[0];
       struct gl_texture_unit *texUnit1 = &ctx->Texture.Unit[1];
 
@@ -191,7 +191,7 @@ void viaEmitState(struct via_context *vmesa)
 	 OUT_RING( (HC_ParaType_Tex << 16) | (HC_SubType_TexGeneral << 24) );
 
 	 if (texUnit0->Enabled && texUnit1->Enabled) {
-	    nDummyValue = (HC_SubA_HTXSMD << 24) | (1 << 3);                
+	    nDummyValue = (HC_SubA_HTXSMD << 24) | (1 << 3);
 	 }
 	 else {
 	    nDummyValue = (HC_SubA_HTXSMD << 24) | 0;
@@ -220,7 +220,7 @@ void viaEmitState(struct via_context *vmesa)
 	 GLuint numLevels = t->lastLevel - t->firstLevel + 1;
 	 if (VIA_DEBUG & DEBUG_STATE) {
 	    fprintf(stderr, "texture0 enabled\n");
-	 }		
+	 }
 	 if (numLevels == 8) {
 	    BEGIN_RING(27);
 	    OUT_RING( HC_HEADER2 );
@@ -263,14 +263,14 @@ void viaEmitState(struct via_context *vmesa)
 	       ((t->lastLevel) << HC_HTXnLVmax_SHIFT) | t->firstLevel );
 	    OUT_RING( t->regTexWidthLog2[0] );
 	    OUT_RING( t->regTexHeightLog2[0] );
-		
+
 	    if (numLevels > 6) {
 	       OUT_RING( t->regTexWidthLog2[1] );
 	       OUT_RING( t->regTexHeightLog2[1] );
 	    }
-                
+
 	    OUT_RING( t->regTexBaseH[0] );
-		
+
 	    if (numLevels > 3) {
 	       OUT_RING( t->regTexBaseH[1] );
 	    }
@@ -331,15 +331,15 @@ void viaEmitState(struct via_context *vmesa)
 	    BEGIN_RING(2 + table->Size);
 	    OUT_RING( HC_HEADER2 );
 	    OUT_RING( (HC_ParaType_Palette << 16) | (0 << 24) );
-	    for (j = 0; j < table->Size; j++) 
+	    for (j = 0; j < table->Size; j++)
 	       OUT_RING( tableF[j] );
 	    ADVANCE_RING();
-	       
+
 	 }
 
 	 QWORD_PAD_RING();
       }
-	
+
       if (texUnit1->Enabled) {
 	 struct gl_texture_object *texObj = texUnit1->_Current;
 	 struct via_texture_object *t = (struct via_texture_object *)texObj;
@@ -347,7 +347,7 @@ void viaEmitState(struct via_context *vmesa)
 	 int texunit = (texUnit0->Enabled ? 1 : 0);
 	 if (VIA_DEBUG & DEBUG_STATE) {
 	    fprintf(stderr, "texture1 enabled\n");
-	 }		
+	 }
 	 if (numLevels == 8) {
 	    BEGIN_RING(27);
 	    OUT_RING( HC_HEADER2 );
@@ -389,16 +389,16 @@ void viaEmitState(struct via_context *vmesa)
 	       ((t->lastLevel) << HC_HTXnLVmax_SHIFT) | t->firstLevel );
 	    OUT_RING( t->regTexWidthLog2[0] );
 	    OUT_RING( t->regTexHeightLog2[0] );
-		
+
 	    if (numLevels > 6) {
 	       OUT_RING( t->regTexWidthLog2[1] );
 	       OUT_RING( t->regTexHeightLog2[1] );
 	       i += 2;
 	    }
-                
+
 	    OUT_RING( t->regTexBaseH[0] );
-		
-	    if (numLevels > 3) { 
+
+	    if (numLevels > 3) {
 	       OUT_RING( t->regTexBaseH[1] );
 	    }
 	    if (numLevels > 6) {
@@ -407,7 +407,7 @@ void viaEmitState(struct via_context *vmesa)
 	    if (numLevels > 9)  {
 	       OUT_RING( t->regTexBaseH[3] );
 	    }
-		
+
 	    for (j = 0; j < numLevels; j++) {
 	       OUT_RING( t->regTexBaseAndPitch[j].baseL );
 	       OUT_RING( t->regTexBaseAndPitch[j].pitchLog2 );
@@ -465,7 +465,7 @@ void viaEmitState(struct via_context *vmesa)
 	 QWORD_PAD_RING();
       }
    }
-    
+
 #if 0
    /* Polygon stipple is broken - for certain stipple values,
     * eg. 0xf0f0f0f0, the hardware will refuse to accept the stipple.
@@ -474,12 +474,12 @@ void viaEmitState(struct via_context *vmesa)
    if (ctx->Polygon.StippleFlag) {
       GLuint *stipple = &ctx->PolygonStipple[0];
       __DRIdrawable *dPriv = vmesa->driDrawable;
-      struct via_renderbuffer *const vrb = 
+      struct via_renderbuffer *const vrb =
 	(struct via_renderbuffer *) dPriv->driverPrivate;
       GLint i;
-        
+
       BEGIN_RING(38);
-      OUT_RING( HC_HEADER2 );             
+      OUT_RING( HC_HEADER2 );
 
       OUT_RING( ((HC_ParaType_Palette << 16) | (HC_SubType_Stipple << 24)) );
       for (i = 31; i >= 0; i--) {
@@ -492,10 +492,10 @@ void viaEmitState(struct via_context *vmesa)
 	    if (stipple[i] & (1<<j))
 	       k |= 1 << (31-j);
 
-	 OUT_RING( k );     
+	 OUT_RING( k );
       }
 
-      OUT_RING( HC_HEADER2 );                     
+      OUT_RING( HC_HEADER2 );
       OUT_RING( (HC_ParaType_NotTex << 16) );
       OUT_RING( (HC_SubA_HSPXYOS << 24) );
       OUT_RING( (HC_SubA_HSPXYOS << 24) );
@@ -503,7 +503,7 @@ void viaEmitState(struct via_context *vmesa)
       ADVANCE_RING();
    }
 #endif
-   
+
    vmesa->newEmitState = 0;
 }
 
@@ -516,7 +516,7 @@ static INLINE GLuint viaPackColor(GLuint bpp,
     case 16:
         return PACK_COLOR_565(r, g, b);
     case 32:
-        return PACK_COLOR_8888(a, r, g, b);        
+        return PACK_COLOR_8888(a, r, g, b);
     default:
        assert(0);
        return 0;
@@ -524,17 +524,17 @@ static INLINE GLuint viaPackColor(GLuint bpp,
 }
 
 static void viaBlendEquationSeparate(struct gl_context *ctx,
-				     GLenum rgbMode, 
+				     GLenum rgbMode,
 				     GLenum aMode)
 {
-    if (VIA_DEBUG & DEBUG_STATE) 
+    if (VIA_DEBUG & DEBUG_STATE)
        fprintf(stderr, "%s in\n", __FUNCTION__);
 
     /* GL_EXT_blend_equation_separate not supported */
     ASSERT(rgbMode == aMode);
 
     /* Can only do GL_ADD equation in hardware */
-    FALLBACK(VIA_CONTEXT(ctx), VIA_FALLBACK_BLEND_EQ, 
+    FALLBACK(VIA_CONTEXT(ctx), VIA_FALLBACK_BLEND_EQ,
 	     rgbMode != GL_FUNC_ADD_EXT);
 
     /* BlendEquation sets ColorLogicOpEnabled in an unexpected
@@ -549,11 +549,11 @@ static void viaBlendFunc(struct gl_context *ctx, GLenum sfactor, GLenum dfactor)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
     GLboolean fallback = GL_FALSE;
-    if (VIA_DEBUG & DEBUG_STATE) 
+    if (VIA_DEBUG & DEBUG_STATE)
        fprintf(stderr, "%s in\n", __FUNCTION__);
 
     switch (ctx->Color.BlendSrcRGB) {
-    case GL_SRC_ALPHA_SATURATE:  
+    case GL_SRC_ALPHA_SATURATE:
     case GL_CONSTANT_COLOR:
     case GL_ONE_MINUS_CONSTANT_COLOR:
     case GL_CONSTANT_ALPHA:
@@ -606,7 +606,7 @@ static void viaScissor(struct gl_context *ctx, GLint x, GLint y,
        return;
 
     if (VIA_DEBUG & DEBUG_STATE)
-       fprintf(stderr, "%s %d,%d %dx%d, drawH %d\n", __FUNCTION__, 
+       fprintf(stderr, "%s %d,%d %dx%d, drawH %d\n", __FUNCTION__,
 	       x,y,w,h, vmesa->driDrawable->h);
 
     if (vmesa->scissor) {
@@ -647,7 +647,7 @@ static void viaDrawBuffer(struct gl_context *ctx, GLenum mode)
 {
    struct via_context *vmesa = VIA_CONTEXT(ctx);
 
-   if (VIA_DEBUG & (DEBUG_DRI|DEBUG_STATE)) 
+   if (VIA_DEBUG & (DEBUG_DRI|DEBUG_STATE))
       fprintf(stderr, "%s in\n", __FUNCTION__);
 
    if (!ctx->DrawBuffer)
@@ -720,11 +720,11 @@ void viaCalcViewport(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
     __DRIdrawable *dPriv = vmesa->driDrawable;
-    struct via_renderbuffer *const vrb = 
+    struct via_renderbuffer *const vrb =
       (struct via_renderbuffer *) dPriv->driverPrivate;
     const GLfloat *v = ctx->Viewport._WindowMap.m;
     GLfloat *m = vmesa->ViewportMatrix.m;
-    
+
     m[MAT_SX] =   v[MAT_SX];
     m[MAT_TX] =   v[MAT_TX] + vrb->drawX + SUBPIXEL_X;
     m[MAT_SY] = - v[MAT_SY];
@@ -756,7 +756,7 @@ void viaInitState(struct gl_context *ctx)
    /* Mesa should do this for us:
     */
 
-   ctx->Driver.BlendEquationSeparate( ctx, 
+   ctx->Driver.BlendEquationSeparate( ctx,
 				      ctx->Color.BlendEquationRGB,
 				      ctx->Color.BlendEquationA);
 
@@ -806,7 +806,7 @@ get_wrap_mode( GLenum sWrap, GLenum tWrap )
 	v |= HC_HTXnMPMD_Tmirror;
 	break;
     }
-    
+
     return v;
 }
 
@@ -865,7 +865,7 @@ get_minmag_filter( GLenum min, GLenum mag )
 }
 
 
-static GLboolean viaChooseTextureState(struct gl_context *ctx) 
+static GLboolean viaChooseTextureState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
     struct gl_texture_unit *texUnit0 = &ctx->Texture.Unit[0];
@@ -876,7 +876,7 @@ static GLboolean viaChooseTextureState(struct gl_context *ctx)
 
         if (texUnit0->_ReallyEnabled) {
             struct gl_texture_object *texObj = texUnit0->_Current;
-   
+
 	    vmesa->regHTXnTB[0] = get_minmag_filter( texObj->MinFilter,
 						    texObj->MagFilter );
 
@@ -887,7 +887,7 @@ static GLboolean viaChooseTextureState(struct gl_context *ctx)
 	    vmesa->regHTXnTB[0] &= ~(HC_HTXnTB_TBC_S | HC_HTXnTB_TBC_T);
             if (texObj->Image[0][texObj->BaseLevel]->Border > 0) {
 	       vmesa->regHTXnTB[0] |= (HC_HTXnTB_TBC_S | HC_HTXnTB_TBC_T);
-	       vmesa->regHTXnTBC[0] = 
+	       vmesa->regHTXnTBC[0] =
 		  PACK_COLOR_888(FLOAT_TO_UBYTE(texObj->BorderColor.f[0]),
 				 FLOAT_TO_UBYTE(texObj->BorderColor.f[1]),
 				 FLOAT_TO_UBYTE(texObj->BorderColor.f[2]));
@@ -920,7 +920,7 @@ static GLboolean viaChooseTextureState(struct gl_context *ctx)
 	    vmesa->regHTXnTB[1] &= ~(HC_HTXnTB_TBC_S | HC_HTXnTB_TBC_T);
             if (texObj->Image[0][texObj->BaseLevel]->Border > 0) {
 	       vmesa->regHTXnTB[1] |= (HC_HTXnTB_TBC_S | HC_HTXnTB_TBC_T);
-	       vmesa->regHTXnTBC[1] = 
+	       vmesa->regHTXnTBC[1] =
 		  PACK_COLOR_888(FLOAT_TO_UBYTE(texObj->BorderColor.f[0]),
 				 FLOAT_TO_UBYTE(texObj->BorderColor.f[1]),
 				 FLOAT_TO_UBYTE(texObj->BorderColor.f[2]));
@@ -943,14 +943,14 @@ static GLboolean viaChooseTextureState(struct gl_context *ctx)
         }
     }
     else {
-        vmesa->regEnable &= ~(HC_HenTXMP_MASK | HC_HenTXCH_MASK | 
+        vmesa->regEnable &= ~(HC_HenTXMP_MASK | HC_HenTXCH_MASK |
 			      HC_HenTXPP_MASK);
     }
-    
+
     return GL_TRUE;
 }
 
-static void viaChooseColorState(struct gl_context *ctx) 
+static void viaChooseColorState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
     GLenum s = ctx->Color.BlendSrcRGB;
@@ -1029,9 +1029,9 @@ static void viaChooseColorState(struct gl_context *ctx)
                 if (vmesa->viaScreen->bitsPerPixel == 16) {
                     /* (1, 1, 1, 1)
                      */
-                    vmesa->regHABLCsat |= (HC_HABLFCa_InvOPC | 
+                    vmesa->regHABLCsat |= (HC_HABLFCa_InvOPC |
 					   HC_HABLFCa_HABLRCa);
-                    vmesa->regHABLAsat |= (HC_HABLFAa_InvOPA | 
+                    vmesa->regHABLAsat |= (HC_HABLFAa_InvOPA |
 					   HC_HABLFAa_HABLFRA);
                     vmesa->regHABLRFCa = 0x0;
                     vmesa->regHABLRAa = 0x0;
@@ -1069,7 +1069,7 @@ static void viaChooseColorState(struct gl_context *ctx)
                      * So (f, f, f, 1) = (0, 0, 0, 1)
                      */
                     vmesa->regHABLCsat |= HC_HABLFCa_OPC | HC_HABLFCa_HABLRCa;
-                    vmesa->regHABLAsat |= (HC_HABLFAa_InvOPA | 
+                    vmesa->regHABLAsat |= (HC_HABLFAa_InvOPA |
 					   HC_HABLFAa_HABLFRA);
                     vmesa->regHABLRFCa = 0x0;
                     vmesa->regHABLRAa = 0x0;
@@ -1077,9 +1077,9 @@ static void viaChooseColorState(struct gl_context *ctx)
                 else {
                     /* (f, f, f, 1), f = min(As, 1 - Ad)
                      */
-                    vmesa->regHABLCsat |= (HC_HABLFCa_OPC | 
+                    vmesa->regHABLCsat |= (HC_HABLFCa_OPC |
 					   HC_HABLFCa_mimAsrcInvAdst);
-                    vmesa->regHABLAsat |= (HC_HABLFAa_InvOPA | 
+                    vmesa->regHABLAsat |= (HC_HABLFAa_InvOPA |
 					   HC_HABLFAa_HABLFRA);
                     vmesa->regHABLRFCa = 0x0;
                     vmesa->regHABLRAa = 0x0;
@@ -1230,7 +1230,7 @@ static void viaChooseColorState(struct gl_context *ctx)
 
     vmesa->regEnable &= ~HC_HenDT_MASK;
 
-    if (ctx->Color.ColorLogicOpEnabled) 
+    if (ctx->Color.ColorLogicOpEnabled)
         vmesa->regHROP = ROP[ctx->Color.LogicOp & 0xF];
     else
         vmesa->regHROP = HC_HROP_P;
@@ -1246,7 +1246,7 @@ static void viaChooseColorState(struct gl_context *ctx)
         vmesa->regEnable &= ~HC_HenAW_MASK;
 }
 
-static void viaChooseFogState(struct gl_context *ctx) 
+static void viaChooseFogState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
 
@@ -1271,7 +1271,7 @@ static void viaChooseFogState(struct gl_context *ctx)
     }
 }
 
-static void viaChooseDepthState(struct gl_context *ctx) 
+static void viaChooseDepthState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
     if (ctx->Depth.Test) {
@@ -1281,11 +1281,11 @@ static void viaChooseDepthState(struct gl_context *ctx)
         else
             vmesa->regEnable &= (~HC_HenZW_MASK);
 	vmesa->regHZWTMD = (ctx->Depth.Func - GL_NEVER) << 16;
-	
+
     }
     else {
         vmesa->regEnable &= ~HC_HenZT_MASK;
-        
+
         /*=* [DBG] racer : can't display cars in car selection menu *=*/
 	/*if (ctx->Depth.Mask)
             vmesa->regEnable |= HC_HenZW_MASK;
@@ -1295,7 +1295,7 @@ static void viaChooseDepthState(struct gl_context *ctx)
     }
 }
 
-static void viaChooseLineState(struct gl_context *ctx) 
+static void viaChooseLineState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
 
@@ -1309,7 +1309,7 @@ static void viaChooseLineState(struct gl_context *ctx)
     }
 }
 
-static void viaChoosePolygonState(struct gl_context *ctx) 
+static void viaChoosePolygonState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
 
@@ -1323,7 +1323,7 @@ static void viaChoosePolygonState(struct gl_context *ctx)
         vmesa->regEnable &= ~HC_HenSP_MASK;
     }
 #else
-    FALLBACK(vmesa, VIA_FALLBACK_POLY_STIPPLE, 
+    FALLBACK(vmesa, VIA_FALLBACK_POLY_STIPPLE,
 	     ctx->Polygon.StippleFlag);
 #endif
 
@@ -1335,10 +1335,10 @@ static void viaChoosePolygonState(struct gl_context *ctx)
     }
 }
 
-static void viaChooseStencilState(struct gl_context *ctx) 
+static void viaChooseStencilState(struct gl_context *ctx)
 {
     struct via_context *vmesa = VIA_CONTEXT(ctx);
-    
+
     if (ctx->Stencil._Enabled) {
         GLuint temp;
 
@@ -1421,8 +1421,8 @@ static void viaChooseStencilState(struct gl_context *ctx)
 
 
 
-static void viaChooseTriangle(struct gl_context *ctx) 
-{       
+static void viaChooseTriangle(struct gl_context *ctx)
+{
     struct via_context *vmesa = VIA_CONTEXT(ctx);
 
     if (ctx->Polygon.CullFlag == GL_TRUE) {
@@ -1475,7 +1475,7 @@ void viaValidateState( struct gl_context *ctx )
 
     if ((vmesa->newState & _NEW_STENCIL) && vmesa->have_hw_stencil)
         viaChooseStencilState(ctx);
-    
+
     if (ctx->_TriangleCaps & DD_SEPARATE_SPECULAR)
         vmesa->regEnable |= HC_HenCS_MASK;
     else
@@ -1485,7 +1485,7 @@ void viaValidateState( struct gl_context *ctx )
 	ctx->Line.SmoothFlag ||
 	ctx->Polygon.SmoothFlag)
         vmesa->regEnable |= HC_HenAA_MASK;
-    else 
+    else
         vmesa->regEnable &= ~HC_HenAA_MASK;
 
     vmesa->newEmitState |= vmesa->newState;

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
  /*
   * Authors:
@@ -63,17 +63,17 @@ st_vp_release_varients( struct st_context *st,
    for (vpv = stvp->varients; vpv; ) {
       struct st_vp_varient *next = vpv->next;
 
-      if (vpv->driver_shader) 
+      if (vpv->driver_shader)
          cso_delete_vertex_shader(st->cso_context, vpv->driver_shader);
-      
+
 #if FEATURE_feedback || FEATURE_rastpos
       if (vpv->draw_shader)
          draw_delete_vertex_shader( st->draw, vpv->draw_shader );
 #endif
-      
+
       if (vpv->tgsi.tokens)
          st_free_tokens(vpv->tgsi.tokens);
-      
+
       FREE( vpv );
 
       vpv = next;
@@ -181,9 +181,9 @@ st_prepare_vertex_program(struct st_context *st,
          default:
             assert(attr < VERT_RESULT_MAX);
             stvp->output_semantic_name[slot] = TGSI_SEMANTIC_GENERIC;
-            stvp->output_semantic_index[slot] = (FRAG_ATTRIB_VAR0 - 
+            stvp->output_semantic_index[slot] = (FRAG_ATTRIB_VAR0 -
                                                 FRAG_ATTRIB_TEX0 +
-                                                attr - 
+                                                attr -
                                                 VERT_RESULT_VAR0);
             break;
          }
@@ -231,7 +231,7 @@ st_translate_vertex_program(struct st_context *st,
       debug_printf("\n");
    }
 
-   error = 
+   error =
       st_translate_mesa_program(st->ctx,
                                 TGSI_PROCESSOR_VERTEX,
                                 ureg,
@@ -343,14 +343,14 @@ st_translate_fragment_program(struct st_context *st,
             /* In most cases, there is nothing special about these
              * inputs, so adopt a convention to use the generic
              * semantic name and the mesa FRAG_ATTRIB_ number as the
-             * index. 
-             * 
+             * index.
+             *
              * All that is required is that the vertex shader labels
              * its own outputs similarly, and that the vertex shader
              * generates at least every output required by the
              * fragment shader plus fixed-function hardware (such as
              * BFC).
-             * 
+             *
              * There is no requirement that semantic indexes start at
              * zero or be restricted to a particular range -- nobody
              * should be building tables based on semantic index.
@@ -442,7 +442,7 @@ st_translate_fragment_program(struct st_context *st,
       debug_printf("\n");
    }
 
-   error = 
+   error =
       st_translate_mesa_program(st->ctx,
                                 TGSI_PROCESSOR_FRAGMENT,
                                 ureg,

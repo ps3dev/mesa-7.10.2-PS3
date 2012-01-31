@@ -548,7 +548,7 @@ display_video(ScrnInfoPtr pScrn, struct xorg_xv_port_priv *pPriv, int id,
    pbox = REGION_RECTS(dstRegion);
    nbox = REGION_NUM_RECTS(dstRegion);
 
-   renderer_bind_destination(pPriv->r, dst_surf, 
+   renderer_bind_destination(pPriv->r, dst_surf,
                              dst_surf->width, dst_surf->height);
 
    bind_blend_state(pPriv);

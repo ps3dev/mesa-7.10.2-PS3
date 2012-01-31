@@ -114,7 +114,7 @@ r128CreateScreen( __DRIscreen *sPriv )
     */
    r128Screen->IsPCI = r128DRIPriv->IsPCI;
    r128Screen->sarea_priv_offset = r128DRIPriv->sarea_priv_offset;
-   
+
    if (sPriv->drm_version.minor >= 3) {
       drm_r128_getparam_t gp;
       int ret;
@@ -422,7 +422,7 @@ r128FillInModes( __DRIscreen *psp,
 
     depth_bits_array[0] = depth_bits;
     depth_bits_array[1] = depth_bits;
-    
+
     /* Just like with the accumulation buffer, always provide some modes
      * with a stencil buffer.  It will be a sw fallback, but some apps won't
      * care about that.
@@ -470,7 +470,7 @@ r128FillInModes( __DRIscreen *psp,
 
 /**
  * This is the driver specific part of the createNewScreen entry point.
- * 
+ *
  * \todo maybe fold this into intelInitDriver
  *
  * \return the struct gl_config supported by this driver

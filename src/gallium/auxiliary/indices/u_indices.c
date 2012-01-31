@@ -31,14 +31,14 @@ static void translate_memcpy_ushort( const void *in,
 {
    memcpy(out, in, nr*sizeof(short));
 }
-                              
+
 static void translate_memcpy_uint( const void *in,
                                    unsigned nr,
                                    void *out )
 {
    memcpy(out, in, nr*sizeof(int));
 }
-                              
+
 
 int u_index_translator( unsigned hw_mask,
                         unsigned prim,
@@ -61,9 +61,9 @@ int u_index_translator( unsigned hw_mask,
    *out_index_size = (in_index_size == 4) ? 4 : 2;
    out_idx = out_size_idx(*out_index_size);
 
-   if ((hw_mask & (1<<prim)) && 
+   if ((hw_mask & (1<<prim)) &&
        in_index_size == *out_index_size &&
-       in_pv == out_pv) 
+       in_pv == out_pv)
    {
       if (in_index_size == 4)
          *out_translate = translate_memcpy_uint;
@@ -172,9 +172,9 @@ int u_index_generator( unsigned hw_mask,
    *out_index_size = ((start + nr) > 0xfffe) ? 4 : 2;
    out_idx = out_size_idx(*out_index_size);
 
-   if ((hw_mask & (1<<prim)) && 
+   if ((hw_mask & (1<<prim)) &&
        (in_pv == out_pv)) {
-       
+
       *out_generate = generate[out_idx][in_pv][out_pv][PIPE_PRIM_POINTS];
       *out_prim = prim;
       *out_nr = nr;

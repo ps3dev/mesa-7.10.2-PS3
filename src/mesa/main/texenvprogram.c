@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2009 VMware, Inc.  All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "glheader.h"
@@ -364,7 +364,7 @@ static GLbitfield get_fp_input_mask( struct gl_context *ctx )
       if (varying_inputs & VERT_BIT_COLOR1)
          fp_inputs |= FRAG_BIT_COL1;
 
-      fp_inputs |= (((varying_inputs & VERT_BIT_TEX_ANY) >> VERT_ATTRIB_TEX0) 
+      fp_inputs |= (((varying_inputs & VERT_BIT_TEX_ANY) >> VERT_ATTRIB_TEX0)
                     << FRAG_ATTRIB_TEX0);
 
    }
@@ -396,10 +396,10 @@ static GLbitfield get_fp_input_mask( struct gl_context *ctx )
       if (vp_outputs & (1 << VERT_RESULT_COL1))
          fp_inputs |= FRAG_BIT_COL1;
 
-      fp_inputs |= (((vp_outputs & VERT_RESULT_TEX_ANY) >> VERT_RESULT_TEX0) 
+      fp_inputs |= (((vp_outputs & VERT_RESULT_TEX_ANY) >> VERT_RESULT_TEX0)
                     << FRAG_ATTRIB_TEX0);
    }
-   
+
    return fp_inputs;
 }
 
@@ -438,7 +438,7 @@ static GLuint make_state_key( struct gl_context *ctx,  struct state_key *key )
          translate_tex_src_bit(texUnit->_ReallyEnabled);
 
       key->unit[i].shadow = ((texObj->CompareMode == GL_COMPARE_R_TO_TEXTURE) &&
-                             ((format == GL_DEPTH_COMPONENT) || 
+                             ((format == GL_DEPTH_COMPONENT) ||
                               (format == GL_DEPTH_STENCIL_EXT)));
 
       key->unit[i].NumArgsRGB = comb->_NumArgsRGB;
@@ -502,7 +502,7 @@ static GLuint make_state_key( struct gl_context *ctx,  struct state_key *key )
 
 /**
  * Use uregs to represent registers internally, translate to Mesa's
- * expected formats on emit.  
+ * expected formats on emit.
  *
  * NOTE: These are passed by value extensively in this file rather
  * than as usual by pointer reference.  If this disturbs you, try
@@ -521,7 +521,7 @@ struct ureg {
    GLuint pad:7;
 };
 
-static const struct ureg undef = { 
+static const struct ureg undef = {
    PROGRAM_UNDEFINED,
    ~0,
    0,
@@ -541,7 +541,7 @@ struct texenv_fragment_program {
    GLbitfield temp_in_use;	/**< Tracks temporary regs which are in use. */
    GLboolean error;
 
-   struct ureg src_texture[MAX_TEXTURE_COORD_UNITS];   
+   struct ureg src_texture[MAX_TEXTURE_COORD_UNITS];
    /* Reg containing each texture unit's sampled texture color,
     * else undef.
     */
@@ -551,7 +551,7 @@ struct texenv_fragment_program {
     * needed for bump mapping, else undef.
     */
 
-   struct ureg src_previous;	/**< Reg containing color from previous 
+   struct ureg src_previous;	/**< Reg containing color from previous
 				 * stage.  May need to be decl'd.
 				 */
 
@@ -605,7 +605,7 @@ static GLboolean is_undef( struct ureg reg )
 static struct ureg get_temp( struct texenv_fragment_program *p )
 {
    GLint bit;
-   
+
    /* First try and reuse temps which have been used already:
     */
    bit = _mesa_ffs( ~p->temp_in_use & p->alu_temps );
@@ -630,7 +630,7 @@ static struct ureg get_temp( struct texenv_fragment_program *p )
 static struct ureg get_tex_temp( struct texenv_fragment_program *p )
 {
    int bit;
-   
+
    /* First try to find available temp not previously used (to avoid
     * starting a new texture indirection).  According to the spec, the
     * ~p->temps_output isn't necessary, but will keep it there for
@@ -640,7 +640,7 @@ static struct ureg get_tex_temp( struct texenv_fragment_program *p )
 
    /* Then any unused temporary:
     */
-   if (!bit) 
+   if (!bit)
       bit = _mesa_ffs( ~p->temp_in_use );
 
    if (!bit) {
@@ -678,7 +678,7 @@ static void release_temps(struct gl_context *ctx, struct texenv_fragment_program
 }
 
 
-static struct ureg register_param5( struct texenv_fragment_program *p, 
+static struct ureg register_param5( struct texenv_fragment_program *p,
 				    GLint s0,
 				    GLint s1,
 				    GLint s2,
@@ -765,11 +765,11 @@ emit_op(struct texenv_fragment_program *p,
 
    _mesa_init_instructions(inst, 1);
    inst->Opcode = op;
-   
+
    emit_arg( &inst->SrcReg[0], src0 );
    emit_arg( &inst->SrcReg[1], src1 );
    emit_arg( &inst->SrcReg[2], src2 );
-   
+
    inst->SaturateMode = saturate ? SATURATE_ZERO_ONE : SATURATE_OFF;
 
    emit_dst( &inst->DstReg, dest, mask );
@@ -783,7 +783,7 @@ emit_op(struct texenv_fragment_program *p,
 
    return inst;
 }
-   
+
 
 static struct ureg emit_arith( struct texenv_fragment_program *p,
 			       enum prog_opcode op,
@@ -795,7 +795,7 @@ static struct ureg emit_arith( struct texenv_fragment_program *p,
 			       struct ureg src2 )
 {
    emit_op(p, op, dest, mask, saturate, src0, src1, src2);
-   
+
    /* Accounting for indirection tracking:
     */
    if (src0.file == PROGRAM_TEMPORARY)
@@ -809,7 +809,7 @@ static struct ureg emit_arith( struct texenv_fragment_program *p,
 
    if (dest.file == PROGRAM_TEMPORARY)
       p->alu_temps |= 1 << dest.idx;
-       
+
    p->program->Base.NumAluInstructions++;
    return dest;
 }
@@ -823,13 +823,13 @@ static struct ureg emit_texld( struct texenv_fragment_program *p,
                                GLuint tex_shadow,
 			       struct ureg coord )
 {
-   struct prog_instruction *inst = emit_op( p, op, 
-					  dest, destmask, 
+   struct prog_instruction *inst = emit_op( p, op,
+					  dest, destmask,
 					  GL_FALSE,	/* don't saturate? */
 					  coord, 	/* arg 0? */
 					  undef,
 					  undef);
-   
+
    inst->TexSrcTarget = tex_idx;
    inst->TexSrcUnit = tex_unit;
    inst->TexShadow = tex_shadow;
@@ -858,7 +858,7 @@ static struct ureg emit_texld( struct texenv_fragment_program *p,
 }
 
 
-static struct ureg register_const4f( struct texenv_fragment_program *p, 
+static struct ureg register_const4f( struct texenv_fragment_program *p,
 				     GLfloat s0,
 				     GLfloat s1,
 				     GLfloat s2,
@@ -886,21 +886,21 @@ static struct ureg register_const4f( struct texenv_fragment_program *p,
 
 static struct ureg get_one( struct texenv_fragment_program *p )
 {
-   if (is_undef(p->one)) 
+   if (is_undef(p->one))
       p->one = register_scalar_const(p, 1.0);
    return p->one;
 }
 
 static struct ureg get_half( struct texenv_fragment_program *p )
 {
-   if (is_undef(p->half)) 
+   if (is_undef(p->half))
       p->half = register_scalar_const(p, 0.5);
    return p->half;
 }
 
 static struct ureg get_zero( struct texenv_fragment_program *p )
 {
-   if (is_undef(p->zero)) 
+   if (is_undef(p->zero))
       p->zero = register_scalar_const(p, 0.0);
    return p->zero;
 }
@@ -912,11 +912,11 @@ static void program_error( struct texenv_fragment_program *p, const char *msg )
    p->error = 1;
 }
 
-static struct ureg get_source( struct texenv_fragment_program *p, 
+static struct ureg get_source( struct texenv_fragment_program *p,
 			       GLuint src, GLuint unit )
 {
    switch (src) {
-   case SRC_TEXTURE: 
+   case SRC_TEXTURE:
       assert(!is_undef(p->src_texture[unit]));
       return p->src_texture[unit];
 
@@ -927,7 +927,7 @@ static struct ureg get_source( struct texenv_fragment_program *p,
    case SRC_TEXTURE4:
    case SRC_TEXTURE5:
    case SRC_TEXTURE6:
-   case SRC_TEXTURE7: 
+   case SRC_TEXTURE7:
       assert(!is_undef(p->src_texture[src - SRC_TEXTURE0]));
       return p->src_texture[src - SRC_TEXTURE0];
 
@@ -952,10 +952,10 @@ static struct ureg get_source( struct texenv_fragment_program *p,
    }
 }
 
-static struct ureg emit_combine_source( struct texenv_fragment_program *p, 
+static struct ureg emit_combine_source( struct texenv_fragment_program *p,
 					GLuint mask,
 					GLuint unit,
-					GLuint source, 
+					GLuint source,
 					GLuint operand )
 {
    struct ureg arg, src, one;
@@ -963,7 +963,7 @@ static struct ureg emit_combine_source( struct texenv_fragment_program *p,
    src = get_source(p, source, unit);
 
    switch (operand) {
-   case OPR_ONE_MINUS_SRC_COLOR: 
+   case OPR_ONE_MINUS_SRC_COLOR:
       /* Get unused tmp,
        * Emit tmp = 1.0 - arg.xyzw
        */
@@ -971,12 +971,12 @@ static struct ureg emit_combine_source( struct texenv_fragment_program *p,
       one = get_one( p );
       return emit_arith( p, OPCODE_SUB, arg, mask, 0, one, src, undef);
 
-   case OPR_SRC_ALPHA: 
+   case OPR_SRC_ALPHA:
       if (mask == WRITEMASK_W)
 	 return src;
       else
 	 return swizzle1( src, SWIZZLE_W );
-   case OPR_ONE_MINUS_SRC_ALPHA: 
+   case OPR_ONE_MINUS_SRC_ALPHA:
       /* Get unused tmp,
        * Emit tmp = 1.0 - arg.wwww
        */
@@ -988,7 +988,7 @@ static struct ureg emit_combine_source( struct texenv_fragment_program *p,
       return get_zero(p);
    case OPR_ONE:
       return get_one(p);
-   case OPR_SRC_COLOR: 
+   case OPR_SRC_COLOR:
       return src;
    default:
       assert(0);
@@ -1006,29 +1006,29 @@ static GLboolean args_match( const struct state_key *key, GLuint unit )
    GLuint i, numArgs = key->unit[unit].NumArgsRGB;
 
    for (i = 0; i < numArgs; i++) {
-      if (key->unit[unit].OptA[i].Source != key->unit[unit].OptRGB[i].Source) 
+      if (key->unit[unit].OptA[i].Source != key->unit[unit].OptRGB[i].Source)
 	 return GL_FALSE;
 
       switch (key->unit[unit].OptA[i].Operand) {
-      case OPR_SRC_ALPHA: 
+      case OPR_SRC_ALPHA:
 	 switch (key->unit[unit].OptRGB[i].Operand) {
-	 case OPR_SRC_COLOR: 
-	 case OPR_SRC_ALPHA: 
+	 case OPR_SRC_COLOR:
+	 case OPR_SRC_ALPHA:
 	    break;
 	 default:
 	    return GL_FALSE;
 	 }
 	 break;
-      case OPR_ONE_MINUS_SRC_ALPHA: 
+      case OPR_ONE_MINUS_SRC_ALPHA:
 	 switch (key->unit[unit].OptRGB[i].Operand) {
-	 case OPR_ONE_MINUS_SRC_COLOR: 
-	 case OPR_ONE_MINUS_SRC_ALPHA: 
+	 case OPR_ONE_MINUS_SRC_COLOR:
+	 case OPR_ONE_MINUS_SRC_ALPHA:
 	    break;
 	 default:
 	    return GL_FALSE;
 	 }
 	 break;
-      default: 
+      default:
 	 return GL_FALSE;	/* impossible */
       }
    }
@@ -1055,16 +1055,16 @@ static struct ureg emit_combine( struct texenv_fragment_program *p,
       src[i] = emit_combine_source( p, mask, unit, opt[i].Source, opt[i].Operand );
 
    switch (mode) {
-   case MODE_REPLACE: 
+   case MODE_REPLACE:
       if (mask == WRITEMASK_XYZW && !saturate)
 	 return src[0];
       else
 	 return emit_arith( p, OPCODE_MOV, dest, mask, saturate, src[0], undef, undef );
-   case MODE_MODULATE: 
+   case MODE_MODULATE:
       return emit_arith( p, OPCODE_MUL, dest, mask, saturate,
 			 src[0], src[1], undef );
-   case MODE_ADD: 
-      return emit_arith( p, OPCODE_ADD, dest, mask, saturate, 
+   case MODE_ADD:
+      return emit_arith( p, OPCODE_ADD, dest, mask, saturate,
 			 src[0], src[1], undef );
    case MODE_ADD_SIGNED:
       /* tmp = arg0 + arg1
@@ -1075,16 +1075,16 @@ static struct ureg emit_combine( struct texenv_fragment_program *p,
       emit_arith( p, OPCODE_ADD, tmp, mask, 0, src[0], src[1], undef );
       emit_arith( p, OPCODE_SUB, dest, mask, saturate, tmp, half, undef );
       return dest;
-   case MODE_INTERPOLATE: 
+   case MODE_INTERPOLATE:
       /* Arg0 * (Arg2) + Arg1 * (1-Arg2) -- note arguments are reordered:
        */
       return emit_arith( p, OPCODE_LRP, dest, mask, saturate, src[2], src[0], src[1] );
 
-   case MODE_SUBTRACT: 
+   case MODE_SUBTRACT:
       return emit_arith( p, OPCODE_SUB, dest, mask, saturate, src[0], src[1], undef );
 
    case MODE_DOT3_RGBA:
-   case MODE_DOT3_RGBA_EXT: 
+   case MODE_DOT3_RGBA_EXT:
    case MODE_DOT3_RGB_EXT:
    case MODE_DOT3_RGB: {
       struct ureg tmp0 = get_temp( p );
@@ -1095,15 +1095,15 @@ static struct ureg emit_combine( struct texenv_fragment_program *p,
       /* tmp0 = 2*src0 - 1
        * tmp1 = 2*src1 - 1
        *
-       * dst = tmp0 dot3 tmp1 
+       * dst = tmp0 dot3 tmp1
        */
-      emit_arith( p, OPCODE_MAD, tmp0, WRITEMASK_XYZW, 0, 
+      emit_arith( p, OPCODE_MAD, tmp0, WRITEMASK_XYZW, 0,
 		  two, src[0], neg1);
 
       if (memcmp(&src[0], &src[1], sizeof(struct ureg)) == 0)
 	 tmp1 = tmp0;
       else
-	 emit_arith( p, OPCODE_MAD, tmp1, WRITEMASK_XYZW, 0, 
+	 emit_arith( p, OPCODE_MAD, tmp1, WRITEMASK_XYZW, 0,
 		     two, src[1], neg1);
       emit_arith( p, OPCODE_DP3, dest, mask, saturate, tmp0, tmp1, undef);
       return dest;
@@ -1146,7 +1146,7 @@ static struct ureg emit_combine( struct texenv_fragment_program *p,
       /* special - not handled here */
       assert(0);
       return src[0];
-   default: 
+   default:
       assert(0);
       return src[0];
    }
@@ -1171,7 +1171,7 @@ emit_texenv(struct texenv_fragment_program *p, GLuint unit)
       /* this isn't really a env stage delivering a color and handled elsewhere */
       return get_source(p, SRC_PREVIOUS, 0);
    }
-   
+
    switch (key->unit[unit].ModeRGB) {
    case MODE_DOT3_RGB_EXT:
       alpha_shift = key->unit[unit].ScaleShiftA;
@@ -1186,7 +1186,7 @@ emit_texenv(struct texenv_fragment_program *p, GLuint unit)
       alpha_shift = key->unit[unit].ScaleShiftA;
       break;
    }
-   
+
    /* If we'll do rgb/alpha shifting don't saturate in emit_combine().
     * We don't want to clamp twice.
     */
@@ -1261,13 +1261,13 @@ emit_texenv(struct texenv_fragment_program *p, GLuint unit)
 	 shift = register_scalar_const(p, (GLfloat)(1<<rgb_shift));
       }
       else {
-	 shift = register_const4f(p, 
+	 shift = register_const4f(p,
 				  (GLfloat)(1<<rgb_shift),
 				  (GLfloat)(1<<rgb_shift),
 				  (GLfloat)(1<<rgb_shift),
 				  (GLfloat)(1<<alpha_shift));
       }
-      return emit_arith( p, OPCODE_MUL, dest, WRITEMASK_XYZW, 
+      return emit_arith( p, OPCODE_MUL, dest, WRITEMASK_XYZW,
 			 saturate, out, shift, undef );
    }
    else
@@ -1304,7 +1304,7 @@ static void load_texture( struct texenv_fragment_program *p, GLuint unit )
          }
 
 	 p->src_texture[unit] = emit_texld( p, OPCODE_TXP,
-					    tmp, WRITEMASK_XYZW, 
+					    tmp, WRITEMASK_XYZW,
 					    unit, texTarget, shadow,
                                             texcoord );
 
@@ -1325,7 +1325,7 @@ static void load_texture( struct texenv_fragment_program *p, GLuint unit )
    }
 }
 
-static GLboolean load_texenv_source( struct texenv_fragment_program *p, 
+static GLboolean load_texenv_source( struct texenv_fragment_program *p,
 				     GLuint src, GLuint unit )
 {
    switch (src) {
@@ -1340,15 +1340,15 @@ static GLboolean load_texenv_source( struct texenv_fragment_program *p,
    case SRC_TEXTURE4:
    case SRC_TEXTURE5:
    case SRC_TEXTURE6:
-   case SRC_TEXTURE7:       
+   case SRC_TEXTURE7:
       load_texture(p, src - SRC_TEXTURE0);
       break;
-      
+
    default:
       /* not a texture src - do nothing */
       break;
    }
- 
+
    return GL_TRUE;
 }
 
@@ -1537,7 +1537,7 @@ create_new_program(struct gl_context *ctx, struct state_key *key,
       p.program->FogOption = GL_NONE;
    }
 
-   if (p.program->Base.NumTexIndirections > ctx->Const.FragmentProgram.MaxTexIndirections) 
+   if (p.program->Base.NumTexIndirections > ctx->Const.FragmentProgram.MaxTexIndirections)
       program_error(&p, "Exceeded max nr indirect texture lookups");
 
    if (p.program->Base.NumTexInstructions > ctx->Const.FragmentProgram.MaxTexInstructions)
@@ -1569,7 +1569,7 @@ create_new_program(struct gl_context *ctx, struct state_key *key,
     */
    if (ctx->Driver.ProgramStringNotify) {
       GLboolean ok = ctx->Driver.ProgramStringNotify(ctx,
-                                                     GL_FRAGMENT_PROGRAM_ARB, 
+                                                     GL_FRAGMENT_PROGRAM_ARB,
                                                      &p.program->Base);
       /* Driver should be able to handle any texenv programs as long as
        * the driver correctly reported max number of texture units correctly,
@@ -1596,15 +1596,15 @@ _mesa_get_fixed_func_fragment_program(struct gl_context *ctx)
    struct gl_fragment_program *prog;
    struct state_key key;
    GLuint keySize;
-	
+
    keySize = make_state_key(ctx, &key);
-      
+
    prog = (struct gl_fragment_program *)
       _mesa_search_program_cache(ctx->FragmentProgram.Cache,
                                  &key, keySize);
 
    if (!prog) {
-      prog = (struct gl_fragment_program *) 
+      prog = (struct gl_fragment_program *)
          ctx->Driver.NewProgram(ctx, GL_FRAGMENT_PROGRAM_ARB, 0);
 
       create_new_program(ctx, &key, prog);

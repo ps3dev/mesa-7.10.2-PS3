@@ -92,11 +92,11 @@ void Pool::grow( void )
 }
 
 /*-----------------------------------------------------------------------------
- * Pool::clear - free buffers associated with pool but keep pool 
+ * Pool::clear - free buffers associated with pool but keep pool
  *-----------------------------------------------------------------------------
  */
 
-void 
+void
 Pool::clear( void )
 {
     assert( (this != 0) && (magic == is_allocated) );

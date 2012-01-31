@@ -82,7 +82,7 @@ svga_create_rasterizer_state(struct pipe_context *pipe,
    /* fill_cw, fill_ccw      - draw module or index translation */
 
    rast->shademode = svga_translate_flatshade( templ->flatshade );
-   rast->cullmode = svga_translate_cullmode( templ->cull_face, 
+   rast->cullmode = svga_translate_cullmode( templ->cull_face,
                                              templ->front_ccw );
    rast->scissortestenable = templ->scissor;
    rast->multisampleantialias = templ->multisample;
@@ -101,7 +101,7 @@ svga_create_rasterizer_state(struct pipe_context *pipe,
       rast->need_pipeline |= SVGA_PIPELINE_FLAG_LINES;
 
    if (templ->line_stipple_enable) {
-      /* LinePattern not implemented on all backends. 
+      /* LinePattern not implemented on all backends.
        */
       if (0) {
          SVGA3dLinePattern lp;
@@ -112,7 +112,7 @@ svga_create_rasterizer_state(struct pipe_context *pipe,
       else {
          rast->need_pipeline |= SVGA_PIPELINE_FLAG_LINES;
       }
-   } 
+   }
 
    if (templ->point_smooth)
       rast->need_pipeline |= SVGA_PIPELINE_FLAG_POINTS;
@@ -142,7 +142,7 @@ svga_create_rasterizer_state(struct pipe_context *pipe,
          break;
 
       case PIPE_FACE_NONE:
-         if (fill_front != fill_back || offset_front != offset_back) 
+         if (fill_front != fill_back || offset_front != offset_back)
          {
             /* Always need the draw module to work out different
              * front/back fill modes:
@@ -168,7 +168,7 @@ svga_create_rasterizer_state(struct pipe_context *pipe,
           (templ->flatshade ||
            templ->light_twoside ||
            offset ||
-           templ->cull_face != PIPE_FACE_NONE)) 
+           templ->cull_face != PIPE_FACE_NONE))
       {
          fill = PIPE_POLYGON_MODE_FILL;
          rast->need_pipeline |= SVGA_PIPELINE_FLAG_TRIS;
@@ -225,7 +225,7 @@ static void svga_bind_rasterizer_state( struct pipe_context *pipe,
 
    draw_set_rasterizer_state(svga->swtnl.draw, raster ? &raster->templ : NULL,
                              state);
-   
+
    svga->dirty |= SVGA_NEW_RAST;
 }
 

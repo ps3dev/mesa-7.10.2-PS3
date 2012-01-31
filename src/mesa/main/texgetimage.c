@@ -678,7 +678,7 @@ getteximage_error_check(struct gl_context *ctx, GLenum target, GLint level,
    }
 
    baseFormat = _mesa_get_format_base_format(texImage->TexFormat);
-      
+
    /* Make sure the requested image format is compatible with the
     * texture's format.  Note that a color index texture can be converted
     * to RGBA so that combo is allowed.

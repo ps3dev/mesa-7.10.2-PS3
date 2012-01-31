@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/mtypes.h"
@@ -175,7 +175,7 @@ intelCopyTexImage1D(struct gl_context * ctx, GLenum target, GLint level,
       goto fail;
 
    /* Setup or redefine the texture object, mipmap tree and texture
-    * image.  Don't populate yet.  
+    * image.  Don't populate yet.
     */
    ctx->Driver.TexImage1D(ctx, target, level, internalFormat,
                           width, border,
@@ -267,7 +267,7 @@ intelCopyTexSubImage1D(struct gl_context * ctx, GLenum target, GLint level,
 
    /* XXX need to check <border> as in above function? */
 
-   /* Need to check texture is compatible with source format. 
+   /* Need to check texture is compatible with source format.
     */
 
    if (!do_copy_texsubimage(intel_context(ctx), target,
@@ -291,7 +291,7 @@ intelCopyTexSubImage2D(struct gl_context * ctx, GLenum target, GLint level,
       _mesa_select_tex_image(ctx, texObj, target, level);
    GLenum internalFormat = texImage->InternalFormat;
 
-   /* Need to check texture is compatible with source format. 
+   /* Need to check texture is compatible with source format.
     */
 
    if (!do_copy_texsubimage(intel_context(ctx), target,

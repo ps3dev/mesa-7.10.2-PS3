@@ -36,7 +36,7 @@
  *
  * We want buffer splitting to be a convenience function for the code
  * actually drawing the primitives rather than a system-wide maximum,
- * otherwise it is hard to avoid pessimism.  
+ * otherwise it is hard to avoid pessimism.
  *
  * For instance, if a driver has no hardware limits on vertex buffer
  * dimensions, it would not ordinarily want to split vbos.  But if

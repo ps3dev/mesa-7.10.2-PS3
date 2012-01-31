@@ -1,7 +1,7 @@
 /**
  * \file hint.h
  * Hints operations.
- * 
+ *
  * \if subset
  * (No-op)
  *
@@ -46,7 +46,7 @@ struct gl_context;
 extern void GLAPIENTRY
 _mesa_Hint( GLenum target, GLenum mode );
 
-extern void 
+extern void
 _mesa_init_hint( struct gl_context * ctx );
 
 #else

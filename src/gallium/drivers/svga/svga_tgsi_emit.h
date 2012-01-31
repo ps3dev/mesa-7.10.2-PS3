@@ -51,7 +51,7 @@ struct svga_arl_consts {
 struct svga_shader_emitter
 {
    boolean use_sm30;
-   
+
    unsigned size;
    char *buf;
    char *ptr;
@@ -65,7 +65,7 @@ struct svga_shader_emitter
    int nr_hw_float_const;
    int nr_hw_int_const;
    int nr_hw_temp;
-   
+
    int insn_offset;
 
    int internal_temp_count;
@@ -245,7 +245,7 @@ inst_token( unsigned opcode )
    return inst;
 }
 
-static INLINE SVGA3dShaderDestToken 
+static INLINE SVGA3dShaderDestToken
 dst_register( unsigned file,
               int number )
 {
@@ -261,7 +261,7 @@ dst_register( unsigned file,
    dest.shfScale = 0;
    dest.type_lower = file & 0x7;
    dest.reserved0 = 1;          /* is_reg */
-   
+
    return dest;
 }
 
@@ -275,7 +275,7 @@ writemask( SVGA3dShaderDestToken dest,
 }
 
 
-static INLINE SVGA3dShaderSrcToken 
+static INLINE SVGA3dShaderSrcToken
 src_token( unsigned file, int number )
 {
    SVGA3dShaderSrcToken src;
@@ -294,7 +294,7 @@ src_token( unsigned file, int number )
 }
 
 
-static INLINE struct src_register 
+static INLINE struct src_register
 absolute( struct src_register src )
 {
    src.base.srcMod = SVGA3DSRCMOD_ABS;
@@ -303,7 +303,7 @@ absolute( struct src_register src )
 }
 
 
-static INLINE struct src_register 
+static INLINE struct src_register
 negate( struct src_register src )
 {
    switch (src.base.srcMod) {
@@ -324,11 +324,11 @@ negate( struct src_register src )
 }
 
 
-static INLINE struct src_register 
+static INLINE struct src_register
 src_register( unsigned file, int number )
 {
    struct src_register src;
-   
+
    src.base = src_token( file, number );
    src.indirect.value = 0;
 

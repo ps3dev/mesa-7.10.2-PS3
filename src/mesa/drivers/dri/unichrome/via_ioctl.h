@@ -54,7 +54,7 @@ void viaEmitBreadcrumb( struct via_context *vmesa );
    if (vmesa->dmaLow) 		\
       viaFlushDma(vmesa);			\
 } while (0)
-    
+
 
 void viaWrapPrimitive( struct via_context *vmesa );
 
@@ -129,5 +129,5 @@ static GLuint INLINE *viaExtendPrimitive(struct via_context *vmesa, int bytes)
 
 #define VIA_GEQ_WRAP(left, right) \
     (((left) - (right)) < ( 1 << 23))
-      
+
 #endif

@@ -51,7 +51,7 @@
 
 
 /**
- * \sw_span_arrays 
+ * \sw_span_arrays
  * \brief Arrays of fragment values.
  *
  * These will either be computed from the span x/xStep values or

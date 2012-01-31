@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -262,7 +262,7 @@ make_fragment_shader_z_stencil(struct st_context *st, GLboolean write_depth,
  * vertex position and texcoord (and optionally, color).
  */
 static void *
-make_passthrough_vertex_shader(struct st_context *st, 
+make_passthrough_vertex_shader(struct st_context *st,
                                GLboolean passColor)
 {
    if (!st->drawpix.vert_shaders[passColor]) {
@@ -272,25 +272,25 @@ make_passthrough_vertex_shader(struct st_context *st,
          return NULL;
 
       /* MOV result.pos, vertex.pos; */
-      ureg_MOV(ureg, 
+      ureg_MOV(ureg,
                ureg_DECL_output( ureg, TGSI_SEMANTIC_POSITION, 0 ),
                ureg_DECL_vs_input( ureg, 0 ));
-      
+
       /* MOV result.texcoord0, vertex.attr[1]; */
-      ureg_MOV(ureg, 
+      ureg_MOV(ureg,
                ureg_DECL_output( ureg, TGSI_SEMANTIC_GENERIC, 0 ),
                ureg_DECL_vs_input( ureg, 1 ));
-      
+
       if (passColor) {
          /* MOV result.color0, vertex.attr[2]; */
-         ureg_MOV(ureg, 
+         ureg_MOV(ureg,
                   ureg_DECL_output( ureg, TGSI_SEMANTIC_COLOR, 0 ),
                   ureg_DECL_vs_input( ureg, 2 ));
       }
 
       ureg_END( ureg );
-      
-      st->drawpix.vert_shaders[passColor] = 
+
+      st->drawpix.vert_shaders[passColor] =
          ureg_create_shader_and_destroy( ureg, st->pipe );
    }
 
@@ -756,7 +756,7 @@ draw_stencil_pixels(struct gl_context *ctx, GLint x, GLint y,
       y = ctx->DrawBuffer->Height - y - height;
    }
 
-   if(format != GL_DEPTH_STENCIL && 
+   if(format != GL_DEPTH_STENCIL &&
       util_format_get_component_bits(strb->format,
                                      UTIL_FORMAT_COLORSPACE_ZS, 0) != 0)
       usage = PIPE_TRANSFER_READ_WRITE;
@@ -902,7 +902,7 @@ st_DrawPixels(struct gl_context *ctx, GLint x, GLint y,
       /* can we write to stencil if not fallback */
       if (!pipe->screen->get_param(pipe->screen, PIPE_CAP_SHADER_STENCIL_EXPORT))
 	 goto stencil_fallback;
-      
+
       tex_format = st_choose_format(st->pipe->screen, base_format(format),
                                     PIPE_TEXTURE_2D,
 				    0, PIPE_BIND_SAMPLER_VIEW);
@@ -1271,7 +1271,7 @@ st_CopyPixels(struct gl_context *ctx, GLint srcx, GLint srcy,
                       width, height, ctx->Pixel.ZoomX, ctx->Pixel.ZoomY,
                       sv,
                       num_sampler_view,
-                      driver_vp, 
+                      driver_vp,
                       driver_fp,
                       color, invertTex, GL_FALSE, GL_FALSE);
 

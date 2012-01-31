@@ -568,7 +568,7 @@ LLBL(x86_p2_ir_done):
 	POP_L( ESI )
 	RET
 #undef FRAME_OFFSET
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

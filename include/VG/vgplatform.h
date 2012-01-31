@@ -13,10 +13,10 @@
  * including without limitation the rights to use, copy, modify, merge,
  * publish, distribute, sublicense, and/or sell copies of the Materials,
  * and to permit persons to whom the Materials are furnished to do so,
- * subject to the following conditions: 
+ * subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included 
- * in all copies or substantial portions of the Materials. 
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
  *
  * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#ifndef VG_API_CALL 
+#ifndef VG_API_CALL
 #if defined(OPENVG_STATIC_LIBRARY)
 #	define VG_API_CALL
 #else
@@ -48,7 +48,7 @@ extern "C" {
 #endif /* defined OPENVG_STATIC_LIBRARY */
 #endif /* ifndef VG_API_CALL */
 
-#ifndef VGU_API_CALL 
+#ifndef VGU_API_CALL
 #if defined(OPENVG_STATIC_LIBRARY)
 #	define VGU_API_CALL
 #else
@@ -83,9 +83,9 @@ typedef unsigned int   VGbitfield;
 
 #ifndef VG_VGEXT_PROTOTYPES
 #define VG_VGEXT_PROTOTYPES
-#endif 
+#endif
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

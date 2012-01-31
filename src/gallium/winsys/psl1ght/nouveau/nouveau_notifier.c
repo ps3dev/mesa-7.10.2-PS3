@@ -90,7 +90,7 @@ nouveau_notifier_free(struct nouveau_notifier **notifier)
 
 	f.channel = nvchan->drm.channel;
 	f.handle  = nvnotify->base.handle;
-	drmCommandWrite(nvdev->fd, DRM_NOUVEAU_GPUOBJ_FREE, &f, sizeof(f));		
+	drmCommandWrite(nvdev->fd, DRM_NOUVEAU_GPUOBJ_FREE, &f, sizeof(f));
 	free(nvnotify);
 #else
 	printf("nouveau_notifier_kfree not implemented\n");

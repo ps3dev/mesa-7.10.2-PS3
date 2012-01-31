@@ -65,7 +65,7 @@ hash_table_ctor(unsigned num_buckets, hash_func_t hash,
         num_buckets = 16;
     }
 
-    ht = malloc(sizeof(*ht) + ((num_buckets - 1) 
+    ht = malloc(sizeof(*ht) + ((num_buckets - 1)
 				     * sizeof(ht->buckets[0])));
     if (ht != NULL) {
         ht->hash = hash;

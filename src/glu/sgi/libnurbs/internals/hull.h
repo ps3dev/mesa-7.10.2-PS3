@@ -58,7 +58,7 @@ private:
 	Trimline 	*right;
 	long 		index;
     };
-	
+
     Side 		lower;
     Side		upper;
     Trimline 		fakeleft;

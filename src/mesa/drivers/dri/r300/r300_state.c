@@ -2250,7 +2250,7 @@ static void r300SetupUsOutputFormat(struct gl_context *ctx)
 	if (!rrb) {
 		return;
 	}
-	
+
 	switch (rrb->base.Format)
 	{
 		case MESA_FORMAT_RGBA5551:

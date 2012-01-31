@@ -28,7 +28,7 @@
 /**
  * @file
  * Generic handle table.
- *  
+ *
  * @author José Fonseca <jrfonseca@tungstengraphics.com>
  */
 
@@ -40,10 +40,10 @@
 extern "C" {
 #endif
 
-   
+
 /**
  * Abstract data type to map integer handles to objects.
- * 
+ *
  * Also referred as "pointer array".
  */
 struct handle_table;
@@ -55,8 +55,8 @@ handle_table_create(void);
 
 /**
  * Set an optional destructor callback.
- * 
- * If set, it will be called during handle_table_remove and 
+ *
+ * If set, it will be called during handle_table_remove and
  * handle_table_destroy calls.
  */
 void
@@ -66,33 +66,33 @@ handle_table_set_destroy(struct handle_table *ht,
 
 /**
  * Add a new object.
- * 
+ *
  * Returns a zero handle on failure (out of memory).
  */
 unsigned
-handle_table_add(struct handle_table *ht, 
+handle_table_add(struct handle_table *ht,
                  void *object);
 
 /**
  * Returns zero on failure (out of memory).
  */
 unsigned
-handle_table_set(struct handle_table *ht, 
+handle_table_set(struct handle_table *ht,
                  unsigned handle,
                  void *object);
 
 /**
  * Fetch an existing object.
- * 
+ *
  * Returns NULL for an invalid handle.
  */
 void *
-handle_table_get(struct handle_table *ht, 
+handle_table_get(struct handle_table *ht,
                  unsigned handle);
 
 
 void
-handle_table_remove(struct handle_table *ht, 
+handle_table_remove(struct handle_table *ht,
                     unsigned handle);
 
 

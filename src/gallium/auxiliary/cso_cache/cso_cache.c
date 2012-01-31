@@ -256,7 +256,7 @@ cso_find_state(struct cso_cache *sc,
 
 
 void *cso_hash_find_data_from_template( struct cso_hash *hash,
-				        unsigned hash_key, 
+				        unsigned hash_key,
 				        void *templ,
 				        int size )
 {

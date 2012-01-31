@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -31,7 +31,7 @@
 
 #include "util/u_inlines.h"
 #include "util/u_memory.h"
-  
+
 #include "tgsi/tgsi_parse.h"
 #include "tgsi/tgsi_scan.h"
 
@@ -84,7 +84,7 @@ static void scan_immediates(const struct tgsi_token *tokens,
 
 	 for (; i < 4; i++)
 	    imm->data[imm->nr][i] = id[i];
-         
+
          imm->nr++;
 	 break;
       }
@@ -101,7 +101,7 @@ static void brw_bind_fs_state( struct pipe_context *pipe, void *prog )
 {
    struct brw_fragment_shader *fs = (struct brw_fragment_shader *)prog;
    struct brw_context *brw = brw_context(pipe);
-   
+
    if (brw->curr.fragment_shader == fs)
       return;
 
@@ -228,7 +228,7 @@ static void *brw_create_vs_state( struct pipe_context *pipe,
       }
    }
 
-   
+
    /* Done:
     */
    return (void *)vs;

@@ -63,7 +63,7 @@ $(TOP)/$(LIB_DIR)/$(GLW_LIB_NAME): $(OBJECTS)
 #
 # Run 'make depend' to update the dependencies if you change what's included
 # by any source file.
-# 
+#
 depend: $(GLW_SOURCES)
 	rm -f depend
 	touch depend

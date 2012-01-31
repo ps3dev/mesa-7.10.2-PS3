@@ -105,7 +105,7 @@ Hull::init( void )
 
 /*----------------------------------------------------------------------
  * nextupper - find next vertex on upper hull of trim region.
- *		 - if vertex is on trim curve, set vtop point to 
+ *		 - if vertex is on trim curve, set vtop point to
  *		   that vertex.  if vertex is on grid, set vtop to
  *		   point to temporary area and stuff coordinants into
  *		   temporary vertex.  Also, place grid coords in temporary
@@ -119,23 +119,23 @@ Hull::nextupper( GridTrimVertex *gv )
 	gv->set( upper.left->prev() );
 	if( gv->isTrimVert() ) return gv;
 	upper.left = 0;
-    } 
+    }
 
     if( upper.line ) {
 	assert( upper.index <= upper.line->uend );
 	gv->set( uarray.uarray[upper.index], upper.line->vval );
 	gv->set( upper.index, upper.line->vindex );
 	if( upper.index++ == upper.line->uend ) upper.line = 0;
-	return gv; 
-    } 
+	return gv;
+    }
 
     if( upper.right ) {
 	gv->set( upper.right->next() );
 	if( gv->isTrimVert() ) return gv;
 	upper.right = 0;
-    } 
+    }
 
-    return 0; 
+    return 0;
 }
 
 GridTrimVertex *
@@ -145,20 +145,20 @@ Hull::nextlower( register GridTrimVertex *gv )
 	gv->set( lower.left->next() );
 	if( gv->isTrimVert() ) return gv;
 	lower.left = 0;
-    } 
+    }
 
     if( lower.line ) {
 	gv->set( uarray.uarray[lower.index], lower.line->vval );
 	gv->set( lower.index, lower.line->vindex );
 	if( lower.index++ == lower.line->uend ) lower.line = 0;
 	return gv;
-    } 
+    }
 
     if( lower.right ) {
 	gv->set( lower.right->prev() );
 	if( gv->isTrimVert() ) return gv;
 	lower.right = 0;
-    } 
+    }
 
     return 0;
 }

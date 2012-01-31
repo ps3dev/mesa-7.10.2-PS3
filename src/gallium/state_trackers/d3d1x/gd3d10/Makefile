@@ -7,7 +7,7 @@ GEN_D3D10=perl d3d10.pl
 include ../Makefile.inc
 
 d3d10.generated.o: d3d10_objects.generated.h d3d10_screen.generated.h d3d10_context.generated.h d3d10_misc.generated.h
- 
+
 d3d10.generated.cpp: ../gd3d11/d3d11.cpp d3d10.pl
 	$(GEN_D3D10) $< > $@
 d3d10_objects.generated.h: ../gd3d11/d3d11_objects.h d3d10.pl

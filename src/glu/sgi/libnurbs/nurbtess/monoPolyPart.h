@@ -33,7 +33,7 @@
 
 #ifndef _MONO_POLY_PART_H
 #define _MONO_POLY_PART_H
- 
+
 class directedLine;
 
 directedLine* monoPolyPart(directedLine* polygon);

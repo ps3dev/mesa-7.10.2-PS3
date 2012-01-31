@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -90,9 +90,9 @@ get_four_texels(const struct spu_texture_level *tlevel, uint face,
 
    qword texel_offset = si_a(si_mpyui(offset_y, 32), offset_x);
    texel_offset = si_mpyui(texel_offset, 4);
-   
+
    vec_uint4 offset = (vec_uint4) si_a(tile_offset, texel_offset);
-   
+
    texture_ea = texture_ea + face * tlevel->bytes_per_image;
 
    spu_dcache_fetch_unaligned((qword *) & texels[0],
@@ -604,7 +604,7 @@ sample_texture_cube(vector float s, vector float t, vector float r,
    /* Compute cube faces referenced by the four sets of texcoords.
     * XXX we should SIMD-ize this.
     */
-   for (p = 0; p < 4; p++) {      
+   for (p = 0; p < 4; p++) {
       float rx = spu_extract(s, p);
       float ry = spu_extract(t, p);
       float rz = spu_extract(r, p);
@@ -621,7 +621,7 @@ sample_texture_cube(vector float s, vector float t, vector float r,
    }
    else {
       /* BAD!  The four texcoords refer to different faces */
-      for (p = 0; p < 4; p++) {      
+      for (p = 0; p < 4; p++) {
          vector float c[4];
 
          spu.sample_texture_2d[unit](spu_splats(newS[p]), spu_splats(newT[p]),

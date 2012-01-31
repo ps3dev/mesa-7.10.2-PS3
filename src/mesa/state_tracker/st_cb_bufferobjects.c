@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -77,7 +77,7 @@ st_bufferobj_free(struct gl_context *ctx, struct gl_buffer_object *obj)
    assert(obj->RefCount == 0);
    assert(st_obj->transfer == NULL);
 
-   if (st_obj->buffer) 
+   if (st_obj->buffer)
       pipe_resource_reference(&st_obj->buffer, NULL);
 
    free(st_obj);
@@ -165,7 +165,7 @@ st_bufferobj_data(struct gl_context *ctx,
 		  GLenum target,
 		  GLsizeiptrARB size,
 		  const GLvoid * data,
-		  GLenum usage, 
+		  GLenum usage,
 		  struct gl_buffer_object *obj)
 {
    struct st_context *st = st_context(ctx);
@@ -175,7 +175,7 @@ st_bufferobj_data(struct gl_context *ctx,
 
    st_obj->Base.Size = size;
    st_obj->Base.Usage = usage;
-   
+
    switch(target) {
    case GL_PIXEL_PACK_BUFFER_ARB:
    case GL_PIXEL_UNPACK_BUFFER_ARB:
@@ -237,7 +237,7 @@ st_bufferobj_map(struct gl_context *ctx, GLenum target, GLenum access,
    case GL_READ_WRITE:
    default:
       flags = PIPE_TRANSFER_READ_WRITE;
-      break;      
+      break;
    }
 
    /* Handle zero-size buffers here rather than in drivers */
@@ -263,7 +263,7 @@ st_bufferobj_map(struct gl_context *ctx, GLenum target, GLenum access,
  * Called via glMapBufferRange().
  */
 static void *
-st_bufferobj_map_range(struct gl_context *ctx, GLenum target, 
+st_bufferobj_map_range(struct gl_context *ctx, GLenum target,
                        GLintptr offset, GLsizeiptr length, GLbitfield access,
                        struct gl_buffer_object *obj)
 {
@@ -285,7 +285,7 @@ st_bufferobj_map_range(struct gl_context *ctx, GLenum target,
 
    if (access & GL_MAP_INVALIDATE_BUFFER_BIT)
       flags |= PIPE_TRANSFER_DISCARD;
-   
+
    if (access & GL_MAP_UNSYNCHRONIZED_BIT)
       flags |= PIPE_TRANSFER_UNSYNCHRONIZED;
 
@@ -308,7 +308,7 @@ st_bufferobj_map_range(struct gl_context *ctx, GLenum target,
       obj->Pointer = &st_bufferobj_zero_length;
    }
    else {
-      obj->Pointer = pipe_buffer_map_range(pipe, 
+      obj->Pointer = pipe_buffer_map_range(pipe,
                                            st_obj->buffer,
                                            offset, length,
                                            flags,
@@ -317,7 +317,7 @@ st_bufferobj_map_range(struct gl_context *ctx, GLenum target,
          obj->Pointer = (ubyte *) obj->Pointer + offset;
       }
    }
-   
+
    if (obj->Pointer) {
       obj->Offset = offset;
       obj->Length = length;
@@ -329,7 +329,7 @@ st_bufferobj_map_range(struct gl_context *ctx, GLenum target,
 
 
 static void
-st_bufferobj_flush_mapped_range(struct gl_context *ctx, GLenum target, 
+st_bufferobj_flush_mapped_range(struct gl_context *ctx, GLenum target,
                                 GLintptr offset, GLsizeiptr length,
                                 struct gl_buffer_object *obj)
 {
@@ -341,11 +341,11 @@ st_bufferobj_flush_mapped_range(struct gl_context *ctx, GLenum target,
    assert(length >= 0);
    assert(offset + length <= obj->Length);
    assert(obj->Pointer);
-   
+
    if (!length)
       return;
 
-   pipe_buffer_flush_mapped_range(pipe, st_obj->transfer, 
+   pipe_buffer_flush_mapped_range(pipe, st_obj->transfer,
                                   obj->Offset + offset, length);
 }
 

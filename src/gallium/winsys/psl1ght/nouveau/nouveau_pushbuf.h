@@ -125,7 +125,7 @@ static __inline__ void
 BIND_RING(struct nouveau_channel *chan, struct nouveau_grobj *gr, unsigned sc)
 {
 	struct nouveau_subchannel *subc = &gr->channel->subc[sc];
-	
+
 	if (subc->gr) {
 		if (subc->gr->bound == NOUVEAU_GROBJ_BOUND_EXPLICIT)
 			assert(0);

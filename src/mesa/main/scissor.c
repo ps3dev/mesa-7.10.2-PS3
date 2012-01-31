@@ -63,7 +63,7 @@ _mesa_Scissor( GLint x, GLint y, GLsizei width, GLsizei height )
  * the dd_function_table::Scissor callback.
  */
 void
-_mesa_set_scissor(struct gl_context *ctx, 
+_mesa_set_scissor(struct gl_context *ctx,
                   GLint x, GLint y, GLsizei width, GLsizei height)
 {
    if (x == ctx->Scissor.X &&

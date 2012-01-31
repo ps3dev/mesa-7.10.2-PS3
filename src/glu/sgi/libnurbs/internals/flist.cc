@@ -79,7 +79,7 @@ void Flist::filter( void )
     start = 0;
 
     int j = 0;
-    for( int i = 1; i < end; i++ ) { 
+    for( int i = 1; i < end; i++ ) {
 	if( pts[i] == pts[i-j-1] )
 	    j++;
 	pts[i-j] = pts[i];
@@ -95,7 +95,7 @@ void Flist::grow( int maxpts )
 {
     if( npts < maxpts ) {
 	if( npts ) delete[] pts;
-	npts = 2 * maxpts; 
+	npts = 2 * maxpts;
 	pts = new REAL[npts];
 	assert( pts != 0 );
     }

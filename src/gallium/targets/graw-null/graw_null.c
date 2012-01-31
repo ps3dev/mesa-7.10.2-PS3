@@ -16,7 +16,7 @@ graw_create_window_and_screen( int x,
 
 
 
-void 
+void
 graw_set_display_func( void (*draw)( void ) )
 {
 }

@@ -71,7 +71,7 @@ GLuint *mgaAllocDmaLow( mgaContextPtr mmesa, int bytes )
     * a new buffer will need to be allocated.
     */
    if ( (mmesa->vertex_dma_buffer == NULL)
-	|| ((mmesa->vertex_dma_buffer->used + bytes) 
+	|| ((mmesa->vertex_dma_buffer->used + bytes)
 	    > mmesa->vertex_dma_buffer->total) ) {
       LOCK_HARDWARE( mmesa );
 
@@ -81,7 +81,7 @@ GLuint *mgaAllocDmaLow( mgaContextPtr mmesa, int bytes )
       if ( mmesa->vertex_dma_buffer != NULL ) {
 	 mgaFlushVerticesLocked( mmesa );
       }
-	   
+
       mmesa->vertex_dma_buffer = mga_get_buffer_ioctl( mmesa );
       UNLOCK_HARDWARE( mmesa );
    }

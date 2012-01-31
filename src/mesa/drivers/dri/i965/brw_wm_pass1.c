@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                  
+
 
 #include "brw_context.h"
 #include "brw_wm.h"
@@ -105,7 +105,7 @@ static GLuint get_texcoord_mask( GLuint tex_idx )
 }
 
 
-/* Step two: Basically this is dead code elimination.  
+/* Step two: Basically this is dead code elimination.
  *
  * Iterate backwards over instructions, noting which values
  * contribute to the final result.  Adjust writemasks to only
@@ -126,12 +126,12 @@ void brw_wm_pass1( struct brw_wm_compile *c )
       }
 
       if (inst->opcode == WM_FB_WRITE) {
-	 track_arg(c, inst, 0, WRITEMASK_XYZW); 
-	 track_arg(c, inst, 1, WRITEMASK_XYZW); 
+	 track_arg(c, inst, 0, WRITEMASK_XYZW);
+	 track_arg(c, inst, 1, WRITEMASK_XYZW);
 	 if (c->source_depth_to_render_target && c->computes_depth)
-	    track_arg(c, inst, 2, WRITEMASK_Z); 
+	    track_arg(c, inst, 2, WRITEMASK_Z);
 	 else
-	    track_arg(c, inst, 2, 0); 
+	    track_arg(c, inst, 2, 0);
 	 continue;
       }
 
@@ -183,17 +183,17 @@ void brw_wm_pass1( struct brw_wm_compile *c )
 	 read0 = writemask;
 	 break;
 
-      case OPCODE_MAD:	
+      case OPCODE_MAD:
       case OPCODE_CMP:
       case OPCODE_LRP:
 	 read0 = writemask;
-	 read1 = writemask;	
-	 read2 = writemask;	
+	 read1 = writemask;
+	 read2 = writemask;
 	 break;
 
-      case OPCODE_XPD: 
-	 if (writemask & WRITEMASK_X) read0 |= WRITEMASK_YZ;	 
-	 if (writemask & WRITEMASK_Y) read0 |= WRITEMASK_XZ;	 
+      case OPCODE_XPD:
+	 if (writemask & WRITEMASK_X) read0 |= WRITEMASK_YZ;
+	 if (writemask & WRITEMASK_Y) read0 |= WRITEMASK_XZ;
 	 if (writemask & WRITEMASK_Z) read0 |= WRITEMASK_XY;
 	 read1 = read0;
 	 break;
@@ -259,7 +259,7 @@ void brw_wm_pass1( struct brw_wm_compile *c )
 	 read1 = WRITEMASK_XY;
 	 break;
 
-      case OPCODE_DP3:	
+      case OPCODE_DP3:
 	 read0 = WRITEMASK_XYZ;
 	 read1 = WRITEMASK_XYZ;
 	 break;
@@ -274,7 +274,7 @@ void brw_wm_pass1( struct brw_wm_compile *c )
 	 read1 = WRITEMASK_XYZW;
 	 break;
 
-      case OPCODE_LIT: 
+      case OPCODE_LIT:
 	 read0 = WRITEMASK_XYW;
 	 break;
 

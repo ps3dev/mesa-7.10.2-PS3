@@ -31,7 +31,7 @@
 
 /** \file texmem.c
  * Implements all of the device-independent texture memory management.
- * 
+ *
  * Currently, only a simple LRU texture memory management policy is
  * implemented.  In the (hopefully very near) future, better policies will be
  * implemented.  The idea is that the DRI should be able to run in one of two
@@ -56,7 +56,7 @@ static unsigned dummy_swap_counter;
  * implementation of this function.  However, since system performance is in
  * no way dependent on this function, the slowness of the implementation is
  * irrelevent.
- * 
+ *
  * \param n Value whose \f$\log_2\f$ is to be calculated
  */
 
@@ -80,16 +80,16 @@ driLog2( GLuint n )
  * the driver, this may or may not be on-card memory.  It could be AGP memory
  * or anyother type of memory from which the hardware can directly read
  * texels.
- * 
+ *
  * This function is intended to be used as the \c IsTextureResident function
  * in the device's \c dd_function_table.
- * 
+ *
  * \param ctx GL context pointer (currently unused)
  * \param texObj Texture object to be tested
  */
 
 GLboolean
-driIsTextureResident( struct gl_context * ctx, 
+driIsTextureResident( struct gl_context * ctx,
 		      struct gl_texture_object * texObj )
 {
    driTextureObject * t;
@@ -108,7 +108,7 @@ driIsTextureResident( struct gl_context * ctx,
  * at the end of the array allows the other elements of the array
  * to be addressed rationally when looking up objects at a particular
  * location in texture memory.
- * 
+ *
  * \param heap Texture heap to be reset
  */
 
@@ -144,7 +144,7 @@ static void printLocalLRU( driTexHeap * heap, const char *callername  )
    driTextureObject *t;
    unsigned sz = 1U << heap->logGranularity;
 
-   fprintf( stderr, "%s in %s:\nLocal LRU, heap %d:\n", 
+   fprintf( stderr, "%s in %s:\nLocal LRU, heap %d:\n",
 	    __FUNCTION__, callername, heap->heapId );
 
    foreach ( t, &heap->texture_objects ) {
@@ -185,7 +185,7 @@ static void printGlobalLRU( driTexHeap * heap, const char *callername )
    drmTextureRegionPtr list = heap->global_regions;
    unsigned int i, j;
 
-   fprintf( stderr, "%s in %s:\nGlobal LRU, heap %d list %p:\n", 
+   fprintf( stderr, "%s in %s:\nGlobal LRU, heap %d list %p:\n",
 	    __FUNCTION__, callername, heap->heapId, (void *)list );
 
    for ( i = 0, j = heap->nrRegions ; i < heap->nrRegions ; i++ ) {
@@ -209,7 +209,7 @@ static void printGlobalLRU( driTexHeap * heap, const char *callername )
 
 /**
  * Called by the client whenever it touches a local texture.
- * 
+ *
  * \param t Texture object that the client has accessed
  */
 
@@ -234,7 +234,7 @@ void driUpdateTextureLRU( driTextureObject * t )
       list = heap->global_regions;
 
 
-      /* Update the context's local LRU 
+      /* Update the context's local LRU
        */
 
       move_to_head( & heap->texture_objects, t );
@@ -268,7 +268,7 @@ void driUpdateTextureLRU( driTextureObject * t )
 
 /**
  * Keep track of swapped out texture objects.
- * 
+ *
  * \param t Texture object to be "swapped" out of its texture heap
  */
 
@@ -306,7 +306,7 @@ void driSwapOutTextureObject( driTextureObject * t )
  * Destroy hardware state associated with texture \a t.  Calls the
  * \a destroy_texture_object method associated with the heap from which
  * \a t was allocated.
- * 
+ *
  * \param t Texture object to be destroyed
  */
 
@@ -364,14 +364,14 @@ void driDestroyTextureObject( driTextureObject * t )
  * textures and the textures belonging to other clients.  Keep track of other
  * client's textures by pushing a placeholder texture onto the LRU list --
  * these are denoted by \a tObj being \a NULL.
- * 
+ *
  * \param heap Heap whose state is to be updated
  * \param offset Byte offset in the heap that has been stolen
  * \param size Size, in bytes, of the stolen block
  * \param in_use Non-zero if the block is pinned/reserved by the kernel
  */
 
-static void driTexturesGone( driTexHeap * heap, int offset, int size, 
+static void driTexturesGone( driTexHeap * heap, int offset, int size,
 			     int in_use )
 {
    driTextureObject * t;
@@ -409,8 +409,8 @@ static void driTexturesGone( driTexHeap * heap, int offset, int size,
 	 return;
       }
       t->heap = heap;
-      if (in_use) 
-	 t->reserved = 1; 
+      if (in_use)
+	 t->reserved = 1;
       insert_at_head( & heap->texture_objects, t );
    }
 }
@@ -423,7 +423,7 @@ static void driTexturesGone( driTexHeap * heap, int offset, int size,
  * been stolen.  If another client has modified a region in which we have
  * textures, then we need to figure out which of our textures have been
  * removed and update our global LRU.
- * 
+ *
  * \param heap Texture heap to be updated
  */
 
@@ -438,8 +438,8 @@ void driAgeTextures( driTexHeap * heap )
     * LRU in the local list...  Fix with a cursor pointer.
     */
 
-   for (i = list[heap->nrRegions].prev ; 
-	i != heap->nrRegions && nr < heap->nrRegions ; 
+   for (i = list[heap->nrRegions].prev ;
+	i != heap->nrRegions && nr < heap->nrRegions ;
 	i = list[i].prev, nr++) {
       /* If switching texturing schemes, then the SAREA might not have been
        * properly cleared, so we need to reset the global texture LRU.
@@ -450,8 +450,8 @@ void driAgeTextures( driTexHeap * heap )
 	 break;
       }
 
-      if (list[i].age > heap->local_age) 
-	  driTexturesGone( heap, i * sz, sz, list[i].in_use); 
+      if (list[i].age > heap->local_age)
+	  driTexturesGone( heap, i * sz, sz, list[i].in_use);
    }
 
    /* Loop or uninitialized heap detected.  Reset.
@@ -516,7 +516,7 @@ driAllocateTexture( driTexHeap * const * heap_array, unsigned nr_heaps,
    for ( id = 0 ; (t->memBlock == NULL) && (id < nr_heaps) ; id++ ) {
       heap = heap_array[ id ];
       if ( heap != NULL ) {
-	 t->memBlock = mmAllocMem( heap->memory_heap, t->totalSize, 
+	 t->memBlock = mmAllocMem( heap->memory_heap, t->totalSize,
 				   heap->alignmentShift, 0 );
       }
    }
@@ -562,9 +562,9 @@ driAllocateTexture( driTexHeap * const * heap_array, unsigned nr_heaps,
 	 heap = heap_array[ index[ id ] ];
 
 	 for ( cursor = heap->texture_objects.prev, temp = cursor->prev;
-	       cursor != &heap->texture_objects ; 
+	       cursor != &heap->texture_objects ;
 	       cursor = temp, temp = cursor->prev ) {
-	       
+
 	    /* The the LRU element.  If the texture is bound to one of
 	     * the texture units, then we cannot kick it out.
 	     */
@@ -581,7 +581,7 @@ driAllocateTexture( driTexHeap * const * heap_array, unsigned nr_heaps,
 	    else
 	       driDestroyTextureObject( cursor );
 
-	    t->memBlock = mmAllocMem( heap->memory_heap, t->totalSize, 
+	    t->memBlock = mmAllocMem( heap->memory_heap, t->totalSize,
 				      heap->alignmentShift, 0 );
 
 	    if (t->memBlock)
@@ -653,7 +653,7 @@ driSetTextureSwapCounterLocation( driTexHeap * heap, unsigned * counter )
 
 /**
  * Create a new heap for texture data.
- * 
+ *
  * \param heap_id             Device-dependent heap identifier.  This value
  *                            will returned by driAllocateTexture when memory
  *                            is allocated from this heap.
@@ -661,7 +661,7 @@ driSetTextureSwapCounterLocation( driTexHeap * heap, unsigned * counter )
  *                            supplied as the first parameter to the
  *                            \c destroy_tex_obj function.
  * \param size                Size, in bytes, of the texture region
- * \param alignmentShift      Alignment requirement for textures.  If textures 
+ * \param alignmentShift      Alignment requirement for textures.  If textures
  *                            must be allocated on a 4096 byte boundry, this
  *                            would be 12.
  * \param nr_regions          Number of regions into which this texture space
@@ -683,15 +683,15 @@ driTexHeap *
 driCreateTextureHeap( unsigned heap_id, void * context, unsigned size,
 		      unsigned alignmentShift, unsigned nr_regions,
 		      drmTextureRegionPtr global_regions, unsigned * global_age,
-		      driTextureObject * swapped_objects, 
+		      driTextureObject * swapped_objects,
 		      unsigned texture_object_size,
 		      destroy_texture_object_t * destroy_tex_obj
 		    )
 {
    driTexHeap * heap;
    unsigned     l;
-    
-    
+
+
    if ( 0 )
        fprintf( stderr, "%s( %u, %p, %u, %u, %u )\n",
 		__FUNCTION__,
@@ -750,7 +750,7 @@ driCreateTextureHeap( unsigned heap_id, void * context, unsigned size,
 
 
 /** Destroys a texture heap
- * 
+ *
  * \param heap Texture heap to be destroyed
  */
 
@@ -838,7 +838,7 @@ fill_in_maximums( driTexHeap * const * heaps, unsigned nr_heaps,
 
    for ( heap = 0 ; heap < nr_heaps ; heap++ ) {
       if ( heaps[ heap ] == NULL ) {
-	 (void) memset( max_textures[ heap ].c, 0, 
+	 (void) memset( max_textures[ heap ].c, 0,
 			sizeof( max_textures[ heap ].c ) );
 	 continue;
       }
@@ -948,7 +948,7 @@ get_max_size( unsigned nr_heaps,
  * Given the amount of texture memory, the number of texture units, and the
  * maximum size of a texel, calculate the maximum texture size the driver can
  * advertise.
- * 
+ *
  * \param heaps Texture heaps for this card
  * \param nr_heap Number of texture heaps
  * \param limits OpenGL contants.  MaxTextureUnits must be set.
@@ -1097,7 +1097,7 @@ void driInitTextureObjects( struct gl_context *ctx, driTextureObject * swapped,
 
 /**
  * Verify that the specified texture is in the specificed heap.
- * 
+ *
  * \param tex   Texture to be tested.
  * \param heap  Texture memory heap to be tested.
  * \return True if the texture is in the heap, false otherwise.
@@ -1144,7 +1144,7 @@ driValidateTextureHeaps( driTexHeap * const * texture_heaps,
       const struct mem_block *p = heap->memory_heap;
 
       /* Check each texture object has a MemBlock, and is linked into
-       * the correct heap.  
+       * the correct heap.
        *
        * Check the texobj base address corresponds to the MemBlock
        * range.  Check the texobj size (recalculate?) fits within
@@ -1201,13 +1201,13 @@ driValidateTextureHeaps( driTexHeap * const * texture_heaps,
 
       if (textures_in_heap != blocks_in_mempool) {
 	 fprintf( stderr, "%s: Different number of textures objects (%u) and "
-		  "inuse memory blocks (%u)\n", 
+		  "inuse memory blocks (%u)\n",
 		  __FUNCTION__, textures_in_heap, blocks_in_mempool );
 	 return GL_FALSE;
       }
 
 #if 0
-      fprintf( stderr, "%s: textures_in_heap = %u\n", 
+      fprintf( stderr, "%s: textures_in_heap = %u\n",
 	       __FUNCTION__, textures_in_heap );
 #endif
    }

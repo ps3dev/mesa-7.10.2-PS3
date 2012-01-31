@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -100,10 +100,10 @@ struct llvmpipe_context {
 
    /** Mapped vertex buffers */
    ubyte *mapped_vbuffer[PIPE_MAX_ATTRIBS];
-   
+
    /** Vertex format */
    struct vertex_info vertex_info;
-   
+
    /** Which vertex shader output slot contains color */
    int color_slot[2];
 
@@ -113,9 +113,9 @@ struct llvmpipe_context {
    /** Which vertex shader output slot contains point size */
    int psize_slot;
 
-   /**< minimum resolvable depth value, for polygon offset */   
+   /**< minimum resolvable depth value, for polygon offset */
    double mrd;
-   
+
    /** The tiling engine */
    struct lp_setup_context *setup;
    struct lp_setup_variant setup_variant;

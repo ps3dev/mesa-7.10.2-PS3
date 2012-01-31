@@ -37,7 +37,7 @@
 #include "util/u_format.h"
 #include "util/u_memory.h"
 #include "util/u_inlines.h"
- 
+
 
 static boolean
 dri_st_framebuffer_validate(struct st_framebuffer_iface *stfbi,

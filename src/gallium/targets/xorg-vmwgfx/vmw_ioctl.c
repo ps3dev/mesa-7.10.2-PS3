@@ -199,20 +199,20 @@ err:
 
 void
 vmw_ioctl_buffer_destroy(struct vmw_customizer *vmw, struct vmw_dma_buffer *buf)
-{ 
-    struct drm_vmw_unref_dmabuf_arg arg; 
+{
+    struct drm_vmw_unref_dmabuf_arg arg;
 
-    if (buf->data) { 
-	munmap(buf->data, buf->size); 
-	buf->data = NULL; 
-    } 
+    if (buf->data) {
+	munmap(buf->data, buf->size);
+	buf->data = NULL;
+    }
 
-    memset(&arg, 0, sizeof(arg)); 
-    arg.handle = buf->handle; 
-    drmCommandWrite(vmw->fd, DRM_VMW_UNREF_DMABUF, &arg, sizeof(arg)); 
+    memset(&arg, 0, sizeof(arg));
+    arg.handle = buf->handle;
+    drmCommandWrite(vmw->fd, DRM_VMW_UNREF_DMABUF, &arg, sizeof(arg));
 
     free(buf);
-} 
+}
 
 void *
 vmw_ioctl_buffer_map(struct vmw_customizer *vmw, struct vmw_dma_buffer *buf)

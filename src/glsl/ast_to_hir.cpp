@@ -1630,7 +1630,7 @@ ast_expression::hir(exec_list *instructions,
        * tree.  This particular use must be at location specified in the grammar
        * as 'variable_identifier'.
        */
-      ir_variable *var = 
+      ir_variable *var =
 	 state->symbols->get_variable(this->primary_expression.identifier);
 
       result = new(ctx) ir_dereference_variable(var);

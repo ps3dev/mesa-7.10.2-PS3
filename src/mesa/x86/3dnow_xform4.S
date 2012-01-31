@@ -68,10 +68,10 @@ LLBL( G3TPGR_1 ):
 
     MOVQ      ( REGIND(EAX), MM0 )	/* x1            | x0                */
     MOVQ      ( REGOFF(8, EAX), MM4 )	/* x3            | x2                */
-	
+
     ADD_L     ( EDI, EAX )		/* next vertex                       */
     PREFETCH  ( REGIND(EAX) )
-	
+
     MOVQ      ( MM0, MM2 )		/* x1              | x0              */
     MOVQ      ( MM4, MM6 )		/* x3              | x2              */
 
@@ -542,7 +542,7 @@ ALIGNTEXT16
 LLBL( G3TPIR_1 ):
 
     PREFETCHW ( REGOFF(32, EDX) )       /* prefetch 2 vertices ahead         */
-	
+
     MOVQ      ( REGIND(EAX), MM0 )	/* x1              | x0              */
     MOVQ      ( REGOFF(8, EAX), MM1 )	/* x3              | x2              */
 
@@ -564,7 +564,7 @@ LLBL( G3TPIR_2 ):
     POP_L     ( ESI )
     RET
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

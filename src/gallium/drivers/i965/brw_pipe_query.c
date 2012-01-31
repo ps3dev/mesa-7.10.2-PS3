@@ -60,14 +60,14 @@ brw_query_get_result(struct pipe_context *pipe,
    if (query->bo) {
       int i;
       uint64_t *map;
-      
+
       if (brw->sws->bo_is_busy(query->bo) && !wait)
 	 return FALSE;
-      
+
       map = bo_map_read(brw->sws, query->bo);
       if (map == NULL)
 	 return FALSE;
-      
+
       for (i = query->first_index; i <= query->last_index; i++) {
 	 query->result += map[i * 2 + 1] - map[i * 2];
       }
@@ -91,7 +91,7 @@ brw_query_create(struct pipe_context *pipe, unsigned type )
       if (query == NULL)
 	 return NULL;
       return (struct pipe_query *)query;
-      
+
    default:
       return NULL;
    }
@@ -146,7 +146,7 @@ brw_query_end(struct pipe_context *pipe, struct pipe_query *q)
 }
 
 /***********************************************************************
- * Internal functions and callbacks to implement queries 
+ * Internal functions and callbacks to implement queries
  */
 
 /** Called to set up the query BO and account for its aperture space */
@@ -206,12 +206,12 @@ brw_emit_query_begin(struct brw_context *brw)
    foreach(query, &brw->query.active_head) {
       if (query->bo != brw->query.bo) {
 	 uint64_t tmp;
-	 
+
 	 /* Propogate the results from this buffer to all of the
 	  * active queries, as the bo is going away.
 	  */
 	 if (query->bo != NULL)
-	    brw_query_get_result( &brw->base, 
+	    brw_query_get_result( &brw->base,
 				  (struct pipe_query *)query,
 				  FALSE,
 				  &tmp );

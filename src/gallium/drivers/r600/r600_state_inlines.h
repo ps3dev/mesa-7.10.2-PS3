@@ -618,7 +618,7 @@ static INLINE uint32_t r600_translate_vertex_data_type(enum pipe_format format)
         default:
 		goto out_unknown;
 	}
-	
+
 	result = S_038008_DATA_FORMAT(result);
 
 	if (desc->channel[i].type == UTIL_FORMAT_TYPE_SIGNED) {

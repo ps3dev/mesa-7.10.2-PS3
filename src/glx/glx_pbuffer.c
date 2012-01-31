@@ -659,9 +659,9 @@ glXCreatePbuffer(Display * dpy, GLXFBConfig config, const int *attrib_list)
 
    if (apple_glx_pbuffer_create(dpy, config, width, height, &errorcode,
                                 &result)) {
-      /* 
+      /*
        * apple_glx_pbuffer_create only sets the errorcode to core X11
-       * errors. 
+       * errors.
        */
       __glXSendError(dpy, errorcode, 0, X_GLXCreatePbuffer, true);
 
@@ -728,7 +728,7 @@ glXQueryDrawable(Display * dpy, GLXDrawable drawable,
     * use XSetErrorHandler(), which is known to not be thread safe.
     * If we use a round-trip call to validate the drawable, there could
     * be a race, so instead we just opt in favor of letting the
-    * XGetGeometry request fail with a GetGeometry request X error 
+    * XGetGeometry request fail with a GetGeometry request X error
     * rather than GLXBadDrawable, in what is hoped to be a rare
     * case of an invalid drawable.  In practice most and possibly all
     * X11 apps using GLX shouldn't notice a difference.
@@ -775,7 +775,7 @@ glXSelectEvent(Display * dpy, GLXDrawable drawable, unsigned long mask)
    if (apple_glx_pbuffer_set_event_mask(drawable, mask))
       return;                   /*done */
 
-   /* 
+   /*
     * The spec allows a window, but currently there are no valid
     * events for a window, so do nothing.
     */
@@ -808,7 +808,7 @@ glXGetSelectedEvent(Display * dpy, GLXDrawable drawable, unsigned long *mask)
    if (apple_glx_pbuffer_get_event_mask(drawable, mask))
       return;                   /*done */
 
-   /* 
+   /*
     * The spec allows a window, but currently there are no valid
     * events for a window, so do nothing, but set the mask to 0.
     */

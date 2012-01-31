@@ -491,7 +491,7 @@ static void i810RenderClippedPoly( struct gl_context *ctx, const GLuint *elts,
    {
       GLuint *tmp = VB->Elts;
       VB->Elts = (GLuint *)elts;
-      tnl->Driver.Render.PrimTabElts[GL_POLYGON]( ctx, 0, n, 
+      tnl->Driver.Render.PrimTabElts[GL_POLYGON]( ctx, 0, n,
 						  PRIM_BEGIN|PRIM_END );
       VB->Elts = tmp;
    }
@@ -713,23 +713,23 @@ void i810RasterPrimitive( struct gl_context *ctx,
    if (I810_DEBUG & DEBUG_PRIMS) {
       /* Prints reduced prim, and hw prim */
       char *prim_name = "Unknown";
-      
+
       switch(hwprim) {
       case PR_LINES:
 	 prim_name = "Lines";
 	 break;
       case PR_LINESTRIP:
 	 prim_name = "LineStrip";
-	 break;	 
+	 break;
       case PR_TRIANGLES:
 	 prim_name = "Triangles";
-	 break;	 
+	 break;
       case PR_TRISTRIP_0:
 	 prim_name = "TriStrip_0";
-	 break;	 
+	 break;
       case PR_TRIFAN:
 	 prim_name = "TriFan";
-	 break;	 
+	 break;
       case PR_POLYGON:
 	 prim_name = "Polygons";
 	 break;
@@ -826,7 +826,7 @@ void i810Fallback( i810ContextPtr imesa, GLuint bit, GLboolean mode )
       imesa->Fallback |= bit;
       if (oldfallback == 0) {
 	 I810_FIREVERTICES(imesa);
-	 if (I810_DEBUG & DEBUG_FALLBACKS) 
+	 if (I810_DEBUG & DEBUG_FALLBACKS)
 	    fprintf(stderr, "ENTER FALLBACK %s\n", getFallbackString( bit ));
 	 _swsetup_Wakeup( ctx );
 	 imesa->RenderIndex = ~0;
@@ -836,7 +836,7 @@ void i810Fallback( i810ContextPtr imesa, GLuint bit, GLboolean mode )
       imesa->Fallback &= ~bit;
       if (oldfallback == bit) {
 	 _swrast_flush( ctx );
-	 if (I810_DEBUG & DEBUG_FALLBACKS) 
+	 if (I810_DEBUG & DEBUG_FALLBACKS)
 	    fprintf(stderr, "LEAVE FALLBACK %s\n", getFallbackString( bit ));
 	 tnl->Driver.Render.Start = i810RenderStart;
 	 tnl->Driver.Render.PrimitiveNotify = i810RenderPrimitive;

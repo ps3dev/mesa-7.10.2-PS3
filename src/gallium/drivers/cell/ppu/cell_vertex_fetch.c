@@ -51,7 +51,7 @@
  * \c row2, and \c row3 are scratch and can be modified by the generated code.
  * Furthermore, these registers will be released, via calls to
  * \c release_register, by this function.
- * 
+ *
  * \note
  * This function requires that four temporary are available on entry.
  */
@@ -173,7 +173,7 @@ emit_fetch(struct spe_function *p,
    spe_lqd(p, v2, in_ptr, (2 + offset[0]) * 16);
    spe_lqd(p, v3, in_ptr, (3 + offset[0]) * 16);
    offset[0] += 4;
-   
+
    switch (bytes) {
    case 1:
       scale_signed = 1.0f / 127.0f;
@@ -230,7 +230,7 @@ emit_fetch(struct spe_function *p,
       float_one = spe_allocate_available_register(p);
       spe_il(p, float_one, 1);
       spe_cuflt(p, float_one, float_one, 0);
-      
+
       if (count < 3) {
 	 float_zero = spe_allocate_available_register(p);
 	 spe_il(p, float_zero, 0);
@@ -290,7 +290,7 @@ void cell_update_vertex_fetch(struct draw_context *draw)
 	    break;
 	 }
       }
-      
+
       if (j == i) {
 	 unique_attr_formats++;
       }
@@ -318,7 +318,7 @@ void cell_update_vertex_fetch(struct draw_context *draw)
       unsigned offset;
 
       if (function_index[i] == i) {
-	 cell->attrib_fetch_offsets[i] = (unsigned) ((void *) p->csr 
+	 cell->attrib_fetch_offsets[i] = (unsigned) ((void *) p->csr
 						     - (void *) p->store);
 
 	 offset = 0;
@@ -336,7 +336,7 @@ void cell_update_vertex_fetch(struct draw_context *draw)
 	 /* Use the same function entry-point as a previously seen attribute
 	  * with the same format.
 	  */
-	 cell->attrib_fetch_offsets[i] = 
+	 cell->attrib_fetch_offsets[i] =
 	     cell->attrib_fetch_offsets[function_index[i]];
       }
    }

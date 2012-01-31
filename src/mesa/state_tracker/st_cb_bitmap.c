@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -347,7 +347,7 @@ setup_bitmap_vertex_data(struct st_context *st, bool normalized,
    }
 
    if (!st->bitmap.vbuf) {
-      st->bitmap.vbuf = pipe_buffer_create(pipe->screen, 
+      st->bitmap.vbuf = pipe_buffer_create(pipe->screen,
                                            PIPE_BIND_VERTEX_BUFFER,
                                            max_slots * sizeof(st->bitmap.vertices));
    }
@@ -364,17 +364,17 @@ setup_bitmap_vertex_data(struct st_context *st, bool normalized,
    st->bitmap.vertices[1][0][1] = clip_y0;
    st->bitmap.vertices[1][2][0] = sRight;
    st->bitmap.vertices[1][2][1] = tTop;
-   
+
    st->bitmap.vertices[2][0][0] = clip_x1;
    st->bitmap.vertices[2][0][1] = clip_y1;
    st->bitmap.vertices[2][2][0] = sRight;
    st->bitmap.vertices[2][2][1] = tBot;
-   
+
    st->bitmap.vertices[3][0][0] = clip_x0;
    st->bitmap.vertices[3][0][1] = clip_y1;
    st->bitmap.vertices[3][2][0] = sLeft;
    st->bitmap.vertices[3][2][1] = tBot;
-   
+
    /* same for all verts: */
    for (i = 0; i < 4; i++) {
       st->bitmap.vertices[i][0][2] = z;
@@ -610,7 +610,7 @@ st_flush_bitmap_cache(struct st_context *st)
          struct pipe_sampler_view *sv;
 
          assert(cache->xmin <= cache->xmax);
- 
+
 /*         printf("flush size %d x %d  at %d, %d\n",
                 cache->xmax - cache->xmin,
                 cache->ymax - cache->ymin,

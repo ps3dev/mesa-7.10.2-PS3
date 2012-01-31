@@ -7,10 +7,10 @@ if env['platform'] in ['linux']:
 
 if env['gcc']:
 	env.Append(CPPDEFINES = [
-		'HAVE_STDINT_H', 
+		'HAVE_STDINT_H',
 		'HAVE_SYS_TYPES_H',
 	])
-	
+
 env.Prepend(CPPPATH = [
 	'include',
 ])
@@ -62,7 +62,7 @@ sources = [
     'svga_tgsi_decl_sm20.c',
     'svga_tgsi_decl_sm30.c',
     'svga_tgsi_insn.c',
-    
+
     'svgadump/svga_dump.c',
     'svgadump/svga_shader_dump.c',
     'svgadump/svga_shader_op.c',

@@ -903,7 +903,7 @@ _mesa_PopAttrib(void)
                else {
                   GLuint i;
                   for (i = 0; i < ctx->Const.MaxDrawBuffers; i++) {
-                     _mesa_ColorMaskIndexed(i, 
+                     _mesa_ColorMaskIndexed(i,
                                   (GLboolean) (color->ColorMask[i][0] != 0),
                                   (GLboolean) (color->ColorMask[i][1] != 0),
                                   (GLboolean) (color->ColorMask[i][2] != 0),
@@ -1045,7 +1045,7 @@ _mesa_PopAttrib(void)
                /* per-light state */
                if (_math_matrix_is_dirty(ctx->ModelviewMatrixStack.Top))
                   _math_matrix_analyse( ctx->ModelviewMatrixStack.Top );
-	       
+
                for (i = 0; i < ctx->Const.MaxLights; i++) {
                   const struct gl_light *l = &light->Light[i];
                   _mesa_set_enable(ctx, GL_LIGHT0 + i, l->Enabled);
@@ -1447,7 +1447,7 @@ _mesa_PopClientAttrib(void)
 	      (struct gl_array_attrib *) node->data;
 
             adjust_buffer_object_ref_counts(ctx->Array.ArrayObj, -1);
-	 
+
             ctx->Array.ActiveTexture = data->ActiveTexture;
 	    if (data->LockCount != 0)
 	       _mesa_LockArraysEXT(data->LockFirst, data->LockCount);
@@ -1455,7 +1455,7 @@ _mesa_PopClientAttrib(void)
 	       _mesa_UnlockArraysEXT();
 
 	    _mesa_BindVertexArrayAPPLE( data->ArrayObj->Name );
-	    
+
 #if FEATURE_ARB_vertex_buffer_object
             _mesa_BindBufferARB(GL_ARRAY_BUFFER_ARB,
                                 data->ArrayBufferObj->Name);
@@ -1467,7 +1467,7 @@ _mesa_PopClientAttrib(void)
 		    sizeof( struct gl_array_object ) );
 
 	    FREE( data->ArrayObj );
-	    
+
 	    /* FIXME: Should some bits in ctx->Array->NewState also be set
 	     * FIXME: here?  It seems like it should be set to inclusive-or
 	     * FIXME: of the old ArrayObj->_Enabled and the new _Enabled.

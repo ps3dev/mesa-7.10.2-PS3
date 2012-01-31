@@ -1419,7 +1419,7 @@ radeonCreateScreen( __DRIscreen *sPriv )
             }
         }
         else
-        {            
+        {
             screen->fbLocation = (temp & 0xffff) << 16;
         }
    }

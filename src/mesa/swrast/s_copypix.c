@@ -690,7 +690,7 @@ _swrast_CopyPixels( struct gl_context *ctx,
 {
    SWcontext *swrast = SWRAST_CONTEXT(ctx);
    swrast_render_start(ctx);
-      
+
    if (!_mesa_check_conditional_render(ctx))
       return; /* don't copy */
 

@@ -55,7 +55,7 @@ void r128DestroyTexObj( r128ContextPtr rmesa, r128TexObjPtr t )
      */
 
     if ( rmesa != NULL )
-    { 
+    {
 	for ( i = 0 ; i < rmesa->glCtx->Const.MaxTextureUnits ; i++ )
 	{
 	    if ( t == rmesa->CurrentTexObj[ i ] ) {
@@ -214,7 +214,7 @@ static void uploadSubImage( r128ContextPtr rmesa, r128TexObjPtr t,
          const GLuint texelBytes =
             _mesa_get_format_bytes(image->TexFormat);
          const GLubyte *src = (const GLubyte *) image->Data +
-            (y * image->Width + x) * texelBytes;            
+            (y * image->Width + x) * texelBytes;
          const GLuint bytes = width * height * texelBytes;
          memcpy(dst, src, bytes);
       }
@@ -261,7 +261,7 @@ void r128UploadTexImages( r128ContextPtr rmesa, r128TexObjPtr t )
 
       /* Set the base offset of the texture image */
       assert(t->base.memBlock);
-      t->bufAddr = rmesa->r128Screen->texOffset[heap] 
+      t->bufAddr = rmesa->r128Screen->texOffset[heap]
 	   + t->base.memBlock->ofs;
 
       /* Set texture offsets for each mipmap level */

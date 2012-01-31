@@ -98,7 +98,7 @@ copy_image_data_to_tree(struct intel_context *intel,
    else {
       assert(intelImage->base.Data != NULL);
 
-      /* More straightforward upload.  
+      /* More straightforward upload.
        */
       intel_miptree_image_data(intel,
                                intelObj->mt,
@@ -116,7 +116,7 @@ copy_image_data_to_tree(struct intel_context *intel,
 }
 
 
-/*  
+/*
  */
 GLuint
 intel_finalize_mipmap_tree(struct intel_context *intel, GLuint unit)
@@ -129,7 +129,7 @@ intel_finalize_mipmap_tree(struct intel_context *intel, GLuint unit)
    GLuint nr_faces = 0;
    struct intel_texture_image *firstImage;
 
-   /* We know/require this is true by now: 
+   /* We know/require this is true by now:
     */
    assert(intelObj->base._Complete);
 
@@ -173,7 +173,7 @@ intel_finalize_mipmap_tree(struct intel_context *intel, GLuint unit)
 
    /* Check tree can hold all active levels.  Check tree matches
     * target, imageFormat, etc.
-    * 
+    *
     * XXX: For some layouts (eg i945?), the test might have to be
     * first_level == firstLevel, as the tree isn't valid except at the
     * original start level.  Hope to get around this by

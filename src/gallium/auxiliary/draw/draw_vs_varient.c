@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -39,18 +39,18 @@
 #include "draw/draw_vs.h"
 #include "translate/translate.h"
 
-/* A first pass at incorporating vertex fetch/emit functionality into 
+/* A first pass at incorporating vertex fetch/emit functionality into
  */
 struct draw_vs_varient_generic {
    struct draw_vs_varient base;
 
    struct draw_vertex_shader *shader;
    struct draw_context *draw;
-   
+
    /* Basic plan is to run these two translate functions before/after
     * the vertex shader's existing run_linear() routine to simulate
-    * the inclusion of this functionality into the shader...  
-    * 
+    * the inclusion of this functionality into the shader...
+    *
     * Next will look at actually including it.
     */
    struct translate *fetch;
@@ -71,9 +71,9 @@ static void vsvg_set_buffer( struct draw_vs_varient *varient,
 {
    struct draw_vs_varient_generic *vsvg = (struct draw_vs_varient_generic *)varient;
 
-   vsvg->fetch->set_buffer(vsvg->fetch, 
-                           buffer, 
-                           ptr, 
+   vsvg->fetch->set_buffer(vsvg->fetch,
+                           buffer,
+                           ptr,
                            stride,
                            max_index );
 }
@@ -124,7 +124,7 @@ static void do_viewport( struct draw_vs_varient_generic *vsvg,
       data[2] = data[2] * scale[2] + trans[2];
    }
 }
-                         
+
 
 static void PIPE_CDECL vsvg_run_elts( struct draw_vs_varient *varient,
                                       const unsigned *elts,
@@ -134,25 +134,25 @@ static void PIPE_CDECL vsvg_run_elts( struct draw_vs_varient *varient,
    struct draw_vs_varient_generic *vsvg = (struct draw_vs_varient_generic *)varient;
    unsigned temp_vertex_stride = vsvg->temp_vertex_stride;
    void *temp_buffer = MALLOC( align(count,4) * temp_vertex_stride );
-   
+
    if (0) debug_printf("%s %d \n", __FUNCTION__,  count);
-			
+
    /* Want to do this in small batches for cache locality?
     */
-   
-   vsvg->fetch->run_elts( vsvg->fetch, 
+
+   vsvg->fetch->run_elts( vsvg->fetch,
                           elts,
                           count,
                           vsvg->draw->instance_id,
                           temp_buffer );
 
-   vsvg->base.vs->run_linear( vsvg->base.vs, 
+   vsvg->base.vs->run_linear( vsvg->base.vs,
                               temp_buffer,
                               temp_buffer,
                               vsvg->base.vs->draw->pt.user.vs_constants,
                               vsvg->base.vs->draw->pt.user.vs_constants_size,
                               count,
-                              temp_vertex_stride, 
+                              temp_vertex_stride,
                               temp_vertex_stride);
 
    /* FIXME: geometry shading? */
@@ -173,12 +173,12 @@ static void PIPE_CDECL vsvg_run_elts( struct draw_vs_varient *varient,
 
 
    vsvg->emit->set_buffer( vsvg->emit,
-                           0, 
+                           0,
                            temp_buffer,
                            temp_vertex_stride,
                            ~0 );
 
-   vsvg->emit->set_buffer( vsvg->emit, 
+   vsvg->emit->set_buffer( vsvg->emit,
                            1,
                            &vsvg->draw->rasterizer->point_size,
                            0,
@@ -201,24 +201,24 @@ static void PIPE_CDECL vsvg_run_linear( struct draw_vs_varient *varient,
    struct draw_vs_varient_generic *vsvg = (struct draw_vs_varient_generic *)varient;
    unsigned temp_vertex_stride = vsvg->temp_vertex_stride;
    void *temp_buffer = MALLOC( align(count,4) * temp_vertex_stride );
-	
+
    if (0) debug_printf("%s %d %d (sz %d, %d)\n", __FUNCTION__, start, count,
                        vsvg->base.key.output_stride,
                        temp_vertex_stride);
 
-   vsvg->fetch->run( vsvg->fetch, 
+   vsvg->fetch->run( vsvg->fetch,
                      start,
                      count,
                      vsvg->draw->instance_id,
                      temp_buffer );
 
-   vsvg->base.vs->run_linear( vsvg->base.vs, 
+   vsvg->base.vs->run_linear( vsvg->base.vs,
                               temp_buffer,
                               temp_buffer,
                               vsvg->base.vs->draw->pt.user.vs_constants,
                               vsvg->base.vs->draw->pt.user.vs_constants_size,
                               count,
-                              temp_vertex_stride, 
+                              temp_vertex_stride,
                               temp_vertex_stride);
 
    if (vsvg->base.key.clip) {
@@ -236,17 +236,17 @@ static void PIPE_CDECL vsvg_run_linear( struct draw_vs_varient *varient,
    }
 
    vsvg->emit->set_buffer( vsvg->emit,
-                           0, 
+                           0,
                            temp_buffer,
                            temp_vertex_stride,
                            ~0 );
-   
-   vsvg->emit->set_buffer( vsvg->emit, 
+
+   vsvg->emit->set_buffer( vsvg->emit,
                            1,
                            &vsvg->draw->rasterizer->point_size,
                            0,
                            ~0 );
-   
+
    vsvg->emit->run( vsvg->emit,
                     0, count,
                     vsvg->draw->instance_id,
@@ -308,7 +308,7 @@ draw_vs_create_varient_generic( struct draw_vertex_shader *vs,
    emit.output_stride = key->output_stride;
    for (i = 0; i < key->nr_outputs; i++) {
       if (key->element[i].out.format != EMIT_1F_PSIZE)
-      {      
+      {
          emit.element[i].type = TRANSLATE_ELEMENT_NORMAL;
          emit.element[i].input_format = PIPE_FORMAT_R32G32B32A32_FLOAT;
          emit.element[i].input_buffer = 0;

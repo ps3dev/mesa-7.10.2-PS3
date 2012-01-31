@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -490,7 +490,7 @@
 #define REG_TYPE_R                 0    /* temporary regs, no need to
                                          * dcl, must be written before
                                          * read -- Preserved between
-                                         * phases. 
+                                         * phases.
                                          */
 #define REG_TYPE_T                 1    /* Interpolated values, must be
                                          * dcl'ed before use.
@@ -535,7 +535,7 @@
 /* Arithmetic instructions */
 
 /* .replicate_swizzle == selection and replication of a particular
- * scalar channel, ie., .xxxx, .yyyy, .zzzz or .wwww 
+ * scalar channel, ie., .xxxx, .yyyy, .zzzz or .wwww
  */
 #define A0_NOP    (0x0<<24)     /* no operation */
 #define A0_ADD    (0x1<<24)     /* dst = src0 + src1 */
@@ -636,11 +636,11 @@
 #define T0_DEST_TYPE_SHIFT                19
 /* Allow: R, OC, OD, U */
 /* Note: U (unpreserved) regs do not retain their values between
- * phases (cannot be used for feedback) 
+ * phases (cannot be used for feedback)
  *
  * Note: oC and OD registers can only be used as the destination of a
  * texture instruction once per phase (this is an implementation
- * restriction). 
+ * restriction).
  */
 #define T0_DEST_NR_SHIFT                 14
 /* Allow R: 0..15, OC,OD: 0..0, U: 0..2 */
@@ -677,9 +677,9 @@
 #define D0_CHANNEL_XYZ              (D0_CHANNEL_XY|D0_CHANNEL_Z)
 
 /* I915 Errata: Do not allow (xz), (xw), (xzw) combinations for diffuse
- * or specular declarations. 
+ * or specular declarations.
  *
- * For T dcls, only allow: (x), (xy), (xyz), (w), (xyzw) 
+ * For T dcls, only allow: (x), (xy), (xyz), (w), (xyzw)
  *
  * Must be zero for S (sampler) dcls
  */

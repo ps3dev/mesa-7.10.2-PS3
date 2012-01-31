@@ -141,7 +141,7 @@ static GLboolean run_vertex_stage( struct gl_context *ctx,
    TNLcontext *tnl = TNL_CONTEXT(ctx);
    struct vertex_buffer *VB = &tnl->vb;
 
-   if (ctx->VertexProgram._Current) 
+   if (ctx->VertexProgram._Current)
       return GL_TRUE;
 
    tnl_clip_prepare(ctx);
@@ -165,7 +165,7 @@ static GLboolean run_vertex_stage( struct gl_context *ctx,
    /* Drivers expect this to be clean to element 4...
     */
    switch (VB->ClipPtr->size) {
-   case 1:			
+   case 1:
       /* impossible */
    case 2:
       _mesa_vector4f_clean_elem( VB->ClipPtr, VB->Count, 2 );

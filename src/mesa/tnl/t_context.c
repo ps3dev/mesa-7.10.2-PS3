@@ -148,7 +148,7 @@ _tnl_InvalidateState( struct gl_context *ctx, GLuint new_state )
       }
    }
 
-   if (ctx->Polygon.FrontMode != GL_FILL || 
+   if (ctx->Polygon.FrontMode != GL_FILL ||
        ctx->Polygon.BackMode != GL_FILL)
       RENDERINPUTS_SET( tnl->render_inputs_bitset, _TNL_ATTRIB_EDGEFLAG );
 
@@ -181,7 +181,7 @@ _tnl_wakeup( struct gl_context *ctx )
 
 #if 0
    if (ctx->Light.ColorMaterialEnabled) {
-      _mesa_update_color_material( ctx, 
+      _mesa_update_color_material( ctx,
 				   ctx->Current.Attrib[VERT_ATTRIB_COLOR0] );
    }
 #endif

@@ -41,23 +41,23 @@
 class Backend;
 
 class reflexChain{
-  Real2 *queue; 
-  /*the order of the polygon vertices: either q[0],q[1].., or 
+  Real2 *queue;
+  /*the order of the polygon vertices: either q[0],q[1].., or
    * q[n-1], q[n-2], ..., q[0]
    *this order determines the interior of the polygon, so it
    *also used to determines whether a chain is reflex or convex
    */
-  Int isIncreasing; 
+  Int isIncreasing;
   Int index_queue;
   Int size_queue; /*allocated size*/
-  
+
 public:
   reflexChain(Int size, Int isIncreasing);
   ~reflexChain();
-  
+
   void insert(Real u, Real v);
   void insert(Real v[2]);
-  
+
   void processNewVertex(Real v[2], primStream* pStream);
   void outputFan(Real v[2], primStream* pStream);
 
@@ -70,7 +70,7 @@ public:
 /*dynamic array of pointers to reals.
  *Intended to store an array of (u,v).
  *Notice that it doesn't allocate or dealocate the space
- *for the (u,v) themselfs. So it assums that someone else 
+ *for the (u,v) themselfs. So it assums that someone else
  *is taking care of them, while this class only plays with
  *the pointers.
  */
@@ -99,13 +99,13 @@ public:
 
 void monoTriangulation(directedLine* monoPolygon, primStream* pStream);
 
-void monoTriangulationRec(Real* topVertex, Real* botVertex, 
+void monoTriangulationRec(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current,
 			  vertexArray* dec_chain, Int dec_current,
 			  primStream* pStream);
 
-void monoTriangulationRec(directedLine* inc_chain, Int inc_index, 
-			  directedLine* dec_chain, Int dec_index, 
+void monoTriangulationRec(directedLine* inc_chain, Int inc_index,
+			  directedLine* dec_chain, Int dec_index,
 			  directedLine* topVertex, Int top_index,
 			  directedLine* botVertex,
 			  primStream* pStream);
@@ -116,60 +116,60 @@ void monoTriangulationRec(directedLine* inc_chain, Int inc_index,
  *is increasing (left chain in V-monotone case) or decreaing (right chain
  *in V-monotone case).
  */
-void monoTriangulation2(Real* topVertex, Real* botVertex, 
+void monoTriangulation2(Real* topVertex, Real* botVertex,
 			vertexArray* inc_chain, Int inc_smallIndex,
 			Int inc_largeIndex,
 			Int is_increase_chain,
 			primStream* pStream);
-void monoTriangulationRecGen(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecGen(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current, Int inc_end,
 			  vertexArray* dec_chain, Int dec_current, Int dec_end,
-			  primStream* pStream); 
+			  primStream* pStream);
 
-void monoTriangulationRecGenOpt(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecGenOpt(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current, Int inc_end,
 			  vertexArray* dec_chain, Int dec_current, Int dec_end,
-			  primStream* pStream); 
+			  primStream* pStream);
 
 void triangulateXYMonoTB(Int n_left, Real** leftVerts,
 		       Int n_right, Real** rightVerts,
 		       primStream* pStream);
 
-void monoTriangulationRecGenTBOpt(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecGenTBOpt(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current, Int inc_end,
 			  vertexArray* dec_chain, Int dec_current, Int dec_end,
 			  primStream* pStream);
 
-void monoTriangulationRecOpt(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecOpt(Real* topVertex, Real* botVertex,
 			     vertexArray* left_chain, Int left_current,
 			     vertexArray* right_chain, Int right_current,
 			     primStream* pStream);
 
-void monoTriangulationRecFunGen(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecFunGen(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current, Int inc_end,
 			  vertexArray* dec_chain, Int dec_current, Int dec_end,
 			  Int  (*compFun)(Real*, Real*),
 			  primStream* pStream);
 
-void monoTriangulationRecFun(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecFun(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current,
 			  vertexArray* dec_chain, Int dec_current,
 			   Int (*compFun)(Real*, Real*),
 			  primStream* pStream);
-void monoTriangulationFun(directedLine* monoPolygon, 
+void monoTriangulationFun(directedLine* monoPolygon,
 			  Int (*compFun)(Real*, Real*), primStream* pStream);
 
 
 
 
-void monoTriangulationRec(Real* topVertex, Real* botVertex, 
+void monoTriangulationRec(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current,
 			  vertexArray* dec_chain, Int dec_current,
 			  Backend* backend);
 
 void monoTriangulationFunBackend(Arc_ptr loop, Int (*compFun)(Real*, Real*), Backend* backend);
 
-void monoTriangulationRecFunBackend(Real* topVertex, Real* botVertex, 
+void monoTriangulationRecFunBackend(Real* topVertex, Real* botVertex,
 			  vertexArray* inc_chain, Int inc_current,
 			  vertexArray* dec_chain, Int dec_current,
 			  Int  (*compFun)(Real*, Real*),

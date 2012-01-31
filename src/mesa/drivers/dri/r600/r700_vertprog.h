@@ -29,7 +29,7 @@
 #define _R700_VERTPROG_H_
 
 #include "main/glheader.h"
-#include "main/mtypes.h" 
+#include "main/mtypes.h"
 
 #include "r700_shader.h"
 #include "r700_assembler.h"
@@ -42,7 +42,7 @@ typedef struct ArrayDesc //TEMP
 	GLenum format; //GL_RGBA or GL_BGRA
 } ArrayDesc;
 
-struct r700_vertex_program 
+struct r700_vertex_program
 {
     struct gl_vertex_program *mesa_program; /* Must be first */
 
@@ -70,10 +70,10 @@ struct r700_vertex_program_cont
 };
 
 //Internal
-unsigned int Map_Vertex_Output(r700_AssemblerBase       *pAsm, 
+unsigned int Map_Vertex_Output(r700_AssemblerBase       *pAsm,
 			       struct gl_vertex_program *mesa_vp,
 			       unsigned int unStart);
-unsigned int Map_Vertex_Input(r700_AssemblerBase       *pAsm, 
+unsigned int Map_Vertex_Input(r700_AssemblerBase       *pAsm,
 			      struct gl_vertex_program *mesa_vp,
 			      unsigned int unStart);
 GLboolean Process_Vertex_Program_Vfetch_Instructions(

@@ -5,7 +5,7 @@
 #include "i810context.h"
 
 void i810EmitPrim( i810ContextPtr imesa );
-void i810FlushPrims( i810ContextPtr mmesa ); 
+void i810FlushPrims( i810ContextPtr mmesa );
 void i810FlushPrimsLocked( i810ContextPtr mmesa );
 void i810FlushPrimsGetBuffer( i810ContextPtr imesa );
 
@@ -35,7 +35,7 @@ do {								\
 
 static INLINE GLuint *i810AllocDmaLow( i810ContextPtr imesa, int bytes )
 {
-   if (imesa->vertex_low + bytes > imesa->vertex_high) 
+   if (imesa->vertex_low + bytes > imesa->vertex_high)
       i810FlushPrimsGetBuffer( imesa );
 
    {

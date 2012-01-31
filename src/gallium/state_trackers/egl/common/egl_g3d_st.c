@@ -196,7 +196,7 @@ egl_g3d_st_framebuffer_flush_front(struct st_framebuffer_iface *stfbi,
          NATIVE_ATTACHMENT_FRONT_LEFT, FALSE, 0);
 }
 
-static boolean 
+static boolean
 egl_g3d_st_framebuffer_validate(struct st_framebuffer_iface *stfbi,
                                 const enum st_attachment_type *statts,
                                 unsigned count,

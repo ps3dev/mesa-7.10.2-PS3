@@ -26,15 +26,15 @@
 /**
  * @file
  * SVGA buffer manager for Guest Memory Regions (GMRs).
- * 
+ *
  * GMRs are used for pixel and vertex data upload/download to/from the virtual
- * SVGA hardware. There is a limited number of GMRs available, and 
- * creating/destroying them is also a slow operation so we must suballocate 
+ * SVGA hardware. There is a limited number of GMRs available, and
+ * creating/destroying them is also a slow operation so we must suballocate
  * them.
- * 
+ *
  * This file implements a pipebuffer library's buffer manager, so that we can
- * use pipepbuffer's suballocation, fencing, and debugging facilities with GMRs. 
- * 
+ * use pipepbuffer's suballocation, fencing, and debugging facilities with GMRs.
+ *
  * @author Jose Fonseca <jfonseca@vmware.com>
  */
 
@@ -58,12 +58,12 @@ struct vmw_gmr_bufmgr;
 struct vmw_gmr_buffer
 {
    struct pb_buffer base;
-   
+
    struct vmw_gmr_bufmgr *mgr;
-   
+
    struct vmw_region *region;
    void *map;
-   
+
 #ifdef DEBUG
    struct pipe_fence_handle *last_fence;
 #endif
@@ -85,7 +85,7 @@ vmw_gmr_buffer(struct pb_buffer *buf)
 struct vmw_gmr_bufmgr
 {
    struct pb_manager base;
-   
+
    struct vmw_winsys_screen *vws;
 };
 
@@ -111,7 +111,7 @@ vmw_gmr_buffer_destroy(struct pb_buffer *_buf)
 #endif
 
    vmw_ioctl_region_unmap(buf->region);
-   
+
    vmw_ioctl_region_destroy(buf->region);
 
    FREE(buf);
@@ -146,7 +146,7 @@ vmw_gmr_buffer_get_base_buffer(struct pb_buffer *buf,
 
 
 static enum pipe_error
-vmw_gmr_buffer_validate( struct pb_buffer *_buf, 
+vmw_gmr_buffer_validate( struct pb_buffer *_buf,
                          struct pb_validate *vl,
                          unsigned flags )
 {
@@ -156,11 +156,11 @@ vmw_gmr_buffer_validate( struct pb_buffer *_buf,
 
 
 static void
-vmw_gmr_buffer_fence( struct pb_buffer *_buf, 
+vmw_gmr_buffer_fence( struct pb_buffer *_buf,
                       struct pipe_fence_handle *fence )
 {
    /* We don't need to do anything, as the pipebuffer library
-    * will take care of delaying the destruction of fenced buffers */  
+    * will take care of delaying the destruction of fenced buffers */
 #ifdef DEBUG
    struct vmw_gmr_buffer *buf = vmw_gmr_buffer(_buf);
    if(fence)
@@ -182,12 +182,12 @@ const struct pb_vtbl vmw_gmr_buffer_vtbl = {
 static struct pb_buffer *
 vmw_gmr_bufmgr_create_buffer(struct pb_manager *_mgr,
                          pb_size size,
-                         const struct pb_desc *desc) 
+                         const struct pb_desc *desc)
 {
    struct vmw_gmr_bufmgr *mgr = vmw_gmr_bufmgr(_mgr);
    struct vmw_winsys_screen *vws = mgr->vws;
    struct vmw_gmr_buffer *buf;
-   
+
    buf = CALLOC_STRUCT(vmw_gmr_buffer);
    if(!buf)
       goto error1;
@@ -202,7 +202,7 @@ vmw_gmr_bufmgr_create_buffer(struct pb_manager *_mgr,
    buf->region = vmw_ioctl_region_create(vws, size);
    if(!buf->region)
       goto error2;
-	 
+
    buf->map = vmw_ioctl_region_map(buf->region);
    if(!buf->map)
       goto error3;
@@ -219,14 +219,14 @@ error1:
 
 
 static void
-vmw_gmr_bufmgr_flush(struct pb_manager *mgr) 
+vmw_gmr_bufmgr_flush(struct pb_manager *mgr)
 {
    /* No-op */
 }
 
 
 static void
-vmw_gmr_bufmgr_destroy(struct pb_manager *_mgr) 
+vmw_gmr_bufmgr_destroy(struct pb_manager *_mgr)
 {
    struct vmw_gmr_bufmgr *mgr = vmw_gmr_bufmgr(_mgr);
    FREE(mgr);
@@ -234,10 +234,10 @@ vmw_gmr_bufmgr_destroy(struct pb_manager *_mgr)
 
 
 struct pb_manager *
-vmw_gmr_bufmgr_create(struct vmw_winsys_screen *vws) 
+vmw_gmr_bufmgr_create(struct vmw_winsys_screen *vws)
 {
    struct vmw_gmr_bufmgr *mgr;
-   
+
    mgr = CALLOC_STRUCT(vmw_gmr_bufmgr);
    if(!mgr)
       return NULL;
@@ -245,30 +245,30 @@ vmw_gmr_bufmgr_create(struct vmw_winsys_screen *vws)
    mgr->base.destroy = vmw_gmr_bufmgr_destroy;
    mgr->base.create_buffer = vmw_gmr_bufmgr_create_buffer;
    mgr->base.flush = vmw_gmr_bufmgr_flush;
-   
+
    mgr->vws = vws;
-   
+
    return &mgr->base;
 }
 
 
 boolean
-vmw_gmr_bufmgr_region_ptr(struct pb_buffer *buf, 
+vmw_gmr_bufmgr_region_ptr(struct pb_buffer *buf,
                           struct SVGAGuestPtr *ptr)
 {
    struct pb_buffer *base_buf;
    unsigned offset = 0;
    struct vmw_gmr_buffer *gmr_buf;
-   
+
    pb_get_base_buffer( buf, &base_buf, &offset );
-   
+
    gmr_buf = vmw_gmr_buffer(base_buf);
    if(!gmr_buf)
       return FALSE;
-   
+
    *ptr = vmw_ioctl_region_ptr(gmr_buf->region);
-   
+
    ptr->offset += offset;
-   
+
    return TRUE;
 }

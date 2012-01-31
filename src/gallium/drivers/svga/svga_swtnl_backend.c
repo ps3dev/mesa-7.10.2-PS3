@@ -118,7 +118,7 @@ svga_vbuf_render_map_vertices( struct vbuf_render *render )
 
    char *ptr = (char*)pipe_buffer_map(&svga->pipe,
                                       svga_render->vbuf,
-                                      PIPE_TRANSFER_WRITE | 
+                                      PIPE_TRANSFER_WRITE |
                                       PIPE_TRANSFER_FLUSH_EXPLICIT |
                                       PIPE_TRANSFER_DISCARD |
                                       PIPE_TRANSFER_UNSYNCHRONIZED,
@@ -252,7 +252,7 @@ svga_vbuf_render_draw_elements( struct vbuf_render *render,
    size_t size = 2 * nr_indices;
 
    assert(( svga_render->vbuf_offset - svga_render->vdecl_offset) % svga_render->vertex_size == 0);
-   
+
    if (svga_render->ibuf_size < svga_render->ibuf_offset + size)
       pipe_resource_reference(&svga_render->ibuf, NULL);
 

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include <strings.h>
@@ -203,7 +203,7 @@ i915_emit_arith(struct i915_fragment_program * p,
    return dest;
 }
 
-static GLuint get_free_rreg (struct i915_fragment_program *p, 
+static GLuint get_free_rreg (struct i915_fragment_program *p,
                              GLuint live_regs)
 {
     int bit = ffs(~live_regs);
@@ -215,7 +215,7 @@ static GLuint get_free_rreg (struct i915_fragment_program *p,
 }
 
 GLuint i915_emit_texld( struct i915_fragment_program *p,
-			GLuint live_regs,               
+			GLuint live_regs,
 			GLuint dest,
 			GLuint destmask,
 			GLuint sampler,
@@ -227,7 +227,7 @@ GLuint i915_emit_texld( struct i915_fragment_program *p,
          * a register we can MOV the swizzled TC to (since TEX doesn't support
          * swizzled sources) */
         GLuint swizCoord = get_free_rreg(p, live_regs);
-        if (swizCoord == UREG_BAD) 
+        if (swizCoord == UREG_BAD)
             return 0;
 
         i915_emit_arith( p, A0_MOV, swizCoord, A0_DEST_CHANNEL_ALL, 0, coord, 0, 0 );
@@ -256,8 +256,8 @@ GLuint i915_emit_texld( struct i915_fragment_program *p,
           (GET_UREG_TYPE(coord) != REG_TYPE_OD) &&
           (GET_UREG_TYPE(coord) != REG_TYPE_T)) {
           GLuint  tmpCoord = get_free_rreg(p, live_regs);
-          
-          if (tmpCoord == UREG_BAD) 
+
+          if (tmpCoord == UREG_BAD)
               return 0;
 
           i915_emit_arith(p, A0_MOV, tmpCoord, A0_DEST_CHANNEL_ALL, 0, coord, 0, 0);
@@ -281,7 +281,7 @@ GLuint i915_emit_texld( struct i915_fragment_program *p,
 	 return UREG_BAD;
       }
 
-      *(p->csr++) = (op | 
+      *(p->csr++) = (op |
 		     T0_DEST( dest ) |
 		     T0_SAMPLER( sampler ));
 

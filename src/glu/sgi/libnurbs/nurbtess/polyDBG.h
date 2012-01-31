@@ -39,7 +39,7 @@
 
 Int DBG_edgesIntersectGen(Real A[2], Real B[2], Real C[2], Real D[2]);
 Int DBG_intersectChain(vertexArray* chain, Int start, Int end, Real A[2], Real B[2]);
-  
+
 
 Int DBG_edgesIntersect(directedLine* l1, directedLine* l2);
 Int DBG_polygonSelfIntersect(directedLine* poly);

@@ -29,7 +29,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef _R200_REG_H_
 #define _R200_REG_H_
 
-#define R200_PP_MISC                      0x1c14 
+#define R200_PP_MISC                      0x1c14
 #define     R200_REF_ALPHA_MASK        0x000000ff
 #define     R200_ALPHA_TEST_FAIL       (0 << 8)
 #define     R200_ALPHA_TEST_LESS       (1 << 8)
@@ -48,7 +48,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_CHROMA_KEY_ZERO       (1 << 18)
 #define     R200_RIGHT_HAND_CUBE_D3D   (0 << 24)
 #define     R200_RIGHT_HAND_CUBE_OGL   (1 << 24)
-#define R200_PP_FOG_COLOR                 0x1c18 
+#define R200_PP_FOG_COLOR                 0x1c18
 #define     R200_FOG_COLOR_MASK        0x00ffffff
 #define     R200_FOG_VERTEX            (0 << 24)
 #define     R200_FOG_TABLE             (1 << 24)
@@ -58,7 +58,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_FOG_USE_SPEC_ALPHA    (3 << 25)
 #define     R200_FOG_USE_VTX_FOG       (4 << 25)
 #define     R200_FOG_USE_MASK          (7 << 25)
-#define R200_RE_SOLID_COLOR               0x1c1c 
+#define R200_RE_SOLID_COLOR               0x1c1c
 #define R200_RB3D_BLENDCNTL               0x1c20
 #define     R200_COMB_FCN_MASK                    (7  << 12)
 #define     R200_COMB_FCN_ADD_CLAMP               (0  << 12)
@@ -94,7 +94,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_DEPTH_ENDIAN_NO_SWAP    (0 << 18)
 #define     R200_DEPTH_ENDIAN_WORD_SWAP  (1 << 18)
 #define     R200_DEPTH_ENDIAN_DWORD_SWAP (2 << 18)
-#define R200_RB3D_ZSTENCILCNTL            0x1c2c 
+#define R200_RB3D_ZSTENCILCNTL            0x1c2c
 #define     R200_DEPTH_FORMAT_MASK          (0xf << 0)
 #define     R200_DEPTH_FORMAT_16BIT_INT_Z   (0  <<  0)
 #define     R200_DEPTH_FORMAT_24BIT_INT_Z   (2  <<  0)
@@ -154,7 +154,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_Z_WRITE_ENABLE             (1  << 30)
 #define     R200_Z_DECOMPRESSION_ENABLE     (1  << 31)
 /*gap*/
-#define R200_PP_CNTL                      0x1c38 
+#define R200_PP_CNTL                      0x1c38
 #define     R200_TEX_0_ENABLE                         0x00000010
 #define     R200_TEX_1_ENABLE                         0x00000020
 #define     R200_TEX_2_ENABLE                         0x00000040
@@ -181,7 +181,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_ANTI_ALIAS_LINE                       0x01000000
 #define     R200_ANTI_ALIAS_POLY                       0x02000000
 #define     R200_ANTI_ALIAS_MASK                       0x03000000
-#define R200_RB3D_CNTL                    0x1c3c 
+#define R200_RB3D_CNTL                    0x1c3c
 #define     R200_ALPHA_BLEND_ENABLE       (1  <<  0)
 #define     R200_PLANE_MASK_ENABLE        (1  <<  1)
 #define     R200_DITHER_ENABLE            (1  <<  2)
@@ -204,19 +204,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_COLOR_FORMAT_ARGB4444    (15 << 10)
 #define     R200_CLRCMP_FLIP_ENABLE       (1  << 14)
 #define     R200_SEPARATE_ALPHA_ENABLE    (1  << 16)
-#define R200_RB3D_COLOROFFSET             0x1c40 
+#define R200_RB3D_COLOROFFSET             0x1c40
 #define     R200_COLOROFFSET_MASK      0xfffffff0
-#define R200_RE_WIDTH_HEIGHT              0x1c44 
+#define R200_RE_WIDTH_HEIGHT              0x1c44
 #define     R200_RE_WIDTH_SHIFT        0
 #define     R200_RE_HEIGHT_SHIFT       16
-#define R200_RB3D_COLORPITCH              0x1c48 
+#define R200_RB3D_COLORPITCH              0x1c48
 #define     R200_COLORPITCH_MASK         0x000001ff8
 #define     R200_COLOR_TILE_ENABLE       (1 << 16)
 #define     R200_COLOR_MICROTILE_ENABLE  (1 << 17)
 #define     R200_COLOR_ENDIAN_NO_SWAP    (0 << 18)
 #define     R200_COLOR_ENDIAN_WORD_SWAP  (1 << 18)
 #define     R200_COLOR_ENDIAN_DWORD_SWAP (2 << 18)
-#define R200_SE_CNTL                      0x1c4c 
+#define R200_SE_CNTL                      0x1c4c
 #define     R200_FFACE_CULL_CW          (0 <<  0)
 #define     R200_FFACE_CULL_CCW         (1 <<  0)
 #define     R200_FFACE_CULL_DIR_MASK    (1 <<  0)
@@ -263,7 +263,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_ROUND_PREC_8TH_PIX     (1 << 30)
 #define     R200_ROUND_PREC_4TH_PIX     (2 << 30)
 #define     R200_ROUND_PREC_HALF_PIX    (3 << 30)
-#define R200_RE_CNTL                      0x1c50 
+#define R200_RE_CNTL                      0x1c50
 #define     R200_STIPPLE_ENABLE                     0x1
 #define     R200_SCISSOR_ENABLE                     0x2
 #define     R200_PATTERN_ENABLE                     0x4
@@ -278,14 +278,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /* gap */
 #define R200_RE_STIPPLE_ADDR              0x1cc8
 #define R200_RE_STIPPLE_DATA              0x1ccc
-#define R200_RE_LINE_PATTERN              0x1cd0 
+#define R200_RE_LINE_PATTERN              0x1cd0
 #define     R200_LINE_PATTERN_MASK             0x0000ffff
 #define     R200_LINE_REPEAT_COUNT_SHIFT       16
 #define     R200_LINE_PATTERN_START_SHIFT      24
 #define     R200_LINE_PATTERN_LITTLE_BIT_ORDER (0 << 28)
 #define     R200_LINE_PATTERN_BIG_BIT_ORDER    (1 << 28)
 #define     R200_LINE_PATTERN_AUTO_RESET       (1 << 29)
-#define R200_RE_LINE_STATE                0x1cd4 
+#define R200_RE_LINE_STATE                0x1cd4
 #define     R200_LINE_CURRENT_PTR_SHIFT       0
 #define     R200_LINE_CURRENT_COUNT_SHIFT     8
 #define R200_RE_SCISSOR_TL_0              0x1cd8
@@ -295,18 +295,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define R200_RE_SCISSOR_TL_2              0x1ce8
 #define R200_RE_SCISSOR_BR_2              0x1cec
 /* gap */
-#define R200_RB3D_DEPTHXY_OFFSET          0x1d60 
+#define R200_RB3D_DEPTHXY_OFFSET          0x1d60
 #define     R200_DEPTHX_SHIFT  0
 #define     R200_DEPTHY_SHIFT  16
 /* gap */
-#define R200_RB3D_STENCILREFMASK          0x1d7c 
+#define R200_RB3D_STENCILREFMASK          0x1d7c
 #define     R200_STENCIL_REF_SHIFT           0
 #define     R200_STENCIL_REF_MASK            (0xff << 0)
 #define     R200_STENCIL_MASK_SHIFT          16
 #define     R200_STENCIL_VALUE_MASK          (0xff << 16)
 #define     R200_STENCIL_WRITEMASK_SHIFT     24
 #define     R200_STENCIL_WRITE_MASK          (0xff << 24)
-#define R200_RB3D_ROPCNTL                 0x1d80 
+#define R200_RB3D_ROPCNTL                 0x1d80
 #define     R200_ROP_MASK                    (15 << 8)
 #define     R200_ROP_CLEAR                   (0  << 8)
 #define     R200_ROP_NOR                     (1  << 8)
@@ -324,17 +324,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_ROP_OR_REVERSE              (13 << 8)
 #define     R200_ROP_OR                      (14 << 8)
 #define     R200_ROP_SET                     (15 << 8)
-#define R200_RB3D_PLANEMASK               0x1d84 
+#define R200_RB3D_PLANEMASK               0x1d84
 /* gap */
-#define R200_SE_VPORT_XSCALE              0x1d98 
-#define R200_SE_VPORT_XOFFSET             0x1d9c 
-#define R200_SE_VPORT_YSCALE              0x1da0 
-#define R200_SE_VPORT_YOFFSET             0x1da4 
-#define R200_SE_VPORT_ZSCALE              0x1da8 
-#define R200_SE_VPORT_ZOFFSET             0x1dac 
-#define R200_SE_ZBIAS_FACTOR              0x1db0 
-#define R200_SE_ZBIAS_CONSTANT            0x1db4 
-#define R200_SE_LINE_WIDTH                0x1db8 
+#define R200_SE_VPORT_XSCALE              0x1d98
+#define R200_SE_VPORT_XOFFSET             0x1d9c
+#define R200_SE_VPORT_YSCALE              0x1da0
+#define R200_SE_VPORT_YOFFSET             0x1da4
+#define R200_SE_VPORT_ZSCALE              0x1da8
+#define R200_SE_VPORT_ZOFFSET             0x1dac
+#define R200_SE_ZBIAS_FACTOR              0x1db0
+#define R200_SE_ZBIAS_CONSTANT            0x1db4
+#define R200_SE_LINE_WIDTH                0x1db8
 #define	    R200_LINE_WIDTH_SHIFT                   0x00000000
 #define	    R200_MINPOINTSIZE_SHIFT                 0x00000010
 /* gap */
@@ -407,8 +407,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_VTX_TEX3_COMP_CNT_SHIFT        9
 #define     R200_VTX_TEX4_COMP_CNT_SHIFT        12
 #define     R200_VTX_TEX5_COMP_CNT_SHIFT        15
-#define R200_SE_TCL_OUTPUT_VTX_FMT_0      0x2090 
-#define R200_SE_TCL_OUTPUT_VTX_FMT_1      0x2094 
+#define R200_SE_TCL_OUTPUT_VTX_FMT_0      0x2090
+#define R200_SE_TCL_OUTPUT_VTX_FMT_1      0x2094
 /* gap */
 #define R200_SE_VTE_CNTL                  0x20b0
 #define     R200_VPORT_X_SCALE_ENA                0x00000001
@@ -471,20 +471,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define R200_SE_TCL_SCALAR_DATA_REG                0x220c
 /* gap */
 #define R200_SE_TCL_MATRIX_SEL_0                   0x2230
-#define     R200_MODELVIEW_0_SHIFT           (0) 
-#define     R200_MODELVIEW_1_SHIFT           (8) 
-#define     R200_MODELVIEW_2_SHIFT           (16) 
-#define     R200_MODELVIEW_3_SHIFT           (24) 
+#define     R200_MODELVIEW_0_SHIFT           (0)
+#define     R200_MODELVIEW_1_SHIFT           (8)
+#define     R200_MODELVIEW_2_SHIFT           (16)
+#define     R200_MODELVIEW_3_SHIFT           (24)
 #define R200_SE_TCL_MATRIX_SEL_1                   0x2234
 #define     R200_IT_MODELVIEW_0_SHIFT        (0)
-#define     R200_IT_MODELVIEW_1_SHIFT        (8) 
+#define     R200_IT_MODELVIEW_1_SHIFT        (8)
 #define     R200_IT_MODELVIEW_2_SHIFT        (16)
 #define     R200_IT_MODELVIEW_3_SHIFT        (24)
 #define R200_SE_TCL_MATRIX_SEL_2                   0x2238
-#define     R200_MODELPROJECT_0_SHIFT         (0) 
-#define     R200_MODELPROJECT_1_SHIFT         (8) 
-#define     R200_MODELPROJECT_2_SHIFT         (16) 
-#define     R200_MODELPROJECT_3_SHIFT         (24) 
+#define     R200_MODELPROJECT_0_SHIFT         (0)
+#define     R200_MODELPROJECT_1_SHIFT         (8)
+#define     R200_MODELPROJECT_2_SHIFT         (16)
+#define     R200_MODELPROJECT_3_SHIFT         (24)
 #define R200_SE_TCL_MATRIX_SEL_3                   0x223c
 #define     R200_TEXMAT_0_SHIFT    0
 #define     R200_TEXMAT_1_SHIFT    8
@@ -523,7 +523,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define	    R200_VTX_TEX_5_ADDR__SHIFT           0x00000008
 
 /* gap */
-#define R200_SE_TCL_LIGHT_MODEL_CTL_0       0x2268 
+#define R200_SE_TCL_LIGHT_MODEL_CTL_0       0x2268
 #define     R200_LIGHTING_ENABLE                (1<<0)
 #define     R200_LIGHT_IN_MODELSPACE            (1<<1)
 #define     R200_LOCAL_VIEWER                   (1<<2)
@@ -541,7 +541,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define       R200_LM0_SOURCE_MATERIAL_1           (1)
 #define       R200_LM0_SOURCE_VERTEX_SHININESS_0   (2)
 #define       R200_LM0_SOURCE_VERTEX_SHININESS_1   (3)
-#define R200_SE_TCL_LIGHT_MODEL_CTL_1       0x226c 
+#define R200_SE_TCL_LIGHT_MODEL_CTL_1       0x226c
 #define       R200_LM1_SOURCE_LIGHT_PREMULT        (0)
 #define       R200_LM1_SOURCE_MATERIAL_0           (1)
 #define       R200_LM1_SOURCE_VERTEX_COLOR_0       (2)
@@ -561,7 +561,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_BACK_AMBIENT_SOURCE_SHIFT          (20)
 #define     R200_BACK_DIFFUSE_SOURCE_SHIFT          (24)
 #define     R200_BACK_SPECULAR_SOURCE_SHIFT         (28)
-#define R200_SE_TCL_PER_LIGHT_CTL_0       0x2270 
+#define R200_SE_TCL_PER_LIGHT_CTL_0       0x2270
 #define     R200_LIGHT_0_ENABLE                    (1<<0)
 #define     R200_LIGHT_0_ENABLE_AMBIENT            (1<<1)
 #define     R200_LIGHT_0_ENABLE_SPECULAR           (1<<2)
@@ -580,17 +580,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_LIGHT_1_CONSTANT_RANGE_ATTEN      (1<<23)
 #define     R200_LIGHT_0_SHIFT                   (0)
 #define     R200_LIGHT_1_SHIFT                   (16)
-#define R200_SE_TCL_PER_LIGHT_CTL_1       0x2274 
+#define R200_SE_TCL_PER_LIGHT_CTL_1       0x2274
 #define     R200_LIGHT_2_SHIFT                   (0)
 #define     R200_LIGHT_3_SHIFT                   (16)
-#define R200_SE_TCL_PER_LIGHT_CTL_2       0x2278 
+#define R200_SE_TCL_PER_LIGHT_CTL_2       0x2278
 #define     R200_LIGHT_4_SHIFT                   (0)
 #define     R200_LIGHT_5_SHIFT                   (16)
-#define R200_SE_TCL_PER_LIGHT_CTL_3       0x227c 
+#define R200_SE_TCL_PER_LIGHT_CTL_3       0x227c
 #define     R200_LIGHT_6_SHIFT                   (0)
 #define     R200_LIGHT_7_SHIFT                   (16)
 /* gap */
-#define R200_SE_TCL_TEX_PROC_CTL_2        0x22a8 
+#define R200_SE_TCL_TEX_PROC_CTL_2        0x22a8
 #define     R200_TEXGEN_COMP_MASK                (0xf)
 #define     R200_TEXGEN_COMP_S                   (0x1)
 #define     R200_TEXGEN_COMP_T                   (0x2)
@@ -602,14 +602,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_TEXGEN_3_COMP_MASK_SHIFT        (12)
 #define     R200_TEXGEN_4_COMP_MASK_SHIFT        (16)
 #define     R200_TEXGEN_5_COMP_MASK_SHIFT        (20)
-#define R200_SE_TCL_TEX_PROC_CTL_3        0x22ac 
+#define R200_SE_TCL_TEX_PROC_CTL_3        0x22ac
 #define     R200_TEXGEN_0_INPUT_TEX_SHIFT        (0)
 #define     R200_TEXGEN_1_INPUT_TEX_SHIFT        (4)
 #define     R200_TEXGEN_2_INPUT_TEX_SHIFT        (8)
 #define     R200_TEXGEN_3_INPUT_TEX_SHIFT        (12)
 #define     R200_TEXGEN_4_INPUT_TEX_SHIFT        (16)
 #define     R200_TEXGEN_5_INPUT_TEX_SHIFT        (20)
-#define R200_SE_TCL_TEX_PROC_CTL_0        0x22b0 
+#define R200_SE_TCL_TEX_PROC_CTL_0        0x22b0
 #define     R200_TEXGEN_TEXMAT_0_ENABLE         (1<<0)
 #define     R200_TEXGEN_TEXMAT_1_ENABLE         (1<<1)
 #define     R200_TEXGEN_TEXMAT_2_ENABLE         (1<<2)
@@ -623,7 +623,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_TEXMAT_4_ENABLE                (1<<12)
 #define     R200_TEXMAT_5_ENABLE                (1<<13)
 #define     R200_TEXGEN_FORCE_W_TO_ONE          (1<<16)
-#define R200_SE_TCL_TEX_PROC_CTL_1        0x22b4 
+#define R200_SE_TCL_TEX_PROC_CTL_1        0x22b4
 #define       R200_TEXGEN_INPUT_MASK           (0xf)
 #define       R200_TEXGEN_INPUT_TEXCOORD_0     (0)
 #define       R200_TEXGEN_INPUT_TEXCOORD_1     (1)
@@ -644,7 +644,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_TEXGEN_5_INPUT_SHIFT        (20)
 #define R200_SE_TC_TEX_CYL_WRAP_CTL       0x22b8
 /* gap */
-#define R200_SE_TCL_UCP_VERT_BLEND_CTL    0x22c0 
+#define R200_SE_TCL_UCP_VERT_BLEND_CTL    0x22c0
 #define     R200_UCP_IN_CLIP_SPACE              (1<<0)
 #define     R200_UCP_IN_MODEL_SPACE             (1<<1)
 #define     R200_UCP_ENABLE_0                   (1<<2)
@@ -804,10 +804,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_POINTSIZE_SHIFT                       0
 #define     R200_MAXPOINTSIZE_SHIFT                    16
 /* gap */
-#define R200_RE_TOP_LEFT                  0x26c0 
+#define R200_RE_TOP_LEFT                  0x26c0
 #define     R200_RE_LEFT_SHIFT         0
 #define     R200_RE_TOP_SHIFT          16
-#define R200_RE_MISC                      0x26c4 
+#define R200_RE_MISC                      0x26c4
 #define     R200_STIPPLE_COORD_MASK           0x1f
 #define     R200_STIPPLE_X_OFFSET_SHIFT       0
 #define     R200_STIPPLE_X_OFFSET_MASK        (0x1f << 0)
@@ -824,7 +824,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define     R200_SCISSOR_ENABLE_1         0x20000000
 #define     R200_SCISSOR_ENABLE_2         0x40000000
 /* gap */
-#define R200_PP_TXFILTER_0                0x2c00 
+#define R200_PP_TXFILTER_0                0x2c00
 #define     R200_MAG_FILTER_NEAREST                   (0  <<  0)
 #define     R200_MAG_FILTER_LINEAR                    (1  <<  0)
 #define     R200_MAG_FILTER_MASK                      (1  <<  0)

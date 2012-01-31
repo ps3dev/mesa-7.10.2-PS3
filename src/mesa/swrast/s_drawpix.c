@@ -569,7 +569,7 @@ draw_depth_stencil_pixels(struct gl_context *ctx, GLint x, GLint y,
       = ctx->Pixel.DepthScale != 1.0 || ctx->Pixel.DepthBias != 0.0;
    const GLuint depthMax = ctx->DrawBuffer->_DepthMax;
    const GLuint stencilMask = ctx->Stencil.WriteMask[0];
-   const GLuint stencilType = (STENCIL_BITS == 8) ? 
+   const GLuint stencilType = (STENCIL_BITS == 8) ?
       GL_UNSIGNED_BYTE : GL_UNSIGNED_SHORT;
    const GLboolean zoom = ctx->Pixel.ZoomX != 1.0 || ctx->Pixel.ZoomY != 1.0;
    struct gl_renderbuffer *depthRb, *stencilRb;
@@ -582,7 +582,7 @@ draw_depth_stencil_pixels(struct gl_context *ctx, GLint x, GLint y,
          return;
       }
    }
-   
+
    depthRb = ctx->ReadBuffer->Attachment[BUFFER_DEPTH].Renderbuffer;
    stencilRb = ctx->ReadBuffer->Attachment[BUFFER_STENCIL].Renderbuffer;
    ASSERT(depthRb);
@@ -601,7 +601,7 @@ draw_depth_stencil_pixels(struct gl_context *ctx, GLint x, GLint y,
        */
       GLint i;
       for (i = 0; i < height; i++) {
-         const GLuint *src = (const GLuint *) 
+         const GLuint *src = (const GLuint *)
             _mesa_image_address2d(&clippedUnpack, pixels, width, height,
                                   GL_DEPTH_STENCIL_EXT, type, i, 0);
          depthRb->PutRow(ctx, depthRb, width, x, y + i, src, NULL);

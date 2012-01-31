@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "util/u_memory.h"
@@ -90,7 +90,7 @@ brw_batchbuffer_free(struct brw_batchbuffer *batch)
 
 
 void
-_brw_batchbuffer_flush(struct brw_batchbuffer *batch, 
+_brw_batchbuffer_flush(struct brw_batchbuffer *batch,
 		       const char *file,
 		       int line)
 {
@@ -103,7 +103,7 @@ _brw_batchbuffer_flush(struct brw_batchbuffer *batch,
     */
 
    if (BRW_DEBUG & DEBUG_BATCH)
-      debug_printf("%s:%d: Batchbuffer flush with %db used\n", 
+      debug_printf("%s:%d: Batchbuffer flush with %db used\n",
 		   file, line, used);
 
    if (ALWAYS_EMIT_MI_FLUSH) {
@@ -112,7 +112,7 @@ _brw_batchbuffer_flush(struct brw_batchbuffer *batch,
       used = batch->ptr - batch->map;
    }
 
-   /* Round batchbuffer usage to 2 DWORDs. 
+   /* Round batchbuffer usage to 2 DWORDs.
     */
    if ((used & 4) == 0) {
       *(GLuint *) (batch->ptr) = 0; /* noop */
@@ -120,7 +120,7 @@ _brw_batchbuffer_flush(struct brw_batchbuffer *batch,
       used = batch->ptr - batch->map;
    }
 
-   /* Mark the end of the buffer. 
+   /* Mark the end of the buffer.
     */
    *(GLuint *) (batch->ptr) = MI_BATCH_BUFFER_END;
    batch->ptr += 4;
@@ -130,7 +130,7 @@ _brw_batchbuffer_flush(struct brw_batchbuffer *batch,
    batch->sws->bo_unmap(batch->buf);
    batch->map = NULL;
    batch->ptr = NULL;
-      
+
    batch->sws->bo_exec(batch->buf, used );
 
    if (BRW_DEBUG & DEBUG_SYNC) {
@@ -169,7 +169,7 @@ brw_batchbuffer_emit_reloc(struct brw_batchbuffer *batch,
 
    ret = batch->sws->bo_emit_reloc(batch->buf,
 				   usage,
-				   delta, 
+				   delta,
 				   batch->ptr - batch->map,
 				   buffer);
    if (ret != 0)

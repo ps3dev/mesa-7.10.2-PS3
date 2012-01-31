@@ -71,7 +71,7 @@ Jarcloc::getnextpt()
     }
     return p++;
 }
-	
+
 inline TrimVertex *
 Jarcloc::getprevpt()
 {

@@ -168,7 +168,7 @@ extern "C" {
  * If we build the library with gcc's -fvisibility=hidden flag, we'll
  * use the PUBLIC macro to mark functions that are to be exported.
  *
- * We also need to define a USED attribute, so the optimizer doesn't 
+ * We also need to define a USED attribute, so the optimizer doesn't
  * inline a static function that we later use in an alias. - ajax
  */
 #if defined(__GNUC__) || (defined(__SUNPRO_C) && (__SUNPRO_C >= 0x590))
@@ -320,7 +320,7 @@ static INLINE GLuint CPU_TO_LE32(GLuint x)
  */
 #if !defined(_WIN32_WCE)
 #if defined(BUILD_FOR_SNAP) && defined(CHECKED)
-#  define ASSERT(X)   _CHECK(X) 
+#  define ASSERT(X)   _CHECK(X)
 #elif defined(DEBUG)
 #  define ASSERT(X)   assert(X)
 #else

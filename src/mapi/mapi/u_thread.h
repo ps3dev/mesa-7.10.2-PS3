@@ -169,7 +169,7 @@ typedef benaphore u_mutex;
 #ifndef THREADS
 
 struct u_tsd {
-   int initMagic; 
+   int initMagic;
 };
 
 typedef unsigned u_mutex;

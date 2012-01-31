@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * Copyright 2009 VMware, Inc.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/glheader.h"
@@ -370,7 +370,7 @@ bind_array_obj(struct gl_context *ctx)
       assert(i < Elements(exec->array.generic_array));
       exec->array.generic_array[i] = &arrayObj->VertexAttrib[i];
    }
-   
+
    exec->array.array_obj = arrayObj->Name;
 }
 
@@ -452,7 +452,7 @@ recalculate_input_bindings(struct gl_context *ctx)
 
    case VP_ARB:
       /* GL_ARB_vertex_program or GLSL vertex shader - Only the generic[0]
-       * attribute array aliases and overrides the legacy position array.  
+       * attribute array aliases and overrides the legacy position array.
        *
        * Otherwise, legacy attributes available in the legacy slots,
        * generic attributes in the generic slots and materials are not
@@ -765,7 +765,7 @@ vbo_validated_drawrangeelements(struct gl_context *ctx, GLenum mode,
     * successive primitives layed out linearly in the vertex arrays.
     * Unless the vertex arrays are all in a VBO (or locked as with
     * CVA), the OpenGL semantics imply that we need to re-read or
-    * re-upload the vertex data on each draw call.  
+    * re-upload the vertex data on each draw call.
     *
     * In the case of hardware tnl, we want to avoid starting the
     * upload at zero, as it will mean every draw call uploads an

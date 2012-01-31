@@ -28,7 +28,7 @@
 /**
  * @file
  * OS independent time-manipulation functions.
- * 
+ *
  * @author Jose Fonseca <jrfonseca@tungstengraphics.com>
  */
 
@@ -50,14 +50,14 @@ extern "C" {
 
 /**
  * Time abstraction.
- * 
+ *
  * Do not access this structure directly. Use the provided function instead.
  */
-struct util_time 
+struct util_time
 {
    int64_t counter;
 };
-   
+
 
 PIPE_DEPRECATED
 static INLINE void
@@ -85,7 +85,7 @@ util_time_add(const struct util_time *t1,
  */
 PIPE_DEPRECATED
 static INLINE int64_t
-util_time_diff(const struct util_time *t1, 
+util_time_diff(const struct util_time *t1,
                const struct util_time *t2)
 {
    return t2->counter - t1->counter;
@@ -116,7 +116,7 @@ _util_time_compare(const struct util_time *t1,
  */
 PIPE_DEPRECATED
 static INLINE boolean
-util_time_timeout(const struct util_time *start, 
+util_time_timeout(const struct util_time *start,
                   const struct util_time *end,
                   const struct util_time *curr)
 {

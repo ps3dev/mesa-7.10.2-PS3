@@ -47,9 +47,9 @@
    GLfloat yMin, yMax;
    GLboolean ltor;
    GLfloat majDx, majDy;  /* major (i.e. long) edge dx and dy */
-   
+
    SWspan span;
-   
+
 #ifdef DO_Z
    GLfloat zPlane[4];
 #endif
@@ -59,7 +59,7 @@
    GLfloat wPlane[4];  /* win[3] */
 #endif
    GLfloat bf = SWRAST_CONTEXT(ctx)->_BackfaceCullSign;
-   
+
    (void) swrast;
 
    INIT_SPAN(span, GL_POLYGON);
@@ -227,10 +227,10 @@
             count++;
             coverage = compute_coveragef(pMin, pMid, pMax, ix, iy);
          }
-         
+
          if (ix <= startX)
             continue;
-         
+
          span.x = startX;
          span.y = iy;
          span.end = (GLuint) ix - (GLuint) startX;
@@ -250,7 +250,7 @@
          GLint ix, left, startX = (GLint) (x + xAdj);
          GLuint count, n;
          GLfloat coverage = 0.0F;
-         
+
          /* make sure we're not past the window edge */
          if (startX >= ctx->DrawBuffer->_Xmax) {
             startX = ctx->DrawBuffer->_Xmax - 1;
@@ -263,7 +263,7 @@
                break;
             startX--;
          }
-         
+
          /* enter interior of triangle */
          ix = startX;
          count = 0;
@@ -284,7 +284,7 @@
             count++;
             coverage = compute_coveragef(pMin, pMax, pMid, ix, iy);
          }
-         
+
 #if defined(DO_ATTRIBS)
          /* compute attributes at left-most fragment */
          span.attrStart[FRAG_ATTRIB_WPOS][3] = solve_plane(ix + 1.5F, iy + 0.5F, wPlane);

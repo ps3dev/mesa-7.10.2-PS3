@@ -76,7 +76,7 @@ _mesa_glsl_read_ir(_mesa_glsl_parse_state *state, exec_list *instructions,
       ir_read_error(state, NULL, "couldn't parse S-Expression.");
       return;
    }
-   
+
    if (scan_for_protos) {
       scan_for_prototypes(state, instructions, expr);
       if (state->error)
@@ -155,7 +155,7 @@ read_type(_mesa_glsl_parse_state *st, s_expression *expr)
 	 return NULL;
       }
    }
-   
+
    s_symbol *type_sym = SX_AS_SYMBOL(expr);
    if (type_sym == NULL) {
       ir_read_error(st, expr, "expected <type> (symbol or list)");
@@ -734,8 +734,8 @@ read_expression(_mesa_glsl_parse_state *st, s_list *list)
       ir_read_error(st, list, "invalid operator: %s", op_sym->value());
       return NULL;
    }
-    
-   /* Now that we know the operator, check for the right number of operands */ 
+
+   /* Now that we know the operator, check for the right number of operands */
    if (ir_expression::get_num_operands(op) == 2) {
       if (list_length != 5) {
 	 ir_read_error(st, list, "expected (expression <type> %s <operand> "

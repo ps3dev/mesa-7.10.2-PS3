@@ -61,7 +61,7 @@ _mesa_x86_64_transform_points4_general:
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	.byte 0x66, 0x66, 0x66, 0x90		/* manual align += 3 */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	testl %ecx, %ecx		/* verify non-zero count */
 	prefetchnta 64(%rsi)
 	jz p4_general_done
@@ -105,7 +105,7 @@ p4_general_loop:
 p4_general_done:
 	.byte 0xf3
 	ret
-	
+
 .section .rodata
 
 .align 16
@@ -133,7 +133,7 @@ _mesa_x86_64_transform_points4_3d:
 	leaq p4_constants(%rip), %rax
 
 	prefetchnta 64(%rsi)
-	
+
 	movaps (%rax), %xmm9
 	movaps 16(%rax), %xmm10
 
@@ -143,7 +143,7 @@ _mesa_x86_64_transform_points4_3d:
 	movl %ecx, V4F_COUNT(%rdi)	/* set dest count */
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	testl %ecx, %ecx		/* verify non-zero count */
 	jz p4_3d_done
 
@@ -204,7 +204,7 @@ _mesa_x86_64_transform_points4_identity:
 	movl %ecx, V4F_COUNT(%rdi)	/* set dest count */
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	test %ecx, %ecx
 	jz p4_identity_done
 
@@ -221,7 +221,7 @@ p4_identity_done:
 	.byte 0xf3
 	ret
 
-	
+
 .align 16
 .globl _mesa_3dnow_transform_points4_3d_no_rot
 .hidden _mesa_3dnow_transform_points4_3d_no_rot
@@ -234,7 +234,7 @@ _mesa_3dnow_transform_points4_3d_no_rot:
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	.byte 0x66, 0x66, 0x90	        /* manual align += 3 */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	test %ecx, %ecx
 	.byte 0x66, 0x66, 0x90		/* manual align += 3 */
 	jz p4_3d_no_rot_done
@@ -243,7 +243,7 @@ _mesa_3dnow_transform_points4_3d_no_rot:
 	movq V4F_START(%rdi), %rdi	/* ptr to first dest vertex */
 
 	prefetch (%rdx)
-	
+
 	movd (%rsi), %mm0		/*                 | m00             */
 	.byte 0x66, 0x66, 0x90	        /* manual align += 3 */
 	punpckldq 20(%rsi), %mm0	/* m11             | m00             */
@@ -256,7 +256,7 @@ _mesa_3dnow_transform_points4_3d_no_rot:
 p4_3d_no_rot_loop:
 
 	prefetchw 32(%rdi)
-	
+
 	movq  (%rdx), %mm4		/* x1              | x0              */
 	movq  8(%rdx), %mm5		/* x3              | x2              */
 	movd  12(%rdx), %mm7		/*                 | x3              */
@@ -277,7 +277,7 @@ p4_3d_no_rot_loop:
 	movq %mm5, 8(%rdi)		/* write r2, r3                      */
 
 	addq $16, %rdi
-	
+
 	decl %ecx
 	prefetch 32(%rdx)
 	jnz p4_3d_no_rot_loop
@@ -286,7 +286,7 @@ p4_3d_no_rot_done:
 	femms
 	ret
 
-	
+
 .align 16
 .globl _mesa_3dnow_transform_points4_perspective
 .hidden _mesa_3dnow_transform_points4_perspective
@@ -298,7 +298,7 @@ _mesa_3dnow_transform_points4_perspective:
 	movl %ecx, V4F_COUNT(%rdi)	/* set dest count */
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	test %ecx, %ecx
 	.byte 0x66, 0x66, 0x90		/* manual align += 3 */
 	jz p4_perspective_done
@@ -309,10 +309,10 @@ _mesa_3dnow_transform_points4_perspective:
 	movd (%rsi), %mm0		/*                 | m00             */
         pxor %mm7, %mm7			/* 0               | 0               */
 	punpckldq 20(%rsi), %mm0	/* m11             | m00             */
-	
+
 	movq 32(%rsi), %mm2		/* m21             | m20             */
 	prefetch (%rdx)
-	
+
 	movd 40(%rsi), %mm1		/*                 | m22             */
 
 	.byte 0x66, 0x66, 0x90	        /* manual align += 3 */
@@ -341,7 +341,7 @@ p4_perspective_loop:
 	pfacc %mm3, %mm6		/* -x2             | x2*m22+x3*m32   */
 
 	movq %mm5, (%rdi)		/* write r0, r1                      */
-	addq %rax, %rdx	
+	addq %rax, %rdx
 	movq %mm6, 8(%rdi)		/* write r2, r3                      */
 
 	addq $16, %rdi
@@ -365,7 +365,7 @@ _mesa_3dnow_transform_points4_2d_no_rot:
 	movl %ecx, V4F_COUNT(%rdi)	/* set dest count */
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	test %ecx, %ecx
 	.byte 0x90			/* manual align += 1 */
 	jz p4_2d_no_rot_done
@@ -376,7 +376,7 @@ _mesa_3dnow_transform_points4_2d_no_rot:
 	movd (%rsi), %mm0		/*                 | m00             */
 	prefetch (%rdx)
 	punpckldq 20(%rsi), %mm0	/* m11             | m00             */
-	
+
 	movq 48(%rsi), %mm1		/* m31             | m30             */
 
 p4_2d_no_rot_loop:
@@ -391,7 +391,7 @@ p4_2d_no_rot_loop:
 
 	punpckhdq %mm6, %mm6		/* x3              | x3              */
 
-	addq %rax, %rdx	
+	addq %rax, %rdx
 	pfmul %mm1, %mm6		/* x3*m31          | x3*m30          */
 
 	prefetch 32(%rdx)		/* hopefully stride is zero          */
@@ -409,7 +409,7 @@ p4_2d_no_rot_done:
 	femms
 	ret
 
-	
+
 .align 16
 .globl _mesa_3dnow_transform_points4_2d
 .hidden _mesa_3dnow_transform_points4_2d
@@ -422,7 +422,7 @@ _mesa_3dnow_transform_points4_2d:
 	movl $4, V4F_SIZE(%rdi)		/* set dest size */
 	.byte 0x66, 0x66, 0x90		/* manual align += 4 */
 	orl $VEC_SIZE_4, V4F_FLAGS(%rdi)/* set dest flags */
-	
+
 	test %ecx, %ecx
 	.byte 0x66, 0x66, 0x90		/* manual align += 4 */
 	jz p4_2d_done
@@ -456,7 +456,7 @@ p4_2d_loop:
 
 	pfmul %mm0, %mm3		/* x1*m10          | x0*m00          */
 
-	addq %rax, %rdx	
+	addq %rax, %rdx
 	pfacc %mm4, %mm3		/* x0*m01+x1*m11   | x0*m00+x1*m10   */
 
 	pfmul %mm2, %mm6		/* x3*m31          | x3*m30          */
@@ -475,9 +475,9 @@ p4_2d_loop:
 p4_2d_done:
 	femms
 	ret
-			
+
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

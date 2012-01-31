@@ -27,9 +27,9 @@
 
 /**
  * @file
- * 
+ *
  * WGL_ARB_pixel_format extension implementation.
- * 
+ *
  * @sa http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt
  */
 

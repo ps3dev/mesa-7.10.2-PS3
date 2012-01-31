@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-       
+
 
 
 #include "brw_context.h"
@@ -40,8 +40,8 @@ const struct brw_tracked_state *atoms[] =
 {
 /*   &brw_wm_input_sizes, */
    &brw_vs_prog,
-   &brw_gs_prog, 
-   &brw_clip_prog, 
+   &brw_gs_prog,
+   &brw_clip_prog,
    &brw_sf_prog,
    &brw_wm_prog,
 
@@ -65,7 +65,7 @@ const struct brw_tracked_state *atoms[] =
    &brw_sf_unit,
    &brw_vs_unit,		/* always required, enabled or not */
    &brw_clip_unit,
-   &brw_gs_unit,  
+   &brw_gs_unit,
 
    /* Command packets:
     */
@@ -212,7 +212,7 @@ enum pipe_error brw_upload_state(struct brw_context *brw)
        * state flags which are generated and checked to help ensure
        * state atoms are ordered correctly in the list.
        */
-      struct brw_state_flags examined, prev;      
+      struct brw_state_flags examined, prev;
       memset(&examined, 0, sizeof(examined));
       prev = *state;
 
@@ -244,7 +244,7 @@ enum pipe_error brw_upload_state(struct brw_context *brw)
       }
    }
    else {
-      for (i = 0; i < Elements(atoms); i++) {	 
+      for (i = 0; i < Elements(atoms); i++) {
 	 const struct brw_tracked_state *atom = atoms[i];
 
 	 if (check_state(state, &atom->dirty)) {
@@ -258,11 +258,11 @@ enum pipe_error brw_upload_state(struct brw_context *brw)
    }
 
    if (BRW_DEBUG & DEBUG_STATE) {
-      brw_update_dirty_counts( state->mesa, 
+      brw_update_dirty_counts( state->mesa,
 			       state->brw,
 			       state->cache );
    }
-   
+
    /* Clear dirty flags:
     */
    memset(state, 0, sizeof(*state));

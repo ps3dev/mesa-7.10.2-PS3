@@ -40,13 +40,13 @@
 
 #include "types.h"
 
-inline int 
+inline int
 max( int x, int y ) { return ( x < y ) ? y : x; }
 
-inline REAL 
+inline REAL
 min( REAL x, REAL y ) { return ( x > y ) ? y : x; }
 
-inline REAL 
+inline REAL
 glu_abs( REAL x ) { return ( x < 0.0 ) ? -x : x; }
 
 #endif /* __glusimplemath_h_ */

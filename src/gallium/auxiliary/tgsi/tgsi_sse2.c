@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007-2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2009-2010 VMware, Inc.  All rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "pipe/p_config.h"
@@ -548,7 +548,7 @@ emit_coef_dady(
  */
 
 /**
- * NOTE: In gcc, if the destination uses the SSE intrinsics, then it must be 
+ * NOTE: In gcc, if the destination uses the SSE intrinsics, then it must be
  * defined with __attribute__((force_align_arg_pointer)), as we do not guarantee
  * that the stack pointer is 16 byte aligned, as expected.
  */
@@ -572,15 +572,15 @@ emit_func_call(
    x86_push(
       func,
       x86_make_reg( file_REG32, reg_DX) );
-   
+
    /* Store XMM regs to the stack
     */
    for(i = 0, n = 0; i < 8; ++i)
       if(xmm_save_mask & (1 << i))
          ++n;
-   
+
    x86_sub_imm(
-      func, 
+      func,
       x86_make_reg( file_REG32, reg_SP ),
       n*16);
 
@@ -601,7 +601,7 @@ emit_func_call(
 	 func,
 	 ecx,
 	 arg[i] );
-   
+
       /* Push actual function arguments (currently just the pointer to
        * the buffer above), and call the function:
        */
@@ -627,9 +627,9 @@ emit_func_call(
             x86_make_disp( x86_make_reg( file_REG32, reg_SP ), n*16 ) );
          ++n;
       }
-   
+
    x86_add_imm(
-      func, 
+      func,
       x86_make_reg( file_REG32, reg_SP ),
       n*16);
 
@@ -649,14 +649,14 @@ emit_func_call(
 static void
 emit_func_call_dst_src1(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst,
    unsigned xmm_src0,
    void (PIPE_CDECL *code)() )
 {
    struct x86_reg store = get_temp( TEMP_R0, 0 );
    unsigned xmm_mask = ((1 << xmm_save) - 1) & ~(1 << xmm_dst);
-   
+
    /* Store our input parameters (in xmm regs) to the buffer we use
     * for passing arguments.  We will pass a pointer to this buffer as
     * the actual function argument.
@@ -682,7 +682,7 @@ emit_func_call_dst_src1(
 static void
 emit_func_call_dst_src2(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst,
    unsigned xmm_src0,
    unsigned xmm_src1,
@@ -743,7 +743,7 @@ emit_func_call_dst_src2(
 /**
  * See http://www.devmaster.net/forums/showthread.php?p=43580
  */
-static INLINE __m128 
+static INLINE __m128
 exp2f4(__m128 x)
 {
    __m128i ipart;
@@ -781,7 +781,7 @@ exp2f4(__m128 x)
 /**
  * See http://www.devmaster.net/forums/showthread.php?p=43580
  */
-static INLINE __m128 
+static INLINE __m128
 log2f4(__m128 x)
 {
    __m128i expmask = _mm_set1_epi32(0x7f800000);
@@ -798,8 +798,8 @@ log2f4(__m128 x)
 
    __m128 logmant;
 
-   /* Minimax polynomial fit of log2(x)/(x - 1), for x in range [1, 2[ 
-    * These coefficients can be generate with 
+   /* Minimax polynomial fit of log2(x)/(x - 1), for x in range [1, 2[
+    * These coefficients can be generate with
     * http://www.boost.org/doc/libs/1_36_0/libs/math/doc/sf_and_dist/html/math_toolkit/toolkit/internals2/minimax.html
     */
 #if LOG_POLY_DEGREE == 6
@@ -873,12 +873,12 @@ cos4f(
 static void
 emit_cos(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
       func,
-      xmm_save, 
+      xmm_save,
       xmm_dst,
       xmm_dst,
       cos4f );
@@ -904,7 +904,7 @@ ex24f(
 static void
 emit_ex2(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
@@ -950,7 +950,7 @@ flr4f(
 static void
 emit_flr(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
@@ -974,7 +974,7 @@ frc4f(
 static void
 emit_frc(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
@@ -1005,7 +1005,7 @@ lg24f(
 static void
 emit_lg2(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
@@ -1072,7 +1072,7 @@ pow4f(
 static void
 emit_pow(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst,
    unsigned xmm_src0,
    unsigned xmm_src1 )
@@ -1115,7 +1115,7 @@ rnd4f(
 static void
 emit_rnd(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
@@ -1136,7 +1136,7 @@ emit_rsqrt(
    /* Although rsqrtps() and rcpps() are low precision on some/all SSE
     * implementations, it is possible to improve its precision at
     * fairly low cost, using a newton/raphson step, as below:
-    * 
+    *
     * x1 = 2 * rcpps(a) - a * rcpps(a) * rcpps(a)
     * x1 = 0.5 * rsqrtps(a) * [3.0 - (a * rsqrtps(a))* rsqrtps(a)]
     *
@@ -1198,7 +1198,7 @@ sgn4f(
 static void
 emit_sgn(
    struct x86_function *func,
-   unsigned xmm_save, 
+   unsigned xmm_save,
    unsigned xmm_dst )
 {
    emit_func_call_dst_src1(
@@ -1221,7 +1221,7 @@ sin4f(
 
 static void
 emit_sin (struct x86_function *func,
-          unsigned xmm_save, 
+          unsigned xmm_save,
           unsigned xmm_dst)
 {
    emit_func_call_dst_src1(
@@ -1406,14 +1406,14 @@ fetch_texel( struct tgsi_sampler **sampler,
 #if 0
    uint j;
 
-   debug_printf("%s sampler: %p (%p) store: %p\n", 
+   debug_printf("%s sampler: %p (%p) store: %p\n",
                 __FUNCTION__,
                 sampler, *sampler,
                 store );
 
    for (j = 0; j < 4; j++)
       debug_printf("sample %d texcoord %f %f %f lodbias %f\n",
-                   j, 
+                   j,
                    store[0+j],
                    store[4+j],
                    store[8 + j],
@@ -1422,7 +1422,7 @@ fetch_texel( struct tgsi_sampler **sampler,
 
    {
       float rgba[NUM_CHANNELS][QUAD_SIZE];
-      (*sampler)->get_samples(*sampler, 
+      (*sampler)->get_samples(*sampler,
                               &store[0],  /* s */
                               &store[4],  /* t */
                               &store[8],  /* r */
@@ -1435,8 +1435,8 @@ fetch_texel( struct tgsi_sampler **sampler,
 
 #if 0
    for (j = 0; j < 4; j++)
-      debug_printf("sample %d result %f %f %f %f\n", 
-                   j, 
+      debug_printf("sample %d result %f %f %f %f\n",
+                   j,
                    store[0+j],
                    store[4+j],
                    store[8+j],
@@ -1513,7 +1513,7 @@ emit_tex( struct x86_function *func,
             make_xmm( i ),
             make_xmm( 3 ) );
       }
-      
+
       /* Store in the argument buffer:
        */
       sse_movaps(
@@ -1600,7 +1600,7 @@ emit_kil(
             TGSI_EXEC_TEMP_00000000_I,
             TGSI_EXEC_TEMP_00000000_C ),
          cc_LessThan );
-      
+
       if( i == 0 ) {
          sse_movmskps(
             func,
@@ -2530,7 +2530,7 @@ emit_instruction(
    case TGSI_OPCODE_TXP:
       emit_tex( func, inst, FALSE, TRUE );
       break;
-      
+
    case TGSI_OPCODE_BRK:
       return 0;
       break;
@@ -2627,7 +2627,7 @@ emit_instruction(
    default:
       return 0;
    }
-   
+
    return 1;
 }
 
@@ -2693,10 +2693,10 @@ emit_declaration(
    }
 }
 
-static void aos_to_soa( struct x86_function *func, 
+static void aos_to_soa( struct x86_function *func,
                         uint arg_aos,
-                        uint arg_machine, 
-                        uint arg_num, 
+                        uint arg_machine,
+                        uint arg_num,
                         uint arg_stride )
 {
    struct x86_reg soa_input = x86_make_reg( file_REG32, reg_AX );
@@ -2710,8 +2710,8 @@ static void aos_to_soa( struct x86_function *func,
 
    x86_mov( func, aos_input,  x86_fn_arg( func, arg_aos ) );
    x86_mov( func, soa_input,  x86_fn_arg( func, arg_machine ) );
-   x86_lea( func, soa_input,  
-	    x86_make_disp( soa_input, 
+   x86_lea( func, soa_input,
+	    x86_make_disp( soa_input,
 			   Offset(struct tgsi_exec_machine, Inputs) ) );
    x86_mov( func, num_inputs, x86_fn_arg( func, arg_num ) );
    x86_mov( func, stride,     x86_fn_arg( func, arg_stride ) );
@@ -2761,10 +2761,10 @@ static void aos_to_soa( struct x86_function *func,
    x86_pop( func, x86_make_reg( file_REG32, reg_BX ) );
 }
 
-static void soa_to_aos( struct x86_function *func, 
-			uint arg_aos, 
-			uint arg_machine, 
-			uint arg_num, 
+static void soa_to_aos( struct x86_function *func,
+			uint arg_aos,
+			uint arg_machine,
+			uint arg_num,
 			uint arg_stride )
 {
    struct x86_reg soa_output = x86_make_reg( file_REG32, reg_AX );
@@ -2778,8 +2778,8 @@ static void soa_to_aos( struct x86_function *func,
 
    x86_mov( func, aos_output, x86_fn_arg( func, arg_aos ) );
    x86_mov( func, soa_output, x86_fn_arg( func, arg_machine ) );
-   x86_lea( func, soa_output, 
-	    x86_make_disp( soa_output, 
+   x86_lea( func, soa_output,
+	    x86_make_disp( soa_output,
 			   Offset(struct tgsi_exec_machine, Outputs) ) );
    x86_mov( func, num_outputs, x86_fn_arg( func, arg_num ) );
 
@@ -2916,7 +2916,7 @@ tgsi_emit_sse2(
     */
    if (parse.FullHeader.Processor.Processor == TGSI_PROCESSOR_VERTEX) {
       if (do_swizzles)
-         aos_to_soa( func, 
+         aos_to_soa( func,
                      4,         /* aos_input */
                      1,         /* machine */
                      5,         /* num_inputs */
@@ -2969,7 +2969,7 @@ tgsi_emit_sse2(
 	 if (!ok) {
             uint opcode = parse.FullToken.FullInstruction.Instruction.Opcode;
             uint proc = parse.FullHeader.Processor.Processor;
-	    debug_printf("failed to translate tgsi opcode %d (%s) to SSE (%s)\n", 
+	    debug_printf("failed to translate tgsi opcode %d (%s) to SSE (%s)\n",
 			 opcode,
                          tgsi_get_opcode_name(opcode),
                          tgsi_get_processor_name(proc));
@@ -3013,7 +3013,7 @@ tgsi_emit_sse2(
 
    if (parse.FullHeader.Processor.Processor == TGSI_PROCESSOR_VERTEX) {
       if (do_swizzles)
-         soa_to_aos( func, 
+         soa_to_aos( func,
 		     7, 	/* aos_output */
 		     1, 	/* machine */
 		     8, 	/* num_outputs */

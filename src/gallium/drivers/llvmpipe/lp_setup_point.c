@@ -50,7 +50,7 @@ struct point_info {
    float (*a0)[4];
    float (*dadx)[4];
    float (*dady)[4];
-};   
+};
 
 
 /**
@@ -202,7 +202,7 @@ setup_point_fragcoord_coef(struct lp_setup_context *setup,
 /**
  * Compute the point->coef[] array dadx, dady, a0 values.
  */
-static void   
+static void
 setup_point_coefficients( struct lp_setup_context *setup,
                           struct point_info *info)
 {
@@ -223,7 +223,7 @@ setup_point_coefficients( struct lp_setup_context *setup,
       if (perspective & usage_mask) {
          fragcoord_usage_mask |= TGSI_WRITEMASK_W;
       }
-      
+
       switch (interp) {
       case LP_INTERP_POSITION:
          /*
@@ -308,8 +308,8 @@ try_setup_point( struct lp_setup_context *setup,
    const float size
       = (setup->point_size_per_vertex && sizeAttr > 0) ? v0[sizeAttr][0]
       : setup->point_size;
-   
-   /* Point size as fixed point integer, remove rounding errors 
+
+   /* Point size as fixed point integer, remove rounding errors
     * and gives minimum width for very small points
     */
    int fixed_width = MAX2(FIXED_ONE,
@@ -317,7 +317,7 @@ try_setup_point( struct lp_setup_context *setup,
 
    const int x0 = subpixel_snap(v0[0][0] - setup->pixel_offset) - fixed_width/2;
    const int y0 = subpixel_snap(v0[0][1] - setup->pixel_offset) - fixed_width/2;
-     
+
    struct lp_scene *scene = setup->scene;
    struct lp_rast_triangle *point;
    unsigned bytes;
@@ -345,7 +345,7 @@ try_setup_point( struct lp_setup_context *setup,
       bbox.x1--;
       bbox.y1--;
    }
-   
+
    if (!u_rect_test_intersection(&setup->draw_region, &bbox)) {
       if (0) debug_printf("offscreen\n");
       LP_COUNT(nr_culled_tris);
@@ -374,7 +374,7 @@ try_setup_point( struct lp_setup_context *setup,
    info.a0 = GET_A0(&point->inputs);
    info.dadx = GET_DADX(&point->inputs);
    info.dady = GET_DADY(&point->inputs);
-   
+
    /* Setup parameter interpolants:
     */
    setup_point_coefficients(setup, &info);
@@ -411,7 +411,7 @@ try_setup_point( struct lp_setup_context *setup,
 }
 
 
-static void 
+static void
 lp_setup_point(struct lp_setup_context *setup,
                const float (*v0)[4])
 {
@@ -426,7 +426,7 @@ lp_setup_point(struct lp_setup_context *setup,
 }
 
 
-void 
+void
 lp_setup_choose_point( struct lp_setup_context *setup )
 {
    setup->point = lp_setup_point;

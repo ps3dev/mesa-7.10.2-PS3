@@ -157,7 +157,7 @@ FillBitmap(struct glx_context * gc, GLint width, GLint height,
 
 /*
 ** Extract array from user's data applying all pixel store modes.
-** The internal packed array format used has LSB_FIRST = FALSE and 
+** The internal packed array format used has LSB_FIRST = FALSE and
 ** ALIGNMENT = 1.
 */
 void

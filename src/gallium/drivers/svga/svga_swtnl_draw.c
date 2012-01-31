@@ -101,12 +101,12 @@ svga_swtnl_draw_vbo(struct svga_context *svga,
 
    /* Ensure the draw module didn't touch this */
    assert(i == svga->curr.num_vertex_buffers);
-   
+
    /*
     * unmap vertex/index buffers
     */
    for (i = 0; i < svga->curr.num_vertex_buffers; i++) {
-      pipe_buffer_unmap(&svga->pipe, svga->curr.vb[i].buffer, 
+      pipe_buffer_unmap(&svga->pipe, svga->curr.vb[i].buffer,
 			vb_transfer[i]);
       draw_set_mapped_vertex_buffer(draw, i, NULL);
    }
@@ -142,7 +142,7 @@ boolean svga_init_swtnl( struct svga_context *svga )
       goto fail;
 
 
-   draw_set_rasterize_stage(svga->swtnl.draw, 
+   draw_set_rasterize_stage(svga->swtnl.draw,
                             draw_vbuf_stage( svga->swtnl.draw, svga->swtnl.backend ));
 
    draw_set_render(svga->swtnl.draw, svga->swtnl.backend);

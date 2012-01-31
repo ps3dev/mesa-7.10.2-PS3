@@ -64,7 +64,7 @@
 struct lp_build_blend_aos_context
 {
    struct lp_build_context base;
-   
+
    LLVMValueRef src;
    LLVMValueRef dst;
    LLVMValueRef const_;
@@ -185,8 +185,8 @@ lp_build_blend_factor_swizzle(unsigned factor)
 
 static LLVMValueRef
 lp_build_blend_swizzle(struct lp_build_blend_aos_context *bld,
-                       LLVMValueRef rgb, 
-                       LLVMValueRef alpha, 
+                       LLVMValueRef rgb,
+                       LLVMValueRef alpha,
                        enum lp_build_blend_swizzle rgb_swizzle,
                        unsigned alpha_swizzle)
 {
@@ -279,7 +279,7 @@ lp_build_blend_func_reverse(unsigned rgb_func, unsigned alpha_func)
 LLVMValueRef
 lp_build_blend_func(struct lp_build_context *bld,
                     unsigned func,
-                    LLVMValueRef term1, 
+                    LLVMValueRef term1,
                     LLVMValueRef term2)
 {
    switch (func) {

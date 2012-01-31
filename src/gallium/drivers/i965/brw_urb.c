@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-        
+
 
 
 #include "brw_batchbuffer.h"
@@ -133,17 +133,17 @@ static int recalculate_urb_fence( struct brw_context *brw )
        (brw->urb.constrained && (brw->urb.vsize > vsize ||
 				 brw->urb.sfsize > sfsize ||
 				 brw->urb.csize > csize))) {
-      
+
 
       brw->urb.csize = csize;
       brw->urb.sfsize = sfsize;
       brw->urb.vsize = vsize;
 
-      brw->urb.nr_vs_entries = limits[VS].preferred_nr_entries;	
-      brw->urb.nr_gs_entries = limits[GS].preferred_nr_entries;	
+      brw->urb.nr_vs_entries = limits[VS].preferred_nr_entries;
+      brw->urb.nr_gs_entries = limits[GS].preferred_nr_entries;
       brw->urb.nr_clip_entries = limits[CLP].preferred_nr_entries;
-      brw->urb.nr_sf_entries = limits[SF].preferred_nr_entries;	
-      brw->urb.nr_cs_entries = limits[CS].preferred_nr_entries;	
+      brw->urb.nr_sf_entries = limits[SF].preferred_nr_entries;
+      brw->urb.nr_cs_entries = limits[CS].preferred_nr_entries;
 
       brw->urb.constrained = 0;
 
@@ -168,27 +168,27 @@ static int recalculate_urb_fence( struct brw_context *brw )
       }
 
       if (BRW_DEBUG & DEBUG_MIN_URB) {
-	 brw->urb.nr_vs_entries = limits[VS].min_nr_entries;	
-	 brw->urb.nr_gs_entries = limits[GS].min_nr_entries;	
+	 brw->urb.nr_vs_entries = limits[VS].min_nr_entries;
+	 brw->urb.nr_gs_entries = limits[GS].min_nr_entries;
 	 brw->urb.nr_clip_entries = limits[CLP].min_nr_entries;
-	 brw->urb.nr_sf_entries = limits[SF].min_nr_entries;	
-	 brw->urb.nr_cs_entries = limits[CS].min_nr_entries;	
+	 brw->urb.nr_sf_entries = limits[SF].min_nr_entries;
+	 brw->urb.nr_cs_entries = limits[CS].min_nr_entries;
 	 brw->urb.constrained = 1;
       }
 
       if (!check_urb_layout(brw)) {
-	 brw->urb.nr_vs_entries = limits[VS].min_nr_entries;	
-	 brw->urb.nr_gs_entries = limits[GS].min_nr_entries;	
+	 brw->urb.nr_vs_entries = limits[VS].min_nr_entries;
+	 brw->urb.nr_gs_entries = limits[GS].min_nr_entries;
 	 brw->urb.nr_clip_entries = limits[CLP].min_nr_entries;
-	 brw->urb.nr_sf_entries = limits[SF].min_nr_entries;	
-	 brw->urb.nr_cs_entries = limits[CS].min_nr_entries;	
+	 brw->urb.nr_sf_entries = limits[SF].min_nr_entries;
+	 brw->urb.nr_cs_entries = limits[CS].min_nr_entries;
 
 	 /* Mark us as operating with constrained nr_entries, so that next
 	  * time we recalculate we'll resize the fences in the hope of
 	  * escaping constrained mode and getting back to normal performance.
 	  */
 	 brw->urb.constrained = 1;
-	 
+
 	 if (!check_urb_layout(brw)) {
 	    /* This is impossible, given the maximal sizes of urb
 	     * entries and the values for minimum nr of entries
@@ -197,7 +197,7 @@ static int recalculate_urb_fence( struct brw_context *brw )
 	    debug_printf("couldn't calculate URB layout!\n");
 	    exit(1);
 	 }
-	 
+
 	 if (BRW_DEBUG & (DEBUG_URB|DEBUG_FALLBACKS))
 	    debug_printf("URB CONSTRAINED\n");
       }
@@ -209,9 +209,9 @@ done:
 		      brw->urb.gs_start,
 		      brw->urb.clip_start,
 		      brw->urb.sf_start,
-		      brw->urb.cs_start, 
+		      brw->urb.cs_start,
 		      URB_SIZES(brw));
-      
+
       brw->state.dirty.brw |= BRW_NEW_URB_FENCE;
    }
 
@@ -253,9 +253,9 @@ int brw_upload_urb_fence(struct brw_context *brw)
     * There are 256/384 urb reg pairs in total.
     */
    uf.bits0.vs_fence  = brw->urb.gs_start;
-   uf.bits0.gs_fence  = brw->urb.clip_start; 
-   uf.bits0.clp_fence = brw->urb.sf_start; 
-   uf.bits1.sf_fence  = brw->urb.cs_start; 
+   uf.bits0.gs_fence  = brw->urb.clip_start;
+   uf.bits0.clp_fence = brw->urb.sf_start;
+   uf.bits1.sf_fence  = brw->urb.cs_start;
    uf.bits1.cs_fence  = URB_SIZES(brw);
 
    BRW_BATCH_STRUCT(brw, &uf);

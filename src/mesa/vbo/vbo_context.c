@@ -45,7 +45,7 @@ static GLuint check_size( const GLfloat *attr )
    if (attr[3] != 1.0) return 4;
    if (attr[2] != 0.0) return 3;
    if (attr[1] != 0.0) return 2;
-   return 1;		
+   return 1;
 }
 
 
@@ -181,13 +181,13 @@ GLboolean _vbo_CreateContext( struct gl_context *ctx )
       /* When no vertex program, pull in the material attributes in
        * the 16..32 generic range.
        */
-      for (i = 0; i < 16; i++) 
+      for (i = 0; i < 16; i++)
 	 vbo->map_vp_none[i] = i;
-      for (i = 0; i < 12; i++) 
+      for (i = 0; i < 12; i++)
 	 vbo->map_vp_none[16+i] = VBO_ATTRIB_MAT_FRONT_AMBIENT + i;
       for (i = 0; i < 4; i++)
-	 vbo->map_vp_none[28+i] = i;	
-      
+	 vbo->map_vp_none[28+i] = i;
+
       for (i = 0; i < Elements(vbo->map_vp_arb); i++)
 	 vbo->map_vp_arb[i] = i;
    }

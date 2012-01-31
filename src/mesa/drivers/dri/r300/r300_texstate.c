@@ -344,7 +344,7 @@ GLboolean r300ValidateBuffers(struct gl_context * ctx)
 						  rrb->bo, 0,
 						  RADEON_GEM_DOMAIN_VRAM);
 	}
-	
+
 	for (i = 0; i < ctx->Const.MaxTextureImageUnits; ++i) {
 		radeonTexObj *t;
 
@@ -454,7 +454,7 @@ void r300SetTexBuffer2(__DRIcontext *pDRICtx, GLint target, GLint texture_format
 		/* Failed to BO for the buffer */
 		return;
 	}
-	
+
 	_mesa_lock_texture(radeon->glCtx, texObj);
 	if (t->bo) {
 		radeon_bo_unref(t->bo);

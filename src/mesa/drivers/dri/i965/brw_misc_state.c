@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
- 
+
 
 
 #include "intel_batchbuffer.h"
@@ -179,12 +179,12 @@ const struct brw_tracked_state brw_psp_urb_cbs = {
    .dirty = {
       .mesa = 0,
       .brw = BRW_NEW_URB_FENCE | BRW_NEW_BATCH,
-      .cache = (CACHE_NEW_VS_UNIT | 
-		CACHE_NEW_GS_UNIT | 
-		CACHE_NEW_GS_PROG | 
-		CACHE_NEW_CLIP_UNIT | 
-		CACHE_NEW_SF_UNIT | 
-		CACHE_NEW_WM_UNIT | 
+      .cache = (CACHE_NEW_VS_UNIT |
+		CACHE_NEW_GS_UNIT |
+		CACHE_NEW_GS_PROG |
+		CACHE_NEW_CLIP_UNIT |
+		CACHE_NEW_SF_UNIT |
+		CACHE_NEW_WM_UNIT |
 		CACHE_NEW_CC_UNIT)
    },
    .prepare = prepare_psp_urb_cbs,
@@ -403,7 +403,7 @@ static void upload_aa_line_parameters(struct brw_context *brw)
    memset(&balp, 0, sizeof(balp));
    balp.header.opcode = CMD_AA_LINE_PARAMETERS;
    balp.header.length = sizeof(balp) / 4 - 2;
-   
+
    BRW_CACHED_BATCH_STRUCT(brw, &balp);
 }
 
@@ -479,7 +479,7 @@ static void upload_invarient_state( struct brw_context *brw )
       struct brw_global_depth_offset_clamp gdo;
       memset(&gdo, 0, sizeof(gdo));
 
-      /* Disable depth offset clamping. 
+      /* Disable depth offset clamping.
        */
       gdo.header.opcode = CMD_GLOBAL_DEPTH_OFFSET_CLAMP;
       gdo.header.length = sizeof(gdo)/4 - 2;
@@ -532,7 +532,7 @@ static void upload_invarient_state( struct brw_context *brw )
 
       vfs.opcode = brw->CMD_VF_STATISTICS;
       if (unlikely(INTEL_DEBUG & DEBUG_STATS))
-	 vfs.statistics_enable = 1; 
+	 vfs.statistics_enable = 1;
 
       BRW_BATCH_STRUCT(brw, &vfs);
    }

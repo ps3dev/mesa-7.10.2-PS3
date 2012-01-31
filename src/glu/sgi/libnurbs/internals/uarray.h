@@ -39,7 +39,7 @@
 #include "types.h"
 
 class Arc;
-typedef class Arc *Arc_ptr; 
+typedef class Arc *Arc_ptr;
 
 class Uarray {
 private:

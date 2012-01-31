@@ -45,7 +45,7 @@
 
 struct keymap
 {
-   struct cso_hash *cso;   
+   struct cso_hash *cso;
    unsigned key_size;
    unsigned max_entries; /* XXX not obeyed net */
    unsigned num_entries;
@@ -113,13 +113,13 @@ util_new_keymap(unsigned keySize, unsigned maxEntries,
    struct keymap *map = MALLOC_STRUCT(keymap);
    if (!map)
       return NULL;
-   
+
    map->cso = cso_hash_create();
    if (!map->cso) {
       FREE(map);
       return NULL;
    }
-   
+
    map->max_entries = maxEntries;
    map->num_entries = 0;
    map->key_size = keySize;
@@ -149,7 +149,7 @@ hash_table_find_iter(const struct keymap *map, const void *key,
 {
    struct cso_hash_iter iter;
    struct keymap_item *item;
-   
+
    iter = cso_hash_find(map->cso, key_hash);
    while (!cso_hash_iter_is_null(iter)) {
       item = (struct keymap_item *) cso_hash_iter_data(iter);
@@ -157,7 +157,7 @@ hash_table_find_iter(const struct keymap *map, const void *key,
          break;
       iter = cso_hash_iter_next(iter);
    }
-   
+
    return iter;
 }
 
@@ -205,14 +205,14 @@ util_keymap_insert(struct keymap *map, const void *key,
       item->value = (void *) data;
       return TRUE;
    }
-   
+
    item = MALLOC_STRUCT(keymap_item);
    if (!item)
       return FALSE;
 
    item->key = mem_dup(key, map->key_size);
    item->value = (void *) data;
-   
+
    iter = cso_hash_insert(map->cso, key_hash, item);
    if (cso_hash_iter_is_null(iter)) {
       FREE(item);
@@ -243,7 +243,7 @@ util_keymap_lookup(const struct keymap *map, const void *key)
    item = hash_table_find_item(map, key, key_hash);
    if (!item)
       return NULL;
-   
+
    return item->value;
 }
 
@@ -269,7 +269,7 @@ util_keymap_remove(struct keymap *map, const void *key, void *user)
    iter = hash_table_find_iter(map, key, key_hash);
    if (cso_hash_iter_is_null(iter))
       return;
-   
+
    item = hash_table_item(iter);
    assert(item);
    if (!item)
@@ -277,7 +277,7 @@ util_keymap_remove(struct keymap *map, const void *key, void *user)
    map->delete_func(map, item->key, item->value, user);
    FREE(item->key);
    FREE(item);
-   
+
    map->num_entries--;
 
    cso_hash_erase(map->cso, iter);

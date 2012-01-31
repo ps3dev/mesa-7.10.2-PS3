@@ -29,7 +29,7 @@ DEFINES = -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE \
 X11_INCLUDES = -I/usr/X11R6/include
 
 CFLAGS   = $(WARN_FLAGS) $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) $(DEFINES) \
-	$(ASM_FLAGS) -std=c99 -ffast-math 
+	$(ASM_FLAGS) -std=c99 -ffast-math
 
 CXXFLAGS = $(WARN_FLAGS) $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) $(DEFINES)
 
@@ -37,7 +37,7 @@ CXXFLAGS = $(WARN_FLAGS) $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) $(DEFINES)
 CFLAGS += -fno-strict-aliasing
 CXXFLAGS += -fno-strict-aliasing
 
-MESA_ASM_SOURCES = 
+MESA_ASM_SOURCES =
 
 # Library/program dependencies
 EXTRA_LIB_PATH=-L/usr/X11R6/lib

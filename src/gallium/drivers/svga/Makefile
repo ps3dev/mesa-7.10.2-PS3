@@ -49,7 +49,7 @@ C_SOURCES = \
 	svga_resource.c \
 	svga_resource_texture.c \
 	svga_resource_buffer.c \
-	svga_resource_buffer_upload.c 
+	svga_resource_buffer_upload.c
 
 
 LIBRARY_INCLUDES = \

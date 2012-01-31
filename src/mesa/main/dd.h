@@ -85,7 +85,7 @@ struct dd_function_table {
    const GLubyte * (*GetString)( struct gl_context *ctx, GLenum name );
 
    /**
-    * Notify the driver after Mesa has made some internal state changes.  
+    * Notify the driver after Mesa has made some internal state changes.
     *
     * This is in addition to any state change callbacks Mesa may already have
     * made.
@@ -109,7 +109,7 @@ struct dd_function_table {
                           GLuint width, GLuint height);
 
    /**
-    * Called whenever an error is generated.  
+    * Called whenever an error is generated.
     * __struct gl_contextRec::ErrorValue contains the error value.
     */
    void (*Error)( struct gl_context *ctx );
@@ -167,14 +167,14 @@ struct dd_function_table {
 		       GLvoid *dest );
 
    /**
-    * Called by glCopyPixels().  
+    * Called by glCopyPixels().
     */
    void (*CopyPixels)( struct gl_context *ctx, GLint srcx, GLint srcy,
                        GLsizei width, GLsizei height,
                        GLint dstx, GLint dsty, GLenum type );
 
    /**
-    * Called by glBitmap().  
+    * Called by glBitmap().
     */
    void (*Bitmap)( struct gl_context *ctx,
 		   GLint x, GLint y, GLsizei width, GLsizei height,
@@ -182,7 +182,7 @@ struct dd_function_table {
 		   const GLubyte *bitmap );
    /*@}*/
 
-   
+
    /**
     * \name Texture image functions
     */
@@ -190,7 +190,7 @@ struct dd_function_table {
 
    /**
     * Choose texture format.
-    * 
+    *
     * This is called by the \c _mesa_store_tex[sub]image[123]d() fallback
     * functions.  The driver should examine \p internalFormat and return a
     * gl_format value.
@@ -200,7 +200,7 @@ struct dd_function_table {
 
    /**
     * Called by glTexImage1D().
-    * 
+    *
     * \param target user specified.
     * \param format user specified.
     * \param type user specified.
@@ -209,7 +209,7 @@ struct dd_function_table {
     * \param texObj is the target texture object.
     * \param texImage is the target texture image.  It will have the texture \p
     * width, \p height, \p depth, \p border and \p internalFormat information.
-    * 
+    *
     * \p retainInternalCopy is returned by this function and indicates whether
     * core Mesa should keep an internal copy of the texture image.
     *
@@ -225,7 +225,7 @@ struct dd_function_table {
 
    /**
     * Called by glTexImage2D().
-    * 
+    *
     * \sa dd_function_table::TexImage1D.
     */
    void (*TexImage2D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -235,10 +235,10 @@ struct dd_function_table {
                        const struct gl_pixelstore_attrib *packing,
                        struct gl_texture_object *texObj,
                        struct gl_texture_image *texImage );
-   
+
    /**
     * Called by glTexImage3D().
-    * 
+    *
     * \sa dd_function_table::TexImage1D.
     */
    void (*TexImage3D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -277,7 +277,7 @@ struct dd_function_table {
                           const struct gl_pixelstore_attrib *packing,
                           struct gl_texture_object *texObj,
                           struct gl_texture_image *texImage );
-   
+
    /**
     * Called by glTexSubImage2D().
     *
@@ -291,7 +291,7 @@ struct dd_function_table {
                           const struct gl_pixelstore_attrib *packing,
                           struct gl_texture_object *texObj,
                           struct gl_texture_image *texImage );
-   
+
    /**
     * Called by glTexSubImage3D().
     *
@@ -316,7 +316,7 @@ struct dd_function_table {
 
    /**
     * Called by glCopyTexImage1D().
-    * 
+    *
     * Drivers should use a fallback routine from texstore.c if needed.
     */
    void (*CopyTexImage1D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -325,7 +325,7 @@ struct dd_function_table {
 
    /**
     * Called by glCopyTexImage2D().
-    * 
+    *
     * Drivers should use a fallback routine from texstore.c if needed.
     */
    void (*CopyTexImage2D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -334,7 +334,7 @@ struct dd_function_table {
 
    /**
     * Called by glCopyTexSubImage1D().
-    * 
+    *
     * Drivers should use a fallback routine from texstore.c if needed.
     */
    void (*CopyTexSubImage1D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -342,7 +342,7 @@ struct dd_function_table {
                               GLint x, GLint y, GLsizei width );
    /**
     * Called by glCopyTexSubImage2D().
-    * 
+    *
     * Drivers should use a fallback routine from texstore.c if needed.
     */
    void (*CopyTexSubImage2D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -351,7 +351,7 @@ struct dd_function_table {
                               GLsizei width, GLsizei height );
    /**
     * Called by glCopyTexSubImage3D().
-    * 
+    *
     * Drivers should use a fallback routine from texstore.c if needed.
     */
    void (*CopyTexSubImage3D)( struct gl_context *ctx, GLenum target, GLint level,
@@ -367,7 +367,7 @@ struct dd_function_table {
 
    /**
     * Called by glTexImage[123]D when user specifies a proxy texture
-    * target.  
+    * target.
     *
     * \return GL_TRUE if the proxy test passes, or GL_FALSE if the test fails.
     */
@@ -378,7 +378,7 @@ struct dd_function_table {
                                   GLint depth, GLint border);
    /*@}*/
 
-   
+
    /**
     * \name Compressed texture functions
     */
@@ -395,7 +395,7 @@ struct dd_function_table {
     * \param texObj is the target texture object.
     * \param texImage is the target texture image.  It will have the texture \p
     * width, \p height, \p depth, \p border and \p internalFormat information.
-    *      
+    *
     * \a retainInternalCopy is returned by this function and indicates whether
     * core Mesa should keep an internal copy of the texture image.
     */
@@ -431,7 +431,7 @@ struct dd_function_table {
 
    /**
     * Called by glCompressedTexSubImage1D().
-    * 
+    *
     * \param target user specified.
     * \param level user specified.
     * \param xoffset user specified.
@@ -507,7 +507,7 @@ struct dd_function_table {
    struct gl_texture_object * (*NewTextureObject)( struct gl_context *ctx, GLuint name,
                                                    GLenum target );
    /**
-    * Called when a texture object is about to be deallocated.  
+    * Called when a texture object is about to be deallocated.
     *
     * Driver should delete the gl_texture_object object and anything
     * hanging off of it.
@@ -519,7 +519,7 @@ struct dd_function_table {
     */
    struct gl_texture_image * (*NewTextureImage)( struct gl_context *ctx );
 
-   /** 
+   /**
     * Called to free tImage->Data.
     */
    void (*FreeTexImageData)( struct gl_context *ctx, struct gl_texture_image *tImage );
@@ -535,7 +535,7 @@ struct dd_function_table {
     * that knows for sure how the texture memory is allocated - via
     * the above callbacks.  There is then an argument that the driver
     * knows what memcpy paths might be fast.  Typically this is invoked with
-    * 
+    *
     * to -- a pointer into texture memory allocated by NewTextureImage() above.
     * from -- a pointer into client memory or a mesa temporary.
     * sz -- nr bytes to copy.
@@ -550,7 +550,7 @@ struct dd_function_table {
 
    /**
     * Called when the texture's color lookup table is changed.
-    * 
+    *
     * If \p tObj is NULL then the shared texture palette
     * gl_texture_object::Palette is to be updated.
     */
@@ -558,7 +558,7 @@ struct dd_function_table {
                                  struct gl_texture_object *tObj );
    /*@}*/
 
-   
+
    /**
     * \name Imaging functionality
     */
@@ -582,19 +582,19 @@ struct dd_function_table {
    /** Allocate a new program */
    struct gl_program * (*NewProgram)(struct gl_context *ctx, GLenum target, GLuint id);
    /** Delete a program */
-   void (*DeleteProgram)(struct gl_context *ctx, struct gl_program *prog);   
+   void (*DeleteProgram)(struct gl_context *ctx, struct gl_program *prog);
    /**
     * Notify driver that a program string (and GPU code) has been specified
     * or modified.  Return GL_TRUE or GL_FALSE to indicate if the program is
     * supported by the driver.
     */
-   GLboolean (*ProgramStringNotify)(struct gl_context *ctx, GLenum target, 
+   GLboolean (*ProgramStringNotify)(struct gl_context *ctx, GLenum target,
                                     struct gl_program *prog);
 
    /** Query if program can be loaded onto hardware */
-   GLboolean (*IsProgramNative)(struct gl_context *ctx, GLenum target, 
+   GLboolean (*IsProgramNative)(struct gl_context *ctx, GLenum target,
 				struct gl_program *prog);
-   
+
    /*@}*/
 
    /**
@@ -738,7 +738,7 @@ struct dd_function_table {
 
    struct gl_buffer_object * (*NewBufferObject)( struct gl_context *ctx, GLuint buffer,
 						 GLenum target );
-   
+
    void (*DeleteBuffer)( struct gl_context *ctx, struct gl_buffer_object *obj );
 
    GLboolean (*BufferData)( struct gl_context *ctx, GLenum target, GLsizeiptrARB size,
@@ -768,7 +768,7 @@ struct dd_function_table {
                              GLsizeiptr length, GLbitfield access,
                              struct gl_buffer_object *obj);
 
-   void (*FlushMappedBufferRange)(struct gl_context *ctx, GLenum target, 
+   void (*FlushMappedBufferRange)(struct gl_context *ctx, GLenum target,
                                   GLintptr offset, GLsizeiptr length,
                                   struct gl_buffer_object *obj);
 
@@ -800,7 +800,7 @@ struct dd_function_table {
    void (*BindFramebuffer)(struct gl_context *ctx, GLenum target,
                            struct gl_framebuffer *drawFb,
                            struct gl_framebuffer *readFb);
-   void (*FramebufferRenderbuffer)(struct gl_context *ctx, 
+   void (*FramebufferRenderbuffer)(struct gl_context *ctx,
                                    struct gl_framebuffer *fb,
                                    GLenum attachment,
                                    struct gl_renderbuffer *rb);
@@ -864,7 +864,7 @@ struct dd_function_table {
    GLuint NeedValidate;
 
    /**
-    * Validate the current T&L module. 
+    * Validate the current T&L module.
     *
     * This is called directly after UpdateState() when a state change that has
     * occurred matches the dd_function_table::NeedValidate bitmask above.  This
@@ -882,14 +882,14 @@ struct dd_function_table {
 #define PRIM_UNKNOWN             (GL_POLYGON+3)
 
    /**
-    * Set by the driver-supplied T&L engine.  
+    * Set by the driver-supplied T&L engine.
     *
     * Set to PRIM_OUTSIDE_BEGIN_END when outside glBegin()/glEnd().
     */
    GLuint CurrentExecPrimitive;
 
    /**
-    * Current state of an in-progress compilation.  
+    * Current state of an in-progress compilation.
     *
     * May take on any of the additional values PRIM_OUTSIDE_BEGIN_END,
     * PRIM_INSIDE_UNKNOWN_PRIM or PRIM_UNKNOWN defined above.
@@ -960,7 +960,7 @@ struct dd_function_table {
     *
     * Notify the T&L component before and after calling a display list.
     */
-   void (*BeginCallList)( struct gl_context *ctx, 
+   void (*BeginCallList)( struct gl_context *ctx,
 			  struct gl_display_list *dlist );
    /**
     * Called by glEndCallList().

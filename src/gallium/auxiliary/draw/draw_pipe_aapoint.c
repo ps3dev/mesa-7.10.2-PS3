@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -205,20 +205,20 @@ aa_transform_inst(struct tgsi_transform_context *ctx,
       decl.Declaration.Semantic = 1;
       decl.Semantic.Name = TGSI_SEMANTIC_GENERIC;
       decl.Semantic.Index = aactx->maxGeneric + 1;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = texInput;
       ctx->emit_declaration(ctx, &decl);
 
       /* declare new temp regs */
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_TEMPORARY;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = tmp0;
       ctx->emit_declaration(ctx, &decl);
 
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_TEMPORARY;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = aactx->colorTemp;
       ctx->emit_declaration(ctx, &decl);
 
@@ -822,7 +822,7 @@ aapoint_create_fs_state(struct pipe_context *pipe,
 {
    struct aapoint_stage *aapoint = aapoint_stage_from_pipe(pipe);
    struct aapoint_fragment_shader *aafs = CALLOC_STRUCT(aapoint_fragment_shader);
-   if (aafs == NULL) 
+   if (aafs == NULL)
       return NULL;
 
    aafs->state = *fs;

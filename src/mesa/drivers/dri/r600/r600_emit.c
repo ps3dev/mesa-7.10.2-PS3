@@ -50,7 +50,7 @@ void r600EmitCacheFlush(context_t *rmesa)
 }
 
 GLboolean r600AllocShaderConsts(struct gl_context * ctx,
-                                void ** constbo,			 
+                                void ** constbo,
                                 int sizeinBYTE,
                                 char * szShaderUsage)
 {
@@ -60,7 +60,7 @@ GLboolean r600AllocShaderConsts(struct gl_context * ctx,
     if(sizeinBYTE < 64) /* SQ_ALU_CONST_BUFFER_SIZE need 64 bytes at least to be non 0 */
     {
         sizeinBYTE = 64;
-    }    
+    }
 
 shader_again_alloc:
 	pbo = radeon_bo_open(radeonctx->radeonScreen->bom,
@@ -98,7 +98,7 @@ GLboolean r600EmitShaderConsts(struct gl_context * ctx,
                                int    bo_offset,
                                GLvoid * data,
                                int sizeinBYTE)
-{	
+{
 	struct radeon_bo * pbo = (struct radeon_bo *)constbo;
 	uint8_t *out;
 

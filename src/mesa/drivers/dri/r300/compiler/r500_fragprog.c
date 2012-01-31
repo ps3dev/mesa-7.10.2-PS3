@@ -322,7 +322,7 @@ void r500FragmentProgramDump(struct radeon_compiler *c, void *user)
       /* JUMP_FUNC JUMP_ANY*/
       fprintf(stderr, "0x%02x %1x ", inst >> 8 & 0xff,
           (inst & R500_FC_JUMP_ANY) >> 5);
-      
+
       /* OP */
       switch(inst & 0x7){
       case R500_FC_OP_JUMP:
@@ -350,7 +350,7 @@ void r500FragmentProgramDump(struct radeon_compiler *c, void *user)
         fprintf(stderr, "CONTINUE");
         break;
       }
-      fprintf(stderr," "); 
+      fprintf(stderr," ");
       /* A_OP */
       switch(inst & (0x3 << 6)){
       case R500_FC_A_OP_NONE:
@@ -367,7 +367,7 @@ void r500FragmentProgramDump(struct radeon_compiler *c, void *user)
       for(i=0; i<2; i++){
         fprintf(stderr, " ");
         switch(inst & (0x3 << (24 + (i * 2)))){
-        /* R500_FC_B_OP0_NONE 
+        /* R500_FC_B_OP0_NONE
 	 * R500_FC_B_OP1_NONE */
 	case 0:
           fprintf(stderr, "NONE");
@@ -387,14 +387,14 @@ void r500FragmentProgramDump(struct radeon_compiler *c, void *user)
       inst = code->inst[n].inst3;
       /* JUMP_ADDR */
       fprintf(stderr, " %d", inst >> 16);
-      
+
       if(code->inst[n].inst2 & R500_FC_IGNORE_UNCOVERED){
         fprintf(stderr, " IGN_UNC");
       }
       inst = code->inst[n].inst3;
       fprintf(stderr, "\n\t3:FC_ADDR    0x%08x:", inst);
       fprintf(stderr, "BOOL: 0x%02x, INT: 0x%02x, JUMP_ADDR: %d, JMP_GLBL: %1x\n",
-      inst & 0x1f, (inst >> 8) & 0x1f, (inst >> 16) & 0x1ff, inst >> 31); 
+      inst & 0x1f, (inst >> 8) & 0x1f, (inst >> 16) & 0x1ff, inst >> 31);
       break;
     case R500_INST_TYPE_TEX:
       inst = code->inst[n].inst1;

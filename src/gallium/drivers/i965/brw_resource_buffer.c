@@ -35,7 +35,7 @@ static void *
 brw_buffer_transfer_map( struct pipe_context *pipe,
 			 struct pipe_transfer *transfer)
 {
-   struct brw_screen *bscreen = brw_screen(pipe->screen); 
+   struct brw_screen *bscreen = brw_screen(pipe->screen);
    struct brw_winsys_screen *sws = bscreen->sws;
    struct brw_buffer *buf = brw_buffer(transfer->resource);
    unsigned offset = transfer->box.x;
@@ -46,7 +46,7 @@ brw_buffer_transfer_map( struct pipe_context *pipe,
    if (buf->user_buffer)
       map = buf->user_buffer;
    else
-      map = sws->bo_map( buf->bo, 
+      map = sws->bo_map( buf->bo,
 			 BRW_DATA_OTHER,
 			 offset,
 			 length,
@@ -63,7 +63,7 @@ brw_buffer_transfer_flush_region( struct pipe_context *pipe,
 				  struct pipe_transfer *transfer,
 				  const struct pipe_box *box)
 {
-   struct brw_screen *bscreen = brw_screen(pipe->screen); 
+   struct brw_screen *bscreen = brw_screen(pipe->screen);
    struct brw_winsys_screen *sws = bscreen->sws;
    struct brw_buffer *buf = brw_buffer(transfer->resource);
    unsigned offset = box->x;
@@ -72,7 +72,7 @@ brw_buffer_transfer_flush_region( struct pipe_context *pipe,
    if (buf->user_buffer)
       return;
 
-   sws->bo_flush_range( buf->bo, 
+   sws->bo_flush_range( buf->bo,
                         offset,
                         length );
 }
@@ -82,10 +82,10 @@ static void
 brw_buffer_transfer_unmap( struct pipe_context *pipe,
 			   struct pipe_transfer *transfer)
 {
-   struct brw_screen *bscreen = brw_screen(pipe->screen); 
+   struct brw_screen *bscreen = brw_screen(pipe->screen);
    struct brw_winsys_screen *sws = bscreen->sws;
    struct brw_buffer *buf = brw_buffer( transfer->resource );
-   
+
    if (buf->bo)
       sws->bo_unmap(buf->bo);
 }
@@ -110,7 +110,7 @@ static unsigned brw_buffer_is_referenced( struct pipe_context *pipe,
 }
 
 
-struct u_resource_vtbl brw_buffer_vtbl = 
+struct u_resource_vtbl brw_buffer_vtbl =
 {
    brw_buffer_get_handle,	     /* get_handle */
    brw_buffer_destroy,		     /* resource_destroy */
@@ -133,11 +133,11 @@ brw_buffer_create(struct pipe_screen *screen,
    struct brw_buffer *buf;
    unsigned buffer_type;
    enum pipe_error ret;
-   
+
    buf = CALLOC_STRUCT(brw_buffer);
    if (!buf)
       return NULL;
-      
+
    buf->b.b = *template;
    buf->b.vtbl = &brw_buffer_vtbl;
    pipe_reference_init(&buf->b.b.reference, 1);
@@ -152,7 +152,7 @@ brw_buffer_create(struct pipe_screen *screen,
    case (PIPE_BIND_VERTEX_BUFFER|PIPE_BIND_INDEX_BUFFER):
       buffer_type = BRW_BUFFER_TYPE_VERTEX;
       break;
-      
+
    case PIPE_BIND_CONSTANT_BUFFER:
       buffer_type = BRW_BUFFER_TYPE_SHADER_CONSTANTS;
       break;
@@ -161,15 +161,15 @@ brw_buffer_create(struct pipe_screen *screen,
       buffer_type = BRW_BUFFER_TYPE_GENERIC;
       break;
    }
-   
+
    ret = sws->bo_alloc( sws, buffer_type,
                         template->width0,
 			64,	/* alignment */
                         &buf->bo );
    if (ret != PIPE_OK)
       return NULL;
-      
-   return &buf->b.b; 
+
+   return &buf->b.b;
 }
 
 
@@ -180,11 +180,11 @@ brw_user_buffer_create(struct pipe_screen *screen,
 		       unsigned bind)
 {
    struct brw_buffer *buf;
-   
+
    buf = CALLOC_STRUCT(brw_buffer);
    if (!buf)
       return NULL;
-   
+
    pipe_reference_init(&buf->b.b.reference, 1);
    buf->b.vtbl = &brw_buffer_vtbl;
    buf->b.b.screen = screen;
@@ -197,6 +197,6 @@ brw_user_buffer_create(struct pipe_screen *screen,
    buf->b.b.array_size = 1;
 
    buf->user_buffer = ptr;
-   
-   return &buf->b.b; 
+
+   return &buf->b.b;
 }

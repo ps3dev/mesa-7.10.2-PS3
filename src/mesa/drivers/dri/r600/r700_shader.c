@@ -70,7 +70,7 @@ void TakeInstOutFromList(TypedShaderList * plstCFInstructions, R700ShaderInstruc
     while(NULL != pCurInst)
     {
         if(pCurInst == pInst)
-        {                        
+        {
             bFound  = GL_TRUE;
             break;
         }
@@ -129,7 +129,7 @@ void Init_R700_Shader(R700_Shader * pShader)
 	pShader->miscVectorIsExported = GL_FALSE;
 	pShader->renderTargetArrayIndexIsExported = GL_FALSE;
 	pShader->ccDist0VectorIsExported = GL_FALSE;
-	pShader->ccDist1VectorIsExported = GL_FALSE; 
+	pShader->ccDist1VectorIsExported = GL_FALSE;
 
 
 	pShader->depthIsExported = GL_FALSE;
@@ -143,18 +143,18 @@ void Init_R700_Shader(R700_Shader * pShader)
 	pShader->uMaxCallDepth = 0;
 
 	pShader->bSurfAllocated = GL_FALSE;
-	
-	pShader->lstCFInstructions.pHead=NULL;  
-	pShader->lstCFInstructions.pTail=NULL;  
+
+	pShader->lstCFInstructions.pHead=NULL;
+	pShader->lstCFInstructions.pTail=NULL;
 	pShader->lstCFInstructions.uNumOfNode=0;
-	pShader->lstALUInstructions.pHead=NULL; 
-	pShader->lstALUInstructions.pTail=NULL; 
+	pShader->lstALUInstructions.pHead=NULL;
+	pShader->lstALUInstructions.pTail=NULL;
 	pShader->lstALUInstructions.uNumOfNode=0;
-	pShader->lstTEXInstructions.pHead=NULL; 
-	pShader->lstTEXInstructions.pTail=NULL; 
+	pShader->lstTEXInstructions.pHead=NULL;
+	pShader->lstTEXInstructions.pTail=NULL;
 	pShader->lstTEXInstructions.uNumOfNode=0;
-	pShader->lstVTXInstructions.pHead=NULL; 
-	pShader->lstVTXInstructions.pTail=NULL; 
+	pShader->lstVTXInstructions.pHead=NULL;
+	pShader->lstVTXInstructions.pTail=NULL;
 	pShader->lstVTXInstructions.uNumOfNode=0;
 }
 
@@ -165,16 +165,16 @@ void SetActiveCFlist(R700_Shader *pShader, TypedShaderList * plstCF)
 
 void AddCFInstruction(R700_Shader *pShader, R700ControlFlowInstruction *pCFInst)
 {
-    R700ControlFlowSXClause*  pSXClause; 
+    R700ControlFlowSXClause*  pSXClause;
     R700ControlFlowSMXClause* pSMXClause;
 
     pCFInst->m_uIndex = pShader->plstCFInstructions_active->uNumOfNode;
-    AddInstToList(pShader->plstCFInstructions_active, 
+    AddInstToList(pShader->plstCFInstructions_active,
                   (R700ShaderInstruction*)pCFInst);
     pShader->uShaderBinaryDWORDSize += GetInstructionSize(pCFInst->m_ShaderInstType);
 
     pSXClause = NULL;
-    pSMXClause = NULL; 
+    pSMXClause = NULL;
 	switch (pCFInst->m_ShaderInstType)
 	{
 	case SIT_CF_ALL_EXP_SX:
@@ -206,13 +206,13 @@ void AddCFInstruction(R700_Shader *pShader, R700ControlFlowInstruction *pCFInst)
 void AddVTXInstruction(R700_Shader *pShader, R700VertexInstruction *pVTXInst)
 {
     pVTXInst->m_uIndex = pShader->lstVTXInstructions.uNumOfNode;
-	AddInstToList(&(pShader->lstVTXInstructions), 
+	AddInstToList(&(pShader->lstVTXInstructions),
                   (R700ShaderInstruction*)pVTXInst);
 	pShader->uShaderBinaryDWORDSize += GetInstructionSize(pVTXInst->m_ShaderInstType);
 
 	if(pVTXInst->m_ShaderInstType == SIT_VTX_GENERIC)
 	{
-		R700VertexGenericFetch* pVTXGenericClause = (R700VertexGenericFetch*)pVTXInst;	
+		R700VertexGenericFetch* pVTXGenericClause = (R700VertexGenericFetch*)pVTXInst;
 		pShader->nRegs = (pShader->nRegs < pVTXGenericClause->m_Word1_GPR.f.dst_gpr) ? pVTXGenericClause->m_Word1_GPR.f.dst_gpr : pShader->nRegs;
 	}
 
@@ -225,7 +225,7 @@ void AddVTXInstruction(R700_Shader *pShader, R700VertexInstruction *pVTXInst)
 void AddTEXInstruction(R700_Shader *pShader, R700TextureInstruction *pTEXInst)
 {
     pTEXInst->m_uIndex = pShader->lstTEXInstructions.uNumOfNode;
-	AddInstToList(&(pShader->lstTEXInstructions), 
+	AddInstToList(&(pShader->lstTEXInstructions),
                   (R700ShaderInstruction*)pTEXInst);
 	pShader->uShaderBinaryDWORDSize += GetInstructionSize(pTEXInst->m_ShaderInstType);
 
@@ -240,7 +240,7 @@ void AddTEXInstruction(R700_Shader *pShader, R700TextureInstruction *pTEXInst)
 void AddALUInstruction(R700_Shader *pShader, R700ALUInstruction *pALUInst)
 {
     pALUInst->m_uIndex = pShader->lstALUInstructions.uNumOfNode;
-    AddInstToList(&(pShader->lstALUInstructions), 
+    AddInstToList(&(pShader->lstALUInstructions),
                   (R700ShaderInstruction*)pALUInst);
     pShader->uShaderBinaryDWORDSize += GetInstructionSize(pALUInst->m_ShaderInstType);
 
@@ -258,11 +258,11 @@ void ResolveLinks(R700_Shader *pShader)
     R700ShaderInstruction  *pInst;
     R700ALUInstruction     *pALUinst;
     R700TextureInstruction *pTEXinst;
-    R700VertexInstruction  *pVTXinst; 
+    R700VertexInstruction  *pVTXinst;
 
     GLuint vtxOffset;
 
-	GLuint cfOffset = 0x0;  
+	GLuint cfOffset = 0x0;
 
     GLuint aluOffset = cfOffset + pShader->lstCFInstructions.uNumOfNode * GetInstructionSize(SIT_CF);
 
@@ -275,10 +275,10 @@ void ResolveLinks(R700_Shader *pShader)
 
         pInst = pInst->pNextInst;
     };
-  
+
     vtxOffset = texOffset + pShader->lstTEXInstructions.uNumOfNode * GetInstructionSize(SIT_TEX);
 
-    if ( ((pShader->lstTEXInstructions.uNumOfNode > 0) && (texOffset % 4 != 0)) || 
+    if ( ((pShader->lstTEXInstructions.uNumOfNode > 0) && (texOffset % 4 != 0)) ||
          ((pShader->lstVTXInstructions.uNumOfNode > 0) && (vtxOffset % 4 != 0))    )
     {
         pALUinst = (R700ALUInstruction*) CALLOC_STRUCT(R700ALUInstruction);
@@ -357,15 +357,15 @@ void Assemble(R700_Shader *pShader)
         return;
     }
 
-    if(pShader->bLinksDirty == GL_TRUE) 
+    if(pShader->bLinksDirty == GL_TRUE)
     {
         ResolveLinks(pShader);
     }
 
     size_of_program = pShader->uShaderBinaryDWORDSize;
-    
+
     pShaderBinary = (GLuint*) MALLOC(sizeof(GLuint)*size_of_program);
- 
+
     pCurrPos = pShaderBinary;
 
     for (i = 0; i < size_of_program; i++)
@@ -378,28 +378,28 @@ void Assemble(R700_Shader *pShader)
     {
         switch (pInst->m_ShaderInstType)
         {
-        case SIT_CF_GENERIC: 
+        case SIT_CF_GENERIC:
             {
                 R700ControlFlowGenericClause* pCFgeneric = (R700ControlFlowGenericClause*)pInst;
                 *pCurrPos++ = pCFgeneric->m_Word0.val;
                 *pCurrPos++ = pCFgeneric->m_Word1.val;
             }
             break;
-        case SIT_CF_ALU: 
+        case SIT_CF_ALU:
             {
                 R700ControlFlowALUClause* pCFalu = (R700ControlFlowALUClause*)pInst;
                 *pCurrPos++ = pCFalu->m_Word0.val;
                 *pCurrPos++ = pCFalu->m_Word1.val;
             }
             break;
-        case SIT_CF_ALL_EXP_SX: 
+        case SIT_CF_ALL_EXP_SX:
             {
                 R700ControlFlowSXClause* pCFsx = (R700ControlFlowSXClause*)pInst;
                 *pCurrPos++ = pCFsx->m_Word0.val;
                 *pCurrPos++ = (pCFsx->m_Word1.val | pCFsx->m_Word1_SWIZ.val);
             }
             break;
-        case SIT_CF_ALL_EXP_SMX: 
+        case SIT_CF_ALL_EXP_SMX:
             {
                 R700ControlFlowSMXClause* pCFsmx = (R700ControlFlowSMXClause*)pInst;
                 *pCurrPos++ = pCFsmx->m_Word0.val;
@@ -412,14 +412,14 @@ void Assemble(R700_Shader *pShader)
 
         pInst = pInst->pNextInst;
     };
-    
+
     number_of_alu_dwords = 0;
     pInst = pShader->lstALUInstructions.pHead;
     while(NULL != pInst)
     {
         switch (pInst->m_ShaderInstType)
         {
-        case SIT_ALU: 
+        case SIT_ALU:
             {
                 R700ALUInstruction* pALU = (R700ALUInstruction*)pInst;
 
@@ -429,7 +429,7 @@ void Assemble(R700_Shader *pShader)
                 number_of_alu_dwords += 2;
             }
             break;
-        case SIT_ALU_HALF_LIT: 
+        case SIT_ALU_HALF_LIT:
             {
                 R700ALUInstructionHalfLiteral* pALUhalf = (R700ALUInstructionHalfLiteral*)pInst;
 
@@ -441,7 +441,7 @@ void Assemble(R700_Shader *pShader)
                 number_of_alu_dwords += 4;
             }
             break;
-        case SIT_ALU_FALL_LIT: 
+        case SIT_ALU_FALL_LIT:
             {
                 R700ALUInstructionFullLiteral* pALUfull = (R700ALUInstructionFullLiteral*)pInst;
 
@@ -462,7 +462,7 @@ void Assemble(R700_Shader *pShader)
 
         pInst = pInst->pNextInst;
     };
-    
+
     pInst = pShader->lstTEXInstructions.pHead;
     while(NULL != pInst)
     {
@@ -475,7 +475,7 @@ void Assemble(R700_Shader *pShader)
 
         pInst = pInst->pNextInst;
     };
-    
+
     pInst = pShader->lstVTXInstructions.pHead;
     while(NULL != pInst)
     {
@@ -515,7 +515,7 @@ void Assemble(R700_Shader *pShader)
     pShader->pProgram = (GLubyte*)pShaderBinary;
 
     end_of_cf_instructions = pShader->uCFOffset + pShader->lstCFInstructions.uNumOfNode * GetInstructionSize(SIT_CF);
-    
+
     pShader->uEndOfCF = end_of_cf_instructions >> 1;
 
     pShader->uEndOfALU = (end_of_cf_instructions + number_of_alu_dwords) >> 1;
@@ -551,14 +551,14 @@ void cleanup_vfetch_shaderinst(R700_Shader *pShader)
     pInst = pShader->lstVTXInstructions.pHead;
     while(NULL != pInst)
     {
-        pVTXInst = (R700VertexInstruction  *)pInst;        
+        pVTXInst = (R700VertexInstruction  *)pInst;
         pShader->uShaderBinaryDWORDSize -= GetInstructionSize(pVTXInst->m_ShaderInstType);
 
         if(NULL != pVTXInst->m_pLinkedGenericClause)
         {
             pCFInst = (R700ControlFlowInstruction*)(pVTXInst->m_pLinkedGenericClause);
 
-            TakeInstOutFromList(&(pShader->lstCFInstructions), 
+            TakeInstOutFromList(&(pShader->lstCFInstructions),
                                  (R700ShaderInstruction*)pCFInst);
 
             pShader->uShaderBinaryDWORDSize -= GetInstructionSize(pCFInst->m_ShaderInstType);
@@ -577,8 +577,8 @@ void cleanup_vfetch_shaderinst(R700_Shader *pShader)
     };
 
     //set NULL pShader->lstVTXInstructions
-    pShader->lstVTXInstructions.pHead=NULL; 
-	pShader->lstVTXInstructions.pTail=NULL; 
+    pShader->lstVTXInstructions.pHead=NULL;
+	pShader->lstVTXInstructions.pTail=NULL;
 	pShader->lstVTXInstructions.uNumOfNode=0;
 }
 

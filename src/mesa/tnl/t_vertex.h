@@ -32,7 +32,7 @@
 #include "t_context.h"
 
 /* New mechanism to specify hardware vertices so that tnl can build
- * and manipulate them directly.  
+ * and manipulate them directly.
  */
 
 
@@ -97,7 +97,7 @@ extern void _tnl_get_attr( struct gl_context *ctx, const void *vertex, GLenum at
 
 /* Complementary to the above.
  */
-extern void _tnl_set_attr( struct gl_context *ctx, void *vout, GLenum attrib, 
+extern void _tnl_set_attr( struct gl_context *ctx, void *vout, GLenum attrib,
 			   const GLfloat *src );
 
 
@@ -110,7 +110,7 @@ extern GLuint _tnl_install_attrs( struct gl_context *ctx,
 
 extern void _tnl_free_vertices( struct gl_context *ctx );
 
-extern void _tnl_init_vertices( struct gl_context *ctx, 
+extern void _tnl_init_vertices( struct gl_context *ctx,
 				GLuint vb_size,
 				GLuint max_vertex_size );
 
@@ -119,11 +119,11 @@ extern void *_tnl_emit_vertices_to_buffer( struct gl_context *ctx,
 					   GLuint end,
 					   void *dest );
 
-/* This function isn't optimal. Check out 
+/* This function isn't optimal. Check out
  * gallium/auxilary/translate for a more comprehensive implementation of
  * the same functionality.
  */
-  
+
 extern void *_tnl_emit_indexed_vertices_to_buffer( struct gl_context *ctx,
 						   const GLuint *elts,
 						   GLuint start,
@@ -153,7 +153,7 @@ void _tnl_register_fastpath( struct tnl_clipspace *vtx,
 
 /* t_vertex_generic.c -- Internal functions for t_vertex.c
  */
-void _tnl_generic_copy_pv_extras( struct gl_context *ctx, 
+void _tnl_generic_copy_pv_extras( struct gl_context *ctx,
 				  GLuint dst, GLuint src );
 
 void _tnl_generic_interp_extras( struct gl_context *ctx,

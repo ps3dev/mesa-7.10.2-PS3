@@ -832,7 +832,7 @@ dri2CreateScreen(int screen, struct glx_display * priv)
       goto handle_error;
    }
 
-   
+
    /* If the server does not support the protocol for
     * DRI2GetBuffersWithFormat, don't supply that interface to the driver.
     */
@@ -962,7 +962,7 @@ dri2CreateDisplay(Display * dpy)
       pdp->loader_extensions[i++] = &dri2LoaderExtension_old.base;
    else
       pdp->loader_extensions[i++] = &dri2LoaderExtension.base;
-   
+
    pdp->loader_extensions[i++] = &systemTimeExtension.base;
 
 #ifdef __DRI_USE_INVALIDATE

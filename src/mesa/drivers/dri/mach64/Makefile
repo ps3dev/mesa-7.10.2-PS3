@@ -23,7 +23,7 @@ C_SOURCES = \
 	$(COMMON_SOURCES) \
 	$(DRIVER_SOURCES)
 
-ASM_SOURCES = 
+ASM_SOURCES =
 
 include ../Makefile.template
 

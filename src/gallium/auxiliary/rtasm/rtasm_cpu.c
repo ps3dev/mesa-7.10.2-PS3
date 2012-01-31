@@ -35,7 +35,7 @@ static boolean rtasm_sse_enabled(void)
 {
    static boolean firsttime = 1;
    static boolean enabled;
-   
+
    /* This gets called quite often at the moment:
     */
    if (firsttime) {
@@ -56,7 +56,7 @@ int rtasm_cpu_has_sse(void)
 #endif
 }
 
-int rtasm_cpu_has_sse2(void) 
+int rtasm_cpu_has_sse2(void)
 {
    /* FIXME: actually detect this at run-time */
 #if defined(PIPE_ARCH_X86) || defined(PIPE_ARCH_X86_64)

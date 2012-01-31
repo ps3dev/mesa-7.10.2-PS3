@@ -506,7 +506,7 @@ LLBL(K_GTP3P3DR_finish):
 	RET
 #undef FRAME_OFFSET
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

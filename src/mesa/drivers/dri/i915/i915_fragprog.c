@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/glheader.h"
@@ -299,8 +299,8 @@ do {									\
 #define EMIT_2ARG_ARITH( OP ) EMIT_ARITH( OP, 2 )
 #define EMIT_3ARG_ARITH( OP ) EMIT_ARITH( OP, 3 )
 
-/* 
- * TODO: consider moving this into core 
+/*
+ * TODO: consider moving this into core
  */
 static void calc_live_regs( struct i915_fragment_program *p )
 {
@@ -308,13 +308,13 @@ static void calc_live_regs( struct i915_fragment_program *p )
     GLuint regsUsed = 0xffff0000;
     uint8_t live_components[16] = { 0, };
     GLint i;
-   
+
     for (i = program->Base.NumInstructions - 1; i >= 0; i--) {
         struct prog_instruction *inst = &program->Base.Instructions[i];
         int opArgs = _mesa_num_inst_src_regs(inst->Opcode);
         int a;
 
-        /* Register is written to: unmark as live for this and preceeding ops */ 
+        /* Register is written to: unmark as live for this and preceeding ops */
         if (inst->DstReg.File == PROGRAM_TEMPORARY) {
             live_components[inst->DstReg.Index] &= ~inst->DstReg.WriteMask;
             if (live_components[inst->DstReg.Index] == 0)
@@ -322,7 +322,7 @@ static void calc_live_regs( struct i915_fragment_program *p )
         }
 
         for (a = 0; a < opArgs; a++) {
-            /* Register is read from: mark as live for this and preceeding ops */ 
+            /* Register is read from: mark as live for this and preceeding ops */
             if (inst->SrcReg[a].File == PROGRAM_TEMPORARY) {
                 unsigned c;
 
@@ -341,7 +341,7 @@ static void calc_live_regs( struct i915_fragment_program *p )
     }
 }
 
-static GLuint get_live_regs( struct i915_fragment_program *p, 
+static GLuint get_live_regs( struct i915_fragment_program *p,
                              const struct prog_instruction *inst )
 {
     const struct gl_fragment_program *program = p->ctx->FragmentProgram._Current;
@@ -349,14 +349,14 @@ static GLuint get_live_regs( struct i915_fragment_program *p,
 
     return p->usedRegs[nr];
 }
- 
+
 
 /* Possible concerns:
  *
  * SIN, COS -- could use another taylor step?
  * LIT      -- results seem a little different to sw mesa
  * LOG      -- different to mesa on negative numbers, but this is conformant.
- * 
+ *
  * Parse failures -- Mesa doesn't currently give a good indication
  * internally whether a particular program string parsed or not.  This
  * can lead to confusion -- hopefully we cope with it ok now.
@@ -651,10 +651,10 @@ upload_program(struct i915_fragment_program *p)
 
          /* b*a + c*(1-a)
           *
-          * b*a + c - ca 
+          * b*a + c - ca
           *
-          * tmp = b*a + c, 
-          * result = (-c)*a + tmp 
+          * tmp = b*a + c,
+          * result = (-c)*a + tmp
           */
          i915_emit_arith(p, A0_MAD, tmp,
                          flags & A0_DEST_CHANNEL_ALL, 0, src1, src0, src2);
@@ -746,7 +746,7 @@ upload_program(struct i915_fragment_program *p)
          src0 = src_vector(p, &inst->SrcReg[0], program);
          tmp = i915_get_utemp(p);
 
-         /* 
+         /*
           * t0.xy = MUL x.xx11, x.x1111  ; x^2, x, 1, 1
           * t0 = MUL t0.xyxy t0.xx11 ; x^4, x^3, x^2, x
           * t1 = MUL t0.xyyw t0.yz11    ; x^7 x^5 x^3 x

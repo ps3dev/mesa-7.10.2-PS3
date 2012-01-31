@@ -95,7 +95,7 @@ generate_entrypoint(unsigned int functionOffset)
     * at offset 32 is the first one where the offset in the
     * "jmp OFFSET*4(%eax)" can't be encoded in a single byte.
     */
-   const GLubyte * const template_func = gl_dispatch_functions_start 
+   const GLubyte * const template_func = gl_dispatch_functions_start
      + (DISPATCH_FUNCTION_SIZE * 32);
    GLubyte * const code = (GLubyte *) u_execmem_alloc(DISPATCH_FUNCTION_SIZE);
 

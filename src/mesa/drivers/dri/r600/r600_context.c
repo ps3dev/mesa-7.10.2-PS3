@@ -358,7 +358,7 @@ static void r600InitGLExtensions(struct gl_context *ctx)
 #ifdef R600_ENABLE_GLSL_TEST
     driInitExtensions(ctx, gl_20_extension, GL_TRUE);
     _mesa_enable_2_0_extensions(ctx);
-    
+
 	/* glsl compiler has problem if this is not GL_TRUE */
 	for (i = 0; i <= MESA_SHADER_FRAGMENT; i++)
 		ctx->ShaderCompilerOptions[i].EmitCondCodes = GL_TRUE;
@@ -422,7 +422,7 @@ GLboolean r600CreateContext(gl_api api,
     {
         r600_init_vtbl(&r600->radeon);
     }
-    
+
 	/* Init default driver functions then plug in our R600-specific functions
 	 * (the texture functions are especially important)
 	 */
@@ -441,7 +441,7 @@ GLboolean r600CreateContext(gl_api api,
 	    r600InitTextureFuncs(&r600->radeon, &functions);
 	    r700InitShaderFuncs(&functions);
     }
-    
+
 	radeonInitQueryObjFunctions(&functions);
 
     if(screen->chip_family >= CHIP_FAMILY_CEDAR)

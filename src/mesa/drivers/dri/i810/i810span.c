@@ -100,7 +100,7 @@ void i810InitSpanFuncs( struct gl_context *ctx )
 {
    struct swrast_device_driver *swdd = _swrast_GetDeviceDriverReference(ctx);
    swdd->SpanRenderStart = i810SpanRenderStart;
-   swdd->SpanRenderFinish = i810SpanRenderFinish; 
+   swdd->SpanRenderFinish = i810SpanRenderFinish;
 }
 
 

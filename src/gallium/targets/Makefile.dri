@@ -32,7 +32,7 @@ INCLUDES = $(SHARED_INCLUDES) $(EXPAT_INCLUDES)
 
 OBJECTS = \
 	$(C_SOURCES:.c=.o) \
-	$(ASM_SOURCES:.S=.o) 
+	$(ASM_SOURCES:.S=.o)
 
 
 ### Include directories

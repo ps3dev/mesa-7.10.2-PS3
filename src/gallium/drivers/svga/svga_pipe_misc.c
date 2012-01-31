@@ -91,7 +91,7 @@ static void svga_set_framebuffer_state(struct pipe_context *pipe,
    if (propagate) {
       /* make sure that drawing calls comes before propagation calls */
       svga_hwtnl_flush_retry( svga );
-   
+
       for (i = 0; i < PIPE_MAX_COLOR_BUFS; i++)
          if (dst->cbufs[i] && dst->cbufs[i] != fb->cbufs[i])
             svga_propagate_surface(pipe, dst->cbufs[i]);
@@ -102,8 +102,8 @@ static void svga_set_framebuffer_state(struct pipe_context *pipe,
     * know that make no such assumption here. */
    for(i = 0; i < fb->nr_cbufs; ++i) {
       if (fb->zsbuf && fb->cbufs[i]) {
-         assert(fb->zsbuf->width == fb->cbufs[i]->width); 
-         assert(fb->zsbuf->height == fb->cbufs[i]->height); 
+         assert(fb->zsbuf->width == fb->cbufs[i]->width);
+         assert(fb->zsbuf->height == fb->cbufs[i]->height);
       }
    }
 

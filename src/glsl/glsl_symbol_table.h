@@ -73,7 +73,7 @@ public:
       ralloc_set_destructor(table, NULL);
       ralloc_free(table);
    }
-   
+
    glsl_symbol_table();
    ~glsl_symbol_table();
 

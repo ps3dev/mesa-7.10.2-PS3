@@ -78,7 +78,7 @@ struct vmw_svga_winsys_context
       uint32_t staged;
       uint32_t reserved;
    } surface;
-   
+
    struct {
       struct vmw_region_relocation relocs[VMW_REGION_RELOCS];
       uint32_t size;
@@ -143,7 +143,7 @@ vmw_swc_flush(struct svga_winsys_context *swc,
    ret = pb_validate_validate(vswc->validate);
    assert(ret == PIPE_OK);
    if(ret == PIPE_OK) {
-   
+
       /* Apply relocations */
       for(i = 0; i < vswc->region.used; ++i) {
          struct vmw_region_relocation *reloc = &vswc->region.relocs[i];
@@ -240,13 +240,13 @@ vmw_swc_reserve(struct svga_winsys_context *swc,
    assert(vswc->command.used + nr_bytes <= vswc->command.size);
    assert(vswc->surface.used + nr_relocs <= vswc->surface.size);
    assert(vswc->region.used + nr_relocs <= vswc->region.size);
-   
+
    vswc->command.reserved = nr_bytes;
    vswc->surface.reserved = nr_relocs;
    vswc->surface.staged = 0;
    vswc->region.reserved = nr_relocs;
    vswc->region.staged = 0;
-   
+
    return vswc->command.buffer + vswc->command.used;
 }
 
@@ -288,7 +288,7 @@ vmw_swc_region_relocation(struct svga_winsys_context *swc,
    struct vmw_region_relocation *reloc;
    unsigned translated_flags;
    enum pipe_error ret;
-   
+
    assert(vswc->region.staged < vswc->region.reserved);
 
    reloc = &vswc->region.relocs[vswc->region.used + vswc->region.staged];

@@ -192,7 +192,7 @@ do {								\
 #define R600_OUT_BATCH_REGSEQ(reg, count)	\
 	R600_OUT_BATCH_REGS((reg), (count))
 
-/* evergreen */ 
+/* evergreen */
 #define EVERGREEN_OUT_BATCH_REGS(reg, num)					\
 do {								\
 	if ((reg) >= R600_SET_CONFIG_REG_OFFSET && (reg) < R600_SET_CONFIG_REG_END) { \

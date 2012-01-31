@@ -43,7 +43,7 @@ static void translate_memcpy_ushort( const void *in,
 {
    memcpy(out, in, nr*sizeof(short));
 }
-                              
+
 static void translate_memcpy_uint( const void *in,
                                    unsigned nr,
                                    void *out )
@@ -60,7 +60,7 @@ static void generate_linear_ushort( unsigned nr,
    for (i = 0; i < nr; i++)
       out_us[i] = (ushort) i;
 }
-                              
+
 static void generate_linear_uint( unsigned nr,
                                   void *out )
 {
@@ -76,7 +76,7 @@ static unsigned nr_lines( unsigned prim,
 {
    switch (prim) {
    case PIPE_PRIM_TRIANGLES:
-      return (nr / 3) * 6; 
+      return (nr / 3) * 6;
    case PIPE_PRIM_TRIANGLE_STRIP:
       return (nr - 2) * 6;
    case PIPE_PRIM_TRIANGLE_FAN:
@@ -92,7 +92,7 @@ static unsigned nr_lines( unsigned prim,
       return 0;
    }
 }
-                              
+
 
 
 int u_unfilled_translator( unsigned prim,
@@ -113,7 +113,7 @@ int u_unfilled_translator( unsigned prim,
    *out_index_size = (in_index_size == 4) ? 4 : 2;
    out_idx = out_size_idx(*out_index_size);
 
-   if (unfilled_mode == PIPE_POLYGON_MODE_POINT) 
+   if (unfilled_mode == PIPE_POLYGON_MODE_POINT)
    {
       *out_prim = PIPE_PRIM_POINTS;
       *out_nr = nr;

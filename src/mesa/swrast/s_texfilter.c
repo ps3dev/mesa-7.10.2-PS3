@@ -1338,7 +1338,7 @@ sample_linear_2d(struct gl_context *ctx,
  * Optimized 2-D texture sampling:
  *    S and T wrap mode == GL_REPEAT
  *    GL_NEAREST min/mag filter
- *    No border, 
+ *    No border,
  *    RowStride == Width,
  *    Format = GL_RGB
  */
@@ -1923,7 +1923,7 @@ choose_cube_face(const struct gl_texture_object *texObj,
       }
    }
 
-   { 
+   {
       const float ima = 1.0F / ma;
       newCoord[0] = ( sc * ima + 1.0F ) * 0.5F;
       newCoord[1] = ( tc * ima + 1.0F ) * 0.5F;
@@ -2390,7 +2390,7 @@ sample_2d_array_linear(struct gl_context *ctx,
       else {
 	 img->FetchTexelf(img, i1, j1, array, t11);
       }
-      
+
       /* trilinear interpolation of samples */
       lerp_rgba_2d(rgba, a, b, t00, t10, t01, t11);
    }
@@ -2551,7 +2551,7 @@ sample_lambda_2d_array(struct gl_context *ctx,
                                                 rgba + minStart);
          break;
       case GL_LINEAR_MIPMAP_NEAREST:
-         sample_2d_array_linear_mipmap_nearest(ctx, tObj, m, 
+         sample_2d_array_linear_mipmap_nearest(ctx, tObj, m,
                                                texcoords + minStart,
                                                lambda + minStart,
                                                rgba + minStart);
@@ -2563,9 +2563,9 @@ sample_lambda_2d_array(struct gl_context *ctx,
                                                rgba + minStart);
          break;
       case GL_LINEAR_MIPMAP_LINEAR:
-         sample_2d_array_linear_mipmap_linear(ctx, tObj, m, 
+         sample_2d_array_linear_mipmap_linear(ctx, tObj, m,
                                               texcoords + minStart,
-                                              lambda + minStart, 
+                                              lambda + minStart,
                                               rgba + minStart);
          break;
       default:
@@ -2830,7 +2830,7 @@ sample_lambda_1d_array(struct gl_context *ctx,
                                                 lambda + minStart, rgba + minStart);
          break;
       case GL_LINEAR_MIPMAP_NEAREST:
-         sample_1d_array_linear_mipmap_nearest(ctx, tObj, m, 
+         sample_1d_array_linear_mipmap_nearest(ctx, tObj, m,
                                                texcoords + minStart,
                                                lambda + minStart,
                                                rgba + minStart);
@@ -2840,9 +2840,9 @@ sample_lambda_1d_array(struct gl_context *ctx,
                                                lambda + minStart, rgba + minStart);
          break;
       case GL_LINEAR_MIPMAP_LINEAR:
-         sample_1d_array_linear_mipmap_linear(ctx, tObj, m, 
+         sample_1d_array_linear_mipmap_linear(ctx, tObj, m,
                                               texcoords + minStart,
-                                              lambda + minStart, 
+                                              lambda + minStart,
                                               rgba + minStart);
          break;
       default:
@@ -3036,7 +3036,7 @@ sample_depth_texture( struct gl_context *ctx,
 
          nearest_texcoord(tObj, level, texcoords[i], &col, &row, &slice);
 
-         if (col >= 0 && row >= 0 && col < width && row < height && 
+         if (col >= 0 && row >= 0 && col < width && row < height &&
              slice >= 0 && slice < depth) {
             img->FetchTexelf(img, col, row, slice, &depthSample);
          }

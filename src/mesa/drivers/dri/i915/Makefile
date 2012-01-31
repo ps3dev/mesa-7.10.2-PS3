@@ -54,7 +54,7 @@ C_SOURCES = \
 	$(COMMON_SOURCES) \
 	$(DRIVER_SOURCES)
 
-ASM_SOURCES = 
+ASM_SOURCES =
 
 DRIVER_DEFINES = -I../intel -DI915 \
 	$(shell pkg-config libdrm --atleast-version=2.3.1 \

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "pipe/p_format.h"
@@ -86,7 +86,7 @@ stw_pf_color[] = {
 };
 
 
-static const struct stw_pf_depth_info 
+static const struct stw_pf_depth_info
 stw_pf_depth_stencil[] = {
    /* pure depth */
    { PIPE_FORMAT_Z32_UNORM,   {32, 0} },
@@ -99,14 +99,14 @@ stw_pf_depth_stencil[] = {
 };
 
 
-static const boolean 
+static const boolean
 stw_pf_doublebuffer[] = {
    FALSE,
    TRUE,
 };
 
 
-const unsigned 
+const unsigned
 stw_pf_multisample[] = {
    0,
    4
@@ -124,7 +124,7 @@ stw_pixelformat_add(
 {
    boolean extended = FALSE;
    struct stw_pixelformat_info *pfi;
-   
+
    assert(stw_dev->pixelformat_extended_count < STW_MAX_PIXELFORMATS);
    if(stw_dev->pixelformat_extended_count >= STW_MAX_PIXELFORMATS)
       return;
@@ -135,16 +135,16 @@ stw_pixelformat_add(
    assert(util_format_get_component_bits(color->format, UTIL_FORMAT_COLORSPACE_RGB, 3) == color->bits.alpha);
    assert(util_format_get_component_bits(depth->format, UTIL_FORMAT_COLORSPACE_ZS, 0) == depth->bits.depth);
    assert(util_format_get_component_bits(depth->format, UTIL_FORMAT_COLORSPACE_ZS, 1) == depth->bits.stencil);
-   
+
    pfi = &stw_dev->pixelformats[stw_dev->pixelformat_extended_count];
-   
+
    memset(pfi, 0, sizeof *pfi);
-   
+
    pfi->pfd.nSize = sizeof pfi->pfd;
    pfi->pfd.nVersion = 1;
 
    pfi->pfd.dwFlags = PFD_SUPPORT_OPENGL;
-   
+
    /* TODO: also support non-native pixel formats */
    pfi->pfd.dwFlags |= PFD_DRAW_TO_WINDOW;
 
@@ -153,7 +153,7 @@ stw_pixelformat_add(
 
    if (doublebuffer)
       pfi->pfd.dwFlags |= PFD_DOUBLEBUFFER | PFD_SWAP_COPY;
-   
+
    pfi->pfd.iPixelType = PFD_TYPE_RGBA;
 
    pfi->pfd.cColorBits = color->bits.red + color->bits.green + color->bits.blue + color->bits.alpha;
@@ -195,9 +195,9 @@ stw_pixelformat_add(
 
    pfi->stvis.samples = samples;
    pfi->stvis.render_buffer = ST_ATTACHMENT_INVALID;
-   
+
    ++stw_dev->pixelformat_extended_count;
-   
+
    if(!extended) {
       ++stw_dev->pixelformat_count;
       assert(stw_dev->pixelformat_count == stw_dev->pixelformat_extended_count);
@@ -209,32 +209,32 @@ stw_pixelformat_init( void )
 {
    struct pipe_screen *screen = stw_dev->screen;
    unsigned i, j, k, l;
-   
+
    assert( !stw_dev->pixelformat_count );
    assert( !stw_dev->pixelformat_extended_count );
 
    for(i = 0; i < Elements(stw_pf_multisample); ++i) {
       unsigned samples = stw_pf_multisample[i];
-      
+
       /* FIXME: re-enabled MSAA when we can query it */
       if(samples)
          continue;
 
       for(j = 0; j < Elements(stw_pf_color); ++j) {
          const struct stw_pf_color_info *color = &stw_pf_color[j];
-         
+
          if(!screen->is_format_supported(screen, color->format, PIPE_TEXTURE_2D,
                                          0, PIPE_BIND_RENDER_TARGET |
                                          PIPE_BIND_DISPLAY_TARGET, 0))
             continue;
-         
+
          for(k = 0; k < Elements(stw_pf_doublebuffer); ++k) {
             unsigned doublebuffer = stw_pf_doublebuffer[k];
-            
+
             for(l = 0; l < Elements(stw_pf_depth_stencil); ++l) {
                const struct stw_pf_depth_info *depth = &stw_pf_depth_stencil[l];
-               
-               if(!screen->is_format_supported(screen, depth->format, PIPE_TEXTURE_2D, 
+
+               if(!screen->is_format_supported(screen, depth->format, PIPE_TEXTURE_2D,
                                                0, PIPE_BIND_DEPTH_STENCIL, 0))
                   continue;
 
@@ -244,7 +244,7 @@ stw_pixelformat_init( void )
          }
       }
    }
-   
+
    assert( stw_dev->pixelformat_count <= stw_dev->pixelformat_extended_count );
    assert( stw_dev->pixelformat_extended_count <= STW_MAX_PIXELFORMATS );
 }
@@ -295,7 +295,7 @@ DrvDescribePixelFormat(
       return 0;
 
    pfi = stw_pixelformat_get_info( index );
-   
+
    memcpy(ppfd, &pfi->pfd, sizeof( PIXELFORMATDESCRIPTOR ));
 
    return count;

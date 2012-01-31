@@ -47,9 +47,9 @@ struct stw_framebuffer;
 struct stw_device
 {
    const struct stw_winsys *stw_winsys;
-   
+
    struct pipe_screen *screen;
-   
+
    /* Cache some PIPE_CAP_* */
    unsigned max_2d_levels;
    unsigned max_2d_length;
@@ -67,10 +67,10 @@ struct stw_device
 
    pipe_mutex ctx_mutex;
    struct handle_table *ctx_table;
-   
+
    pipe_mutex fb_mutex;
    struct stw_framebuffer *fb_head;
-   
+
 #ifdef DEBUG
    unsigned long memdbg_no;
 #endif

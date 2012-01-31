@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-     
+
 
 #include "brw_context.h"
 #include "brw_defines.h"
@@ -64,7 +64,7 @@ static void brw_set_dest(struct brw_compile *p,
    insn->bits1.da1.dest_reg_type = dest.type;
    insn->bits1.da1.dest_address_mode = dest.address_mode;
 
-   if (dest.address_mode == BRW_ADDRESS_DIRECT) {   
+   if (dest.address_mode == BRW_ADDRESS_DIRECT) {
       insn->bits1.da1.dest_reg_nr = dest.nr;
 
       if (insn->header.access_mode == BRW_ALIGN_1) {
@@ -198,13 +198,13 @@ static void brw_set_src0( struct brw_instruction *insn,
 
    if (reg.file == BRW_IMMEDIATE_VALUE) {
       insn->bits3.ud = reg.dw1.ud;
-   
+
       /* Required to set some fields in src1 as well:
        */
       insn->bits1.da1.src1_reg_file = 0; /* arf */
       insn->bits1.da1.src1_reg_type = reg.type;
    }
-   else 
+   else
    {
       if (reg.address_mode == BRW_ADDRESS_DIRECT) {
 	 if (insn->header.access_mode == BRW_ALIGN_1) {
@@ -220,7 +220,7 @@ static void brw_set_src0( struct brw_instruction *insn,
 	 insn->bits2.ia1.src0_subreg_nr = reg.subnr;
 
 	 if (insn->header.access_mode == BRW_ALIGN_1) {
-	    insn->bits2.ia1.src0_indirect_offset = reg.dw1.bits.indirect_offset; 
+	    insn->bits2.ia1.src0_indirect_offset = reg.dw1.bits.indirect_offset;
 	 }
 	 else {
 	    insn->bits2.ia16.src0_subreg_nr = reg.dw1.bits.indirect_offset;
@@ -228,7 +228,7 @@ static void brw_set_src0( struct brw_instruction *insn,
       }
 
       if (insn->header.access_mode == BRW_ALIGN_1) {
-	 if (reg.width == BRW_WIDTH_1 && 
+	 if (reg.width == BRW_WIDTH_1 &&
 	     insn->header.execution_size == BRW_EXECUTE_1) {
 	    insn->bits2.da1.src0_horiz_stride = BRW_HORIZONTAL_STRIDE_0;
 	    insn->bits2.da1.src0_width = BRW_WIDTH_1;
@@ -296,7 +296,7 @@ void brw_set_src1( struct brw_instruction *insn,
       }
 
       if (insn->header.access_mode == BRW_ALIGN_1) {
-	 if (reg.width == BRW_WIDTH_1 && 
+	 if (reg.width == BRW_WIDTH_1 &&
 	     insn->header.execution_size == BRW_EXECUTE_1) {
 	    insn->bits3.da1.src1_horiz_stride = BRW_HORIZONTAL_STRIDE_0;
 	    insn->bits3.da1.src1_width = BRW_WIDTH_1;
@@ -611,7 +611,7 @@ static void brw_set_sampler_message(struct brw_context *brw,
 
 
 
-static struct brw_instruction *next_insn( struct brw_compile *p, 
+static struct brw_instruction *next_insn( struct brw_compile *p,
 					  GLuint opcode )
 {
    struct brw_instruction *insn;
@@ -621,7 +621,7 @@ static struct brw_instruction *next_insn( struct brw_compile *p,
    insn = &p->store[p->nr_insn++];
    memcpy(insn, p->current, sizeof(*insn));
 
-   /* Reset this one-shot flag: 
+   /* Reset this one-shot flag:
     */
 
    if (p->current->header.destreg__conditionalmod) {
@@ -641,7 +641,7 @@ static struct brw_instruction *brw_alu1( struct brw_compile *p,
 {
    struct brw_instruction *insn = next_insn(p, opcode);
    brw_set_dest(p, insn, dest);
-   brw_set_src0(insn, src);   
+   brw_set_src0(insn, src);
    return insn;
 }
 
@@ -651,7 +651,7 @@ static struct brw_instruction *brw_alu2(struct brw_compile *p,
 					struct brw_reg src0,
 					struct brw_reg src1 )
 {
-   struct brw_instruction *insn = next_insn(p, opcode);   
+   struct brw_instruction *insn = next_insn(p, opcode);
    brw_set_dest(p, insn, dest);
    brw_set_src0(insn, src0);
    brw_set_src1(insn, src1);
@@ -789,7 +789,7 @@ struct brw_instruction *brw_MUL(struct brw_compile *p,
 
 void brw_NOP(struct brw_compile *p)
 {
-   struct brw_instruction *insn = next_insn(p, BRW_OPCODE_NOP);   
+   struct brw_instruction *insn = next_insn(p, BRW_OPCODE_NOP);
    brw_set_dest(p, insn, retype(brw_vec4_grf(0,0), BRW_REGISTER_TYPE_UD));
    brw_set_src0(insn, retype(brw_vec4_grf(0,0), BRW_REGISTER_TYPE_UD));
    brw_set_src1(insn, brw_imm_ud(0x0));
@@ -803,7 +803,7 @@ void brw_NOP(struct brw_compile *p)
  * Comparisons, if/else/endif
  */
 
-struct brw_instruction *brw_JMPI(struct brw_compile *p, 
+struct brw_instruction *brw_JMPI(struct brw_compile *p,
                                  struct brw_reg dest,
                                  struct brw_reg src0,
                                  struct brw_reg src1)
@@ -897,7 +897,7 @@ brw_IF_gen6(struct brw_compile *p, uint32_t conditional,
    return insn;
 }
 
-struct brw_instruction *brw_ELSE(struct brw_compile *p, 
+struct brw_instruction *brw_ELSE(struct brw_compile *p,
 				 struct brw_instruction *if_insn)
 {
    struct intel_context *intel = &p->brw->intel;
@@ -953,15 +953,15 @@ struct brw_instruction *brw_ELSE(struct brw_compile *p,
    return insn;
 }
 
-void brw_ENDIF(struct brw_compile *p, 
+void brw_ENDIF(struct brw_compile *p,
 	       struct brw_instruction *patch_insn)
 {
    struct intel_context *intel = &p->brw->intel;
    GLuint br = 1;
 
    if (intel->gen >= 5)
-      br = 2; 
- 
+      br = 2;
+
    if (p->single_program_flow) {
       /* In single program flow mode, there's no need to execute an ENDIF,
        * since we don't need to do any stack operations, and if we're executing
@@ -1139,7 +1139,7 @@ struct brw_instruction *brw_DO(struct brw_compile *p, GLuint execute_size)
 
 
 
-struct brw_instruction *brw_WHILE(struct brw_compile *p, 
+struct brw_instruction *brw_WHILE(struct brw_compile *p,
                                   struct brw_instruction *do_insn)
 {
    struct intel_context *intel = &p->brw->intel;
@@ -1191,7 +1191,7 @@ struct brw_instruction *brw_WHILE(struct brw_compile *p,
 
 /* FORWARD JUMPS:
  */
-void brw_land_fwd_jump(struct brw_compile *p, 
+void brw_land_fwd_jump(struct brw_compile *p,
 		       struct brw_instruction *jmp_insn)
 {
    struct intel_context *intel = &p->brw->intel;
@@ -1231,7 +1231,7 @@ void brw_CMP(struct brw_compile *p,
 
    /* Make it so that future instructions will use the computed flag
     * value until brw_set_predicate_control_flag_value() is called
-    * again.  
+    * again.
     */
    if (dest.file == BRW_ARCHITECTURE_REGISTER_FILE &&
        dest.nr == 0) {
@@ -1382,8 +1382,8 @@ void brw_math_16( struct brw_compile *p,
 {
    struct intel_context *intel = &p->brw->intel;
    struct brw_instruction *insn;
-   GLuint msg_length = (function == BRW_MATH_FUNCTION_POW) ? 2 : 1; 
-   GLuint response_length = (function == BRW_MATH_FUNCTION_SINCOS) ? 2 : 1; 
+   GLuint msg_length = (function == BRW_MATH_FUNCTION_POW) ? 2 : 1;
+   GLuint response_length = (function == BRW_MATH_FUNCTION_SINCOS) ? 2 : 1;
 
    if (intel->gen >= 6) {
       insn = next_insn(p, BRW_OPCODE_MATH);
@@ -1416,8 +1416,8 @@ void brw_math_16( struct brw_compile *p,
    brw_set_dest(p, insn, dest);
    brw_set_src0(insn, src);
    brw_set_math_message(p->brw,
-			insn, 
-			msg_length, response_length, 
+			insn,
+			msg_length, response_length,
 			function,
 			BRW_MATH_INTEGER_UNSIGNED,
 			precision,
@@ -1432,9 +1432,9 @@ void brw_math_16( struct brw_compile *p,
 
    brw_set_dest(p, insn, offset(dest,1));
    brw_set_src0(insn, src);
-   brw_set_math_message(p->brw, 
-			insn, 
-			msg_length, response_length, 
+   brw_set_math_message(p->brw,
+			insn,
+			msg_length, response_length,
 			function,
 			BRW_MATH_INTEGER_UNSIGNED,
 			precision,
@@ -1898,7 +1898,7 @@ void brw_SAMPLE(struct brw_compile *p,
       /*printf("%s: zero writemask??\n", __FUNCTION__); */
       return;
    }
-   
+
    /* Hardware doesn't do destination dependency checking on send
     * instructions properly.  Add a workaround which generates the
     * dependency by other means.  In practice it seems like this bug
@@ -1947,11 +1947,11 @@ void brw_SAMPLE(struct brw_compile *p,
 
 	 brw_MOV(p, retype(m1, BRW_REGISTER_TYPE_UD),
 		 retype(brw_vec8_grf(0,0), BRW_REGISTER_TYPE_UD));
-  	 brw_MOV(p, get_element_ud(m1, 2), brw_imm_ud(newmask << 12)); 
+  	 brw_MOV(p, get_element_ud(m1, 2), brw_imm_ud(newmask << 12));
 
 	 brw_pop_insn_state(p);
 
-  	 src0 = retype(brw_null_reg(), BRW_REGISTER_TYPE_UW); 
+  	 src0 = retype(brw_null_reg(), BRW_REGISTER_TYPE_UW);
 	 dest = offset(dest, dst_offset);
 
 	 /* For 16-wide dispatch, masked channels are skipped in the
@@ -1965,7 +1965,7 @@ void brw_SAMPLE(struct brw_compile *p,
 
    {
       struct brw_instruction *insn;
-   
+
       /* Sandybridge doesn't have the implied move for SENDs,
        * and the first message register index comes from src0.
        */
@@ -1993,7 +1993,7 @@ void brw_SAMPLE(struct brw_compile *p,
 			      binding_table_index,
 			      sampler,
 			      msg_type,
-			      response_length, 
+			      response_length,
 			      msg_length,
 			      eot,
 			      header_present,
@@ -2062,9 +2062,9 @@ void brw_urb_WRITE(struct brw_compile *p,
 		       allocate,
 		       used,
 		       msg_length,
-		       response_length, 
-		       eot, 
-		       writes_complete, 
+		       response_length,
+		       eot,
+		       writes_complete,
 		       offset,
 		       swizzle);
 }

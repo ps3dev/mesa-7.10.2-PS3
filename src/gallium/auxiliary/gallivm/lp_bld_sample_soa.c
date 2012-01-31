@@ -173,7 +173,7 @@ lp_build_sample_texel_soa(struct lp_build_sample_context *bld,
 
    if (use_border) {
       /* select texel color or border color depending on use_border */
-      LLVMValueRef border_color_ptr = 
+      LLVMValueRef border_color_ptr =
          bld->dynamic_state->border_color(bld->dynamic_state,
                                           bld->gallivm, unit);
       int chan;
@@ -442,7 +442,7 @@ lp_build_sample_wrap_nearest(struct lp_build_sample_context *bld,
    LLVMBuilderRef builder = bld->gallivm->builder;
    LLVMValueRef length_minus_one = lp_build_sub(int_coord_bld, length, int_coord_bld->one);
    LLVMValueRef icoord;
-   
+
    switch(wrap_mode) {
    case PIPE_TEX_WRAP_REPEAT:
       coord = lp_build_mul(coord_bld, coord, length_f);
@@ -1136,7 +1136,7 @@ lp_build_sample_nop(struct gallivm_state *gallivm, struct lp_type type,
 
    for (chan = 0; chan < 4; chan++) {
       texel_out[chan] = one;
-   }  
+   }
 }
 
 

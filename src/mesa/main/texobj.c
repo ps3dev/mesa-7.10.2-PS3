@@ -67,7 +67,7 @@ _mesa_lookup_texture(struct gl_context *ctx, GLuint id)
  *
  * Called via ctx->Driver.NewTextureObject, unless overridden by a device
  * driver.
- * 
+ *
  * \param shared the shared GL state structure to contain the texture object
  * \param name integer name for the texture object
  * \param target either GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D,
@@ -642,7 +642,7 @@ _mesa_test_texobj_completeness( const struct gl_context *ctx,
 		     return;
 		  }
 		  /* check that all six images have same size */
-                  if (t->Image[face][i]->Width2 != width || 
+                  if (t->Image[face][i]->Width2 != width ||
                       t->Image[face][i]->Height2 != height) {
 		     incomplete(t, "CubeMap Image[n][i] bad size");
 		     return;
@@ -759,7 +759,7 @@ _mesa_get_fallback_texture(struct gl_context *ctx)
 
       /* init the image fields */
       _mesa_init_teximage_fields(ctx, GL_TEXTURE_2D, texImage,
-                                 8, 8, 1, 0, GL_RGBA, texFormat); 
+                                 8, 8, 1, 0, GL_RGBA, texFormat);
 
       ASSERT(texImage->TexFormat != MESA_FORMAT_NONE);
 
@@ -797,7 +797,7 @@ _mesa_get_fallback_texture(struct gl_context *ctx)
  * Calls _mesa_HashFindFreeKeyBlock() to find a block of free texture
  * IDs which are stored in \p textures.  Corresponding empty texture
  * objects are also generated.
- */ 
+ */
 void GLAPIENTRY
 _mesa_GenTextures( GLsizei n, GLuint *textures )
 {
@@ -861,7 +861,7 @@ unbind_texobj_from_fbo(struct gl_context *ctx,
          for (j = 0; j < BUFFER_COUNT; j++) {
             if (fb->Attachment[j].Type == GL_TEXTURE &&
                 fb->Attachment[j].Texture == texObj) {
-               _mesa_remove_attachment(ctx, fb->Attachment + j);         
+               _mesa_remove_attachment(ctx, fb->Attachment + j);
             }
          }
       }
@@ -989,10 +989,10 @@ target_enum_to_index(GLenum target)
 
 /**
  * Bind a named texture to a texturing target.
- * 
+ *
  * \param target texture target.
  * \param texName texture name.
- * 
+ *
  * \sa glBindTexture().
  *
  * Determines the old texture object bound and returns immediately if rebinding
@@ -1093,13 +1093,13 @@ _mesa_BindTexture( GLenum target, GLuint texName )
 
 /**
  * Set texture priorities.
- * 
+ *
  * \param n number of textures.
  * \param texName texture names.
  * \param priorities corresponding texture priorities.
- * 
+ *
  * \sa glPrioritizeTextures().
- * 
+ *
  * Looks up each texture in the hash, clamps the corresponding priority between
  * 0.0 and 1.0, and calls dd_function_table::PrioritizeTexture.
  */
@@ -1135,13 +1135,13 @@ _mesa_PrioritizeTextures( GLsizei n, const GLuint *texName,
 
 /**
  * See if textures are loaded in texture memory.
- * 
+ *
  * \param n number of textures to query.
  * \param texName array with the texture names.
  * \param residences array which will hold the residence status.
  *
- * \return GL_TRUE if all textures are resident and \p residences is left unchanged, 
- * 
+ * \return GL_TRUE if all textures are resident and \p residences is left unchanged,
+ *
  * \sa glAreTexturesResident().
  *
  * Looks up each texture in the hash and calls
@@ -1191,7 +1191,7 @@ _mesa_AreTexturesResident(GLsizei n, const GLuint *texName,
          residences[i] = GL_FALSE;
       }
    }
-   
+
    return allResident;
 }
 
@@ -1203,7 +1203,7 @@ _mesa_AreTexturesResident(GLsizei n, const GLuint *texName,
  *
  * \return GL_TRUE if texture name corresponds to a texture, or GL_FALSE
  * otherwise.
- * 
+ *
  * \sa glIsTexture().
  *
  * Calls _mesa_HashLookup().

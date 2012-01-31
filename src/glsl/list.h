@@ -470,7 +470,7 @@ inline void exec_node::insert_before(exec_list *before)
 
 /**
  * This version is safe even if the current node is removed.
- */ 
+ */
 #define foreach_list_safe(__node, __list)			     \
    for (exec_node * __node = (__list)->head, * __next = __node->next \
 	; __next != NULL					     \

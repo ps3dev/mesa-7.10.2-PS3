@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -109,19 +109,19 @@ void
 i915_emit_hardware_state(struct i915_context *i915 )
 {
    /* XXX: there must be an easier way */
-   const unsigned dwords = ( 14 + 
-                             7 + 
-                             I915_MAX_DYNAMIC + 
-                             8 + 
-                             2 + I915_TEX_UNITS*3 + 
+   const unsigned dwords = ( 14 +
+                             7 +
+                             I915_MAX_DYNAMIC +
+                             8 +
                              2 + I915_TEX_UNITS*3 +
-                             2 + I915_MAX_CONSTANT*4 + 
+                             2 + I915_TEX_UNITS*3 +
+                             2 + I915_MAX_CONSTANT*4 +
 #if 0
-                             i915->current.program_len + 
+                             i915->current.program_len +
 #else
-                             i915->fs->program_len + 
+                             i915->fs->program_len +
 #endif
-                             6 
+                             6
                            ) * 3/2; /* plus 50% margin */
    const unsigned relocs = ( I915_TEX_UNITS +
                              3
@@ -154,7 +154,7 @@ i915_emit_hardware_state(struct i915_context *i915 )
 
       OUT_BATCH(_3DSTATE_DFLT_SPEC_CMD);
       OUT_BATCH(0);
-      
+
       OUT_BATCH(_3DSTATE_DFLT_Z_CMD);
       OUT_BATCH(0);
 
@@ -163,9 +163,9 @@ i915_emit_hardware_state(struct i915_context *i915 )
                 CSB_TCB(1, 1) |
                 CSB_TCB(2, 2) |
                 CSB_TCB(3, 3) |
-                CSB_TCB(4, 4) | 
-                CSB_TCB(5, 5) | 
-                CSB_TCB(6, 6) | 
+                CSB_TCB(4, 4) |
+                CSB_TCB(5, 5) |
+                CSB_TCB(6, 6) |
                 CSB_TCB(7, 7));
 
       OUT_BATCH(_3DSTATE_RASTER_RULES_CMD |
@@ -174,8 +174,8 @@ i915_emit_hardware_state(struct i915_context *i915 )
                 ENABLE_LINE_STRIP_PROVOKE_VRTX |
                 ENABLE_TRI_FAN_PROVOKE_VRTX |
                 LINE_STRIP_PROVOKE_VRTX(1) |
-                TRI_FAN_PROVOKE_VRTX(2) | 
-                ENABLE_TEXKILL_3D_4D | 
+                TRI_FAN_PROVOKE_VRTX(2) |
+                ENABLE_TEXKILL_3D_4D |
                 TEXKILL_4D);
 
       /* Need to initialize this to zero.
@@ -194,15 +194,15 @@ i915_emit_hardware_state(struct i915_context *i915 )
    /* 7 dwords, 1 relocs */
    if (i915->hardware_dirty & I915_HW_IMMEDIATE)
    {
-      OUT_BATCH(_3DSTATE_LOAD_STATE_IMMEDIATE_1 | 
+      OUT_BATCH(_3DSTATE_LOAD_STATE_IMMEDIATE_1 |
                 I1_LOAD_S(0) |
                 I1_LOAD_S(1) |
                 I1_LOAD_S(2) |
                 I1_LOAD_S(4) |
                 I1_LOAD_S(5) |
-                I1_LOAD_S(6) | 
+                I1_LOAD_S(6) |
                 (5));
-      
+
       if(i915->vbo)
          OUT_RELOC(i915->vbo,
                    I915_USAGE_VERTEX,
@@ -215,11 +215,11 @@ i915_emit_hardware_state(struct i915_context *i915 )
       OUT_BATCH(i915->current.immediate[I915_IMMEDIATE_S4]);
       OUT_BATCH(i915->current.immediate[I915_IMMEDIATE_S5]);
       OUT_BATCH(i915->current.immediate[I915_IMMEDIATE_S6]);
-   } 
+   }
 
 #if 01
    /* I915_MAX_DYNAMIC dwords, 0 relocs */
-   if (i915->hardware_dirty & I915_HW_DYNAMIC) 
+   if (i915->hardware_dirty & I915_HW_DYNAMIC)
    {
       int i;
       for (i = 0; i < I915_MAX_DYNAMIC; i++) {
@@ -280,7 +280,7 @@ i915_emit_hardware_state(struct i915_context *i915 )
             cformat = PIPE_FORMAT_B8G8R8A8_UNORM; /* arbitrary */
          cformat = translate_format(cformat);
 
-         if (depth_surface) 
+         if (depth_surface)
             zformat = translate_depth_format( i915->framebuffer.zsbuf->format );
 
          OUT_BATCH(_3DSTATE_DST_BUF_VARS_CMD);
@@ -327,12 +327,12 @@ i915_emit_hardware_state(struct i915_context *i915 )
 #if 01
    /* samplers */
    /* 2 + I915_TEX_UNITS*3 dwords, 0 relocs */
-   if (i915->hardware_dirty & I915_HW_SAMPLER) 
+   if (i915->hardware_dirty & I915_HW_SAMPLER)
    {
       if (i915->current.sampler_enable_nr) {
          int i;
 
-         OUT_BATCH( _3DSTATE_SAMPLER_STATE | 
+         OUT_BATCH( _3DSTATE_SAMPLER_STATE |
                     (3 * i915->current.sampler_enable_nr) );
 
          OUT_BATCH( i915->current.sampler_enable_flags );

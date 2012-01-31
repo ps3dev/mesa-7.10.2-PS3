@@ -1,6 +1,6 @@
 AMIGA AMIWIN PORT of MESA: THE OPENGL SOFTWARE EMULATION
 ========================================================
-Port by Victor Ng-Thow-Hing (victorng@dgp.toronto.edu) 
+Port by Victor Ng-Thow-Hing (victorng@dgp.toronto.edu)
 Original Author (Brian Paul (brianp@ssec.wisc.edu)
 
 Dec.1 , 1995: Port of release Mesa 1.2.5
@@ -11,22 +11,22 @@ Nov.25, 1995: Port of release Mesa 1.2.4
 
 HISTORY
 =======
-As a 3D graphics progammer, I was increasingly frustrated to see OpenGL 
+As a 3D graphics progammer, I was increasingly frustrated to see OpenGL
 appearing on so many platforms EXCEPT the Amiga. Up to now, the task
 of porting OpenGL directly from native Amiga drawing routines seemed like
 a daunting task. However, two important events made this port possible.
 
-First of all, Brian Paul wrote Mesa, the OpenGL software emulator that 
-can be found on many platforms - except the Amiga and Atari (who cares 
-about the latter!). This was pretty ironic considering that Mesa was 
-originally prototyped on an Amiga! The second great event was when 
-Holger Kruse developed AmiWin, the X11R6 server for the Amiga (definitely 
+First of all, Brian Paul wrote Mesa, the OpenGL software emulator that
+can be found on many platforms - except the Amiga and Atari (who cares
+about the latter!). This was pretty ironic considering that Mesa was
+originally prototyped on an Amiga! The second great event was when
+Holger Kruse developed AmiWin, the X11R6 server for the Amiga (definitely
 register for this great piece of software) and released a development kit
 so one could compile X programs with SAS/C.
 
 Since Mesa had X routines as its primitive drawing operations, this made
 a marriage of Mesa and Amiwin feasible. I copied over the sources from
-an ftp site, played with the code, wrote some Smakefiles, and voila, 
+an ftp site, played with the code, wrote some Smakefiles, and voila,
 I had OpenGL programs displaying on my Amiga.
 
 Although the speed is nothing to be impressed about, this port can be
@@ -34,7 +34,7 @@ potentially useful to those who want to quickly test their code in
 wireframe or perhaps learn more about programming with the OpenGL API.
 
 I hope Amiga developers will continue to write excellent software for
-their machine, especially more X clients for Amiwin. If you have any 
+their machine, especially more X clients for Amiwin. If you have any
 solutions so some of my problems in the porting notes, please send me
 some email!
 
@@ -62,7 +62,7 @@ Study the Smakefiles in the demos, samples and book directories for the
 proper SAS/C options and linkable libraries to use. Basically aux calls
 require Mesaaux.LIB, gl calls require MesaGL.LIB, glu calls MesaGLU.LIB,
 tk calls Mesatk.LIB. There is a preliminary port of MesaGLUT.LIB toolkit
-available in the lib directory with the other Mesa libraries. However, 
+available in the lib directory with the other Mesa libraries. However,
 it seems to cause crashes on some of the sample code. Someone else may want
 to attempt a more stable port.
 
@@ -70,7 +70,7 @@ PORTING NOTES TO AMIWIN
 =======================
 
 My strategy of porting was to leave as much of the code untouched as
-possible. I surrounded any amiga specific changes with 
+possible. I surrounded any amiga specific changes with
 #ifdef AMIWIN ... #endif or #ifndef AMIWIN ... #endif preprocessor
 symbols. The code  was ported on an Amiga 2000, with Fusion 40 accelerator
 and a Picasso II graphics card. The SAS/C 6.56 compiler was used, with
@@ -79,7 +79,7 @@ the AmiWin 2.16 X development kit.
 All compilations were done for a 68040 CPU with 68882 math coprocessor for
 maximum  speed. Please edit the smakefile for other compilers.
 I wrote smakefiles for the directories I ported. I omitted the Windows
-and Widgets directories. The former is for MS Windows and the latter 
+and Widgets directories. The former is for MS Windows and the latter
 requires Motif, which is not easily available for the Amiga.
 
 Here are the changes I did per directory:
@@ -92,25 +92,25 @@ Nov. 25, 1995 v 1.2.4
 
 * mesa/include
 Dec. 1, 1995 v 1.2.5
-  - added the following to GL/xmesa.h 
+  - added the following to GL/xmesa.h
      #ifdef AMIWIN
      #include <pragmas/xlib_pragmas.h>
      extern struct Library *XLibBase;
      #endif
 NET CHANGE: xmesa.h
 
-* mesa/src 
+* mesa/src
 Nov. 25, 1995 v 1.2.4
   - added the necessary pragma calls for X functions to the following:
-    xmesa1.c, xmesa2.c, xmesa3.c, xfonts.c, glx.c 
-    This prevents undefined symbols errors during the linking phase for 
+    xmesa1.c, xmesa2.c, xmesa3.c, xfonts.c, glx.c
+    This prevents undefined symbols errors during the linking phase for
     X library calls
   - created smakefile
 Dec.  1, 1995 v 1.2.5
-  - removed AMIWIN includes from xmesa1.c, xmesa2.c, xmesa3.c, xfonts.c, 
+  - removed AMIWIN includes from xmesa1.c, xmesa2.c, xmesa3.c, xfonts.c,
     glx.c since they are now defined in include/GL/xmesa.h
 NET CHANGE: smakefile
-   
+
 * mesa/src-tk
 Nov. 25, 1995 v 1.2.4
   - added the necessary pragma calls for X functions to the following:
@@ -138,7 +138,7 @@ Nov. 25, 1995 v 1.2.4
   - added the necessary pragma calls for X functions to the following:
     xdemo.c, glxdemo.c, offset.c
   - created smakefile
-  - put #ifndef AMIWIN ... #endif around sleep() calls in xdemo.c since 
+  - put #ifndef AMIWIN ... #endif around sleep() calls in xdemo.c since
     they are not part of AmigaDOS.
 Dec.  1, 1995 v 1.2.5
   - removed AMIWIN defines from xdemo.c, glxdemo.c, offset.c since
@@ -157,7 +157,7 @@ Nov. 25, 1995 v 1.2.4
   - put #ifndef AMIWIN ... #endif around sleep() in blendxor.c
   - removed olympic from smakefile targets since <sys/time.h> not defined
 Dec.  1, 1995 v 1.2.5
-  - removed AMIWIN defines from oglinfo.c, since already defined in 
+  - removed AMIWIN defines from oglinfo.c, since already defined in
     include/GL/xmesa.h
   - modified Smakefile to include header and includes from the AmiTCP4.0
     net.lib linkable library to provide unix-compatible sys/time.h and
@@ -177,5 +177,5 @@ NET CHANGE: smakefile
 
 * mesa/windows
 Dec.  1, 1995 v 1.2.5
-- Removed directory to save space since this is only needed for Windows based 
+- Removed directory to save space since this is only needed for Windows based
   machines.

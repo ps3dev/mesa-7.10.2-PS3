@@ -187,7 +187,7 @@ sisUpdateBufferSize(sisContextPtr smesa)
       }
 
       if (smesa->glCtx->Visual.depthBits > 0) {
-         sisInitRenderbuffer(&smesa->depth.Base, 
+         sisInitRenderbuffer(&smesa->depth.Base,
                              (smesa->glCtx->Visual.depthBits == 16
                               ? GL_DEPTH_COMPONENT16 : GL_DEPTH_COMPONENT24));
          sisSetSpanFunctions(&smesa->depth, &fb->Visual);
@@ -251,7 +251,7 @@ sisUpdateBufferSize(sisContextPtr smesa)
       prev->hwZ = current->hwZ;
       smesa->GlobalFlag |= GFLAG_ZSETTING;
    }
-  
+
    sisUpdateClipping( smesa->glCtx );
 }
 

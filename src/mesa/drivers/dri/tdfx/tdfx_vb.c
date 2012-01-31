@@ -15,14 +15,14 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
  */
- 
+
 #include "main/glheader.h"
 #include "main/mtypes.h"
 #include "main/imports.h"
@@ -194,8 +194,8 @@ void tdfxPrintSetupFlags(char *msg, GLuint flags )
    fprintf(stderr, "%s(%x): %s%s%s%s%s%s\n",
 	   msg,
 	   (int)flags,
-	   (flags & TDFX_XYZ_BIT)     ? " xyz," : "", 
-	   (flags & TDFX_W_BIT)     ? " w," : "", 
+	   (flags & TDFX_XYZ_BIT)     ? " xyz," : "",
+	   (flags & TDFX_W_BIT)     ? " w," : "",
 	   (flags & TDFX_RGBA_BIT)     ? " rgba," : "",
 	   (flags & TDFX_TEX0_BIT)     ? " tex-0," : "",
 	   (flags & TDFX_TEX1_BIT)     ? " tex-1," : "",
@@ -217,7 +217,7 @@ void tdfxCheckTexSizes( struct gl_context *ctx )
        */
       if (setup_tab[ind].vertex_format != fxMesa->vertexFormat) {
 	 FLUSH_BATCH(fxMesa);
-	 fxMesa->dirty |= TDFX_UPLOAD_VERTEX_LAYOUT;      
+	 fxMesa->dirty |= TDFX_UPLOAD_VERTEX_LAYOUT;
 	 fxMesa->vertexFormat = setup_tab[ind].vertex_format;
 
 	 /* This is required as we have just changed the vertex
@@ -256,7 +256,7 @@ void tdfxBuildVertices( struct gl_context *ctx, GLuint start, GLuint end,
 
       if (newinputs & VERT_BIT_FOG)
 	 ind |= TDFX_FOGC_BIT;
-      
+
       if (newinputs & VERT_BIT_TEX0)
 	 ind |= TDFX_TEX0_BIT;
 
@@ -314,7 +314,7 @@ void tdfxChooseVertexState( struct gl_context *ctx )
 
    if (setup_tab[ind].vertex_format != fxMesa->vertexFormat) {
       FLUSH_BATCH(fxMesa);
-      fxMesa->dirty |= TDFX_UPLOAD_VERTEX_LAYOUT;      
+      fxMesa->dirty |= TDFX_UPLOAD_VERTEX_LAYOUT;
       fxMesa->vertexFormat = setup_tab[ind].vertex_format;
    }
 }

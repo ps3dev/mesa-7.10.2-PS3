@@ -51,7 +51,7 @@ static int emit_framebuffer( struct svga_context *svga,
     * We need to reemit non-null surface bindings, even when they are not
     * dirty, to ensure that the resources are paged in.
     */
-   
+
    for(i = 0; i < PIPE_MAX_COLOR_BUFS; ++i) {
       if (curr->cbufs[i] != hw->cbufs[i] ||
           (reemit && hw->cbufs[i])) {
@@ -61,12 +61,12 @@ static int emit_framebuffer( struct svga_context *svga,
          ret = SVGA3D_SetRenderTarget(svga->swc, SVGA3D_RT_COLOR0 + i, curr->cbufs[i]);
          if (ret != PIPE_OK)
             return ret;
-         
+
          pipe_surface_reference(&hw->cbufs[i], curr->cbufs[i]);
       }
    }
 
-   
+
    if (curr->zsbuf != hw->zsbuf ||
        (reemit && hw->zsbuf)) {
       ret = SVGA3D_SetRenderTarget(svga->swc, SVGA3D_RT_DEPTH, curr->zsbuf);
@@ -84,7 +84,7 @@ static int emit_framebuffer( struct svga_context *svga,
          if (ret != PIPE_OK)
             return ret;
       }
-      
+
       pipe_surface_reference(&hw->zsbuf, curr->zsbuf);
    }
 
@@ -93,7 +93,7 @@ static int emit_framebuffer( struct svga_context *svga,
 }
 
 
-struct svga_tracked_state svga_hw_framebuffer = 
+struct svga_tracked_state svga_hw_framebuffer =
 {
    "hw framebuffer state",
    SVGA_NEW_FRAME_BUFFER |
@@ -104,7 +104,7 @@ struct svga_tracked_state svga_hw_framebuffer =
 
 
 
-/*********************************************************************** 
+/***********************************************************************
  */
 
 static int emit_viewport( struct svga_context *svga,
@@ -127,8 +127,8 @@ static int emit_viewport( struct svga_context *svga,
 
    float fx =        viewport->scale[0] * -1.0 + viewport->translate[0];
    float fy = flip * viewport->scale[1] * -1.0 + viewport->translate[1];
-   float fw =        viewport->scale[0] * 2; 
-   float fh = flip * viewport->scale[1] * 2; 
+   float fw =        viewport->scale[0] * 2;
+   float fh = flip * viewport->scale[1] * 2;
 
    memset( &prescale, 0, sizeof(prescale) );
 
@@ -172,24 +172,24 @@ static int emit_viewport( struct svga_context *svga,
 
    if (fx < 0) {
       prescale.translate[0] += fx;
-      prescale.scale[0] *= fw / (fw + fx); 
+      prescale.scale[0] *= fw / (fw + fx);
       fw += fx;
       fx = 0;
    }
 
    if (fy < 0) {
       prescale.translate[1] += fy;
-      prescale.scale[1] *= fh / (fh + fy); 
+      prescale.scale[1] *= fh / (fh + fy);
       fh += fy;
       fy = 0;
    }
 
    if (fx + fw > fb_width) {
-      prescale.scale[0] *= fw / (fb_width - fx); 
+      prescale.scale[0] *= fw / (fb_width - fx);
       prescale.translate[0] -= fx * (fw / (fb_width - fx));
       prescale.translate[0] += fx;
       fw = fb_width - fx;
-      
+
    }
 
    if (fy + fh > fb_height) {
@@ -268,8 +268,8 @@ static int emit_viewport( struct svga_context *svga,
     */
    if (range_min > range_max) {
       float range_tmp;
-      range_tmp = range_min; 
-      range_min = range_max; 
+      range_tmp = range_min;
+      range_min = range_max;
       range_max = range_tmp;
       prescale.scale[2]     = -prescale.scale[2];
    }
@@ -302,7 +302,7 @@ static int emit_viewport( struct svga_context *svga,
       /* Adjust prescale to take into account the fact that it is
        * going to be applied prior to the perspective divide and
        * viewport transformation.
-       * 
+       *
        * Vwin = H(Vc/Vc.w) + J
        *
        * We want to tweak Vwin with scale and translation from above,
@@ -352,7 +352,7 @@ out:
    }
 
    if (svga->state.hw_clear.depthrange.zmin != range_min ||
-       svga->state.hw_clear.depthrange.zmax != range_max) 
+       svga->state.hw_clear.depthrange.zmax != range_max)
    {
       ret = SVGA3D_SetZRange(svga->swc, range_min, range_max );
       if(ret != PIPE_OK)
@@ -371,7 +371,7 @@ out:
 }
 
 
-struct svga_tracked_state svga_hw_viewport = 
+struct svga_tracked_state svga_hw_viewport =
 {
    "hw viewport state",
    ( SVGA_NEW_FRAME_BUFFER |
@@ -395,12 +395,12 @@ static int emit_scissor_rect( struct svga_context *svga,
    rect.y = scissor->miny;
    rect.w = scissor->maxx - scissor->minx; /* + 1 ?? */
    rect.h = scissor->maxy - scissor->miny; /* + 1 ?? */
-   
+
    return SVGA3D_SetScissorRect(svga->swc, &rect);
 }
 
 
-struct svga_tracked_state svga_hw_scissor = 
+struct svga_tracked_state svga_hw_scissor =
 {
    "hw scissor state",
    SVGA_NEW_SCISSOR,
@@ -432,7 +432,7 @@ static int emit_clip_planes( struct svga_context *svga,
 }
 
 
-struct svga_tracked_state svga_hw_clip_planes = 
+struct svga_tracked_state svga_hw_clip_planes =
 {
    "hw viewport state",
    SVGA_NEW_CLIP,

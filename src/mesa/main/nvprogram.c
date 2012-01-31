@@ -76,7 +76,7 @@ _mesa_ExecuteProgramNV(GLenum target, GLuint id, const GLfloat *params)
       _mesa_error(ctx, GL_INVALID_OPERATION, "glExecuteProgramNV");
       return;
    }
-   
+
    _mesa_problem(ctx, "glExecuteProgramNV() not supported");
 }
 
@@ -856,7 +856,7 @@ void GLAPIENTRY
 _mesa_ProgramNamedParameter4dNV(GLuint id, GLsizei len, const GLubyte *name,
                                 GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
-   _mesa_ProgramNamedParameter4fNV(id, len, name, (GLfloat)x, (GLfloat)y, 
+   _mesa_ProgramNamedParameter4fNV(id, len, name, (GLfloat)x, (GLfloat)y,
                                    (GLfloat)z, (GLfloat)w);
 }
 

@@ -55,10 +55,10 @@ TrimRegion::setDu( REAL du )
 void
 TrimRegion::init( long npts, Arc_ptr extrema )
 {
-    left.init( npts, extrema, extrema->pwlArc->npts - 1 ); 
+    left.init( npts, extrema, extrema->pwlArc->npts - 1 );
     left.getNextPt();
 
-    right.init( npts, extrema, 0 ); 
+    right.init( npts, extrema, 0 );
     right.getPrevPt();
 }
 
@@ -76,7 +76,7 @@ TrimRegion::getPts( Backend &backend )
     right.getPrevPts( bot.vval, backend );
 }
 
-void 
+void
 TrimRegion::getGridExtent( void )
 {
     getGridExtent( left.last(), right.last() );
@@ -103,7 +103,7 @@ TrimRegion::canTile( void )
 {
     TrimVertex *lf = left.first();
     TrimVertex *ll = left.last();
-    TrimVertex *l = ( ll->param[0] > lf->param[0] ) ? ll : lf; 
+    TrimVertex *l = ( ll->param[0] > lf->param[0] ) ? ll : lf;
 
     TrimVertex *rf = right.first();
     TrimVertex *rl = right.last();

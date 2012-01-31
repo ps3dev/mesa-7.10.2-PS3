@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
 
 #include "pipe/p_format.h"
@@ -37,7 +37,7 @@
 /* Code to layout images in a mipmap tree for i965.
  */
 
-static int 
+static int
 brw_tex_pitch_align (struct brw_texture *tex,
 		     int pitch)
 {
@@ -70,8 +70,8 @@ brw_tex_pitch_align (struct brw_texture *tex,
 }
 
 
-static void 
-brw_tex_alignment_unit(enum pipe_format pf, 
+static void
+brw_tex_alignment_unit(enum pipe_format pf,
 		       GLuint *w, GLuint *h)
 {
     switch (pf) {
@@ -95,7 +95,7 @@ brw_tex_alignment_unit(enum pipe_format pf,
 }
 
 
-static void 
+static void
 brw_tex_set_level_info(struct brw_texture *tex,
 		       GLuint level,
 		       GLuint nr_images,
@@ -121,7 +121,7 @@ brw_tex_set_level_info(struct brw_texture *tex,
 static void
 brw_tex_set_image_offset(struct brw_texture *tex,
 			 GLuint level, GLuint img,
-			 GLuint x, GLuint y, 
+			 GLuint x, GLuint y,
 			 GLuint offset)
 {
    assert((x == 0 && y == 0) || img != 0 || level != 0);
@@ -129,7 +129,7 @@ brw_tex_set_image_offset(struct brw_texture *tex,
 
    if (BRW_DEBUG & DEBUG_TEXTURE)
       debug_printf("%s level %d img %d pos %d,%d image_offset %x\n",
-		   __FUNCTION__, level, img, x, y, 
+		   __FUNCTION__, level, img, x, y,
 		   tex->image_offset[level][img]);
 
    tex->image_offset[level][img] = (x + y * tex->pitch) * tex->cpp + offset;
@@ -162,10 +162,10 @@ static void brw_layout_2d( struct brw_texture *tex )
        GLuint mip1_width;
 
        if (tex->compressed) {
-          mip1_width = (align(u_minify(tex->b.b.width0, 1), align_w) + 
+          mip1_width = (align(u_minify(tex->b.b.width0, 1), align_w) +
                         align(u_minify(tex->b.b.width0, 2), align_w));
        } else {
-          mip1_width = (align(u_minify(tex->b.b.width0, 1), align_w) + 
+          mip1_width = (align(u_minify(tex->b.b.width0, 1), align_w) +
                         u_minify(tex->b.b.width0, 2));
        }
 
@@ -211,7 +211,7 @@ static void brw_layout_2d( struct brw_texture *tex )
 }
 
 
-static boolean 
+static boolean
 brw_layout_cubemap_idgng( struct brw_texture *tex )
 {
    GLuint align_h = 2, align_w = 4;
@@ -250,16 +250,16 @@ brw_layout_cubemap_idgng( struct brw_texture *tex )
    tex->pitch = brw_tex_pitch_align(tex, tex->pitch);
 
    if (tex->compressed) {
-      qpitch = ((y_pitch + 
+      qpitch = ((y_pitch +
 		 align(u_minify(y_pitch, 1), align_h) +
 		 11 * align_h) / 4) * tex->pitch * tex->cpp;
 
-      tex->total_height = ((y_pitch + 
-			    align(u_minify(y_pitch, 1), align_h) + 
+      tex->total_height = ((y_pitch +
+			    align(u_minify(y_pitch, 1), align_h) +
 			    11 * align_h) / 4) * 6;
    } else {
-      qpitch = (y_pitch + 
-		align(u_minify(y_pitch, 1), align_h) + 
+      qpitch = (y_pitch +
+		align(u_minify(y_pitch, 1), align_h) +
 		11 * align_h) * tex->pitch * tex->cpp;
 
       tex->total_height = (y_pitch +
@@ -393,7 +393,7 @@ GLboolean brw_texture_layout(struct brw_screen *brw_screen,
       else
 	 brw_layout_3d_cube( tex );
       break;
-	    
+
    case PIPE_TEXTURE_3D:
       brw_layout_3d_cube( tex );
       break;

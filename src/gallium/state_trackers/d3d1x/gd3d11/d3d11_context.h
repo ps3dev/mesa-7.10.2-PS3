@@ -1441,8 +1441,8 @@ changed:
 			return subresource / levels;
 		}
 	}
-		
-	
+
+
 	/* TODO: deferred contexts will need a different implementation of this,
 	 * because we can't put the transfer info into the resource itself.
 	 * Also, there are very different restrictions, for obvious reasons.

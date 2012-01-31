@@ -105,8 +105,8 @@
 #endif
 
 #if (HAVE_HW_DIVIDE && !HAVE_PTEX_VERTICES)
-#error "can't cope with this combination" 
-#endif 
+#error "can't cope with this combination"
+#endif
 
 #ifndef LOCALVARS
 #define LOCALVARS
@@ -182,7 +182,7 @@ static void TAG(emit)( struct gl_context *ctx,
       const GLuint t0 = GET_TEXSOURCE(0);
       tc0_stride = VB->AttribPtr[_TNL_ATTRIB_TEX0 + t0]->stride;
       tc0 = VB->AttribPtr[_TNL_ATTRIB_TEX0 + t0]->data;
-      if (DO_PTEX) 
+      if (DO_PTEX)
 	 tc0_size = VB->AttribPtr[_TNL_ATTRIB_TEX0 + t0]->size;
    }
 
@@ -216,13 +216,13 @@ static void TAG(emit)( struct gl_context *ctx,
       coord =  (GLfloat (*)[4])((GLubyte *)coord + start * coord_stride);
       if (DO_TEX0)
 	 tc0 =  (GLfloat (*)[4])((GLubyte *)tc0 + start * tc0_stride);
-      if (DO_TEX1) 
+      if (DO_TEX1)
 	 tc1 =  (GLfloat (*)[4])((GLubyte *)tc1 + start * tc1_stride);
-      if (DO_TEX2) 
+      if (DO_TEX2)
 	 tc2 =  (GLfloat (*)[4])((GLubyte *)tc2 + start * tc2_stride);
-      if (DO_TEX3) 
+      if (DO_TEX3)
 	 tc3 =  (GLfloat (*)[4])((GLubyte *)tc3 + start * tc3_stride);
-      if (DO_RGBA) 
+      if (DO_RGBA)
 	 STRIDE_4F(col, start * col_stride);
       if (DO_SPEC)
 	 STRIDE_4F(spec, start * spec_stride);
@@ -231,7 +231,7 @@ static void TAG(emit)( struct gl_context *ctx,
       //	 fog =  (GLfloat (*)[4])((GLubyte *)fog + start * fog_stride);
       /*  STRIDE_F(fog, start * fog_stride); */
    }
-   
+
    for (i=start; i < end; i++, v = (VERTEX *)((GLubyte *)v + stride)) {
       if (DO_XYZW) {
 	 if (HAVE_HW_VIEWPORT || mask[i] == 0) {
@@ -245,7 +245,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	    v->v.w = 1.0;
 	 }
 	 if (MACH64_DEBUG & DEBUG_VERBOSE_PRIMS) {
-	    fprintf(stderr, "%s: vert (importable) %d: %.2f %.2f %.2f %f\n", 
+	    fprintf(stderr, "%s: vert (importable) %d: %.2f %.2f %.2f %f\n",
 		    __FUNCTION__, i, v->v.x, v->v.y, v->v.z, v->v.w);
 	 }
 	 coord =  (GLfloat (*)[4])((GLubyte *)coord +  coord_stride);
@@ -277,7 +277,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	 v->v.u0 = tc0[0][0];
 	 v->v.v0 = tc0[0][1];
 	 if (MACH64_DEBUG & DEBUG_VERBOSE_PRIMS) {
-	    fprintf(stderr, "%s: vert (importable) %d: u0: %.2f, v0: %.2f, w: %f\n", 
+	    fprintf(stderr, "%s: vert (importable) %d: u0: %.2f, v0: %.2f, w: %f\n",
 		    __FUNCTION__, i, v->v.u0, v->v.v0, v->v.w);
 	 }
 #ifdef MACH64_PREMULT_TEXCOORDS
@@ -286,11 +286,11 @@ static void TAG(emit)( struct gl_context *ctx,
 #endif
 	 if (DO_PTEX) {
 	    if (HAVE_PTEX_VERTICES) {
-	       if (tc0_size == 4) 
+	       if (tc0_size == 4)
 		  v->pv.q0 = tc0[0][3];
 	       else
 		  v->pv.q0 = 1.0;
-	    } 
+	    }
 	    else if (tc0_size == 4) {
 #ifdef MACH64_PREMULT_TEXCOORDS
 	       v->v.w *= tc0[0][3];
@@ -300,19 +300,19 @@ static void TAG(emit)( struct gl_context *ctx,
 	       v->v.u0 *= rhw;
 	       v->v.v0 *= rhw;
 #endif
-	    } 
-	 } 
+	    }
+	 }
 	 tc0 =  (GLfloat (*)[4])((GLubyte *)tc0 +  tc0_stride);
       }
       if (DO_TEX1) {
 	 if (DO_PTEX) {
 	    v->pv.u1 = tc1[0][0];
 	    v->pv.v1 = tc1[0][1];
-	    if (tc1_size == 4) 
+	    if (tc1_size == 4)
 	       v->pv.q1 = tc1[0][3];
 	    else
 	       v->pv.q1 = 1.0;
-	 } 
+	 }
 	 else {
 	    v->v.u1 = tc1[0][0];
 	    v->v.v1 = tc1[0][1];
@@ -322,7 +322,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	 v->v.v1 *= v->v.w;
 #endif
 	 tc1 =  (GLfloat (*)[4])((GLubyte *)tc1 +  tc1_stride);
-      } 
+      }
       else if (DO_PTEX) {
 	 *(GLuint *)&v->pv.q1 = 0;	/* avoid culling on radeon */
       }
@@ -330,32 +330,32 @@ static void TAG(emit)( struct gl_context *ctx,
 	 if (DO_PTEX) {
 	    v->pv.u2 = tc2[0][0];
 	    v->pv.v2 = tc2[0][1];
-	    if (tc2_size == 4) 
+	    if (tc2_size == 4)
 	       v->pv.q2 = tc2[0][3];
 	    else
 	       v->pv.q2 = 1.0;
-	 } 
+	 }
 	 else {
 	    v->v.u2 = tc2[0][0];
 	    v->v.v2 = tc2[0][1];
 	 }
 	 tc2 =  (GLfloat (*)[4])((GLubyte *)tc2 +  tc2_stride);
-      } 
+      }
       if (DO_TEX3) {
 	 if (DO_PTEX) {
 	    v->pv.u3 = tc3[0][0];
 	    v->pv.v3 = tc3[0][1];
-	    if (tc3_size == 4) 
+	    if (tc3_size == 4)
 	       v->pv.q3 = tc3[0][3];
 	    else
 	       v->pv.q3 = 1.0;
-	    } 
+	    }
 	 else {
 	    v->v.u3 = tc3[0][0];
 	    v->v.v3 = tc3[0][1];
 	 }
 	 tc3 =  (GLfloat (*)[4])((GLubyte *)tc3 +  tc3_stride);
-      } 
+      }
    }
 }
 
@@ -394,7 +394,7 @@ static void TAG(emit)( struct gl_context *ctx, GLuint start, GLuint end,
       coord =  (GLfloat (*)[4])((GLubyte *)coord + start * coord_stride);
       STRIDE_4F(col, start * col_stride);
    }
-   
+
    for (i=start; i < end; i++, v+=4) {
       if (HAVE_HW_VIEWPORT || mask[i] == 0) {
 	 VIEWPORT_X(v[0], coord[0][0]);
@@ -484,7 +484,7 @@ static GLboolean TAG(check_tex_sizes)( struct gl_context *ctx )
 
    if (DO_PTEX)
       return GL_TRUE;
-   
+
    if ((DO_TEX3 && VB->AttribPtr[_TNL_ATTRIB_TEX0 + GET_TEXSOURCE(3)]->size == 4) ||
        (DO_TEX2 && VB->AttribPtr[_TNL_ATTRIB_TEX0 + GET_TEXSOURCE(2)]->size == 4) ||
        (DO_TEX1 && VB->AttribPtr[_TNL_ATTRIB_TEX0 + GET_TEXSOURCE(1)]->size == 4) ||
@@ -576,7 +576,7 @@ static void TAG(interp)( struct gl_context *ctx,
 	       w );
    }
 
-   if ((HAVE_HW_DIVIDE && CHECK_HW_DIVIDE) || 
+   if ((HAVE_HW_DIVIDE && CHECK_HW_DIVIDE) ||
        DO_FOG || DO_SPEC || DO_TEX0 || DO_TEX1 ||
        DO_TEX2 || DO_TEX3 || !HAVE_TINY_VERTICES) {
 
@@ -624,7 +624,7 @@ static void TAG(interp)( struct gl_context *ctx,
 #ifdef MACH64_PREMULT_TEXCOORDS
 	    GLfloat qout = 1 / out->v.w;
 	    GLfloat qin = 1 / in->v.w;
-	    
+
 	    INTERP_F( t, dst->v.u0, out->v.u0 * qout, in->v.u0 * qin);
 	    INTERP_F( t, dst->v.v0, out->v.v0 * qout, in->v.v0 * qin);
 
@@ -645,7 +645,7 @@ static void TAG(interp)( struct gl_context *ctx,
 #ifdef MACH64_PREMULT_TEXCOORDS
 	    GLfloat qout = 1 / out->v.w;
 	    GLfloat qin = 1 / in->v.w;
-	    
+
 	    INTERP_F( t, dst->v.u1, out->v.u1 * qout, in->v.u1 * qin );
 	    INTERP_F( t, dst->v.v1, out->v.v1 * qout, in->v.v1 * qin );
 

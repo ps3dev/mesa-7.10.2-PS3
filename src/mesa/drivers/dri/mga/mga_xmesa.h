@@ -45,7 +45,7 @@ typedef struct mga_screen_private_s {
 
    /**
     * Characters (bytes) per-pixel for both the front and back buffers.
-    * 
+    *
     * \note
     * This is also implicitly the bytes per-pixel for the depth-buffer.
     */

@@ -1081,7 +1081,7 @@ if test "x$enable_egl" = xyes; then
             		  [have_xcb_dri2=yes],[have_xcb_dri2=no])
             PKG_CHECK_MODULES([LIBUDEV], [libudev > 150],
             		  [have_libudev=yes],[have_libudev=no])
-            
+
             if test "$have_xcb_dri2" = yes; then
                 EGL_DRIVER_DRI2=dri2
                 DEFINES="$DEFINES -DHAVE_XCB_DRI2"

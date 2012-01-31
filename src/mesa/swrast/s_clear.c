@@ -120,7 +120,7 @@ clear_rgba_buffer(struct gl_context *ctx, struct gl_renderbuffer *rb, GLuint buf
    ASSERT(ctx->Color.ColorMask[buf][0] &&
           ctx->Color.ColorMask[buf][1] &&
           ctx->Color.ColorMask[buf][2] &&
-          ctx->Color.ColorMask[buf][3]);             
+          ctx->Color.ColorMask[buf][3]);
 
    ASSERT(rb->PutMonoRow);
 

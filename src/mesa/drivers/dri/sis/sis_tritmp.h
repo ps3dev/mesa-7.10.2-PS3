@@ -70,7 +70,7 @@ static void TAG(sis6326_draw_tri_mmio)(sisContextPtr smesa, char *verts)
    GLfloat delt02, diffx02, diffy02, diffy12;
    GLint dwPrimitiveSet = smesa->dwPrimitiveSet;
    sisVertex tv0, tv1, tv2;
-   
+
    /* XXX Culling? */
 
    tv0 = *v0;
@@ -91,7 +91,7 @@ static void TAG(sis6326_draw_tri_mmio)(sisContextPtr smesa, char *verts)
    y0 = v0->v.y;
    y1 = v1->v.y;
    y2 = v2->v.y;
-   
+
 
    if (y0 > y1) {
       if (y1 > y2) {
@@ -172,7 +172,7 @@ static void TAG(sis6326_draw_tri_mmio)(sisContextPtr smesa, char *verts)
       if (tmp <= 0.0)
          dwPrimitiveSet |= OP_3D_DIRECTION_LEFT;
    }
-   
+
    tv0 = *v0;
    tv1 = *v1;
    tv2 = *v2;
@@ -182,7 +182,7 @@ static void TAG(sis6326_draw_tri_mmio)(sisContextPtr smesa, char *verts)
    v0 = &tv0;
    v1 = &tv1;
    v2 = &tv2;
-   
+
    y0 = v0->v.y;
    y1 = v1->v.y;
    y2 = v2->v.y;
@@ -191,7 +191,7 @@ static void TAG(sis6326_draw_tri_mmio)(sisContextPtr smesa, char *verts)
    fprintf(stderr, "Vertex1 %f %f %f\n", v1->v.x, v1->v.y, v1->v.z);
    fprintf(stderr, "Vertex2 %f %f %f\n", v2->v.x, v2->v.y, v2->v.z);*/
    mWait3DCmdQueue(MMIO_VERT_REG_COUNT * 3 + 1);
-   MMIO(REG_3D_PrimitiveSet, dwPrimitiveSet); 
+   MMIO(REG_3D_PrimitiveSet, dwPrimitiveSet);
    SIS_MMIO_WRITE_VERTEX(v0, 0, 0);
    SIS_MMIO_WRITE_VERTEX(v1, 1, 0);
    SIS_MMIO_WRITE_VERTEX(v2, 2, 1);
@@ -219,7 +219,7 @@ static void TAG(sis6326_draw_line_mmio)(sisContextPtr smesa, char *verts)
    }
 
    mWait3DCmdQueue (MMIO_VERT_REG_COUNT * 2 + 1);
-   MMIO(REG_3D_PrimitiveSet, dwPrimitiveSet); 
+   MMIO(REG_3D_PrimitiveSet, dwPrimitiveSet);
    SIS_MMIO_WRITE_VERTEX(v0, 0, 0);
    SIS_MMIO_WRITE_VERTEX(v1, 1, 1);
 }
@@ -229,7 +229,7 @@ static void TAG(sis6326_draw_point_mmio)(sisContextPtr smesa, char *verts)
    sisVertexPtr v0 = (sisVertexPtr)verts;
 
    mWait3DCmdQueue (MMIO_VERT_REG_COUNT * 1 + 1);
-   MMIO(REG_3D_PrimitiveSet, smesa->dwPrimitiveSet | OP_6326_3D_ATOP); 
+   MMIO(REG_3D_PrimitiveSet, smesa->dwPrimitiveSet | OP_6326_3D_ATOP);
    SIS_MMIO_WRITE_VERTEX(v0, 1, 1);
 }
 #endif

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
  /*
   * Authors:
@@ -95,7 +95,7 @@ softpipe_displaytarget_layout(struct pipe_screen *screen,
    spr->dt = winsys->displaytarget_create(winsys,
                                           spr->base.bind,
                                           spr->base.format,
-                                          spr->base.width0, 
+                                          spr->base.width0,
                                           spr->base.height0,
                                           16,
                                           &spr->stride[0] );
@@ -135,7 +135,7 @@ softpipe_resource_create(struct pipe_screen *screen,
       if (!softpipe_resource_layout(screen, spr))
          goto fail;
    }
-    
+
    return &spr->base;
 
  fail:
@@ -273,7 +273,7 @@ softpipe_create_surface(struct pipe_context *pipe,
 /**
  * Free a pipe_surface which was created with softpipe_create_surface().
  */
-static void 
+static void
 softpipe_surface_destroy(struct pipe_context *pipe,
                          struct pipe_surface *surf)
 {
@@ -350,8 +350,8 @@ softpipe_get_transfer(struct pipe_context *pipe,
       pt->layer_stride = pt->stride * nblocksy;
 
       spt->offset = sp_get_tex_image_offset(spr, level, box->z);
- 
-      spt->offset += 
+
+      spt->offset +=
          box->y / util_format_get_blockheight(format) * spt->base.stride +
          box->x / util_format_get_blockwidth(format) * util_format_get_blocksize(format);
 
@@ -365,7 +365,7 @@ softpipe_get_transfer(struct pipe_context *pipe,
  * Free a pipe_transfer object which was created with
  * softpipe_get_transfer().
  */
-static void 
+static void
 softpipe_transfer_destroy(struct pipe_context *pipe,
                           struct pipe_transfer *transfer)
 {
@@ -385,7 +385,7 @@ softpipe_transfer_map(struct pipe_context *pipe,
    struct softpipe_resource *spr = softpipe_resource(transfer->resource);
    struct sw_winsys *winsys = softpipe_screen(pipe->screen)->winsys;
    uint8_t *map;
-   
+
    /* resources backed by display target treated specially:
     */
    if (spr->dt) {

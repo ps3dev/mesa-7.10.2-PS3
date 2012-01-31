@@ -51,7 +51,7 @@ struct svga_screen
 
    unsigned use_ps30;
    unsigned use_vs30;
-   
+
    struct {
       boolean force_level_surface_view;
       boolean force_surface_view;
@@ -61,7 +61,7 @@ struct svga_screen
    } debug;
 
    unsigned texture_timestamp;
-   pipe_mutex tex_mutex; 
+   pipe_mutex tex_mutex;
 
    pipe_mutex swc_mutex; /* Used for buffer uploads */
 

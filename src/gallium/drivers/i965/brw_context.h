@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -53,7 +53,7 @@
  *
  * VUE - vertex URB entry.  An urb entry holding a vertex and usually
  * a vertex header.  The header contains control information and
- * things like primitive type, Begin/end flags and clip codes.  
+ * things like primitive type, Begin/end flags and clip codes.
  *
  * PUE - primitive URB entry.  An urb entry produced by the setup (SF)
  * unit holding rasterization and interpolation parameters.
@@ -192,7 +192,7 @@ struct brw_fs_signature {
 };
 
 #define brw_fs_signature_size(s) (offsetof(struct brw_fs_signature, input) + \
-                                  ((s)->nr_inputs * sizeof (s)->input[0])) 
+                                  ((s)->nr_inputs * sizeof (s)->input[0]))
 
 
 struct brw_fragment_shader {
@@ -204,7 +204,7 @@ struct brw_fragment_shader {
 
    unsigned iz_lookup;
    /*unsigned wm_lookup;*/
-   
+
    unsigned  uses_depth:1;
    unsigned  has_flow_control:1;
 
@@ -374,7 +374,7 @@ struct brw_vs_output_sizes {
  * to surface binding table indexes, for WM.
  */
 #define BTI_COLOR_BUF(d)          (d)
-#define BTI_FRAGMENT_CONSTANTS    (BRW_MAX_DRAW_BUFFERS) 
+#define BTI_FRAGMENT_CONSTANTS    (BRW_MAX_DRAW_BUFFERS)
 #define BTI_TEXTURE(t)            (BRW_MAX_DRAW_BUFFERS + 1 + (t))
 
 /**
@@ -432,7 +432,7 @@ struct brw_cache_item {
    GLuint data_size;
 
    struct brw_cache_item *next;
-};   
+};
 
 
 
@@ -448,7 +448,7 @@ struct brw_cache {
    GLuint key_size[BRW_MAX_CACHE];		/* for fixed-size keys */
    GLuint aux_size[BRW_MAX_CACHE];
    char *name[BRW_MAX_CACHE];
-   
+
 
    /* Record of the last BOs chosen for each cache_id.  Used to set
     * brw->state.dirty.cache when a new cache item is chosen.
@@ -489,7 +489,7 @@ struct brw_cached_batch_item {
    GLuint sz;
    struct brw_cached_batch_item *next;
 };
-   
+
 
 
 /* Protect against a future where VERT_ATTRIB_MAX > 32.  Wouldn't life
@@ -526,7 +526,7 @@ struct brw_query_object {
 /**
  * brw_context is derived from pipe_context
  */
-struct brw_context 
+struct brw_context
 {
    struct pipe_context base;
    struct brw_chipset chipset;
@@ -538,7 +538,7 @@ struct brw_context
    GLuint primitive;
    GLuint reduced_primitive;
 
-   /* Active state from the state tracker: 
+   /* Active state from the state tracker:
     */
    struct {
       struct brw_vertex_shader *vertex_shader;
@@ -609,7 +609,7 @@ struct brw_context
    struct {
       struct u_upload_mgr *upload_vertex;
       struct u_upload_mgr *upload_index;
-      
+
       /* Information on uploaded vertex buffers:
        */
       struct {
@@ -657,8 +657,8 @@ struct brw_context
       GLuint cs_start;
    } urb;
 
-   
-   /* BRW_NEW_CURBE_OFFSETS: 
+
+   /* BRW_NEW_CURBE_OFFSETS:
     */
    struct {
       GLuint wm_start;  /**< pos of first wm const in CURBE buffer */
@@ -693,7 +693,7 @@ struct brw_context
       /** Binding table of pointers to surf_bo entries */
       struct brw_winsys_buffer *bind_bo;
       struct brw_winsys_buffer *surf_bo[BRW_VS_MAX_SURF];
-      GLuint nr_surfaces;      
+      GLuint nr_surfaces;
    } vs;
 
    struct {
@@ -734,7 +734,7 @@ struct brw_context
       struct brw_winsys_buffer *sdc_bo[BRW_MAX_TEX_UNIT];
 
       GLuint render_surf;
-      GLuint nr_surfaces;      
+      GLuint nr_surfaces;
 
       GLuint max_threads;
       struct brw_winsys_buffer *scratch_bo;

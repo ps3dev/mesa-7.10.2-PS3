@@ -157,7 +157,7 @@ GLfloat _mesa_ubyte_to_float_color_tab[256];
 
 /**
  * Swap buffers notification callback.
- * 
+ *
  * \param ctx GL context.
  *
  * Called by window system just before swapping buffers.
@@ -183,7 +183,7 @@ _mesa_notifySwapBuffers(struct gl_context *ctx)
 /**
  * Allocates a struct gl_config structure and initializes it via
  * _mesa_initialize_visual().
- * 
+ *
  * \param dbFlag double buffering
  * \param stereoFlag stereo buffer
  * \param depthBits requested bits per depth buffer value. Any value in [0, 32]
@@ -198,7 +198,7 @@ _mesa_notifySwapBuffers(struct gl_context *ctx)
  * \param blueBits same as above.
  * \param alphaBits same as above.
  * \param numSamples not really used.
- * 
+ *
  * \return pointer to new struct gl_config or NULL if requested parameters can't be
  * met.
  *
@@ -310,7 +310,7 @@ _mesa_initialize_visual( struct gl_config *vis,
  * Destroy a visual and free its memory.
  *
  * \param vis visual.
- * 
+ *
  * Frees the visual structure.
  */
 void
@@ -539,7 +539,7 @@ init_program_limits(GLenum type, struct gl_program_constants *prog)
  * Use defaults from config.h.  The device drivers will often override
  * some of these values (such as number of texture units).
  */
-static void 
+static void
 _mesa_init_constants(struct gl_context *ctx)
 {
    assert(ctx);
@@ -852,7 +852,7 @@ _mesa_alloc_dispatch_table(int size)
  * Note that the driver needs to pass in its dd_function_table here since
  * we need to at least call driverFunctions->NewTextureObject to create the
  * default texture objects.
- * 
+ *
  * Called by _mesa_create_context().
  *
  * Performs the imports and exports callback tables initialization, and
@@ -1037,7 +1037,7 @@ _mesa_initialize_context(struct gl_context *ctx,
  * \param driverFunctions points to the dd_function_table into which the
  *        driver has plugged in all its special functions.
  * \param driverContext points to the device driver's private context state
- * 
+ *
  * \return pointer to a new __struct gl_contextRec or NULL if error.
  */
 struct gl_context *
@@ -1085,7 +1085,7 @@ _mesa_create_context(const struct gl_config *visual,
 
 /**
  * Free the data associated with the given context.
- * 
+ *
  * But doesn't free the struct gl_context struct itself.
  *
  * \sa _mesa_initialize_context() and init_attrib_groups().
@@ -1168,7 +1168,7 @@ _mesa_free_context_data( struct gl_context *ctx )
  * Destroy a struct gl_context structure.
  *
  * \param ctx GL context.
- * 
+ *
  * Calls _mesa_free_context_data() and frees the gl_context object itself.
  */
 void
@@ -1184,7 +1184,7 @@ _mesa_destroy_context( struct gl_context *ctx )
 #if _HAVE_FULL_GL
 /**
  * Copy attribute groups from one context to another.
- * 
+ *
  * \param src source context
  * \param dst destination context
  * \param mask bitwise OR of GL_*_BIT flags
@@ -1313,7 +1313,7 @@ _mesa_copy_context( const struct gl_context *src, struct gl_context *dst, GLuint
  *
  * \return GL_TRUE if compatible, GL_FALSE otherwise.
  */
-static GLboolean 
+static GLboolean
 check_compatible(const struct gl_context *ctx,
                  const struct gl_framebuffer *buffer)
 {
@@ -1432,7 +1432,7 @@ _mesa_make_current( struct gl_context *newCtx,
       }
    }
 
-   if (curCtx && 
+   if (curCtx &&
       (curCtx->WinSysDrawBuffer || curCtx->WinSysReadBuffer) && /* make sure this context is valid for flushing */
       curCtx != newCtx)
       _mesa_flush(curCtx);
@@ -1460,7 +1460,7 @@ _mesa_make_current( struct gl_context *newCtx,
           * or not bound to a user-created FBO.
           */
          if (!newCtx->DrawBuffer || newCtx->DrawBuffer->Name == 0) {
-            /* KW: merge conflict here, revisit. 
+            /* KW: merge conflict here, revisit.
              */
             /* fix up the fb fields - these will end up wrong otherwise
              * if the DRIdrawable changes, and everything relies on them.
@@ -1542,7 +1542,7 @@ _mesa_make_current( struct gl_context *newCtx,
 	 newCtx->FirstTimeCurrent = GL_FALSE;
       }
    }
-   
+
    return GL_TRUE;
 }
 
@@ -1560,7 +1560,7 @@ _mesa_share_state(struct gl_context *ctx, struct gl_context *ctxToShare)
       struct gl_shared_state *oldSharedState = ctx->Shared;
 
       ctx->Shared = ctxToShare->Shared;
-      
+
       _glthread_LOCK_MUTEX(ctx->Shared->Mutex);
       ctx->Shared->RefCount++;
       _glthread_UNLOCK_MUTEX(ctx->Shared->Mutex);
@@ -1580,7 +1580,7 @@ _mesa_share_state(struct gl_context *ctx, struct gl_context *ctxToShare)
 
 /**
  * \return pointer to the current GL context for this thread.
- * 
+ *
  * Calls _glapi_get_context(). This isn't the fastest way to get the current
  * context.  If you need speed, see the #GET_CURRENT_CONTEXT macro in
  * context.h.
@@ -1597,7 +1597,7 @@ _mesa_get_current_context( void )
  *
  * It'll either be the immediate-mode execute dispatcher or the display list
  * compile dispatcher.
- * 
+ *
  * \param ctx GL context.
  *
  * \return pointer to dispatch_table.
@@ -1623,7 +1623,7 @@ _mesa_get_dispatch(struct gl_context *ctx)
  *
  * \param ctx GL context.
  * \param error error code.
- * 
+ *
  * Records the given error code and call the driver's dd_function_table::Error
  * function if defined.
  *

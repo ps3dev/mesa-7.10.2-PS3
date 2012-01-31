@@ -667,7 +667,7 @@ struct tdfx_glide {
                            GrTextureClampMode_t t_clampmode );
    void (*grTexCombine)( GrChipID_t tmu,
                          GrCombineFunction_t rgb_function,
-                         GrCombineFactor_t rgb_factor, 
+                         GrCombineFactor_t rgb_factor,
                          GrCombineFunction_t alpha_function,
                          GrCombineFactor_t alpha_factor,
                          FxBool rgb_invert,
@@ -699,7 +699,7 @@ struct tdfx_glide {
                                               int               start,
                                               int               end );
    void (*grTexDownloadTable)( GrTexTable_t type, void *data );
-   void (*grTexDownloadTablePartial)( GrTexTable_t type, 
+   void (*grTexDownloadTablePartial)( GrTexTable_t type,
                                       void *data, int start, int end );
    void (*grTexMipMapMode)( GrChipID_t tmu, GrMipMapMode_t mode,
                             FxBool lodBlend );
@@ -711,17 +711,17 @@ struct tdfx_glide {
                                   GrTexInfo        *info );
    FxBool (*grLfbLock)( GrLock_t type, GrBuffer_t buffer,
                         GrLfbWriteMode_t writeMode,
-                        GrOriginLocation_t origin, FxBool pixelPipeline, 
+                        GrOriginLocation_t origin, FxBool pixelPipeline,
                         GrLfbInfo_t *info );
    FxBool (*grLfbUnlock)( GrLock_t type, GrBuffer_t buffer );
    void (*grLfbConstantAlpha)( GrAlpha_t alpha );
    void (*grLfbConstantDepth)( FxU32 depth );
    void (*grLfbWriteColorSwizzle)(FxBool swizzleBytes, FxBool swapWords);
    void (*grLfbWriteColorFormat)(GrColorFormat_t colorFormat);
-   FxBool (*grLfbWriteRegion)( GrBuffer_t dst_buffer, 
-                               FxU32 dst_x, FxU32 dst_y, 
-                               GrLfbSrcFmt_t src_format, 
-                               FxU32 src_width, FxU32 src_height, 
+   FxBool (*grLfbWriteRegion)( GrBuffer_t dst_buffer,
+                               FxU32 dst_x, FxU32 dst_y,
+                               GrLfbSrcFmt_t src_format,
+                               FxU32 src_width, FxU32 src_height,
                                FxBool pixelPipeline,
                                FxI32 src_stride, void *src_data );
    FxBool (*grLfbReadRegion)( GrBuffer_t src_buffer,
@@ -847,7 +847,7 @@ struct tdfx_context {
 
    struct tdfx_glide	Glide;
 
-   /* Fallback rasterization functions 
+   /* Fallback rasterization functions
     */
    tdfx_point_func draw_point;
    tdfx_line_func draw_line;
@@ -859,9 +859,9 @@ struct tdfx_context {
    GLuint vertexFormat;		/* the current format */
    void *layout[TDFX_NUM_LAYOUTS];
    tdfxVertex *verts;
-   
+
    GLfloat hw_viewport[16];
-   
+
    GLuint SetupIndex;
    GLuint SetupNewInputs;
    GLuint RenderIndex;

@@ -47,13 +47,13 @@
 /**
  * Set the texture wrap modes.
  * Currently \c GL_REPEAT, \c GL_CLAMP and \c GL_CLAMP_TO_EDGE are supported.
- * 
+ *
  * \param t Texture object whose wrap modes are to be set
  * \param swrap Wrap mode for the \a s texture coordinate
  * \param twrap Wrap mode for the \a t texture coordinate
  */
 
-static void 
+static void
 mgaSetTexWrapping( mgaTextureObjectPtr t, GLenum swrap, GLenum twrap )
 {
    GLboolean  is_clamp = GL_FALSE;
@@ -102,7 +102,7 @@ mgaSetTexWrapping( mgaTextureObjectPtr t, GLenum swrap, GLenum twrap )
 
 /**
  * Set the texture magnification and minification modes.
- * 
+ *
  * \param t Texture whose filter modes are to be set
  * \param minf Texture minification mode
  * \param magf Texture magnification mode
@@ -367,7 +367,7 @@ static void mgaTexImage2D( struct gl_context *ctx, GLenum target, GLint level,
 
    if ( t != NULL ) {
       driSwapOutTextureObject( t );
-   } 
+   }
    else {
       t = (driTextureObject *) mgaAllocTexObj( texObj );
       if ( t == NULL ) {
@@ -384,9 +384,9 @@ static void mgaTexImage2D( struct gl_context *ctx, GLenum target, GLint level,
       t->dirty_images[0] |= (1UL << level);
 }
 
-static void mgaTexSubImage2D( struct gl_context *ctx, 
+static void mgaTexSubImage2D( struct gl_context *ctx,
 			       GLenum target,
-			       GLint level,	
+			       GLint level,
 			       GLint xoffset, GLint yoffset,
 			       GLsizei width, GLsizei height,
 			       GLenum format, GLenum type,
@@ -400,7 +400,7 @@ static void mgaTexSubImage2D( struct gl_context *ctx,
    assert( t ); /* this _should_ be true */
    if ( t != NULL ) {
       driSwapOutTextureObject( t );
-   } 
+   }
    else {
       t = (driTextureObject *) mgaAllocTexObj( texObj );
       if ( t == NULL ) {
@@ -409,7 +409,7 @@ static void mgaTexSubImage2D( struct gl_context *ctx,
       }
    }
 
-   _mesa_store_texsubimage2d(ctx, target, level, xoffset, yoffset, width, 
+   _mesa_store_texsubimage2d(ctx, target, level, xoffset, yoffset, width,
 			     height, format, type, pixels, packing, texObj,
 			     texImage);
    level -= t->firstLevel;
@@ -433,7 +433,7 @@ mgaTexParameter( struct gl_context *ctx, GLenum target,
 
    /* If we don't have a hardware texture, it will be automatically
     * created with current state before it is used, so we don't have
-    * to do anything now 
+    * to do anything now
     */
    if ( (t == NULL) ||
         (target != GL_TEXTURE_2D &&

@@ -86,7 +86,7 @@ build_mask_linear(int c, int dcdx, int dcdy)
    mask |= ((c1 + 0 * dcdx) >> 31) & (1 << 4);
    mask |= ((c1 + 1 * dcdx) >> 31) & (1 << 5);
    mask |= ((c1 + 2 * dcdx) >> 31) & (1 << 6);
-   mask |= ((c1 + 3 * dcdx) >> 31) & (1 << 7); 
+   mask |= ((c1 + 3 * dcdx) >> 31) & (1 << 7);
    mask |= ((c2 + 0 * dcdx) >> 31) & (1 << 8);
    mask |= ((c2 + 1 * dcdx) >> 31) & (1 << 9);
    mask |= ((c2 + 2 * dcdx) >> 31) & (1 << 10);
@@ -95,13 +95,13 @@ build_mask_linear(int c, int dcdx, int dcdy)
    mask |= ((c3 + 1 * dcdx) >> 31) & (1 << 13);
    mask |= ((c3 + 2 * dcdx) >> 31) & (1 << 14);
    mask |= ((c3 + 3 * dcdx) >> 31) & (1 << 15);
-  
+
    return mask;
 }
 
 
 static INLINE void
-build_masks(int c, 
+build_masks(int c,
 	    int cdiff,
 	    int dcdx,
 	    int dcdy,
@@ -145,7 +145,7 @@ lp_rast_triangle_3_4(struct lp_rasterizer_task *task,
 
 
 static INLINE void
-build_masks(int c, 
+build_masks(int c,
 	    int cdiff,
 	    int dcdx,
 	    int dcdy,
@@ -273,12 +273,12 @@ lp_rast_triangle_3_16(struct lp_rasterizer_task *task,
 
    __m128i dcdx2;
    __m128i dcdx3;
-   
+
    __m128i span_0;                /* 0,dcdx,2dcdx,3dcdx for plane 0 */
    __m128i span_1;                /* 0,dcdx,2dcdx,3dcdx for plane 1 */
    __m128i span_2;                /* 0,dcdx,2dcdx,3dcdx for plane 2 */
    __m128i unused;
-   
+
    transpose4_epi32(&p0, &p1, &p2, &zero,
                     &c, &dcdx, &dcdy, &rej4);
 
@@ -378,12 +378,12 @@ lp_rast_triangle_3_4(struct lp_rasterizer_task *task,
 
    __m128i dcdx2;
    __m128i dcdx3;
-   
+
    __m128i span_0;                /* 0,dcdx,2dcdx,3dcdx for plane 0 */
    __m128i span_1;                /* 0,dcdx,2dcdx,3dcdx for plane 1 */
    __m128i span_2;                /* 0,dcdx,2dcdx,3dcdx for plane 2 */
    __m128i unused;
-   
+
    transpose4_epi32(&p0, &p1, &p2, &zero,
                     &c, &dcdx, &dcdy, &unused);
 
@@ -405,7 +405,7 @@ lp_rast_triangle_3_4(struct lp_rasterizer_task *task,
       __m128i c0_0 = _mm_add_epi32(SCALAR_EPI32(c, 0), span_0);
       __m128i c1_0 = _mm_add_epi32(SCALAR_EPI32(c, 1), span_1);
       __m128i c2_0 = _mm_add_epi32(SCALAR_EPI32(c, 2), span_2);
-      
+
       __m128i c_0 = _mm_or_si128(_mm_or_si128(c0_0, c1_0), c2_0);
 
       __m128i c0_1 = _mm_add_epi32(c0_0, SCALAR_EPI32(dcdy, 0));

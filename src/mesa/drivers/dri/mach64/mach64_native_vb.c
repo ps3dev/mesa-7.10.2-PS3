@@ -45,13 +45,13 @@ void TAG(translate_vertex)(struct gl_context *ctx,
    CARD32 *p = (CARD32 *)src + 10 - mmesa->vertex_size;
 
    dst->attrib[FRAG_ATTRIB_WPOS][3] = 1.0;
-   
+
    switch ( format ) {
       case TEX1_VERTEX_FORMAT:
 #ifdef MACH64_PREMULT_TEXCOORDS
 	 {
 	    float rhw = 1.0 / LE32_IN_FLOAT( p + 2 );
-	    
+
 	    dst->attrib[FRAG_ATTRIB_TEX1][0] = rhw*LE32_IN_FLOAT( p++ );
 	    dst->attrib[FRAG_ATTRIB_TEX1][1] = rhw*LE32_IN_FLOAT( p++ );
 	 }
@@ -66,7 +66,7 @@ void TAG(translate_vertex)(struct gl_context *ctx,
 #ifdef MACH64_PREMULT_TEXCOORDS
 	 {
 	    float rhw = 1.0 / LE32_IN_FLOAT( p + 2 );
-	    
+
 	    dst->attrib[FRAG_ATTRIB_TEX0][0] = rhw*LE32_IN_FLOAT( p++ );
 	    dst->attrib[FRAG_ATTRIB_TEX0][1] = rhw*LE32_IN_FLOAT( p++ );
 	 }
@@ -76,7 +76,7 @@ void TAG(translate_vertex)(struct gl_context *ctx,
 #endif
 	 dst->attrib[FRAG_ATTRIB_TEX0][3] = 1.0;
 	 dst->attrib[FRAG_ATTRIB_WPOS][3] = LE32_IN_FLOAT( p++ );
-	
+
       case NOTEX_VERTEX_FORMAT:
 	 dst->attrib[FRAG_ATTRIB_COL1][2] = UBYTE_TO_FLOAT(((GLubyte *)p)[0]);
 	 dst->attrib[FRAG_ATTRIB_COL1][1] = UBYTE_TO_FLOAT(((GLubyte *)p)[1]);
@@ -92,17 +92,17 @@ void TAG(translate_vertex)(struct gl_context *ctx,
 	 dst->color[0] = ((GLubyte *)p)[2];
 	 dst->color[3] = ((GLubyte *)p)[3];
 	 p++;
-	 
+
 	 {
 	    GLuint xy = LE32_IN( p );
-	    
+
 	    dst->attrib[FRAG_ATTRIB_WPOS][0] = UNVIEWPORT_X( (GLfloat)(GLshort)( xy >> 16 ) );
 	    dst->attrib[FRAG_ATTRIB_WPOS][1] = UNVIEWPORT_Y( (GLfloat)(GLshort)( xy & 0xffff ) );
 	 }
    }
 
    assert( p + 1 - (CARD32 *)src == 10 );
-	 
+
    dst->pointSize = ctx->Point.Size;
 }
 
@@ -113,14 +113,14 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
    LOCALVARS
    GLuint format = GET_VERTEX_FORMAT();
    CARD32 *p = (CARD32 *)v + 10 - mmesa->vertex_size;
-   
+
    switch ( format ) {
       case TEX1_VERTEX_FORMAT:
 	 {
 	    GLfloat u, v, w;
 #ifdef MACH64_PREMULT_TEXCOORDS
 	    float rhw = 1.0 / LE32_IN_FLOAT( p + 2 );
-	    
+
 	    u = rhw*LE32_IN_FLOAT( p++ );
 	    v = rhw*LE32_IN_FLOAT( p++ );
 #else
@@ -136,7 +136,7 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
 	    GLfloat u, v, w;
 #ifdef MACH64_PREMULT_TEXCOORDS
 	    float rhw = 1.0 / LE32_IN_FLOAT( p + 2 );
-	    
+
 	    u = rhw*LE32_IN_FLOAT( p++ );
 	    v = rhw*LE32_IN_FLOAT( p++ );
 #else
@@ -146,11 +146,11 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
 	    w = LE32_IN_FLOAT( p++ );
 	    fprintf( stderr, "u0 %f v0 %f w0 %f\n", u, v, w );
 	 }
-	
+
       case NOTEX_VERTEX_FORMAT:
 	 {
 	    GLubyte r, g, b, a;
-	    
+
 	    b = ((GLubyte *)p)[0];
 	    g = ((GLubyte *)p)[1];
 	    r = ((GLubyte *)p)[2];
@@ -164,7 +164,7 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
 	    GLuint xy;
 	    GLfloat x, y, z;
 	    GLubyte r, g, b, a;
-	    
+
 	    z = LE32_IN( p++ ) / 65536.0;
 
 	    b = ((GLubyte *)p)[0];
@@ -175,24 +175,24 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
 	    xy = LE32_IN( p );
 	    x = (GLfloat)(GLshort)( xy >> 16 ) / 4.0;
 	    y = (GLfloat)(GLshort)( xy & 0xffff ) / 4.0;
-	    
+
 	    fprintf(stderr, "x %f y %f z %f\n", x, y, z);
 	    fprintf(stderr, "r %d g %d b %d a %d\n", r, g, b, a);
 	 }
    }
-   
-   assert( p + 1 - (CARD32 *)v == 10 );	 
+
+   assert( p + 1 - (CARD32 *)v == 10 );
 
    fprintf(stderr, "\n");
 }
 
 /* Interpolate the elements of the VB not included in typical hardware
- * vertices.  
+ * vertices.
  *
  * NOTE: All these arrays are guarenteed by tnl to be writeable and
  * have good stride.
  */
-#ifndef INTERP_QUALIFIER 
+#ifndef INTERP_QUALIFIER
 #define INTERP_QUALIFIER static
 #endif
 
@@ -209,7 +209,7 @@ INTERP_QUALIFIER void TAG(interp_extras)( struct gl_context *ctx,
 
    if (VB->BackfaceColorPtr) {
       assert(VB->BackfaceColorPtr->stride == 4 * sizeof(GLfloat));
-      
+
       INTERP_4F( t,
 		 GET_COLOR(VB->BackfaceColorPtr, dst),
 		 GET_COLOR(VB->BackfaceColorPtr, out),
@@ -230,7 +230,7 @@ INTERP_QUALIFIER void TAG(interp_extras)( struct gl_context *ctx,
    INTERP_VERTEX(ctx, t, dst, out, in, force_boundary);
 }
 
-INTERP_QUALIFIER void TAG(copy_pv_extras)( struct gl_context *ctx, 
+INTERP_QUALIFIER void TAG(copy_pv_extras)( struct gl_context *ctx,
 					   GLuint dst, GLuint src )
 {
    LOCALVARS

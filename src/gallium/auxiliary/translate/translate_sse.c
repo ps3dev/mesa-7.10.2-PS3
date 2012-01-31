@@ -1143,10 +1143,10 @@ static struct x86_reg get_buffer_ptr( struct translate_sse *p,
    }
    else if (!index_size || p->buffer_varient[var_idx].instance_divisor) {
       struct x86_reg ptr = p->src_ECX;
-      struct x86_reg buf_ptr = 
+      struct x86_reg buf_ptr =
          x86_make_disp(p->machine_EDI,
                        get_offset(p, &p->buffer_varient[var_idx].ptr));
-      
+
       x64_rexw(p->func);
       x86_mov(p->func, ptr, buf_ptr);
       return ptr;
@@ -1155,11 +1155,11 @@ static struct x86_reg get_buffer_ptr( struct translate_sse *p,
       struct x86_reg ptr = p->src_ECX;
       const struct translate_buffer_varient *varient = &p->buffer_varient[var_idx];
 
-      struct x86_reg buf_stride = 
+      struct x86_reg buf_stride =
          x86_make_disp(p->machine_EDI,
                        get_offset(p, &p->buffer[varient->buffer_index].stride));
 
-      struct x86_reg buf_base_ptr = 
+      struct x86_reg buf_base_ptr =
          x86_make_disp(p->machine_EDI,
                        get_offset(p, &p->buffer[varient->buffer_index].base_ptr));
 
@@ -1188,7 +1188,7 @@ static struct x86_reg get_buffer_ptr( struct translate_sse *p,
 
 
 
-static boolean incr_inputs( struct translate_sse *p, 
+static boolean incr_inputs( struct translate_sse *p,
                             unsigned index_size )
 {
    if (!index_size && p->nr_buffer_varients == 1) {
@@ -1222,12 +1222,12 @@ static boolean incr_inputs( struct translate_sse *p,
             x86_mov(p->func, buf_ptr, p->tmp_EAX);
          }
       }
-   } 
+   }
    else {
       x64_rexw(p->func);
       x86_lea(p->func, p->idx_ESI, x86_make_disp(p->idx_ESI, index_size));
    }
-   
+
    return TRUE;
 }
 
@@ -1245,8 +1245,8 @@ static boolean incr_inputs( struct translate_sse *p,
  *  Lots of hardcoding
  *
  * EAX -- pointer to current output vertex
- * ECX -- pointer to current attribute 
- * 
+ * ECX -- pointer to current attribute
+ *
  */
 static boolean build_vertex_emit( struct translate_sse *p,
 				  struct x86_function *func,
@@ -1336,9 +1336,9 @@ static boolean build_vertex_emit( struct translate_sse *p,
             last_varient = varient;
             vb = get_buffer_ptr(p, index_size, varient, elt);
          }
-         
-         if (!translate_attr( p, a, 
-                              x86_make_disp(vb, a->input_offset), 
+
+         if (!translate_attr( p, a,
+                              x86_make_disp(vb, a->input_offset),
                               x86_make_disp(p->outbuf_EBX, a->output_offset)))
             return FALSE;
       }
@@ -1346,13 +1346,13 @@ static boolean build_vertex_emit( struct translate_sse *p,
       /* Next output vertex:
        */
       x64_rexw(p->func);
-      x86_lea(p->func, 
+      x86_lea(p->func,
               p->outbuf_EBX,
               x86_make_disp(p->outbuf_EBX,
                             p->translate.key.output_stride));
 
       /* Incr index
-       */ 
+       */
       incr_inputs( p, index_size );
    }
 
@@ -1372,7 +1372,7 @@ static boolean build_vertex_emit( struct translate_sse *p,
 
    /* Pop regs and return
     */
-   
+
    if(x86_target(p->func) != X86_64_STD_ABI)
    {
       x86_pop(p->func, p->idx_ESI);
@@ -1397,7 +1397,7 @@ static boolean build_vertex_emit( struct translate_sse *p,
 
 
 
-			       
+
 static void translate_sse_set_buffer( struct translate *translate,
 				unsigned buf,
 				const void *ptr,
@@ -1412,9 +1412,9 @@ static void translate_sse_set_buffer( struct translate *translate,
       p->buffer[buf].max_index = max_index;
    }
 
-   if (0) debug_printf("%s %d/%d: %p %d\n", 
-                       __FUNCTION__, buf, 
-                       p->nr_buffers, 
+   if (0) debug_printf("%s %d/%d: %p %d\n",
+                       __FUNCTION__, buf,
+                       p->nr_buffers,
                        ptr, stride);
 }
 
@@ -1440,7 +1440,7 @@ struct translate *translate_sse2_create( const struct translate_key *key )
       goto fail;
 
    p = os_malloc_aligned(sizeof(struct translate_sse), 16);
-   if (p == NULL) 
+   if (p == NULL)
       goto fail;
    memset(p, 0, sizeof(*p));
    memcpy(p->consts, consts, sizeof(consts));

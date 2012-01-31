@@ -9,7 +9,7 @@ static GLboolean need_swtnl( struct brw_context *brw )
 {
    const struct pipe_rasterizer_state *rast = &brw->curr.rast->templ;
 
-   /* If we don't require strict OpenGL conformance, never 
+   /* If we don't require strict OpenGL conformance, never
     * use fallbacks.  If we're forcing fallbacks, always
     * use fallfacks.
     */
@@ -33,7 +33,7 @@ static GLboolean need_swtnl( struct brw_context *brw )
     */
    {
       int ve0_vb = brw->curr.vertex_element[0].vertex_buffer_index;
-      
+
       if (brw->curr.vertex_buffer[ve0_vb].stride == 0)
 	 return TRUE;
    }
@@ -47,7 +47,7 @@ static GLboolean need_swtnl( struct brw_context *brw )
 	 return TRUE;
 
    }
-   
+
    if (brw->reduced_primitive == PIPE_PRIM_LINES ||
        (brw->reduced_primitive == PIPE_PRIM_TRIANGLES &&
 	(rast->fill_cw == PIPE_POLYGON_MODE_LINE ||
@@ -65,12 +65,12 @@ static GLboolean need_swtnl( struct brw_context *brw )
        */
       if (rast->line_stipple_enable &&
 	  (brw->reduced_primitive == PIPE_PRIM_TRIANGLES ||
-	   brw->primitive == PIPE_PRIM_LINE_LOOP || 
+	   brw->primitive == PIPE_PRIM_LINE_LOOP ||
 	   brw->primitive == PIPE_PRIM_LINE_STRIP))
 	 return TRUE;
    }
 
-   
+
    if (brw->reduced_primitive == PIPE_PRIM_POINTS ||
        (brw->reduced_primitive == PIPE_PRIM_TRIANGLES &&
 	(rast->fill_cw == PIPE_POLYGON_MODE_POINT ||
@@ -87,7 +87,7 @@ static GLboolean need_swtnl( struct brw_context *brw )
     *
     * XXX: need a workaround for this.
     */
-      
+
    /* Nothing stopping us from the fast path now */
    return FALSE;
 }

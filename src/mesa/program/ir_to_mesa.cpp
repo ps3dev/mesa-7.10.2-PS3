@@ -703,7 +703,7 @@ ir_to_mesa_visitor::get_temp(const glsl_type *type)
 variable_storage *
 ir_to_mesa_visitor::find_variable_storage(ir_variable *var)
 {
-   
+
    variable_storage *entry;
 
    foreach_iter(exec_list_iterator, iter, this->variables) {

@@ -4,7 +4,7 @@
 /*
  * Generate shuffle patterns with minimal fuss.
  *
- * Based on ideas from 
+ * Based on ideas from
  * http://www.insomniacgames.com/tech/articles/0408/files/shuffles.pdf
  *
  * A-P indicates 0-15th position in first vector
@@ -24,10 +24,10 @@
  * 8 indicates 0x80
  * 0 indicates 0x00
  *
- * The macros SHUFFLE4() SHUFFLE8() and SHUFFLE16() provide a const vector 
+ * The macros SHUFFLE4() SHUFFLE8() and SHUFFLE16() provide a const vector
  * unsigned char literal suitable for use with spu_shuffle().
  *
- * The macros SHUFB4() SHUFB8() and SHUFB16() provide a const qword vector 
+ * The macros SHUFB4() SHUFB8() and SHUFB16() provide a const qword vector
  * literal suitable for use with si_shufb().
  *
  *
@@ -35,7 +35,7 @@
  * SHUFB4(A,A,A,A)
  * expands to :
  * ((const qword){0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3})
- * 
+ *
  * SHUFFLE8(A,B,a,b,C,c,8,8)
  * expands to :
  * ((const vector unsigned char){0x00,0x01,0x02,0x03,0x10,0x11,0x12,0x13,

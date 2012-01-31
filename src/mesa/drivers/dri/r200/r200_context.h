@@ -67,7 +67,7 @@ typedef struct r200_context *r200ContextPtr;
 struct r200_vertex_program {
         struct gl_vertex_program mesa_program; /* Must be first */
         int translated;
-        /* need excess instr: 1 for late loop checking, 2 for 
+        /* need excess instr: 1 for late loop checking, 2 for
            additional instr due to instr/attr, 3 for fog */
         VERTEX_SHADER_INSTRUCTION instr[R200_VSF_MAX_INST + 6];
         int pos_end;
@@ -97,7 +97,7 @@ struct r200_texture_state {
 /* Trying to keep these relatively short as the variables are becoming
  * extravagently long.  Drop the driver name prefix off the front of
  * everything - I think we know which driver we're in by now, and keep the
- * prefix to 3 letters unless absolutely impossible.  
+ * prefix to 3 letters unless absolutely impossible.
  */
 
 #define CTX_CMD_0             0
@@ -281,11 +281,11 @@ struct r200_texture_state {
 #define TCG_TEX_CYL_WRAP_CTL      5
 #define TCG_STATE_SIZE            6
 
-#define MTL_CMD_0            0	
-#define MTL_EMMISSIVE_RED    1	
-#define MTL_EMMISSIVE_GREEN  2	
-#define MTL_EMMISSIVE_BLUE   3	
-#define MTL_EMMISSIVE_ALPHA  4	
+#define MTL_CMD_0            0
+#define MTL_EMMISSIVE_RED    1
+#define MTL_EMMISSIVE_GREEN  2
+#define MTL_EMMISSIVE_BLUE   3
+#define MTL_EMMISSIVE_ALPHA  4
 #define MTL_AMBIENT_RED      5
 #define MTL_AMBIENT_GREEN    6
 #define MTL_AMBIENT_BLUE     7
@@ -366,7 +366,7 @@ struct r200_texture_state {
 #define GRD_STATE_SIZE             5
 
 /* position changes frequently when lighting in modelpos - separate
- * out to new state item?  
+ * out to new state item?
  */
 #define LIT_CMD_0                  0
 #define LIT_AMBIENT_RED            1
@@ -485,7 +485,7 @@ struct r200_texture_state {
 #define STP_STATE_SIZE 35
 
 struct r200_hw_state {
-   /* Hardware state, stored as cmdbuf commands:  
+   /* Hardware state, stored as cmdbuf commands:
     *   -- Need to doublebuffer for
     *           - reviving state after loss of context
     *           - eliding noop statechange loops? (except line stipple count)
@@ -536,9 +536,9 @@ struct r200_state {
    GLuint envneeded;
 };
 
-#define R200_CMD_BUF_SZ  (16*1024) 
+#define R200_CMD_BUF_SZ  (16*1024)
 
-#define R200_ELT_BUF_SZ  (16*1024) 
+#define R200_ELT_BUF_SZ  (16*1024)
 /* r200_tcl.c
  */
 struct r200_tcl_info {
@@ -580,10 +580,10 @@ struct r200_swtcl_info {
    /* A maximum total of 29 elements per vertex:  3 floats for position, 3
     * floats for normal, 4 floats for color, 4 bytes for secondary color,
     * 3 floats for each texture unit (18 floats total).
-    * 
+    *
     * we maybe need add. 4 to prevent segfault if someone specifies
     * GL_TEXTURE6/GL_TEXTURE7 (esp. for the codegen-path) (FIXME: )
-    * 
+    *
     * The position data is never actually stored here, so 3 elements could be
     * trimmed out of the buffer.
     */

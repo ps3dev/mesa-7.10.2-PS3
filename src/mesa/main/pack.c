@@ -4994,7 +4994,7 @@ _mesa_unpack_image( GLuint dimensions,
                   for (i = 0; i < width; i++) {
                      if (*s & srcMask) {
                         *d |= dstMask;
-                     }      
+                     }
                      if (srcMask == 128) {
                         srcMask = 1;
                         s++;
@@ -5036,7 +5036,7 @@ _mesa_unpack_image( GLuint dimensions,
                      }
                      else {
                         dstMask = dstMask >> 1;
-                     }      
+                     }
                   }
                }
             }

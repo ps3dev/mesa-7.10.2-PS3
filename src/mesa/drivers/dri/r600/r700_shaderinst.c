@@ -172,11 +172,11 @@ unsigned int GetInstructionSize(ShaderInstType instType)
 {
     switch(instType)
     {
-    case SIT_ALU_HALF_LIT:  
-    case SIT_TEX:           
-    case SIT_VTX:           
-    case SIT_VTX_GENERIC:   
-    case SIT_VTX_SEM:       
+    case SIT_ALU_HALF_LIT:
+    case SIT_TEX:
+    case SIT_VTX:
+    case SIT_VTX_GENERIC:
+    case SIT_VTX_SEM:
         return 4;
     case SIT_ALU_FALL_LIT:
         return 6;
@@ -191,9 +191,9 @@ unsigned int GetCFMaxInstructions(ShaderInstType instType)
 {
     switch (instType)
     {
-    case SIT_CF_ALL_EXP:    
-    case SIT_CF_ALL_EXP_SX: 
-    case SIT_CF_ALL_EXP_SMX:  
+    case SIT_CF_ALL_EXP:
+    case SIT_CF_ALL_EXP_SX:
+    case SIT_CF_ALL_EXP_SMX:
         return 0x10;
     case SIT_CF_GENERIC:
         return 0x8;  //For tex and vtx

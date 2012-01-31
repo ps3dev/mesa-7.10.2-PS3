@@ -26,7 +26,7 @@
 /**
  * @file
  * SVGA Shader Token Opcode Info
- * 
+ *
  * @author Michal Krol <michal@vmware.com>
  */
 

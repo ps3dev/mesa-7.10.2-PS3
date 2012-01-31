@@ -53,7 +53,7 @@ vmw_pipe_fence( uint32_t fence )
 
 
 struct pb_fence_ops *
-vmw_fence_ops_create(struct vmw_winsys_screen *vws); 
+vmw_fence_ops_create(struct vmw_winsys_screen *vws);
 
 
 #endif /* VMW_FENCE_H_ */

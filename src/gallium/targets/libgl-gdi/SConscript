@@ -31,7 +31,7 @@ if env['gcc']:
     sources += ['#src/gallium/state_trackers/wgl/opengl32.mingw.def']
 else:
     sources += ['#src/gallium/state_trackers/wgl/opengl32.def']
-    
+
 drivers += [trace, rbug]
 
 env['no_import_lib'] = 1

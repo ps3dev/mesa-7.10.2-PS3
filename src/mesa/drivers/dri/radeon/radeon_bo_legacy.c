@@ -1,9 +1,9 @@
-/* 
+/*
  * Copyright © 2008 Nicolai Haehnle
  * Copyright © 2008 Dave Airlie
  * Copyright © 2008 Jérôme Glisse
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,13 +11,13 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
  * THE COPYRIGHT HOLDERS, AUTHORS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * The above copyright notice and this permission notice (including the
@@ -99,7 +99,7 @@ struct bo_manager_legacy {
 static void bo_legacy_tobj_destroy(void *data, driTextureObject *t)
 {
     struct bo_legacy_texture_object *tobj = (struct bo_legacy_texture_object *)t;
-    
+
     if (tobj->parent) {
         tobj->parent->tobj = NULL;
         tobj->parent->validated = 0;
@@ -174,8 +174,8 @@ static void legacy_get_current_age(struct bo_manager_legacy *boml)
     unsigned char *RADEONMMIO = NULL;
     int r;
 
-    if (   IS_R300_CLASS(boml->screen) 
-        || IS_R600_CLASS(boml->screen) ) 
+    if (   IS_R300_CLASS(boml->screen)
+        || IS_R600_CLASS(boml->screen) )
     {
     	gp.param = RADEON_PARAM_LAST_CLEAR;
     	gp.value = (int *)&boml->current_age;
@@ -185,7 +185,7 @@ static void legacy_get_current_age(struct bo_manager_legacy *boml)
        	 fprintf(stderr, "%s: drmRadeonGetParam: %d\n", __FUNCTION__, r);
          exit(1);
        }
-    } 
+    }
     else {
         RADEONMMIO = boml->screen->mmio.map;
         boml->current_age = boml->screen->scratch[3];
@@ -257,7 +257,7 @@ void legacy_track_pending(struct radeon_bo_manager *bom, int debug)
         if (legacy_is_pending(&(bo_legacy->base))) {
         }
         bo_legacy = next;
-    } 
+    }
 }
 
 static int legacy_wait_any_pending(struct bo_manager_legacy *boml)
@@ -448,16 +448,16 @@ static struct radeon_bo *bo_open(struct radeon_bo_manager *bom,
         bo_free(bo_legacy);
         return NULL;
     }
-    if (bo_legacy->base.domains & RADEON_GEM_DOMAIN_GTT) 
+    if (bo_legacy->base.domains & RADEON_GEM_DOMAIN_GTT)
     {
 retry:
         legacy_track_pending(&boml->base, 0);
         /* dma buffers */
 
         r = bo_dma_alloc(&(bo_legacy->base));
-        if (r) 
+        if (r)
         {
-	         if (legacy_wait_any_pending(boml) == -1) 
+	         if (legacy_wait_any_pending(boml) == -1)
              {
                   bo_free(bo_legacy);
 	              return NULL;
@@ -465,8 +465,8 @@ retry:
 	         goto retry;
 	         return NULL;
         }
-    } 
-    else 
+    }
+    else
     {
         bo_legacy->ptr = malloc(bo_legacy->base.size);
         if (bo_legacy->ptr == NULL) {
@@ -538,11 +538,11 @@ static int bo_unmap(struct radeon_bo_int *bo)
 {
     struct bo_legacy *bo_legacy = (struct bo_legacy*)bo;
 
-    if (--bo_legacy->map_count > 0) 
+    if (--bo_legacy->map_count > 0)
     {
         return 0;
     }
-    
+
     bo->ptr = NULL;
 
     return 0;
@@ -588,7 +588,7 @@ static int bo_vram_validate(struct radeon_bo_int *bo,
     struct bo_legacy *bo_legacy = (struct bo_legacy*)bo;
     int r;
     int retry_count = 0, pending_retry = 0;
-    
+
     if (!bo_legacy->tobj) {
 	bo_legacy->tobj = CALLOC(sizeof(struct bo_legacy_texture_object));
 	bo_legacy->tobj->parent = bo_legacy;
@@ -694,7 +694,7 @@ static int bo_vram_validate(struct radeon_bo_int *bo,
     return 0;
 }
 
-/* 
+/*
  *  radeon_bo_legacy_validate -
  *  returns:
  *  0 - all good
@@ -759,7 +759,7 @@ void radeon_bo_legacy_pending(struct radeon_bo *bo, uint32_t pending)
     /* add to pending list */
     radeon_bo_ref(bo);
     if (bo_legacy->is_pending > 1) {
-        return;    
+        return;
     }
     bo_legacy->pprev = boml->pending_bos.pprev;
     bo_legacy->pnext = NULL;
@@ -854,7 +854,7 @@ struct radeon_bo_manager *radeon_bo_manager_legacy_ctor(struct radeon_screen *sc
     }
 
     /* biggest framebuffer size */
-    size = 4096*4096*4; 
+    size = 4096*4096*4;
 
     /* allocate front */
     bo = radeon_legacy_bo_alloc_static(bom, size, bom->screen->frontOffset);

@@ -116,7 +116,7 @@ do {						\
 /**
  * Macro to assert that the API call was made outside the
  * glBegin()/glEnd() pair, with return value.
- * 
+ *
  * \param ctx GL context.
  * \param retval value to return value in case the assertion fails.
  */
@@ -132,7 +132,7 @@ do {									\
 /**
  * Macro to assert that the API call was made outside the
  * glBegin()/glEnd() pair.
- * 
+ *
  * \param ctx GL context.
  */
 #define ASSERT_OUTSIDE_SAVE_BEGIN_END(ctx)				\
@@ -147,7 +147,7 @@ do {									\
 /**
  * Macro to assert that the API call was made outside the
  * glBegin()/glEnd() pair and flush the vertices.
- * 
+ *
  * \param ctx GL context.
  */
 #define ASSERT_OUTSIDE_SAVE_BEGIN_END_AND_FLUSH(ctx)			\
@@ -159,7 +159,7 @@ do {									\
 /**
  * Macro to assert that the API call was made outside the
  * glBegin()/glEnd() pair and flush the vertices, with return value.
- * 
+ *
  * \param ctx GL context.
  * \param retval value to return value in case the assertion fails.
  */
@@ -5536,7 +5536,7 @@ static INLINE GLboolean compare4fv( const GLfloat *a,
 {
    return memcmp( a, b, count * sizeof(GLfloat) ) == 0;
 }
-                              
+
 
 static void GLAPIENTRY
 save_Materialfv(GLenum face, GLenum pname, const GLfloat * param)
@@ -5574,7 +5574,7 @@ save_Materialfv(GLenum face, GLenum pname, const GLfloat * param)
       _mesa_compile_error(ctx, GL_INVALID_ENUM, "material(pname)");
       return;
    }
-   
+
    if (ctx->ExecuteFlag) {
       CALL_Materialfv(ctx->Exec, (face, pname, param));
    }
@@ -8241,7 +8241,7 @@ _mesa_NewList(GLuint name, GLenum mode)
 
 
 /**
- * End definition of current display list. 
+ * End definition of current display list.
  */
 static void GLAPIENTRY
 _mesa_EndList(void)
@@ -8258,7 +8258,7 @@ _mesa_EndList(void)
       _mesa_error(ctx, GL_INVALID_OPERATION, "glEndList");
       return;
    }
-   
+
    /* Call before emitting END_OF_LIST, in case the driver wants to
     * emit opcodes itself.
     */
@@ -9338,7 +9338,7 @@ _mesa_create_save_table(void)
    SET_StencilMaskSeparate(table, save_StencilMaskSeparate);
    SET_StencilOpSeparate(table, save_StencilOpSeparate);
 
-   /* ATI_separate_stencil */ 
+   /* ATI_separate_stencil */
    SET_StencilFuncSeparateATI(table, save_StencilFuncSeparateATI);
 
    /* GL_ARB_imaging */

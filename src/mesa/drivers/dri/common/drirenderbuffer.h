@@ -55,7 +55,7 @@ typedef struct {
 
    /**
     * A handy flag to know if this is the back color buffer.
-    * 
+    *
     * \note
     * This is currently only used by tdfx.
     */

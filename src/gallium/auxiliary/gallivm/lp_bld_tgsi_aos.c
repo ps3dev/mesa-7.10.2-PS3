@@ -105,7 +105,7 @@ struct lp_build_tgsi_aos_context
 
 
 /**
- * Wrapper around lp_build_swizzle_aos which translates swizzles to another 
+ * Wrapper around lp_build_swizzle_aos which translates swizzles to another
  * ordering.
  */
 static LLVMValueRef
@@ -1026,7 +1026,7 @@ emit_instruction(
    default:
       return FALSE;
    }
-   
+
    if (info->num_dst) {
       emit_store(bld, inst, 0, dst0);
    }

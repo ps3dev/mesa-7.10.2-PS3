@@ -134,9 +134,9 @@ or vector level?  If we do it at the vector level, we're going to end
 up with many different versions of the variable when encountering code
 like:
 
-(assign (constant bool (1)) (swiz x (var_ref __retval) ) (var_ref a) ) 
-(assign (constant bool (1)) (swiz y (var_ref __retval) ) (var_ref b) ) 
-(assign (constant bool (1)) (swiz z (var_ref __retval) ) (var_ref c) ) 
+(assign (constant bool (1)) (swiz x (var_ref __retval) ) (var_ref a) )
+(assign (constant bool (1)) (swiz y (var_ref __retval) ) (var_ref b) )
+(assign (constant bool (1)) (swiz z (var_ref __retval) ) (var_ref c) )
 
 If every masked update of a component relies on the previous value of
 the variable, then we're probably going to be quite limited in our

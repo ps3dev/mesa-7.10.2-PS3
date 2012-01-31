@@ -295,8 +295,8 @@ static GLboolean run_render( struct gl_context *ctx,
       clip_render_tab_elts[GL_TRIANGLES] = clip_elt_triangles;
    }
    else {
-      tab = (VB->Elts ? 
-	     tnl->Driver.Render.PrimTabElts : 
+      tab = (VB->Elts ?
+	     tnl->Driver.Render.PrimTabElts :
 	     tnl->Driver.Render.PrimTabVerts);
    }
 
@@ -312,9 +312,9 @@ static GLboolean run_render( struct gl_context *ctx,
 
 	 assert((prim & PRIM_MODE_MASK) <= GL_POLYGON);
 
-	 if (MESA_VERBOSE & VERBOSE_PRIMS) 
-	    _mesa_debug(NULL, "MESA prim %s %d..%d\n", 
-			_mesa_lookup_enum_by_nr(prim & PRIM_MODE_MASK), 
+	 if (MESA_VERBOSE & VERBOSE_PRIMS)
+	    _mesa_debug(NULL, "MESA prim %s %d..%d\n",
+			_mesa_lookup_enum_by_nr(prim & PRIM_MODE_MASK),
 			start, start+length);
 
 	 if (length)

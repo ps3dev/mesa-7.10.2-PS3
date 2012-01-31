@@ -461,17 +461,17 @@ sis_set_texobj_parm( struct gl_context *ctx, struct gl_texture_object *texObj,
       CLAMPED_FLOAT_TO_UBYTE(c[2], texObj->BorderColor.f[2]);
       CLAMPED_FLOAT_TO_UBYTE(c[3], texObj->BorderColor.f[3]);
 
-      current->texture[hw_unit].hwTextureBorderColor = 
+      current->texture[hw_unit].hwTextureBorderColor =
          PACK_COLOR_8888(c[3], c[0], c[1], c[2]);
    }
 
    if (current->texture[hw_unit].hwTextureBorderColor !=
-       prev->texture[hw_unit].hwTextureBorderColor) 
+       prev->texture[hw_unit].hwTextureBorderColor)
    {
       prev->texture[hw_unit].hwTextureBorderColor =
-         current->texture[hw_unit].hwTextureBorderColor; 
+         current->texture[hw_unit].hwTextureBorderColor;
       if (hw_unit == 1)
-         smesa->GlobalFlag |= GFLAG_TEXBORDERCOLOR_1; 
+         smesa->GlobalFlag |= GFLAG_TEXBORDERCOLOR_1;
       else
          smesa->GlobalFlag |= GFLAG_TEXBORDERCOLOR;
    }
@@ -557,7 +557,7 @@ sis_set_texobj_parm( struct gl_context *ctx, struct gl_texture_object *texObj,
       }
    }
 
-   if (current->texture[hw_unit].hwTextureSet != 
+   if (current->texture[hw_unit].hwTextureSet !=
       prev->texture[hw_unit].hwTextureSet)
    {
       prev->texture[hw_unit].hwTextureSet =
@@ -567,7 +567,7 @@ sis_set_texobj_parm( struct gl_context *ctx, struct gl_texture_object *texObj,
       else
          smesa->GlobalFlag |= CFLAG_TEXTURERESET;
    }
-   if (current->texture[hw_unit].hwTextureMip != 
+   if (current->texture[hw_unit].hwTextureMip !=
       prev->texture[hw_unit].hwTextureMip)
    {
       prev->texture[hw_unit].hwTextureMip =
@@ -594,7 +594,7 @@ sis_reset_texture_env (struct gl_context *ctx, int hw_unit)
    {
       current->hwTexBlendColor1 = STAGE1_C_CF;
       current->hwTexBlendAlpha1 = STAGE1_A_AF;
-      
+
       if ((current->hwTexBlendColor1 != prev->hwTexBlendColor1) ||
           (current->hwTexBlendAlpha1 != prev->hwTexBlendAlpha1) ||
           (current->hwTexEnvColor != prev->hwTexEnvColor))
@@ -607,7 +607,7 @@ sis_reset_texture_env (struct gl_context *ctx, int hw_unit)
    } else {
       current->hwTexBlendColor0 = STAGE0_C_CF;
       current->hwTexBlendAlpha0 = STAGE0_A_AF;
-      
+
       if ((current->hwTexBlendColor0 != prev->hwTexBlendColor0) ||
           (current->hwTexBlendAlpha0 != prev->hwTexBlendAlpha0) ||
           (current->hwTexEnvColor != prev->hwTexEnvColor))
@@ -626,7 +626,7 @@ static void updateTextureUnit( struct gl_context *ctx, int unit )
    const struct gl_texture_unit *texUnit = &ctx->Texture.Unit[unit];
    struct gl_texture_object *texObj = texUnit->_Current;
    GLint fallbackbit;
-   
+
    if (unit == 0)
       fallbackbit = SIS_FALLBACK_TEXTURE0;
    else

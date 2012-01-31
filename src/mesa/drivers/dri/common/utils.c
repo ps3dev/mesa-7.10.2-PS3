@@ -39,10 +39,10 @@
 
 /**
  * Print message to \c stderr if the \c LIBGL_DEBUG environment variable
- * is set. 
- * 
+ * is set.
+ *
  * Is called from the drivers.
- * 
+ *
  * \param f \c printf like format string.
  */
 void
@@ -61,7 +61,7 @@ __driUtilMessage(const char *f, ...)
 
 
 unsigned
-driParseDebugString( const char * debug, 
+driParseDebugString( const char * debug,
 		     const struct dri_debug_control * control  )
 {
    unsigned   flag;
@@ -86,19 +86,19 @@ driParseDebugString( const char * debug,
 
 /**
  * Create the \c GL_RENDERER string for DRI drivers.
- * 
+ *
  * Almost all DRI drivers use a \c GL_RENDERER string of the form:
  *
  *    "Mesa DRI <chip> <driver date> <AGP speed) <CPU information>"
  *
  * Using the supplied chip name, driver data, and AGP speed, this function
  * creates the string.
- * 
+ *
  * \param buffer         Buffer to hold the \c GL_RENDERER string.
  * \param hardware_name  Name of the hardware.
  * \param driver_date    Driver date.
  * \param agp_mode       AGP mode (speed).
- * 
+ *
  * \returns
  * The length of the string stored in \c buffer.  This does \b not include
  * the terminating \c NUL character.
@@ -121,7 +121,7 @@ driGetRendererString( char * buffer, const char * hardware_name,
    case 8:
       offset += sprintf( & buffer[ offset ], " AGP %ux", agp_mode );
       break;
-	
+
    default:
       break;
    }
@@ -187,7 +187,7 @@ static const struct dri_extension all_mesa_extensions[] = {
 
 /**
  * Enable and map extensions supported by the driver.
- * 
+ *
  * When ctx is NULL, extensions are not enabled, but their functions
  * are still mapped.  When extensions_to_enable is NULL, all static
  * functions known to mesa core are mapped.
@@ -233,10 +233,10 @@ void driInitExtensions( struct gl_context * ctx,
 
 /**
  * Enable and map functions for a single extension
- * 
+ *
  * \param ctx  Context where extension is to be enabled.
  * \param ext  Extension that is to be enabled.
- * 
+ *
  * \sa driInitExtensions, _mesa_enable_extension, _mesa_map_function_array
  */
 void driInitSingleExtension( struct gl_context * ctx,
@@ -262,10 +262,10 @@ void driInitSingleExtension( struct gl_context * ctx,
  * \param ddxExpected  Minimum DDX minor and range of DDX major version required by the driver.
  * \param drmActual    Actual DRM version supplied __driCreateNewScreen.
  * \param drmExpected  Minimum DRM version required by the driver.
- * 
+ *
  * \returns \c GL_TRUE if all version requirements are met.  Otherwise,
  *          \c GL_FALSE is returned.
- * 
+ *
  * \sa __driCreateNewScreen, driCheckDriDdxDrmVersions2
  *
  * \todo
@@ -305,7 +305,7 @@ driCheckDriDdxDrmVersions3(const char * driver_name,
 		       ddxActual->major, ddxActual->minor, ddxActual->patch);
       return GL_FALSE;
    }
-   
+
    /* Check that the DRM driver version is compatible */
    if ( (drmActual->major != drmExpected->major)
 	|| (drmActual->minor < drmExpected->minor) ) {
@@ -372,11 +372,11 @@ GLboolean driClipRectToFramebuffer( const struct gl_framebuffer *buffer,
 
 /**
  * Creates a set of \c struct gl_config that a driver will expose.
- * 
+ *
  * A set of \c struct gl_config will be created based on the supplied
  * parameters.  The number of modes processed will be 2 *
  * \c num_depth_stencil_bits * \c num_db_modes.
- * 
+ *
  * For the most part, data is just copied from \c depth_bits, \c stencil_bits,
  * \c db_modes, and \c visType into each \c struct gl_config element.
  * However, the meanings of \c fb_format and \c fb_type require further
@@ -388,7 +388,7 @@ GLboolean driClipRectToFramebuffer( const struct gl_framebuffer *buffer,
  * \c GL_UNSIGNED_SHORT_5_6_5_REV is specified with \c GL_RGB, bits [15:11]
  * are the blue value, bits [10:5] are the green value, and bits [4:0] are
  * the red value.
- * 
+ *
  * One sublte issue is the combination of \c GL_RGB  or \c GL_BGR and either
  * of the \c GL_UNSIGNED_INT_8_8_8_8 modes.  The resulting mask values in the
  * \c struct gl_config structure is \b identical to the \c GL_RGBA or
@@ -397,7 +397,7 @@ GLboolean driClipRectToFramebuffer( const struct gl_framebuffer *buffer,
  * still uses 32-bits.
  *
  * If in doubt, look at the tables used in the function.
- * 
+ *
  * \param ptr_to_modes  Pointer to a pointer to a linked list of
  *                      \c struct gl_config.  Upon completion, a pointer to
  *                      the next element to be process will be stored here.
@@ -407,7 +407,7 @@ GLboolean driClipRectToFramebuffer( const struct gl_framebuffer *buffer,
  * \param fb_format     Format of the framebuffer.  Currently only \c GL_RGB,
  *                      \c GL_RGBA, \c GL_BGR, and \c GL_BGRA are supported.
  * \param fb_type       Type of the pixels in the framebuffer.  Currently only
- *                      \c GL_UNSIGNED_SHORT_5_6_5, 
+ *                      \c GL_UNSIGNED_SHORT_5_6_5,
  *                      \c GL_UNSIGNED_SHORT_5_6_5_REV,
  *                      \c GL_UNSIGNED_INT_8_8_8_8, and
  *                      \c GL_UNSIGNED_INT_8_8_8_8_REV are supported.
@@ -427,17 +427,17 @@ GLboolean driClipRectToFramebuffer( const struct gl_framebuffer *buffer,
  * \param num_msaa_modes Number of entries in \c msaa_samples.
  * \param visType       GLX visual type.  Usually either \c GLX_TRUE_COLOR or
  *                      \c GLX_DIRECT_COLOR.
- * 
+ *
  * \returns
  * \c GL_TRUE on success or \c GL_FALSE on failure.  Currently the only
  * cause of failure is a bad parameter (i.e., unsupported \c fb_format or
  * \c fb_type).
- * 
+ *
  * \todo
  * There is currently no way to support packed RGB modes (i.e., modes with
  * exactly 3 bytes per pixel) or floating-point modes.  This could probably
  * be done by creating some new, private enums with clever names likes
- * \c GL_UNSIGNED_3BYTE_8_8_8, \c GL_4FLOAT_32_32_32_32, 
+ * \c GL_UNSIGNED_3BYTE_8_8_8, \c GL_4FLOAT_32_32_32_32,
  * \c GL_4HALF_16_16_16_16, etc.  We can cross that bridge when we come to it.
  */
 __DRIconfig **
@@ -669,7 +669,7 @@ __DRIconfig **driConcatConfigs(__DRIconfig **a,
     j = 0;
     while (b[j] != NULL)
 	j++;
-   
+
     all = malloc((i + j + 1) * sizeof *all);
     index = 0;
     for (i = 0; a[i] != NULL; i++)
@@ -773,7 +773,7 @@ driGetConfigAttribIndex(const __DRIconfig *config,
         /* any other int-sized field */
 	*value = *(unsigned int *)
 	    ((char *) &config->modes + attribMap[index].offset);
-	
+
 	break;
     }
 

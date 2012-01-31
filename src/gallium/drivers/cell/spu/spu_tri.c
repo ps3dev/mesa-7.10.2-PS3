@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -386,7 +386,7 @@ flush_spans(void)
    }
 
    /* XXX this loop could be moved into the above switch cases... */
-   
+
    /* Setup for mask calculation */
    const vec_int4 quad_LlRr = setup.span.quad;
    const vec_int4 quad_RrLl = spu_rlqwbyte(quad_LlRr, 8);
@@ -403,11 +403,11 @@ flush_spans(void)
        * Computes mask to indicate which pixels in the 2x2 quad are actually
        * inside the triangle's bounds.
        */
-      
+
       /* Calculate ({x,x+1,x,x+1} >= {l[0],l[0],l[1],l[1]}) */
       const mask_t gt_LLll_xs = spu_cmpgt(quad_LLll, xs);
-      const mask_t gte_xs_LLll = spu_nand(gt_LLll_xs, gt_LLll_xs); 
-      
+      const mask_t gte_xs_LLll = spu_nand(gt_LLll_xs, gt_LLll_xs);
+
       /* Calculate ({r[0],r[0],r[1],r[1]} > {x,x+1,x,x+1}) */
       const mask_t gt_RRrr_xs = spu_cmpgt(quad_RRrr, xs);
 
@@ -431,7 +431,7 @@ print_vertex(const struct vertex_header *v)
    uint i;
    fprintf(stderr, "  Vertex: (%p)\n", v);
    for (i = 0; i < spu.vertex_info.num_attribs; i++) {
-      fprintf(stderr, "    %d: %f %f %f %f\n",  i, 
+      fprintf(stderr, "    %d: %f %f %f %f\n",  i,
               spu_extract(v->data[i], 0),
               spu_extract(v->data[i], 1),
               spu_extract(v->data[i], 2),
@@ -578,7 +578,7 @@ setup_sort_vertices(const qword vs)
  * Compute a0 for a constant-valued coefficient (GL_FLAT shading).
  * The value value comes from vertex->data[slot].
  * The result will be put into setup.coef[slot].a0.
- * \param slot  which attribute slot 
+ * \param slot  which attribute slot
  */
 static INLINE void
 const_coeff4(uint slot)
@@ -614,7 +614,7 @@ tri_linear_coeff4(uint slot)
 
    vector float tempx = spu_mul(setup.coef[slot].dadx, xxxx);
    vector float tempy = spu_mul(setup.coef[slot].dady, yyyy);
-                         
+
    setup.coef[slot].a0 = spu_sub(vmin_d, spu_add(tempx, tempy));
 }
 
@@ -658,7 +658,7 @@ tri_persp_coeff4(uint slot)
 
    vector float tempx = spu_mul(setup.coef[slot].dadx, xxxx);
    vector float tempy = spu_mul(setup.coef[slot].dady, yyyy);
-                         
+
    setup.coef[slot].a0 = spu_sub(vmin_d, spu_add(tempx, tempy));
 }
 
@@ -752,7 +752,7 @@ subtriangle(struct edge *eleft, struct edge *eright, unsigned lines)
    finish_y -= sy;
 
    /*
-   printf("%s %d %d\n", __FUNCTION__, start_y, finish_y);  
+   printf("%s %d %d\n", __FUNCTION__, start_y, finish_y);
    */
 
    for (y = start_y; y < finish_y; y++) {

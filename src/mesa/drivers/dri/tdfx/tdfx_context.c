@@ -142,14 +142,14 @@ static void tdfxDDInitExtensions( struct gl_context *ctx )
 
 
 static const struct tnl_pipeline_stage *tdfx_pipeline[] = {
-   &_tnl_vertex_transform_stage, 
-   &_tnl_normal_transform_stage, 
+   &_tnl_vertex_transform_stage,
+   &_tnl_normal_transform_stage,
    &_tnl_lighting_stage,
-   &_tnl_fog_coordinate_stage, 
-   &_tnl_texgen_stage, 
-   &_tnl_texture_transform_stage, 
+   &_tnl_fog_coordinate_stage,
+   &_tnl_texgen_stage,
+   &_tnl_texture_transform_stage,
    &_tnl_point_attenuation_stage,
-   &_tnl_render_stage,		
+   &_tnl_render_stage,
    0,
 };
 
@@ -191,7 +191,7 @@ GLboolean tdfxCreateContext( gl_api api,
    /* Allocate the Mesa context */
    if (sharedContextPrivate)
       shareCtx = ((tdfxContextPtr) sharedContextPrivate)->glCtx;
-   else 
+   else
       shareCtx = NULL;
 
    fxMesa->glCtx = _mesa_create_context(mesaVis, shareCtx,
@@ -327,7 +327,7 @@ GLboolean tdfxCreateContext( gl_api api,
 
    tdfxDDInitExtensions( ctx );
    /* XXX these should really go right after _mesa_init_driver_functions() */
-   tdfxDDInitSpanFuncs( ctx ); 
+   tdfxDDInitSpanFuncs( ctx );
    tdfxDDInitStateFuncs( ctx );
    tdfxDDInitTriFuncs( ctx );
    tdfxInitVB( ctx );
@@ -827,7 +827,7 @@ GLboolean tdfxInitGlide(tdfxContextPtr tmesa)
       /* The device-specific Glide library filename didn't work, try the
        * old, generic libglide3.so library.
        */
-      libHandle = dlopen(defaultGlide, RTLD_NOW); 
+      libHandle = dlopen(defaultGlide, RTLD_NOW);
       if (!libHandle) {
          __driUtilMessage(
             "can't find Glide library, dlopen(%s) and dlopen(%s) both failed.",
@@ -843,7 +843,7 @@ GLboolean tdfxInitGlide(tdfxContextPtr tmesa)
       if (env && strstr(env, "verbose")) {
          fprintf(stderr, "libGL: using Glide library %s\n", libName);
       }
-   }         
+   }
 
 #define GET_FUNCTION(PTR, NAME)						\
    tmesa->Glide.PTR = dlsym(libHandle, NAME);				\
@@ -978,7 +978,7 @@ GLboolean tdfxInitGlide(tdfxContextPtr tmesa)
    tmesa->Glide.txImgQuantize = dlsym(libHandle, "txImgQuantize");
    tmesa->Glide.txImgDequantizeFXT1 = dlsym(libHandle, "_txImgDequantizeFXT1");
    tmesa->Glide.txErrorSetCallback = dlsym(libHandle, "txErrorSetCallback");
-   
+
 #ifdef DEBUG_TRAP
    /* wrap the drawing functions so we can trap them */
    real_grDrawTriangle = tmesa->Glide.grDrawTriangle;

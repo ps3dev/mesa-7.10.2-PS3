@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                   
+
 
 #include "brw_context.h"
 #include "brw_wm.h"
@@ -75,13 +75,13 @@ static void init_registers( struct brw_wm_compile *c )
    GLuint i = 0;
    GLuint j;
 
-   for (j = 0; j < c->grf_limit; j++) 
+   for (j = 0; j < c->grf_limit; j++)
       c->pass2_grf[j].nextuse = BRW_WM_MAX_INSN;
 
    for (j = 0; j < (c->nr_payload_regs + 1) / 2; j++)
       prealloc_reg(c, &c->payload.depth[j], i++);
 
-   for (j = 0; j < c->nr_creg; j++) 
+   for (j = 0; j < c->nr_creg; j++)
       prealloc_reg(c, &c->creg[j], i++);
 
    if (intel->gen >= 6) {
@@ -157,12 +157,12 @@ static void update_register_usage(struct brw_wm_compile *c,
 
 static void spill_value(struct brw_wm_compile *c,
 			struct brw_wm_value *value)
-{	
+{
    /* Allocate a spill slot.  Note that allocations start from 0x40 -
     * the first slot is reserved to mean "undef" in brw_wm_emit.c
     */
    if (!value->spill_slot) {
-      c->last_scratch += 0x40;	
+      c->last_scratch += 0x40;
       value->spill_slot = c->last_scratch;
    }
 
@@ -213,7 +213,7 @@ static GLuint search_contiguous_regs(struct brw_wm_compile *c,
 
    /* Any non-empty regs will need to be spilled:
     */
-   for (j = 0; j < nr; j++) 
+   for (j = 0; j < nr; j++)
       if (grf[reg+j].value)
 	 spill_value(c, grf[reg+j].value);
 
@@ -221,7 +221,7 @@ static GLuint search_contiguous_regs(struct brw_wm_compile *c,
 }
 
 
-static void alloc_contiguous_dest(struct brw_wm_compile *c, 
+static void alloc_contiguous_dest(struct brw_wm_compile *c,
 				  struct brw_wm_value *dst[],
 				  GLuint nr,
 				  GLuint thisinsn)
@@ -254,7 +254,7 @@ static void alloc_contiguous_dest(struct brw_wm_compile *c,
 }
 
 
-static void load_args(struct brw_wm_compile *c, 
+static void load_args(struct brw_wm_compile *c,
 		      struct brw_wm_instruction *inst)
 {
    GLuint thisinsn = inst - c->instruction;
@@ -336,7 +336,7 @@ void brw_wm_pass2( struct brw_wm_compile *c )
       }
 
       if (TEST_DST_SPILLS && inst->opcode != WM_PIXELXY) {
-	 for (i = 0; i < 4; i++)	
+	 for (i = 0; i < 4; i++)
 	    if (inst->dst[i])
 	       spill_value(c, inst->dst[i]);
       }

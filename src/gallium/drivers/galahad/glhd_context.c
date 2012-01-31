@@ -924,7 +924,7 @@ galahad_context_transfer_unmap(struct pipe_context *_context,
 
    if (glhd_resource->map_count < 1) {
       glhd_warn("context::transfer_unmap() called too many times"
-                " (count = %d)\n", glhd_resource->map_count);      
+                " (count = %d)\n", glhd_resource->map_count);
    }
 
    glhd_resource->map_count--;

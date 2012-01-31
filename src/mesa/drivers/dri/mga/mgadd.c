@@ -54,7 +54,7 @@ static const GLubyte *mgaGetString( struct gl_context *ctx, GLenum name )
       return (GLubyte *) "VA Linux Systems Inc.";
 
    case GL_RENDERER:
-      offset = driGetRendererString( buffer, 
+      offset = driGetRendererString( buffer,
 				     MGA_IS_G400(mmesa) ? "G400" :
 				     MGA_IS_G200(mmesa) ? "G200" : "MGA",
 				     DRIVER_DATE,

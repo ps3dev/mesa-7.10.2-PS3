@@ -56,7 +56,7 @@ struct Patchspec : public Pspec {
     int			stride;
     void 		clamp( REAL );
     void 		getstepsize( REAL );
-    void		singleStep( void );    
+    void		singleStep( void );
 };
 
 class Patch {
@@ -84,8 +84,8 @@ private:
     int			cullval;
     int			notInBbox;
     int			needsSampling;
-    REAL		cpts[MAXORDER*MAXORDER*MAXCOORDS]; //culling pts 
-    REAL		spts[MAXORDER*MAXORDER*MAXCOORDS]; //sampling pts 
+    REAL		cpts[MAXORDER*MAXORDER*MAXCOORDS]; //culling pts
+    REAL		spts[MAXORDER*MAXORDER*MAXCOORDS]; //sampling pts
     REAL		bpts[MAXORDER*MAXORDER*MAXCOORDS]; //bbox pts
     Patchspec		pspec[2];
     void 		checkBboxConstraint( void );

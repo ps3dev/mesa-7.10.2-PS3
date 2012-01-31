@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -234,27 +234,27 @@ aa_transform_inst(struct tgsi_transform_context *ctx,
       decl.Declaration.Semantic = 1;
       decl.Semantic.Name = TGSI_SEMANTIC_GENERIC;
       decl.Semantic.Index = aactx->maxGeneric + 1;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = aactx->maxInput + 1;
       ctx->emit_declaration(ctx, &decl);
 
       /* declare new sampler */
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_SAMPLER;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = aactx->freeSampler;
       ctx->emit_declaration(ctx, &decl);
 
       /* declare new temp regs */
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_TEMPORARY;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = aactx->texTemp;
       ctx->emit_declaration(ctx, &decl);
 
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_TEMPORARY;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = aactx->colorTemp;
       ctx->emit_declaration(ctx, &decl);
 
@@ -439,7 +439,7 @@ aaline_create_texture(struct aaline_stage *aaline)
 
       u_box_origin_2d( size, size, &box );
 
-      /* This texture is new, no need to flush. 
+      /* This texture is new, no need to flush.
        */
       transfer = pipe->get_transfer(pipe,
                                     aaline->texture,
@@ -519,7 +519,7 @@ bind_aaline_fragment_shader(struct aaline_stage *aaline)
    struct draw_context *draw = aaline->stage.draw;
    struct pipe_context *pipe = draw->pipe;
 
-   if (!aaline->fs->aaline_fs && 
+   if (!aaline->fs->aaline_fs &&
        !generate_aaline_fs(aaline))
       return FALSE;
 
@@ -950,7 +950,7 @@ draw_install_aaline_stage(struct draw_context *draw, struct pipe_context *pipe)
 
    pipe->bind_fragment_sampler_states = aaline_bind_sampler_states;
    pipe->set_fragment_sampler_views = aaline_set_sampler_views;
-   
+
    /* Install once everything is known to be OK:
     */
    draw->pipeline.aaline = &aaline->stage;
@@ -960,6 +960,6 @@ draw_install_aaline_stage(struct draw_context *draw, struct pipe_context *pipe)
  fail:
    if (aaline)
       aaline->stage.destroy( &aaline->stage );
-   
+
    return FALSE;
 }

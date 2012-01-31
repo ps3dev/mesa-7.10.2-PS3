@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -39,8 +39,8 @@ i915_fill_blit(struct i915_context *i915,
                unsigned short dst_pitch,
                struct i915_winsys_buffer *dst_buffer,
                unsigned dst_offset,
-               short x, short y, 
-               short w, short h, 
+               short x, short y,
+               short w, short h,
                unsigned color)
 {
    unsigned BR13, CMD;
@@ -88,7 +88,7 @@ i915_copy_blit(struct i915_context *i915,
                struct i915_winsys_buffer *dst_buffer,
                unsigned dst_offset,
                short src_x, short src_y,
-               short dst_x, short dst_y, 
+               short dst_x, short dst_y,
                short w, short h)
 {
    unsigned CMD, BR13;

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
  /*
   * Authors:
@@ -365,7 +365,7 @@ i915_texture_layout_3d(struct i915_texture *tex)
    unsigned nblocksy = util_format_get_nblocksy(pt->format, pt->height0);
    unsigned stack_nblocksy = 0;
 
-   /* Calculate the size of a single slice. 
+   /* Calculate the size of a single slice.
     */
    tex->stride = align(util_format_get_stride(pt->format, pt->width0), 4);
 
@@ -381,11 +381,11 @@ i915_texture_layout_3d(struct i915_texture *tex)
       nblocksy = util_format_get_nblocksy(pt->format, height);
    }
 
-   /* Fixup depth image_offsets: 
+   /* Fixup depth image_offsets:
     */
    for (level = 0; level <= pt->last_level; level++) {
       unsigned i;
-      for (i = 0; i < depth; i++) 
+      for (i = 0; i < depth; i++)
          i915_texture_set_image_offset(tex, level, i, 0, i * stack_nblocksy);
 
       depth = u_minify(depth, 1);
@@ -715,7 +715,7 @@ i915_texture_destroy(struct pipe_screen *screen,
    FREE(tex);
 }
 
-static struct pipe_transfer * 
+static struct pipe_transfer *
 i915_texture_get_transfer(struct pipe_context *context,
                           struct pipe_resource *resource,
                           unsigned level,
@@ -775,7 +775,7 @@ i915_texture_transfer_unmap(struct pipe_context *pipe,
 
 
 
-struct u_resource_vtbl i915_texture_vtbl = 
+struct u_resource_vtbl i915_texture_vtbl =
 {
    i915_texture_get_handle,	      /* get_handle */
    i915_texture_destroy,	      /* resource_destroy */

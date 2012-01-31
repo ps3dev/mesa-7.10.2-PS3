@@ -95,7 +95,7 @@ Renderhints::isProperty( long property )
     }
 }
 
-REAL 
+REAL
 Renderhints::getProperty( long property )
 {
     switch ( property ) {
@@ -113,7 +113,7 @@ Renderhints::getProperty( long property )
     }
 }
 
-void 
+void
 Renderhints::setProperty( long property, REAL value )
 {
     switch ( property ) {

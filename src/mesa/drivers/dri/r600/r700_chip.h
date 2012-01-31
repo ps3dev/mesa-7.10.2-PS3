@@ -61,13 +61,13 @@
 #define ASIC_CTL_CONST_BASE_INDEX 0xF3FC
 
 
-enum 
+enum
 {
     SQ_ABSOLUTE                              = 0x00000000,
     SQ_RELATIVE                              = 0x00000001,
 };
 
-enum 
+enum
 {
     SQ_ALU_SCL_210                           = 0x00000000,
     SQ_ALU_SCL_122                           = 0x00000001,
@@ -75,13 +75,13 @@ enum
     SQ_ALU_SCL_221                           = 0x00000003,
 };
 
-enum 
+enum
 {
     SQ_TEX_UNNORMALIZED                      = 0x00000000,
     SQ_TEX_NORMALIZED                        = 0x00000001,
 };
 
-enum 
+enum
 {
     SQ_CF_PIXEL_MRT0                         = 0x00000000,
     SQ_CF_PIXEL_MRT1                         = 0x00000001,
@@ -106,7 +106,7 @@ enum
     PGM_RESOURCES__PRIME_CACHE_ON_DRAW_bit = 23,
 };
 
-enum 
+enum
 {
     TEX_XYFilter_Point                       = 0x00000000,
     TEX_XYFilter_Linear                      = 0x00000001,
@@ -118,7 +118,7 @@ enum
     TEX_MipFilter_Linear                     = 0x00000002,
 };
 
-enum 
+enum
 {
     SQ_EXPORT_WRITE                          = 0x00000000,
     SQ_EXPORT_WRITE_IND                      = 0x00000001,
@@ -148,7 +148,7 @@ enum
 #define  PM4_OPCODE_SET_SAMPLER         (R700_PM4_PACKET3_NOP | (IT_SET_SAMPLER << 8))
 #define  PM4_OPCODE_CONTEXT_CONTROL     (R700_PM4_PACKET3_NOP | (IT_CONTEXT_CONTROL << 8))
 
-union UINT_FLOAT 
+union UINT_FLOAT
 {
     unsigned int u32All;
     float	f32All;

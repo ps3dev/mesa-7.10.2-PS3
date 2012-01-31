@@ -73,7 +73,7 @@ Additions to Chapter 3 of the GLX 1.3 Specification (Functions and Errors)
     thread's current context, glXCopySubBufferMESA performs an
     implicit glFlush before it returns.  Subsequent OpenGL commands
     may be issued immediately after calling glXCopySubBufferMESA, but
-    are not executed until the copy is completed. 
+    are not executed until the copy is completed.
 
 GLX Protocol
 

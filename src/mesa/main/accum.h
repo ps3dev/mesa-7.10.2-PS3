@@ -1,7 +1,7 @@
 /**
  * \file accum.h
  * Accumulation buffer operations.
- * 
+ *
  * \if subset
  * (No-op)
  *

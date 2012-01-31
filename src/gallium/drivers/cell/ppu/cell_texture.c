@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
  /*
   * Authors:
@@ -49,7 +49,7 @@
 
 
 static boolean
-cell_resource_layout(struct pipe_screen *screen, 
+cell_resource_layout(struct pipe_screen *screen,
 		     struct cell_resource *ct)
 {
    struct pipe_resource *pt = &ct->base;
@@ -88,7 +88,7 @@ cell_resource_layout(struct pipe_screen *screen,
    }
 
    ct->data = align_malloc(ct->buffer_size, 16);
- 
+
    return ct->data != NULL;
 }
 
@@ -107,7 +107,7 @@ cell_displaytarget_layout(struct pipe_screen *screen,
    ct->dt = winsys->displaytarget_create(winsys,
                                           ct->base.bind,
                                           ct->base.format,
-                                          ct->base.width0, 
+                                          ct->base.width0,
                                           ct->base.height0,
                                           16,
                                           &ct->dt_stride );
@@ -267,13 +267,13 @@ untwiddle_image_uint(uint w, uint h, uint tile_size, uint *dst,
    dst_stride /= 4; /* convert from bytes to pixels */
 
    tile_buf = align_malloc(tile_size * tile_size * 4, 16);
-   
+
    /* loop over src tiles */
    for (it = 0; it < h_t; it++) {
       for (jt = 0; jt < w_t; jt++) {
          /* start of src tile: */
          const uint *tsrc = src + (it * w_t + jt) * tile_size2;
-         
+
          twiddle_tile(tsrc, tile_buf);
          tsrc = tile_buf;
 
@@ -330,7 +330,7 @@ cell_create_surface(struct pipe_context *ctx,
 }
 
 
-static void 
+static void
 cell_surface_destroy(struct pipe_context *ctx, struct pipe_surface *surf)
 {
    pipe_resource_reference(&surf->texture, NULL);
@@ -387,7 +387,7 @@ cell_get_transfer(struct pipe_context *ctx,
 }
 
 
-static void 
+static void
 cell_transfer_destroy(struct pipe_context *ctx, struct pipe_transfer *t)
 {
    struct cell_transfer *transfer = cell_transfer(t);
@@ -459,7 +459,7 @@ cell_transfer_map(struct pipe_context *ctx, struct pipe_transfer *transfer)
       enum pipe_format format = pt->format;
       unsigned blocksize = util_format_get_blocksize(format);
 
-      ctrans->map = (ct->mapped + 
+      ctrans->map = (ct->mapped +
 		     ctrans->offset +
 		     ctrans->base.box.y / util_format_get_blockheight(format) * stride +
 		     ctrans->base.box.x / util_format_get_blockwidth(format) * blocksize);
@@ -507,7 +507,7 @@ cell_transfer_unmap(struct pipe_context *ctx,
 	    // xxx fix
 	 }
       }
-      
+
       align_free(ctrans->map);
    }
    else {
@@ -606,7 +606,7 @@ cell_resource_from_handle(struct pipe_screen *screen,
 }
 
 
-static boolean 
+static boolean
 cell_resource_get_handle(struct pipe_screen *scree,
                          struct pipe_resource *tex,
                          struct winsys_handle *handle)

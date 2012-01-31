@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -117,7 +117,7 @@ do { \
 
 
 static void
-logicop_quad(struct quad_stage *qs, 
+logicop_quad(struct quad_stage *qs,
              float (*quadColor)[4],
              float (*dest)[4])
 {
@@ -229,7 +229,7 @@ logicop_quad(struct quad_stage *qs,
  * \param has_dst_alpha  does the dest color buffer have an alpha channel?
  */
 static void
-blend_quad(struct quad_stage *qs, 
+blend_quad(struct quad_stage *qs,
            float (*quadColor)[4],
            float (*dest)[4],
            unsigned blend_index,
@@ -273,7 +273,7 @@ blend_quad(struct quad_stage *qs,
          VEC4_MUL(source[0], quadColor[0], alpha); /* R */
          VEC4_MUL(source[1], quadColor[1], alpha); /* G */
          VEC4_MUL(source[2], quadColor[2], alpha); /* B */
-      } 
+      }
       else {
          VEC4_COPY(source[0], quadColor[0]); /* R */
          VEC4_COPY(source[1], quadColor[1]); /* G */
@@ -787,7 +787,7 @@ colormask_quad(unsigned colormask,
 
 
 static void
-blend_fallback(struct quad_stage *qs, 
+blend_fallback(struct quad_stage *qs,
                struct quad_header *quads[],
                unsigned nr)
 {
@@ -795,14 +795,14 @@ blend_fallback(struct quad_stage *qs,
    const struct pipe_blend_state *blend = softpipe->blend;
    unsigned cbuf;
 
-   for (cbuf = 0; cbuf < softpipe->framebuffer.nr_cbufs; cbuf++) 
+   for (cbuf = 0; cbuf < softpipe->framebuffer.nr_cbufs; cbuf++)
    {
       /* which blend/mask state index to use: */
       const uint blend_buf = blend->independent_blend_enable ? cbuf : 0;
       float dest[4][QUAD_SIZE];
       struct softpipe_cached_tile *tile
          = sp_get_cached_tile(softpipe->cbuf_cache[cbuf],
-                              quads[0]->input.x0, 
+                              quads[0]->input.x0,
                               quads[0]->input.y0);
       boolean has_dst_alpha
          = util_format_has_alpha(softpipe->framebuffer.cbufs[cbuf]->format);
@@ -814,7 +814,7 @@ blend_fallback(struct quad_stage *qs,
          const int itx = (quad->input.x0 & (TILE_SIZE-1));
          const int ity = (quad->input.y0 & (TILE_SIZE-1));
 
-         /* get/swizzle dest colors 
+         /* get/swizzle dest colors
           */
          for (j = 0; j < QUAD_SIZE; j++) {
             int x = itx + (j & 1);
@@ -834,7 +834,7 @@ blend_fallback(struct quad_stage *qs,
 
          if (blend->rt[blend_buf].colormask != 0xf)
             colormask_quad( blend->rt[cbuf].colormask, quadColor, dest);
-   
+
          /* Output color values
           */
          for (j = 0; j < QUAD_SIZE; j++) {
@@ -852,7 +852,7 @@ blend_fallback(struct quad_stage *qs,
 
 
 static void
-blend_single_add_src_alpha_inv_src_alpha(struct quad_stage *qs, 
+blend_single_add_src_alpha_inv_src_alpha(struct quad_stage *qs,
                                          struct quad_header *quads[],
                                          unsigned nr)
 {
@@ -864,7 +864,7 @@ blend_single_add_src_alpha_inv_src_alpha(struct quad_stage *qs,
 
    struct softpipe_cached_tile *tile
       = sp_get_cached_tile(qs->softpipe->cbuf_cache[0],
-                           quads[0]->input.x0, 
+                           quads[0]->input.x0,
                            quads[0]->input.y0);
 
    for (q = 0; q < nr; q++) {
@@ -873,7 +873,7 @@ blend_single_add_src_alpha_inv_src_alpha(struct quad_stage *qs,
       const float *alpha = quadColor[3];
       const int itx = (quad->input.x0 & (TILE_SIZE-1));
       const int ity = (quad->input.y0 & (TILE_SIZE-1));
-      
+
       /* get/swizzle dest colors */
       for (j = 0; j < QUAD_SIZE; j++) {
          int x = itx + (j & 1);
@@ -912,7 +912,7 @@ blend_single_add_src_alpha_inv_src_alpha(struct quad_stage *qs,
 }
 
 static void
-blend_single_add_one_one(struct quad_stage *qs, 
+blend_single_add_one_one(struct quad_stage *qs,
                          struct quad_header *quads[],
                          unsigned nr)
 {
@@ -921,7 +921,7 @@ blend_single_add_one_one(struct quad_stage *qs,
 
    struct softpipe_cached_tile *tile
       = sp_get_cached_tile(qs->softpipe->cbuf_cache[0],
-                           quads[0]->input.x0, 
+                           quads[0]->input.x0,
                            quads[0]->input.y0);
 
    for (q = 0; q < nr; q++) {
@@ -929,7 +929,7 @@ blend_single_add_one_one(struct quad_stage *qs,
       float (*quadColor)[4] = quad->output.color[0];
       const int itx = (quad->input.x0 & (TILE_SIZE-1));
       const int ity = (quad->input.y0 & (TILE_SIZE-1));
-      
+
       /* get/swizzle dest colors */
       for (j = 0; j < QUAD_SIZE; j++) {
          int x = itx + (j & 1);
@@ -938,7 +938,7 @@ blend_single_add_one_one(struct quad_stage *qs,
             dest[i][j] = tile->data.color[y][x][i];
          }
       }
-     
+
       VEC4_ADD_SAT(quadColor[0], quadColor[0], dest[0]); /* R */
       VEC4_ADD_SAT(quadColor[1], quadColor[1], dest[1]); /* G */
       VEC4_ADD_SAT(quadColor[2], quadColor[2], dest[2]); /* B */
@@ -958,7 +958,7 @@ blend_single_add_one_one(struct quad_stage *qs,
 
 
 static void
-single_output_color(struct quad_stage *qs, 
+single_output_color(struct quad_stage *qs,
                     struct quad_header *quads[],
                     unsigned nr)
 {
@@ -966,7 +966,7 @@ single_output_color(struct quad_stage *qs,
 
    struct softpipe_cached_tile *tile
       = sp_get_cached_tile(qs->softpipe->cbuf_cache[0],
-                           quads[0]->input.x0, 
+                           quads[0]->input.x0,
                            quads[0]->input.y0);
 
    for (q = 0; q < nr; q++) {
@@ -974,7 +974,7 @@ single_output_color(struct quad_stage *qs,
       float (*quadColor)[4] = quad->output.color[0];
       const int itx = (quad->input.x0 & (TILE_SIZE-1));
       const int ity = (quad->input.y0 & (TILE_SIZE-1));
-      
+
       for (j = 0; j < QUAD_SIZE; j++) {
          if (quad->inout.mask & (1 << j)) {
             int x = itx + (j & 1);
@@ -988,7 +988,7 @@ single_output_color(struct quad_stage *qs,
 }
 
 static void
-blend_noop(struct quad_stage *qs, 
+blend_noop(struct quad_stage *qs,
            struct quad_header *quads[],
            unsigned nr)
 {
@@ -996,7 +996,7 @@ blend_noop(struct quad_stage *qs,
 
 
 static void
-choose_blend_quad(struct quad_stage *qs, 
+choose_blend_quad(struct quad_stage *qs,
                   struct quad_header *quads[],
                   unsigned nr)
 {
@@ -1004,7 +1004,7 @@ choose_blend_quad(struct quad_stage *qs,
    const struct pipe_blend_state *blend = softpipe->blend;
 
    qs->run = blend_fallback;
-   
+
    if (softpipe->framebuffer.nr_cbufs == 0) {
       qs->run = blend_noop;
    }

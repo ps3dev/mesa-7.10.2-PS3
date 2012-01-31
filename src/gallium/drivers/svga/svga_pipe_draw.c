@@ -47,8 +47,8 @@ retry_draw_range_elements( struct svga_context *svga,
                            int index_bias,
                            unsigned min_index,
                            unsigned max_index,
-                           unsigned prim, 
-                           unsigned start, 
+                           unsigned prim,
+                           unsigned start,
                            unsigned count,
                            boolean do_retry )
 {
@@ -99,8 +99,8 @@ retry:
 
 static enum pipe_error
 retry_draw_arrays( struct svga_context *svga,
-                   unsigned prim, 
-                   unsigned start, 
+                   unsigned prim,
+                   unsigned start,
                    unsigned count,
                    boolean do_retry )
 {
@@ -131,7 +131,7 @@ retry_draw_arrays( struct svga_context *svga,
    return 0;
 
 retry:
-   if (ret == PIPE_ERROR_OUT_OF_MEMORY && do_retry) 
+   if (ret == PIPE_ERROR_OUT_OF_MEMORY && do_retry)
    {
       svga_context_flush( svga, NULL );
 
@@ -170,7 +170,7 @@ svga_draw_vbo(struct pipe_context *pipe, const struct pipe_draw_info *info)
       svga->curr.reduced_prim = reduced_prim;
       svga->dirty |= SVGA_NEW_REDUCED_PRIMITIVE;
    }
-   
+
    svga_update_state_retry( svga, SVGA_STATE_NEED_SWTNL );
 
 #ifdef DEBUG

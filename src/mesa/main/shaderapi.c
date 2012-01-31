@@ -432,7 +432,7 @@ create_shader(struct gl_context *ctx, GLenum type)
 }
 
 
-static GLuint 
+static GLuint
 create_shader_program(struct gl_context *ctx)
 {
    GLuint name;
@@ -668,7 +668,7 @@ get_programiv(struct gl_context *ctx, GLuint program, GLenum pname, GLint *param
    switch (pname) {
    case GL_DELETE_STATUS:
       *params = shProg->DeletePending;
-      break; 
+      break;
    case GL_LINK_STATUS:
       *params = shProg->LinkStatus;
       break;
@@ -923,7 +923,7 @@ print_shader_info(const struct gl_shader_program *shProg)
       default:
          s = "";
       }
-      printf("  %s shader %u, checksum %u\n", s, 
+      printf("  %s shader %u, checksum %u\n", s,
 	     shProg->Shaders[i]->Name,
 	     shProg->Shaders[i]->SourceChecksum);
    }
@@ -1093,7 +1093,7 @@ validate_shader_program(const struct gl_shader_program *shProg,
 
      any active sampler in the current program object refers to a texture
      image unit where fixed-function fragment processing accesses a
-     texture target that does not match the sampler type, or 
+     texture target that does not match the sampler type, or
 
      the sum of the number of active samplers in the program and the
      number of texture image units enabled for fixed-function fragment
@@ -1561,7 +1561,7 @@ _mesa_ShaderSourceARB(GLhandleARB shaderObj, GLsizei count,
          free(source);
          source = newSource;
       }
-   }      
+   }
 
    shader_source(ctx, shaderObj, source);
 

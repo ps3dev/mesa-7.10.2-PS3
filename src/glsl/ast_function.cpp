@@ -1258,7 +1258,7 @@ ast_function_expression::hir(exec_list *instructions,
       process_parameters(instructions, &actual_parameters, &this->expressions,
 			 state);
 
-      return match_function_by_name(instructions, 
+      return match_function_by_name(instructions,
 				    id->primary_expression.identifier, & loc,
 				    &actual_parameters, state);
    }

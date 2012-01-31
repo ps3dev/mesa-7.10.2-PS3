@@ -380,7 +380,7 @@ static void emit_vap_setup(struct r300_context *r300)
                     ((((R300_SWIZZLE_SELECT_X << R300_SWIZZLE_SELECT_X_SHIFT) |
                        (R300_SWIZZLE_SELECT_Y << R300_SWIZZLE_SELECT_Y_SHIFT) |
                        (R300_SWIZZLE_SELECT_FP_ZERO << R300_SWIZZLE_SELECT_Z_SHIFT) |
-                       (R300_SWIZZLE_SELECT_FP_ONE << R300_SWIZZLE_SELECT_W_SHIFT) | 
+                       (R300_SWIZZLE_SELECT_FP_ONE << R300_SWIZZLE_SELECT_W_SHIFT) |
                        (0xf << R300_WRITE_ENA_SHIFT) ) << 0) |
                      (((R300_SWIZZLE_SELECT_X << R300_SWIZZLE_SELECT_X_SHIFT) |
                        (R300_SWIZZLE_SELECT_Y << R300_SWIZZLE_SELECT_Y_SHIFT) |

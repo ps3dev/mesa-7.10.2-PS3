@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -162,7 +162,7 @@ struct cell_command_fence
 
 /**
  * Command to specify per-fragment operations state and generated code.
- * Note that this is a variant-length structure, allocated with as 
+ * Note that this is a variant-length structure, allocated with as
  * much memory as needed to hold the generated code; the "code"
  * field *must* be the last field in the structure.  Also, the entire
  * length of the structure (including the variant code field) must be
@@ -188,7 +188,7 @@ struct cell_command_fragment_ops
    unsigned total_code_size;
    unsigned front_code_index;
    unsigned back_code_index;
-   /* this field has variant length, and must be the last field in 
+   /* this field has variant length, and must be the last field in
     * the structure
     */
    unsigned code[0];

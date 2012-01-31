@@ -258,8 +258,8 @@ static void brw_set_vertex_buffers(struct pipe_context *pipe,
       return;
 
    /* Adjust refcounts */
-   for (i = 0; i < count; i++) 
-      pipe_resource_reference(&brw->curr.vertex_buffer[i].buffer, 
+   for (i = 0; i < count; i++)
+      pipe_resource_reference(&brw->curr.vertex_buffer[i].buffer,
                             buffers[i].buffer);
 
    for ( ; i < brw->curr.num_vertex_buffers; i++)
@@ -304,7 +304,7 @@ static void brw_set_index_buffer(struct pipe_context *pipe,
 }
 
 
-void 
+void
 brw_pipe_vertex_init( struct brw_context *brw )
 {
    brw->base.set_vertex_buffers = brw_set_vertex_buffers;
@@ -315,7 +315,7 @@ brw_pipe_vertex_init( struct brw_context *brw )
 }
 
 
-void 
+void
 brw_pipe_vertex_cleanup( struct brw_context *brw )
 {
 

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
  /*
   * Authors:
@@ -537,7 +537,7 @@ llvmpipe_create_surface(struct pipe_context *pipe,
 }
 
 
-static void 
+static void
 llvmpipe_surface_destroy(struct pipe_context *pipe,
                          struct pipe_surface *surf)
 {
@@ -607,7 +607,7 @@ llvmpipe_get_transfer(struct pipe_context *pipe,
 }
 
 
-static void 
+static void
 llvmpipe_transfer_destroy(struct pipe_context *pipe,
                               struct pipe_transfer *transfer)
 {
@@ -1269,7 +1269,7 @@ llvmpipe_unswizzle_cbuf_tile(struct llvmpipe_resource *lpr,
       uint ii = x, jj = y;
       uint tile_offset = jj / TILE_SIZE + ii / TILE_SIZE;
       uint byte_offset = tile_offset * TILE_SIZE * TILE_SIZE * 4;
-      
+
       /* Note that lp_tiled_to_linear expects the tile parameter to
        * point at the first tile in a whole-image sized array.  In
        * this code, we have only a single tile and have to do some
@@ -1402,7 +1402,7 @@ llvmpipe_init_context_resource_funcs(struct pipe_context *pipe)
    pipe->transfer_map = llvmpipe_transfer_map;
    pipe->transfer_unmap = llvmpipe_transfer_unmap;
    pipe->is_resource_referenced = llvmpipe_is_resource_referenced;
- 
+
    pipe->transfer_flush_region = u_default_transfer_flush_region;
    pipe->transfer_inline_write = u_default_transfer_inline_write;
 

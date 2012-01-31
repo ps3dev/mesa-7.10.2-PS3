@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -51,7 +51,7 @@
  * Since it's pretty much impossible to form PPC vector immediates, load
  * them from memory here:
  */
-PIPE_ALIGN_VAR(16) const float 
+PIPE_ALIGN_VAR(16) const float
 ppc_builtin_constants[] = {
    1.0f, -128.0f, 128.0, 0.0
 };
@@ -432,7 +432,7 @@ static int
 get_src_vec(struct gen_context *gen,
             struct tgsi_full_instruction *inst, int src_reg, uint chan)
 {
-   const const struct tgsi_full_src_register *src = 
+   const const struct tgsi_full_src_register *src =
       &inst->Src[src_reg];
    int vec;
    uint i;
@@ -480,7 +480,7 @@ release_src_vecs(struct gen_context *gen)
 
 
 static int
-get_dst_vec(struct gen_context *gen, 
+get_dst_vec(struct gen_context *gen,
             const struct tgsi_full_instruction *inst,
             unsigned chan_index)
 {
@@ -984,7 +984,7 @@ emit_log(struct gen_context *gen, struct tgsi_full_instruction *inst)
       if (IS_DST0_CHANNEL_ENABLED(*inst, CHAN_X)) {
          emit_store(gen, tmp_vec, inst, CHAN_X, FALSE);
       }
-      
+
       /* Compute Y = abs / 2^tmp */
       if (IS_DST0_CHANNEL_ENABLED(*inst, CHAN_Y)) {
          const int zero_vec = ppc_allocate_vec_register(gen->f);
@@ -1319,7 +1319,7 @@ tgsi_emit_ppc(const struct tgsi_token *tokens,
 
 	 if (!ok) {
             uint opcode = parse.FullToken.FullInstruction.Instruction.Opcode;
-	    debug_printf("failed to translate tgsi opcode %d (%s) to PPC (%s)\n", 
+	    debug_printf("failed to translate tgsi opcode %d (%s) to PPC (%s)\n",
 			 opcode,
                          tgsi_get_opcode_name(opcode),
                          parse.FullHeader.Processor.Processor == TGSI_PROCESSOR_VERTEX ?

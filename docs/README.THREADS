@@ -28,7 +28,7 @@ necessary for both Mesa and application code to use the same threads API.
 So, if your application uses Sun's thread API, then you should build Mesa
 using one of the targets for Sun threads.
 
-The mtdemos directory contains some example programs which use 
+The mtdemos directory contains some example programs which use
 multiple threads to render to osmesa rendering context(s).
 
 Linux users should be aware that there exist many different POSIX

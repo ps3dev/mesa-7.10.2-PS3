@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/glheader.h"
@@ -122,7 +122,7 @@ GetTexelOp(GLint unit)
  * This function should return \c GLboolean.  When \c GL_FALSE is returned,
  * it means that an environment is selected that the hardware cannot do.  This
  * is the way the Radeon and R200 drivers work.
- * 
+ *
  * \todo
  * Looking at i830_3d_regs.h, it seems the i830 can do part of
  * GL_ATI_texture_env_combine3.  It can handle using \c GL_ONE and
@@ -268,7 +268,7 @@ i830SetTexEnvCombine(struct i830_context * i830,
     * match the spec.  Can't use DOT3 as it won't propogate values
     * into alpha as required:
     *
-    * Note - the global factor is set up with alpha == .5, so 
+    * Note - the global factor is set up with alpha == .5, so
     * the alpha part of the DOT4 calculation should be zero.
     */
    if (combine->ModeRGB == GL_DOT3_RGBA_EXT ||

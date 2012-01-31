@@ -431,7 +431,7 @@ static GLubyte *r600_ptr_color(const struct radeon_renderbuffer * rrb,
    macro-linear/micro-tiled
    macro-tiled /micro-linear
    macro-tiled /micro-tiled
-   1 byte surface 
+   1 byte surface
    2 byte surface - two types - we only provide 8x2 microtiling
    4 byte surface
    8/16 byte (unused)
@@ -1049,7 +1049,7 @@ radeon_map_unmap_framebuffer(struct gl_context *ctx, struct gl_framebuffer *fb,
 				radeon_teximage_unmap(image);
 		}
 	}
-	
+
 	/* depth buffer (Note wrapper!) */
 	if (fb->_DepthBuffer)
 		map_unmap_rb(fb->_DepthBuffer->Wrapped, map);

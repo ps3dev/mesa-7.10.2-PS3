@@ -28,7 +28,7 @@
 /**
  * @file
  * Buffer validation.
- * 
+ *
  * @author Jose Fonseca <jrfonseca@tungstengraphics.com>
  */
 
@@ -50,7 +50,7 @@ struct pipe_fence_handle;
 
 /**
  * Buffer validation list.
- * 
+ *
  * It holds a list of buffers to be validated and fenced when flushing.
  */
 struct pb_validate;
@@ -68,7 +68,7 @@ pb_validate_foreach(struct pb_validate *vl,
 
 /**
  * Validate all buffers for hardware access.
- * 
+ *
  * Should be called right before issuing commands to the hardware.
  */
 enum pipe_error
@@ -76,7 +76,7 @@ pb_validate_validate(struct pb_validate *vl);
 
 /**
  * Fence all buffers and clear the list.
- * 
+ *
  * Should be called right after issuing commands to the hardware.
  */
 void

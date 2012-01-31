@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -84,7 +84,7 @@ static void interp_attr( float dst[4],
 			 float t,
 			 const float in[4],
 			 const float out[4] )
-{  
+{
    dst[0] = LINTERP( t, out[0], in[0] );
    dst[1] = LINTERP( t, out[1], in[1] );
    dst[2] = LINTERP( t, out[2], in[2] );
@@ -110,12 +110,12 @@ static void copy_colors( struct draw_stage *stage,
 
 
 
-/* Interpolate between two vertices to produce a third.  
+/* Interpolate between two vertices to produce a third.
  */
 static void interp( const struct clip_stage *clip,
 		    struct vertex_header *dst,
 		    float t,
-		    const struct vertex_header *out, 
+		    const struct vertex_header *out,
 		    const struct vertex_header *in )
 {
    const unsigned nr_attrs = draw_current_shader_outputs(clip->stage.draw);
@@ -236,7 +236,7 @@ dot4(const float *a, const float *b)
 /* Clip a triangle against the viewport and user clip planes.
  */
 static void
-do_clip_tri( struct draw_stage *stage, 
+do_clip_tri( struct draw_stage *stage,
 	     struct prim_header *header,
 	     unsigned clipmask )
 {
@@ -298,7 +298,7 @@ do_clip_tri( struct draw_stage *stage,
 		*/
 	       float t = dp / (dp - dp_prev);
 	       interp( clipper, new_vert, t, vert, vert_prev );
-	       
+
 	       /* Force edgeflag true in this case:
 		*/
 	       new_vert->edgeflag = 1;
@@ -350,7 +350,7 @@ do_clip_tri( struct draw_stage *stage,
             }
          }
       }
-      
+
       /* Emit the polygon as triangles to the setup stage:
        */
       emit_poly( stage, inlist, n, header );
@@ -383,7 +383,7 @@ do_clip_line( struct draw_stage *stage,
       if (dp1 < 0.0F) {
 	 float t = dp1 / (dp1 - dp0);
          t1 = MAX2(t1, t);
-      } 
+      }
 
       if (dp0 < 0.0F) {
 	 float t = dp0 / (dp0 - dp1);
@@ -421,10 +421,10 @@ do_clip_line( struct draw_stage *stage,
 
 
 static void
-clip_point( struct draw_stage *stage, 
+clip_point( struct draw_stage *stage,
 	    struct prim_header *header )
 {
-   if (header->v[0]->clipmask == 0) 
+   if (header->v[0]->clipmask == 0)
       stage->next->point( stage->next, header );
 }
 
@@ -433,9 +433,9 @@ static void
 clip_line( struct draw_stage *stage,
 	   struct prim_header *header )
 {
-   unsigned clipmask = (header->v[0]->clipmask | 
+   unsigned clipmask = (header->v[0]->clipmask |
                         header->v[1]->clipmask);
-   
+
    if (clipmask == 0) {
       /* no clipping needed */
       stage->next->line( stage->next, header );
@@ -452,16 +452,16 @@ static void
 clip_tri( struct draw_stage *stage,
 	  struct prim_header *header )
 {
-   unsigned clipmask = (header->v[0]->clipmask | 
-                        header->v[1]->clipmask | 
+   unsigned clipmask = (header->v[0]->clipmask |
+                        header->v[1]->clipmask |
                         header->v[2]->clipmask);
-   
+
    if (clipmask == 0) {
       /* no clipping needed */
       stage->next->tri( stage->next, header );
    }
-   else if ((header->v[0]->clipmask & 
-             header->v[1]->clipmask & 
+   else if ((header->v[0]->clipmask &
+             header->v[1]->clipmask &
              header->v[2]->clipmask) == 0) {
       do_clip_tri(stage, header, clipmask);
    }
@@ -471,7 +471,7 @@ clip_tri( struct draw_stage *stage,
 /* Update state.  Could further delay this until we hit the first
  * primitive that really requires clipping.
  */
-static void 
+static void
 clip_init_state( struct draw_stage *stage )
 {
    struct clip_stage *clipper = clip_stage( stage );
@@ -490,7 +490,7 @@ clip_init_state( struct draw_stage *stage )
 	 }
       }
    }
-   
+
    stage->tri = clip_tri;
    stage->line = clip_line;
 }
@@ -512,7 +512,7 @@ static void clip_first_line( struct draw_stage *stage,
 }
 
 
-static void clip_flush( struct draw_stage *stage, 
+static void clip_flush( struct draw_stage *stage,
 			     unsigned flags )
 {
    stage->tri = clip_first_tri;

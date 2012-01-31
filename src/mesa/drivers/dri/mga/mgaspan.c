@@ -62,7 +62,7 @@
 			dPriv->x * drb->cpp +				\
 			dPriv->y * pitch)
 
-#define LOCAL_STENCIL_VARS LOCAL_DEPTH_VARS 
+#define LOCAL_STENCIL_VARS LOCAL_DEPTH_VARS
 
 #define HW_LOCK()
 

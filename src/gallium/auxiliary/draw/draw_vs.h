@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -38,11 +38,11 @@
 struct draw_context;
 struct pipe_shader_state;
 
-struct draw_varient_input 
+struct draw_varient_input
 {
    enum pipe_format format;
    unsigned buffer;
-   unsigned offset; 
+   unsigned offset;
    unsigned instance_divisor;
 };
 
@@ -115,7 +115,7 @@ struct draw_vertex_shader {
     */
    const float (*immediates)[4];
 
-   /* 
+   /*
     */
    struct draw_vs_varient *varient[16];
    unsigned nr_varients;
@@ -226,7 +226,7 @@ void draw_vs_aos_machine_viewport( struct aos_machine *machine,
 
 
 #define MAX_TGSI_VERTICES 4
-   
+
 
 
 #endif

@@ -380,7 +380,7 @@ trace_screen_fence_reference(struct pipe_screen *_screen,
 
    assert(pdst);
    dst = *pdst;
-   
+
    trace_dump_call_begin("pipe_screen", "fence_reference");
 
    trace_dump_arg(ptr, screen);

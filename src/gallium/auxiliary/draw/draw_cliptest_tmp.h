@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2010, VMware, inc.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -44,7 +44,7 @@ static boolean TAG(do_cliptest)( struct pt_post_vs *pvs,
    for (j = 0; j < info->count; j++) {
       float *position = out->data[pos];
       unsigned mask = 0x0;
-  
+
       initialize_vertex_header(out);
 
       if (flags & (DO_CLIP_XY | DO_CLIP_FULL_Z | DO_CLIP_HALF_Z | DO_CLIP_USER)) {
@@ -76,7 +76,7 @@ static boolean TAG(do_cliptest)( struct pt_post_vs *pvs,
          if (flags & DO_CLIP_USER) {
             unsigned i;
             for (i = 6; i < nr; i++) {
-               if (dot4(position, plane[i]) < 0) 
+               if (dot4(position, plane[i]) < 0)
                   mask |= (1<<i);
             }
          }

@@ -33,10 +33,10 @@
 
 #include "glheader.h"
 
-extern void GLAPIENTRY 
+extern void GLAPIENTRY
 _mesa_ClipPlane( GLenum plane, const GLdouble *equation );
 
-extern void GLAPIENTRY 
+extern void GLAPIENTRY
 _mesa_GetClipPlane( GLenum plane, GLdouble *equation );
 
 #endif

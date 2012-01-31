@@ -38,10 +38,10 @@
 
 #elif defined(PIPE_SUBSYSTEM_WINDOWS_CE)
 
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <windows.h> 
-#include <types.h> 
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <types.h>
 
 #elif defined(PIPE_SUBSYSTEM_WINDOWS_USER)
 
@@ -60,7 +60,7 @@
 
 
 #ifdef PIPE_SUBSYSTEM_WINDOWS_DISPLAY
-static INLINE void 
+static INLINE void
 _EngDebugPrint(const char *format, ...)
 {
    va_list ap;
@@ -85,16 +85,16 @@ os_log_message(const char *message)
    }
 #elif defined(PIPE_SUBSYSTEM_WINDOWS_CE)
    wchar_t *wide_format;
-   long wide_str_len;   
-   /* Format is ascii - needs to be converted to wchar_t for printing */   
+   long wide_str_len;
+   /* Format is ascii - needs to be converted to wchar_t for printing */
    wide_str_len = MultiByteToWideChar(CP_ACP, 0, message, -1, NULL, 0);
-   wide_format = (wchar_t *) malloc((wide_str_len+1) * sizeof(wchar_t));   
-   if (wide_format) {   
+   wide_format = (wchar_t *) malloc((wide_str_len+1) * sizeof(wchar_t));
+   if (wide_format) {
       MultiByteToWideChar(CP_ACP, 0, message, -1,
-            wide_format, wide_str_len);   
-      NKDbgPrintfW(wide_format, wide_format);   
-      free(wide_format);   
-   } 
+            wide_format, wide_str_len);
+      NKDbgPrintfW(wide_format, wide_format);
+      free(wide_format);
+   }
 #elif defined(PIPE_SUBSYSTEM_WINDOWS_MINIPORT)
    /* TODO */
 #else /* !PIPE_SUBSYSTEM_WINDOWS */
@@ -153,7 +153,7 @@ os_get_option(const char *name)
    const void *pMap = NULL;
    const char *sol, *eol, *sep;
    static char output[1024];
-   
+
    pMap = EngMapFile(L"\\??\\c:\\gallium.cfg", 0, &iFile);
    if(pMap) {
       sol = (const char *)pMap;
@@ -178,7 +178,7 @@ os_get_option(const char *name)
 #else
    return NULL;
 #endif
-#elif defined(PIPE_SUBSYSTEM_WINDOWS_CE) || defined(PIPE_SUBSYSTEM_WINDOWS_MINIPORT) 
+#elif defined(PIPE_SUBSYSTEM_WINDOWS_CE) || defined(PIPE_SUBSYSTEM_WINDOWS_MINIPORT)
    /* TODO: implement */
    return NULL;
 #else

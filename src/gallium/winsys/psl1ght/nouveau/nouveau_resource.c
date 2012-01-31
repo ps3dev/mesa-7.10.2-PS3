@@ -81,7 +81,7 @@ nouveau_resource_alloc(struct nouveau_resource *heap, unsigned size, void *priv,
 			*res = r;
 			return 0;
 		}
-			
+
 		heap = heap->next;
 	}
 
@@ -120,5 +120,5 @@ nouveau_resource_free(struct nouveau_resource **res)
 		r->prev->size += r->size;
 		free(r);
 	}
-	
+
 }

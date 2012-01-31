@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "pipe/p_context.h"
@@ -70,7 +70,7 @@ static int brw_prepare_vertices(struct brw_context *brw)
       struct brw_winsys_buffer *bo;
       struct pipe_resource *upload_buf = NULL;
       unsigned offset;
-      
+
       if (BRW_DEBUG & DEBUG_VERTS)
 	 debug_printf("%s vb[%d] user:%d offset:0x%x sz:0x%x stride:0x%x\n",
 		      __FUNCTION__, i,
@@ -85,12 +85,12 @@ static int brw_prepare_vertices(struct brw_context *brw)
 	  * zero-stride buffers & have them use additional constants (or
 	  * add support for >1 constant buffer) instead.
 	  */
-	 unsigned size = (vb->stride == 0 ? 
+	 unsigned size = (vb->stride == 0 ?
 			  vb->buffer->width0 - vb->buffer_offset :
 			  MAX2(vb->buffer->width0 - vb->buffer_offset,
 			       vb->stride * (max_index + 1 - min_index)));
 
-	 ret = u_upload_buffer( brw->vb.upload_vertex, 
+	 ret = u_upload_buffer( brw->vb.upload_vertex,
 				vb->buffer_offset + min_index * vb->stride,
 				size,
 				vb->buffer,
@@ -100,7 +100,7 @@ static int brw_prepare_vertices(struct brw_context *brw)
 	    return ret;
 
 	 bo = brw_buffer(upload_buf)->bo;
-	 
+
 	 assert(offset + size <= bo->size);
       }
       else
@@ -110,7 +110,7 @@ static int brw_prepare_vertices(struct brw_context *brw)
       }
 
       assert(offset < bo->size);
-      
+
       /* Set up post-upload info about this vertex buffer:
        */
       brw->vb.vb[i].offset = offset;
@@ -280,7 +280,7 @@ static int brw_prepare_indices(struct brw_context *brw)
     * In gallium this will happen in the case where successive draw
     * calls are made with (distinct?) userbuffers, but the upload_mgr
     * places the data into a single winsys buffer.
-    * 
+    *
     * This statechange doesn't raise any state flags and is always
     * just merged into the final draw packet:
     */

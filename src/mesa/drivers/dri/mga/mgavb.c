@@ -43,7 +43,7 @@
 
 
 #define MGA_TEX1_BIT       0x1
-#define MGA_TEX0_BIT       0x2	
+#define MGA_TEX0_BIT       0x2
 #define MGA_RGBA_BIT       0x4
 #define MGA_SPEC_BIT       0x8
 #define MGA_FOG_BIT	   0x10
@@ -80,7 +80,7 @@ static struct {
 #define DO_TEX3 0
 #define DO_PTEX (IND & MGA_PTEX_BIT)
 
-			       
+
 #define VERTEX mgaVertex
 #define VERTEX_COLOR mga_color_t
 #define LOCALVARS mgaContextPtr mmesa = MGA_CONTEXT(ctx);
@@ -307,7 +307,7 @@ void mgaPrintSetupFlags(char *msg, GLuint flags )
    fprintf(stderr, "%s: %d %s%s%s%s%s%s\n",
 	   msg,
 	   (int)flags,
-	   (flags & MGA_XYZW_BIT)      ? " xyzw," : "", 
+	   (flags & MGA_XYZW_BIT)      ? " xyzw," : "",
 	   (flags & MGA_RGBA_BIT)     ? " rgba," : "",
 	   (flags & MGA_SPEC_BIT)     ? " spec," : "",
 	   (flags & MGA_FOG_BIT)      ? " fog," : "",
@@ -339,8 +339,8 @@ void mgaCheckTexSizes( struct gl_context *ctx )
 }
 
 
-void mgaBuildVertices( struct gl_context *ctx, 
-		       GLuint start, 
+void mgaBuildVertices( struct gl_context *ctx,
+		       GLuint start,
 		       GLuint count,
 		       GLuint newinputs )
 {
@@ -355,17 +355,17 @@ void mgaBuildVertices( struct gl_context *ctx,
       return;
 
    if (newinputs & VERT_BIT_POS) {
-      setup_tab[mmesa->SetupIndex].emit( ctx, start, count, v, stride );   
+      setup_tab[mmesa->SetupIndex].emit( ctx, start, count, v, stride );
    } else {
       GLuint ind = 0;
 
       if (newinputs & VERT_BIT_COLOR0)
 	 ind |= MGA_RGBA_BIT;
-      
+
       if (newinputs & VERT_BIT_COLOR1)
 	 ind |= MGA_SPEC_BIT;
 
-      if (newinputs & VERT_BIT_TEX0) 
+      if (newinputs & VERT_BIT_TEX0)
 	 ind |= MGA_TEX0_BIT;
 
       if (newinputs & VERT_BIT_TEX1)
@@ -380,7 +380,7 @@ void mgaBuildVertices( struct gl_context *ctx,
       ind &= mmesa->SetupIndex;
 
       if (ind) {
-	 setup_tab[ind].emit( ctx, start, count, v, stride );   
+	 setup_tab[ind].emit( ctx, start, count, v, stride );
       }
    }
 }
@@ -392,12 +392,12 @@ void mgaChooseVertexState( struct gl_context *ctx )
    TNLcontext *tnl = TNL_CONTEXT(ctx);
    GLuint ind = MGA_XYZW_BIT|MGA_RGBA_BIT;
 
-   if (ctx->_TriangleCaps & DD_SEPARATE_SPECULAR) 
+   if (ctx->_TriangleCaps & DD_SEPARATE_SPECULAR)
       ind |= MGA_SPEC_BIT;
 
-   if (ctx->Fog.Enabled) 
+   if (ctx->Fog.Enabled)
       ind |= MGA_FOG_BIT;
-   
+
    if (ctx->Texture._EnabledUnits & 0x2) {
       /* unit 1 enabled */
       if (ctx->Texture._EnabledUnits & 0x1) {
@@ -412,7 +412,7 @@ void mgaChooseVertexState( struct gl_context *ctx )
       /* unit 0 enabled */
       ind |= MGA_TEX0_BIT;
    }
-   
+
    mmesa->SetupIndex = ind;
 
    if (ctx->_TriangleCaps & (DD_TRI_LIGHT_TWOSIDE|DD_TRI_UNFILLED)) {
@@ -424,7 +424,7 @@ void mgaChooseVertexState( struct gl_context *ctx )
    }
 
    if (setup_tab[ind].vertex_format != mmesa->vertex_format) {
-      FLUSH_BATCH(mmesa);      
+      FLUSH_BATCH(mmesa);
       mmesa->dirty |= MGA_UPLOAD_PIPE;
       mmesa->vertex_format = setup_tab[ind].vertex_format;
       mmesa->vertex_size = setup_tab[ind].vertex_size;
@@ -443,7 +443,7 @@ void *mga_emit_contiguous_verts( struct gl_context *ctx,
    setup_tab[mmesa->SetupIndex].emit( ctx, start, count, dest, stride );
    return (void *)((char *)dest + stride * (count - start));
 }
-				   
+
 
 
 void mgaInitVB( struct gl_context *ctx )

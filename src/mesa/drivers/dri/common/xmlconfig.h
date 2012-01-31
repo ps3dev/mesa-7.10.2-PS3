@@ -15,11 +15,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * FELIX KUEHLING, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * FELIX KUEHLING, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  */
 /**
  * \file xmlconfig.h
@@ -67,11 +67,11 @@ typedef struct driOptionCache {
   /**< \brief Array of option infos
    *
    * Points to the same array in the screen and all contexts */
-    driOptionValue *values;	
+    driOptionValue *values;
   /**< \brief Array of option values
    *
    * \li Default values in screen
-   * \li Actual values in contexts 
+   * \li Actual values in contexts
    */
     GLuint tableSize;
   /**< \brief Size of the arrays
@@ -83,7 +83,7 @@ typedef struct driOptionCache {
 
 /** \brief Parse XML option info from configOptions
  *
- * To be called in <driver>CreateScreen 
+ * To be called in <driver>CreateScreen
  *
  * \param info    pointer to a driOptionCache that will store the option info
  * \param configOptions   XML document describing available configuration opts

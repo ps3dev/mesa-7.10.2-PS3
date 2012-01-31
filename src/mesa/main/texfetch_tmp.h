@@ -27,14 +27,14 @@
 /**
  * \file texfetch_tmp.h
  * Texel fetch functions template.
- * 
+ *
  * This template file is used by texfetch.c to generate texel fetch functions
- * for 1-D, 2-D and 3-D texture images. 
+ * for 1-D, 2-D and 3-D texture images.
  *
  * It should be expanded by defining \p DIM as the number texture dimensions
  * (1, 2 or 3).  According to the value of \p DIM a series of macros is defined
  * for the texel lookup in the gl_texture_image::Data.
- * 
+ *
  * \author Gareth Hughes
  * \author Brian Paul
  */
@@ -872,8 +872,8 @@ static void FETCH(f_al88)( const struct gl_texture_image *texImage,
                            GLint i, GLint j, GLint k, GLfloat *texel )
 {
    const GLushort s = *TEXEL_ADDR(GLushort, texImage, i, j, k, 1);
-   texel[RCOMP] = 
-   texel[GCOMP] = 
+   texel[RCOMP] =
+   texel[GCOMP] =
    texel[BCOMP] = UBYTE_TO_FLOAT( s & 0xff );
    texel[ACOMP] = UBYTE_TO_FLOAT( s >> 8 );
 }
@@ -944,8 +944,8 @@ static void FETCH(f_al88_rev)( const struct gl_texture_image *texImage,
                                GLint i, GLint j, GLint k, GLfloat *texel )
 {
    const GLushort s = *TEXEL_ADDR(GLushort, texImage, i, j, k, 1);
-   texel[RCOMP] = 
-   texel[GCOMP] = 
+   texel[RCOMP] =
+   texel[GCOMP] =
    texel[BCOMP] = UBYTE_TO_FLOAT( s >> 8 );
    texel[ACOMP] = UBYTE_TO_FLOAT( s & 0xff );
 }
@@ -1307,8 +1307,8 @@ static void FETCH(sl8)(const struct gl_texture_image *texImage,
                        GLint i, GLint j, GLint k, GLfloat *texel )
 {
    const GLubyte *src = TEXEL_ADDR(GLubyte, texImage, i, j, k, 1);
-   texel[RCOMP] = 
-   texel[GCOMP] = 
+   texel[RCOMP] =
+   texel[GCOMP] =
    texel[BCOMP] = nonlinear_to_linear(src[0]);
    texel[ACOMP] = 1.0F;
 }
@@ -1695,7 +1695,7 @@ store_texel_signed_rg_16(struct gl_texture_image *texImage,
 
 /* MESA_FORMAT_SIGNED_RGBA_16 ***********************************************/
 
-static void 
+static void
 FETCH(signed_rgb_16)(const struct gl_texture_image *texImage,
                      GLint i, GLint j, GLint k, GLfloat *texel)
 {

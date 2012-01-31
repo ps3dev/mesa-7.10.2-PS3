@@ -37,7 +37,7 @@
  * Draw a simple vertex buffer / primitive.
  * Limited to float[4] vertex attribs, tightly packed.
  */
-void 
+void
 util_draw_vertex_buffer(struct pipe_context *pipe,
                         struct pipe_resource *vbuf,
                         uint offset,
@@ -69,13 +69,13 @@ util_draw_vertex_buffer(struct pipe_context *pipe,
  * Draw screen-aligned textured quad.
  * Note: this isn't especially efficient.
  */
-void 
+void
 util_draw_texquad(struct pipe_context *pipe,
                   float x0, float y0, float x1, float y1, float z)
 {
    uint numAttribs = 2, i, j;
    uint vertexBytes = 4 * (4 * numAttribs * sizeof(float));
-   struct pipe_resource *vbuf = NULL;  
+   struct pipe_resource *vbuf = NULL;
    uint *v = NULL;
 
    v = MALLOC(vertexBytes);
@@ -112,10 +112,10 @@ util_draw_texquad(struct pipe_context *pipe,
    v[25] = y1;
    v[28] = 0.0;
    v[29] = 1.0;
-	 
+
    vbuf = pipe_user_buffer_create(pipe->screen, v, vertexBytes,
 				  PIPE_BIND_VERTEX_BUFFER);
-   if (!vbuf) 
+   if (!vbuf)
       goto out;
 
    util_draw_vertex_buffer(pipe, vbuf, 0, PIPE_PRIM_TRIANGLE_FAN, 4, 2);
@@ -123,7 +123,7 @@ util_draw_texquad(struct pipe_context *pipe,
 out:
    if (vbuf)
       pipe_resource_reference(&vbuf, NULL);
-   
+
    if (v)
       FREE(v);
 }

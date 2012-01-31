@@ -12,7 +12,7 @@ struct br0 {
    GLuint client:3;
 };
 
-   
+
 struct br13 {
    GLint dest_pitch:16;
    GLuint rop:8;
@@ -42,7 +42,7 @@ struct xy_color_blit {
       GLuint dest_x2:16;
       GLuint dest_y2:16;
    } dw3;
-   
+
    GLuint dest_base_addr;
    GLuint color;
 };
@@ -60,7 +60,7 @@ struct xy_src_copy_blit {
       GLuint dest_x2:16;
       GLuint dest_y2:16;
    } dw3;
-   
+
    GLuint dest_base_addr;
 
    struct {
@@ -72,7 +72,7 @@ struct xy_src_copy_blit {
       GLint src_pitch:16;
       GLuint pad:16;
    } dw6;
-   
+
    GLuint src_base_addr;
 };
 
@@ -89,7 +89,7 @@ struct xy_setup_blit {
       GLuint clip_x2:16;
       GLuint clip_y2:16;
    } dw3;
-      
+
    GLuint dest_base_addr;
    GLuint background_color;
    GLuint foreground_color;
@@ -117,7 +117,7 @@ struct xy_text_immediate_blit {
    struct {
       GLuint dest_x2:16;
       GLuint dest_y2:16;
-   } dw2;   
+   } dw2;
 
    /* Src bitmap data follows as inline dwords.
     */

@@ -60,17 +60,17 @@
 3)  History
 
     Initially Darren Abbott (abbott@hiwaay.net) ported Mesa versions 2.x
-    to XFree86 OS/2. This port might still be available from 
+    to XFree86 OS/2. This port might still be available from
        http://fly.HiWAAY.net/~abbott/xfree86-os2/xfree86.html
 
-    The current port picked up things during the beta test for 3.0. 
+    The current port picked up things during the beta test for 3.0.
     No major changes in the source were done. The build mechanism under OS/2
     has been made very similar to other platforms (if you treat mklib-emx.cmd
     as a "black box").
     Advantage is that X/2 is now a valid target and all files are
     integrated in the official source distribution.
     Disadvantage is that this port (i.e. the DLLs' interface itself) is
-    definitly NOT COMPATIBLE to those of version 2.x. 
+    definitly NOT COMPATIBLE to those of version 2.x.
     It's uncertain whether this would be at all possible but since there
     a _very_ few those apps it's not worth to find out anyway.
     Also some libs (MesaTK, MesaAUX) are withdrawn from the Mesa distribution,
@@ -89,7 +89,7 @@
        http://www.mesa3d.org/
 
     The OS/2 ports should be available from
-       http://r350.ee.ntu.edu.tw/~hcchu/os2/ports 
+       http://r350.ee.ntu.edu.tw/~hcchu/os2/ports
 
 --
 Alexander Mai

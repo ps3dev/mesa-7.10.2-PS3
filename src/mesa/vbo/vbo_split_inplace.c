@@ -65,14 +65,14 @@ static void flush_vertex( struct split_context *split )
    struct _mesa_index_buffer ib;
    GLuint i;
 
-   if (!split->dstprim_nr) 
+   if (!split->dstprim_nr)
       return;
 
    if (split->ib) {
       ib = *split->ib;
 
       ib.count = split->max_index - split->min_index + 1;
-      ib.ptr = (const void *)((const char *)ib.ptr + 
+      ib.ptr = (const void *)((const char *)ib.ptr +
                               split->min_index * _mesa_sizeof_type(ib.type));
 
       /* Rebase the primitives to save index buffer entries. */
@@ -137,7 +137,7 @@ static GLuint get_max_vertices(struct split_context *split,
 /* Break large primitives into smaller ones.  If not possible, convert
  * the primitive to indexed and pass to split_elts().
  */
-static void split_prims( struct split_context *split) 
+static void split_prims( struct split_context *split)
 {
    GLuint i;
 
@@ -156,7 +156,7 @@ static void split_prims( struct split_context *split)
 	 flush_vertex(split);
 	 available = get_max_vertices(split, prim);
       }
-      
+
       if (available >= count) {
 	 struct _mesa_prim *outprim = next_outprim(split);
 
@@ -172,7 +172,7 @@ static void split_prims( struct split_context *split)
 
 	    nr = MIN2( available, remaining );
 	    nr -= (nr - first) % incr;
-	    
+
 	    outprim->mode = prim->mode;
 	    outprim->begin = (j == 0 && prim->begin);
 	    outprim->end = (nr == remaining && prim->end);
@@ -182,12 +182,12 @@ static void split_prims( struct split_context *split)
 	    update_index_bounds(split, outprim);
 
 	    if (nr == remaining) {
-	       /* Finished. 
+	       /* Finished.
 		*/
 	       j += nr;
 	    }
 	    else {
-	       /* Wrapped the primitive: 
+	       /* Wrapped the primitive:
 		*/
 	       j += nr - (first - incr);
 	       flush_vertex(split);
@@ -208,7 +208,7 @@ static void split_prims( struct split_context *split)
 	 struct _mesa_prim tmpprim;
 	 GLuint *elts = malloc(count * sizeof(GLuint));
 	 GLuint j;
-	 
+
 	 for (j = 0; j < count; j++)
 	    elts[j] = prim->start + j;
 
@@ -216,7 +216,7 @@ static void split_prims( struct split_context *split)
 	 ib.type = GL_UNSIGNED_INT;
 	 ib.obj = split->ctx->Shared->NullBufferObj;
 	 ib.ptr = elts;
-	    
+
 	 tmpprim = *prim;
 	 tmpprim.indexed = 1;
 	 tmpprim.start = 0;
@@ -226,11 +226,11 @@ static void split_prims( struct split_context *split)
 
 	 vbo_split_copy(split->ctx,
 			split->array,
-			&tmpprim, 1, 
+			&tmpprim, 1,
 			&ib,
 			split->draw,
 			split->limits);
-	    
+
 	 free(elts);
       }
       else {
@@ -238,7 +238,7 @@ static void split_prims( struct split_context *split)
 
 	 vbo_split_copy(split->ctx,
 			split->array,
-			prim, 1, 
+			prim, 1,
 			split->ib,
 			split->draw,
 			split->limits);

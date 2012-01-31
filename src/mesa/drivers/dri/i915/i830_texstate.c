@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/mtypes.h"
@@ -241,8 +241,8 @@ i830_update_tex_unit(struct intel_context *intel, GLuint unit, GLuint ss3)
           lodbias = -64;
       if (lodbias > 63)
           lodbias = 63;
-      
-      state[I830_TEXREG_TM0S3] = ((lodbias << TM0S3_LOD_BIAS_SHIFT) & 
+
+      state[I830_TEXREG_TM0S3] = ((lodbias << TM0S3_LOD_BIAS_SHIFT) &
                                   TM0S3_LOD_BIAS_MASK);
 #if 0
       /* YUV conversion:
@@ -323,7 +323,7 @@ i830UpdateTextureState(struct intel_context *intel)
          break;
       case 0:{
 	 struct i830_context *i830 = i830_context(&intel->ctx);
-         if (i830->state.active & I830_UPLOAD_TEX(i)) 
+         if (i830->state.active & I830_UPLOAD_TEX(i))
             I830_ACTIVESTATE(i830, I830_UPLOAD_TEX(i), GL_FALSE);
 
 	 if (i830->state.tex_buffer[i] != NULL) {

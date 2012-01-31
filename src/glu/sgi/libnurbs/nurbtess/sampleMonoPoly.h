@@ -42,7 +42,7 @@ void  triangulateXYMono(Int n_upper, Real upperVerts[][2],
 		       Int n_lower, Real lowerVerts[][2],
 		       primStream* pStream);
 
-void stripOfFanLeft(vertexArray* leftChain, 
+void stripOfFanLeft(vertexArray* leftChain,
 		     Int largeIndex,
 		     Int smallIndex,
 		     gridWrap* grid,
@@ -93,12 +93,12 @@ void sampleMonoPoly(directedLine* polygon, gridWrap* grid, Int ulinear, Int vlin
 void sampleMonoPolyRec(
 		       Real* topVertex,
 		       Real* botVertex,
-		       vertexArray* leftChain, 
+		       vertexArray* leftChain,
 		       Int leftStartIndex,
 		       vertexArray* rightChain,
 		       Int rightStartIndex,
-		       gridBoundaryChain* leftGridChain, 
-		       gridBoundaryChain* rightGridChain, 
+		       gridBoundaryChain* leftGridChain,
+		       gridBoundaryChain* rightGridChain,
 		       Int gridStartIndex,
 		       primStream* pStream,
 		       rectBlockArray* rbArray
@@ -113,20 +113,20 @@ void sampleLeftStripRecF(vertexArray* leftChain,
 			primStream* pStream
 		     );
 
-void findUpCorners(Real *topVertex, 
-		   vertexArray *leftChain, 
+void findUpCorners(Real *topVertex,
+		   vertexArray *leftChain,
 		   Int leftChainStartIndex, Int leftChainEndIndex,
-		   vertexArray *rightChain, 
+		   vertexArray *rightChain,
 		   Int rightChainStartIndex, Int rightChainEndIndex,
 		   Real v,
 		   Real uleft,
 		   Real uright,
-		   Int& ret_leftCornerWhere, 
+		   Int& ret_leftCornerWhere,
 		   Int& ret_leftCornerIndex,
 		   Int& ret_rightCornerWhere,
 		   Int& ret_rightCornerIndex
 		   );
-void findDownCorners(Real *botVertex, 
+void findDownCorners(Real *botVertex,
 		   vertexArray *leftChain, Int leftChainStartIndex, Int leftChainEndIndex,
 		   vertexArray *rightChain, Int rightChainStartIndex, Int rightChainEndIndex,
 		   Real v,
@@ -137,8 +137,8 @@ void findDownCorners(Real *botVertex,
 		   Int& ret_rightCornerWhere,
 		   Int& ret_rightCornerIndex
 		   );
-void findNeck(vertexArray *leftChain, Int botLeftIndex, 
-	      vertexArray *rightChain, Int botRightIndex, 
+void findNeck(vertexArray *leftChain, Int botLeftIndex,
+	      vertexArray *rightChain, Int botRightIndex,
 	      Int& leftLastIndex, /*left point of the neck*/
 	      Int& rightLastIndex /*right point of the neck*/
 	      );
@@ -148,20 +148,20 @@ Int findNeckF(vertexArray *leftChain, Int botLeftIndex,
 	       gridBoundaryChain* leftGridChain,
 	       gridBoundaryChain* rightGridChain,
 	       Int gridStartIndex,
-	       Int& neckLeft, 
+	       Int& neckLeft,
 	       Int& neckRight);
 
-void findTopAndBot(directedLine* polygon, 
-		   directedLine*& topV, 
+void findTopAndBot(directedLine* polygon,
+		   directedLine*& topV,
 		   directedLine*& botV);
-void findGridChains(directedLine* top, directedLine* bot, 
+void findGridChains(directedLine* top, directedLine* bot,
 		    gridWrap* grid,
 		    gridBoundaryChain*& leftGridChain,
 		    gridBoundaryChain*& rightGridChain);
 void toVertexArrays(directedLine* topV, directedLine* botV, vertexArray& leftChain, vertexArray& rightChain);
 
 void drawCorners(
-		 Real* topV, Real* botV,		 
+		 Real* topV, Real* botV,
 		 vertexArray* leftChain,
 		 vertexArray* rightChain,
 		 gridBoundaryChain* leftGridChain,
@@ -177,7 +177,7 @@ void drawCorners(
 		 Int bot_rightCornerWhere,
 		 Int bot_rightCornerIndex);
 
-Int checkMiddle(vertexArray* chain, Int begin, Int end, 
+Int checkMiddle(vertexArray* chain, Int begin, Int end,
 		Real vup, Real vbelow);
 
 #endif

@@ -48,7 +48,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
    char *buf = srb->map;						\
    GLuint p;								\
    (void) buf; (void) p;
-   
+
 
 #define LOCAL_DEPTH_VARS						\
    sisContextPtr smesa = SIS_CONTEXT(ctx);				\
@@ -56,7 +56,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
    struct sis_renderbuffer *srb = (struct sis_renderbuffer *) rb;	\
    char *buf = srb->map;
 
-#define LOCAL_STENCIL_VARS LOCAL_DEPTH_VARS 
+#define LOCAL_STENCIL_VARS LOCAL_DEPTH_VARS
 
 #define HW_LOCK() do {} while(0);
 
@@ -165,7 +165,7 @@ sisDDInitSpanFuncs( struct gl_context *ctx )
 {
    struct swrast_device_driver *swdd = _swrast_GetDeviceDriverReference(ctx);
    swdd->SpanRenderStart   = sisSpanRenderStart;
-   swdd->SpanRenderFinish  = sisSpanRenderFinish; 
+   swdd->SpanRenderFinish  = sisSpanRenderFinish;
 }
 
 

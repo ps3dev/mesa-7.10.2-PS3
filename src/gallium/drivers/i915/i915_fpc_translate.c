@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -46,24 +46,24 @@
  * Simple pass-through fragment shader to use when we don't have
  * a real shader (or it fails to compile for some reason).
  */
-static unsigned passthrough[] = 
+static unsigned passthrough[] =
 {
    _3DSTATE_PIXEL_SHADER_PROGRAM | ((2*3)-1),
 
    /* declare input color:
     */
-   (D0_DCL | 
-    (REG_TYPE_T << D0_TYPE_SHIFT) | 
-    (T_DIFFUSE << D0_NR_SHIFT) | 
+   (D0_DCL |
+    (REG_TYPE_T << D0_TYPE_SHIFT) |
+    (T_DIFFUSE << D0_NR_SHIFT) |
     D0_CHANNEL_ALL),
    0,
    0,
 
    /* move to output color:
     */
-   (A0_MOV | 
-    (REG_TYPE_OC << A0_DEST_TYPE_SHIFT) | 
-    A0_DEST_CHANNEL_ALL | 
+   (A0_MOV |
+    (REG_TYPE_OC << A0_DEST_TYPE_SHIFT) |
+    A0_DEST_CHANNEL_ALL |
     (REG_TYPE_T << A0_SRC0_TYPE_SHIFT) |
     (T_DIFFUSE << A0_SRC0_NR_SHIFT)),
    0x01230000,			/* .xyzw */
@@ -124,7 +124,7 @@ i915_program_error(struct i915_fp_compile *p, const char *msg, ...)
    char buffer[1024];
 
    debug_printf("i915_program_error: ");
-   va_start( args, msg );  
+   va_start( args, msg );
    util_vsnprintf( buffer, sizeof(buffer), msg, args );
    va_end( args );
    debug_printf("%s", buffer);
@@ -161,7 +161,7 @@ src_vector(struct i915_fp_compile *p,
        * components wide.  Could use a texcoord to pass these
        * attributes if necessary, but that won't work in the general
        * case.
-       * 
+       *
        * We also use a texture coordinate to pass wpos when possible.
        */
 
@@ -412,7 +412,7 @@ emit_simple_arith_swap2(struct i915_fp_compile *p,
  * SIN, COS -- could use another taylor step?
  * LIT      -- results seem a little different to sw mesa
  * LOG      -- different to mesa on negative numbers, but this is conformant.
- */ 
+ */
 static void
 i915_translate_instruction(struct i915_fp_compile *p,
                            const struct tgsi_full_instruction *inst)
@@ -439,9 +439,9 @@ i915_translate_instruction(struct i915_fp_compile *p,
       src0 = src_vector(p, &inst->Src[0]);
       src1 = src_vector(p, &inst->Src[1]);
       src2 = src_vector(p, &inst->Src[2]);
-      i915_emit_arith(p, A0_CMP, 
+      i915_emit_arith(p, A0_CMP,
                       get_result_vector(p, &inst->Dst[0]),
-                      get_result_flags(inst), 
+                      get_result_flags(inst),
                       0, src0, src2, src1);   /* NOTE: order of src2, src1 */
       break;
 
@@ -463,7 +463,7 @@ i915_translate_instruction(struct i915_fp_compile *p,
                       tmp, A0_DEST_CHANNEL_X, 0,
                       tmp, i915_emit_const1f(p, (float) (M_PI * 2.0)), 0);
 
-      /* 
+      /*
        * t0.xy = MUL x.xx11, x.x1111  ; x^2, x, 1, 1
        * t0 = MUL t0.xyxy t0.xx11 ; x^4, x^3, x^2, 1
        * t0 = MUL t0.xxz1 t0.z111    ; x^6 x^4 x^2 1
@@ -622,10 +622,10 @@ i915_translate_instruction(struct i915_fp_compile *p,
 
       /* b*a + c*(1-a)
        *
-       * b*a + c - ca 
+       * b*a + c - ca
        *
-       * tmp = b*a + c, 
-       * result = (-c)*a + tmp 
+       * tmp = b*a + c,
+       * result = (-c)*a + tmp
        */
       i915_emit_arith(p, A0_MAD, tmp,
                       flags & A0_DEST_CHANNEL_ALL, 0, src1, src0, src2);
@@ -689,11 +689,11 @@ i915_translate_instruction(struct i915_fp_compile *p,
                       get_result_vector(p, &inst->Dst[0]),
                       flags, 0, swizzle(tmp, X, X, X, X), 0, 0);
       break;
-      
+
    case TGSI_OPCODE_RET:
       /* XXX: no-op? */
       break;
-      
+
    case TGSI_OPCODE_RCP:
       src0 = src_vector(p, &inst->Src[0]);
 
@@ -718,7 +718,7 @@ i915_translate_instruction(struct i915_fp_compile *p,
       src0 = src_vector(p, &inst->Src[0]);
       tmp = i915_get_utemp(p);
 
-      /* 
+      /*
        * t0.xy = MUL x.xx11, x.x1111  ; x^2, x, 1, 1
        * t0 = MUL t0.xyxy t0.xx11 ; x^4, x^3, x^2, x
        * t1 = MUL t0.xyyw t0.yz11    ; x^7 x^5 x^3 x
@@ -805,7 +805,7 @@ i915_translate_instruction(struct i915_fp_compile *p,
                       tmp, A0_DEST_CHANNEL_X, 0,
                       tmp, i915_emit_const1f(p, (float) (M_PI * 2.0)), 0);
 
-      /* 
+      /*
        * t0.xy = MUL x.xx11, x.x1111  ; x^2, x, 1, 1
        * t0 = MUL t0.xyxy t0.xx11 ; x^4, x^3, x^2, x
        * t1 = MUL t0.xyyw t0.yz11    ; x^7 x^5 x^3 x
@@ -1078,7 +1078,7 @@ i915_fini_compile(struct i915_context *i915, struct i915_fp_compile *p)
       /* patch in the program length */
       p->declarations[0] |= program_size + decl_size - 2;
 
-      /* Copy compilation results to fragment program struct: 
+      /* Copy compilation results to fragment program struct:
        */
       assert(!ifs->program);
       ifs->program
@@ -1087,16 +1087,16 @@ i915_fini_compile(struct i915_context *i915, struct i915_fp_compile *p)
          ifs->program_len = program_size + decl_size;
 
          memcpy(ifs->program,
-                p->declarations, 
+                p->declarations,
                 decl_size * sizeof(uint));
 
-         memcpy(ifs->program + decl_size, 
-                p->program, 
+         memcpy(ifs->program + decl_size,
+                p->program,
                 program_size * sizeof(uint));
       }
    }
 
-   /* Release the compilation struct: 
+   /* Release the compilation struct:
     */
    FREE(p);
 }

@@ -84,7 +84,7 @@ typedef enum {
     AMO_LPBCapVEUVerSRR=0x0100FFB4,
     AMO_LPBCapVeuDnScDR=0x0100FFB8
 
-}AddressMapOffset;   
+}AddressMapOffset;
 /*more to add*/
 
 
@@ -225,7 +225,7 @@ typedef enum {
     CRI_MV2           = 0x48,
     CRI_MV3           = 0x49,
     CRI_MacroDescr    = 0x4a,  /*kickoff?*/
-    
+
     CRI_MeuCtrl = 0x50,
     CRI_SrcYAddr = 0x51,
     CRI_DestAddr = 0x52,
@@ -234,9 +234,9 @@ typedef enum {
     CRI_SrcCbAddr = 0x55,
     CRI_SrcCrAddr = 0x56,
     CRI_SrcCrCbStride = 0x57,
-    
+
     CRI_BCI_Power= 0x5f,
-    
+
     CRI_PSCtrl=0xA0,
     CRI_SSClrKeyCtrl=0xA1,
     CRI_SSCtrl=0xA4,

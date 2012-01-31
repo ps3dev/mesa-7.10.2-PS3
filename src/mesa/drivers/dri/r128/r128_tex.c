@@ -54,7 +54,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 /**
  * Set the texture wrap modes.  Currently \c GL_REPEAT, \c GL_CLAMP,
  * \c GL_CLAMP_TO_EDGE, and \c GL_MIRRORED_REPEAT are supported.
- * 
+ *
  * \param t Texture object whose wrap modes are to be set
  * \param swrap Wrap mode for the \a s texture coordinate
  * \param twrap Wrap mode for the \a t texture coordinate
@@ -159,7 +159,7 @@ static r128TexObjPtr r128AllocTexObj( struct gl_texture_object *texObj )
       /* FIXME Something here to set initial values for other parts of
        * FIXME t->setup?
        */
-  
+
       make_empty_list( (driTextureObject *) t );
 
       r128SetTexWrap( t, texObj->WrapS, texObj->WrapT );

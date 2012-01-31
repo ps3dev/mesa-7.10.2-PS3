@@ -62,7 +62,7 @@ static void fetch_pipeline_prepare( struct draw_pt_middle_end *middle,
    unsigned i;
    unsigned instance_id_index = ~0;
 
-   unsigned gs_out_prim = (draw->gs.geometry_shader ? 
+   unsigned gs_out_prim = (draw->gs.geometry_shader ?
                            draw->gs.geometry_shader->output_primitive :
                            prim);
 
@@ -86,13 +86,13 @@ static void fetch_pipeline_prepare( struct draw_pt_middle_end *middle,
 
    /* Always leave room for the vertex header whether we need it or
     * not.  It's hard to get rid of it in particular because of the
-    * viewport code in draw_pt_post_vs.c.  
+    * viewport code in draw_pt_post_vs.c.
     */
    fpme->vertex_size = sizeof(struct vertex_header) + nr * 4 * sizeof(float);
 
-   
 
-   draw_pt_fetch_prepare( fpme->fetch, 
+
+   draw_pt_fetch_prepare( fpme->fetch,
                           vs->info.num_inputs,
                           fpme->vertex_size,
                           instance_id_index );
@@ -174,7 +174,7 @@ static void emit(struct pt_emit *emit,
 
 
 static void draw_vertex_shader_run(struct draw_vertex_shader *vshader,
-                                   const void *constants[PIPE_MAX_CONSTANT_BUFFERS], 
+                                   const void *constants[PIPE_MAX_CONSTANT_BUFFERS],
                                    unsigned const_size[PIPE_MAX_CONSTANT_BUFFERS],
                                    const struct draw_vertex_info *input_verts,
                                    struct draw_vertex_info *output_verts )

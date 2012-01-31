@@ -15,9 +15,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
@@ -44,19 +44,19 @@
  *
  * Non-local texture objects have a valid MemBlock to describe the
  * region managed by the other client, and can be identified by
- * 't->globj == 0' 
+ * 't->globj == 0'
  */
 struct i810_texture_object_t {
    driTextureObject base;
-     
+
    int Pitch;
    int Height;
    int texelBytes;
    char *BufAddr;
-   
+
    GLuint max_level;
 
-   struct { 
+   struct {
       const struct gl_texture_image *image;
       int offset;		/* into BufAddr */
       int height;
@@ -66,7 +66,7 @@ struct i810_texture_object_t {
    GLuint Setup[I810_TEX_SETUP_SIZE];
    GLuint dirty;
 
-};		
+};
 
 void i810UpdateTextureState( struct gl_context *ctx );
 void i810InitTextureFuncs( struct dd_function_table *functions );

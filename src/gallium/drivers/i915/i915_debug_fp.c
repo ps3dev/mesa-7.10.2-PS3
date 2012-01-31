@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -254,7 +254,7 @@ print_dest_reg(struct debug_stream *stream, unsigned dword)
 
 
 static void
-print_arith_op(struct debug_stream *stream, 
+print_arith_op(struct debug_stream *stream,
 	       unsigned opcode, const unsigned * program)
 {
    if (opcode != A0_NOP) {
@@ -288,7 +288,7 @@ print_arith_op(struct debug_stream *stream,
 
 
 static void
-print_tex_op(struct debug_stream *stream, 
+print_tex_op(struct debug_stream *stream,
 	     unsigned opcode, const unsigned * program)
 {
    print_dest_reg(stream, program[0] | A0_DEST_CHANNEL_ALL);
@@ -298,7 +298,7 @@ print_tex_op(struct debug_stream *stream,
 
    PRINTF(stream, "S[%d],", program[0] & T0_SAMPLER_NR_MASK);
 
-   print_reg_type_nr(stream, 
+   print_reg_type_nr(stream,
 		     (program[1] >> T1_ADDRESS_REG_TYPE_SHIFT) &
                      REG_TYPE_MASK,
                      (program[1] >> T1_ADDRESS_REG_NR_SHIFT) & REG_NR_MASK);
@@ -306,12 +306,12 @@ print_tex_op(struct debug_stream *stream,
 }
 
 static void
-print_texkil_op(struct debug_stream *stream, 
+print_texkil_op(struct debug_stream *stream,
                 unsigned opcode, const unsigned * program)
 {
    PRINTF(stream, "TEXKIL ");
 
-   print_reg_type_nr(stream, 
+   print_reg_type_nr(stream,
 		     (program[1] >> T1_ADDRESS_REG_TYPE_SHIFT) &
                      REG_TYPE_MASK,
                      (program[1] >> T1_ADDRESS_REG_NR_SHIFT) & REG_NR_MASK);
@@ -319,18 +319,18 @@ print_texkil_op(struct debug_stream *stream,
 }
 
 static void
-print_dcl_op(struct debug_stream *stream, 
+print_dcl_op(struct debug_stream *stream,
 	     unsigned opcode, const unsigned * program)
 {
    PRINTF(stream, "%s ", opcodes[opcode]);
-   print_dest_reg(stream, 
+   print_dest_reg(stream,
 		  program[0] | A0_DEST_CHANNEL_ALL);
    PRINTF(stream, "\n");
 }
 
 
 void
-i915_disassemble_program(struct debug_stream *stream, 
+i915_disassemble_program(struct debug_stream *stream,
 			 const unsigned * program, unsigned sz)
 {
    unsigned i;

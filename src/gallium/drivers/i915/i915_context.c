@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "i915_context.h"
@@ -72,7 +72,7 @@ i915_draw_vbo(struct pipe_context *pipe, const struct pipe_draw_info *info)
 
    draw_set_mapped_constant_buffer(draw, PIPE_SHADER_VERTEX, 0,
                                    i915->current.constants[PIPE_SHADER_VERTEX],
-                                   (i915->current.num_user_constants[PIPE_SHADER_VERTEX] * 
+                                   (i915->current.num_user_constants[PIPE_SHADER_VERTEX] *
                                       4 * sizeof(float)));
 
    /*
@@ -103,7 +103,7 @@ static void i915_destroy(struct pipe_context *pipe)
    int i;
 
    draw_destroy(i915->draw);
-   
+
    if(i915->batch)
       i915->iws->batchbuffer_destroy(i915->batch);
 

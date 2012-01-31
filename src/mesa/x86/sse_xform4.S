@@ -229,7 +229,7 @@ LLBL( sse_identity_done ):
 	POP_L( ESI )
 	RET
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

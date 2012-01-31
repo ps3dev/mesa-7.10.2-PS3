@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2009 VMware, Inc.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #ifndef TGSI_UREG_H
@@ -35,7 +35,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-   
+
 struct ureg_program;
 
 /* Almost a tgsi_src_register, but we need to pull in the Absolute
@@ -112,7 +112,7 @@ ureg_get_tokens( struct ureg_program *ureg,
 void ureg_free_tokens( const struct tgsi_token *tokens );
 
 
-void 
+void
 ureg_destroy( struct ureg_program * );
 
 
@@ -247,7 +247,7 @@ ureg_DECL_constant( struct ureg_program *,
 struct ureg_dst
 ureg_DECL_temporary( struct ureg_program * );
 
-void 
+void
 ureg_release_temporary( struct ureg_program *ureg,
                         struct ureg_dst tmp );
 
@@ -482,11 +482,11 @@ ureg_emit_texture(struct ureg_program *ureg,
                   unsigned insn_token,
                   unsigned target );
 
-void 
+void
 ureg_emit_dst( struct ureg_program *ureg,
                struct ureg_dst dst );
 
-void 
+void
 ureg_emit_src( struct ureg_program *ureg,
                struct ureg_src src );
 
@@ -738,7 +738,7 @@ static INLINE void ureg_##op( struct ureg_program *ureg,                \
 /***********************************************************************
  * Inline helpers for manipulating register structs:
  */
-static INLINE struct ureg_src 
+static INLINE struct ureg_src
 ureg_negate( struct ureg_src reg )
 {
    assert(reg.File != TGSI_FILE_NULL);
@@ -755,8 +755,8 @@ ureg_abs( struct ureg_src reg )
    return reg;
 }
 
-static INLINE struct ureg_src 
-ureg_swizzle( struct ureg_src reg, 
+static INLINE struct ureg_src
+ureg_swizzle( struct ureg_src reg,
               int x, int y, int z, int w )
 {
    unsigned swz = ( (reg.SwizzleX << 0) |
@@ -783,7 +783,7 @@ ureg_scalar( struct ureg_src reg, int x )
    return ureg_swizzle(reg, x, x, x, x);
 }
 
-static INLINE struct ureg_dst 
+static INLINE struct ureg_dst
 ureg_writemask( struct ureg_dst reg,
                 unsigned writemask )
 {
@@ -792,7 +792,7 @@ ureg_writemask( struct ureg_dst reg,
    return reg;
 }
 
-static INLINE struct ureg_dst 
+static INLINE struct ureg_dst
 ureg_saturate( struct ureg_dst reg )
 {
    assert(reg.File != TGSI_FILE_NULL);
@@ -818,7 +818,7 @@ ureg_predicate(struct ureg_dst reg,
    return reg;
 }
 
-static INLINE struct ureg_dst 
+static INLINE struct ureg_dst
 ureg_dst_indirect( struct ureg_dst reg, struct ureg_src addr )
 {
    assert(reg.File != TGSI_FILE_NULL);
@@ -829,7 +829,7 @@ ureg_dst_indirect( struct ureg_dst reg, struct ureg_src addr )
    return reg;
 }
 
-static INLINE struct ureg_src 
+static INLINE struct ureg_src
 ureg_src_indirect( struct ureg_src reg, struct ureg_src addr )
 {
    assert(reg.File != TGSI_FILE_NULL);

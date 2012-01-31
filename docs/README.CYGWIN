@@ -5,9 +5,9 @@
 WARNING
 =======
 
-If you installed X11 (packages xorg-x11-devel and xorg-x11-bin-dlls ) with the 
-latest setup.exe from Cygwin the GL (Mesa) libraries and include are already 
-installed in /usr/X11R6. 
+If you installed X11 (packages xorg-x11-devel and xorg-x11-bin-dlls ) with the
+latest setup.exe from Cygwin the GL (Mesa) libraries and include are already
+installed in /usr/X11R6.
 
 The following will explain how to "replace" them.
 
@@ -19,7 +19,7 @@ How to compile Mesa on Cygwin/X11 systems:
 1. Shared libs:
     type 'make cygwin-sl'.
 
-    When finished, the Mesa DLL will be in the Mesa-x.y/lib/ and 
+    When finished, the Mesa DLL will be in the Mesa-x.y/lib/ and
     Mesa-x.y/bin directories.
 
 
@@ -59,10 +59,10 @@ Configuration options:
 
 
 Shared libraries:
-   If you compile shared libraries (Win32 DLLS) you may have to set an 
-   environment variable to specify where the Mesa libraries are located.  
-   Set the PATH variable to include /your-dir/Mesa-2.6/bin.   
-   Otherwise, when you try to run a demo it may fail with a message saying 
+   If you compile shared libraries (Win32 DLLS) you may have to set an
+   environment variable to specify where the Mesa libraries are located.
+   Set the PATH variable to include /your-dir/Mesa-2.6/bin.
+   Otherwise, when you try to run a demo it may fail with a message saying
    that one or more DLL couldn't be found.
 
 
@@ -119,7 +119,7 @@ Double buffering:
    XImage is faster when Mesa has to do pixel-by-pixel rendering.  If you
    need depth buffering the XImage will almost surely be faster.  Exper-
    iment with the MESA_BACK_BUFFER variable to see which is faster for
-   your application.  
+   your application.
 
 
 Colormaps:
@@ -196,7 +196,7 @@ Extensions
 ==========
    There are three Mesa-specific GLX extensions at this time.
 
-   GLX_MESA_pixmap_colormap 
+   GLX_MESA_pixmap_colormap
 
       This extension adds the GLX function:
 

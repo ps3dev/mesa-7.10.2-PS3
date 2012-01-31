@@ -36,7 +36,7 @@
 typedef struct bezierPatch{
   float umin, vmin, umax, vmax;
   int uorder; /*order= degree + 1*/
-  int vorder; 
+  int vorder;
 
   /*
    *the control points are stored in a one dimensional  array.
@@ -45,13 +45,13 @@ typedef struct bezierPatch{
    *where P(i,j) are the control points, B_i(.) are Bezier
    *basis functions.
    *Each control point can have dimension 3 or 4: (x,y,z,w).
-   *The components of P(i,j) are stored in a one dimensional 
-   *array: 
+   *The components of P(i,j) are stored in a one dimensional
+   *array:
    *       ctlpoints[]
    *in the order of:
    * P[0,0], P[0,1], ..., P[0,vorder-1],
    * P[1,0], P[1,1], ..., P[1,vorder-1],
-   *  ...             
+   *  ...
    * P[uorder-1,0], P[uorder-1,1], ..., P[uorder-1,vorder-1].
    */
   int dimension;
@@ -60,7 +60,7 @@ typedef struct bezierPatch{
   /*
    *in case we have to manage multiple bezierPatches.
    */
-  struct bezierPatch  *next; 
+  struct bezierPatch  *next;
 
 } bezierPatch;
 

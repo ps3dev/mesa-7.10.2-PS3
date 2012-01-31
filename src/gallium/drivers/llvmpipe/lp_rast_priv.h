@@ -275,36 +275,36 @@ lp_rast_shade_quads_all( struct lp_rasterizer_task *task,
    END_JIT_CALL();
 }
 
-void lp_rast_triangle_1( struct lp_rasterizer_task *, 
+void lp_rast_triangle_1( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_2( struct lp_rasterizer_task *, 
+void lp_rast_triangle_2( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_3( struct lp_rasterizer_task *, 
+void lp_rast_triangle_3( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_4( struct lp_rasterizer_task *, 
+void lp_rast_triangle_4( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_5( struct lp_rasterizer_task *, 
+void lp_rast_triangle_5( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_6( struct lp_rasterizer_task *, 
+void lp_rast_triangle_6( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_7( struct lp_rasterizer_task *, 
+void lp_rast_triangle_7( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
-void lp_rast_triangle_8( struct lp_rasterizer_task *, 
+void lp_rast_triangle_8( struct lp_rasterizer_task *,
                          const union lp_rast_cmd_arg );
 
 void lp_rast_triangle_3_4(struct lp_rasterizer_task *,
 			  const union lp_rast_cmd_arg );
 
-void lp_rast_triangle_3_16( struct lp_rasterizer_task *, 
+void lp_rast_triangle_3_16( struct lp_rasterizer_task *,
                             const union lp_rast_cmd_arg );
 
-void lp_rast_triangle_4_16( struct lp_rasterizer_task *, 
+void lp_rast_triangle_4_16( struct lp_rasterizer_task *,
                             const union lp_rast_cmd_arg );
 
 void
 lp_rast_set_state(struct lp_rasterizer_task *task,
                   const union lp_rast_cmd_arg arg);
- 
+
 void
 lp_debug_bin( const struct cmd_bin *bin );
 

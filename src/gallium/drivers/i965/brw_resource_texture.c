@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -62,21 +62,21 @@ brw_transfer(struct pipe_transfer *transfer)
 static GLuint translate_tex_target( unsigned target )
 {
    switch (target) {
-   case PIPE_TEXTURE_1D: 
+   case PIPE_TEXTURE_1D:
       return BRW_SURFACE_1D;
 
-   case PIPE_TEXTURE_2D: 
+   case PIPE_TEXTURE_2D:
    case PIPE_TEXTURE_RECT:
       return BRW_SURFACE_2D;
 
-   case PIPE_TEXTURE_3D: 
+   case PIPE_TEXTURE_3D:
       return BRW_SURFACE_3D;
 
    case PIPE_TEXTURE_CUBE:
       return BRW_SURFACE_CUBE;
 
-   default: 
-      assert(0); 
+   default:
+      assert(0);
       return BRW_SURFACE_1D;
    }
 }
@@ -92,7 +92,7 @@ static GLuint translate_tex_format( enum pipe_format pf )
       return BRW_SURFACEFORMAT_I8_UNORM;
 
    case PIPE_FORMAT_A8_UNORM:
-      return BRW_SURFACEFORMAT_A8_UNORM; 
+      return BRW_SURFACEFORMAT_A8_UNORM;
 
    case PIPE_FORMAT_L16_UNORM:
       return BRW_SURFACEFORMAT_L16_UNORM;
@@ -102,7 +102,7 @@ static GLuint translate_tex_format( enum pipe_format pf )
       return BRW_SURFACEFORMAT_I16_UNORM;
 
    case PIPE_FORMAT_A16_UNORM:
-      return BRW_SURFACEFORMAT_A16_UNORM; 
+      return BRW_SURFACEFORMAT_A16_UNORM;
       */
 
    case PIPE_FORMAT_L8A8_UNORM:
@@ -146,10 +146,10 @@ static GLuint translate_tex_format( enum pipe_format pf )
 
    case PIPE_FORMAT_DXT1_RGBA:
        return BRW_SURFACEFORMAT_BC1_UNORM;
-       
+
    case PIPE_FORMAT_DXT3_RGBA:
        return BRW_SURFACEFORMAT_BC2_UNORM;
-       
+
    case PIPE_FORMAT_DXT5_RGBA:
        return BRW_SURFACEFORMAT_BC3_UNORM;
 
@@ -257,7 +257,7 @@ static unsigned brw_texture_is_referenced( struct pipe_context *pipe,
          if (!(layer == -1 || surf->id.bits.layer == layer) ||
              surf->id.bits.level != level)
             continue;
-         
+
          if (bscreen->sws->bo_references( batch_bo, surf->bo))
             return PIPE_REFERENCED_FOR_READ | PIPE_REFERENCED_FOR_WRITE;
       }
@@ -272,7 +272,7 @@ static unsigned brw_texture_is_referenced( struct pipe_context *pipe,
  */
 
 
-static struct pipe_transfer * 
+static struct pipe_transfer *
 brw_texture_get_transfer(struct pipe_context *context,
                          struct pipe_resource *resource,
                          unsigned level,
@@ -313,7 +313,7 @@ brw_texture_transfer_map(struct pipe_context *pipe,
       assert(box->z == 0);
    offset = tex->image_offset[transfer->level][box->z];
 
-   map = sws->bo_map(tex->bo, 
+   map = sws->bo_map(tex->bo,
                      BRW_DATA_OTHER,
                      0,
                      tex->bo->size,
@@ -343,7 +343,7 @@ brw_texture_transfer_unmap(struct pipe_context *pipe,
 
 
 
-struct u_resource_vtbl brw_texture_vtbl = 
+struct u_resource_vtbl brw_texture_vtbl =
 {
    brw_texture_get_handle,	      /* get_handle */
    brw_texture_destroy,	      /* resource_destroy */
@@ -363,13 +363,13 @@ struct u_resource_vtbl brw_texture_vtbl =
 struct pipe_resource *
 brw_texture_create( struct pipe_screen *screen,
 		    const struct pipe_resource *template )
-{  
+{
    struct brw_screen *bscreen = brw_screen(screen);
    struct brw_texture *tex;
    enum brw_buffer_type buffer_type;
    enum pipe_error ret;
    GLuint format;
-   
+
    tex = CALLOC_STRUCT(brw_texture);
    if (tex == NULL)
       return NULL;
@@ -390,14 +390,14 @@ brw_texture_create( struct pipe_screen *screen,
    /* XXX: No tiling with compressed textures??
     */
    if (tex->compressed == 0 &&
-       !bscreen->no_tiling) 
+       !bscreen->no_tiling)
    {
       if (bscreen->chipset.is_965 &&
 	  util_format_is_depth_or_stencil(template->format))
 	 tex->tiling = BRW_TILING_Y;
       else
 	 tex->tiling = BRW_TILING_X;
-   } 
+   }
    else {
       tex->tiling = BRW_TILING_NONE;
    }
@@ -406,7 +406,7 @@ brw_texture_create( struct pipe_screen *screen,
    if (!brw_texture_layout( bscreen, tex ))
       goto fail;
 
-   
+
    if (template->bind & (PIPE_BIND_SCANOUT |
                            PIPE_BIND_SHARED)) {
       buffer_type = BRW_BUFFER_TYPE_SCANOUT;
@@ -461,7 +461,7 @@ brw_texture_create( struct pipe_screen *screen,
    tex->ss.ss3.depth = tex->b.b.depth0 - 1;
 
    tex->ss.ss4.min_lod = 0;
- 
+
    if (tex->b.b.target == PIPE_TEXTURE_CUBE) {
       tex->ss.ss0.cube_pos_x = 1;
       tex->ss.ss0.cube_pos_y = 1;
@@ -480,7 +480,7 @@ fail:
 }
 
 
-struct pipe_resource * 
+struct pipe_resource *
 brw_texture_from_handle(struct pipe_screen *screen,
                         const struct pipe_resource *template,
                         struct winsys_handle *whandle)

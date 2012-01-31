@@ -160,7 +160,7 @@ _mesa_error_check_format_type(struct gl_context *ctx, GLenum format, GLenum type
    /* no errors */
    return GL_FALSE;
 }
-      
+
 
 
 void GLAPIENTRY

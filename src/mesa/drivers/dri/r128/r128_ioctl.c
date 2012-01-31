@@ -195,7 +195,7 @@ void r128FireBlitLocked( r128ContextPtr rmesa, drmBufPtr buffer,
    blit.width = width;
    blit.height = height;
 
-   ret = drmCommandWrite( rmesa->driFd, DRM_R128_BLIT, 
+   ret = drmCommandWrite( rmesa->driFd, DRM_R128_BLIT,
                           &blit, sizeof(blit) );
 
    if ( ret ) {

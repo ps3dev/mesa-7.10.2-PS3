@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * (C) Copyright IBM Corporation 2008
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -58,14 +58,14 @@ fetch_shuffle_data[5] = {
       0x00, 0x80, 0x80, 0x80, 0x01, 0x80, 0x80, 0x80,
       0x02, 0x80, 0x80, 0x80, 0x03, 0x80, 0x80, 0x80,
    },
-   
+
    /* Shuffle used by CVT_16_USCALED and CVT_16_SSCALED
     */
    {
       0x00, 0x01, 0x80, 0x80, 0x02, 0x03, 0x80, 0x80,
       0x04, 0x05, 0x80, 0x80, 0x06, 0x07, 0x80, 0x80,
    },
-   
+
    /* High value shuffle used by trans4x4.
     */
    {
@@ -96,7 +96,7 @@ static void generic_vertex_fetch(struct spu_vs_context *draw,
    ASSERT(count <= 4);
 
 #if DRAW_DBG
-   printf("SPU: %s count = %u, nr_attrs = %u\n", 
+   printf("SPU: %s count = %u, nr_attrs = %u\n",
           __FUNCTION__, count, nr_attrs);
 #endif
 
@@ -114,7 +114,7 @@ static void generic_vertex_fetch(struct spu_vs_context *draw,
       PIPE_ALIGN_VAR(16) qword in[2 * 4];
 
 
-      /* Fetch four attributes for four vertices.  
+      /* Fetch four attributes for four vertices.
        */
       idx = 0;
       for (i = 0; i < count; i++) {

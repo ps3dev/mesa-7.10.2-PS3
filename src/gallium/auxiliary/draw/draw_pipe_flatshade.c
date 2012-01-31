@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -122,7 +122,7 @@ static void flatshade_tri_0( struct draw_stage *stage,
    tmp.v[2] = dup_vert(stage, header->v[2], 1);
 
    copy_colors2(stage, tmp.v[1], tmp.v[2], tmp.v[0]);
-   
+
    stage->next->tri( stage->next, &tmp );
 }
 
@@ -140,7 +140,7 @@ static void flatshade_tri_2( struct draw_stage *stage,
    tmp.v[2] = header->v[2];
 
    copy_colors2(stage, tmp.v[0], tmp.v[1], tmp.v[2]);
-   
+
    stage->next->tri( stage->next, &tmp );
 }
 
@@ -160,7 +160,7 @@ static void flatshade_line_0( struct draw_stage *stage,
    tmp.v[1] = dup_vert(stage, header->v[1], 0);
 
    copy_colors(stage, tmp.v[1], tmp.v[0]);
-   
+
    stage->next->line( stage->next, &tmp );
 }
 
@@ -173,7 +173,7 @@ static void flatshade_line_1( struct draw_stage *stage,
    tmp.v[1] = header->v[1];
 
    copy_colors(stage, tmp.v[0], tmp.v[1]);
-   
+
    stage->next->line( stage->next, &tmp );
 }
 
@@ -226,7 +226,7 @@ static void flatshade_first_line( struct draw_stage *stage,
 }
 
 
-static void flatshade_flush( struct draw_stage *stage, 
+static void flatshade_flush( struct draw_stage *stage,
 			     unsigned flags )
 {
    stage->tri = flatshade_first_tri;

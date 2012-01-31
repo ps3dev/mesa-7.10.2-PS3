@@ -1316,7 +1316,7 @@ make_3d_mipmap(GLenum datatype, GLuint comps, GLint border,
       GLubyte *dstImgRow = imgDst;
 
       for (row = 0; row < dstHeightNB; row++) {
-         do_row_3D(datatype, comps, srcWidthNB, 
+         do_row_3D(datatype, comps, srcWidthNB,
                    srcImgARowA, srcImgARowB,
                    srcImgBRowA, srcImgBRowB,
                    dstWidthNB, dstImgRow);
@@ -1479,7 +1479,7 @@ make_2d_stack_mipmap(GLenum datatype, GLuint comps, GLint border,
 
    /* Compute src and dst pointers, skipping any border */
    srcA = srcPtr + border * ((srcWidth + 1) * bpt);
-   if (srcHeight > 1) 
+   if (srcHeight > 1)
       srcB = srcA + srcRowBytes;
    else
       srcB = srcA;
@@ -1632,7 +1632,7 @@ next_mipmap_level_size(GLenum target, GLint border,
       *dstWidth = srcWidth; /* can't go smaller */
    }
 
-   if ((srcHeight - 2 * border > 1) && 
+   if ((srcHeight - 2 * border > 1) &&
        (target != GL_TEXTURE_1D_ARRAY_EXT)) {
       *dstHeight = (srcHeight - 2 * border) / 2 + 2 * border;
    }
@@ -1823,9 +1823,9 @@ _mesa_generate_mipmap(struct gl_context *ctx, GLenum target,
       ASSERT(dstImage->FetchTexelf);
 
       _mesa_generate_mipmap_level(target, datatype, comps, border,
-                                  srcWidth, srcHeight, srcDepth, 
+                                  srcWidth, srcHeight, srcDepth,
                                   srcData, srcImage->RowStride,
-                                  dstWidth, dstHeight, dstDepth, 
+                                  dstWidth, dstHeight, dstDepth,
                                   dstData, dstImage->RowStride);
 
 

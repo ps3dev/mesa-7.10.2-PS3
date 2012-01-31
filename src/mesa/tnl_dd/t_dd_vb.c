@@ -48,7 +48,7 @@
  */
 static void copy_pv_rgba4_spec5( struct gl_context *ctx, GLuint edst, GLuint esrc )
 {
-   LOCALVARS   
+   LOCALVARS
    GLubyte *verts = GET_VERTEX_STORE();
    GLuint size = GET_VERTEX_SIZE();
    GLuint *dst = (GLuint *)(verts + (edst * size));
@@ -265,7 +265,7 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
 	      v->pv.v1,
 	      v->pv.q1);
       break;
-#endif      
+#endif
    default:
       fprintf(stderr, "???\n");
       break;
@@ -277,12 +277,12 @@ void TAG(print_vertex)( struct gl_context *ctx, const VERTEX *v )
 
 
 /* Interpolate the elements of the VB not included in typical hardware
- * vertices.  
+ * vertices.
  *
  * NOTE: All these arrays are guarenteed by tnl to be writeable and
  * have good stride.
  */
-#ifndef INTERP_QUALIFIER 
+#ifndef INTERP_QUALIFIER
 #define INTERP_QUALIFIER static
 #endif
 
@@ -320,7 +320,7 @@ INTERP_QUALIFIER void TAG(interp_extras)( struct gl_context *ctx,
    INTERP_VERTEX(ctx, t, dst, out, in, force_boundary);
 }
 
-INTERP_QUALIFIER void TAG(copy_pv_extras)( struct gl_context *ctx, 
+INTERP_QUALIFIER void TAG(copy_pv_extras)( struct gl_context *ctx,
 					   GLuint dst, GLuint src )
 {
    LOCALVARS

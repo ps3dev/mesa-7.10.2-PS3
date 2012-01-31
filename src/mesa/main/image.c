@@ -214,7 +214,7 @@ _mesa_sizeof_packed_type( GLenum type )
          return sizeof(GLuint);
       case GL_UNSIGNED_SHORT_8_8_MESA:
       case GL_UNSIGNED_SHORT_8_8_REV_MESA:
-         return sizeof(GLushort);      
+         return sizeof(GLushort);
       case GL_UNSIGNED_INT_24_8_EXT:
          return sizeof(GLuint);
       default:
@@ -1041,7 +1041,7 @@ _mesa_is_compressed_format(struct gl_context *ctx, GLenum format)
  * \param img  which image in the volume (0 for 1D or 2D images)
  * \param row  row of pixel in the image (0 for 1D images)
  * \param column column of pixel in the image
- * 
+ *
  * \return address of pixel on success, or NULL on error.
  *
  * \sa gl_pixelstore_attrib.
@@ -1197,7 +1197,7 @@ _mesa_image_address3d( const struct gl_pixelstore_attrib *packing,
  * \param width image width.
  * \param format pixel format.
  * \param type pixel data type.
- * 
+ *
  * \return the stride in bytes for the given parameters, or -1 if error
  */
 GLint

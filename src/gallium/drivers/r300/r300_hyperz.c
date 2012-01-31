@@ -31,7 +31,7 @@
 #include "util/u_mm.h"
 
 /*
-  HiZ rules - taken from various docs 
+  HiZ rules - taken from various docs
    1. HiZ only works on depth values
    2. Cannot HiZ if stencil fail or zfail is !KEEP
    3. on R300/400, HiZ is disabled if depth test is EQUAL
@@ -127,7 +127,7 @@ static boolean r300_can_hiz(struct r300_context *r300)
                 z->current_func, dsa_state->z_stencil_control);
             return FALSE;
         }
-    }    
+    }
     return TRUE;
 }
 

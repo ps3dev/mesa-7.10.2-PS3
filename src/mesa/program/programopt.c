@@ -23,7 +23,7 @@
  */
 
 /**
- * \file  programopt.c 
+ * \file  programopt.c
  * Vertex/Fragment program optimizations and transformations for program
  * options, etc.
  *
@@ -218,12 +218,12 @@ _mesa_insert_mvp_mad_code(struct gl_context *ctx, struct gl_vertex_program *vpro
 void
 _mesa_insert_mvp_code(struct gl_context *ctx, struct gl_vertex_program *vprog)
 {
-   if (ctx->mvp_with_dp4) 
+   if (ctx->mvp_with_dp4)
       _mesa_insert_mvp_dp4_code( ctx, vprog );
    else
       _mesa_insert_mvp_mad_code( ctx, vprog );
 }
-      
+
 
 
 
@@ -416,7 +416,7 @@ is_texture_instruction(const struct prog_instruction *inst)
       return GL_FALSE;
    }
 }
-      
+
 
 /**
  * Count the number of texure indirections in the given program.
@@ -437,11 +437,11 @@ _mesa_count_texture_indirections(struct gl_program *prog)
       const struct prog_instruction *inst = prog->Instructions + i;
 
       if (is_texture_instruction(inst)) {
-         if (((inst->SrcReg[0].File == PROGRAM_TEMPORARY) && 
+         if (((inst->SrcReg[0].File == PROGRAM_TEMPORARY) &&
               (tempsOutput & (1 << inst->SrcReg[0].Index))) ||
              ((inst->Opcode != OPCODE_KIL) &&
-              (inst->DstReg.File == PROGRAM_TEMPORARY) && 
-              (aluTemps & (1 << inst->DstReg.Index)))) 
+              (inst->DstReg.File == PROGRAM_TEMPORARY) &&
+              (aluTemps & (1 << inst->DstReg.Index))))
             {
                indirections++;
                tempsOutput = 0x0;

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -42,17 +42,17 @@
 
 
 static void
-st_device_really_destroy(struct st_device *st_dev) 
+st_device_really_destroy(struct st_device *st_dev)
 {
    if(st_dev->screen) {
-      /* FIXME: Don't really destroy until we keep track of every single 
-       * reference or we end up causing a segmentation fault every time 
+      /* FIXME: Don't really destroy until we keep track of every single
+       * reference or we end up causing a segmentation fault every time
        * python exits. */
 #if 0
       st_dev->screen->destroy(st_dev->screen);
 #endif
    }
-   
+
    FREE(st_dev);
 }
 
@@ -69,7 +69,7 @@ st_device_reference(struct st_device **ptr, struct st_device *st_dev)
 
 
 void
-st_device_destroy(struct st_device *st_dev) 
+st_device_destroy(struct st_device *st_dev)
 {
    st_device_reference(&st_dev, NULL);
 }
@@ -93,10 +93,10 @@ st_device_create(boolean hardware)
    st_dev = CALLOC_STRUCT(st_device);
    if (!st_dev)
       goto no_device;
-   
+
    pipe_reference_init(&st_dev->reference, 1);
    st_dev->screen = screen;
-   
+
    return st_dev;
 
 no_device:
@@ -107,23 +107,23 @@ no_screen:
 
 
 void
-st_context_destroy(struct st_context *st_ctx) 
+st_context_destroy(struct st_context *st_ctx)
 {
    unsigned i;
-   
+
    if(st_ctx) {
       struct st_device *st_dev = st_ctx->st_dev;
-      
+
       if(st_ctx->cso) {
          cso_delete_vertex_shader(st_ctx->cso, st_ctx->vs);
          cso_delete_fragment_shader(st_ctx->cso, st_ctx->fs);
-         
+
          cso_destroy_context(st_ctx->cso);
       }
-      
+
       if(st_ctx->pipe)
          st_ctx->pipe->destroy(st_ctx->pipe);
-      
+
       for(i = 0; i < PIPE_MAX_SAMPLERS; ++i)
          pipe_sampler_view_reference(&st_ctx->fragment_sampler_views[i], NULL);
       for(i = 0; i < PIPE_MAX_VERTEX_SAMPLERS; ++i)
@@ -131,23 +131,23 @@ st_context_destroy(struct st_context *st_ctx)
       pipe_resource_reference(&st_ctx->default_texture, NULL);
 
       FREE(st_ctx);
-      
+
       st_device_reference(&st_dev, NULL);
    }
 }
 
 
 struct st_context *
-st_context_create(struct st_device *st_dev) 
+st_context_create(struct st_device *st_dev)
 {
    struct st_context *st_ctx;
-   
+
    st_ctx = CALLOC_STRUCT(st_context);
    if(!st_ctx)
       return NULL;
-   
+
    st_device_reference(&st_ctx->st_dev, st_dev);
-   
+
    st_ctx->pipe = st_dev->screen->context_create(st_dev->screen, NULL);
    if(!st_ctx->pipe) {
       st_context_destroy(st_ctx);
@@ -159,7 +159,7 @@ st_context_create(struct st_device *st_dev)
       st_context_destroy(st_ctx);
       return NULL;
    }
-   
+
    /* disabled blending/masking */
    {
       struct pipe_blend_state blend;
@@ -243,12 +243,12 @@ st_context_create(struct st_device *st_dev)
       templat.array_size = 1;
       templat.last_level = 0;
       templat.bind = PIPE_BIND_SAMPLER_VIEW;
-   
+
       st_ctx->default_texture = screen->resource_create( screen, &templat );
       if(st_ctx->default_texture) {
 	 struct pipe_box box;
 	 uint32_t zero = 0;
-	 
+
 	 u_box_origin_2d( 1, 1, &box );
 
 	 pipe->transfer_inline_write(pipe,
@@ -282,14 +282,14 @@ st_context_create(struct st_device *st_dev)
 
       pipe_sampler_view_reference(&view, NULL);
    }
-   
+
    /* vertex shader */
    {
       const uint semantic_names[] = { TGSI_SEMANTIC_POSITION,
                                       TGSI_SEMANTIC_GENERIC };
       const uint semantic_indexes[] = { 0, 0 };
-      st_ctx->vs = util_make_vertex_passthrough_shader(st_ctx->pipe, 
-                                                       2, 
+      st_ctx->vs = util_make_vertex_passthrough_shader(st_ctx->pipe,
+                                                       2,
                                                        semantic_names,
                                                        semantic_indexes);
       cso_set_vertex_shader_handle(st_ctx->cso, st_ctx->vs);

@@ -61,7 +61,7 @@ static struct svga_shader_result *search_fs_key( struct svga_fragment_shader *fs
       if (compare_fs_keys( key, &result->key.fkey ) == 0)
          return result;
    }
-   
+
    return NULL;
 }
 
@@ -86,10 +86,10 @@ static enum pipe_error compile_fs( struct svga_context *svga,
       goto fail;
    }
 
-   ret = SVGA3D_DefineShader(svga->swc, 
+   ret = SVGA3D_DefineShader(svga->swc,
                              result->id,
                              SVGA3D_SHADERTYPE_PS,
-                             result->tokens, 
+                             result->tokens,
                              result->nr_tokens * sizeof result->tokens[0]);
    if (ret)
       goto fail;
@@ -138,20 +138,20 @@ static int make_fs_key( const struct svga_context *svga,
     * requires that the incoming fragment color be white.  This change
     * achieves that by creating a varient of the current fragment
     * shader that overrides all output colors with 1,1,1,1
-    *   
+    *
     * This will work for most shaders, including those containing
     * TEXKIL and/or depth-write.  However, it will break on the
     * combination of xor-logicop plus alphatest.
     *
     * Ultimately, we could implement alphatest in the shader using
     * texkil prior to overriding the outgoing fragment color.
-    *   
+    *
     * SVGA_NEW_BLEND
     */
    if (svga->curr.blend->need_white_fragments) {
       key->white_fragments = 1;
    }
-   
+
    /* XXX: want to limit this to the textures that the shader actually
     * refers to.
     *
@@ -224,13 +224,13 @@ static int emit_hw_fs( struct svga_context *svga,
          return ret;
 
       svga->dirty |= SVGA_NEW_FS_RESULT;
-      svga->state.hw_draw.fs = result;      
+      svga->state.hw_draw.fs = result;
    }
 
    return 0;
 }
 
-struct svga_tracked_state svga_hw_fs = 
+struct svga_tracked_state svga_hw_fs =
 {
    "fragment shader (hwtnl)",
    (SVGA_NEW_FS |

@@ -255,9 +255,9 @@ static int r600_cs_end(struct radeon_cs_int *csi,
     return 0;
 }
 
-static int r600_cs_process_relocs(struct radeon_cs_int *csi, 
+static int r600_cs_process_relocs(struct radeon_cs_int *csi,
                                   uint32_t * reloc_chunk,
-                                  uint32_t * length_dw_reloc_chunk) 
+                                  uint32_t * length_dw_reloc_chunk)
 {
     struct r600_cs_manager_legacy *csm = (struct r600_cs_manager_legacy*)csi->csm;
     struct r600_cs_reloc_legacy *relocs;
@@ -371,7 +371,7 @@ static int r600_cs_emit(struct radeon_cs_int *csi)
 
     //dump_cmdbuf(cs);
 
-    do 
+    do
     {
         r = drmCommandWriteRead(csi->csm->fd, DRM_RADEON_CS, &cs_cmd, sizeof(cs_cmd));
         retry++;
@@ -479,7 +479,7 @@ void r600InitCmdBuf(context_t *r600) /* from rcommonInitCmdBuf */
     else
     {
         r600InitAtoms(r600);
-    }	
+    }
 
 	/* Initialize command buffer */
 	size = 256 * driQueryOptioni(&rmesa->optionCache,

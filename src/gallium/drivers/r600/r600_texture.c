@@ -796,7 +796,7 @@ static unsigned r600_get_swizzle_combined(const unsigned char *swizzle_format,
 
 /* texture format translate */
 uint32_t r600_translate_texformat(enum pipe_format format,
-				  const unsigned char *swizzle_view, 
+				  const unsigned char *swizzle_view,
 				  uint32_t *word4_p, uint32_t *yuv_format_p)
 {
 	uint32_t result = 0, word4 = 0, yuv_format = 0;
@@ -850,7 +850,7 @@ uint32_t r600_translate_texformat(enum pipe_format format,
 			break;
 		}
 		goto out_unknown; /* TODO */
-		
+
 	case UTIL_FORMAT_COLORSPACE_SRGB:
 		word4 |= S_038010_FORCE_DEGAMMA(1);
 		if (format == PIPE_FORMAT_L8A8_SRGB || format == PIPE_FORMAT_L8_SRGB)
@@ -866,7 +866,7 @@ uint32_t r600_translate_texformat(enum pipe_format format,
 		static int r600_enable_s3tc = -1;
 
 		if (r600_enable_s3tc == -1)
-			r600_enable_s3tc = 
+			r600_enable_s3tc =
 				debug_get_bool_option("R600_ENABLE_S3TC", FALSE);
 
 		if (!r600_enable_s3tc)
@@ -889,7 +889,7 @@ uint32_t r600_translate_texformat(enum pipe_format format,
 	}
 
 
-	for (i = 0; i < desc->nr_channels; i++) {	
+	for (i = 0; i < desc->nr_channels; i++) {
 		if (desc->channel[i].type == UTIL_FORMAT_TYPE_SIGNED) {
 			word4 |= sign_bit[i];
 		}
@@ -903,7 +903,7 @@ uint32_t r600_translate_texformat(enum pipe_format format,
 	for (i = 1; i < desc->nr_channels; i++) {
 		uniform = uniform && desc->channel[0].size == desc->channel[i].size;
 	}
-	
+
 	/* Non-uniform formats. */
 	if (!uniform) {
 		switch(desc->nr_channels) {
@@ -1021,7 +1021,7 @@ uint32_t r600_translate_texformat(enum pipe_format format,
 				goto out_word4;
 			}
 		}
-		
+
 	}
 out_word4:
 	if (word4_p)

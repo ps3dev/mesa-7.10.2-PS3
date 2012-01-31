@@ -104,7 +104,7 @@ extern void r200SetupVertexProg( struct gl_context *ctx );
 
 /* first CARD32 of an instruction */
 
-/* possible operations: 
+/* possible operations:
     DOT, MUL, ADD, MAD, FRC, MAX, MIN, SGE, SLT, EXP, LOG, LIT, POW, RCP, RSQ, EX2,
     LG2, MAD_2, ARL */
 

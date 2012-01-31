@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "i915_reg.h"
@@ -78,7 +78,7 @@ static boolean debug( struct debug_stream *stream, const char *name, unsigned le
 {
    unsigned i;
    unsigned *ptr = (unsigned *)(stream->ptr + stream->offset);
-   
+
    if (len == 0) {
       PRINTF(stream, "Error - zero length packet (0x%08x)\n", stream->ptr[0]);
       assert(0);
@@ -91,11 +91,11 @@ static boolean debug( struct debug_stream *stream, const char *name, unsigned le
 
    PRINTF(stream, "%s (%d dwords):\n", name, len);
    for (i = 0; i < len; i++)
-      PRINTF(stream, "\t0x%08x\n",  ptr[i]);   
+      PRINTF(stream, "\t0x%08x\n",  ptr[i]);
    PRINTF(stream, "\n");
 
    stream->offset += len * sizeof(unsigned);
-   
+
    return TRUE;
 }
 
@@ -119,33 +119,33 @@ static const char *get_prim_name( unsigned val )
    }
 }
 
-static boolean debug_prim( struct debug_stream *stream, const char *name, 
+static boolean debug_prim( struct debug_stream *stream, const char *name,
 			     boolean dump_floats,
 			     unsigned len )
 {
    unsigned *ptr = (unsigned *)(stream->ptr + stream->offset);
    const char *prim = get_prim_name( ptr[0] );
    unsigned i;
-   
+
 
 
    PRINTF(stream, "%s %s (%d dwords):\n", name, prim, len);
-   PRINTF(stream, "\t0x%08x\n",  ptr[0]);   
+   PRINTF(stream, "\t0x%08x\n",  ptr[0]);
    for (i = 1; i < len; i++) {
       if (dump_floats)
-	 PRINTF(stream, "\t0x%08x // %f\n",  ptr[i], *(float *)&ptr[i]);   
+	 PRINTF(stream, "\t0x%08x // %f\n",  ptr[i], *(float *)&ptr[i]);
       else
-	 PRINTF(stream, "\t0x%08x\n",  ptr[i]);   
+	 PRINTF(stream, "\t0x%08x\n",  ptr[i]);
    }
 
-      
+
    PRINTF(stream, "\n");
 
    stream->offset += len * sizeof(unsigned);
-   
+
    return TRUE;
 }
-   
+
 
 
 
@@ -181,12 +181,12 @@ static boolean debug_chain( struct debug_stream *stream, const char *name, unsig
       PRINTF(stream, "\t0x%08x\n",  ptr[i]);
 
    stream->offset = ptr[1] & ~0x3;
-   
+
    if (stream->offset < old_offset)
-      PRINTF(stream, "\n... skipping backwards from 0x%x --> 0x%x ...\n\n", 
+      PRINTF(stream, "\n... skipping backwards from 0x%x --> 0x%x ...\n\n",
 		   old_offset, stream->offset );
    else
-      PRINTF(stream, "\n... skipping from 0x%x --> 0x%x ...\n\n", 
+      PRINTF(stream, "\n... skipping from 0x%x --> 0x%x ...\n\n",
 		   old_offset, stream->offset );
 
 
@@ -278,7 +278,7 @@ static boolean debug_load_immediate( struct debug_stream *stream,
    unsigned *ptr = (unsigned *)(stream->ptr + stream->offset);
    unsigned bits = (ptr[0] >> 4) & 0xff;
    unsigned j = 0;
-   
+
    PRINTF(stream, "%s (%d dwords, flags: %x):\n", name, len, bits);
    PRINTF(stream, "\t0x%08x\n",  ptr[j++]);
 
@@ -362,7 +362,7 @@ static boolean debug_load_immediate( struct debug_stream *stream,
       BITS(stream, ptr[j], 7,  4,   "blend dst factor");
       FLAG(stream, ptr[j], 3,       "depth write enable");
       FLAG(stream, ptr[j], 2,       "color write enable");
-      BITS(stream, ptr[j], 1,  0,   "provoking vertex"); 
+      BITS(stream, ptr[j], 1,  0,   "provoking vertex");
       j++;
    }
 
@@ -372,10 +372,10 @@ static boolean debug_load_immediate( struct debug_stream *stream,
    assert(j == len);
 
    stream->offset += len * sizeof(unsigned);
-   
+
    return TRUE;
 }
- 
+
 
 
 static boolean debug_load_indirect( struct debug_stream *stream,
@@ -385,7 +385,7 @@ static boolean debug_load_indirect( struct debug_stream *stream,
    unsigned *ptr = (unsigned *)(stream->ptr + stream->offset);
    unsigned bits = (ptr[0] >> 8) & 0x3f;
    unsigned i, j = 0;
-   
+
    PRINTF(stream, "%s (%d dwords):\n", name, len);
    PRINTF(stream, "\t0x%08x\n",  ptr[j++]);
 
@@ -432,10 +432,10 @@ static boolean debug_load_indirect( struct debug_stream *stream,
    assert(j == len);
 
    stream->offset += len * sizeof(unsigned);
-   
+
    return TRUE;
 }
- 	
+
 static void BR13( struct debug_stream *stream,
 		  unsigned val )
 {
@@ -495,7 +495,7 @@ static void BR16( struct debug_stream *stream,
 {
    PRINTF(stream, "\t0x%08x -- color\n",  val);
 }
-   
+
 static boolean debug_copy_blit( struct debug_stream *stream,
 				  const char *name,
 				  unsigned len )
@@ -505,7 +505,7 @@ static boolean debug_copy_blit( struct debug_stream *stream,
 
    PRINTF(stream, "%s (%d dwords):\n", name, len);
    PRINTF(stream, "\t0x%08x\n",  ptr[j++]);
-   
+
    BR13(stream, ptr[j++]);
    BR22(stream, ptr[j++]);
    BR23(stream, ptr[j++]);
@@ -570,7 +570,7 @@ static boolean debug_map_state( struct debug_stream *stream,
 
    PRINTF(stream, "%s (%d dwords):\n", name, len);
    PRINTF(stream, "\t0x%08x\n",  ptr[j++]);
-   
+
    {
       PRINTF(stream, "\t0x%08x\n",  ptr[j]);
       BITS(stream, ptr[j], 15, 0,   "map mask");
@@ -622,7 +622,7 @@ static boolean debug_sampler_state( struct debug_stream *stream,
 
    PRINTF(stream, "%s (%d dwords):\n", name, len);
    PRINTF(stream, "\t0x%08x\n",  ptr[j++]);
-   
+
    {
       PRINTF(stream, "\t0x%08x\n",  ptr[j]);
       BITS(stream, ptr[j], 15, 0,   "sampler mask");
@@ -702,7 +702,7 @@ static boolean debug_dest_vars( struct debug_stream *stream,
       FLAG(stream, ptr[j], 1,      "vert line stride offset");
       j++;
    }
-   
+
    stream->offset += len * sizeof(unsigned);
    assert(j == len);
    return TRUE;
@@ -730,7 +730,7 @@ static boolean debug_buf_info( struct debug_stream *stream,
       MBZ (ptr[j], 2,  0);
       j++;
    }
-   
+
    PRINTF(stream, "\t0x%08x -- buffer base address\n",  ptr[j++]);
 
    stream->offset += len * sizeof(unsigned);
@@ -742,7 +742,7 @@ static boolean i915_debug_packet( struct debug_stream *stream )
 {
    unsigned *ptr = (unsigned *)(stream->ptr + stream->offset);
    unsigned cmd = *ptr;
-   
+
    switch (((cmd >> 29) & 0x7)) {
    case 0x0:
       switch ((cmd >> 23) & 0x3f) {
@@ -770,7 +770,7 @@ static boolean i915_debug_packet( struct debug_stream *stream )
       assert(0);
       break;
    case 0x2:
-      switch ((cmd >> 22) & 0xff) {	 
+      switch ((cmd >> 22) & 0xff) {
       case 0x50:
 	 return debug_color_blit(stream, "XY_COLOR_BLT", (cmd & 0xff) + 2);
       case 0x53:
@@ -780,7 +780,7 @@ static boolean i915_debug_packet( struct debug_stream *stream )
       }
       break;
    case 0x3:
-      switch ((cmd >> 24) & 0x1f) {	 
+      switch ((cmd >> 24) & 0x1f) {
       case 0x6:
 	 return debug(stream, "3DSTATE_ANTI_ALIASING", 1);
       case 0x7:
@@ -792,7 +792,7 @@ static boolean i915_debug_packet( struct debug_stream *stream )
       case 0xb:
 	 return debug(stream, "3DSTATE_INDEPENDENT_ALPHA_BLEND", 1);
       case 0xc:
-	 return debug(stream, "3DSTATE_MODES5", 1);	 
+	 return debug(stream, "3DSTATE_MODES5", 1);
       case 0xd:
 	 return debug_modes4(stream, "3DSTATE_MODES4", 1);
       case 0x15:
@@ -863,9 +863,9 @@ static boolean i915_debug_packet( struct debug_stream *stream )
 	    return debug(stream, "", 1);
 	 break;
       case 0x1f:
-	 if ((cmd & (1 << 23)) == 0)	
+	 if ((cmd & (1 << 23)) == 0)
 	    return debug_prim(stream, "3DPRIM (inline)", 1, (cmd & 0x1ffff) + 2);
-	 else if (cmd & (1 << 17)) 
+	 else if (cmd & (1 << 17))
 	 {
 	    if ((cmd & 0xffff) == 0)
 	       return debug_variable_length_prim(stream);
@@ -873,7 +873,7 @@ static boolean i915_debug_packet( struct debug_stream *stream )
 	       return debug_prim(stream, "3DPRIM (indexed)", 0, (((cmd & 0xffff) + 1) / 2) + 1);
 	 }
 	 else
-	    return debug_prim(stream, "3DPRIM  (indirect sequential)", 0, 2); 
+	    return debug_prim(stream, "3DPRIM  (indirect sequential)", 0, 2);
 	 break;
       default:
 	 return debug(stream, "", 0);
@@ -907,7 +907,7 @@ i915_dump_batchbuffer( struct i915_winsys_batchbuffer *batch )
       debug_printf( "\n\nBATCH: ???\n");
       return;
    }
-   
+
    debug_printf( "\n\nBATCH: (%d)\n", (int)bytes / 4);
 
    while (!done &&
