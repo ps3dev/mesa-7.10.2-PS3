@@ -36,7 +36,7 @@ if True:
 if env['llvm']:
     env.Append(CPPDEFINES = ['GALLIUM_LLVMPIPE'])
     env.Prepend(LIBS = [llvmpipe])
-    
+
 if False:
     # TODO: Detect Cell SDK
     env.Append(CPPDEFINES = 'GALLIUM_CELL')

@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-    
+
 #include "ast.h"
 #include "glsl_parser_extras.h"
 #include "glsl_types.h"
@@ -213,7 +213,7 @@
 %type <for_rest_statement> for_rest_statement
 %%
 
-translation_unit: 
+translation_unit:
 	version_statement extension_statement_list
 	{
 	   _mesa_glsl_initialize_types(state);
@@ -446,7 +446,7 @@ function_call_header_with_parameters:
 	}
 	;
 
-	// Grammar Note: Constructors look like functions, but lexical 
+	// Grammar Note: Constructors look like functions, but lexical
 	// analysis recognized most of them as keywords. They are now
 	// recognized through "type_specifier".
 function_call_header:
@@ -501,7 +501,7 @@ method_call_header_with_parameters:
 	}
 	;
 
-	// Grammar Note: Constructors look like methods, but lexical 
+	// Grammar Note: Constructors look like methods, but lexical
 	// analysis recognized most of them as keywords. They are now
 	// recognized through "type_specifier".
 method_call_header:
@@ -1680,7 +1680,7 @@ for_rest_statement:
 
 	// Grammar Note: No 'goto'. Gotos are not supported.
 jump_statement:
-	CONTINUE ';' 
+	CONTINUE ';'
 	{
 	   void *ctx = state;
 	   $$ = new(ctx) ast_jump_statement(ast_jump_statement::ast_continue, NULL);

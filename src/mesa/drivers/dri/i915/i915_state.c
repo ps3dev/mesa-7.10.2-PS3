@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -216,7 +216,7 @@ i915BlendColor(struct gl_context * ctx, const GLfloat color[4])
    GLubyte r, g, b, a;
 
    DBG("%s\n", __FUNCTION__);
-   
+
    UNCLAMPED_FLOAT_TO_UBYTE(r, color[RCOMP]);
    UNCLAMPED_FLOAT_TO_UBYTE(g, color[GCOMP]);
    UNCLAMPED_FLOAT_TO_UBYTE(b, color[BCOMP]);
@@ -327,7 +327,7 @@ i915DepthFunc(struct gl_context * ctx, GLenum func)
    int test = intel_translate_compare_func(func);
 
    DBG("%s\n", __FUNCTION__);
-   
+
    I915_STATECHANGE(i915, I915_UPLOAD_CTX);
    i915->state.Ctx[I915_CTXREG_LIS6] &= ~S6_DEPTH_TEST_FUNC_MASK;
    i915->state.Ctx[I915_CTXREG_LIS6] |= test << S6_DEPTH_TEST_FUNC_SHIFT;
@@ -339,7 +339,7 @@ i915DepthMask(struct gl_context * ctx, GLboolean flag)
    struct i915_context *i915 = I915_CONTEXT(ctx);
 
    DBG("%s flag (%d)\n", __FUNCTION__, flag);
-   
+
    I915_STATECHANGE(i915, I915_UPLOAD_CTX);
 
    if (flag && ctx->Depth.Test)
@@ -500,12 +500,12 @@ i915Scissor(struct gl_context * ctx, GLint x, GLint y, GLsizei w, GLsizei h)
       y2 = y + h - 1;
       DBG("%s %d..%d,%d..%d (not inverted)\n", __FUNCTION__, x1, x2, y1, y2);
    }
-   
+
    x1 = CLAMP(x1, 0, ctx->DrawBuffer->Width - 1);
    y1 = CLAMP(y1, 0, ctx->DrawBuffer->Height - 1);
    x2 = CLAMP(x2, 0, ctx->DrawBuffer->Width - 1);
    y2 = CLAMP(y2, 0, ctx->DrawBuffer->Height - 1);
-   
+
    DBG("%s %d..%d,%d..%d (clamped)\n", __FUNCTION__, x1, x2, y1, y2);
 
    I915_STATECHANGE(i915, I915_UPLOAD_BUFFERS);
@@ -520,7 +520,7 @@ i915LogicOp(struct gl_context * ctx, GLenum opcode)
    int tmp = intel_translate_logic_op(opcode);
 
    DBG("%s\n", __FUNCTION__);
-   
+
    I915_STATECHANGE(i915, I915_UPLOAD_CTX);
    i915->state.Ctx[I915_CTXREG_STATE4] &= ~LOGICOP_MASK;
    i915->state.Ctx[I915_CTXREG_STATE4] |= LOGIC_OP_FUNC(tmp);
@@ -567,7 +567,7 @@ i915LineWidth(struct gl_context * ctx, GLfloat widthf)
    int width;
 
    DBG("%s\n", __FUNCTION__);
-   
+
    width = (int) (widthf * 2);
    width = CLAMP(width, 1, 0xf);
    lis4 |= width << S4_LINE_WIDTH_SHIFT;
@@ -586,7 +586,7 @@ i915PointSize(struct gl_context * ctx, GLfloat size)
    GLint point_size = (int) round(size);
 
    DBG("%s\n", __FUNCTION__);
-   
+
    point_size = CLAMP(point_size, 1, 255);
    lis4 |= point_size << S4_POINT_WIDTH_SHIFT;
 
@@ -656,7 +656,7 @@ static void
 i915LightModelfv(struct gl_context * ctx, GLenum pname, const GLfloat * param)
 {
    DBG("%s\n", __FUNCTION__);
-   
+
    if (pname == GL_LIGHT_MODEL_COLOR_CONTROL) {
       update_specular(ctx);
    }
@@ -984,7 +984,7 @@ i915_init_packets(struct i915_context *i915)
 
    {
       I915_STATECHANGE(i915, I915_UPLOAD_CTX);
-      /* Probably don't want to upload all this stuff every time one 
+      /* Probably don't want to upload all this stuff every time one
        * piece changes.
        */
       i915->state.Ctx[I915_CTXREG_LI] = (_3DSTATE_LOAD_STATE_IMMEDIATE_1 |

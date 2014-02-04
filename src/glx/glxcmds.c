@@ -482,7 +482,7 @@ glXCopyContext(Display * dpy, GLXContext source_user,
                              mask, &errorcode, &x11error)) {
       __glXSendError(dpy, errorcode, 0, X_GLXCopyContext, x11error);
    }
-   
+
 #else
    xGLXCopyContextReq *req;
    struct glx_context *gc = __glXGetCurrentContext();
@@ -607,10 +607,10 @@ glXCreateGLXPixmap(Display * dpy, XVisualInfo * vis, Pixmap pixmap)
    const struct glx_config *config;
 
    config = _gl_context_modes_find_visual(psc->visuals, vis->visualid);
-   
+
    if(apple_glx_pixmap_create(dpy, vis->screen, pixmap, config))
       return None;
-   
+
    return pixmap;
 #else
    xGLXCreateGLXPixmapReq *req;
@@ -1786,7 +1786,7 @@ __glXWaitVideoSyncSGI(int divisor, int remainder, unsigned int *count)
 
 /*
 ** GLX_SGIX_fbconfig
-** Many of these functions are aliased to GLX 1.3 entry points in the 
+** Many of these functions are aliased to GLX 1.3 entry points in the
 ** GLX_functions table.
 */
 

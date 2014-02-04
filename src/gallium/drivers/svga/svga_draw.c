@@ -51,7 +51,7 @@ struct svga_hwtnl *svga_hwtnl_create( struct svga_context *svga,
 
    hwtnl->svga = svga;
    hwtnl->upload_ib = upload_ib;
-   
+
    hwtnl->cmd.swc = swc;
 
    return hwtnl;
@@ -76,7 +76,7 @@ void svga_hwtnl_destroy( struct svga_hwtnl *hwtnl )
 
    for (i = 0; i < hwtnl->cmd.prim_count; i++)
       pipe_resource_reference(&hwtnl->cmd.prim_ib[i], NULL);
-      
+
 
    FREE(hwtnl);
 }
@@ -88,13 +88,13 @@ void svga_hwtnl_set_flatshade( struct svga_hwtnl *hwtnl,
 {
    hwtnl->hw_pv = PV_FIRST;
    hwtnl->api_pv = (flatshade && !flatshade_first) ? PV_LAST : PV_FIRST;
-}                               
+}
 
 void svga_hwtnl_set_unfilled( struct svga_hwtnl *hwtnl,
                               unsigned mode )
 {
    hwtnl->api_fillmode = mode;
-}                               
+}
 
 void svga_hwtnl_reset_vdecl( struct svga_hwtnl *hwtnl,
                              unsigned count )
@@ -123,7 +123,7 @@ void svga_hwtnl_vdecl( struct svga_hwtnl *hwtnl,
 
    hwtnl->cmd.vdecl[i] = *decl;
 
-   pipe_resource_reference(&hwtnl->cmd.vdecl_vb[i], vb);   
+   pipe_resource_reference(&hwtnl->cmd.vdecl_vb[i], vb);
 }
 
 
@@ -168,22 +168,22 @@ svga_hwtnl_flush( struct svga_hwtnl *hwtnl )
                svga_surface(svga->curr.framebuffer.cbufs[0])->handle : NULL,
                hwtnl->cmd.prim_count);
 
-      ret = SVGA3D_BeginDrawPrimitives(swc, 
-                                       &vdecl, 
-                                       hwtnl->cmd.vdecl_count, 
-                                       &prim, 
+      ret = SVGA3D_BeginDrawPrimitives(swc,
+                                       &vdecl,
+                                       hwtnl->cmd.vdecl_count,
+                                       &prim,
                                        hwtnl->cmd.prim_count);
-      if (ret != PIPE_OK) 
+      if (ret != PIPE_OK)
          return ret;
 
-      
+
       memcpy( vdecl,
               hwtnl->cmd.vdecl,
               hwtnl->cmd.vdecl_count * sizeof hwtnl->cmd.vdecl[0]);
 
       for (i = 0; i < hwtnl->cmd.vdecl_count; i++) {
-         /* Given rangeHint is considered to be relative to indexBias, and 
-          * indexBias varies per primitive, we cannot accurately supply an 
+         /* Given rangeHint is considered to be relative to indexBias, and
+          * indexBias varies per primitive, we cannot accurately supply an
           * rangeHint when emitting more than one primitive per draw command.
           */
          if (hwtnl->cmd.prim_count == 1) {
@@ -212,7 +212,7 @@ svga_hwtnl_flush( struct svga_hwtnl *hwtnl )
                                  SVGA_RELOC_READ);
          pipe_resource_reference(&hwtnl->cmd.prim_ib[i], NULL);
       }
-      
+
       SVGA_FIFOCommitAll( swc );
       hwtnl->cmd.prim_count = 0;
    }
@@ -368,7 +368,7 @@ enum pipe_error svga_hwtnl_prim( struct svga_hwtnl *hwtnl,
       if (ret != PIPE_OK)
          return ret;
    }
-   
+
    /* min/max indices are relative to bias */
    hwtnl->cmd.min_index[hwtnl->cmd.prim_count] = min_index;
    hwtnl->cmd.max_index[hwtnl->cmd.prim_count] = max_index;

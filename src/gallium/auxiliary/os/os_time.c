@@ -28,7 +28,7 @@
 /**
  * @file
  * OS independent time-manipulation functions.
- * 
+ *
  * @author Jose Fonseca <jfonseca@vmware.com>
  */
 
@@ -100,17 +100,17 @@ os_time_sleep(int64_t usecs)
 {
    static LONGLONG frequency;
    LONGLONG start, curr, end;
-   
+
    EngQueryPerformanceCounter(&start);
-   
+
    if(!frequency)
       EngQueryPerformanceFrequency(&frequency);
-   
+
    end = start + (usecs * frequency + 999999LL)/1000000LL;
-   
+
    do {
       EngQueryPerformanceCounter(&curr);
-   } while(start <= curr && curr < end || 
+   } while(start <= curr && curr < end ||
 	   end < start && (curr < end || start <= curr));
 }
 

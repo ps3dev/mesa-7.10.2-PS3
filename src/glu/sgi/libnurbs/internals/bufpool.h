@@ -54,7 +54,7 @@ public:
     inline void*	new_buffer( void );
     inline void		free_buffer( void * );
     void		clear( void );
-    
+
 private:
     void		grow( void );
 
@@ -94,7 +94,7 @@ Pool::free_buffer( void *b )
  *-----------------------------------------------------------------------------
  */
 
-inline void * 
+inline void *
 Pool::new_buffer( void )
 {
     void *buffer;
@@ -104,7 +104,7 @@ Pool::new_buffer( void )
     /* find free buffer */
 
     if( freelist ) {
-    	buffer = (void *) freelist; 
+    	buffer = (void *) freelist;
     	freelist = freelist->next;
     } else {
     	if( ! nextfree )
@@ -114,7 +114,7 @@ Pool::new_buffer( void )
     }
     return buffer;
 }
-	
+
 class PooledObj {
 public:
     inline void *	operator new( size_t, Pool & );

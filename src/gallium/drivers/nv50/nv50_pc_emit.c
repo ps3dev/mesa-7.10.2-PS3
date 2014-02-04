@@ -676,7 +676,7 @@ emit_minmax(struct nv_pc *pc, struct nv_instruction *i)
       pc->emit[1] |= 0x84000000;
       break;
    }
-	
+
    emit_form_MAD(pc, i);
 
    if (i->src[0]->mod & NV_MOD_ABS) pc->emit[1] |= 0x00100000;

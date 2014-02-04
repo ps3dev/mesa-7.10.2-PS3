@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Provide additional functionality on top of bufmgr buffers:
@@ -198,7 +198,7 @@ intel_region_flink(struct intel_region *region, uint32_t *name)
    if (region->name == 0) {
       if (drm_intel_bo_flink(region->buffer, &region->name))
 	 return GL_FALSE;
-      
+
       _mesa_HashInsert(region->screen->named_regions,
 		       region->name, region);
    }
@@ -493,7 +493,7 @@ intel_region_cow(struct intel_context *intel, struct intel_region *region)
 
    _DBG("%s %p (%d bytes)\n", __FUNCTION__, region, pbo->Base.Size);
 
-   /* Now blit from the texture buffer to the new buffer: 
+   /* Now blit from the texture buffer to the new buffer:
     */
 
    intel_prepare_render(intel);

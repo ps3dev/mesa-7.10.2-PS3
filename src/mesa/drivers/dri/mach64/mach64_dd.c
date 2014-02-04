@@ -69,7 +69,7 @@ static const GLubyte *mach64DDGetString( struct gl_context *ctx, GLenum name )
       return (GLubyte*)"Gareth Hughes, Leif Delgass, José Fonseca";
 
    case GL_RENDERER:
- 
+
       offset = driGetRendererString( buffer, card_name, DRIVER_DATE,
 				     agp_mode );
       return (GLubyte *)buffer;

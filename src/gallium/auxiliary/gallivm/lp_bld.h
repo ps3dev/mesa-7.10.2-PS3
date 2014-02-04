@@ -46,7 +46,7 @@
  * for a standalone example.
  */
 
-#include <llvm-c/Core.h>  
+#include <llvm-c/Core.h>
 
 
 /** Ensure HAVE_LLVM is set to avoid #ifdef HAVE_LLVM everywhere */

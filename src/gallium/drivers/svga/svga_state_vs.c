@@ -60,7 +60,7 @@ static struct svga_shader_result *search_vs_key( struct svga_vertex_shader *vs,
       if (compare_vs_keys( key, &result->key.vkey ) == 0)
          return result;
    }
-   
+
    return NULL;
 }
 
@@ -85,10 +85,10 @@ static enum pipe_error compile_vs( struct svga_context *svga,
       goto fail;
    }
 
-   ret = SVGA3D_DefineShader(svga->swc, 
+   ret = SVGA3D_DefineShader(svga->swc,
                              result->id,
                              SVGA3D_SHADERTYPE_VS,
-                             result->tokens, 
+                             result->tokens,
                              result->nr_tokens * sizeof result->tokens[0]);
    if (ret)
       goto fail;
@@ -159,13 +159,13 @@ static int emit_hw_vs( struct svga_context *svga,
          return ret;
 
       svga->dirty |= SVGA_NEW_VS_RESULT;
-      svga->state.hw_draw.vs = result;      
+      svga->state.hw_draw.vs = result;
    }
 
    return 0;
 }
 
-struct svga_tracked_state svga_hw_vs = 
+struct svga_tracked_state svga_hw_vs =
 {
    "vertex shader (hwtnl)",
    (SVGA_NEW_VS |
@@ -219,8 +219,8 @@ static int update_zero_stride( struct svga_context *svga,
          translate = translate_generic_create(&key);
 
          assert(vel->src_offset == 0);
-         
-         mapped_buffer = pipe_buffer_map_range(&svga->pipe, 
+
+         mapped_buffer = pipe_buffer_map_range(&svga->pipe,
                                                vbuffer->buffer,
                                                vel->src_offset,
                                                util_format_get_blocksize(vel->src_format),

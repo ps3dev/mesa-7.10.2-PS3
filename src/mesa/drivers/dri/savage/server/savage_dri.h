@@ -41,7 +41,7 @@ typedef struct {
    unsigned int sarea_priv_offset;
 
    unsigned int bufferSize; /* size of DMA buffers */
-   
+
    unsigned int frontbufferSize;
    unsigned int frontOffset;
 

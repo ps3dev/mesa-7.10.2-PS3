@@ -272,7 +272,7 @@ ExaPrepareAccess(PixmapPtr pPix, int index)
 					PIPE_TRANSFER_MAP_DIRECTLY |
 #endif
 					PIPE_TRANSFER_READ_WRITE,
-					0, 0, 
+					0, 0,
                                         pPix->drawable.width,
                                         pPix->drawable.height );
 	if (!priv->map_transfer)
@@ -388,7 +388,7 @@ ExaDoneSolid(PixmapPtr pPixmap)
 
     if (!priv)
 	return;
-   
+
     xorg_composite_done(exa);
 }
 
@@ -470,7 +470,7 @@ ExaPrepareCopy(PixmapPtr pSrcPixmap, PixmapPtr pDstPixmap, int xdir,
                                     &surf_tmpl);
 
 
-       renderer_copy_prepare(exa->renderer, 
+       renderer_copy_prepare(exa->renderer,
                              exa->copy.dst_surface,
                              exa->copy.src_texture );
     }
@@ -507,7 +507,7 @@ ExaCopy(PixmapPtr pDstPixmap, int srcX, int srcY, int dstX, int dstY,
                                        0, &src_box);
    }
    else {
-      renderer_copy_pixmap(exa->renderer, 
+      renderer_copy_pixmap(exa->renderer,
                            dstX, dstY,
                            srcX, srcY,
                            width, height,
@@ -823,10 +823,10 @@ ExaModifyPixmapHeader(PixmapPtr pPixmap, int width, int height,
     if (0) {
        debug_printf("%s pixmap %p sz %dx%dx%d devKind %d\n",
                     __FUNCTION__, pPixmap, width, height, bitsPerPixel, devKind);
-       
+
        if (priv->tex)
           debug_printf("  ==> old texture %dx%d\n",
-                       priv->tex->width0, 
+                       priv->tex->width0,
                        priv->tex->height0);
     }
 

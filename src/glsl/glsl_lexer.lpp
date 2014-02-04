@@ -98,7 +98,7 @@ HASH		^{SPC}#{SPC}
 
 [ \r\t]+		;
 
-    /* Preprocessor tokens. */ 
+    /* Preprocessor tokens. */
 ^[ \t]*#[ \t]*$			;
 ^[ \t]*#[ \t]*version		{ BEGIN PP; return VERSION; }
 ^[ \t]*#[ \t]*extension		{ BEGIN PP; return EXTENSION; }
@@ -418,7 +418,7 @@ row_major	KEYWORD(130, 999, ROW_MAJOR);
 
 [_a-zA-Z][_a-zA-Z0-9]*	{
 			    struct _mesa_glsl_parse_state *state = yyextra;
-			    void *ctx = state;	
+			    void *ctx = state;
 			    yylval->identifier = ralloc_strdup(ctx, yytext);
 			    return classify_identifier(state, yytext);
 			}

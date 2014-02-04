@@ -388,8 +388,8 @@ static void gs_tri_adj(struct draw_geometry_shader *shader,
  * Execute geometry shader using TGSI interpreter.
  */
 int draw_geometry_shader_run(struct draw_geometry_shader *shader,
-                             const void *constants[PIPE_MAX_CONSTANT_BUFFERS], 
-                             const unsigned constants_size[PIPE_MAX_CONSTANT_BUFFERS], 
+                             const void *constants[PIPE_MAX_CONSTANT_BUFFERS],
+                             const unsigned constants_size[PIPE_MAX_CONSTANT_BUFFERS],
                              const struct draw_vertex_info *input_verts,
                              const struct draw_prim_info *input_prim,
                              struct draw_vertex_info *output_verts,

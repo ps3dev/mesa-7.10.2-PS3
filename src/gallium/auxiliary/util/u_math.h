@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -123,46 +123,46 @@ __inline double __cdecl atan2(double val)
 #endif
 
 
-#if defined(_MSC_VER) 
+#if defined(_MSC_VER)
 
 #if _MSC_VER < 1400 && !defined(__cplusplus) || defined(PIPE_SUBSYSTEM_WINDOWS_CE)
- 
-static INLINE float cosf( float f ) 
+
+static INLINE float cosf( float f )
 {
    return (float) cos( (double) f );
 }
 
-static INLINE float sinf( float f ) 
+static INLINE float sinf( float f )
 {
    return (float) sin( (double) f );
 }
 
-static INLINE float ceilf( float f ) 
+static INLINE float ceilf( float f )
 {
    return (float) ceil( (double) f );
 }
 
-static INLINE float floorf( float f ) 
+static INLINE float floorf( float f )
 {
    return (float) floor( (double) f );
 }
 
-static INLINE float powf( float f, float g ) 
+static INLINE float powf( float f, float g )
 {
    return (float) pow( (double) f, (double) g );
 }
 
-static INLINE float sqrtf( float f ) 
+static INLINE float sqrtf( float f )
 {
    return (float) sqrt( (double) f );
 }
 
-static INLINE float fabsf( float f ) 
+static INLINE float fabsf( float f )
 {
    return (float) fabs( (double) f );
 }
 
-static INLINE float logf( float f ) 
+static INLINE float logf( float f )
 {
    return (float) log( (double) f );
 }
@@ -323,7 +323,7 @@ util_ifloor(float f)
 static INLINE int
 util_iround(float f)
 {
-#if defined(PIPE_CC_GCC) && defined(PIPE_ARCH_X86) 
+#if defined(PIPE_CC_GCC) && defined(PIPE_ARCH_X86)
    int r;
    __asm__ ("fistpl %0" : "=m" (r) : "t" (f) : "st");
    return r;

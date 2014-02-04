@@ -338,7 +338,7 @@ LLBL( G3TP3NRR_1 ):
 
     ADD_L     ( EDI, EAX )		/* next vertex                       */
     PREFETCHW ( REGIND(EAX) )
-	
+
     PFMUL     ( MM0, MM4 )		/* x1*m11          | x0*m00          */
 
     PFADD     ( MM1, MM4 )		/* x1*m11+m31      | x0*m00+m30      */
@@ -555,7 +555,7 @@ LLBL( G3TPIR_2 ):
     POP_L     ( ESI )
     RET
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

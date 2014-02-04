@@ -527,7 +527,7 @@ bld_insn_1(struct bld_context *bld, uint opcode, struct nv_value *src0)
    struct nv_instruction *insn = new_instruction(bld->pc, opcode);
 
    nv_reference(bld->pc, &insn->src[0], src0);
-   
+
    return bld_def(insn, 0, new_value(bld->pc, NV_FILE_GPR, src0->reg.as_type));
 }
 
@@ -1159,7 +1159,7 @@ emit_fetch(struct bld_context *bld, const struct tgsi_full_instruction *insn,
    default:
       NOUVEAU_ERR("illegal/unhandled src reg file: %d\n", src->Register.File);
       abort();
-      break;	   
+      break;
    }
    if (!res)
       return bld_undef(bld, NV_FILE_GPR);
@@ -1549,7 +1549,7 @@ bld_instruction(struct bld_context *bld,
 #ifdef NV50_TGSI2NC_DEBUG
    debug_printf("bld_instruction:"); tgsi_dump_instruction(insn, 1);
 #endif
-	
+
    switch (insn->Instruction.Opcode) {
    case TGSI_OPCODE_ADD:
    case TGSI_OPCODE_MAX:
@@ -1804,7 +1804,7 @@ bld_instruction(struct bld_context *bld,
       FOR_EACH_DST0_ENABLED_CHANNEL(c, insn) {
          src0 = emit_fetch(bld, insn, 0, c);
          dst0[c] = bld_insn_1(bld, opcode, src0);
-      }	   
+      }
       break;
    case TGSI_OPCODE_LIT:
       bld_lit(bld, dst0, insn);

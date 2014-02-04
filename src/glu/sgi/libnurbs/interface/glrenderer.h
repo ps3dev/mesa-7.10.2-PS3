@@ -51,7 +51,7 @@ class GLUnurbs : public NurbsTessellator {
 public:
 		GLUnurbs( void );
     void 	loadGLMatrices( void );
-    void	useGLMatrices( const GLfloat modelMatrix[16], 
+    void	useGLMatrices( const GLfloat modelMatrix[16],
 			       const GLfloat projMatrix[16],
 			       const GLint viewport[4] );
     void		setSamplingMatrixIdentity( void );
@@ -60,16 +60,16 @@ public:
     void	bgnrender( void );
     void	endrender( void );
     void	setautoloadmode( INREAL value )
-      		    { 
-		      
-		      if (value) autoloadmode = GL_TRUE; 
-		      else autoloadmode = GL_FALSE; 
-			
+      		    {
+
+		      if (value) autoloadmode = GL_TRUE;
+		      else autoloadmode = GL_FALSE;
+
 		    }
     GLboolean	getautoloadmode( void ) { return autoloadmode; }
 
     errorCallbackType errorCallback;
-    void	postError( int which ) 
+    void	postError( int which )
 		    { if (errorCallback) (errorCallback)( (GLenum)which ); }
 #ifdef _WIN32
     void        putSurfCallBack(GLenum which, void (GLAPIENTRY *fn)() )
@@ -85,7 +85,7 @@ public:
       {
 	return surfaceEvaluator.get_vertices_call_back();
       }
-    
+
     void        put_vertices_call_back(int flag)
       {
 	surfaceEvaluator.put_vertices_call_back(flag);
@@ -95,7 +95,7 @@ public:
       {
         return surfaceEvaluator.get_callback_auto_normal();
       }
- 
+
     void         put_callback_auto_normal(int flag)
       {
         surfaceEvaluator.put_callback_auto_normal(flag);
@@ -131,11 +131,11 @@ private:
     OpenGLSurfaceEvaluator	surfaceEvaluator;
     OpenGLCurveEvaluator	curveEvaluator;
 
-    void		loadSamplingMatrix( const GLfloat vmat[4][4], 
+    void		loadSamplingMatrix( const GLfloat vmat[4][4],
 			        const GLint viewport[4] );
     void		loadCullingMatrix( GLfloat vmat[4][4] );
     static void		grabGLMatrix( GLfloat vmat[4][4] );
-    static void		transform4d( GLfloat A[4], GLfloat B[4], 
+    static void		transform4d( GLfloat A[4], GLfloat B[4],
 				GLfloat mat[4][4] );
     static void		multmatrix4d( GLfloat n[4][4], const GLfloat left[4][4],
 				const GLfloat right[4][4] );

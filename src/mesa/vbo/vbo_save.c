@@ -68,7 +68,7 @@ void vbo_save_init( struct gl_context *ctx )
       for (i = 0; i < 16; ++i) {
          arrays[i     ].BufferObj = NULL;
          arrays[i + 16].BufferObj = NULL;
-         _mesa_reference_buffer_object(ctx, &arrays[i     ].BufferObj, 
+         _mesa_reference_buffer_object(ctx, &arrays[i     ].BufferObj,
                                        vbo->legacy_currval[i].BufferObj);
          _mesa_reference_buffer_object(ctx, &arrays[i + 16].BufferObj,
                                        vbo->generic_currval[i].BufferObj);

@@ -50,14 +50,14 @@
 #define MAXARCS	10
 
 /*----------------------------------------------------------------------------
- * Subdivider::split - split trim regions in source bin by line (param == value). 
+ * Subdivider::split - split trim regions in source bin by line (param == value).
  *----------------------------------------------------------------------------
  */
 
 void
 Subdivider::split( Bin& bin, Bin& left, Bin& right, int param, REAL value )
 {
-    Bin	intersections, unknown; 
+    Bin	intersections, unknown;
 
     partition( bin, left, intersections, right, unknown, param, value );
 
@@ -85,7 +85,7 @@ Subdivider::split( Bin& bin, Bin& left, Bin& right, int param, REAL value )
     if( param == 0 ) { /* sort into increasing t order */
 	ArcSdirSorter sorter(*this);
 	sorter.qsort( list, count );
-	
+
         //::qsort ((void *)list, count, sizeof(Arc_ptr), (cmpfunc)compare_s);
 	for( lptr=list; lptr<last; lptr+=2 )
 	    check_s ( lptr[0], lptr[1] );
@@ -114,7 +114,7 @@ Subdivider::split( Bin& bin, Bin& left, Bin& right, int param, REAL value )
     }
 
     if( list != arclist ) delete[] list;
-    unknown.adopt(); 
+    unknown.adopt();
 }
 
 
@@ -136,7 +136,7 @@ Subdivider::check_s( Arc_ptr jarc1, Arc_ptr jarc2 )
 	::mylongjmp( jumpbuffer, 28 );
     }
 
-    if( ! ( jarc2->tail()[0] > (jarc2)->head()[0] ) ) { 
+    if( ! ( jarc2->tail()[0] > (jarc2)->head()[0] ) ) {
 #ifndef NDEBUG
 	_glu_dprintf( "s difference %f\n",  (jarc2)->tail()[0] - (jarc2)->head()[0] );
 #endif
@@ -160,7 +160,7 @@ Subdivider::link( Arc_ptr jarc1, Arc_ptr jarc2, Arc_ptr up, Arc_ptr down )
     up->prev->next = up;
 }
 
-inline void 
+inline void
 Subdivider::simple_link( Arc_ptr jarc1, Arc_ptr jarc2 )
 {
     Arc_ptr tmp = jarc2->prev;
@@ -196,7 +196,7 @@ Subdivider::join_s( Bin& left, Bin& right, Arc_ptr jarc1, Arc_ptr jarc2 )
     if( t1 == t2 ) {
 	simple_link( jarc1, jarc2 );
     } else {
-	Arc_ptr newright = new(arcpool) Arc( arc_right, 0 ); 
+	Arc_ptr newright = new(arcpool) Arc( arc_right, 0 );
 	Arc_ptr newleft = new(arcpool) Arc( arc_left, 0 );
 	assert( t1 < t2 );
 	if( isBezierArcType() ) {
@@ -235,7 +235,7 @@ Subdivider::check_t( Arc_ptr jarc1, Arc_ptr jarc2 )
 	::mylongjmp( jumpbuffer, 28 );
     }
 
-    if( ! ( jarc2->tail()[1] > (jarc2)->head()[1] ) ) { 
+    if( ! ( jarc2->tail()[1] > (jarc2)->head()[1] ) ) {
 #ifndef NDEBUG
 	_glu_dprintf( "t difference %f\n",  jarc2->tail()[1] - (jarc2)->head()[1] );
 #endif

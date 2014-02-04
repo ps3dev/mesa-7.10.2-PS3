@@ -37,7 +37,7 @@
 
 /**
  * Send glPixelStore command to the server
- * 
+ *
  * \param gc     Current GLX context
  * \param sop    Either \c X_GLsop_PixelStoref or \c X_GLsop_PixelStorei
  * \param pname  Selector of which pixel parameter is to be set.

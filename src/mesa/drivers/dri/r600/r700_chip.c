@@ -53,7 +53,7 @@ static void r700SendTexState(struct gl_context *ctx, struct radeon_state_atom *a
 	radeon_print(RADEON_STATE, RADEON_VERBOSE, "%s\n", __func__);
 
 	for (i = 0; i < R700_TEXTURE_NUMBERUNITS; i++) {
-		if (ctx->Texture.Unit[i]._ReallyEnabled) {            
+		if (ctx->Texture.Unit[i]._ReallyEnabled) {
 			radeonTexObj *t = r700->textures[i];
 			if (t) {
 				if (!t->image_override) {
@@ -70,8 +70,8 @@ static void r700SendTexState(struct gl_context *ctx, struct radeon_state_atom *a
 					BEGIN_BATCH_NO_AUTOSTATE(9 + 4);
 					R600_OUT_BATCH(CP_PACKET3(R600_IT_SET_RESOURCE, 7));
 
-                    if( (1<<i) & vp->r700AsmCode.unVetTexBits )                    
-                    {   /* vs texture */                                     
+                    if( (1<<i) & vp->r700AsmCode.unVetTexBits )
+                    {   /* vs texture */
                         R600_OUT_BATCH((i + VERT_ATTRIB_MAX + SQ_FETCH_RESOURCE_VS_OFFSET) * FETCH_RESOURCE_STRIDE);
                     }
                     else
@@ -116,13 +116,13 @@ static void r700SendTexSamplerState(struct gl_context *ctx, struct radeon_state_
 	radeon_print(RADEON_STATE, RADEON_VERBOSE, "%s\n", __func__);
 
 	for (i = 0; i < R700_TEXTURE_NUMBERUNITS; i++) {
-		if (ctx->Texture.Unit[i]._ReallyEnabled) {            
+		if (ctx->Texture.Unit[i]._ReallyEnabled) {
 			radeonTexObj *t = r700->textures[i];
 			if (t) {
 				BEGIN_BATCH_NO_AUTOSTATE(5);
 				R600_OUT_BATCH(CP_PACKET3(R600_IT_SET_SAMPLER, 3));
 
-                if( (1<<i) & vp->r700AsmCode.unVetTexBits )                    
+                if( (1<<i) & vp->r700AsmCode.unVetTexBits )
                 {   /* vs texture */
                     R600_OUT_BATCH((i+SQ_TEX_SAMPLER_VS_OFFSET) * SAMPLER_STRIDE); //work 1
                 }
@@ -202,7 +202,7 @@ static void r700SetupVTXConstants(struct gl_context  * ctx,
     SETfield(uSQ_VTX_CONSTANT_WORD2_0, GetSurfaceFormat(pStreamDesc->type, pStreamDesc->size, NULL),
 	     SQ_VTX_CONSTANT_WORD2_0__DATA_FORMAT_shift,
 	     SQ_VTX_CONSTANT_WORD2_0__DATA_FORMAT_mask); /* TODO : trace back api for initial data type, not only GL_FLOAT */
-    
+
     if(GL_TRUE == pStreamDesc->normalize)
     {
         SETfield(uSQ_VTX_CONSTANT_WORD2_0, SQ_NUM_FORMAT_NORM,
@@ -574,7 +574,7 @@ static void r700SetDepthTarget(context_t *context)
     {
         height = rrb->base.Height;
     }
-    else 
+    else
     {
         height =  context->radeon.radeonScreen->driScreen->fbHeight;
     }
@@ -809,11 +809,11 @@ static void r700SendVSState(struct gl_context *ctx, struct radeon_state_atom *at
         {
             r700SyncSurf(context, pbo_const, RADEON_GEM_DOMAIN_GTT, 0, SH_ACTION_ENA_bit); /* TODO : Check kc bit. */
 
-            BEGIN_BATCH_NO_AUTOSTATE(3);            
-            R600_OUT_BATCH_REGVAL(SQ_ALU_CONST_BUFFER_SIZE_VS_0, (r700->vs.num_consts * 4)/16 );    
+            BEGIN_BATCH_NO_AUTOSTATE(3);
+            R600_OUT_BATCH_REGVAL(SQ_ALU_CONST_BUFFER_SIZE_VS_0, (r700->vs.num_consts * 4)/16 );
             END_BATCH();
 
-            BEGIN_BATCH_NO_AUTOSTATE(3 + 2);            
+            BEGIN_BATCH_NO_AUTOSTATE(3 + 2);
             R600_OUT_BATCH_REGSEQ(SQ_ALU_CONST_CACHE_VS_0, 1);
             R600_OUT_BATCH(r700->vs.SQ_ALU_CONST_CACHE_VS_0.u32All);
             R600_OUT_BATCH_RELOC(r700->vs.SQ_ALU_CONST_CACHE_VS_0.u32All,
@@ -823,7 +823,7 @@ static void r700SendVSState(struct gl_context *ctx, struct radeon_state_atom *at
             END_BATCH();
         }
     }
-    
+
     COMMIT_BATCH();
 }
 

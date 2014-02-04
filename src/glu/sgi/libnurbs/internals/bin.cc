@@ -62,7 +62,7 @@ Bin::~Bin()
  *----------------------------------------------------------------------------
  */
 
-void 
+void
 Bin::remove_this_arc( Arc_ptr arc )
 {
     Arc_ptr *j;
@@ -94,7 +94,7 @@ Bin::numarcs()
  *----------------------------------------------------------------------------
  */
 
-void 
+void
 Bin::adopt()
 {
     markall();
@@ -135,7 +135,7 @@ Bin::show( char *name )
  *----------------------------------------------------------------------------
  */
 
-void 
+void
 Bin::markall()
 {
     for( Arc_ptr jarc=firstarc(); jarc; jarc=nextarc() )
@@ -147,12 +147,12 @@ Bin::markall()
  *----------------------------------------------------------------------------
  */
 
-void 
+void
 Bin::listBezier( void )
 {
     for( Arc_ptr jarc=firstarc(); jarc; jarc=nextarc() ) {
 	if( jarc->isbezier( ) ) {
-    	    assert( jarc->pwlArc->npts == 2 );	
+    	    assert( jarc->pwlArc->npts == 2 );
 #ifndef NDEBUG
 	    TrimVertex  *pts = jarc->pwlArc->pts;
     	    REAL s1 = pts[0].param[0];

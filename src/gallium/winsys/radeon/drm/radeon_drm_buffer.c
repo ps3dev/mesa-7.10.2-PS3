@@ -313,7 +313,7 @@ radeon_drm_bufmgr_create_buffer(struct pb_manager *_mgr,
  error2:
     FREE(buf);
  error1:
-    return NULL; 
+    return NULL;
 }
 
 static void

@@ -91,11 +91,11 @@ stw_framebuffer_destroy_locked(
       stw_dev->stw_winsys->shared_surface_close(stw_dev->screen, fb->shared_surface);
 
    stw_st_destroy_framebuffer_locked(fb->stfb);
-   
+
    pipe_mutex_unlock( fb->mutex );
 
    pipe_mutex_destroy( fb->mutex );
-   
+
    FREE( fb );
 }
 
@@ -118,7 +118,7 @@ stw_framebuffer_get_size( struct stw_framebuffer *fb )
    POINT client_pos;
 
    assert(fb->hWnd);
-   
+
    /* Get the client area size. */
    GetClientRect( fb->hWnd, &client_rect );
    assert(client_rect.left == 0);
@@ -133,8 +133,8 @@ stw_framebuffer_get_size( struct stw_framebuffer *fb )
 
    if(width != fb->width || height != fb->height) {
       fb->must_resize = TRUE;
-      fb->width = width; 
-      fb->height = height; 
+      fb->width = width;
+      fb->height = height;
    }
 
    client_pos.x = 0;
@@ -177,26 +177,26 @@ stw_call_window_proc(
    struct stw_tls_data *tls_data;
    PCWPSTRUCT pParams = (PCWPSTRUCT)lParam;
    struct stw_framebuffer *fb;
-   
+
    tls_data = stw_tls_get_data();
    if(!tls_data)
       return 0;
-   
+
    if (nCode < 0 || !stw_dev)
        return CallNextHookEx(tls_data->hCallWndProcHook, nCode, wParam, lParam);
 
    if (pParams->message == WM_WINDOWPOSCHANGED) {
       /* We handle WM_WINDOWPOSCHANGED instead of WM_SIZE because according to
-       * http://blogs.msdn.com/oldnewthing/archive/2008/01/15/7113860.aspx 
-       * WM_SIZE is generated from WM_WINDOWPOSCHANGED by DefWindowProc so it 
+       * http://blogs.msdn.com/oldnewthing/archive/2008/01/15/7113860.aspx
+       * WM_SIZE is generated from WM_WINDOWPOSCHANGED by DefWindowProc so it
        * can be masked out by the application. */
       LPWINDOWPOS lpWindowPos = (LPWINDOWPOS)pParams->lParam;
-      if((lpWindowPos->flags & SWP_SHOWWINDOW) || 
+      if((lpWindowPos->flags & SWP_SHOWWINDOW) ||
          !(lpWindowPos->flags & SWP_NOMOVE) ||
          !(lpWindowPos->flags & SWP_NOSIZE)) {
          fb = stw_framebuffer_from_hwnd( pParams->hwnd );
          if(fb) {
-            /* Size in WINDOWPOS includes the window frame, so get the size 
+            /* Size in WINDOWPOS includes the window frame, so get the size
              * of the client area via GetClientRect.  */
             stw_framebuffer_get_size(fb);
             stw_framebuffer_release(fb);
@@ -228,7 +228,7 @@ stw_framebuffer_create(
    hWnd = WindowFromDC( hdc );
    if(!hWnd)
       return NULL;
-   
+
    fb = CALLOC_STRUCT( stw_framebuffer );
    if (fb == NULL)
       return NULL;
@@ -302,15 +302,15 @@ stw_framebuffer_update(
    assert(fb->stfb);
    assert(fb->height);
    assert(fb->width);
-   
-   /* XXX: It would be nice to avoid checking the size again -- in theory  
-    * stw_call_window_proc would have cought the resize and stored the right 
-    * size already, but unfortunately threads created before the DllMain is 
+
+   /* XXX: It would be nice to avoid checking the size again -- in theory
+    * stw_call_window_proc would have cought the resize and stored the right
+    * size already, but unfortunately threads created before the DllMain is
     * called don't get a DLL_THREAD_ATTACH notification, and there is no way
     * to know of their existing without using the not very portable PSAPI.
     */
    stw_framebuffer_get_size(fb);
-}                      
+}
 
 
 void
@@ -327,14 +327,14 @@ stw_framebuffer_cleanup( void )
    fb = stw_dev->fb_head;
    while (fb) {
       next = fb->next;
-      
+
       pipe_mutex_lock(fb->mutex);
       stw_framebuffer_destroy_locked(fb);
-      
+
       fb = next;
    }
    stw_dev->fb_head = NULL;
-   
+
    pipe_mutex_unlock( stw_dev->fb_mutex );
 }
 
@@ -349,15 +349,15 @@ stw_framebuffer_from_hdc_locked(
    HWND hwnd;
    struct stw_framebuffer *fb;
 
-   /* 
-    * Some applications create and use several HDCs for the same window, so 
+   /*
+    * Some applications create and use several HDCs for the same window, so
     * looking up the framebuffer by the HDC is not reliable. Use HWND whenever
     * possible.
-    */ 
+    */
    hwnd = WindowFromDC(hdc);
    if(hwnd)
       return stw_framebuffer_from_hwnd_locked(hwnd);
-   
+
    for (fb = stw_dev->fb_head; fb != NULL; fb = fb->next)
       if (fb->hDC == hdc) {
          pipe_mutex_lock(fb->mutex);
@@ -433,16 +433,16 @@ DrvSetPixelFormat(
    if(!fb) {
       return FALSE;
    }
-      
+
    stw_framebuffer_release( fb );
 
-   /* Some applications mistakenly use the undocumented wglSetPixelFormat 
-    * function instead of SetPixelFormat, so we call SetPixelFormat here to 
+   /* Some applications mistakenly use the undocumented wglSetPixelFormat
+    * function instead of SetPixelFormat, so we call SetPixelFormat here to
     * avoid opengl32.dll's wglCreateContext to fail */
    if (GetPixelFormat(hdc) == 0) {
         SetPixelFormat(hdc, iPixelFormat, NULL);
    }
-   
+
    return TRUE;
 }
 
@@ -459,7 +459,7 @@ stw_pixelformat_get(
       iPixelFormat = fb->iPixelFormat;
       stw_framebuffer_release(fb);
    }
-   
+
    return iPixelFormat;
 }
 

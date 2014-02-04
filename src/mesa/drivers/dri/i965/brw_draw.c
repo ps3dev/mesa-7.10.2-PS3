@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -58,7 +58,7 @@ static GLuint prim_to_hw_prim[GL_POLYGON+1] = {
 };
 
 
-static const GLenum reduced_prim[GL_POLYGON+1] = {  
+static const GLenum reduced_prim[GL_POLYGON+1] = {
    GL_POINTS,
    GL_LINES,
    GL_LINES,
@@ -120,7 +120,7 @@ static GLuint trim(GLenum prim, GLuint length)
       return length > 3 ? (length - length % 2) : 0;
    else if (prim == GL_QUADS)
       return length - length % 4;
-   else 
+   else
       return length;
 }
 
@@ -202,7 +202,7 @@ static GLboolean check_fallbacks( struct brw_context *brw,
    struct gl_context *ctx = &brw->intel.ctx;
    GLuint i;
 
-   /* If we don't require strict OpenGL conformance, never 
+   /* If we don't require strict OpenGL conformance, never
     * use fallbacks.  If we're forcing fallbacks, always
     * use fallfacks.
     */
@@ -214,7 +214,7 @@ static GLboolean check_fallbacks( struct brw_context *brw,
 
    if (ctx->Polygon.SmoothFlag) {
       for (i = 0; i < nr_prims; i++)
-	 if (reduced_prim[prim[i].mode] == GL_TRIANGLES) 
+	 if (reduced_prim[prim[i].mode] == GL_TRIANGLES)
 	    return GL_TRUE;
    }
 
@@ -223,7 +223,7 @@ static GLboolean check_fallbacks( struct brw_context *brw,
     */
    if (ctx->Line.SmoothFlag) {
       for (i = 0; i < nr_prims; i++)
-	 if (reduced_prim[prim[i].mode] == GL_LINES) 
+	 if (reduced_prim[prim[i].mode] == GL_LINES)
 	    return GL_TRUE;
    }
 
@@ -235,9 +235,9 @@ static GLboolean check_fallbacks( struct brw_context *brw,
 	 /* GS doesn't get enough information to know when to reset
 	  * the stipple counter?!?
 	  */
-	 if (prim[i].mode == GL_LINE_LOOP || prim[i].mode == GL_LINE_STRIP) 
+	 if (prim[i].mode == GL_LINE_LOOP || prim[i].mode == GL_LINE_STRIP)
 	    return GL_TRUE;
-	    
+
 	 if (prim[i].mode == GL_POLYGON &&
 	     (ctx->Polygon.FrontMode == GL_LINE ||
 	      ctx->Polygon.BackMode == GL_LINE))
@@ -247,7 +247,7 @@ static GLboolean check_fallbacks( struct brw_context *brw,
 
    if (ctx->Point.SmoothFlag) {
       for (i = 0; i < nr_prims; i++)
-	 if (prim[i].mode == GL_POINTS) 
+	 if (prim[i].mode == GL_POINTS)
 	    return GL_TRUE;
    }
 
@@ -283,7 +283,7 @@ static GLboolean check_fallbacks( struct brw_context *brw,
          }
       }
    }
-      
+
    /* Nothing stopping us from the fast path now */
    return GL_FALSE;
 }
@@ -312,7 +312,7 @@ static GLboolean brw_try_draw_prims( struct gl_context *ctx,
    /* We have to validate the textures *before* checking for fallbacks;
     * otherwise, the software fallback won't be able to rely on the
     * texture state, the firstLevel and lastLevel fields won't be
-    * set in the intel texture object (they'll both be 0), and the 
+    * set in the intel texture object (they'll both be 0), and the
     * software fallback will segfault if it attempts to access any
     * texture level other than level 0.
     */
@@ -333,8 +333,8 @@ static GLboolean brw_try_draw_prims( struct gl_context *ctx,
    brw->state.dirty.brw |= BRW_NEW_VERTICES;
 
    /* Have to validate state quite late.  Will rebuild tnl_program,
-    * which depends on varying information.  
-    * 
+    * which depends on varying information.
+    *
     * Note this is where brw->vs->prog_data.inputs_read is calculated,
     * so can't access it earlier.
     */
@@ -462,7 +462,7 @@ void brw_draw_init( struct brw_context *brw )
    struct gl_context *ctx = &brw->intel.ctx;
    struct vbo_context *vbo = vbo_context(ctx);
 
-   /* Register our drawing function: 
+   /* Register our drawing function:
     */
    vbo->draw_prims = brw_draw_prims;
 }

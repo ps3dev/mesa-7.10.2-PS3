@@ -241,7 +241,7 @@ GLboolean XMesaSetFXmode( GLint mode )
          return GL_FALSE;
       }
       if (ctx) {
-         /* [dBorca] Hack alert: 
+         /* [dBorca] Hack alert:
 	  * oh, this is sooo wrong: ctx above is
 	  * really an fxMesaContext, not an XMesaContext
 	  */

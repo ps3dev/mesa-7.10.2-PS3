@@ -20,14 +20,14 @@ static drmBufPtr i810_get_buffer_ioctl( i810ContextPtr imesa )
    drmI810DMA dma;
    drmBufPtr buf;
    int retcode, i = 0;
-   
+
    while (1) {
       retcode = drmCommandWriteRead(imesa->driFd, DRM_I810_GETBUF,
                                     &dma, sizeof(drmI810DMA));
 
-      if (dma.granted == 1 && retcode == 0) 
+      if (dma.granted == 1 && retcode == 0)
 	 break;
-      
+
       if (++i > 1000) {
 	 drmCommandNone(imesa->driFd, DRM_I810_FLUSH);
 	 i = 0;
@@ -60,7 +60,7 @@ static void i810Clear( struct gl_context *ctx, GLbitfield mask )
    clear.clear_depth = (GLuint) (ctx->Depth.Clear * DEPTH_SCALE);
 
    I810_FIREVERTICES( imesa );
-	
+
    if ((mask & BUFFER_BIT_FRONT_LEFT) && colorMask == ~0U) {
       clear.flags |= I810_FRONT;
       mask &= ~BUFFER_BIT_FRONT_LEFT;
@@ -72,7 +72,7 @@ static void i810Clear( struct gl_context *ctx, GLbitfield mask )
    }
 
    if (mask & BUFFER_BIT_DEPTH) {
-      if (ctx->Depth.Mask) 
+      if (ctx->Depth.Mask)
 	 clear.flags |= I810_DEPTH;
       mask &= ~BUFFER_BIT_DEPTH;
    }
@@ -93,10 +93,10 @@ static void i810Clear( struct gl_context *ctx, GLbitfield mask )
       cx += imesa->drawX;
       cy += imesa->drawY;
 
-      for (i = 0 ; i < imesa->numClipRects ; ) 
-      { 	 
+      for (i = 0 ; i < imesa->numClipRects ; )
+      {
 	 unsigned int nr = MIN2(i + I810_NR_SAREA_CLIPRECTS, imesa->numClipRects);
-	 drm_clip_rect_t *box = imesa->pClipRects;	 
+	 drm_clip_rect_t *box = imesa->pClipRects;
 	 drm_clip_rect_t *b = (drm_clip_rect_t *)imesa->sarea->boxes;
 	 int n = 0;
 
@@ -108,7 +108,7 @@ static void i810Clear( struct gl_context *ctx, GLbitfield mask )
 	       GLint w = box[i].x2 - x;
 	       GLint h = box[i].y2 - y;
 
-	       if (x < cx) w -= cx - x, x = cx; 
+	       if (x < cx) w -= cx - x, x = cx;
 	       if (y < cy) h -= cy - y, y = cy;
 	       if (x + w > cx + cw) w = cx + cw - x;
 	       if (y + h > cy + ch) h = cy + ch - y;
@@ -139,7 +139,7 @@ static void i810Clear( struct gl_context *ctx, GLbitfield mask )
       imesa->upload_cliprects = GL_TRUE;
    }
 
-   if (mask) 
+   if (mask)
       _swrast_Clear( ctx, mask );
 }
 
@@ -147,9 +147,9 @@ static void i810Clear( struct gl_context *ctx, GLbitfield mask )
 
 
 /*
- * Copy the back buffer to the front buffer. 
+ * Copy the back buffer to the front buffer.
  */
-void i810CopyBuffer( const __DRIdrawable *dPriv ) 
+void i810CopyBuffer( const __DRIdrawable *dPriv )
 {
    i810ContextPtr imesa;
    drm_clip_rect_t *pbox;
@@ -163,7 +163,7 @@ void i810CopyBuffer( const __DRIdrawable *dPriv )
 
    I810_FIREVERTICES( imesa );
    LOCK_HARDWARE( imesa );
-   
+
    pbox = (drm_clip_rect_t *)dPriv->pClipRects;
    nbox = dPriv->numClipRects;
 
@@ -174,7 +174,7 @@ void i810CopyBuffer( const __DRIdrawable *dPriv )
 
       imesa->sarea->nbox = nr - i;
 
-      for ( ; i < nr ; i++) 
+      for ( ; i < nr ; i++)
 	 *b++ = pbox[i];
 
       drmCommandNone(imesa->driFd, DRM_I810_SWAP);
@@ -197,7 +197,7 @@ void i810CopyBuffer( const __DRIdrawable *dPriv )
 /*
  * XXX implement when full-screen extension is done.
  */
-void i810PageFlip( const __DRIdrawable *dPriv ) 
+void i810PageFlip( const __DRIdrawable *dPriv )
 {
   i810ContextPtr imesa;
   int tmp, ret;
@@ -205,12 +205,12 @@ void i810PageFlip( const __DRIdrawable *dPriv )
   assert(dPriv);
   assert(dPriv->driContextPriv);
   assert(dPriv->driContextPriv->driverPrivate);
-    
+
   imesa = (i810ContextPtr) dPriv->driContextPriv->driverPrivate;
 
   I810_FIREVERTICES( imesa );
   LOCK_HARDWARE( imesa );
-  
+
   if (dPriv->pClipRects) {
      memcpy(&(imesa->sarea->boxes[0]), &(dPriv->pClipRects[0]),
             sizeof(drm_clip_rect_t));
@@ -225,7 +225,7 @@ void i810PageFlip( const __DRIdrawable *dPriv )
 
   tmp = GET_ENQUEUE_AGE(imesa);
   UNLOCK_HARDWARE( imesa );
-  
+
    /* multiarb will suck the life out of the server without this throttle:
     */
   if (GET_DISPATCH_AGE(imesa) < imesa->lastSwap) {
@@ -242,7 +242,7 @@ void i810PageFlip( const __DRIdrawable *dPriv )
 
 /* This waits for *everybody* to finish rendering -- overkill.
  */
-void i810DmaFinish( i810ContextPtr imesa  ) 
+void i810DmaFinish( i810ContextPtr imesa  )
 {
    I810_FIREVERTICES( imesa );
 
@@ -252,13 +252,13 @@ void i810DmaFinish( i810ContextPtr imesa  )
 }
 
 
-void i810RegetLockQuiescent( i810ContextPtr imesa  ) 
+void i810RegetLockQuiescent( i810ContextPtr imesa  )
 {
    drmUnlock(imesa->driFd, imesa->hHWContext);
-   i810GetLock( imesa, DRM_LOCK_QUIESCENT ); 
+   i810GetLock( imesa, DRM_LOCK_QUIESCENT );
 }
 
-void i810WaitAgeLocked( i810ContextPtr imesa, int age  ) 
+void i810WaitAgeLocked( i810ContextPtr imesa, int age  )
 {
    int i = 0, j;
 
@@ -274,7 +274,7 @@ void i810WaitAgeLocked( i810ContextPtr imesa, int age  )
 }
 
 
-void i810WaitAge( i810ContextPtr imesa, int age  ) 
+void i810WaitAge( i810ContextPtr imesa, int age  )
 {
    int i = 0, j;
 
@@ -320,21 +320,21 @@ static int intersect_rect( drm_clip_rect_t *out,
 
 static void emit_state( i810ContextPtr imesa )
 {
-   GLuint dirty = imesa->dirty;   
+   GLuint dirty = imesa->dirty;
    I810SAREAPtr sarea = imesa->sarea;
 
    if (dirty & I810_UPLOAD_BUFFERS) {
-      memcpy( sarea->BufferState, imesa->BufferSetup, 
+      memcpy( sarea->BufferState, imesa->BufferSetup,
 	      sizeof(imesa->BufferSetup) );
-   }	 
+   }
 
    if (dirty & I810_UPLOAD_CTX) {
-      memcpy( sarea->ContextState, imesa->Setup, 
+      memcpy( sarea->ContextState, imesa->Setup,
 	      sizeof(imesa->Setup) );
    }
 
    if (dirty & I810_UPLOAD_TEX0) {
-      memcpy(sarea->TexState[0], 
+      memcpy(sarea->TexState[0],
 	     imesa->CurrentTexObj[0]->Setup,
 	     sizeof(imesa->CurrentTexObj[0]->Setup));
    }
@@ -347,7 +347,7 @@ static void emit_state( i810ContextPtr imesa )
 	      sizeof(imesa->CurrentTexObj[1]->Setup));
 
       /* Need this for the case where both units are bound to the same
-       * texobj.  
+       * texobj.
        */
       setup[I810_TEXREG_MI1] ^= (MI1_MAP_0 ^ MI1_MAP_1);
       setup[I810_TEXREG_MLC] ^= (MLC_MAP_0 ^ MLC_MAP_1);
@@ -355,7 +355,7 @@ static void emit_state( i810ContextPtr imesa )
       setup[I810_TEXREG_MCS] ^= (MCS_COORD_0 ^ MCS_COORD_1);
       setup[I810_TEXREG_MF]  ^= (MF_MAP_0 ^ MF_MAP_1);
    }
-    
+
    sarea->dirty = dirty;
    imesa->dirty = 0;
 }
@@ -376,10 +376,10 @@ void i810FlushPrimsLocked( i810ContextPtr imesa )
    I810SAREAPtr sarea = imesa->sarea;
    drmI810Vertex vertex;
    int i;
-	  
+
    if (I810_DEBUG & DEBUG_STATE)
       i810PrintDirty( __FUNCTION__, imesa->dirty );
-   
+
    if (imesa->dirty)
       emit_state( imesa );
 
@@ -391,23 +391,23 @@ void i810FlushPrimsLocked( i810ContextPtr imesa )
    if (!nbox) {
       vertex.used = 0;
    }
-   else if (nbox > I810_NR_SAREA_CLIPRECTS) {      
+   else if (nbox > I810_NR_SAREA_CLIPRECTS) {
       imesa->upload_cliprects = GL_TRUE;
    }
 
-   if (!nbox || !imesa->upload_cliprects) 
+   if (!nbox || !imesa->upload_cliprects)
    {
-      if (nbox == 1) 
+      if (nbox == 1)
 	 sarea->nbox = 0;
       else
 	 sarea->nbox = nbox;
 
-      vertex.discard = 1;	
+      vertex.discard = 1;
       drmCommandWrite(imesa->driFd, DRM_I810_VERTEX,
                       &vertex, sizeof(drmI810Vertex));
       age_imesa(imesa, sarea->last_enqueue);
-   }  
-   else 
+   }
+   else
    {
       for (i = 0 ; i < nbox ; )
       {
@@ -416,7 +416,7 @@ void i810FlushPrimsLocked( i810ContextPtr imesa )
 
 	 if (imesa->scissor) {
 	    sarea->nbox = 0;
-	 
+
 	    for ( ; i < nr ; i++) {
 	       b->x1 = pbox[i].x1 - imesa->drawX;
 	       b->y1 = pbox[i].y1 - imesa->drawY;
@@ -444,10 +444,10 @@ void i810FlushPrimsLocked( i810ContextPtr imesa )
 	       b->y2 = pbox[i].y2 - imesa->drawY;
 	    }
 	 }
-	 
+
 	 /* Finished with the buffer?
 	  */
-	 if (nr == nbox) 
+	 if (nr == nbox)
 	    vertex.discard = 1;
 
 	 drmCommandWrite(imesa->driFd, DRM_I810_VERTEX,
@@ -471,8 +471,8 @@ void i810FlushPrimsGetBuffer( i810ContextPtr imesa )
 {
    LOCK_HARDWARE(imesa);
 
-   if (imesa->vertex_buffer) 
-      i810FlushPrimsLocked( imesa );      
+   if (imesa->vertex_buffer)
+      i810FlushPrimsLocked( imesa );
 
    imesa->vertex_buffer = i810_get_buffer_ioctl( imesa );
    imesa->vertex_high = imesa->vertex_buffer->total;
@@ -483,7 +483,7 @@ void i810FlushPrimsGetBuffer( i810ContextPtr imesa )
 }
 
 
-void i810FlushPrims( i810ContextPtr imesa ) 
+void i810FlushPrims( i810ContextPtr imesa )
 {
    if (imesa->vertex_buffer) {
       LOCK_HARDWARE( imesa );
@@ -505,7 +505,7 @@ static void i810Flush( struct gl_context *ctx )
    I810_FIREVERTICES( imesa );
 }
 
-static void i810Finish( struct gl_context *ctx  ) 
+static void i810Finish( struct gl_context *ctx  )
 {
    i810ContextPtr imesa = I810_CONTEXT( ctx );
    i810DmaFinish( imesa );

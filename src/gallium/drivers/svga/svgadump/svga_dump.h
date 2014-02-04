@@ -28,7 +28,7 @@
 
 #include "pipe/p_compiler.h"
 
-void            
+void
 svga_dump_command(uint32_t cmd_id, const void *data, uint32_t size);
 
 void

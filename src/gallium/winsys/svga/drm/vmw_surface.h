@@ -26,7 +26,7 @@
 /**
  * @file
  * Surfaces for VMware SVGA winsys.
- * 
+ *
  * @author Jose Fonseca <jfonseca@vmware.com>
  */
 

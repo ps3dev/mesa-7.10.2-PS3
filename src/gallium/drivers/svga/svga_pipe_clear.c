@@ -35,7 +35,7 @@
 
 
 static enum pipe_error
-try_clear(struct svga_context *svga, 
+try_clear(struct svga_context *svga,
           unsigned buffers,
           const float *rgba,
           double depth,
@@ -88,7 +88,7 @@ try_clear(struct svga_context *svga,
       memcpy(&rect, &svga->state.hw_clear.viewport, sizeof rect);
       ret = SVGA3D_SetViewport(svga->swc, &rect);
    }
-   
+
    return ret;
 }
 

@@ -132,7 +132,7 @@ mgaFillInModes( __DRIscreen *psp,
     depth_bits_array[0] = 0;
     depth_bits_array[1] = depth_bits;
     depth_bits_array[2] = depth_bits;
-    
+
     /* Just like with the accumulation buffer, always provide some modes
      * with a stencil buffer.  It will be a sw fallback, but some apps won't
      * care about that.
@@ -284,12 +284,12 @@ mgaInitDriver(__DRIscreen *sPriv)
    mgaScreen->textureSize[MGA_CARD_HEAP] = serverInfo->textureSize;
    mgaScreen->textureSize[MGA_AGP_HEAP] = serverInfo->agpTextureSize;
 
-   
+
    /* The texVirtual array stores the base addresses in the CPU's address
     * space of the texture memory pools.  The base address of the on-card
     * memory pool is calculated as an offset of the base of video memory.  The
     * AGP texture pool has to be mapped into the processes address space by
-    * the DRM. 
+    * the DRM.
     */
 
    mgaScreen->texVirtual[MGA_CARD_HEAP] = (char *)(mgaScreen->sPriv->pFB +
@@ -349,12 +349,12 @@ mgaDestroyScreen(__DRIscreen *sPriv)
 extern const struct tnl_pipeline_stage _mga_render_stage;
 
 static const struct tnl_pipeline_stage *mga_pipeline[] = {
-   &_tnl_vertex_transform_stage, 
-   &_tnl_normal_transform_stage, 
-   &_tnl_lighting_stage,	
+   &_tnl_vertex_transform_stage,
+   &_tnl_normal_transform_stage,
+   &_tnl_lighting_stage,
    &_tnl_fog_coordinate_stage,
-   &_tnl_texgen_stage, 
-   &_tnl_texture_transform_stage, 
+   &_tnl_texgen_stage,
+   &_tnl_texture_transform_stage,
    &_tnl_vertex_program_stage,
 
 				/* REMOVE: point attenuation stage */
@@ -362,7 +362,7 @@ static const struct tnl_pipeline_stage *mga_pipeline[] = {
    &_mga_render_stage,		/* ADD: unclipped rastersetup-to-dma */
                                 /* Need new ioctl for wacceptseq */
 #endif
-   &_tnl_render_stage,		
+   &_tnl_render_stage,
    0,
 };
 
@@ -455,7 +455,7 @@ mgaCreateContext( gl_api api,
    /* Allocate the Mesa context */
    if (sharedContextPrivate)
       shareCtx = ((mgaContextPtr) sharedContextPrivate)->glCtx;
-   else 
+   else
       shareCtx = NULL;
    mmesa->glCtx = _mesa_create_context(mesaVis, shareCtx,
                                        &functions, (void *) mmesa);
@@ -541,8 +541,8 @@ mgaCreateContext( gl_api api,
    mmesa->hw_stencil = mesaVis->stencilBits && mesaVis->depthBits == 24;
 
    switch (mesaVis->depthBits) {
-   case 16: 
-      mmesa->depth_scale = 1.0/(GLdouble)0xffff; 
+   case 16:
+      mmesa->depth_scale = 1.0/(GLdouble)0xffff;
       mmesa->depth_clear_mask = ~0;
       mmesa->ClearDepth = 0xffff;
       break;
@@ -565,7 +565,7 @@ mgaCreateContext( gl_api api,
    mmesa->haveHwStipple = GL_FALSE;
    mmesa->RenderIndex = -1;		/* impossible value */
    mmesa->dirty = ~0;
-   mmesa->vertex_format = 0;   
+   mmesa->vertex_format = 0;
    mmesa->CurrentTexObj[0] = 0;
    mmesa->CurrentTexObj[1] = 0;
    mmesa->tmu_source[0] = 0;
@@ -573,13 +573,13 @@ mgaCreateContext( gl_api api,
 
    mmesa->texAge[0] = 0;
    mmesa->texAge[1] = 0;
-   
+
    /* Initialize the software rasterizer and helper modules.
     */
    _swrast_CreateContext( ctx );
    _vbo_CreateContext( ctx );
    _tnl_CreateContext( ctx );
-   
+
    _swsetup_CreateContext( ctx );
 
    /* Install the customized pipeline:
@@ -608,12 +608,12 @@ mgaCreateContext( gl_api api,
    if ( driQueryOptionb( &mmesa->optionCache, "arb_vertex_program" ) ) {
       driInitExtensions(ctx, ARB_vp_extensions, GL_FALSE);
    }
-   
+
    if ( driQueryOptionb( &mmesa->optionCache, "nv_vertex_program" ) ) {
       driInitExtensions( ctx, NV_vp_extensions, GL_FALSE );
    }
 
-	
+
    /* XXX these should really go right after _mesa_init_driver_functions() */
    mgaDDInitStateFuncs( ctx );
    mgaDDInitSpanFuncs( ctx );
@@ -665,7 +665,7 @@ mgaDestroyContext(__DRIcontext *driContextPriv)
       /* free the Mesa context */
       mmesa->glCtx->DriverCtx = NULL;
       _mesa_destroy_context(mmesa->glCtx);
-       
+
       if ( release_texture_heaps ) {
          /* This share group is about to go away, free our private
           * texture object data.
@@ -704,11 +704,11 @@ mgaCreateBuffer( __DRIscreen *driScrnPriv,
       return GL_FALSE; /* not implemented */
    }
    else {
-      GLboolean swStencil = (mesaVis->stencilBits > 0 && 
+      GLboolean swStencil = (mesaVis->stencilBits > 0 &&
 			     mesaVis->depthBits != 24);
 
 #if 0
-      driDrawPriv->driverPrivate = (void *) 
+      driDrawPriv->driverPrivate = (void *)
          _mesa_create_framebuffer(mesaVis,
                                   GL_FALSE,  /* software depth buffer? */
                                   swStencil,
@@ -868,8 +868,8 @@ mgaMakeCurrent(__DRIcontext *driContextPriv,
 	 }
 
 	 mmesa->driDrawable = driDrawPriv;
-	 mmesa->dirty = ~0; 
-	 mmesa->dirty_cliprects = (MGA_FRONT|MGA_BACK); 
+	 mmesa->dirty = ~0;
+	 mmesa->dirty_cliprects = (MGA_FRONT|MGA_BACK);
       }
 
       mmesa->driReadable = driReadPriv;
@@ -922,7 +922,7 @@ void mgaGetLock( mgaContextPtr mmesa, GLuint flags )
 
 /**
  * This is the driver specific part of the createNewScreen entry point.
- * 
+ *
  * \todo maybe fold this into intelInitDriver
  *
  * \return the struct gl_config supported by this driver

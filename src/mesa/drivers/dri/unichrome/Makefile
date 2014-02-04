@@ -16,13 +16,13 @@ DRIVER_SOURCES = \
 	via_span.c \
 	via_state.c \
 	via_texcombine.c \
-	via_tris.c 
+	via_tris.c
 
 C_SOURCES = \
 	$(COMMON_SOURCES) \
 	$(DRIVER_SOURCES)
 
-ASM_SOURCES = 
+ASM_SOURCES =
 
 
 include ../Makefile.template

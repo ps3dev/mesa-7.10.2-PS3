@@ -18,7 +18,7 @@ INCLUDES = $(SHARED_INCLUDES) $(EXPAT_INCLUDES)
 
 OBJECTS = $(C_SOURCES:.c=.o) \
 	  $(CXX_SOURCES:.cpp=.o) \
-	  $(ASM_SOURCES:.S=.o) 
+	  $(ASM_SOURCES:.S=.o)
 
 
 ### Include directories
@@ -67,7 +67,7 @@ $(LIBNAME): $(OBJECTS) $(MESA_MODULES) $(EXTRA_MODULES) Makefile \
 
 
 $(TOP)/$(LIB_DIR)/$(LIBNAME): $(LIBNAME)
-	$(INSTALL) $(LIBNAME) $(TOP)/$(LIB_DIR) 
+	$(INSTALL) $(LIBNAME) $(TOP)/$(LIB_DIR)
 
 
 # If the Makefile defined SUBDIRS, run make in each

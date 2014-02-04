@@ -159,14 +159,14 @@ _mesa_ClearColorIuiEXT(GLuint r, GLuint g, GLuint b, GLuint a)
 
 /**
  * Clear buffers.
- * 
+ *
  * \param mask bit-mask indicating the buffers to be cleared.
  *
  * Flushes the vertices and verifies the parameter. If __struct gl_contextRec::NewState
  * is set then calls _mesa_update_state() to update gl_frame_buffer::_Xmin,
  * etc. If the rasterization mode is set to GL_RENDER then requests the driver
  * to clear the buffers, via the dd_function_table::Clear callback.
- */ 
+ */
 void GLAPIENTRY
 _mesa_Clear( GLbitfield mask )
 {

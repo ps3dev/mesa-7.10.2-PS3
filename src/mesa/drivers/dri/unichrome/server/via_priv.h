@@ -32,7 +32,7 @@ typedef struct  {
     VIAMem HQVMem;
     VIAMem SWfbMem;
 
-    DDPIXELFORMAT DPFsrc; 
+    DDPIXELFORMAT DPFsrc;
     DDUPDATEOVERLAY UpdateOverlayBackup;    /* For HQVcontrol func use
 					    // To save MPEG updateoverlay info.*/
 

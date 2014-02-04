@@ -62,7 +62,7 @@ void evergreen_insert_wpos_code(struct gl_context *ctx, struct gl_fragment_progr
     inst = fprog->Base.Instructions;
     for (i = 0; i < fprog->Base.NumInstructions; i++) {
         for (j=0; j < 3; j++) {
-            if(inst->SrcReg[j].File == PROGRAM_INPUT && 
+            if(inst->SrcReg[j].File == PROGRAM_INPUT &&
                inst->SrcReg[j].Index == FRAG_ATTRIB_WPOS) {
                 inst->SrcReg[j].File = PROGRAM_TEMPORARY;
                 inst->SrcReg[j].Index = wpos_temp;
@@ -95,7 +95,7 @@ void evergreen_insert_wpos_code(struct gl_context *ctx, struct gl_fragment_progr
 //TODO : Validate FP input with VP output.
 void evergreen_Map_Fragment_Program(r700_AssemblerBase         *pAsm,
 						  struct gl_fragment_program *mesa_fp,
-                          struct gl_context *ctx) 
+                          struct gl_context *ctx)
 {
 	unsigned int unBit;
     unsigned int i;
@@ -104,10 +104,10 @@ void evergreen_Map_Fragment_Program(r700_AssemblerBase         *pAsm,
     struct evergreen_vertex_program_cont *vpc =
 		       (struct evergreen_vertex_program_cont *)ctx->VertexProgram._Current;
     GLbitfield OutputsWritten = vpc->mesa_program.Base.OutputsWritten;
-    
+
 	pAsm->number_used_registers = 0;
 
-//Input mapping : mesa_fp->Base.InputsRead set the flag, set in 
+//Input mapping : mesa_fp->Base.InputsRead set the flag, set in
 	//The flags parsed in parse_attrib_binding. FRAG_ATTRIB_COLx, FRAG_ATTRIB_TEXx, ...
 	//MUST match order in Map_Vertex_Output
 	unBit = 1 << FRAG_ATTRIB_WPOS;
@@ -142,8 +142,8 @@ void evergreen_Map_Fragment_Program(r700_AssemblerBase         *pAsm,
 			pAsm->uiFP_AttributeMap[FRAG_ATTRIB_TEX0 + i] = pAsm->number_used_registers++;
 		}
 	}
- 
-/* order has been taken care of */ 
+
+/* order has been taken care of */
 #if 1
     for(i=VERT_RESULT_VAR0; i<VERT_RESULT_MAX; i++)
 	{
@@ -179,12 +179,12 @@ void evergreen_Map_Fragment_Program(r700_AssemblerBase         *pAsm,
                 pPsParam = PsVarying->Parameters + j;
 
                 for(k=0; k<VsVarying->NumParameters; k++)
-                {					
+                {
                     pVsParam = VsVarying->Parameters + k;
 
 			        if( strcmp(pPsParam->Name, pVsParam->Name) == 0)
                     {
-                        pAsm->uiFP_AttributeMap[i] = pAsm->number_used_registers + k;                  
+                        pAsm->uiFP_AttributeMap[i] = pAsm->number_used_registers + k;
                         if(k > unMaxVarying)
                         {
                             unMaxVarying = k;
@@ -306,7 +306,7 @@ GLboolean evergreen_Find_Instruction_Dependencies_fp(struct evergreen_fragment_p
 
     fp->r700AsmCode.pInstDeps = pInstDeps;
 
-    //Find dep for tex inst    
+    //Find dep for tex inst
     for(i=0; i<mesa_fp->Base.NumInstructions; i++)
     {
         pILInst = &(mesa_fp->Base.Instructions[i]);
@@ -340,7 +340,7 @@ GLboolean evergreen_Find_Instruction_Dependencies_fp(struct evergreen_fragment_p
                 {
                     pInstDeps[nDepInstID].nDstDep = i;
                 }
- 
+
             }
 
         }
@@ -354,7 +354,7 @@ GLboolean evergreen_Find_Instruction_Dependencies_fp(struct evergreen_fragment_p
 
 GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp,
 							     struct gl_fragment_program   *mesa_fp,
-                                 struct gl_context *ctx) 
+                                 struct gl_context *ctx)
 {
 	GLuint    number_of_colors_exported;
 	GLboolean z_enabled = GL_FALSE;
@@ -366,9 +366,9 @@ GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp
 
     //Init_Program
 	Init_r700_AssemblerBase( SPT_FP, &(fp->r700AsmCode), &(fp->r700Shader) );
-        
+
     fp->constbo0 = NULL;
-    fp->r700AsmCode.bUseMemConstant = GL_TRUE;  
+    fp->r700AsmCode.bUseMemConstant = GL_TRUE;
     fp->r700AsmCode.unAsic = 8;
 
     if(mesa_fp->Base.InputsRead & FRAG_BIT_WPOS)
@@ -386,14 +386,14 @@ GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp
             {
                 shadow_unit = inst->TexSrcUnit;
                 shadow_ambient[2] = shadow_unit;
-                fp->r700AsmCode.shadow_regs[shadow_unit] = 
+                fp->r700AsmCode.shadow_regs[shadow_unit] =
                     _mesa_add_state_reference(mesa_fp->Base.Parameters, shadow_ambient);
             }
             inst++;
         }
     }
 
-    evergreen_Map_Fragment_Program(&(fp->r700AsmCode), mesa_fp, ctx); 
+    evergreen_Map_Fragment_Program(&(fp->r700AsmCode), mesa_fp, ctx);
 
     if( GL_FALSE == evergreen_Find_Instruction_Dependencies_fp(fp, mesa_fp) )
 	{
@@ -401,7 +401,7 @@ GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp
     }
 
     InitShaderProgram(&(fp->r700AsmCode));
-	
+
     for(i=0; i < MAX_SAMPLERS; i++)
     {
          fp->r700AsmCode.SamplerUnits[i] = fp->mesa_program.Base.SamplerUnits[i];
@@ -412,7 +412,7 @@ GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp
 	if( GL_FALSE == AssembleInstr(0,
                                   0,
                                   mesa_fp->Base.NumInstructions,
-                                  &(mesa_fp->Base.Instructions[0]), 
+                                  &(mesa_fp->Base.Instructions[0]),
                                   &(fp->r700AsmCode)) )
 	{
 		return GL_FALSE;
@@ -428,7 +428,7 @@ GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp
         return GL_FALSE;
     }
 
-    fp->r700Shader.nRegs = (fp->r700AsmCode.number_used_registers == 0) ? 0 
+    fp->r700Shader.nRegs = (fp->r700AsmCode.number_used_registers == 0) ? 0
                          : (fp->r700AsmCode.number_used_registers - 1);
 
 	fp->r700Shader.nParamExports = fp->r700AsmCode.number_of_exports;
@@ -468,7 +468,7 @@ void evergreenSelectFragmentShader(struct gl_context *ctx)
     }
 
     if (GL_FALSE == fp->translated)
-	    evergreenTranslateFragmentShader(fp, &(fp->mesa_program), ctx); 
+	    evergreenTranslateFragmentShader(fp, &(fp->mesa_program), ctx);
 }
 
 void * evergreenGetActiveFpShaderBo(struct gl_context * ctx)
@@ -494,7 +494,7 @@ GLboolean evergreenSetupFragmentProgram(struct gl_context * ctx)
     struct evergreen_fragment_program *fp = (struct evergreen_fragment_program *)
 	                                   (ctx->FragmentProgram._Current);
     r700_AssemblerBase         *pAsm = &(fp->r700AsmCode);
-    struct gl_fragment_program *mesa_fp = &(fp->mesa_program);    
+    struct gl_fragment_program *mesa_fp = &(fp->mesa_program);
     unsigned int ui, i;
     unsigned int unNumOfReg;
     unsigned int unBit;
@@ -513,7 +513,7 @@ GLboolean evergreenSetupFragmentProgram(struct gl_context * ctx)
                        (GLvoid *)(fp->r700Shader.pProgram),
                        fp->r700Shader.uShaderBinaryDWORDSize,
                        "FS");
-        
+
         fp->loaded = GL_TRUE;
     }
 
@@ -526,8 +526,8 @@ GLboolean evergreenSetupFragmentProgram(struct gl_context * ctx)
     evergreen->SQ_PGM_RESOURCES_PS.u32All = 0;
     SETbit(evergreen->SQ_PGM_RESOURCES_PS.u32All, PGM_RESOURCES__PRIME_CACHE_ON_DRAW_bit);
 
-    evergreen->ps.SQ_ALU_CONST_CACHE_PS_0.u32All = 0; 
-    evergreen->ps.SQ_PGM_START_PS.u32All = 0;         
+    evergreen->ps.SQ_ALU_CONST_CACHE_PS_0.u32All = 0;
+    evergreen->ps.SQ_PGM_START_PS.u32All = 0;
 
     EVERGREEN_STATECHANGE(context, spi);
 
@@ -613,7 +613,7 @@ GLboolean evergreenSetupFragmentProgram(struct gl_context * ctx)
     struct evergreen_vertex_program_cont *vpc =
 		       (struct evergreen_vertex_program_cont *)ctx->VertexProgram._Current;
     GLbitfield OutputsWritten = vpc->mesa_program.Base.OutputsWritten;
-    
+
     for(ui = 0; ui < EVERGREEN_MAX_SHADER_EXPORTS; ui++)
         evergreen->SPI_PS_INPUT_CNTL[ui].u32All = 0;
 
@@ -753,7 +753,7 @@ GLboolean evergreenSetupFPconstants(struct gl_context * ctx)
     /* sent out shader constants. */
     paramList = fp->mesa_program.Base.Parameters;
 
-    if(NULL != paramList) 
+    if(NULL != paramList)
     {
 	    _mesa_load_state_parameters(ctx, paramList);
 
@@ -777,16 +777,16 @@ GLboolean evergreenSetupFPconstants(struct gl_context * ctx)
 	    alloc_size = ((unNumParamData * 4 * 4) + 255) & ~255;
 
         /* Load fp constants to gpu */
-        if(unNumParamData > 0) 
-        {            
-            radeonAllocDmaRegion(&context->radeon, 
-                                &context->fp_Constbo, 
-                                &context->fp_bo_offset, 
+        if(unNumParamData > 0)
+        {
+            radeonAllocDmaRegion(&context->radeon,
+                                &context->fp_Constbo,
+                                &context->fp_bo_offset,
                                 alloc_size,
-                                256);            
+                                256);
             r600EmitShaderConsts(ctx,
                                  context->fp_Constbo,
-                                 context->fp_bo_offset,         
+                                 context->fp_bo_offset,
                                  (GLvoid *)&(evergreen->ps.consts[0][0]),
                                  unNumParamData * 4 * 4);
         }

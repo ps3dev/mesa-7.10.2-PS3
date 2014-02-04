@@ -167,7 +167,7 @@ void mach64FlushVerticesLocked( mach64ContextPtr mmesa )
 	 }
 
 	 mmesa->sarea->dirty |= MACH64_UPLOAD_CLIPRECTS;
-	 
+
 	 vertex.prim = prim;
 	 vertex.buf = buffer;
 	 vertex.used = count;
@@ -209,7 +209,7 @@ void mach64FireBlitLocked( mach64ContextPtr mmesa, void *buffer,
    blit.height = height;
 
    do {
-      ret = drmCommandWrite( mmesa->driFd, DRM_MACH64_BLIT, 
+      ret = drmCommandWrite( mmesa->driFd, DRM_MACH64_BLIT,
 			     &blit, sizeof(drm_mach64_blit_t) );
    } while ( ( ret == -EAGAIN ) && ( to++ < MACH64_TIMEOUT ) );
 
@@ -415,7 +415,7 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
    y1 = b[0].y1;
    x2 = b[0].x2;
    y2 = b[0].y2;
- 
+
    /* setup a single cliprect and call the clear ioctl for each box */
    mmesa->sarea->nbox = 1;
 
@@ -433,7 +433,7 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
    /* Red box if DDFinish was called to wait for rendering to complete */
    if ( mmesa->c_drawWaits ) {
       color = mach64PackColor( mmesa->mach64Screen->cpp, 255, 0, 0, 0 );
-      
+
       clear.x = x;
       clear.y = y;
       clear.w = w;
@@ -458,7 +458,7 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
    /* draw a green box if we had to wait for previous frame(s) to complete */
    if ( !mmesa->hardwareWentIdle ) {
       color = mach64PackColor( mmesa->mach64Screen->cpp, 0, 255, 0, 0 );
-      
+
       clear.x = x;
       clear.y = y;
       clear.w = w;
@@ -528,7 +528,7 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
 	    exit( -1 );
 	 }
       }
-   }  
+   }
 
    x += w;
    w = 8;
@@ -553,7 +553,7 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
 	 fprintf( stderr, "DRM_MACH64_CLEAR: return = %d\n", ret );
 	 exit( -1 );
       }
-      
+
    }
 
    h = 4;
@@ -565,8 +565,8 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
    if ( mmesa->c_textureBytes ) {
       color = mach64PackColor( mmesa->mach64Screen->cpp, 255, 0, 255, 0 );
       w = mmesa->c_textureBytes / 16384;
-      if ( w <= 0 ) 
-	 w = 1; 
+      if ( w <= 0 )
+	 w = 1;
       if (w > (mmesa->driDrawable->w - 44))
 	 w = mmesa->driDrawable->w - 44;
 
@@ -592,8 +592,8 @@ void mach64PerformanceBoxesLocked( mach64ContextPtr mmesa )
    if ( mmesa->c_agpTextureBytes ) {
       color = mach64PackColor( mmesa->mach64Screen->cpp, 0, 0, 255, 0 );
       w = mmesa->c_agpTextureBytes / 16384;
-      if ( w <= 0 ) 
-	 w = 1; 
+      if ( w <= 0 )
+	 w = 1;
       if (w > (mmesa->driDrawable->w - 44))
 	 w = mmesa->driDrawable->w - 44;
 
@@ -852,7 +852,7 @@ void mach64FlushDMALocked( mach64ContextPtr mmesa )
 void mach64UploadHwStateLocked( mach64ContextPtr mmesa )
 {
    drm_mach64_sarea_t *sarea = mmesa->sarea;
-   
+
    drm_mach64_context_regs_t *regs = &sarea->context_state;
    unsigned int dirty = sarea->dirty;
    CARD32 offset = ((regs->tex_size_pitch & 0xf0) >> 2);

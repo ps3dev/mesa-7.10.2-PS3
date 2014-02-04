@@ -124,10 +124,10 @@ viaInitDriver(__DRIscreen *sPriv)
 
     if (VIA_DEBUG & DEBUG_DRI) {
 	fprintf(stderr, "deviceID = %08x\n", viaScreen->deviceID);
-	fprintf(stderr, "width = %08x\n", viaScreen->width);	
-	fprintf(stderr, "height = %08x\n", viaScreen->height);	
-	fprintf(stderr, "cpp = %08x\n", viaScreen->cpp);	
-	fprintf(stderr, "fbOffset = %08x\n", viaScreen->fbOffset);	
+	fprintf(stderr, "width = %08x\n", viaScreen->width);
+	fprintf(stderr, "height = %08x\n", viaScreen->height);
+	fprintf(stderr, "cpp = %08x\n", viaScreen->cpp);
+	fprintf(stderr, "fbOffset = %08x\n", viaScreen->fbOffset);
     }
 
     viaScreen->bufs = via_create_empty_buffers();
@@ -207,7 +207,7 @@ viaCreateBuffer(__DRIscreen *driScrnPriv,
     viaScreenPrivate *screen = (viaScreenPrivate *) driScrnPriv->private;
 #endif
 
-    GLboolean swStencil = (mesaVis->stencilBits > 0 && 
+    GLboolean swStencil = (mesaVis->stencilBits > 0 &&
 			   mesaVis->depthBits != 24);
     GLboolean swAccum = mesaVis->accumRedBits > 0;
 
@@ -366,7 +366,7 @@ viaFillInModes( __DRIscreen *psp,
 
 /**
  * This is the driver specific part of the createNewScreen entry point.
- * 
+ *
  * \todo maybe fold this into intelInitDriver
  *
  * \return the struct gl_config supported by this driver

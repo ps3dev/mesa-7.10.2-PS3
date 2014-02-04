@@ -94,7 +94,7 @@ svga_buffer_map_range( struct pipe_screen *screen,
 		       unsigned length,
                        unsigned usage )
 {
-   struct svga_screen *ss = svga_screen(screen); 
+   struct svga_screen *ss = svga_screen(screen);
    struct svga_winsys_screen *sws = ss->sws;
    struct svga_buffer *sbuf = svga_buffer( buf );
    void *map;
@@ -134,20 +134,20 @@ svga_buffer_map_range( struct pipe_screen *screen,
             sbuf->map.flush_explicit = TRUE;
       }
    }
-   
+
    return map;
 }
 
 
 
-static void 
+static void
 svga_buffer_flush_mapped_range( struct pipe_screen *screen,
                                 struct pipe_resource *buf,
                                 unsigned offset, unsigned length)
 {
    struct svga_buffer *sbuf = svga_buffer( buf );
    struct svga_screen *ss = svga_screen(screen);
-   
+
    pipe_mutex_lock(ss->swc_mutex);
    assert(sbuf->map.writing);
    if(sbuf->map.writing) {
@@ -157,16 +157,16 @@ svga_buffer_flush_mapped_range( struct pipe_screen *screen,
    pipe_mutex_unlock(ss->swc_mutex);
 }
 
-static void 
+static void
 svga_buffer_unmap( struct pipe_screen *screen,
                    struct pipe_resource *buf)
 {
-   struct svga_screen *ss = svga_screen(screen); 
+   struct svga_screen *ss = svga_screen(screen);
    struct svga_winsys_screen *sws = ss->sws;
    struct svga_buffer *sbuf = svga_buffer( buf );
-   
+
    pipe_mutex_lock(ss->swc_mutex);
-   
+
    assert(sbuf->map.count);
    if(sbuf->map.count)
       --sbuf->map.count;
@@ -178,10 +178,10 @@ svga_buffer_unmap( struct pipe_screen *screen,
       if(!sbuf->map.flush_explicit) {
          /* No mapped range was flushed -- flush the whole buffer */
          SVGA_DBG(DEBUG_DMA, "flushing the whole buffer\n");
-   
+
          svga_buffer_add_range(sbuf, 0, sbuf->b.b.width0);
       }
-      
+
       sbuf->map.writing = FALSE;
       sbuf->map.flush_explicit = FALSE;
    }
@@ -195,25 +195,25 @@ static void
 svga_buffer_destroy( struct pipe_screen *screen,
 		     struct pipe_resource *buf )
 {
-   struct svga_screen *ss = svga_screen(screen); 
+   struct svga_screen *ss = svga_screen(screen);
    struct svga_buffer *sbuf = svga_buffer( buf );
 
    assert(!p_atomic_read(&buf->reference.count));
-   
+
    assert(!sbuf->dma.pending);
 
    if(sbuf->handle)
       svga_buffer_destroy_host_surface(ss, sbuf);
-   
+
    if(sbuf->uploaded.buffer)
       pipe_resource_reference(&sbuf->uploaded.buffer, NULL);
 
    if(sbuf->hwbuf)
       svga_buffer_destroy_hw_storage(ss, sbuf);
-   
+
    if(sbuf->swbuf && !sbuf->user)
       align_free(sbuf->swbuf);
-   
+
    FREE(sbuf);
 }
 
@@ -267,7 +267,7 @@ static void svga_buffer_transfer_unmap( struct pipe_context *pipe,
 
 
 
-struct u_resource_vtbl svga_buffer_vtbl = 
+struct u_resource_vtbl svga_buffer_vtbl =
 {
    u_default_resource_get_handle,      /* get_handle */
    svga_buffer_destroy,		     /* resource_destroy */
@@ -288,11 +288,11 @@ svga_buffer_create(struct pipe_screen *screen,
 {
    struct svga_screen *ss = svga_screen(screen);
    struct svga_buffer *sbuf;
-   
+
    sbuf = CALLOC_STRUCT(svga_buffer);
    if(!sbuf)
       goto error1;
-   
+
    sbuf->b.b = *template;
    sbuf->b.vtbl = &svga_buffer_vtbl;
    pipe_reference_init(&sbuf->b.b.reference, 1);
@@ -307,8 +307,8 @@ svga_buffer_create(struct pipe_screen *screen,
       if(!sbuf->swbuf)
          goto error2;
    }
-      
-   return &sbuf->b.b; 
+
+   return &sbuf->b.b;
 
 error2:
    FREE(sbuf);
@@ -323,11 +323,11 @@ svga_user_buffer_create(struct pipe_screen *screen,
 			unsigned bind)
 {
    struct svga_buffer *sbuf;
-   
+
    sbuf = CALLOC_STRUCT(svga_buffer);
    if(!sbuf)
       goto no_sbuf;
-      
+
    pipe_reference_init(&sbuf->b.b.reference, 1);
    sbuf->b.vtbl = &svga_buffer_vtbl;
    sbuf->b.b.screen = screen;
@@ -341,8 +341,8 @@ svga_user_buffer_create(struct pipe_screen *screen,
 
    sbuf->swbuf = ptr;
    sbuf->user = TRUE;
-   
-   return &sbuf->b.b; 
+
+   return &sbuf->b.b;
 
 no_sbuf:
    return NULL;

@@ -306,7 +306,7 @@ _mesa_DrawBuffersARB(GLsizei n, const GLenum *buffers)
              || _mesa_bitcount(destMask[output]) > 1) {
             _mesa_error(ctx, GL_INVALID_ENUM, "glDrawBuffersARB(buffer)");
             return;
-         }         
+         }
          destMask[output] &= supportedMask;
          if (destMask[output] == 0) {
             _mesa_error(ctx, GL_INVALID_OPERATION,

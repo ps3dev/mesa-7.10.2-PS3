@@ -37,7 +37,7 @@
 /**
  * \struct SWvertex
  * \brief Data-structure to handle vertices in the software rasterizer.
- * 
+ *
  * The software rasterizer now uses this format for vertices.  Thus a
  * 'RasterSetup' stage or other translation is required between the
  * tnl module and the swrast rasterization functions.  This serves to

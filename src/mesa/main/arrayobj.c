@@ -53,7 +53,7 @@
 
 /**
  * Look up the array object for the given ID.
- * 
+ *
  * \returns
  * Either a pointer to the array object with the specified ID or \c NULL for
  * a non-existent ID.  The spec defines ID 0 as being technically
@@ -104,7 +104,7 @@ unbind_array_object_vbos(struct gl_context *ctx, struct gl_array_object *obj)
 
 /**
  * Allocate and initialize a new vertex array object.
- * 
+ *
  * This function is intended to be called via
  * \c dd_function_table::NewArrayObject.
  */
@@ -120,7 +120,7 @@ _mesa_new_array_object( struct gl_context *ctx, GLuint name )
 
 /**
  * Delete an array object.
- * 
+ *
  * This function is intended to be called via
  * \c dd_function_table::DeleteArrayObject.
  */
@@ -445,7 +445,7 @@ _mesa_BindVertexArrayAPPLE( GLuint id )
 
 /**
  * Delete a set of array objects.
- * 
+ *
  * \param n      Number of array objects to delete.
  * \param ids    Array of \c n array object IDs.
  */
@@ -478,7 +478,7 @@ _mesa_DeleteVertexArraysAPPLE(GLsizei n, const GLuint *ids)
 	 /* The ID is immediately freed for re-use */
 	 remove_array_object(ctx, obj);
 
-         /* Unreference the array object. 
+         /* Unreference the array object.
           * If refcount hits zero, the object will be deleted.
           */
          _mesa_reference_array_object(ctx, &obj, NULL);
@@ -494,7 +494,7 @@ _mesa_DeleteVertexArraysAPPLE(GLsizei n, const GLuint *ids)
  * \param arrays  Array of \c n locations to store the IDs.
  * \param vboOnly Will arrays have to reside in VBOs?
  */
-static void 
+static void
 gen_vertex_arrays(struct gl_context *ctx, GLsizei n, GLuint *arrays, GLboolean vboOnly)
 {
    GLuint first;
@@ -555,9 +555,9 @@ _mesa_GenVertexArraysAPPLE(GLsizei n, GLuint *arrays)
 
 /**
  * Determine if ID is the name of an array object.
- * 
+ *
  * \param id  ID of the potential array object.
- * \return  \c GL_TRUE if \c id is the name of a array object, 
+ * \return  \c GL_TRUE if \c id is the name of a array object,
  *          \c GL_FALSE otherwise.
  */
 GLboolean GLAPIENTRY

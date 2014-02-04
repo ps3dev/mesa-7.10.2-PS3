@@ -117,7 +117,7 @@ brw_begin_query(struct gl_context *ctx, struct gl_query_object *q)
 		  0);
 	  OUT_BATCH(0);
 	  ADVANCE_BATCH();
-      
+
       } else {
 	  BEGIN_BATCH(4);
 	  OUT_BATCH(_3DSTATE_PIPE_CONTROL |
@@ -163,7 +163,7 @@ brw_end_query(struct gl_context *ctx, struct gl_query_object *q)
 		  8);
 	  OUT_BATCH(0);
 	  ADVANCE_BATCH();
-      
+
       } else {
 	  BEGIN_BATCH(4);
 	  OUT_BATCH(_3DSTATE_PIPE_CONTROL |
@@ -273,7 +273,7 @@ brw_emit_query_begin(struct brw_context *brw)
 		 ((brw->query.index * 2) * sizeof(uint64_t)));
        OUT_BATCH(0);
        ADVANCE_BATCH();
-       
+
    } else {
        BEGIN_BATCH(4);
        OUT_BATCH(_3DSTATE_PIPE_CONTROL |
@@ -330,7 +330,7 @@ brw_emit_query_end(struct brw_context *brw)
 		 ((brw->query.index * 2 + 1) * sizeof(uint64_t)));
        OUT_BATCH(0);
        ADVANCE_BATCH();
-   
+
    } else {
        BEGIN_BATCH(4);
        OUT_BATCH(_3DSTATE_PIPE_CONTROL |

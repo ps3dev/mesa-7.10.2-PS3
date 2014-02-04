@@ -73,18 +73,18 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	CLEARbit(t->SQ_TEX_RESOURCE4, SQ_TEX_RESOURCE_WORD4_0__FORCE_DEGAMMA_bit);
 
 	SETfield(t->SQ_TEX_RESOURCE4, SQ_FORMAT_COMP_UNSIGNED,
-		     FORMAT_COMP_X_shift, 
+		     FORMAT_COMP_X_shift,
              FORMAT_COMP_X_mask);
 	SETfield(t->SQ_TEX_RESOURCE4, SQ_FORMAT_COMP_UNSIGNED,
-		     FORMAT_COMP_Y_shift, 
+		     FORMAT_COMP_Y_shift,
              FORMAT_COMP_Y_mask);
 	SETfield(t->SQ_TEX_RESOURCE4, SQ_FORMAT_COMP_UNSIGNED,
-		     FORMAT_COMP_Z_shift, 
+		     FORMAT_COMP_Z_shift,
              FORMAT_COMP_Z_mask);
 	SETfield(t->SQ_TEX_RESOURCE4, SQ_FORMAT_COMP_UNSIGNED,
-		     FORMAT_COMP_W_shift, 
+		     FORMAT_COMP_W_shift,
              FORMAT_COMP_W_mask);
-	
+
 	SETfield(t->SQ_TEX_RESOURCE1, ARRAY_LINEAR_GENERAL,
 		     EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_shift,
 		     EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_mask);
@@ -94,7 +94,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	case MESA_FORMAT_RGBA8888:
 	case MESA_FORMAT_SIGNED_RGBA8888:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_W,
@@ -119,7 +119,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	case MESA_FORMAT_RGBA8888_REV:
 	case MESA_FORMAT_SIGNED_RGBA8888_REV:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -143,7 +143,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ARGB8888:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -157,7 +157,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_XRGB8888:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -171,7 +171,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_XRGB8888_REV:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_1,
@@ -185,7 +185,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ARGB8888_REV:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Y,
@@ -199,7 +199,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGB888:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -213,7 +213,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGB565:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_5_6_5,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -227,7 +227,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGB565_REV:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_5_6_5,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -241,7 +241,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ARGB4444:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_4_4_4_4,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -255,7 +255,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ARGB4444_REV:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_4_4_4_4,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Y,
@@ -269,7 +269,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ARGB1555:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_1_5_5_5,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -283,7 +283,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ARGB1555_REV:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_1_5_5_5,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Y,
@@ -298,7 +298,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	case MESA_FORMAT_AL88:
 	case MESA_FORMAT_AL88_REV: /* TODO : Check this. */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -312,7 +312,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGB332:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_3_3_2,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -326,7 +326,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_A8: /* ZERO, ZERO, ZERO, X */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_0,
@@ -340,7 +340,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_L8: /* X, X, X, ONE */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -355,7 +355,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	case MESA_FORMAT_I8: /* X, X, X, X */
 	case MESA_FORMAT_CI8:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -366,7 +366,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 			 SQ_TEX_RESOURCE_WORD4_0__DST_SEL_Z_shift, SQ_TEX_RESOURCE_WORD4_0__DST_SEL_Z_mask);
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
 			 SQ_TEX_RESOURCE_WORD4_0__DST_SEL_W_shift, SQ_TEX_RESOURCE_WORD4_0__DST_SEL_W_mask);
-		break;		
+		break;
 	case MESA_FORMAT_RGB_DXT1: /* not supported yet */
 	case MESA_FORMAT_RGBA_DXT1: /* not supported yet */
 	case MESA_FORMAT_RGBA_DXT3: /* not supported yet */
@@ -375,7 +375,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 
 	case MESA_FORMAT_RGBA_FLOAT32:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_32_32_32_32_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -389,7 +389,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGBA_FLOAT16:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_16_16_16_16_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -403,7 +403,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGB_FLOAT32: /* X, Y, Z, ONE */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_32_32_32_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -417,7 +417,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_RGB_FLOAT16:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_16_16_16_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -431,7 +431,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ALPHA_FLOAT32: /* ZERO, ZERO, ZERO, X */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_32_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_0,
@@ -445,7 +445,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_ALPHA_FLOAT16: /* ZERO, ZERO, ZERO, X */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_16_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_0,
@@ -459,7 +459,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_LUMINANCE_FLOAT32: /* X, X, X, ONE */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_32_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -473,7 +473,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_LUMINANCE_FLOAT16: /* X, X, X, ONE */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_16_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -487,7 +487,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_LUMINANCE_ALPHA_FLOAT32:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_32_32_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -501,7 +501,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_LUMINANCE_ALPHA_FLOAT16:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_16_16_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -515,7 +515,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_INTENSITY_FLOAT32: /* X, X, X, X */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_32_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -529,7 +529,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_INTENSITY_FLOAT16: /* X, X, X, X */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_16_FLOAT,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -546,36 +546,36 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	case MESA_FORMAT_S8_Z24:
 	case MESA_FORMAT_Z24_S8:
 	case MESA_FORMAT_Z32:
-	case MESA_FORMAT_S8:        	
-        CLEARbit(t->SQ_TEX_RESOURCE0, EG_SQ_TEX_RESOURCE_WORD0_0__NDTO_bit);        
+	case MESA_FORMAT_S8:
+        CLEARbit(t->SQ_TEX_RESOURCE0, EG_SQ_TEX_RESOURCE_WORD0_0__NDTO_bit);
 		SETfield(t->SQ_TEX_RESOURCE1, ARRAY_1D_TILED_THIN1,
 			     EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_shift,
 			     EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_mask);
 		switch (mesa_format) {
 		case MESA_FORMAT_Z16:
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_16,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 			break;
 		case MESA_FORMAT_X8_Z24:
 		case MESA_FORMAT_S8_Z24:
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_8_24,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 			break;
 		case MESA_FORMAT_Z24_S8:
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_24_8,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 			break;
 		case MESA_FORMAT_Z32:
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_32,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 			break;
 		case MESA_FORMAT_S8:
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_8,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 			break;
 		default:
@@ -619,7 +619,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 	/* EXT_texture_sRGB */
 	case MESA_FORMAT_SRGBA8:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_W,
@@ -634,7 +634,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_SLA8:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -649,7 +649,7 @@ static GLboolean evergreenGetTexFormat(struct gl_texture_object *tObj, gl_format
 		break;
 	case MESA_FORMAT_SL8: /* X, X, X, ONE */
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
@@ -700,24 +700,24 @@ static void evergreenUpdateTexWrap(radeonTexObjPtr t)
 	struct gl_texture_object *tObj = &t->base;
 
     SETfield(t->SQ_TEX_SAMPLER0, evergreen_translate_wrap_mode(tObj->WrapS),
-             EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift, 
+             EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_mask);
 
-	if (tObj->Target != GL_TEXTURE_1D) 
+	if (tObj->Target != GL_TEXTURE_1D)
     {
 		SETfield(t->SQ_TEX_SAMPLER0, evergreen_translate_wrap_mode(tObj->WrapT),
-			     EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_Y_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_Y_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_Y_mask);
 
 		if (tObj->Target == GL_TEXTURE_3D)
 			SETfield(t->SQ_TEX_SAMPLER0, evergreen_translate_wrap_mode(tObj->WrapR),
-				     EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_Z_shift, 
+				     EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_Z_shift,
                      EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_Z_mask);
 	}
 }
 
 static void evergreenSetTexDefaultState(radeonTexObjPtr t)
-{       
+{
     /* Init text object to default states. */
     t->SQ_TEX_RESOURCE0 = 0;
     t->SQ_TEX_RESOURCE1 = 0;
@@ -728,16 +728,16 @@ static void evergreenSetTexDefaultState(radeonTexObjPtr t)
     t->SQ_TEX_RESOURCE6 = 0;
     t->SQ_TEX_RESOURCE7 = 0;
 
-    SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_2D, 
-             EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift, 
+    SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_2D,
+             EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift,
              EG_SQ_TEX_RESOURCE_WORD0_0__DIM_mask);
 
     CLEARbit(t->SQ_TEX_RESOURCE0, EG_SQ_TEX_RESOURCE_WORD0_0__NDTO_bit);
 
     SETfield(t->SQ_TEX_RESOURCE1, ARRAY_LINEAR_GENERAL,
-             EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_shift, 
-             EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_mask);       
-        
+             EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_shift,
+             EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_mask);
+
     SETfield(t->SQ_TEX_RESOURCE4, SQ_FORMAT_COMP_UNSIGNED,
              FORMAT_COMP_X_shift, FORMAT_COMP_X_mask);
     SETfield(t->SQ_TEX_RESOURCE4, SQ_FORMAT_COMP_UNSIGNED,
@@ -752,7 +752,7 @@ static void evergreenSetTexDefaultState(radeonTexObjPtr t)
     CLEARbit(t->SQ_TEX_RESOURCE4, SQ_TEX_RESOURCE_WORD4_0__FORCE_DEGAMMA_bit);
     SETfield(t->SQ_TEX_RESOURCE4, SQ_ENDIAN_NONE,
              SQ_TEX_RESOURCE_WORD4_0__ENDIAN_SWAP_shift, SQ_TEX_RESOURCE_WORD4_0__ENDIAN_SWAP_mask);
-        
+
     SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_X,
 		     SQ_TEX_RESOURCE_WORD4_0__DST_SEL_X_shift,
 		     SQ_TEX_RESOURCE_WORD4_0__DST_SEL_X_mask);
@@ -765,47 +765,47 @@ static void evergreenSetTexDefaultState(radeonTexObjPtr t)
 	SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_W,
 		     SQ_TEX_RESOURCE_WORD4_0__DST_SEL_W_shift,
 		     SQ_TEX_RESOURCE_WORD4_0__DST_SEL_W_mask);
-    SETfield(t->SQ_TEX_RESOURCE4, 0, 
-             BASE_LEVEL_shift, 
-             BASE_LEVEL_mask); /* mip-maps */            
+    SETfield(t->SQ_TEX_RESOURCE4, 0,
+             BASE_LEVEL_shift,
+             BASE_LEVEL_mask); /* mip-maps */
 
     SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-             EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+             EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
              EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
     SETfield(t->SQ_TEX_RESOURCE7, SQ_TEX_VTX_VALID_TEXTURE,
-             EG_SQ_TEX_RESOURCE_WORD7_0__TYPE_shift, 
+             EG_SQ_TEX_RESOURCE_WORD7_0__TYPE_shift,
              EG_SQ_TEX_RESOURCE_WORD7_0__TYPE_mask);
 
     /* Initialize sampler registers */
     t->SQ_TEX_SAMPLER0 = 0;
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_WRAP, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_WRAP,
              EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift,
 	         EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_WRAP, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_WRAP,
+             EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_WRAP, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_WRAP,
+             EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__CLAMP_X_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_XY_FILTER_POINT, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_XY_FILTER_POINT,
+             EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_XY_FILTER_POINT, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_XY_FILTER_POINT,
+             EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_Z_FILTER_NONE, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__Z_FILTER_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_Z_FILTER_NONE,
+             EG_SQ_TEX_SAMPLER_WORD0_0__Z_FILTER_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__Z_FILTER_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_Z_FILTER_NONE, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_Z_FILTER_NONE,
+             EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
-    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_BORDER_COLOR_TRANS_BLACK, 
-             EG_SQ_TEX_SAMPLER_WORD0_0__BORDER_COLOR_TYPE_shift, 
+    SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_BORDER_COLOR_TRANS_BLACK,
+             EG_SQ_TEX_SAMPLER_WORD0_0__BORDER_COLOR_TYPE_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__BORDER_COLOR_TYPE_mask);
 
     t->SQ_TEX_SAMPLER1 = 0;
-    SETfield(t->SQ_TEX_SAMPLER1, 0x7ff, 
-             EG_SQ_TEX_SAMPLER_WORD1_0__MAX_LOD_shift, 
+    SETfield(t->SQ_TEX_SAMPLER1, 0x7ff,
+             EG_SQ_TEX_SAMPLER_WORD1_0__MAX_LOD_shift,
              EG_SQ_TEX_SAMPLER_WORD1_0__MAX_LOD_mask);
 
     t->SQ_TEX_SAMPLER2 = 0;
@@ -831,54 +831,54 @@ static void evergreenSetTexFilter(radeonTexObjPtr t, GLenum minf, GLenum magf, G
 		return;
 	}
 
-	switch (minf) 
+	switch (minf)
     {
 	case GL_NEAREST:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Point,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_MipFilter_None,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
 		break;
 	case GL_LINEAR:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Linear,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_MipFilter_None,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
 		break;
 	case GL_NEAREST_MIPMAP_NEAREST:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Point,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_MipFilter_Point,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
 		break;
 	case GL_NEAREST_MIPMAP_LINEAR:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Point,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_MipFilter_Linear,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
 		break;
 	case GL_LINEAR_MIPMAP_NEAREST:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Linear,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_MipFilter_Point,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
 		break;
 	case GL_LINEAR_MIPMAP_LINEAR:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Linear,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MIN_FILTER_mask);
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_MipFilter_Linear,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__MIP_FILTER_mask);
 		break;
 	}
@@ -886,16 +886,16 @@ static void evergreenSetTexFilter(radeonTexObjPtr t, GLenum minf, GLenum magf, G
 	/* Note we don't have 3D mipmaps so only use the mag filter setting
 	 * to set the 3D texture filter mode.
 	 */
-	switch (magf) 
+	switch (magf)
     {
 	case GL_NEAREST:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Point,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_mask);
 		break;
 	case GL_LINEAR:
 		SETfield(t->SQ_TEX_SAMPLER0, TEX_XYFilter_Linear,
-			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_shift, 
+			     EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__XY_MAG_FILTER_mask);
 		break;
 	}
@@ -909,7 +909,7 @@ static void evergreenSetTexBorderColor(radeonTexObjPtr t, const GLfloat color[4]
 	t->TD_PS_SAMPLER0_BORDER_BLUE = *((uint32_t*)&(color[0]));
 
     SETfield(t->SQ_TEX_SAMPLER0, SQ_TEX_BORDER_COLOR_REGISTER,
-		     EG_SQ_TEX_SAMPLER_WORD0_0__BORDER_COLOR_TYPE_shift, 
+		     EG_SQ_TEX_SAMPLER_WORD0_0__BORDER_COLOR_TYPE_shift,
              EG_SQ_TEX_SAMPLER_WORD0_0__BORDER_COLOR_TYPE_mask);
 }
 
@@ -946,47 +946,47 @@ static GLboolean evergreen_setup_hardware_state(struct gl_context * ctx, struct 
 
 	firstImage = t->base.Image[0][t->minLod];
 
-	if (!t->image_override) {        
+	if (!t->image_override) {
 		if (!evergreenGetTexFormat(texObj, firstImage->TexFormat)) {
 			radeon_warning("unsupported texture format in %s\n",
 				       __FUNCTION__);
 			return GL_FALSE;
-		}        
+		}
 	}
 
-    switch (texObj->Target) 
+    switch (texObj->Target)
     {
     case GL_TEXTURE_1D:
-        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_1D, 
-                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift, 
+        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_1D,
+                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift,
                  EG_SQ_TEX_RESOURCE_WORD0_0__DIM_mask);
-        SETfield(t->SQ_TEX_RESOURCE1, 0, 
-                 EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift, 
+        SETfield(t->SQ_TEX_RESOURCE1, 0,
+                 EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift,
                  EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_mask);
         break;
     case GL_TEXTURE_2D:
     case GL_TEXTURE_RECTANGLE_NV:
-        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_2D, 
-                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift, 
+        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_2D,
+                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift,
                  EG_SQ_TEX_RESOURCE_WORD0_0__DIM_mask);
-        SETfield(t->SQ_TEX_RESOURCE1, 0, 
-                 EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift, 
+        SETfield(t->SQ_TEX_RESOURCE1, 0,
+                 EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift,
                  EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_mask);
         break;
     case GL_TEXTURE_3D:
-        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_3D, 
-                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift, 
+        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_3D,
+                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift,
                  EG_SQ_TEX_RESOURCE_WORD0_0__DIM_mask);
         SETfield(t->SQ_TEX_RESOURCE1, (firstImage->Depth - 1), // ???
-	             EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift, 
+	             EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift,
                  EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_mask);
         break;
     case GL_TEXTURE_CUBE_MAP:
-        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_CUBEMAP, 
-                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift, 
+        SETfield(t->SQ_TEX_RESOURCE0, SQ_TEX_DIM_CUBEMAP,
+                 EG_SQ_TEX_RESOURCE_WORD0_0__DIM_shift,
                  EG_SQ_TEX_RESOURCE_WORD0_0__DIM_mask);
-        SETfield(t->SQ_TEX_RESOURCE1, 0, 
-                 EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift, 
+        SETfield(t->SQ_TEX_RESOURCE1, 0,
+                 EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_shift,
                  EG_SQ_TEX_RESOURCE_WORD1_0__TEX_DEPTH_mask);
         break;
     default:
@@ -1004,14 +1004,14 @@ static GLboolean evergreen_setup_hardware_state(struct gl_context * ctx, struct 
 	if (uTexelPitch < 8)
 		uTexelPitch = 8;
 
-	SETfield(t->SQ_TEX_RESOURCE0, (uTexelPitch/8)-1, 
-             EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_shift, 
+	SETfield(t->SQ_TEX_RESOURCE0, (uTexelPitch/8)-1,
+             EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_shift,
              EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_mask);
 	SETfield(t->SQ_TEX_RESOURCE0, firstImage->Width - 1,
-		     EG_SQ_TEX_RESOURCE_WORD0_0__TEX_WIDTH_shift, 
+		     EG_SQ_TEX_RESOURCE_WORD0_0__TEX_WIDTH_shift,
              EG_SQ_TEX_RESOURCE_WORD0_0__TEX_WIDTH_mask);
 	SETfield(t->SQ_TEX_RESOURCE1, firstImage->Height - 1,
-		     EG_SQ_TEX_RESOURCE_WORD1_0__TEX_HEIGHT_shift, 
+		     EG_SQ_TEX_RESOURCE_WORD1_0__TEX_HEIGHT_shift,
              EG_SQ_TEX_RESOURCE_WORD1_0__TEX_HEIGHT_mask);
 
 	t->SQ_TEX_RESOURCE2 = get_base_teximage_offset(t) / 256;
@@ -1020,24 +1020,24 @@ static GLboolean evergreen_setup_hardware_state(struct gl_context * ctx, struct 
 
 	SETfield(t->SQ_TEX_RESOURCE4, 0, BASE_LEVEL_shift, BASE_LEVEL_mask);
 	SETfield(t->SQ_TEX_RESOURCE5, t->maxLod - t->minLod, LAST_LEVEL_shift, LAST_LEVEL_mask);
-    
+
 	SETfield(t->SQ_TEX_SAMPLER1,
 		     EG_S_FIXED(CLAMP(t->base.MinLod - t->minLod, 0, 15), 8),
-		     EG_SQ_TEX_SAMPLER_WORD1_0__MIN_LOD_shift, 
+		     EG_SQ_TEX_SAMPLER_WORD1_0__MIN_LOD_shift,
              EG_SQ_TEX_SAMPLER_WORD1_0__MIN_LOD_mask);
 	SETfield(t->SQ_TEX_SAMPLER1,
 		     EG_S_FIXED(CLAMP(t->base.MaxLod - t->minLod, 0, 15), 8),
-		     EG_SQ_TEX_SAMPLER_WORD1_0__MAX_LOD_shift, 
+		     EG_SQ_TEX_SAMPLER_WORD1_0__MAX_LOD_shift,
              EG_SQ_TEX_SAMPLER_WORD1_0__MAX_LOD_mask);
 	SETfield(t->SQ_TEX_SAMPLER2,
 		     EG_S_FIXED(CLAMP(ctx->Texture.Unit[unit].LodBias + t->base.LodBias, -16, 16), 8),
-		     EG_SQ_TEX_SAMPLER_WORD2_0__LOD_BIAS_shift, 
+		     EG_SQ_TEX_SAMPLER_WORD2_0__LOD_BIAS_shift,
              EG_SQ_TEX_SAMPLER_WORD2_0__LOD_BIAS_mask);
 
 	if(texObj->CompareMode == GL_COMPARE_R_TO_TEXTURE_ARB)
 	{
-		SETfield(t->SQ_TEX_SAMPLER0, evergreen_translate_shadow_func(texObj->CompareFunc), 
-                 EG_SQ_TEX_SAMPLER_WORD0_0__DCF_shift, 
+		SETfield(t->SQ_TEX_SAMPLER0, evergreen_translate_shadow_func(texObj->CompareFunc),
+                 EG_SQ_TEX_SAMPLER_WORD0_0__DCF_shift,
                  EG_SQ_TEX_SAMPLER_WORD0_0__DCF_mask);
 	}
 	else
@@ -1079,7 +1079,7 @@ void evergreenSetTexOffset(__DRIcontext * pDRICtx, GLint texname,
 	switch (depth) {
 	case 32:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -1095,7 +1095,7 @@ void evergreenSetTexOffset(__DRIcontext * pDRICtx, GLint texname,
 	case 24:
 	default:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -1110,7 +1110,7 @@ void evergreenSetTexOffset(__DRIcontext * pDRICtx, GLint texname,
 		break;
 	case 16:
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_5_6_5,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -1132,8 +1132,8 @@ void evergreenSetTexOffset(__DRIcontext * pDRICtx, GLint texname,
 	if (pitch_val < 8)
 		pitch_val = 8;
 
-	SETfield(t->SQ_TEX_RESOURCE0, (pitch_val/8)-1, 
-             EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_shift, 
+	SETfield(t->SQ_TEX_RESOURCE0, (pitch_val/8)-1,
+             EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_shift,
              EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_mask);
 }
 
@@ -1202,7 +1202,7 @@ void evergreenSetTexBuffer(__DRIcontext *pDRICtx, GLint target, GLint glx_textur
 		if (glx_texture_format == __DRI_TEXTURE_FORMAT_RGB) {
 			texFormat = MESA_FORMAT_RGB888;
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 			SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -1216,7 +1216,7 @@ void evergreenSetTexBuffer(__DRIcontext *pDRICtx, GLint target, GLint glx_textur
 		} else {
 			texFormat = MESA_FORMAT_ARGB8888;
 			SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+				     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                      EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 			SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -1235,7 +1235,7 @@ void evergreenSetTexBuffer(__DRIcontext *pDRICtx, GLint target, GLint glx_textur
 		// FMT_8_8_8 ???
 		texFormat = MESA_FORMAT_RGB888;
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_8_8_8_8,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_W,
@@ -1251,7 +1251,7 @@ void evergreenSetTexBuffer(__DRIcontext *pDRICtx, GLint target, GLint glx_textur
 	case 2:
 		texFormat = MESA_FORMAT_RGB565;
 		SETfield(t->SQ_TEX_RESOURCE7, FMT_5_6_5,
-			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift, 
+			     EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_shift,
                  EG_SQ_TEX_RESOURCE_WORD7_0__DATA_FORMAT_mask);
 
 		SETfield(t->SQ_TEX_RESOURCE4, SQ_SEL_Z,
@@ -1278,14 +1278,14 @@ void evergreenSetTexBuffer(__DRIcontext *pDRICtx, GLint target, GLint glx_textur
 	if (pitch_val < 8)
 		pitch_val = 8;
 
-	SETfield(t->SQ_TEX_RESOURCE0, (pitch_val/8)-1, 
-             EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_shift, 
+	SETfield(t->SQ_TEX_RESOURCE0, (pitch_val/8)-1,
+             EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_shift,
              EG_SQ_TEX_RESOURCE_WORD0_0__PITCH_mask);
 	SETfield(t->SQ_TEX_RESOURCE0, rb->base.Width - 1,
-		     EG_SQ_TEX_RESOURCE_WORD0_0__TEX_WIDTH_shift, 
+		     EG_SQ_TEX_RESOURCE_WORD0_0__TEX_WIDTH_shift,
              EG_SQ_TEX_RESOURCE_WORD0_0__TEX_WIDTH_mask);
 	SETfield(t->SQ_TEX_RESOURCE1, rb->base.Height - 1,
-		     EG_SQ_TEX_RESOURCE_WORD1_0__TEX_HEIGHT_shift, 
+		     EG_SQ_TEX_RESOURCE_WORD1_0__TEX_HEIGHT_shift,
              EG_SQ_TEX_RESOURCE_WORD1_0__TEX_HEIGHT_mask);
 
 	t->validated = GL_TRUE;
@@ -1296,12 +1296,12 @@ void evergreenSetTexBuffer(__DRIcontext *pDRICtx, GLint target, GLint glx_textur
 void evergreenUpdateTextureState(struct gl_context * ctx)
 {
 	context_t *context = EVERGREEN_CONTEXT(ctx);
-    EVERGREEN_CHIP_CONTEXT * evergreen = GET_EVERGREEN_CHIP(context);	
+    EVERGREEN_CHIP_CONTEXT * evergreen = GET_EVERGREEN_CHIP(context);
 	struct gl_texture_unit *texUnit;
 	struct radeon_tex_obj *t;
 	GLuint    unit;
 
-	EVERGREEN_STATECHANGE(context, tx);    
+	EVERGREEN_STATECHANGE(context, tx);
 
 	for (unit = 0; unit < R700_MAX_TEXTURE_UNITS; unit++) {
 		texUnit = &ctx->Texture.Unit[unit];
@@ -1356,7 +1356,7 @@ GLboolean evergreenValidateBuffers(struct gl_context * ctx)
 						  rrb->bo, 0,
 						  RADEON_GEM_DOMAIN_VRAM);
 	}
-	
+
 	for (i = 0; i < ctx->Const.MaxTextureImageUnits; ++i) {
 		radeonTexObj *t;
 
@@ -1400,7 +1400,7 @@ GLboolean evergreenValidateBuffers(struct gl_context * ctx)
 		radeon_cs_space_add_persistent_bo(rmesa->radeon.cmdbuf.cs, pbo,
 						  RADEON_GEM_DOMAIN_GTT, 0);
 	}
-	
+
 	ret = radeon_cs_space_check_with_bo(rmesa->radeon.cmdbuf.cs, first_elem(&rmesa->radeon.dma.reserved)->bo, RADEON_GEM_DOMAIN_GTT, 0);
 	if (ret)
 		return GL_FALSE;
@@ -1421,7 +1421,7 @@ static struct gl_texture_object *evergreenNewTextureObject(struct gl_context * c
 
 	_mesa_initialize_texture_object(&t->base, name, target);
 	t->base.MaxAnisotropy = rmesa->radeon.initialMaxAnisotropy;
-    
+
 	evergreenSetTexDefaultState(t);
 	evergreenUpdateTexWrap(t);
 	evergreenSetTexFilter(t, t->base.MinFilter, t->base.MagFilter, t->base.MaxAnisotropy);

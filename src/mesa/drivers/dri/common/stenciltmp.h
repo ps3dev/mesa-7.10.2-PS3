@@ -35,7 +35,7 @@ static void TAG(WriteStencilSpan)( struct gl_context *ctx,
 
 	 WRITE_STENCIL_SPAN();
 #else /* HAVE_HW_STENCIL_SPANS */
-	 HW_CLIPLOOP() 
+	 HW_CLIPLOOP()
 	    {
 	       GLint i = 0;
 	       CLIPSPAN(x,y,n,x1,n1,i);
@@ -91,7 +91,7 @@ static void TAG(WriteMonoStencilSpan)( struct gl_context *ctx,
 
 	 y = Y_FLIP(y);
 
-	 HW_CLIPLOOP() 
+	 HW_CLIPLOOP()
 	    {
 	       GLint i = 0;
 	       CLIPSPAN(x,y,n,x1,n1,i);
@@ -177,7 +177,7 @@ static void TAG(ReadStencilSpan)( struct gl_context *ctx,
 
 	 READ_STENCIL_SPAN();
 #else /* HAVE_HW_STENCIL_SPANS */
-	 HW_CLIPLOOP() 
+	 HW_CLIPLOOP()
 	    {
 	       GLint i = 0;
 	       CLIPSPAN(x,y,n,x1,n1,i);
@@ -202,7 +202,7 @@ static void TAG(ReadStencilPixels)( struct gl_context *ctx,
 	 LOCAL_STENCIL_VARS;
 
 	 if (DBG) fprintf(stderr, "ReadStencilPixels\n");
- 
+
 #if HAVE_HW_STENCIL_PIXELS
 	 (void) i;
 

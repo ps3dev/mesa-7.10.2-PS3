@@ -79,9 +79,9 @@ gdi_sw_is_displaytarget_format_supported( struct sw_winsys *ws,
    case PIPE_FORMAT_B8G8R8A8_UNORM:
       return TRUE;
 
-   /* TODO: Support other formats possible with BMPs, as described in 
+   /* TODO: Support other formats possible with BMPs, as described in
     * http://msdn.microsoft.com/en-us/library/dd183376(VS.85).aspx */
-      
+
    default:
       return FALSE;
    }
@@ -129,7 +129,7 @@ gdi_sw_displaytarget_create(struct sw_winsys *winsys,
    struct gdi_sw_displaytarget *gdt;
    unsigned cpp;
    unsigned bpp;
-   
+
    gdt = CALLOC_STRUCT(gdi_sw_displaytarget);
    if(!gdt)
       goto no_gdt;
@@ -140,10 +140,10 @@ gdi_sw_displaytarget_create(struct sw_winsys *winsys,
 
    bpp = util_format_get_blocksizebits(format);
    cpp = util_format_get_blocksize(format);
-   
+
    gdt->stride = align(width * cpp, alignment);
    gdt->size = gdt->stride * height;
-   
+
    gdt->data = align_malloc(gdt->size, alignment);
    if(!gdt->data)
       goto no_data;
@@ -205,7 +205,7 @@ gdi_sw_display( struct sw_winsys *winsys,
 }
 
 static void
-gdi_sw_displaytarget_display(struct sw_winsys *winsys, 
+gdi_sw_displaytarget_display(struct sw_winsys *winsys,
                              struct sw_displaytarget *dt,
                              void *context_private)
 {

@@ -358,7 +358,7 @@ void renderer_bind_destination(struct xorg_renderer *r,
    /* Constant buffer set up to match viewport dimensions:
     */
    if (r->fb_width != width ||
-       r->fb_height != height) 
+       r->fb_height != height)
    {
       float vs_consts[8] = {
          2.f/width, 2.f/height, 1, 1,
@@ -481,7 +481,7 @@ void renderer_copy_prepare(struct xorg_renderer *r,
       cso_single_sampler_done(r->cso);
    }
 
-   renderer_bind_destination(r, dst_surface, 
+   renderer_bind_destination(r, dst_surface,
                              dst_surface->width,
                              dst_surface->height);
 

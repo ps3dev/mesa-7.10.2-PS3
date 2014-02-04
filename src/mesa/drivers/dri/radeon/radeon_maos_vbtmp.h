@@ -108,7 +108,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	 tc0 = (GLuint (*)[4])&ctx->Current.Attrib[VERT_ATTRIB_TEX0];
 	 tc0_stride = 0;
       }
-	 
+
    }
 
    if (DO_NORM) {
@@ -150,19 +150,19 @@ static void TAG(emit)( struct gl_context *ctx,
 	 fog_stride = 0;
       }
    }
-   
-   
+
+
    if (start) {
       coord =  (GLuint (*)[4])((GLubyte *)coord + start * coord_stride);
       if (DO_TEX0)
 	 tc0 =  (GLuint (*)[4])((GLubyte *)tc0 + start * tc0_stride);
-      if (DO_TEX1) 
+      if (DO_TEX1)
 	 tc1 =  (GLuint (*)[4])((GLubyte *)tc1 + start * tc1_stride);
-      if (DO_TEX2) 
+      if (DO_TEX2)
 	 tc2 =  (GLuint (*)[4])((GLubyte *)tc2 + start * tc2_stride);
-      if (DO_NORM) 
+      if (DO_NORM)
 	 norm =  (GLuint (*)[4])((GLubyte *)norm + start * norm_stride);
-      if (DO_RGBA) 
+      if (DO_RGBA)
 	 STRIDE_4F(col, start * col_stride);
       if (DO_SPEC)
 	 STRIDE_4F(spec, start * spec_stride);
@@ -173,14 +173,14 @@ static void TAG(emit)( struct gl_context *ctx,
 
    {
       for (i=start; i < end; i++) {
-	 
+
 	 v[0].ui = coord[0][0];
 	 v[1].ui = coord[0][1];
 	 v[2].ui = coord[0][2];
 	 if (DO_W) {
 	    v[3].ui = coord[0][3];
 	    v += 4;
-	 } 
+	 }
 	 else
 	    v += 3;
 	 coord =  (GLuint (*)[4])((GLubyte *)coord +  coord_stride);
@@ -227,7 +227,7 @@ static void TAG(emit)( struct gl_context *ctx,
 		  v[2].ui = tc0[0][3];
 	       if (TCL_DEBUG) fprintf(stderr, "%.2f ", v[2].f);
 	       v += 3;
-	    } 
+	    }
 	    else
 	       v += 2;
 	    tc0 =  (GLuint (*)[4])((GLubyte *)tc0 +  tc0_stride);
@@ -245,11 +245,11 @@ static void TAG(emit)( struct gl_context *ctx,
 		  v[2].ui = tc1[0][3];
 	       if (TCL_DEBUG) fprintf(stderr, "%.2f ", v[2].f);
 	       v += 3;
-	    } 
+	    }
 	    else
 	       v += 2;
 	    tc1 =  (GLuint (*)[4])((GLubyte *)tc1 +  tc1_stride);
-	 } 
+	 }
 	 if (DO_TEX2) {
 	    v[0].ui = tc2[0][0];
 	    v[1].ui = tc2[0][1];
@@ -263,11 +263,11 @@ static void TAG(emit)( struct gl_context *ctx,
 		  v[2].ui = tc2[0][3];
 	       if (TCL_DEBUG) fprintf(stderr, "%.2f ", v[2].f);
 	       v += 3;
-	    } 
+	    }
 	    else
 	       v += 2;
 	    tc2 =  (GLuint (*)[4])((GLubyte *)tc2 +  tc2_stride);
-	 } 
+	 }
 	 if (TCL_DEBUG) fprintf(stderr, "\n");
       }
    }

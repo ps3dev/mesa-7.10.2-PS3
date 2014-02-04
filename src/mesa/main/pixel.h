@@ -43,7 +43,7 @@ struct gl_context;
 
 #if FEATURE_pixel_transfer
 
-extern void 
+extern void
 _mesa_update_pixel( struct gl_context *ctx, GLuint newstate );
 
 extern void
@@ -64,7 +64,7 @@ _mesa_init_pixel_dispatch(struct _glapi_table *disp)
 #endif /* FEATURE_pixel_transfer */
 
 
-extern void 
+extern void
 _mesa_init_pixel( struct gl_context * ctx );
 
 /*@}*/

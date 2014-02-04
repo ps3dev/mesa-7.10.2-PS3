@@ -28,8 +28,8 @@
 /**
  * \file
  * Implementation of malloc-based buffers to store data that can't be processed
- * by the hardware. 
- * 
+ * by the hardware.
+ *
  * \author Jose Fonseca <jrfonseca@tungstengraphics.com>
  */
 
@@ -40,7 +40,7 @@
 #include "pb_bufmgr.h"
 
 
-struct malloc_buffer 
+struct malloc_buffer
 {
    struct pb_buffer base;
    void *data;
@@ -69,7 +69,7 @@ malloc_buffer_destroy(struct pb_buffer *buf)
 
 
 static void *
-malloc_buffer_map(struct pb_buffer *buf, 
+malloc_buffer_map(struct pb_buffer *buf,
                   unsigned flags,
 		  void *flush_ctx)
 {
@@ -84,8 +84,8 @@ malloc_buffer_unmap(struct pb_buffer *buf)
 }
 
 
-static enum pipe_error 
-malloc_buffer_validate(struct pb_buffer *buf, 
+static enum pipe_error
+malloc_buffer_validate(struct pb_buffer *buf,
                        struct pb_validate *vl,
                        unsigned flags)
 {
@@ -95,7 +95,7 @@ malloc_buffer_validate(struct pb_buffer *buf,
 
 
 static void
-malloc_buffer_fence(struct pb_buffer *buf, 
+malloc_buffer_fence(struct pb_buffer *buf,
                     struct pipe_fence_handle *fence)
 {
    assert(0);
@@ -112,7 +112,7 @@ malloc_buffer_get_base_buffer(struct pb_buffer *buf,
 }
 
 
-const struct pb_vtbl 
+const struct pb_vtbl
 malloc_buffer_vtbl = {
       malloc_buffer_destroy,
       malloc_buffer_map,
@@ -125,12 +125,12 @@ malloc_buffer_vtbl = {
 
 struct pb_buffer *
 pb_malloc_buffer_create(pb_size size,
-                   	const struct pb_desc *desc) 
+                   	const struct pb_desc *desc)
 {
    struct malloc_buffer *buf;
-   
+
    /* TODO: do a single allocation */
-   
+
    buf = CALLOC_STRUCT(malloc_buffer);
    if(!buf)
       return NULL;
@@ -152,29 +152,29 @@ pb_malloc_buffer_create(pb_size size,
 
 
 static struct pb_buffer *
-pb_malloc_bufmgr_create_buffer(struct pb_manager *mgr, 
+pb_malloc_bufmgr_create_buffer(struct pb_manager *mgr,
                                pb_size size,
-                               const struct pb_desc *desc) 
+                               const struct pb_desc *desc)
 {
    return pb_malloc_buffer_create(size, desc);
 }
 
 
 static void
-pb_malloc_bufmgr_flush(struct pb_manager *mgr) 
+pb_malloc_bufmgr_flush(struct pb_manager *mgr)
 {
    /* No-op */
 }
 
 
 static void
-pb_malloc_bufmgr_destroy(struct pb_manager *mgr) 
+pb_malloc_bufmgr_destroy(struct pb_manager *mgr)
 {
    /* No-op */
 }
 
 
-static struct pb_manager 
+static struct pb_manager
 pb_malloc_bufmgr = {
    pb_malloc_bufmgr_destroy,
    pb_malloc_bufmgr_create_buffer,
@@ -183,7 +183,7 @@ pb_malloc_bufmgr = {
 
 
 struct pb_manager *
-pb_malloc_bufmgr_create(void) 
+pb_malloc_bufmgr_create(void)
 {
   return &pb_malloc_bufmgr;
 }

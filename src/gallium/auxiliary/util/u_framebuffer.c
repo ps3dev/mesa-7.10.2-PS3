@@ -27,7 +27,7 @@
 /**
  * @file
  * Framebuffer utility functions.
- *  
+ *
  * @author Brian Paul
  */
 

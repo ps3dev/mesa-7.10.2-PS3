@@ -29,7 +29,7 @@
 /**
  * @file
  * Mipmap generation utility
- *  
+ *
  * @author Brian Paul
  */
 
@@ -999,7 +999,7 @@ reduce_2d(enum pipe_format pformat,
 
    /* Compute src and dst pointers */
    srcA = srcPtr;
-   if (srcHeight > 1) 
+   if (srcHeight > 1)
       srcB = srcA + srcRowStride;
    else
       srcB = srcA;
@@ -1078,7 +1078,7 @@ reduce_3d(enum pipe_format pformat,
       ubyte *dstImgRow = imgDst;
 
       for (row = 0; row < dstHeight; row++) {
-         do_row_3D(datatype, comps, srcWidth, 
+         do_row_3D(datatype, comps, srcWidth,
                    srcImgARowA, srcImgARowB,
                    srcImgBRowA, srcImgBRowB,
                    dstWidth, dstImgRow);
@@ -1302,7 +1302,7 @@ util_create_gen_mipmap(struct pipe_context *pipe,
    }
 
    /* vertex shader - still needed to specify mapping from fragment
-    * shader input semantics to vertex elements 
+    * shader input semantics to vertex elements
     */
    {
       const uint semantic_names[] = { TGSI_SEMANTIC_POSITION,
@@ -1344,7 +1344,7 @@ get_next_slot(struct gen_mipmap_state *ctx)
 {
    const unsigned max_slots = 4096 / sizeof ctx->vertices;
 
-   if (ctx->vbuf_slot >= max_slots) 
+   if (ctx->vbuf_slot >= max_slots)
       util_gen_mipmap_flush( ctx );
 
    if (!ctx->vbuf) {
@@ -1352,7 +1352,7 @@ get_next_slot(struct gen_mipmap_state *ctx)
                                      PIPE_BIND_VERTEX_BUFFER,
                                      max_slots * sizeof ctx->vertices);
    }
-   
+
    return ctx->vbuf_slot++ * sizeof ctx->vertices;
 }
 
@@ -1446,7 +1446,7 @@ void util_gen_mipmap_flush( struct gen_mipmap_state *ctx )
 {
    pipe_resource_reference(&ctx->vbuf, NULL);
    ctx->vbuf_slot = 0;
-} 
+}
 
 
 /**
@@ -1616,7 +1616,7 @@ util_gen_mipmap(struct gen_mipmap_state *ctx,
                                   face,
                                   rcoord);
 
-         util_draw_vertex_buffer(ctx->pipe, 
+         util_draw_vertex_buffer(ctx->pipe,
                                  ctx->vbuf,
                                  offset,
                                  PIPE_PRIM_TRIANGLE_FAN,

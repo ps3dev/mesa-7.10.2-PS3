@@ -86,7 +86,7 @@ struct radeon_texture_state {
 /* Trying to keep these relatively short as the variables are becoming
  * extravagently long.  Drop the driver name prefix off the front of
  * everything - I think we know which driver we're in by now, and keep the
- * prefix to 3 letters unless absolutely impossible.  
+ * prefix to 3 letters unless absolutely impossible.
  */
 
 #define CTX_CMD_0             0
@@ -219,7 +219,7 @@ struct radeon_texture_state {
 #define GRD_STATE_SIZE             5
 
 /* position changes frequently when lighting in modelpos - separate
- * out to new state item?  
+ * out to new state item?
  */
 #define LIT_CMD_0                  0
 #define LIT_AMBIENT_RED            1
@@ -305,7 +305,7 @@ struct radeon_texture_state {
 #define STP_STATE_SIZE 35
 
 struct r100_hw_state {
-	/* Hardware state, stored as cmdbuf commands:  
+	/* Hardware state, stored as cmdbuf commands:
 	 *   -- Need to doublebuffer for
 	 *           - eliding noop statechange loops? (except line stipple count)
 	 */
@@ -391,7 +391,7 @@ struct r100_swtcl_info {
 /* A maximum total of 20 elements per vertex:  3 floats for position, 3
  * floats for normal, 4 floats for color, 4 bytes for secondary color,
  * 3 floats for each texture unit (9 floats total).
- * 
+ *
  * The position data is never actually stored here, so 3 elements could be
  * trimmed out of the buffer. This number is only valid for vtxfmt!
  */

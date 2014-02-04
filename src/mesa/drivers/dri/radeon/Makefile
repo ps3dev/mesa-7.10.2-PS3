@@ -55,7 +55,7 @@ DRIVER_DEFINES = -DRADEON_R100
 
 DRI_LIB_DEPS += $(RADEON_LDFLAGS)
 
-X86_SOURCES = 
+X86_SOURCES =
 
 include ../Makefile.template
 

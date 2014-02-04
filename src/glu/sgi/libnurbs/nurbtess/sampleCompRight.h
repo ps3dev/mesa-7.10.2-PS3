@@ -36,7 +36,7 @@
 #define NOT_TAKEOUT
 
 #include "sampleMonoPoly.h"
-void stripOfFanRight(vertexArray* rightChain, 
+void stripOfFanRight(vertexArray* rightChain,
 		    Int largeIndex,
 		    Int smallIndex,
 		    gridWrap* grid,
@@ -53,7 +53,7 @@ void sampleRightStripRecF(vertexArray* rightChain,
 		     Int botRightIndex,
 		     gridBoundaryChain* rightGridChain,
 		     Int rightGridChainStartIndex,
-		     Int rightGridChainEndIndex,	
+		     Int rightGridChainEndIndex,
 		     primStream* pStream
 		     );
 //the degenerate case of sampleRightOneGridStep
@@ -65,7 +65,7 @@ void sampleRightOneGridStepNoMiddle(vertexArray* rightChain,
 				    primStream* pStream);
 //sampling the right area in between two grid lines
 //shape: _________|
-void sampleRightOneGridStep(vertexArray* rightChain, 
+void sampleRightOneGridStep(vertexArray* rightChain,
 			    Int beginRightIndex,
 			    Int endRightIndex,
 			    gridBoundaryChain* rightGridChain,

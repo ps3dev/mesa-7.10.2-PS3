@@ -115,7 +115,7 @@ sisAllocTexImage( sisContextPtr smesa, sisTexObjPtr t, int level,
    }
    else
       t->image[level].memType = VIDEO_TYPE;
-   
+
    t->image[level].Data = ALIGN(addr, TEXTURE_HW_ALIGNMENT);
    t->image[level].pitch = image->Width * texel_size;
    t->image[level].size = image->Width * image->Height * texel_size;
@@ -141,7 +141,7 @@ sisFreeTexImage( sisContextPtr smesa, sisTexObjPtr t, int level )
    }
    t->image[level].Data = NULL;
    t->image[level].handle = NULL;
-   /* If there are no textures loaded any more, reset the hw format so the 
+   /* If there are no textures loaded any more, reset the hw format so the
     * object can be reused for new formats
     */
    t->numImages--;
@@ -151,7 +151,7 @@ sisFreeTexImage( sisContextPtr smesa, sisTexObjPtr t, int level )
    }
 }
 
-static void 
+static void
 sisTexEnv( struct gl_context *ctx, GLenum target, GLenum pname, const GLfloat *param )
 {
   sisContextPtr smesa = SIS_CONTEXT(ctx);
@@ -204,8 +204,8 @@ sisDeleteTexture( struct gl_context * ctx, struct gl_texture_object *texObj )
 
    t = texObj->DriverData;
    if (t == NULL) {
-      /* 
-       * this shows the texture is default object and never be a 
+      /*
+       * this shows the texture is default object and never be a
        * argument of sisTexImage*
        */
       return;
@@ -379,7 +379,7 @@ static void sisTexImage1D( struct gl_context *ctx, GLenum target, GLint level,
    /* Upload the texture */
    WaitEngIdle(smesa);
    memcpy(t->image[level].Data, texImage->Data, t->image[level].size);
-   
+
    if (smesa->PrevTexFormat[ctx->Texture.CurrentUnit] != t->format)
    {
       smesa->TexStates[ctx->Texture.CurrentUnit] |= NEW_TEXTURE_ENV;
@@ -466,7 +466,7 @@ static void sisTexImage2D( struct gl_context *ctx, GLenum target, GLint level,
    /* Upload the texture */
    WaitEngIdle(smesa);
    memcpy(t->image[level].Data, texImage->Data, t->image[level].size);
-   
+
    if (smesa->PrevTexFormat[ctx->Texture.CurrentUnit] != t->format)
    {
       smesa->TexStates[ctx->Texture.CurrentUnit] |= NEW_TEXTURE_ENV;

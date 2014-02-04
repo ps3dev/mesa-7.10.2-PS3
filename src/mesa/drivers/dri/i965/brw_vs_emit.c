@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-            
+
 
 #include "main/macros.h"
 #include "program/program.h"
@@ -92,7 +92,7 @@ static void release_tmp( struct brw_vs_compile *c, struct brw_reg tmp )
    if (tmp.nr == c->last_tmp-1)
       c->last_tmp--;
 }
-			       
+
 static void release_tmps( struct brw_vs_compile *c )
 {
    c->last_tmp = c->first_tmp;
@@ -166,7 +166,7 @@ static void brw_vs_alloc_regs( struct brw_vs_compile *c )
    c->r0 = brw_vec8_grf(reg, 0);
    reg++;
 
-   /* User clip planes from curbe: 
+   /* User clip planes from curbe:
     */
    if (c->key.nr_userclip) {
       if (intel->gen >= 6) {
@@ -261,7 +261,7 @@ static void brw_vs_alloc_regs( struct brw_vs_compile *c )
    if (intel->gen < 6 && c->prog_data.nr_params == 0)
       c->prog_data.nr_params = 4;
 
-   /* Allocate input regs:  
+   /* Allocate input regs:
     */
    c->nr_inputs = 0;
    for (i = 0; i < VERT_ATTRIB_MAX; i++) {
@@ -362,7 +362,7 @@ static void brw_vs_alloc_regs( struct brw_vs_compile *c )
             }
 	 }
       }
-   }     
+   }
 
    /* Allocate program temporaries:
     */
@@ -534,7 +534,7 @@ static void unalias3( struct brw_vs_compile *c,
 static void emit_sop( struct brw_vs_compile *c,
                       struct brw_reg dst,
                       struct brw_reg arg0,
-                      struct brw_reg arg1, 
+                      struct brw_reg arg1,
 		      GLuint cond)
 {
    struct brw_compile *p = &c->func;
@@ -620,7 +620,7 @@ static void emit_sign(struct brw_vs_compile *c,
    brw_set_predicate_control(p, BRW_PREDICATE_NONE);
 }
 
-static void emit_max( struct brw_compile *p, 
+static void emit_max( struct brw_compile *p,
 		      struct brw_reg dst,
 		      struct brw_reg arg0,
 		      struct brw_reg arg1 )
@@ -639,7 +639,7 @@ static void emit_max( struct brw_compile *p,
    }
 }
 
-static void emit_min( struct brw_compile *p, 
+static void emit_min( struct brw_compile *p,
 		      struct brw_reg dst,
 		      struct brw_reg arg0,
 		      struct brw_reg arg1 )
@@ -698,7 +698,7 @@ static void emit_math1_gen4(struct brw_vs_compile *c,
    if (need_tmp)
       tmp = get_tmp(c);
 
-   brw_math(p, 
+   brw_math(p,
 	    tmp,
 	    function,
 	    BRW_MATH_SATURATE_NONE,
@@ -765,7 +765,7 @@ emit_math1(struct brw_vs_compile *c,
       emit_math1_gen4(c, function, dst, arg0, precision);
 }
 
-static void emit_math2_gen4( struct brw_vs_compile *c, 
+static void emit_math2_gen4( struct brw_vs_compile *c,
 			GLuint function,
 			struct brw_reg dst,
 			struct brw_reg arg0,
@@ -780,12 +780,12 @@ static void emit_math2_gen4( struct brw_vs_compile *c,
        dst.dw1.bits.writemask != 0xf)
       need_tmp = GL_TRUE;
 
-   if (need_tmp) 
+   if (need_tmp)
       tmp = get_tmp(c);
 
    brw_MOV(p, brw_message_reg(3), arg1);
-   
-   brw_math(p, 
+
+   brw_math(p,
 	    tmp,
 	    function,
 	    BRW_MATH_SATURATE_NONE,
@@ -800,7 +800,7 @@ static void emit_math2_gen4( struct brw_vs_compile *c,
    }
 }
 
-static void emit_math2_gen6( struct brw_vs_compile *c, 
+static void emit_math2_gen6( struct brw_vs_compile *c,
 			GLuint function,
 			struct brw_reg dst,
 			struct brw_reg arg0,
@@ -816,7 +816,7 @@ static void emit_math2_gen6( struct brw_vs_compile *c,
 
    brw_MOV(p, tmp_src0, arg0);
    brw_MOV(p, tmp_src1, arg1);
-   
+
    brw_set_access_mode(p, BRW_ALIGN_1);
    brw_math2(p,
 	    tmp_dst,
@@ -832,7 +832,7 @@ static void emit_math2_gen6( struct brw_vs_compile *c,
    release_tmp(c, tmp_dst);
 }
 
-static void emit_math2( struct brw_vs_compile *c, 
+static void emit_math2( struct brw_vs_compile *c,
 			GLuint function,
 			struct brw_reg dst,
 			struct brw_reg arg0,
@@ -853,7 +853,7 @@ static void emit_exp_noalias( struct brw_vs_compile *c,
 			      struct brw_reg arg0 )
 {
    struct brw_compile *p = &c->func;
-   
+
 
    if (dst.dw1.bits.writemask & WRITEMASK_X) {
       struct brw_reg tmp = get_tmp(c);
@@ -864,15 +864,15 @@ static void emit_exp_noalias( struct brw_vs_compile *c,
 
       /* result[0] = 2.0 ^ tmp */
 
-      /* Adjust exponent for floating point: 
-       * exp += 127 
+      /* Adjust exponent for floating point:
+       * exp += 127
        */
       brw_ADD(p, brw_writemask(tmp_d, WRITEMASK_X), tmp_d, brw_imm_d(127));
 
-      /* Install exponent and sign.  
-       * Excess drops off the edge: 
+      /* Install exponent and sign.
+       * Excess drops off the edge:
        */
-      brw_SHL(p, brw_writemask(retype(dst, BRW_REGISTER_TYPE_D), WRITEMASK_X), 
+      brw_SHL(p, brw_writemask(retype(dst, BRW_REGISTER_TYPE_D), WRITEMASK_X),
 	      tmp_d, brw_imm_d(23));
 
       release_tmp(c, tmp);
@@ -882,7 +882,7 @@ static void emit_exp_noalias( struct brw_vs_compile *c,
       /* result[1] = arg0.x - floor(arg0.x) */
       brw_FRC(p, brw_writemask(dst, WRITEMASK_Y), brw_swizzle1(arg0, 0));
    }
-   
+
    if (dst.dw1.bits.writemask & WRITEMASK_Z) {
       /* As with the LOG instruction, we might be better off just
        * doing a taylor expansion here, seeing as we have to do all
@@ -891,12 +891,12 @@ static void emit_exp_noalias( struct brw_vs_compile *c,
        * If mathbox partial precision is too low, consider also:
        * result[3] = result[0] * EXP(result[1])
        */
-      emit_math1(c, 
-		 BRW_MATH_FUNCTION_EXP, 
+      emit_math1(c,
+		 BRW_MATH_FUNCTION_EXP,
 		 brw_writemask(dst, WRITEMASK_Z),
-		 brw_swizzle1(arg0, 0), 
+		 brw_swizzle1(arg0, 0),
 		 BRW_MATH_PRECISION_FULL);
-   }  
+   }
 
    if (dst.dw1.bits.writemask & WRITEMASK_W) {
       /* result[3] = 1.0; */
@@ -920,7 +920,7 @@ static void emit_log_noalias( struct brw_vs_compile *c,
       tmp = get_tmp(c);
       tmp_ud = retype(tmp, BRW_REGISTER_TYPE_UD);
    }
-   
+
    /* Perform mant = frexpf(fabsf(x), &exp), adjust exp and mnt
     * according to spec:
     *
@@ -931,34 +931,34 @@ static void emit_log_noalias( struct brw_vs_compile *c,
     * result[1].i = (x.i & ((1<<23)-1)        + (127<<23)
     */
    if (dst.dw1.bits.writemask & WRITEMASK_XZ) {
-      brw_AND(p, 
+      brw_AND(p,
 	      brw_writemask(tmp_ud, WRITEMASK_X),
 	      brw_swizzle1(arg0_ud, 0),
 	      brw_imm_ud((1U<<31)-1));
 
-      brw_SHR(p, 
-	      brw_writemask(tmp_ud, WRITEMASK_X), 
+      brw_SHR(p,
+	      brw_writemask(tmp_ud, WRITEMASK_X),
 	      tmp_ud,
 	      brw_imm_ud(23));
 
-      brw_ADD(p, 
-	      brw_writemask(tmp, WRITEMASK_X), 
+      brw_ADD(p,
+	      brw_writemask(tmp, WRITEMASK_X),
 	      retype(tmp_ud, BRW_REGISTER_TYPE_D),	/* does it matter? */
 	      brw_imm_d(-127));
    }
 
    if (dst.dw1.bits.writemask & WRITEMASK_YZ) {
-      brw_AND(p, 
+      brw_AND(p,
 	      brw_writemask(tmp_ud, WRITEMASK_Y),
 	      brw_swizzle1(arg0_ud, 0),
 	      brw_imm_ud((1<<23)-1));
 
-      brw_OR(p, 
-	     brw_writemask(tmp_ud, WRITEMASK_Y), 
+      brw_OR(p,
+	     brw_writemask(tmp_ud, WRITEMASK_Y),
 	     tmp_ud,
 	     brw_imm_ud(127<<23));
    }
-   
+
    if (dst.dw1.bits.writemask & WRITEMASK_Z) {
       /* result[2] = result[0] + LOG2(result[1]); */
 
@@ -966,23 +966,23 @@ static void emit_log_noalias( struct brw_vs_compile *c,
        * taylor series.  Maybe we *should* use a taylor series as by
        * the time all the above has been done it's almost certainly
        * quicker than calling the mathbox, even with low precision.
-       * 
+       *
        * Options are:
        *    - result[0] + mathbox.LOG2(result[1])
        *    - mathbox.LOG2(arg0.x)
        *    - result[0] + inline_taylor_approx(result[1])
        */
-      emit_math1(c, 
-		 BRW_MATH_FUNCTION_LOG, 
-		 brw_writemask(tmp, WRITEMASK_Z), 
-		 brw_swizzle1(tmp, 1), 
+      emit_math1(c,
+		 BRW_MATH_FUNCTION_LOG,
+		 brw_writemask(tmp, WRITEMASK_Z),
+		 brw_swizzle1(tmp, 1),
 		 BRW_MATH_PRECISION_FULL);
-      
-      brw_ADD(p, 
-	      brw_writemask(tmp, WRITEMASK_Z), 
-	      brw_swizzle1(tmp, 2), 
+
+      brw_ADD(p,
+	      brw_writemask(tmp, WRITEMASK_Z),
+	      brw_swizzle1(tmp, 2),
 	      brw_swizzle1(tmp, 0));
-   }  
+   }
 
    if (dst.dw1.bits.writemask & WRITEMASK_W) {
       /* result[3] = 1.0; */
@@ -998,14 +998,14 @@ static void emit_log_noalias( struct brw_vs_compile *c,
 
 /* Need to unalias - consider swizzles:   r0 = DST r0.xxxx r1
  */
-static void emit_dst_noalias( struct brw_vs_compile *c, 
+static void emit_dst_noalias( struct brw_vs_compile *c,
 			      struct brw_reg dst,
 			      struct brw_reg arg0,
 			      struct brw_reg arg1)
 {
    struct brw_compile *p = &c->func;
 
-   /* There must be a better way to do this: 
+   /* There must be a better way to do this:
     */
    if (dst.dw1.bits.writemask & WRITEMASK_X)
       brw_MOV(p, brw_writemask(dst, WRITEMASK_X), brw_imm_f(1.0));
@@ -1028,7 +1028,7 @@ static void emit_xpd( struct brw_compile *p,
 }
 
 
-static void emit_lit_noalias( struct brw_vs_compile *c, 
+static void emit_lit_noalias( struct brw_vs_compile *c,
 			      struct brw_reg dst,
 			      struct brw_reg arg0 )
 {
@@ -1037,11 +1037,11 @@ static void emit_lit_noalias( struct brw_vs_compile *c,
    struct brw_reg tmp = dst;
    GLboolean need_tmp = (dst.file != BRW_GENERAL_REGISTER_FILE);
 
-   if (need_tmp) 
+   if (need_tmp)
       tmp = get_tmp(c);
-   
-   brw_MOV(p, brw_writemask(dst, WRITEMASK_YZ), brw_imm_f(0)); 
-   brw_MOV(p, brw_writemask(dst, WRITEMASK_XW), brw_imm_f(1)); 
+
+   brw_MOV(p, brw_writemask(dst, WRITEMASK_YZ), brw_imm_f(0));
+   brw_MOV(p, brw_writemask(dst, WRITEMASK_XW), brw_imm_f(1));
 
    /* Need to use BRW_EXECUTE_8 and also do an 8-wide compare in order
     * to get all channels active inside the IF.  In the clipping code
@@ -1057,12 +1057,12 @@ static void emit_lit_noalias( struct brw_vs_compile *c,
       brw_MOV(p, brw_writemask(tmp, WRITEMASK_Z),  brw_swizzle1(arg0,1));
       brw_set_predicate_control(p, BRW_PREDICATE_NONE);
 
-      emit_math2(c, 
-		 BRW_MATH_FUNCTION_POW, 
+      emit_math2(c,
+		 BRW_MATH_FUNCTION_POW,
 		 brw_writemask(dst, WRITEMASK_Z),
 		 brw_swizzle1(tmp, 2),
 		 brw_swizzle1(arg0, 3),
-		 BRW_MATH_PRECISION_PARTIAL);      
+		 BRW_MATH_PRECISION_PARTIAL);
    }
 
    brw_ENDIF(p, if_insn);
@@ -1084,7 +1084,7 @@ static void emit_lrp_noalias(struct brw_vs_compile *c,
 }
 
 /** 3 or 4-component vector normalization */
-static void emit_nrm( struct brw_vs_compile *c, 
+static void emit_nrm( struct brw_vs_compile *c,
                       struct brw_reg dst,
                       struct brw_reg arg0,
                       int num_comps)
@@ -1210,8 +1210,8 @@ static struct brw_reg get_reg( struct brw_vs_compile *c,
    case PROGRAM_UNDEFINED:			/* undef values */
       return brw_null_reg();
 
-   case PROGRAM_LOCAL_PARAM: 
-   case PROGRAM_ENV_PARAM: 
+   case PROGRAM_LOCAL_PARAM:
+   case PROGRAM_ENV_PARAM:
    case PROGRAM_WRITE_ONLY:
    default:
       assert(0);
@@ -1419,7 +1419,7 @@ static struct brw_reg get_arg( struct brw_vs_compile *c,
 
    reg = get_src_reg(c, inst, argIndex);
 
-   /* Convert 3-bit swizzle to 2-bit.  
+   /* Convert 3-bit swizzle to 2-bit.
     */
    if (reg.file != BRW_IMMEDIATE_VALUE) {
       reg.dw1.bits.swizzle = BRW_SWIZZLE4(GET_SWZ(src->Swizzle, 0),
@@ -1478,7 +1478,7 @@ static struct brw_reg get_dst( struct brw_vs_compile *c,
 }
 
 
-static void emit_swz( struct brw_vs_compile *c, 
+static void emit_swz( struct brw_vs_compile *c,
 		      struct brw_reg dst,
                       const struct prog_instruction *inst)
 {
@@ -1517,7 +1517,7 @@ static void emit_swz( struct brw_vs_compile *c,
 	 }
       }
    }
-   
+
    /* Do src first, in case dst aliases src:
     */
    if (src_mask) {
@@ -1525,22 +1525,22 @@ static void emit_swz( struct brw_vs_compile *c,
 
       arg0 = get_src_reg(c, inst, argIndex);
 
-      arg0 = brw_swizzle(arg0, 
-			 src_swz[0], src_swz[1], 
+      arg0 = brw_swizzle(arg0,
+			 src_swz[0], src_swz[1],
 			 src_swz[2], src_swz[3]);
 
       brw_MOV(p, brw_writemask(tmp, src_mask), arg0);
-   } 
-   
-   if (zeros_mask) 
+   }
+
+   if (zeros_mask)
       brw_MOV(p, brw_writemask(tmp, zeros_mask), brw_imm_f(0));
 
-   if (ones_mask) 
+   if (ones_mask)
       brw_MOV(p, brw_writemask(tmp, ones_mask), brw_imm_f(1));
 
    if (src.Negate)
       brw_MOV(p, brw_writemask(tmp, src.Negate), negate(tmp));
-   
+
    if (need_tmp) {
       brw_MOV(p, dst, tmp);
       release_tmp(c, tmp);
@@ -1563,7 +1563,7 @@ static void emit_vertex_write( struct brw_vs_compile *c)
    int next_mrf, i;
 
    if (c->key.copy_edgeflag) {
-      brw_MOV(p, 
+      brw_MOV(p,
 	      get_reg(c, PROGRAM_OUTPUT, VERT_RESULT_EDGE),
 	      get_reg(c, PROGRAM_INPUT, VERT_ATTRIB_EDGEFLAG));
    }
@@ -1612,7 +1612,7 @@ static void emit_vertex_write( struct brw_vs_compile *c)
 
       brw_MOV(p, header1, brw_imm_ud(0));
 
-      brw_set_access_mode(p, BRW_ALIGN_16);	
+      brw_set_access_mode(p, BRW_ALIGN_16);
 
       if (c->prog_data.outputs_written & BITFIELD64_BIT(VERT_RESULT_PSIZ)) {
 	 struct brw_reg psiz = c->regs[PROGRAM_OUTPUT][VERT_RESULT_PSIZ];
@@ -1629,9 +1629,9 @@ static void emit_vertex_write( struct brw_vs_compile *c)
 	 brw_set_predicate_control(p, BRW_PREDICATE_NONE);
       }
 
-      /* i965 clipping workaround: 
+      /* i965 clipping workaround:
        * 1) Test for -ve rhw
-       * 2) If set, 
+       * 2) If set,
        *      set ndc = (0,0,0,0)
        *      set ucp[6] = 1
        *
@@ -1644,7 +1644,7 @@ static void emit_vertex_write( struct brw_vs_compile *c)
 		 BRW_CONDITIONAL_L,
 		 brw_swizzle1(ndc, 3),
 		 brw_imm_f(0));
-   
+
 	 brw_OR(p, brw_writemask(header1, WRITEMASK_W), header1, brw_imm_ud(1<<6));
 	 brw_MOV(p, ndc, brw_imm_f(0));
 	 brw_set_predicate_control(p, BRW_PREDICATE_NONE);
@@ -1727,7 +1727,7 @@ static void emit_vertex_write( struct brw_vs_compile *c)
 
    eot = (c->first_overflow_output == 0);
 
-   brw_urb_WRITE(p, 
+   brw_urb_WRITE(p,
 		 brw_null_reg(), /* dest */
 		 0,		/* starting mrf reg nr */
 		 c->r0,		/* src */
@@ -1851,7 +1851,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
    GLuint insn, if_depth = 0, loop_depth = 0;
    struct brw_instruction *if_inst[MAX_IF_DEPTH], *loop_inst[MAX_LOOP_DEPTH] = { 0 };
    int if_depth_in_loop[MAX_LOOP_DEPTH];
-   const struct brw_indirect stack_index = brw_indirect(0, 0);   
+   const struct brw_indirect stack_index = brw_indirect(0, 0);
    GLuint index;
    GLuint file;
 
@@ -1878,7 +1878,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
        for (i = 0; i < 3; i++) {
 	   struct prog_src_register *src = &inst->SrcReg[i];
 	   GLuint index = src->Index;
-	   GLuint file = src->File;	
+	   GLuint file = src->File;
 	   if (file == PROGRAM_OUTPUT && index != VERT_RESULT_HPOS)
 	       c->output_regs[index].used_in_src = GL_TRUE;
        }
@@ -1917,7 +1917,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
 	  for (i = 0; i < 3; i++) {
 	      const struct prog_src_register *src = &inst->SrcReg[i];
 	      index = src->Index;
-	      file = src->File;	
+	      file = src->File;
 	      if (file == PROGRAM_OUTPUT && c->output_regs[index].used_in_src)
 		  args[i] = c->output_regs[index].reg;
 	      else
@@ -1927,7 +1927,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
       /* Get dest regs.  Note that it is possible for a reg to be both
        * dst and arg, given the static allocation of registers.  So
        * care needs to be taken emitting multi-operation instructions.
-       */ 
+       */
       index = inst->DstReg.Index;
       file = inst->DstReg.File;
       if (file == PROGRAM_OUTPUT && c->output_regs[index].used_in_src)
@@ -1970,7 +1970,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
 	 emit_nrm(c, dst, args[0], 4);
 	 break;
       case OPCODE_DST:
-	 unalias2(c, dst, args[0], args[1], emit_dst_noalias); 
+	 unalias2(c, dst, args[0], args[1], emit_dst_noalias);
 	 break;
       case OPCODE_EXP:
 	 unalias1(c, dst, args[0], emit_exp_noalias);
@@ -2020,7 +2020,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
 	 brw_MUL(p, dst, args[0], args[1]);
 	 break;
       case OPCODE_POW:
-	 emit_math2(c, BRW_MATH_FUNCTION_POW, dst, args[0], args[1], BRW_MATH_PRECISION_FULL); 
+	 emit_math2(c, BRW_MATH_FUNCTION_POW, dst, args[0], args[1], BRW_MATH_PRECISION_FULL);
 	 break;
       case OPCODE_RCP:
 	 emit_math1(c, BRW_MATH_FUNCTION_INV, dst, args[0], BRW_MATH_PRECISION_FULL);
@@ -2087,7 +2087,7 @@ void brw_vs_emit(struct brw_vs_compile *c )
          assert(if_depth > 0);
 	 brw_ENDIF(p, if_inst[--if_depth]);
 	 if_depth_in_loop[loop_depth]--;
-	 break;			
+	 break;
       case OPCODE_BGNLOOP:
 	 clear_current_const(c);
          loop_inst[loop_depth++] = brw_DO(p, BRW_EXECUTE_8);

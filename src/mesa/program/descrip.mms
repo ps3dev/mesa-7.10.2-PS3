@@ -60,7 +60,7 @@ OBJECTS = \
 VERSION=Mesa V3.4
 
 ##### TARGETS #####
-all : 
+all :
 	$(MMS)$(MMSQUALIFIERS) $(LIBDIR)$(GL_LIB)
 	set def [.slang]
 	$(MMS)$(MMSQUALIFIERS)

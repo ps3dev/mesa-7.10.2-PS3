@@ -154,7 +154,7 @@ lp_rast_clear_color(struct lp_rasterizer_task *task,
 
    unsigned i;
 
-   LP_DBG(DEBUG_RAST, "%s 0x%x,0x%x,0x%x,0x%x\n", __FUNCTION__, 
+   LP_DBG(DEBUG_RAST, "%s 0x%x,0x%x,0x%x,0x%x\n", __FUNCTION__,
               clear_color[0],
               clear_color[1],
               clear_color[2],
@@ -668,7 +668,7 @@ rasterize_bin(struct lp_rasterizer_task *task,
  * stores them again unchanged.  This typically happens when bins have
  * been flushed for some reason in the middle of a frame, or when
  * incremental updates are being made to a render target.
- * 
+ *
  * Try to avoid doing pointless work in this case.
  */
 static boolean
@@ -798,7 +798,7 @@ static PIPE_THREAD_ROUTINE( thread_func, init_data )
           *  - get next scene to rasterize
           *  - map the framebuffer surfaces
           */
-         lp_rast_begin( rast, 
+         lp_rast_begin( rast,
                         lp_scene_dequeue( rast->full_scenes, TRUE ) );
       }
 
@@ -813,7 +813,7 @@ static PIPE_THREAD_ROUTINE( thread_func, init_data )
 
       rasterize_scene(task,
                       rast->curr_scene);
-      
+
       /* wait for all threads to finish with this scene */
       pipe_barrier_wait( &rast->barrier );
 

@@ -155,7 +155,7 @@ _mesa_sparc_transform_normalize_normals:
 
 7:	retl
 	 nop
-	
+
 	.globl	_mesa_sparc_transform_normalize_normals_no_rot
 _mesa_sparc_transform_normalize_normals_no_rot:
 	/* o0=mat o1=scale o2=in o3=lengths o4=dest */

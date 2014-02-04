@@ -189,7 +189,7 @@ typedef enum {
 
 	/** branch instruction: has no effect */
 	RC_OPCODE_ENDIF,
-	
+
 	RC_OPCODE_BGNLOOP,
 
 	RC_OPCODE_BRK,

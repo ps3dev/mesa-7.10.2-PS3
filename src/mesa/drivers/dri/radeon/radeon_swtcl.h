@@ -56,8 +56,8 @@ extern void radeon_emit_indexed_verts( struct gl_context *ctx,
 				       GLuint start,
 				       GLuint count );
 
-extern void radeon_translate_vertex( struct gl_context *ctx, 
-				     const radeonVertex *src, 
+extern void radeon_translate_vertex( struct gl_context *ctx,
+				     const radeonVertex *src,
 				     SWvertex *dst );
 
 extern void radeon_print_vertex( struct gl_context *ctx, const radeonVertex *v );

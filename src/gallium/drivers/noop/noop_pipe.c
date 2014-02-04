@@ -117,7 +117,7 @@ static struct pipe_resource *noop_resource_create(struct pipe_screen *screen,
 
 		nresource->dt = winsys->displaytarget_create(winsys, nresource->base.bind,
 								nresource->base.format,
-								nresource->base.width0, 
+								nresource->base.width0,
 								nresource->base.height0,
 								16, &stride);
 	}

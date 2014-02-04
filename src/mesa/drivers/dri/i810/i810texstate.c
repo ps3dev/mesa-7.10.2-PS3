@@ -15,9 +15,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
@@ -40,7 +40,7 @@
 
 
 
-static void i810SetTexImages( i810ContextPtr imesa, 
+static void i810SetTexImages( i810ContextPtr imesa,
 			      struct gl_texture_object *tObj )
 {
    GLuint height, width, pitch, i, textureFormat, log_pitch;
@@ -97,7 +97,7 @@ static void i810SetTexImages( i810ContextPtr imesa,
    width = tObj->Image[0][t->base.firstLevel]->Width * t->texelBytes;
    for (pitch = 32, log_pitch=2 ; pitch < width ; pitch *= 2 )
       log_pitch++;
-   
+
    /* All images must be loaded at this pitch.  Count the number of
     * lines required:
     */
@@ -111,11 +111,11 @@ static void i810SetTexImages( i810ContextPtr imesa,
    t->Pitch = pitch;
    t->base.totalSize = height*pitch;
    t->max_level = i-1;
-   t->dirty = I810_UPLOAD_TEX0 | I810_UPLOAD_TEX1;   
-   t->Setup[I810_TEXREG_MI1] = (MI1_MAP_0 | textureFormat | log_pitch); 
+   t->dirty = I810_UPLOAD_TEX0 | I810_UPLOAD_TEX1;
+   t->Setup[I810_TEXREG_MI1] = (MI1_MAP_0 | textureFormat | log_pitch);
    t->Setup[I810_TEXREG_MLL] = (GFX_OP_MAP_LOD_LIMITS |
 				MLL_MAP_0  |
-				MLL_UPDATE_MAX_MIP | 
+				MLL_UPDATE_MAX_MIP |
 				MLL_UPDATE_MIN_MIP |
 				((numLevels - 1) << MLL_MIN_MIP_SHIFT));
 
@@ -191,7 +191,7 @@ static const unsigned operand_modifiers[] = {
  * a reasonable place to make note of it.
  */
 static GLboolean
-i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit, 
+i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit,
 			 int * color_stage, int * alpha_stage )
 {
    i810ContextPtr imesa = I810_CONTEXT(ctx);
@@ -214,7 +214,7 @@ i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit,
       return GL_TRUE;
    }
 
-      
+
    if ((*color_stage >= 3) || (*alpha_stage >= 3)) {
       return GL_FALSE;
    }
@@ -236,7 +236,7 @@ i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit,
 	 color_arg[i] = MC_ARG_TEX1_COLOR;
 	 break;
       case GL_TEXTURE:
-	 color_arg[i] = (unit == 0) 
+	 color_arg[i] = (unit == 0)
 	   ? MC_ARG_TEX0_COLOR : MC_ARG_TEX1_COLOR;
 	 break;
       case GL_CONSTANT:
@@ -347,13 +347,13 @@ i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit,
        * done in stage zero and writes to MC_DEST_ACCUMULATOR.  The
        * (arg1*(1-arg2)) portion is done in stage 1, and the final stage is
        * (MC_ARG1_ACCUMULATOR | MC_ARG2_CURRENT_COLOR | MC_OP_ADD).
-       * 
+       *
        * It can also be done without using the accumulator by rearranging
        * the equation as (arg1 + (arg2 * (arg0 - arg1))).  Too bad the i810
        * doesn't support the MODULATE_AND_ADD mode that the i830 supports.
        * If it did, the interpolate could be done in only two stages.
        */
-	 
+
       if ( (color_arg[2] & MC_ARG_INVERT) != 0 ) {
 	 unsigned temp = color_arg[0];
 
@@ -412,7 +412,7 @@ i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit,
       return GL_FALSE;
    }
 
-   
+
    switch ( texUnit->_CurrentCombine->ModeA ) {
    case GL_REPLACE:
       alpha_combine = MA_OP_ARG1;
@@ -514,7 +514,7 @@ i810UpdateTexEnvCombine( struct gl_context *ctx, GLuint unit,
       (*color_stage)++;
    }
 
-   
+
    if ( Ashift != 0 ) {
       const unsigned alpha_scale = GFX_OP_MAP_ALPHA_STAGES
 	| (*alpha_stage << MA_STAGE_SHIFT)
@@ -553,7 +553,7 @@ static GLboolean enable_tex_common( struct gl_context *ctx, GLuint unit )
       return GL_FALSE;
     }
   }
-   
+
   /* Update state if this is a different texture object to last
    * time.
    */
@@ -561,11 +561,11 @@ static GLboolean enable_tex_common( struct gl_context *ctx, GLuint unit )
     I810_STATECHANGE(imesa, (I810_UPLOAD_TEX0<<unit));
     imesa->CurrentTexObj[unit] = t;
     t->base.bound |= (1U << unit);
-    
+
     /* XXX: should be locked */
     driUpdateTextureLRU( (driTextureObject *) t );
   }
-  
+
   imesa->TexEnvImageFmt[unit] = tObj->Image[0][tObj->BaseLevel]->_BaseFormat;
   return GL_TRUE;
 }
@@ -583,10 +583,10 @@ static GLboolean enable_tex_rect( struct gl_context *ctx, GLuint unit )
 
   I810_STATECHANGE(imesa, (I810_UPLOAD_TEX0<<unit));
   t->Setup[I810_TEXREG_MCS] &= ~MCS_NORMALIZED_COORDS;
-  t->Setup[I810_TEXREG_MCS] |= MCS_UPDATE_NORMALIZED; 
+  t->Setup[I810_TEXREG_MCS] |= MCS_UPDATE_NORMALIZED;
   t->Setup[I810_TEXREG_MI2] = (MI2_DIMENSIONS_ARE_EXACT |
 			       (Height << MI2_HEIGHT_SHIFT) | Width);
-  
+
   return GL_TRUE;
 }
 
@@ -603,10 +603,10 @@ static GLboolean enable_tex_2d( struct gl_context *ctx, GLuint unit )
   log2Height = tObj->Image[0][t->base.firstLevel]->HeightLog2;
 
   I810_STATECHANGE(imesa, (I810_UPLOAD_TEX0<<unit));
-  t->Setup[I810_TEXREG_MCS] |= MCS_NORMALIZED_COORDS | MCS_UPDATE_NORMALIZED; 
+  t->Setup[I810_TEXREG_MCS] |= MCS_NORMALIZED_COORDS | MCS_UPDATE_NORMALIZED;
   t->Setup[I810_TEXREG_MI2] = (MI2_DIMENSIONS_ARE_LOG2 |
 			       (log2Height << MI2_HEIGHT_SHIFT) | log2Width);
-  
+
   return GL_TRUE;
 }
 
@@ -615,9 +615,9 @@ static void disable_tex( struct gl_context *ctx, GLuint unit )
   i810ContextPtr imesa = I810_CONTEXT(ctx);
 
   imesa->CurrentTexObj[unit] = 0;
-  imesa->TexEnvImageFmt[unit] = 0;	
-  imesa->dirty &= ~(I810_UPLOAD_TEX0<<unit); 
-  
+  imesa->TexEnvImageFmt[unit] = 0;
+  imesa->dirty &= ~(I810_UPLOAD_TEX0<<unit);
+
 }
 
 /**
@@ -627,13 +627,13 @@ static void disable_tex( struct gl_context *ctx, GLuint unit )
  * 1D textures should be supported!  Just use a 2D texture with the second
  * texture coordinate value fixed at 0.0.
  */
-static void i810UpdateTexUnit( struct gl_context *ctx, GLuint unit, 
+static void i810UpdateTexUnit( struct gl_context *ctx, GLuint unit,
 			      int * next_color_stage, int * next_alpha_stage )
 {
    i810ContextPtr imesa = I810_CONTEXT(ctx);
    struct gl_texture_unit *texUnit = &ctx->Texture.Unit[unit];
    GLboolean ret;
-   
+
    switch(texUnit->_ReallyEnabled) {
    case TEXTURE_2D_BIT:
      ret = enable_tex_common( ctx, unit);
@@ -655,7 +655,7 @@ static void i810UpdateTexUnit( struct gl_context *ctx, GLuint unit,
    }
 
 
-   if (!i810UpdateTexEnvCombine( ctx, unit, 
+   if (!i810UpdateTexEnvCombine( ctx, unit,
 				 next_color_stage, next_alpha_stage )) {
      FALLBACK( imesa, I810_FALLBACK_TEXTURE, GL_TRUE );
    }

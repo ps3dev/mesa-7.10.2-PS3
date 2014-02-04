@@ -47,7 +47,7 @@ logbase2(int n)
 
 /* Otherwise, store it in memory if (Border != 0) or (any dimension ==
  * 1).
- *    
+ *
  * Otherwise, if max_level >= level >= min_level, create tree with
  * space for textures from min_level down to max_level.
  *
@@ -91,7 +91,7 @@ guess_and_alloc_mipmap_tree(struct intel_context *intel,
       firstLevel = intelObj->base.BaseLevel;
 
 
-   /* Figure out image dimensions at start level. 
+   /* Figure out image dimensions at start level.
     */
    for (i = intelImage->level; i > firstLevel; i--) {
       width <<= 1;
@@ -326,12 +326,12 @@ intelTexImage(struct gl_context * ctx,
    else {
       texelBytes = _mesa_get_format_bytes(texImage->TexFormat);
 
-      if (!intelImage->mt) {      
+      if (!intelImage->mt) {
 	  assert(texImage->RowStride == width);
       }
    }
 
-   /* Release the reference to a potentially orphaned buffer.   
+   /* Release the reference to a potentially orphaned buffer.
     * Release any old malloced memory.
     */
    if (intelImage->mt) {
@@ -497,9 +497,9 @@ intelTexImage(struct gl_context * ctx,
 	       memcpy(texImage->Data, pixels, imageSize);
            }
        }
-       else if (!_mesa_texstore(ctx, dims, 
-                                texImage->_BaseFormat, 
-                                texImage->TexFormat, 
+       else if (!_mesa_texstore(ctx, dims,
+                                texImage->_BaseFormat,
+                                texImage->TexFormat,
                                 texImage->Data, 0, 0, 0, /* dstX/Y/Zoffset */
                                 dstRowStride,
                                 texImage->ImageOffsets,
@@ -636,7 +636,7 @@ intel_get_tex_image(struct gl_context * ctx, GLenum target, GLint level,
       _mesa_get_teximage(ctx, target, level, format, type, pixels,
                          texObj, texImage);
    }
-     
+
 
    /* Unmap */
    if (intelImage->mt) {

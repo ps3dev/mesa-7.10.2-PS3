@@ -46,12 +46,12 @@ enum SVGA3dSurfaceFormat;
 extern struct u_resource_vtbl svga_texture_vtbl;
 
 
-struct svga_texture 
+struct svga_texture
 {
    struct u_resource b;
 
    boolean defined[6][SVGA_MAX_TEXTURE_LEVELS];
-   
+
    struct svga_sampler_view *cached_view;
 
    unsigned view_age[SVGA_MAX_TEXTURE_LEVELS];
@@ -61,8 +61,8 @@ struct svga_texture
 
    /**
     * Creation key for the host surface handle.
-    * 
-    * This structure describes all the host surface characteristics so that it 
+    *
+    * This structure describes all the host surface characteristics so that it
     * can be looked up in cache, since creating a host surface is often a slow
     * operation.
     */

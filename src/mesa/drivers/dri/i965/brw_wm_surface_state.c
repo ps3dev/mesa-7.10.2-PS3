@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                   
+
 
 #include "main/mtypes.h"
 #include "main/texstore.h"
@@ -47,23 +47,23 @@
 static GLuint translate_tex_target( GLenum target )
 {
    switch (target) {
-   case GL_TEXTURE_1D: 
+   case GL_TEXTURE_1D:
       return BRW_SURFACE_1D;
 
-   case GL_TEXTURE_RECTANGLE_NV: 
+   case GL_TEXTURE_RECTANGLE_NV:
       return BRW_SURFACE_2D;
 
-   case GL_TEXTURE_2D: 
+   case GL_TEXTURE_2D:
       return BRW_SURFACE_2D;
 
-   case GL_TEXTURE_3D: 
+   case GL_TEXTURE_3D:
       return BRW_SURFACE_3D;
 
-   case GL_TEXTURE_CUBE_MAP: 
+   case GL_TEXTURE_CUBE_MAP:
       return BRW_SURFACE_CUBE;
 
-   default: 
-      assert(0); 
+   default:
+      assert(0);
       return 0;
    }
 }
@@ -81,7 +81,7 @@ static GLuint translate_tex_format( gl_format mesa_format,
       return BRW_SURFACEFORMAT_I8_UNORM;
 
    case MESA_FORMAT_A8:
-      return BRW_SURFACEFORMAT_A8_UNORM; 
+      return BRW_SURFACEFORMAT_A8_UNORM;
 
    case MESA_FORMAT_AL88:
       return BRW_SURFACEFORMAT_L8A8_UNORM;
@@ -103,7 +103,7 @@ static GLuint translate_tex_format( gl_format mesa_format,
 
    case MESA_FORMAT_RGB888:
       assert(0);		/* not supported for sampling */
-      return BRW_SURFACEFORMAT_R8G8B8_UNORM;      
+      return BRW_SURFACEFORMAT_R8G8B8_UNORM;
 
    case MESA_FORMAT_ARGB8888:
       return BRW_SURFACEFORMAT_B8G8R8A8_UNORM;
@@ -135,7 +135,7 @@ static GLuint translate_tex_format( gl_format mesa_format,
       return BRW_SURFACEFORMAT_FXT1;
 
    case MESA_FORMAT_Z16:
-      if (depth_mode == GL_INTENSITY) 
+      if (depth_mode == GL_INTENSITY)
 	  return BRW_SURFACEFORMAT_I16_UNORM;
       else if (depth_mode == GL_ALPHA)
 	  return BRW_SURFACEFORMAT_A16_UNORM;
@@ -149,10 +149,10 @@ static GLuint translate_tex_format( gl_format mesa_format,
 
    case MESA_FORMAT_RGBA_DXT1:
        return BRW_SURFACEFORMAT_BC1_UNORM;
-       
+
    case MESA_FORMAT_RGBA_DXT3:
        return BRW_SURFACEFORMAT_BC2_UNORM;
-       
+
    case MESA_FORMAT_RGBA_DXT5:
        return BRW_SURFACEFORMAT_BC3_UNORM;
 
@@ -172,7 +172,7 @@ static GLuint translate_tex_format( gl_format mesa_format,
       /* XXX: these different surface formats don't seem to
        * make any difference for shadow sampler/compares.
        */
-      if (depth_mode == GL_INTENSITY) 
+      if (depth_mode == GL_INTENSITY)
          return BRW_SURFACEFORMAT_I24X8_UNORM;
       else if (depth_mode == GL_ALPHA)
          return BRW_SURFACEFORMAT_A24X8_UNORM;
@@ -244,7 +244,7 @@ brw_update_texture_surface( struct gl_context *ctx, GLuint unit )
    surf.ss3.depth = firstImage->Depth - 1;
 
    surf.ss4.min_lod = 0;
- 
+
    if (tObj->Target == GL_TEXTURE_CUBE_MAP) {
       surf.ss0.cube_pos_x = 1;
       surf.ss0.cube_pos_y = 1;

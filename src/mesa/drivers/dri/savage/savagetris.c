@@ -70,7 +70,7 @@ static GLenum reduced_prim[GL_POLYGON+1] = {
    GL_TRIANGLES
 };
 
- 
+
 /***********************************************************************
  *                    Emit primitives                                  *
  ***********************************************************************/
@@ -202,7 +202,7 @@ static INLINE void savage_draw_line (savageContextPtr imesa,
    *(float *)&vb[0] = v1->v.x + ix;
    *(float *)&vb[1] = v1->v.y + iy;
    EMIT_VERT (j, vb, vertsize, 2, v1);
-} 
+}
 
 /* Fallback drawing functions for the ptex hack. Code duplication
  * (especially lines and points) isn't beautiful, but I didn't feel
@@ -278,7 +278,7 @@ static INLINE void savage_ptex_line (savageContextPtr imesa,
    *(float *)&vb[0] = v1->v.x + ix;
    *(float *)&vb[1] = v1->v.y + iy;
    EMIT_VERT (j, vb, vertsize, 2, &tmp1);
-} 
+}
 
 static INLINE void savage_ptex_point (savageContextPtr imesa,
 					  savageVertexPtr v0) {
@@ -318,7 +318,7 @@ static INLINE void savage_ptex_point (savageContextPtr imesa,
    *(float *)&vb[1] = y - sz;
    EMIT_VERT (j, vb, vertsize, 2, &tmp);
 }
- 
+
 /***********************************************************************
  *          Macros for t_dd_tritmp.h to draw basic primitives          *
  ***********************************************************************/
@@ -860,7 +860,7 @@ static void savageRenderPrimitive( struct gl_context *ctx, GLenum prim )
 
    if (rprim == GL_TRIANGLES && (ctx->_TriangleCaps & DD_TRI_UNFILLED))
       return;
-       
+
    if (imesa->raster_primitive != rprim) {
       savageRasterPrimitive( ctx, rprim );
    }
@@ -1147,7 +1147,7 @@ static void savageRenderStart( struct gl_context *ctx )
    /* Important:
     */
    VB->AttribPtr[VERT_ATTRIB_POS] = VB->NdcPtr;
- 
+
    if (imesa->savageScreen->chipset < S3_SAVAGE4) {
       setupIndex = savageChooseVertexFormat_s3d(ctx);
    } else {
@@ -1159,8 +1159,8 @@ static void savageRenderStart( struct gl_context *ctx )
    if (setupIndex != imesa->SetupIndex || imesa->vertex_size == 0) {
       GLuint hwVertexSize;
       imesa->vertex_size =
-	 _tnl_install_attrs( ctx, 
-			     imesa->vertex_attrs, 
+	 _tnl_install_attrs( ctx,
+			     imesa->vertex_attrs,
 			     imesa->vertex_attr_count,
 			     imesa->hw_viewport, 0 );
       imesa->vertex_size >>= 2;
@@ -1261,10 +1261,10 @@ void savageFallback( struct gl_context *ctx, GLuint bit, GLboolean mode )
 
 	 _tnl_invalidate_vertex_state( ctx, ~0 );
 	 _tnl_invalidate_vertices( ctx, ~0 );
-	 _tnl_install_attrs( ctx, 
-			     imesa->vertex_attrs, 
+	 _tnl_install_attrs( ctx,
+			     imesa->vertex_attrs,
 			     imesa->vertex_attr_count,
-			     imesa->hw_viewport, 0 ); 
+			     imesa->hw_viewport, 0 );
 
 	 imesa->new_gl_state |= _SAVAGE_NEW_RENDER_STATE;
       }
@@ -1299,8 +1299,8 @@ void savageInitTriFuncs( struct gl_context *ctx )
    tnl->Driver.Render.CopyPV = _tnl_copy_pv;
    tnl->Driver.Render.Interp = _tnl_interp;
 
-   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12, 
+   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12,
 		       (6 + 2*ctx->Const.MaxTextureUnits) * sizeof(GLfloat) );
-   
+
    SAVAGE_CONTEXT(ctx)->verts = (char *)tnl->clipspace.vertex_buf;
 }

@@ -829,7 +829,7 @@ identity_context_transfer_unmap(struct pipe_context *_context,
 }
 
 
-static void 
+static void
 identity_context_transfer_inline_write(struct pipe_context *_context,
                                        struct pipe_resource *_resource,
                                        unsigned level,

@@ -28,9 +28,9 @@
 /**
  * @file
  * SSE intrinsics portability header.
- * 
- * Although the SSE intrinsics are support by all modern x86 and x86-64 
- * compilers, there are some intrisincs missing in some implementations 
+ *
+ * Although the SSE intrinsics are support by all modern x86 and x86-64
+ * compilers, there are some intrisincs missing in some implementations
  * (especially older MSVC versions). This header abstracts that away.
  */
 

@@ -287,7 +287,7 @@
 #define S_SBLEND_BOTH_SRC_ALPHA		0x0B000000
 #define S_SBLEND_BOTH_INV_SRC_ALPHA	0x0C000000
 
-/* 
+/*
  * REG_6326_3D_TextureSet		(0x8A38 - 0x8A3B)
  */
 #define MASK_6326_TextureMinFilter	0x00000007
@@ -359,7 +359,7 @@
 #define TEX_FILTER_MAG_NEAREST		0x00000000
 #define TEX_FILTER_MAG_LINEAR		0x00000008
 
-/* 
+/*
  * REG_6326_3D_TextureBlendSet		(0x8A3C - 0x8A3F)
  */
 #define MASK_TextureTransparencyLowB	0x000000ff
@@ -377,7 +377,7 @@
 #define TB_A_AF				(1 << 24)
 #define TB_A_AFAS			(1 << 24)
 
-/* 
+/*
  * REG_6326_3D_TextureTransparencyColorHigh	(0x8A40 - 0x8A43)
  */
 #define MASK_TextureTransparencyHighB	0x000000FF
@@ -391,13 +391,13 @@
 #define MASK_TexturePitchEven		0x03FF0000
 #define SHIFT_TexturePitchEven		16
 
-/* 
+/*
  * REG_3D_TextureWidthHeightMix		(0x8A80 - 0x8A83)
  */
 #define MASK_TextureWidthLog2		0xf0000000
 #define MASK_TextureHeightLog2		0x0f000000
 
-/* 
+/*
  * REG_3D_TextureBorderColor		(0x8A90 - 0x8A93)
  */
 #define MASK_TextureBorderColorB	0x000000FF

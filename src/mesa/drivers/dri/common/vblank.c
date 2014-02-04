@@ -54,8 +54,8 @@ static int64_t vblank_to_msc(__DRIdrawable * dPriv, unsigned int vblank)
  * may, it will never decrease for a given drawable.
  *
  * \warning This function is called from \c glXGetVideoSyncSGI, which expects
- * a \c count of type \c unsigned (32-bit), and \c glXGetSyncValuesOML, which 
- * expects a \c count of type \c int64_t (signed 64-bit).  The kernel ioctl 
+ * a \c count of type \c unsigned (32-bit), and \c glXGetSyncValuesOML, which
+ * expects a \c count of type \c int64_t (signed 64-bit).  The kernel ioctl
  * currently always returns a \c sequence of type \c unsigned.
  *
  * \param priv   Pointer to the DRI screen private struct.
@@ -95,10 +95,10 @@ int driDrawableGetMSC32( __DRIscreen * priv,
  * Wait for a specified refresh count.  This implements most of the
  * functionality of \c glXWaitForMscOML from the GLX_OML_sync_control spec.
  * Waits for the \c target_msc refresh.  If that has already passed, it
- * waits until \f$(MSC \bmod divisor)\f$ is equal to \c remainder.  If 
+ * waits until \f$(MSC \bmod divisor)\f$ is equal to \c remainder.  If
  * \c target_msc is 0, use the behavior of glXWaitVideoSyncSGI(), which
  * omits the initial check against a target MSC value.
- * 
+ *
  * This function is actually something of a hack.  The problem is that, at
  * the time of this writing, none of the existing DRM modules support an
  * ioctl that returns a 64-bit count (at least not on 32-bit platforms).
@@ -136,7 +136,7 @@ int driWaitForMSC32( __DRIdrawable *priv,
 
       do {
          /* dont_wait means we're using the glXWaitVideoSyncSGI() behavior.
-          * The first time around, just get the current count and proceed 
+          * The first time around, just get the current count and proceed
           * to the test for (MSC % divisor) == remainder.
           */
          vbl.request.type = dont_wait ? DRM_VBLANK_RELATIVE :
@@ -159,9 +159,9 @@ int driWaitForMSC32( __DRIdrawable *priv,
 
          /* Assuming the wait-done test fails, the next refresh to wait for
           * will be one that satisfies (MSC % divisor) == remainder.  The
-          * value (MSC - (MSC % divisor) + remainder) is the refresh value 
-          * closest to the current value that would satisfy the equation.  
-          * If this refresh has already happened, we add divisor to obtain 
+          * value (MSC - (MSC % divisor) + remainder) is the refresh value
+          * closest to the current value that would satisfy the equation.
+          * If this refresh has already happened, we add divisor to obtain
           * the next refresh after the current one that will satisfy it.
           */
          r = ((uint64_t)*msc % divisor);
@@ -257,7 +257,7 @@ static int do_wait( drmVBlank * vbl, GLuint * vbl_seq, int fd )
       static GLboolean first_time = GL_TRUE;
 
       if ( first_time ) {
-	 fprintf(stderr, 
+	 fprintf(stderr,
 		 "%s: drmWaitVBlank returned %d, IRQs don't seem to be"
 		 " working correctly.\nTry adjusting the vblank_mode"
 		 " configuration parameter.\n", __FUNCTION__, ret);
@@ -301,7 +301,7 @@ void driDrawableInitVBlank( __DRIdrawable *priv )
 	!( priv->vblFlags & VBLANK_FLAG_NO_IRQ ) ) {
       /* Get current vertical blank sequence */
       drmVBlank vbl;
- 
+
       vbl.request.type = DRM_VBLANK_RELATIVE;
       if ( priv->vblFlags & VBLANK_FLAG_SECONDARY )
  	 vbl.request.type |= DRM_VBLANK_SECONDARY;
@@ -329,7 +329,7 @@ driGetVBlankInterval( const  __DRIdrawable *priv )
 
       return priv->swap_interval;
    }
-   else 
+   else
       return driGetDefaultVBlankInterval( priv );
 }
 
@@ -357,7 +357,7 @@ driGetCurrentVBlank( __DRIdrawable *priv )
 /****************************************************************************/
 /**
  * Waits for the vertical blank for use with glXSwapBuffers.
- * 
+ *
  * \param missed_deadline  Set to \c GL_TRUE if the MSC after waiting is later
  *                 than the "target" based on \c priv->vblFlags.  The idea is
  *                 that if \c missed_deadline is set, then the application is

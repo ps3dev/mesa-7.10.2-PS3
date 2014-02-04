@@ -88,7 +88,7 @@ struct svga_blend_state {
       uint8_t srcblend;
       uint8_t dstblend;
       uint8_t blendeq;
-      
+
       boolean separate_alpha_blend_enable;
       uint8_t srcblend_alpha;
       uint8_t dstblend_alpha;
@@ -104,7 +104,7 @@ struct svga_depth_stencil_state {
 
    unsigned alphatestenable:1;
    unsigned alphafunc:8;
-  
+
    struct {
       unsigned enabled:1;
       unsigned func:8;
@@ -112,7 +112,7 @@ struct svga_depth_stencil_state {
       unsigned zfail:8;
       unsigned pass:8;
    } stencil[2];
-   
+
    /* SVGA3D has one ref/mask/writemask triple shared between front &
     * back face stencil.  We really need two:
     */
@@ -145,7 +145,7 @@ struct svga_rasterizer_state {
    float slopescaledepthbias;
    float depthbias;
    float pointsize;
-   
+
    unsigned hw_unfilled:16;         /* PIPE_POLYGON_MODE_x */
    unsigned need_pipeline:16;    /* which prims do we need help for? */
 };
@@ -175,9 +175,9 @@ struct svga_velems_state {
 };
 
 /* Use to calculate differences between state emitted to hardware and
- * current driver-calculated state.  
+ * current driver-calculated state.
  */
-struct svga_state 
+struct svga_state
 {
    const struct svga_blend_state *blend;
    const struct svga_depth_stencil_state *depth;
@@ -248,7 +248,7 @@ struct svga_hw_clear_state
    struct {
       float zmin, zmax;
    } depthrange;
-   
+
    struct pipe_framebuffer_state framebuffer;
    struct svga_prescale prescale;
 };
@@ -331,7 +331,7 @@ struct svga_context
 
       unsigned texture_timestamp;
 
-      /* 
+      /*
        */
       struct svga_sw_state          sw;
       struct svga_hw_draw_state     hw_draw;
@@ -389,9 +389,9 @@ struct svga_context
 
 
 /***********************************************************************
- * svga_clear.c: 
+ * svga_clear.c:
  */
-void svga_clear(struct pipe_context *pipe, 
+void svga_clear(struct pipe_context *pipe,
                 unsigned buffers,
                 const float *rgba,
                 double depth,
@@ -399,7 +399,7 @@ void svga_clear(struct pipe_context *pipe,
 
 
 /***********************************************************************
- * svga_screen_texture.c: 
+ * svga_screen_texture.c:
  */
 void svga_mark_surfaces_dirty(struct svga_context *svga);
 

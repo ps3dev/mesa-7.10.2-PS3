@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -66,12 +66,12 @@ static void cull_tri( struct draw_stage *stage,
    const float ey = v0[1] - v2[1];
    const float fx = v1[0] - v2[0];
    const float fy = v1[1] - v2[1];
-   
+
    /* det = cross(e,f).z */
    header->det = ex * fy - ey * fx;
 
    if (header->det != 0) {
-      /* if det < 0 then Z points toward the camera and the triangle is 
+      /* if det < 0 then Z points toward the camera and the triangle is
        * counter-clockwise winding.
        */
       unsigned ccw = (header->det < 0);
@@ -87,7 +87,7 @@ static void cull_tri( struct draw_stage *stage,
 }
 
 
-static void cull_first_tri( struct draw_stage *stage, 
+static void cull_first_tri( struct draw_stage *stage,
 			    struct prim_header *header )
 {
    struct cull_stage *cull = cull_stage(stage);

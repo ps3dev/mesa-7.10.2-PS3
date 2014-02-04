@@ -38,7 +38,7 @@
 
 /* Guess the storage size of cached surfaces and try and keep it under
  * this amount:
- */ 
+ */
 #define SVGA_HOST_SURFACE_CACHE_BYTES 16*1024*1024
 
 /* Maximum number of discrete surfaces in the cache:
@@ -67,51 +67,51 @@ struct svga_host_surface_cache_key
 };
 
 
-struct svga_host_surface_cache_entry 
+struct svga_host_surface_cache_entry
 {
-   /** 
+   /**
     * Head for the LRU list, svga_host_surface_cache::unused, and
     * svga_host_surface_cache::empty
     */
    struct list_head head;
-   
+
    /** Head for the bucket lists. */
    struct list_head bucket_head;
 
    struct svga_host_surface_cache_key key;
    struct svga_winsys_surface *handle;
-   
+
    struct pipe_fence_handle *fence;
 };
 
 
 /**
  * Cache of the host surfaces.
- * 
+ *
  * A cache entry can be in the following stages:
  * 1. empty
  * 2. holding a buffer in a validate list
  * 3. holding a flushed buffer (not in any validate list) with an active fence
  * 4. holding a flushed buffer with an expired fence
- * 
- * An entry progresses from 1 -> 2 -> 3 -> 4. When we need an entry to put a 
- * buffer into we preferencial take from 1, or from the least recentely used 
+ *
+ * An entry progresses from 1 -> 2 -> 3 -> 4. When we need an entry to put a
+ * buffer into we preferencial take from 1, or from the least recentely used
  * buffer from 3/4.
  */
-struct svga_host_surface_cache 
+struct svga_host_surface_cache
 {
    pipe_mutex mutex;
-   
+
    /* Unused buffers are put in buckets to speed up lookups */
    struct list_head bucket[SVGA_HOST_SURFACE_CACHE_BUCKETS];
-   
-   /* Entries with unused buffers, ordered from most to least recently used 
+
+   /* Entries with unused buffers, ordered from most to least recently used
     * (3 and 4) */
    struct list_head unused;
-   
+
    /* Entries with buffers still in validate lists (2) */
    struct list_head validated;
-   
+
    /** Empty entries (1) */
    struct list_head empty;
 

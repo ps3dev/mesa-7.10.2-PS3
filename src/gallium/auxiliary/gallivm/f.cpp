@@ -18,7 +18,7 @@
  * - Download and abuild the NTL library from
  *   http://shoup.net/ntl/download.html
  *
- * - Download boost source code matching to your distro. 
+ * - Download boost source code matching to your distro.
  *
  * - Goto libs/math/minimax and replace f.cpp with this file.
  *
@@ -26,7 +26,7 @@
  *
  *   g++ -o minimax -I /path/to/ntl/include main.cpp f.cpp /path/to/ntl/src/ntl.a -lboost_math_tr1
  *
- * - Run as 
+ * - Run as
  *
  *    ./minimax
  *
@@ -52,7 +52,7 @@
 boost::math::ntl::RR f(const boost::math::ntl::RR& x, int variant)
 {
    static const boost::math::ntl::RR tiny = boost::math::tools::min_value<boost::math::ntl::RR>() * 64;
-   
+
    switch(variant)
    {
    case 0:
@@ -69,10 +69,10 @@ boost::math::ntl::RR f(const boost::math::ntl::RR& x, int variant)
 
 
 void show_extra(
-   const boost::math::tools::polynomial<boost::math::ntl::RR>& n, 
-   const boost::math::tools::polynomial<boost::math::ntl::RR>& d, 
-   const boost::math::ntl::RR& x_offset, 
-   const boost::math::ntl::RR& y_offset, 
+   const boost::math::tools::polynomial<boost::math::ntl::RR>& n,
+   const boost::math::tools::polynomial<boost::math::ntl::RR>& d,
+   const boost::math::ntl::RR& x_offset,
+   const boost::math::ntl::RR& y_offset,
    int variant)
 {
    switch(variant)

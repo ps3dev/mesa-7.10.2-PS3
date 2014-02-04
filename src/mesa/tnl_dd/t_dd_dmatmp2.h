@@ -70,7 +70,7 @@ do { 						\
 /**********************************************************************/
 
 
-static ELT_TYPE *TAG(emit_elts)( struct gl_context *ctx, 
+static ELT_TYPE *TAG(emit_elts)( struct gl_context *ctx,
 			    ELT_TYPE *dest,
 			    GLuint *elts, GLuint nr )
 {
@@ -85,11 +85,11 @@ static ELT_TYPE *TAG(emit_elts)( struct gl_context *ctx,
       EMIT_ELT( dest, 0, elts[0] );
       dest += 1;
    }
-   
+
    return dest;
 }
 
-static ELT_TYPE *TAG(emit_consecutive_elts)( struct gl_context *ctx, 
+static ELT_TYPE *TAG(emit_consecutive_elts)( struct gl_context *ctx,
 					ELT_TYPE *dest,
 					GLuint start, GLuint nr )
 {
@@ -142,7 +142,7 @@ static void TAG(render_lines_verts)( struct gl_context *ctx,
       RESET_STIPPLE();
       AUTO_STIPPLE( GL_TRUE );
    }
-      
+
    EMIT_PRIM( ctx, GL_LINES, HW_LINES, start, count );
 
    if ((flags & PRIM_END) && ctx->Line.StippleFlag)
@@ -166,7 +166,7 @@ static void TAG(render_line_strip_verts)( struct gl_context *ctx,
 
 
    if (PREFER_DISCRETE_ELT_PRIM( count-start, HW_LINES ))
-   {   
+   {
       int dmasz = GET_MAX_HW_ELTS();
       GLuint j, nr;
 
@@ -183,7 +183,7 @@ static void TAG(render_line_strip_verts)( struct gl_context *ctx,
 
 	 nr = MIN2( dmasz, count - j );
 	 dest = ALLOC_ELTS( (nr-1)*2 );
-	    
+
 	 for ( i = j ; i+1 < j+nr ; i+=1 ) {
 	    EMIT_TWO_ELTS( dest, 0, (i+0), (i+1) );
 	    dest += 2;
@@ -248,10 +248,10 @@ static void TAG(render_line_loop_verts)( struct gl_context *ctx,
 
 	    /* Emit 1 more line into space alloced above */
 	    if (j + 1 >= count) {
- 	       EMIT_TWO_ELTS( dest, 0, (j), (start) ); 
- 	       dest += 2; 
+ 	       EMIT_TWO_ELTS( dest, 0, (j), (start) );
+ 	       dest += 2;
  	    }
- 
+
 	    CLOSE_ELTS();
 	 }
       }
@@ -278,7 +278,7 @@ static void TAG(render_line_loop_verts)( struct gl_context *ctx,
 	       j += nr;
 	       CLOSE_ELTS();
 	    }
-	 }   
+	 }
       }
    } else {
       TAG(render_line_strip_verts)( ctx, j, count, flags );
@@ -319,7 +319,7 @@ static void TAG(render_tri_strip_verts)( struct gl_context *ctx,
       return;
 
    if (PREFER_DISCRETE_ELT_PRIM( count-start, HW_TRIANGLES ))
-   {   
+   {
       int dmasz = GET_MAX_HW_ELTS();
       int parity = 0;
       GLuint j, nr;
@@ -337,7 +337,7 @@ static void TAG(render_tri_strip_verts)( struct gl_context *ctx,
 
 	 nr = MIN2( dmasz, count - j );
 	 dest = ALLOC_ELTS( (nr-2)*3 );
-	    
+
 	 for ( i = j ; i+2 < j+nr ; i++, parity^=1 ) {
 	    EMIT_ELT( dest, 0, (i+0+parity) );
 	    EMIT_ELT( dest, 1, (i+1-parity) );
@@ -360,11 +360,11 @@ static void TAG(render_tri_fan_verts)( struct gl_context *ctx,
    LOCAL_VARS;
    if (0) fprintf(stderr, "%s\n", __FUNCTION__);
 
-   if (start+2 >= count) 
+   if (start+2 >= count)
       return;
 
    if (PREFER_DISCRETE_ELT_PRIM( count-start, HW_TRIANGLES ))
-   {   
+   {
       int dmasz = GET_MAX_HW_ELTS();
       GLuint j, nr;
 
@@ -378,14 +378,14 @@ static void TAG(render_tri_fan_verts)( struct gl_context *ctx,
 
 	 nr = MIN2( dmasz, count - j );
 	 dest = ALLOC_ELTS( (nr-1)*3 );
-	    
+
 	 for ( i = j ; i+1 < j+nr ; i++ ) {
 	    EMIT_ELT( dest, 0, (start) );
 	    EMIT_ELT( dest, 1, (i) );
 	    EMIT_ELT( dest, 2, (i+1) );
 	    dest += 3;
 	 }
-	 
+
 	 CLOSE_ELTS();
       }
    }
@@ -403,7 +403,7 @@ static void TAG(render_poly_verts)( struct gl_context *ctx,
    LOCAL_VARS;
    if (0) fprintf(stderr, "%s\n", __FUNCTION__);
 
-   if (start+2 >= count) 
+   if (start+2 >= count)
       return;
 
    EMIT_PRIM( ctx, GL_POLYGON, HW_POLYGON, start, count );
@@ -419,12 +419,12 @@ static void TAG(render_quad_strip_verts)( struct gl_context *ctx,
 
    count -= (count-start) & 1;
 
-   if (start+3 >= count) 
+   if (start+3 >= count)
       return;
 
    if (HAVE_QUAD_STRIPS) {
       EMIT_PRIM( ctx, GL_QUAD_STRIP, HW_QUAD_STRIP, start, count );
-   } 
+   }
    else if (ctx->Light.ShadeModel == GL_FLAT) {
       LOCAL_VARS;
       int dmasz = GET_MAX_HW_ELTS();
@@ -443,7 +443,7 @@ static void TAG(render_quad_strip_verts)( struct gl_context *ctx,
 	 nr = MIN2( dmasz, count - j );
 	 quads = (nr/2)-1;
 	 dest = ALLOC_ELTS( quads*6 );
-	    
+
 	 for ( i = j ; i < j+quads*2 ; i+=2 ) {
 	    EMIT_TWO_ELTS( dest, 0, (i+0), (i+1) );
 	    EMIT_TWO_ELTS( dest, 2, (i+2), (i+1) );
@@ -469,15 +469,15 @@ static void TAG(render_quads_verts)( struct gl_context *ctx,
    if (0) fprintf(stderr, "%s\n", __FUNCTION__);
    count -= (count-start)%4;
 
-   if (start+3 >= count) 
+   if (start+3 >= count)
       return;
 
    if (HAVE_QUADS) {
       EMIT_PRIM( ctx, GL_QUADS, HW_QUADS, start, count );
-   } 
+   }
    else {
       /* Hardware doesn't have a quad primitive type -- simulate it
-       * using indexed vertices and the triangle primitive: 
+       * using indexed vertices and the triangle primitive:
        */
       LOCAL_VARS;
       int dmasz = GET_MAX_HW_ELTS();
@@ -649,11 +649,11 @@ static void TAG(render_line_loop_elts)( struct gl_context *ctx,
    else
       j = start + 1;
 
-   
+
    if (flags & PRIM_END) {
       if (start+1 >= count)
 	 return;
-   } 
+   }
    else {
       if (j+1 >= count)
 	 return;
@@ -664,7 +664,7 @@ static void TAG(render_line_loop_elts)( struct gl_context *ctx,
    if ((flags & PRIM_BEGIN) && ctx->Line.StippleFlag)
       RESET_STIPPLE();
 
-   
+
    /* Ensure last vertex doesn't wrap:
     */
    dmasz--;

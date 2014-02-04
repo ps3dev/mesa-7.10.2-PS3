@@ -66,7 +66,7 @@ private:
 };
 
 inline void
-TrimRegion::init( REAL vval ) 
+TrimRegion::init( REAL vval )
 {
     bot.vval = vval;
 }

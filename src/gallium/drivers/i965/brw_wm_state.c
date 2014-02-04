@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                   
+
 #include "util/u_math.h"
 
 #include "brw_context.h"
@@ -113,7 +113,7 @@ wm_unit_populate_key(struct brw_context *brw, struct brw_wm_unit_key *key)
       key->computes_depth = 0;
 
    /* PIPE_NEW_DEPTH_STENCIL_ALPHA */
-   key->uses_kill = (fp->info.uses_kill || 
+   key->uses_kill = (fp->info.uses_kill ||
 		     brw->curr.zstencil->cc3.alpha_test);
 
    key->has_flow_control = fp->has_flow_control;
@@ -174,7 +174,7 @@ wm_unit_create_from_key(struct brw_context *brw, struct brw_wm_unit_key *key,
    wm.thread3.const_urb_entry_read_length = key->curb_entry_read_length;
    wm.thread3.const_urb_entry_read_offset = key->curbe_offset * 2;
 
-   if (BRW_IS_IGDNG(brw)) 
+   if (BRW_IS_IGDNG(brw))
       wm.wm4.sampler_count = 0; /* hardware requirement */
    else
       wm.wm4.sampler_count = (key->sampler_count + 1) / 4;
@@ -257,7 +257,7 @@ static enum pipe_error upload_wm_unit( struct brw_context *brw )
 
       /* Do we need a new buffer:
        */
-      if (brw->wm.scratch_bo && total > brw->wm.scratch_bo->size) 
+      if (brw->wm.scratch_bo && total > brw->wm.scratch_bo->size)
 	 bo_reference(&brw->wm.scratch_bo, NULL);
 
       if (brw->wm.scratch_bo == NULL) {
@@ -312,7 +312,7 @@ static enum pipe_error upload_wm_unit( struct brw_context *brw )
                         &brw->wm.state_bo))
       return PIPE_OK;
 
-   ret = wm_unit_create_from_key(brw, &key, 
+   ret = wm_unit_create_from_key(brw, &key,
                                  reloc, nr_reloc,
                                  &brw->wm.state_bo);
    if (ret)
@@ -325,7 +325,7 @@ const struct brw_tracked_state brw_wm_unit = {
    .dirty = {
       .mesa = (PIPE_NEW_FRAGMENT_SHADER |
 	       PIPE_NEW_DEPTH_BUFFER |
-	       PIPE_NEW_RAST | 
+	       PIPE_NEW_RAST |
 	       PIPE_NEW_DEPTH_STENCIL_ALPHA |
 	       PIPE_NEW_QUERY),
 

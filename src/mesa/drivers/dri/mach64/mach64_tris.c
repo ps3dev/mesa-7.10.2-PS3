@@ -141,33 +141,33 @@ static INLINE void mach64_draw_quad( mach64ContextPtr mmesa,
       fprintf(stderr,"Vertex 4:\n");
       mach64_print_vertex( ctx, v3 );
    }
-   
+
    xy = LE32_IN( &v0->ui[xyoffset] );
    xx[0] = (GLshort)( xy >> 16 );
    yy[0] = (GLshort)( xy & 0xffff );
-   
+
    xy = LE32_IN( &v1->ui[xyoffset] );
    xx[1] = (GLshort)( xy >> 16 );
    yy[1] = (GLshort)( xy & 0xffff );
-   
+
    xy = LE32_IN( &v3->ui[xyoffset] );
    xx[2] = (GLshort)( xy >> 16 );
    yy[2] = (GLshort)( xy & 0xffff );
-	   
+
    a = (xx[0] - xx[2]) * (yy[1] - yy[2]) -
        (yy[0] - yy[2]) * (xx[1] - xx[2]);
 
    if ( (mmesa->backface_sign &&
-	((a < 0 && !signbit( mmesa->backface_sign )) || 
+	((a < 0 && !signbit( mmesa->backface_sign )) ||
 	(a > 0 && signbit( mmesa->backface_sign )))) ) {
       /* cull quad */
       if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS )
 	 fprintf(stderr,"Quad culled\n");
       return;
    }
-   
+
    ooa = 16.0 / a;
-   
+
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * sizeof(CARD32) );
    vbchk = vb + vbsiz;
 
@@ -179,17 +179,17 @@ static INLINE void mach64_draw_quad( mach64ContextPtr mmesa,
    xy = LE32_IN( &v2->ui[xyoffset] );
    xx[0] = (GLshort)( xy >> 16 );
    yy[0] = (GLshort)( xy & 0xffff );
-	   
+
    a = (xx[0] - xx[2]) * (yy[1] - yy[2]) -
        (yy[0] - yy[2]) * (xx[1] - xx[2]);
-   
+
    ooa = 16.0 / a;
-   
+
    COPY_VERTEX_OOA( vb, vertsize, v2, 1 );
    LE32_OUT( vb++, *(CARD32 *)&ooa );
 
    assert( vb == vbchk );
-   
+
 #if MACH64_PRINT_BUFFER
    {
       int i;
@@ -204,7 +204,7 @@ static INLINE void mach64_draw_quad( mach64ContextPtr mmesa,
    GLint coloridx;
    GLfloat ooa;
    GLint xx[3], yy[3]; /* 2 fractional bits for hardware */
-   unsigned vbsiz = 
+   unsigned vbsiz =
 	 ((
 	    1 +
 	    (vertsize > 6 ? 2 : 0) +
@@ -217,13 +217,13 @@ static INLINE void mach64_draw_quad( mach64ContextPtr mmesa,
 
    if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS ) {
       fprintf(stderr, "%s:\n", __FUNCTION__);
-      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v0->v.x, v0->v.y, v0->v.z, v0->v.w, v0->v.u0, v0->v.v0, v0->v.u1, v0->v.v1);
-      fprintf(stderr,"Vertex 2: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 2: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v1->v.x, v1->v.y, v1->v.z, v1->v.w, v1->v.u0, v1->v.v0, v1->v.u1, v1->v.v1);
-      fprintf(stderr,"Vertex 3: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 3: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v2->v.x, v2->v.y, v2->v.z, v2->v.w, v2->v.u0, v2->v.v0, v2->v.u1, v2->v.v1);
-      fprintf(stderr,"Vertex 4: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 4: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v3->v.x, v3->v.y, v3->v.z, v3->v.w, v3->v.u0, v3->v.v0, v3->v.u1, v3->v.v1);
    }
 
@@ -250,16 +250,16 @@ static INLINE void mach64_draw_quad( mach64ContextPtr mmesa,
 
    ooa = 0.25 * 0.25 * ((xx[0] - xx[2]) * (yy[1] - yy[2]) -
 			(yy[0] - yy[2]) * (xx[1] - xx[2]));
-   
+
    if ( ooa * mmesa->backface_sign < 0 ) {
       /* cull quad */
       if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS )
 	 fprintf(stderr,"Quad culled\n");
       return;
    }
-   
+
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * 4 );
-   
+
    ooa = 1.0 / ooa;
 
    coloridx = (vertsize > 4) ? 4: 3;
@@ -444,33 +444,33 @@ static INLINE void mach64_draw_triangle( mach64ContextPtr mmesa,
       fprintf(stderr,"Vertex 3:\n");
       mach64_print_vertex( ctx, v2 );
    }
-   
+
    xy = LE32_IN( &v0->ui[xyoffset] );
    xx[0] = (GLshort)( xy >> 16 );
    yy[0] = (GLshort)( xy & 0xffff );
-   
+
    xy = LE32_IN( &v1->ui[xyoffset] );
    xx[1] = (GLshort)( xy >> 16 );
    yy[1] = (GLshort)( xy & 0xffff );
-   
+
    xy = LE32_IN( &v2->ui[xyoffset] );
    xx[2] = (GLshort)( xy >> 16 );
    yy[2] = (GLshort)( xy & 0xffff );
-	   
+
    a = (xx[0] - xx[2]) * (yy[1] - yy[2]) -
        (yy[0] - yy[2]) * (xx[1] - xx[2]);
-   
+
    if ( mmesa->backface_sign &&
-	((a < 0 && !signbit( mmesa->backface_sign )) || 
+	((a < 0 && !signbit( mmesa->backface_sign )) ||
 	(a > 0 && signbit( mmesa->backface_sign ))) ) {
       /* cull triangle */
       if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS )
 	 fprintf(stderr,"Triangle culled\n");
       return;
    }
-   
+
    ooa = 16.0 / a;
-   
+
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * sizeof(CARD32) );
    vbchk = vb + vbsiz;
 
@@ -495,7 +495,7 @@ static INLINE void mach64_draw_triangle( mach64ContextPtr mmesa,
    GLint coloridx;
    GLfloat ooa;
    GLint xx[3], yy[3]; /* 2 fractional bits for hardware */
-   unsigned vbsiz = 
+   unsigned vbsiz =
 	 ((
 	    1 +
 	    (vertsize > 6 ? 2 : 0) +
@@ -508,11 +508,11 @@ static INLINE void mach64_draw_triangle( mach64ContextPtr mmesa,
 
    if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS ) {
       fprintf(stderr, "%s:\n", __FUNCTION__);
-      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v0->v.x, v0->v.y, v0->v.z, v0->v.w, v0->v.u0, v0->v.v0, v0->v.u1, v0->v.v1);
-      fprintf(stderr,"Vertex 2: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 2: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v1->v.x, v1->v.y, v1->v.z, v1->v.w, v1->v.u0, v1->v.v0, v1->v.u1, v1->v.v1);
-      fprintf(stderr,"Vertex 3: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n", 
+      fprintf(stderr,"Vertex 3: x: %.2f, y: %.2f, z: %.2f, w: %f\n\ts0: %f, t0: %f\n\ts1: %f, t1: %f\n",
 	      v2->v.x, v2->v.y, v2->v.z, v2->v.w, v2->v.u0, v2->v.v0, v2->v.u1, v2->v.v1);
    }
 
@@ -548,7 +548,7 @@ static INLINE void mach64_draw_triangle( mach64ContextPtr mmesa,
    }
 
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * 4 );
-   
+
    ooa = 1.0 / ooa;
 
    coloridx = (vertsize > 4) ? 4: 3;
@@ -693,26 +693,26 @@ static INLINE void mach64_draw_line( mach64ContextPtr mmesa,
       fprintf(stderr,"Vertex 2:\n");
       mach64_print_vertex( ctx, v1 );
    }
-  
+
    pxy0 = &v0->ui[xyoffset];
    xy0old = *pxy0;
    xy0 = LE32_IN( &xy0old );
    x0 = (GLshort)( xy0 >> 16 );
    y0 = (GLshort)( xy0 & 0xffff );
-   
+
    pxy1 = &v1->ui[xyoffset];
    xy1old = *pxy1;
    xy1 = LE32_IN( &xy1old );
    x1 = (GLshort)( xy1 >> 16 );
    y1 = (GLshort)( xy1 & 0xffff );
-   
+
    if ( (dx = x1 - x0) < 0 ) {
       dx = -dx;
    }
    if ( (dy = y1 - y0) < 0 ) {
       dy = -dy;
    }
-   
+
    /* adjust vertices depending on line direction */
    if ( dx > dy ) {
       ix = 0;
@@ -736,7 +736,7 @@ static INLINE void mach64_draw_line( mach64ContextPtr mmesa,
    LE32_OUT( vb++, *(CARD32 *)&ooa );
 
    ooa = -ooa;
-   
+
    LE32_OUT( pxy1, (( x1 + ix ) << 16) | (( y1 + iy ) & 0xffff) );
    COPY_VERTEX_OOA( vb, vertsize, v1, 1 );
    LE32_OUT( vb++, *(CARD32 *)&ooa );
@@ -749,7 +749,7 @@ static INLINE void mach64_draw_line( mach64ContextPtr mmesa,
    float width = 1.0; /* Only support 1 pix lines now */
    GLfloat ooa;
    GLint xx[3], yy[3]; /* 2 fractional bits for hardware */
-   unsigned vbsiz = 
+   unsigned vbsiz =
 	 ((
 	    1 +
 	    (vertsize > 6 ? 2 : 0) +
@@ -759,7 +759,7 @@ static INLINE void mach64_draw_line( mach64ContextPtr mmesa,
 	 ) * 4 + 4);
    CARD32 *vb;
    unsigned vbidx = 0;
-   
+
    GLfloat hw, dx, dy, ix, iy;
    GLfloat x0 = v0->v.x;
    GLfloat y0 = v0->v.y;
@@ -780,9 +780,9 @@ static INLINE void mach64_draw_line( mach64ContextPtr mmesa,
 
    if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS ) {
       fprintf(stderr, "%s:\n", __FUNCTION__);
-      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n", 
+      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n",
 	      v0->v.x, v0->v.y, v0->v.z, v0->v.w);
-      fprintf(stderr,"Vertex 2: x: %.2f, y: %.2f, z: %.2f, w: %f\n", 
+      fprintf(stderr,"Vertex 2: x: %.2f, y: %.2f, z: %.2f, w: %f\n",
 	      v1->v.x, v1->v.y, v1->v.z, v1->v.w);
    }
 
@@ -837,7 +837,7 @@ static INLINE void mach64_draw_line( mach64ContextPtr mmesa,
    }
 
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * 4 );
-   
+
    ooa = 1.0 / ooa;
 
    coloridx = (vertsize > 4) ? 4: 3;
@@ -978,18 +978,18 @@ static INLINE void mach64_draw_point( mach64ContextPtr mmesa,
       fprintf(stderr,"Vertex 1:\n");
       mach64_print_vertex( ctx, v0 );
    }
-  
+
    if( !sz )
       sz = 1;	/* round to the nearest supported size */
-      
+
    pxy = &v0->ui[xyoffset];
    xyold = *pxy;
    xy = LE32_IN( &xyold );
    x = (GLshort)( xy >> 16 );
    y = (GLshort)( xy & 0xffff );
-   
+
    ooa = 4.0 / (sz * sz);
-   
+
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * sizeof(CARD32) );
    vbchk = vb + vbsiz;
 
@@ -1002,19 +1002,19 @@ static INLINE void mach64_draw_point( mach64ContextPtr mmesa,
    LE32_OUT( vb++, *(CARD32 *)&ooa );
 
    ooa = -ooa;
-   
+
    LE32_OUT( pxy, (( x + sz ) << 16) | (( y + sz ) & 0xffff) );
    COPY_VERTEX_OOA( vb, vertsize, v0, 1 );
    LE32_OUT( vb++, *(CARD32 *)&ooa );
 
    *pxy = xyold;
 #else /* !MACH64_NATIVE_VTXFMT */
-   GLuint vertsize = mmesa->vertex_size; 
+   GLuint vertsize = mmesa->vertex_size;
    GLint coloridx;
    float sz = 1.0; /* Only support 1 pix points now */
    GLfloat ooa;
    GLint xx[3], yy[3]; /* 2 fractional bits for hardware */
-   unsigned vbsiz = 
+   unsigned vbsiz =
 	 ((
 	    1 +
 	    (vertsize > 6 ? 2 : 0) +
@@ -1024,10 +1024,10 @@ static INLINE void mach64_draw_point( mach64ContextPtr mmesa,
 	 ) * 4 + 4);
    CARD32 *vb;
    unsigned vbidx = 0;
-   
+
    if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS ) {
       fprintf(stderr, "%s:\n", __FUNCTION__);
-      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n", 
+      fprintf(stderr,"Vertex 1: x: %.2f, y: %.2f, z: %.2f, w: %f\n",
 	      v0->v.x, v0->v.y, v0->v.z, v0->v.w);
    }
 
@@ -1063,7 +1063,7 @@ static INLINE void mach64_draw_point( mach64ContextPtr mmesa,
    }
 
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * 4 );
-   
+
    ooa = 1.0 / ooa;
 
    coloridx = (vertsize > 4) ? 4: 3;
@@ -1598,37 +1598,37 @@ static void mach64FastRenderClippedPoly( struct gl_context *ctx, const GLuint *e
    GLubyte *mach64verts = (GLubyte *)mmesa->verts;
    mach64VertexPtr v0, v1, v2;
    int i;
-   
+
    v0 = (mach64VertexPtr)VERT(elts[1]);
    v1 = (mach64VertexPtr)VERT(elts[2]);
    v2 = (mach64VertexPtr)VERT(elts[0]);
-      
+
    xy = LE32_IN( &v0->ui[xyoffset] );
    xx[0] = (GLshort)( xy >> 16 );
    yy[0] = (GLshort)( xy & 0xffff );
-   
+
    xy = LE32_IN( &v1->ui[xyoffset] );
    xx[1] = (GLshort)( xy >> 16 );
    yy[1] = (GLshort)( xy & 0xffff );
-   
+
    xy = LE32_IN( &v2->ui[xyoffset] );
    xx[2] = (GLshort)( xy >> 16 );
    yy[2] = (GLshort)( xy & 0xffff );
-	   
+
    a = (xx[0] - xx[2]) * (yy[1] - yy[2]) -
        (yy[0] - yy[2]) * (xx[1] - xx[2]);
 
    if ( (mmesa->backface_sign &&
-	((a < 0 && !signbit( mmesa->backface_sign )) || 
+	((a < 0 && !signbit( mmesa->backface_sign )) ||
 	(a > 0 && signbit( mmesa->backface_sign )))) ) {
       /* cull polygon */
       if ( MACH64_DEBUG & DEBUG_VERBOSE_PRIMS )
 	 fprintf(stderr,"Polygon culled\n");
       return;
    }
-   
+
    ooa.f = 16.0 / a;
-   
+
    vb = (CARD32 *)mach64AllocDmaLow( mmesa, vbsiz * sizeof(CARD32) );
    vbchk = vb + vbsiz;
 
@@ -1647,14 +1647,14 @@ static void mach64FastRenderClippedPoly( struct gl_context *ctx, const GLuint *e
       xy = LE32_IN( &v0->ui[xyoffset] );
       xx[0] = (GLshort)( xy >> 16 );
       yy[0] = (GLshort)( xy & 0xffff );
-	      
+
       a = (xx[0] - xx[2]) * (yy[1] - yy[2]) -
 	  (yy[0] - yy[2]) * (xx[1] - xx[2]);
       ooa.f = 16.0 / a;
-   
+
       COPY_VERTEX_OOA( vb, vertsize, v0, 1 );
       LE32_OUT( vb++, ooa.u );
-      
+
       if (i >= n)
 	 break;
       v1 = (mach64VertexPtr)VERT(elts[i]);
@@ -1663,11 +1663,11 @@ static void mach64FastRenderClippedPoly( struct gl_context *ctx, const GLuint *e
       xy = LE32_IN( &v1->ui[xyoffset] );
       xx[1] = (GLshort)( xy >> 16 );
       yy[1] = (GLshort)( xy & 0xffff );
-	      
+
       a = (xx[0] - xx[2]) * (yy[1] - yy[2]) -
 	  (yy[0] - yy[2]) * (xx[1] - xx[2]);
       ooa.f = 16.0 / a;
-   
+
       COPY_VERTEX_OOA( vb, vertsize, v1, 2 );
       LE32_OUT( vb++, ooa.u );
    }
@@ -1685,9 +1685,9 @@ static void mach64FastRenderClippedPoly( struct gl_context *ctx, const GLuint *e
    int i;
 
    for (i = 2 ; i < n ; i++) {
-      mach64_draw_triangle( mmesa, 
-			    VERT(elts[i-1]), 
-			    VERT(elts[i]), 
+      mach64_draw_triangle( mmesa,
+			    VERT(elts[i-1]),
+			    VERT(elts[i]),
 			    (mach64VertexPtr) start
 			    );
    }

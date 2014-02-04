@@ -106,7 +106,7 @@ _mesa_GetProgramEnvParameterdvARB(GLenum target, GLuint index,
 
 
 extern void GLAPIENTRY
-_mesa_GetProgramEnvParameterfvARB(GLenum target, GLuint index, 
+_mesa_GetProgramEnvParameterfvARB(GLenum target, GLuint index,
                                   GLfloat *params);
 
 
@@ -116,7 +116,7 @@ _mesa_GetProgramLocalParameterdvARB(GLenum target, GLuint index,
 
 
 extern void GLAPIENTRY
-_mesa_GetProgramLocalParameterfvARB(GLenum target, GLuint index, 
+_mesa_GetProgramLocalParameterfvARB(GLenum target, GLuint index,
                                     GLfloat *params);
 
 

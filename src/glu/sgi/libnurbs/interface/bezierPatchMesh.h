@@ -38,7 +38,7 @@
 
 typedef struct bezierPatchMesh{
   bezierPatch *bpatch; /*vertex*/
-  bezierPatch *bpatch_normal; 
+  bezierPatch *bpatch_normal;
   bezierPatch *bpatch_texcoord; /*s,t,r,q*/
   bezierPatch *bpatch_color; /*RGBA*/
 
@@ -51,10 +51,10 @@ typedef struct bezierPatchMesh{
   int index_UVarray;
   int size_length_array;
   int index_length_array;
-  
+
   int counter; /*track the current strip size*/
   GLenum type; /*track the current type: 0: GL_TRIANGLES, 1: GL_TRIANGLE_STRIP*/
-  
+
   /*we eventually want to evaluate from (u,v) to (x,y,z) and draw them*/
   float *vertex_array; /*each vertex contains three components*/
   float *normal_array; /*each normal contains three components*/
@@ -102,7 +102,7 @@ void bezierPatchMeshDelDeg(bezierPatchMesh* bpm);
 
 
 void bezierPatchMeshEval(bezierPatchMesh* bpm);
-  
+
 void bezierPatchMeshDraw(bezierPatchMesh* bpm);
 
 void bezierPatchMeshListDraw(bezierPatchMesh* list);

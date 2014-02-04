@@ -225,7 +225,7 @@ struct xmesa_buffer {
 				/*    0 = not available			*/
 				/*    1 = XImage support available	*/
 				/*    2 = Pixmap support available too	*/
-#if defined(USE_XSHM) 
+#if defined(USE_XSHM)
    XShmSegmentInfo shminfo;
 #endif
 

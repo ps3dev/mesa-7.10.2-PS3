@@ -98,12 +98,12 @@ stw_tls_cleanup_thread(void)
    data = (struct stw_tls_data *) TlsGetValue(tlsIndex);
    if(data) {
       TlsSetValue(tlsIndex, NULL);
-   
+
       if(data->hCallWndProcHook) {
          UnhookWindowsHookEx(data->hCallWndProcHook);
          data->hCallWndProcHook = NULL;
       }
-   
+
       FREE(data);
    }
 }
@@ -121,14 +121,14 @@ struct stw_tls_data *
 stw_tls_get_data(void)
 {
    struct stw_tls_data *data;
-   
+
    if (tlsIndex == TLS_OUT_OF_INDEXES) {
       return NULL;
    }
-   
+
    data = (struct stw_tls_data *) TlsGetValue(tlsIndex);
    if(!data) {
-      /* DllMain is called with DLL_THREAD_ATTACH only by threads created after 
+      /* DllMain is called with DLL_THREAD_ATTACH only by threads created after
        * the DLL is loaded by the process */
       data = stw_tls_data_create();
       if(!data)

@@ -14,7 +14,7 @@ struct lp_setup_variant_list_item
 };
 
 
-struct lp_setup_variant_key {   
+struct lp_setup_variant_key {
    unsigned size:16;
    unsigned num_inputs:8;
    unsigned color_slot:8;
@@ -28,7 +28,7 @@ struct lp_setup_variant_key {
    unsigned pad:5;
 
    float units;
-   float scale;      
+   float scale;
    struct lp_shader_input inputs[PIPE_MAX_SHADER_INPUTS];
 };
 
@@ -52,7 +52,7 @@ typedef void (*lp_jit_setup_triangle)( const float (*v0)[4],
  */
 struct lp_setup_variant {
    struct lp_setup_variant_key key;
-   
+
    struct lp_setup_variant_list_item list_item_global;
 
    /* XXX: this is a pointer to the LLVM IR.  Once jit_function is

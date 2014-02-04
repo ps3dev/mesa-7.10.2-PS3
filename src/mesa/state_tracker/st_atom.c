@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -152,14 +152,14 @@ void st_validate_state( struct st_context *st )
        * state flags which are generated and checked to help ensure
        * state atoms are ordered correctly in the list.
        */
-      struct st_state_flags examined, prev;      
+      struct st_state_flags examined, prev;
       memset(&examined, 0, sizeof(examined));
       prev = *state;
 
-      for (i = 0; i < Elements(atoms); i++) {	 
+      for (i = 0; i < Elements(atoms); i++) {
 	 const struct st_tracked_state *atom = atoms[i];
 	 struct st_state_flags generated;
-	 
+
 	 /*printf("atom %s %x/%x\n", atom->name, atom->dirty.mesa, atom->dirty.st);*/
 
 	 if (!(atom->dirty.mesa || atom->dirty.st) ||
@@ -187,7 +187,7 @@ void st_validate_state( struct st_context *st )
 
    }
    else {
-      for (i = 0; i < Elements(atoms); i++) {	 
+      for (i = 0; i < Elements(atoms); i++) {
 	 if (check_state(state, &atoms[i]->dirty))
 	    atoms[i]->update( st );
       }

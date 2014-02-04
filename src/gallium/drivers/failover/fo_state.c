@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -35,13 +35,13 @@
 
 
 /* This looks like a lot of work at the moment - we're keeping a
- * duplicate copy of the state up-to-date.  
+ * duplicate copy of the state up-to-date.
  *
  * This can change in two ways:
  * - With constant state objects we would only need to save a pointer,
  *     not the whole object.
  * - By adding a callback in the state tracker to re-emit state.  The
- *     state tracker knows the current state already and can re-emit it 
+ *     state tracker knows the current state already and can re-emit it
  *     without additional complexity.
  *
  * This works as a proof-of-concept, but a final version will have
@@ -113,7 +113,7 @@ failover_set_stencil_ref( struct pipe_context *pipe,
    failover->hw->set_stencil_ref( failover->hw, stencil_ref );
 }
 
-static void 
+static void
 failover_set_clip_state( struct pipe_context *pipe,
                          const struct pipe_clip_state *clip )
 {
@@ -312,7 +312,7 @@ failover_delete_vertex_elements_state( struct pipe_context *pipe,
    FREE(state);
 }
 
-static void 
+static void
 failover_set_polygon_stipple( struct pipe_context *pipe,
                               const struct pipe_poly_stipple *stipple )
 {
@@ -366,7 +366,7 @@ failover_delete_rasterizer_state(struct pipe_context *pipe,
 }
 
 
-static void 
+static void
 failover_set_scissor_state( struct pipe_context *pipe,
                                  const struct pipe_scissor_state *scissor )
 {
@@ -554,13 +554,13 @@ failover_set_vertex_sampler_views(struct pipe_context *pipe,
 }
 
 
-static void 
+static void
 failover_set_viewport_state( struct pipe_context *pipe,
 			     const struct pipe_viewport_state *viewport )
 {
    struct failover_context *failover = failover_context(pipe);
 
-   failover->viewport = *viewport; 
+   failover->viewport = *viewport;
    failover->dirty |= FO_NEW_VIEWPORT;
    failover->sw->set_viewport_state( failover->sw, viewport );
    failover->hw->set_viewport_state( failover->hw, viewport );

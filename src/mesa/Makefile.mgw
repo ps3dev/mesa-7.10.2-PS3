@@ -1,18 +1,18 @@
 # Mesa 3-D graphics library
 # Version:  7.0
-# 
+#
 # Copyright (C) 1999-2003  Brian Paul   All Rights Reserved.
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
 # to deal in the Software without restriction, including without limitation
 # the rights to use, copy, modify, merge, publish, distribute, sublicense,
 # and/or sell copies of the Software, and to permit persons to whom the
 # Software is furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included
 # in all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 # OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
@@ -30,10 +30,10 @@
 #
 #  updated : by Heromyth, on 2007-7-21
 #  Email   : zxpmyth@yahoo.com.cn
-#  Bugs    : 1) All the default settings work fine. But the setting X86=1 can't work. 
+#  Bugs    : 1) All the default settings work fine. But the setting X86=1 can't work.
 #            The others havn't been tested yet.
 #            2) The generated DLLs are *not* compatible with the ones built
-#            with the other compilers like VC8, especially for GLUT. 
+#            with the other compilers like VC8, especially for GLUT.
 #            3) Although more tests are needed, it can be used individually!
 
 
@@ -109,7 +109,7 @@ else
   ifeq ($(ICD),1)
     CFLAGS += -DUSE_MGL_NAMESPACE
     GL_DEF = drivers/windows/icd/mesa.def
-  else    
+  else
     GL_DEF = $(LIB_NAME).def
   endif
 endif
@@ -126,7 +126,7 @@ endif
 
 include sources.mak
 
-CFLAGS += $(INCLUDE_DIRS) 
+CFLAGS += $(INCLUDE_DIRS)
 
 ifeq ($(X86),1)
 CFLAGS += -DUSE_X86_ASM

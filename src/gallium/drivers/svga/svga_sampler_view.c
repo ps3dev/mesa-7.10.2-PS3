@@ -47,7 +47,7 @@ svga_get_tex_sampler_view(struct pipe_context *pipe,
                           unsigned min_lod, unsigned max_lod)
 {
    struct svga_screen *ss = svga_screen(pt->screen);
-   struct svga_texture *tex = svga_texture(pt); 
+   struct svga_texture *tex = svga_texture(pt);
    struct svga_sampler_view *sv = NULL;
    SVGA3dSurfaceFormat format = svga_translate_format(pt->format);
    boolean view = TRUE;

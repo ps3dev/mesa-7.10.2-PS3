@@ -30,7 +30,7 @@ TWO(PSUBW      ( MX1, MA2 ))			/*   a2 + 1  |   a2 + 1  |   a2 + 1  |   a2 + 1  
 TWO(PMULLW     ( MP2, MA2 ))			/*                  t2 = p2*a2                   */	;\
 													;\
     PSRLW      ( CONST(8), MA1 )		/*               t1 >> 8 ~= t1/255               */	;\
-TWO(PSRLW      ( CONST(8), MA2 ))		/*               t2 >> 8 ~= t2/255               */	
+TWO(PSRLW      ( CONST(8), MA2 ))		/*               t2 >> 8 ~= t2/255               */
 
 
 /* integer multiplication - geometric series
@@ -43,7 +43,7 @@ TWO(PSRLW      ( CONST(8), MA2 ))		/*               t2 >> 8 ~= t2/255           
  *
  *   t/255 ~= (t + (t >> 8)) >> 8
  *
- * note that just by itself it doesn't satisfies the OpenGL criteria, as 255*255 = 254, 
+ * note that just by itself it doesn't satisfies the OpenGL criteria, as 255*255 = 254,
  * so the special case a = 255 must be accounted or roundoff must be used
  */
 #define GMB_MULT_GS( MP1, MA1, MP2, MA2 ) \
@@ -65,7 +65,7 @@ TWO(PSRLW      ( CONST(8), MA2 ))		/*    sa2    |    sb2    |    sg2    |    sr2
 
 /* integer multiplication - geometric series plus rounding
  *
- * when using a geometric series division instead of truncating the result 
+ * when using a geometric series division instead of truncating the result
  * use roundoff in the approximation (Jim Blinn)
  *
  *   t = rgb*a + 0x80
@@ -94,7 +94,7 @@ TWO(PADDW      ( MP2, MA2 ))			/*        t2 + (t2 >> 8) ~= (t2/255) << 8        
 TWO(PSRLW      ( CONST(8), MA2 ))		/*    sa2    |    sb2    |    sg2    |    sr2    */
 
 
-/* linear interpolation - geometric series 
+/* linear interpolation - geometric series
  */
 #define GMB_LERP_GS( MP1, MQ1, MA1, MP2, MQ2, MA2) \
     PSUBW      ( MQ1, MP1 )                     /* pa1 - qa1 | pb1 - qb1 | pg1 - qg1 | pr1 - qr1 */	;\
@@ -396,7 +396,7 @@ TWO(MOVQ       ( MM1, REGIND(rgba) ))
 #include "mmx_blendtmp.h"
 
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

@@ -81,7 +81,7 @@ lp_fence_reference(struct lp_fence **ptr,
    if (pipe_reference(&old->reference, &f->reference)) {
       lp_fence_destroy(old);
    }
-   
+
    *ptr = f;
 }
 

@@ -40,7 +40,7 @@
 #include "arc.h"
 #include "defines.h"
 
-class Bin 
+class Bin
 { /* a linked list of jordan arcs */
 private:
     Arc_ptr head;/*first arc on list */

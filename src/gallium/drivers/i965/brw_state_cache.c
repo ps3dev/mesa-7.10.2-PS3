@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -176,7 +176,7 @@ brw_search_cache(struct brw_cache *cache,
                  enum brw_cache_id cache_id,
                  const void *key,
                  GLuint key_size,
-                 struct brw_winsys_reloc *relocs, 
+                 struct brw_winsys_reloc *relocs,
 		 GLuint nr_relocs,
                  void *aux_return,
                  struct brw_winsys_buffer **bo_out)
@@ -190,13 +190,13 @@ brw_search_cache(struct brw_cache *cache,
    if (item) {
       if (aux_return)
          *(void **)aux_return = (void *)((char *)item->key + item->key_size);
-      
+
       update_cache_last(cache, cache_id, item->bo);
       bo_reference(bo_out, item->bo);
       return TRUE;
    }
-   
-   return FALSE;      
+
+   return FALSE;
 }
 
 
@@ -228,7 +228,7 @@ brw_upload_cache( struct brw_cache *cache,
     */
    ret = cache->sws->bo_alloc(cache->sws,
                               cache->buffer_type,
-                              data_size, 1 << 6, 
+                              data_size, 1 << 6,
                               bo_out);
    if (ret)
       return ret;
@@ -273,7 +273,7 @@ brw_upload_cache( struct brw_cache *cache,
 		   data_size, cache_id);
 
    /* Copy data to the buffer */
-   ret = cache->sws->bo_subdata(item->bo, 
+   ret = cache->sws->bo_subdata(item->bo,
                                 cache_id,
                                 0, data_size, data,
                                 relocs, nr_relocs);
@@ -325,7 +325,7 @@ brw_cache_data_sz(struct brw_cache *cache,
  * If nr_relocs is nonzero, brw_search_cache()/brw_upload_cache() would be
  * better to use, as the potentially changing offsets in the data-used-as-key
  * will result in excessive cache misses.
- * 
+ *
  * XXX: above is no longer true -- can we remove some code?
  */
 enum pipe_error

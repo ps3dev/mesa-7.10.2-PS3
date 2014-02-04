@@ -88,7 +88,7 @@ struct symbol_header {
 struct scope_level {
     /** Link to next (inner) scope level. */
     struct scope_level *next;
-    
+
     /** Linked list of symbols with the same scope. */
     struct symbol *symbols;
 };
@@ -187,7 +187,7 @@ void
 _mesa_symbol_table_push_scope(struct _mesa_symbol_table *table)
 {
     struct scope_level *const scope = calloc(1, sizeof(*scope));
-    
+
     scope->next = table->current_scope;
     table->current_scope = scope;
     table->depth++;
@@ -207,7 +207,7 @@ _mesa_symbol_table_iterator_ctor(struct _mesa_symbol_table *table,
 {
     struct _mesa_symbol_table_iterator *iter = calloc(1, sizeof(*iter));
     struct symbol_header *const hdr = find_symbol(table, name);
-    
+
     iter->name_space = name_space;
 
     if (hdr != NULL) {

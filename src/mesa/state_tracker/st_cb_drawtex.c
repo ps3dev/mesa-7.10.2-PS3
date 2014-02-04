@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -157,7 +157,7 @@ st_DrawTex(struct gl_context *ctx, GLfloat x, GLfloat y, GLfloat z,
                                                   PIPE_TRANSFER_WRITE,
                                                   &vbuffer_transfer);
       GLuint attr;
-      
+
       z = CLAMP(z, 0.0f, 1.0f);
 
       /* positions (in clip coords) */

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /*
@@ -210,7 +210,7 @@ st_pipe_vertex_format(GLenum type, GLuint size, GLenum format,
       case GL_UNSIGNED_BYTE: return ubyte_types_norm[size-1];
       case GL_FIXED: return fixed_types[size-1];
       default: assert(0); return 0;
-      }      
+      }
    }
    else {
       switch (type) {
@@ -225,7 +225,7 @@ st_pipe_vertex_format(GLenum type, GLuint size, GLenum format,
       case GL_UNSIGNED_BYTE: return ubyte_types_scale[size-1];
       case GL_FIXED: return fixed_types[size-1];
       default: assert(0); return 0;
-      }      
+      }
    }
    return 0; /* silence compiler warning */
 }
@@ -264,7 +264,7 @@ is_interleaved_arrays(const struct st_vertex_program *vp,
       else if (firstStride != stride) {
          return GL_FALSE;
       }
-         
+
       if (!bufObj || !bufObj->Name) {
          num_client_arrays++;
          /* Try to detect if the client-space arrays are
@@ -320,7 +320,7 @@ get_arrays_bounds(const struct st_vertex_program *vp,
       const GLuint mesaAttr = vp->index_to_input[attr];
       const GLint stride = arrays[mesaAttr]->StrideB;
       const GLubyte *start = arrays[mesaAttr]->Ptr;
-      const unsigned sz = (arrays[mesaAttr]->Size * 
+      const unsigned sz = (arrays[mesaAttr]->Size *
                            _mesa_sizeof_type(arrays[mesaAttr]->Type));
       const GLubyte *end = start + (max_index * stride) + sz;
 
@@ -453,7 +453,7 @@ setup_non_interleaved_attribs(struct gl_context *ctx,
          /* attribute data is in user-space memory, not a VBO */
          uint bytes;
          /*printf("user-space array %d stride %d\n", attr, stride);*/
-	
+
          *userSpace = GL_TRUE;
 
          /* wrap user data */
@@ -466,7 +466,7 @@ setup_non_interleaved_attribs(struct gl_context *ctx,
                bytes = arrays[mesaAttr]->Size
                   * _mesa_sizeof_type(arrays[mesaAttr]->Type);
             }
-            vbuffer[attr].buffer = 
+            vbuffer[attr].buffer =
 	       pipe_user_buffer_create(pipe->screen,
 				       (void *) arrays[mesaAttr]->Ptr, bytes,
 				       PIPE_BIND_VERTEX_BUFFER);
@@ -474,7 +474,7 @@ setup_non_interleaved_attribs(struct gl_context *ctx,
          else {
             /* no array, use ctx->Current.Attrib[] value */
             bytes = sizeof(ctx->Current.Attrib[0]);
-            vbuffer[attr].buffer = 
+            vbuffer[attr].buffer =
 	       pipe_user_buffer_create(pipe->screen,
 				       (void *) ctx->Current.Attrib[mesaAttr],
 				       bytes,
@@ -748,7 +748,7 @@ st_draw_vbo(struct gl_context *ctx,
       assert(!vbuffer[attr].buffer);
    }
 
-   if (userSpace) 
+   if (userSpace)
    {
       pipe->set_vertex_buffers(pipe, 0, NULL);
    }

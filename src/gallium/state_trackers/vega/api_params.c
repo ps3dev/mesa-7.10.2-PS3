@@ -1415,7 +1415,7 @@ VGfloat vegaGetParameterf(VGHandle object,
    case VG_IMAGE_WIDTH:
    case VG_IMAGE_HEIGHT:
 #ifdef OPENVG_VERSION_1_1
-   case VG_FONT_NUM_GLYPHS: 
+   case VG_FONT_NUM_GLYPHS:
       return vgGetParameteri(object, paramType);
       break;
 #endif

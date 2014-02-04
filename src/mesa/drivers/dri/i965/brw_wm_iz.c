@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                
+
 
 #include "main/mtypes.h"
 #include "brw_wm.h"
@@ -50,70 +50,70 @@ const struct {
    GLuint ds_present:1;
 } wm_iz_table[IZ_BIT_MAX] =
 {
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { N, 1, 1, 0, 0 }, 
- { N, 0, 1, 0, 0 }, 
- { N, 0, 1, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { N, 1, 1, 0, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { N, 1, 1, 0, 0 }, 
- { N, 0, 1, 0, 0 }, 
- { N, 0, 1, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { N, 1, 1, 0, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { C, 0, 1, 1, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { N, 1, 1, 0, 1 }, 
- { N, 0, 1, 0, 1 }, 
- { N, 0, 1, 0, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 0, 1, 1, 1 }, 
- { C, 0, 1, 1, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { N, 1, 1, 0, 1 }, 
- { C, 0, 1, 1, 1 }, 
- { C, 0, 1, 1, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 0, 0, 0, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 0, 1, 0, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 1, 1, 0, 1 }, 
- { C, 0, 1, 0, 1 }, 
- { C, 0, 1, 0, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 1, 1, 1, 1 }, 
- { C, 0, 1, 1, 1 }, 
- { C, 0, 1, 1, 1 }, 
- { P, 0, 0, 0, 0 }, 
- { C, 1, 1, 1, 1 }, 
- { C, 0, 1, 1, 1 }, 
- { C, 0, 1, 1, 1 } 
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { N, 1, 1, 0, 0 },
+ { N, 0, 1, 0, 0 },
+ { N, 0, 1, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { C, 0, 1, 1, 0 },
+ { C, 0, 1, 1, 0 },
+ { P, 0, 0, 0, 0 },
+ { N, 1, 1, 0, 0 },
+ { C, 0, 1, 1, 0 },
+ { C, 0, 1, 1, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { N, 1, 1, 0, 0 },
+ { N, 0, 1, 0, 0 },
+ { N, 0, 1, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { C, 0, 1, 1, 0 },
+ { C, 0, 1, 1, 0 },
+ { P, 0, 0, 0, 0 },
+ { N, 1, 1, 0, 0 },
+ { C, 0, 1, 1, 0 },
+ { C, 0, 1, 1, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { N, 1, 1, 0, 1 },
+ { N, 0, 1, 0, 1 },
+ { N, 0, 1, 0, 1 },
+ { P, 0, 0, 0, 0 },
+ { P, 0, 0, 0, 0 },
+ { C, 0, 1, 1, 1 },
+ { C, 0, 1, 1, 1 },
+ { P, 0, 0, 0, 0 },
+ { N, 1, 1, 0, 1 },
+ { C, 0, 1, 1, 1 },
+ { C, 0, 1, 1, 1 },
+ { P, 0, 0, 0, 0 },
+ { C, 0, 0, 0, 1 },
+ { P, 0, 0, 0, 0 },
+ { C, 0, 1, 0, 1 },
+ { P, 0, 0, 0, 0 },
+ { C, 1, 1, 0, 1 },
+ { C, 0, 1, 0, 1 },
+ { C, 0, 1, 0, 1 },
+ { P, 0, 0, 0, 0 },
+ { C, 1, 1, 1, 1 },
+ { C, 0, 1, 1, 1 },
+ { C, 0, 1, 1, 1 },
+ { P, 0, 0, 0, 0 },
+ { C, 1, 1, 1, 1 },
+ { C, 0, 1, 1, 1 },
+ { C, 0, 1, 1, 1 }
 };
 
 /**

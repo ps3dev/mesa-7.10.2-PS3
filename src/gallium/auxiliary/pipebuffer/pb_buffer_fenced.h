@@ -28,22 +28,22 @@
 /**
  * \file
  * Buffer fencing.
- * 
- * "Fenced buffers" is actually a misnomer. They should be referred as 
+ *
+ * "Fenced buffers" is actually a misnomer. They should be referred as
  * "fenceable buffers", i.e, buffers that can be fenced, but I couldn't find
  * the word "fenceable" in the dictionary.
- * 
- * A "fenced buffer" is a decorator around a normal buffer, which adds two 
+ *
+ * A "fenced buffer" is a decorator around a normal buffer, which adds two
  * special properties:
  * - the ability for the destruction to be delayed by a fence;
  * - reference counting.
- * 
- * Usually DMA buffers have a life-time that will extend the life-time of its 
- * handle. The end-of-life is dictated by the fence signalling. 
- * 
- * Between the handle's destruction, and the fence signalling, the buffer is 
+ *
+ * Usually DMA buffers have a life-time that will extend the life-time of its
+ * handle. The end-of-life is dictated by the fence signalling.
+ *
+ * Between the handle's destruction, and the fence signalling, the buffer is
  * stored in a fenced buffer list.
- * 
+ *
  * \author Jose Fonseca <jrfonseca@tungstengraphics.com>
  */
 

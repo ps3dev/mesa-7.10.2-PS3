@@ -73,7 +73,7 @@ Targets and Environment variables used for Mingw build:
 	X86=1		optimize for x86 (if possible, use MMX, SSE, 3DNow).
 			default = no
 
-	
+
 Running the Build:
 
 	Launch Mingw.
@@ -99,22 +99,22 @@ Updated on 2007-7-21
 
 Notice:
 	1) The generated DLLs are *not* compatible with the ones built
-with the other compilers like VC8, especially for GLUT. 
+with the other compilers like VC8, especially for GLUT.
 
 	2) Although more tests are needed, it can be used individually!
 
-	3) You can set the options about whether using STDCALL to build MESA. The 
+	3) You can set the options about whether using STDCALL to build MESA. The
 config file is <Mesa3D-root>\configs\config.mgw. The default setting is that:
 		ALL_USING_STDCALL = 1
-, which means using STDCALL to build MESA. 
+, which means using STDCALL to build MESA.
 
-	4) Of course, you can MESA without using STDCALL,I like this:) 
+	4) Of course, you can MESA without using STDCALL,I like this:)
 The setting is :
 		ALL_USING_STDCALL = 0
-To do this, however, you must modify wingdi.h which is in MingW's include dir. 
+To do this, however, you must modify wingdi.h which is in MingW's include dir.
 For example, run:
 	notepad	C:\MingW\include\wingdi.h
-, and delete all the lines where all the wgl*() functions are. Because they would 
+, and delete all the lines where all the wgl*() functions are. Because they would
 be conflicted with the ones in <Mesa3D-root>\include\GL\mesa_wgl.h.
 
 >>>>>>>>>> Conflicted Functions List >>>>>>>>>>
@@ -141,13 +141,13 @@ WINGDIAPI BOOL WINAPI wglUseFontOutlinesW(HDC,DWORD,DWORD,DWORD,FLOAT,FLOAT,int,
 ====================
 Updated on 2007-7-22
 ====================
-	I havn't thought that I would find a better way to solve my problems so soon. 
+	I havn't thought that I would find a better way to solve my problems so soon.
 I changed the method in which the import-libs and DLLs are made. After this update,
-the DLLs of MESA are more optimized and more compatible. 
-	It seems that there is no need to keep the building way of 'NO-STDCALL'.The 
-way of USING_STDCALL is so nice! The file <Mesa3D-root>\configs\config.mgw is 
+the DLLs of MESA are more optimized and more compatible.
+	It seems that there is no need to keep the building way of 'NO-STDCALL'.The
+way of USING_STDCALL is so nice! The file <Mesa3D-root>\configs\config.mgw is
 also not needed, and can be deleted safely!
-	
+
 
 
 *********************************************************************************

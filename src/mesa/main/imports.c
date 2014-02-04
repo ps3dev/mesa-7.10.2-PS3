@@ -1,7 +1,7 @@
 /**
  * \file imports.c
  * Standard C library function wrappers.
- * 
+ *
  * Imports are services which the device driver or window system or
  * operating system provides to the core renderer.  The core renderer (Mesa)
  * will call these functions in order to do memory allocation, simple I/O,
@@ -76,7 +76,7 @@ extern int vsnprintf(char *str, size_t count, const char *fmt, va_list arg);
  *
  * \param bytes number of bytes to allocate.
  * \param alignment alignment (must be greater than zero).
- * 
+ *
  * Allocates extra memory to accommodate rounding up the address for
  * alignment and to record the real malloc address.
  *
@@ -126,7 +126,7 @@ _mesa_align_calloc(size_t bytes, unsigned long alignment)
 {
 #if defined(HAVE_POSIX_MEMALIGN)
    void *mem;
-   
+
    mem = _mesa_align_malloc(bytes, alignment);
    if (mem != NULL) {
       (void) memset(mem, 0, bytes);
@@ -548,7 +548,7 @@ _mesa_float_to_half(float val)
    const int flt_s = (fi.i >> 31) & 0x1;
    int s, e, m = 0;
    GLhalfARB result;
-   
+
    /* sign bit */
    s = flt_s;
 
@@ -684,7 +684,7 @@ _mesa_half_to_float(GLhalfARB val)
  * Wrapper for bsearch().
  */
 void *
-_mesa_bsearch( const void *key, const void *base, size_t nmemb, size_t size, 
+_mesa_bsearch( const void *key, const void *base, size_t nmemb, size_t size,
                int (*compar)(const void *, const void *) )
 {
 #if defined(_WIN32_WCE)
@@ -793,7 +793,7 @@ _mesa_snprintf( char *str, size_t size, const char *fmt, ... )
 {
    int r;
    va_list args;
-   va_start( args, fmt );  
+   va_start( args, fmt );
    r = vsnprintf( str, size, fmt, args );
    va_end( args );
    return r;
@@ -835,8 +835,8 @@ output_if_debug(const char *prefixString, const char *outputString,
          fprintf(stderr, "\n");
 
 #if defined(_WIN32) && !defined(_WIN32_WCE)
-      /* stderr from windows applications without console is not usually 
-       * visible, so communicate with the debugger instead */ 
+      /* stderr from windows applications without console is not usually
+       * visible, so communicate with the debugger instead */
       {
          char buf[4096];
          _mesa_snprintf(buf, sizeof(buf), "%s: %s%s", prefixString, outputString, newline ? "\n" : "");
@@ -888,7 +888,7 @@ flush_delayed_errors( struct gl_context *ctx )
    char s[MAXSTRING];
 
    if (ctx->ErrorDebugCount) {
-      _mesa_snprintf(s, MAXSTRING, "%d similar %s errors", 
+      _mesa_snprintf(s, MAXSTRING, "%d similar %s errors",
                      ctx->ErrorDebugCount,
                      error_string(ctx->ErrorValue));
 
@@ -911,10 +911,10 @@ _mesa_warning( struct gl_context *ctx, const char *fmtString, ... )
 {
    char str[MAXSTRING];
    va_list args;
-   va_start( args, fmtString );  
+   va_start( args, fmtString );
    (void) vsnprintf( str, MAXSTRING, fmtString, args );
    va_end( args );
-   
+
    if (ctx)
       flush_delayed_errors( ctx );
 
@@ -936,7 +936,7 @@ _mesa_problem( const struct gl_context *ctx, const char *fmtString, ... )
    char str[MAXSTRING];
    (void) ctx;
 
-   va_start( args, fmtString );  
+   va_start( args, fmtString );
    vsnprintf( str, MAXSTRING, fmtString, args );
    va_end( args );
 
@@ -952,7 +952,7 @@ _mesa_problem( const struct gl_context *ctx, const char *fmtString, ... )
  * If debugging is enabled (either at compile-time via the DEBUG macro, or
  * run-time via the MESA_DEBUG environment variable), report the error with
  * _mesa_debug().
- * 
+ *
  * \param ctx the GL context.
  * \param error the error value.
  * \param fmtString printf() style format string, followed by optional args
@@ -980,7 +980,7 @@ _mesa_error( struct gl_context *ctx, GLenum error, const char *fmtString, ... )
 #endif
    }
 
-   if (debug) {      
+   if (debug) {
       if (ctx->ErrorValue == error &&
           ctx->ErrorDebugFmtString == fmtString) {
          ctx->ErrorDebugCount++;
@@ -990,14 +990,14 @@ _mesa_error( struct gl_context *ctx, GLenum error, const char *fmtString, ... )
          va_list args;
 
          flush_delayed_errors( ctx );
-         
+
          va_start(args, fmtString);
          vsnprintf(s, MAXSTRING, fmtString, args);
          va_end(args);
 
          _mesa_snprintf(s2, MAXSTRING, "%s in %s", error_string(error), s);
          output_if_debug("Mesa: User error", s2, GL_TRUE);
-         
+
          ctx->ErrorDebugFmtString = fmtString;
          ctx->ErrorDebugCount = 0;
       }
@@ -1010,7 +1010,7 @@ _mesa_error( struct gl_context *ctx, GLenum error, const char *fmtString, ... )
 /**
  * Report debug information.  Print error message to stderr via fprintf().
  * No-op if DEBUG mode not enabled.
- * 
+ *
  * \param ctx GL context.
  * \param fmtString printf()-style format string, followed by optional args.
  */

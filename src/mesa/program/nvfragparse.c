@@ -574,7 +574,7 @@ Parse_TextureImageId(struct parse_state *parseState,
 
    if (!Parse_Token(parseState, imageSrc))
       RETURN_ERROR;
-   
+
    if (imageSrc[0] != 'T' ||
        imageSrc[1] != 'E' ||
        imageSrc[2] != 'X') {
@@ -1030,7 +1030,7 @@ Parse_VectorSrc(struct parse_state *parseState,
          RETURN_ERROR2("Undefined constant or parameter: ", ident);
       }
       srcReg->File = PROGRAM_NAMED_PARAM;
-      srcReg->Index = paramIndex;      
+      srcReg->Index = paramIndex;
    }
    else if (IsDigit(token[0]) || token[0] == '-' || token[0] == '+' || token[0] == '.'){
       /* literal scalar constant */
@@ -1053,7 +1053,7 @@ Parse_VectorSrc(struct parse_state *parseState,
       paramIndex = _mesa_add_unnamed_constant(parseState->parameters,
                                               values, 4, NULL);
       srcReg->File = PROGRAM_NAMED_PARAM;
-      srcReg->Index = paramIndex;      
+      srcReg->Index = paramIndex;
    }
    else {
       RETURN_ERROR2("Invalid source register name", token);
@@ -1147,7 +1147,7 @@ Parse_ScalarSrcReg(struct parse_state *parseState,
       paramIndex = _mesa_add_unnamed_constant(parseState->parameters,
                                               values, 4, NULL);
       srcReg->File = PROGRAM_NAMED_PARAM;
-      srcReg->Index = paramIndex;      
+      srcReg->Index = paramIndex;
    }
    else if (IsLetter(token[0])){
       /* named param/constant */
@@ -1161,7 +1161,7 @@ Parse_ScalarSrcReg(struct parse_state *parseState,
          RETURN_ERROR2("Undefined constant or parameter: ", ident);
       }
       srcReg->File = PROGRAM_NAMED_PARAM;
-      srcReg->Index = paramIndex;      
+      srcReg->Index = paramIndex;
    }
    else if (IsDigit(token[0])) {
       /* scalar literal */
@@ -1171,7 +1171,7 @@ Parse_ScalarSrcReg(struct parse_state *parseState,
          RETURN_ERROR;
       paramIndex = _mesa_add_unnamed_constant(parseState->parameters,
                                               values, 4, NULL);
-      srcReg->Index = paramIndex;      
+      srcReg->Index = paramIndex;
       srcReg->File = PROGRAM_NAMED_PARAM;
       needSuffix = GL_FALSE;
    }

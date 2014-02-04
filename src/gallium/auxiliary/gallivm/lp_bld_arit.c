@@ -239,7 +239,7 @@ lp_build_add(struct lp_build_context *bld,
          if(type.width == 16)
             intrinsic = type.sign ? "llvm.x86.sse2.padds.w" : "llvm.x86.sse2.paddus.w";
       }
-   
+
       if(intrinsic)
          return lp_build_intrinsic_binary(builder, intrinsic, lp_build_vec_type(bld->gallivm, bld->type), a, b);
    }
@@ -340,7 +340,7 @@ lp_build_sub(struct lp_build_context *bld,
          if(type.width == 16)
             intrinsic = type.sign ? "llvm.x86.sse2.psubs.w" : "llvm.x86.sse2.psubus.w";
       }
-   
+
       if(intrinsic)
          return lp_build_intrinsic_binary(builder, intrinsic, lp_build_vec_type(bld->gallivm, bld->type), a, b);
    }
@@ -369,11 +369,11 @@ lp_build_sub(struct lp_build_context *bld,
  * - alpha plus one
  *
  *     makes the following approximation to the division (Sree)
- *    
+ *
  *       a*b/255 ~= (a*(b + 1)) >> 256
- *    
+ *
  *     which is the fastest method that satisfies the following OpenGL criteria
- *    
+ *
  *       0*0 = 0 and 255*255 = 255
  *
  * - geometric series
@@ -399,9 +399,9 @@ lp_build_sub(struct lp_build_context *bld,
  *
  *     achieving the exact results
  *
- * @sa Alvy Ray Smith, Image Compositing Fundamentals, Tech Memo 4, Aug 15, 1995, 
+ * @sa Alvy Ray Smith, Image Compositing Fundamentals, Tech Memo 4, Aug 15, 1995,
  *     ftp://ftp.alvyray.com/Acrobat/4_Comp.pdf
- * @sa Michael Herf, The "double blend trick", May 2000, 
+ * @sa Michael Herf, The "double blend trick", May 2000,
  *     http://www.stereopsis.com/doubleblend.html
  */
 static LLVMValueRef
@@ -418,22 +418,22 @@ lp_build_mul_u8n(struct gallivm_state *gallivm,
    assert(lp_check_value(i16_type, b));
 
    c8 = lp_build_const_int_vec(gallivm, i16_type, 8);
-   
+
 #if 0
-   
+
    /* a*b/255 ~= (a*(b + 1)) >> 256 */
    b = LLVMBuildAdd(builder, b, lp_build_const_int_vec(gallium, i16_type, 1), "");
    ab = LLVMBuildMul(builder, a, b, "");
 
 #else
-   
+
    /* ab/255 ~= (ab + (ab >> 8) + 0x80) >> 8 */
    ab = LLVMBuildMul(builder, a, b, "");
    ab = LLVMBuildAdd(builder, ab, LLVMBuildLShr(builder, ab, c8, ""), "");
    ab = LLVMBuildAdd(builder, ab, lp_build_const_int_vec(gallivm, i16_type, 0x80), "");
 
 #endif
-   
+
    ab = LLVMBuildLShr(builder, ab, c8, "");
 
    return ab;
@@ -480,7 +480,7 @@ lp_build_mul(struct lp_build_context *bld,
          abh = lp_build_mul_u8n(bld->gallivm, i16_type, ah, bh);
 
          ab = lp_build_pack2(bld->gallivm, i16_type, type, abl, abh);
-         
+
          return ab;
       }
 
@@ -1715,7 +1715,7 @@ lp_build_sin(struct lp_build_context *bld,
     * scale by 4/Pi
     * y = _mm_mul_ps(x, *(v4sf*)_ps_cephes_FOPI);
     */
-   
+
    LLVMValueRef FOPi = lp_build_const_v4sf(gallivm, 1.27323954473516);
    LLVMValueRef scale_y = LLVMBuildFMul(b, x_abs, FOPi, "scale_y");
 
@@ -1723,7 +1723,7 @@ lp_build_sin(struct lp_build_context *bld,
     * store the integer part of y in mm0
     * emm2 = _mm_cvttps_epi32(y);
     */
-   
+
    LLVMValueRef emm2_i = LLVMBuildFPToSI(b, scale_y, v4si, "emm2_i");
 
    /*
@@ -1749,19 +1749,19 @@ lp_build_sin(struct lp_build_context *bld,
     */
    LLVMValueRef pi32_4 = lp_build_const_v4si(bld->gallivm, 4);
    LLVMValueRef emm0_and =  LLVMBuildAnd(b, emm2_add, pi32_4, "emm0_and");
-   
+
    /*
     * emm2 = _mm_slli_epi32(emm0, 29);
-    */  
+    */
    LLVMValueRef const_29 = lp_build_const_v4si(bld->gallivm, 29);
    LLVMValueRef swap_sign_bit = LLVMBuildShl(b, emm0_and, const_29, "swap_sign_bit");
 
    /*
-    * get the polynom selection mask 
+    * get the polynom selection mask
     * there is one polynom for 0 <= x <= Pi/4
     * and another one for Pi/4<x<=Pi/2
     * Both branches will be computed.
-    *  
+    *
     * emm2 = _mm_and_si128(emm2, *(v4si*)_pi32_2);
     * emm2 = _mm_cmpeq_epi32(emm2, _mm_setzero_si128());
     */
@@ -1786,8 +1786,8 @@ lp_build_sin(struct lp_build_context *bld,
    LLVMValueRef DP3 = lp_build_const_v4sf(gallivm, -3.77489497744594108e-8);
 
    /*
-    * The magic pass: "Extended precision modular arithmetic" 
-    * x = ((x - y * DP1) - y * DP2) - y * DP3; 
+    * The magic pass: "Extended precision modular arithmetic"
+    * x = ((x - y * DP1) - y * DP2) - y * DP3;
     * xmm1 = _mm_mul_ps(y, xmm1);
     * xmm2 = _mm_mul_ps(y, xmm2);
     * xmm3 = _mm_mul_ps(y, xmm3);
@@ -1800,7 +1800,7 @@ lp_build_sin(struct lp_build_context *bld,
     * x = _mm_add_ps(x, xmm1);
     * x = _mm_add_ps(x, xmm2);
     * x = _mm_add_ps(x, xmm3);
-    */ 
+    */
 
    LLVMValueRef x_1 = LLVMBuildFAdd(b, x_abs, xmm1, "x_1");
    LLVMValueRef x_2 = LLVMBuildFAdd(b, x_1, xmm2, "x_2");
@@ -1838,7 +1838,7 @@ lp_build_sin(struct lp_build_context *bld,
     * tmp = _mm_mul_ps(z, *(v4sf*)_ps_0p5);
     * y = _mm_sub_ps(y, tmp);
     * y = _mm_add_ps(y, *(v4sf*)_ps_1);
-    */ 
+    */
    LLVMValueRef half = lp_build_const_v4sf(gallivm, 0.5);
    LLVMValueRef tmp = LLVMBuildFMul(b, z, half, "tmp");
    LLVMValueRef y_9 = LLVMBuildFSub(b, y_8, tmp, "y_8");
@@ -1929,7 +1929,7 @@ lp_build_cos(struct lp_build_context *bld,
     * scale by 4/Pi
     * y = _mm_mul_ps(x, *(v4sf*)_ps_cephes_FOPI);
     */
-   
+
    LLVMValueRef FOPi = lp_build_const_v4sf(gallivm, 1.27323954473516);
    LLVMValueRef scale_y = LLVMBuildFMul(b, x_abs, FOPi, "scale_y");
 
@@ -1937,7 +1937,7 @@ lp_build_cos(struct lp_build_context *bld,
     * store the integer part of y in mm0
     * emm2 = _mm_cvttps_epi32(y);
     */
-   
+
    LLVMValueRef emm2_i = LLVMBuildFPToSI(b, scale_y, v4si, "emm2_i");
 
    /*
@@ -1973,19 +1973,19 @@ lp_build_cos(struct lp_build_context *bld,
    LLVMValueRef emm0_not = LLVMBuildXor(b, emm2_2, inv, "emm0_not");
    LLVMValueRef pi32_4 = lp_build_const_v4si(bld->gallivm, 4);
    LLVMValueRef emm0_and =  LLVMBuildAnd(b, emm0_not, pi32_4, "emm0_and");
-   
+
    /*
     * emm2 = _mm_slli_epi32(emm0, 29);
-    */  
+    */
    LLVMValueRef const_29 = lp_build_const_v4si(bld->gallivm, 29);
    LLVMValueRef sign_bit = LLVMBuildShl(b, emm0_and, const_29, "sign_bit");
 
    /*
-    * get the polynom selection mask 
+    * get the polynom selection mask
     * there is one polynom for 0 <= x <= Pi/4
     * and another one for Pi/4<x<=Pi/2
     * Both branches will be computed.
-    *  
+    *
     * emm2 = _mm_and_si128(emm2, *(v4si*)_pi32_2);
     * emm2 = _mm_cmpeq_epi32(emm2, _mm_setzero_si128());
     */
@@ -2006,8 +2006,8 @@ lp_build_cos(struct lp_build_context *bld,
    LLVMValueRef DP3 = lp_build_const_v4sf(gallivm, -3.77489497744594108e-8);
 
    /*
-    * The magic pass: "Extended precision modular arithmetic" 
-    * x = ((x - y * DP1) - y * DP2) - y * DP3; 
+    * The magic pass: "Extended precision modular arithmetic"
+    * x = ((x - y * DP1) - y * DP2) - y * DP3;
     * xmm1 = _mm_mul_ps(y, xmm1);
     * xmm2 = _mm_mul_ps(y, xmm2);
     * xmm3 = _mm_mul_ps(y, xmm3);
@@ -2020,7 +2020,7 @@ lp_build_cos(struct lp_build_context *bld,
     * x = _mm_add_ps(x, xmm1);
     * x = _mm_add_ps(x, xmm2);
     * x = _mm_add_ps(x, xmm3);
-    */ 
+    */
 
    LLVMValueRef x_1 = LLVMBuildFAdd(b, x_abs, xmm1, "x_1");
    LLVMValueRef x_2 = LLVMBuildFAdd(b, x_1, xmm2, "x_2");
@@ -2058,7 +2058,7 @@ lp_build_cos(struct lp_build_context *bld,
     * tmp = _mm_mul_ps(z, *(v4sf*)_ps_0p5);
     * y = _mm_sub_ps(y, tmp);
     * y = _mm_add_ps(y, *(v4sf*)_ps_1);
-    */ 
+    */
    LLVMValueRef half = lp_build_const_v4sf(gallivm, 0.5);
    LLVMValueRef tmp = LLVMBuildFMul(b, z, half, "tmp");
    LLVMValueRef y_9 = LLVMBuildFSub(b, y_8, tmp, "y_8");

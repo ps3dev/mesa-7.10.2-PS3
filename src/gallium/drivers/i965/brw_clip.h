@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -36,7 +36,7 @@
 #include "brw_reg.h"
 #include "brw_eu.h"
 
-#define MAX_VERTS (3+6+6)	
+#define MAX_VERTS (3+6+6)
 
 /* Note that if unfilled primitives are being emitted, we have to fix
  * up polygon offset and flatshading at this point:
@@ -62,7 +62,7 @@ struct brw_clip_prog_key {
    GLuint output_bfc1:6;
    GLuint output_edgeflag:6;
    GLuint pad1:2;
-   
+
    GLfloat offset_factor;
    GLfloat offset_units;
 };
@@ -86,7 +86,7 @@ struct brw_clip_compile {
    struct brw_compile func;
    struct brw_clip_prog_key key;
    struct brw_clip_prog_data prog_data;
-   
+
    struct {
       struct brw_reg R0;
       struct brw_reg vertex[MAX_VERTS];
@@ -108,10 +108,10 @@ struct brw_clip_compile {
       struct brw_reg dir;
       struct brw_reg tmp0, tmp1;
       struct brw_reg offset;
-      
+
       struct brw_reg fixed_planes;
       struct brw_reg plane_equation;
-       
+
       struct brw_reg ff_sync;
    } reg;
 
@@ -158,7 +158,7 @@ void brw_clip_tri_init_vertices( struct brw_clip_compile *c );
 void brw_clip_tri_flat_shade( struct brw_clip_compile *c );
 void brw_clip_tri( struct brw_clip_compile *c );
 void brw_clip_tri_emit_polygon( struct brw_clip_compile *c );
-void brw_clip_tri_alloc_regs( struct brw_clip_compile *c, 
+void brw_clip_tri_alloc_regs( struct brw_clip_compile *c,
 			      GLuint nr_verts );
 
 
@@ -174,7 +174,7 @@ void brw_clip_interp_vertex( struct brw_clip_compile *c,
 
 void brw_clip_init_planes( struct brw_clip_compile *c );
 
-void brw_clip_emit_vue(struct brw_clip_compile *c, 
+void brw_clip_emit_vue(struct brw_clip_compile *c,
 		       struct brw_indirect vert,
 		       GLboolean allocate,
 		       GLboolean eot,

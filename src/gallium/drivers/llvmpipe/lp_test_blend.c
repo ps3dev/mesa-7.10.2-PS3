@@ -824,7 +824,7 @@ test_some(struct gallivm_state *gallivm, unsigned verbose, FILE *fp,
       alpha_func = &blend_funcs[rand() % num_funcs];
       rgb_src_factor = &blend_factors[rand() % num_factors];
       alpha_src_factor = &blend_factors[rand() % num_factors];
-      
+
       do {
          rgb_dst_factor = &blend_factors[rand() % num_factors];
       } while(*rgb_dst_factor == PIPE_BLENDFACTOR_SRC_ALPHA_SATURATE);

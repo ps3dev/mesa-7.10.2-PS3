@@ -126,7 +126,7 @@ static void savage_BCI_clear(struct gl_context *ctx, drm_savage_clear_t *pclear)
 	drm_clip_rect_t *pbox = imesa->sarea->boxes;
         int i;
 
-	
+
       	if (nbox > SAVAGE_NR_SAREA_CLIPRECTS)
      		nbox = SAVAGE_NR_SAREA_CLIPRECTS;
 
@@ -163,14 +163,14 @@ static void savage_BCI_clear(struct gl_context *ctx, drm_savage_clear_t *pclear)
 			WRITE_CMD((bciptr) , (height << 16) | width,uint32_t);
 			savageDMACommit (imesa, bciptr);
 		}
-		
+
 		if ( pclear->flags & (SAVAGE_DEPTH |SAVAGE_STENCIL) ) {
 		        uint32_t writeMask = 0x0;
 		        if(imesa->hw_stencil)
-		        {        
+		        {
 		            if(pclear->flags & SAVAGE_STENCIL)
 		            {
-		          
+
 		                 writeMask |= 0xFF000000;
 		            }
 		            if(pclear->flags & SAVAGE_DEPTH)
@@ -184,14 +184,14 @@ static void savage_BCI_clear(struct gl_context *ctx, drm_savage_clear_t *pclear)
 		            imesa->regs.s4.zBufCtrl.ni.autoZEnable = GL_TRUE;
                             imesa->regs.s4.zBufCtrl.ni.frameID =
 				~imesa->regs.s4.zBufCtrl.ni.frameID;
-                            
+
                             imesa->dirty |= SAVAGE_UPLOAD_GLOBAL;
 		        }
 		        else
 		        {
 		            if(imesa->IsFullScreen)
 		                imesa->NotFirstFrame = GL_TRUE;
-		                
+
 			    if(imesa->hw_stencil)
 			    {
 				bciptr = savageDMAAlloc (imesa, 10);
@@ -217,7 +217,7 @@ static void savage_BCI_clear(struct gl_context *ctx, drm_savage_clear_t *pclear)
 			        if(writeMask != 0xFFFFFFFF)
 			        {
 			           WRITE_CMD((bciptr) , 0x960100D7,uint32_t);
-                                   WRITE_CMD((bciptr) , 0xFFFFFFFF,uint32_t);  
+                                   WRITE_CMD((bciptr) , 0xFFFFFFFF,uint32_t);
 			        }
 			    }
 			    savageDMACommit (imesa, bciptr);
@@ -235,23 +235,23 @@ static void savage_BCI_swap(savageContextPtr imesa)
     drm_clip_rect_t *pbox = imesa->sarea->boxes;
     int i;
     volatile uint32_t *bciptr;
-    
+
     if (nbox > SAVAGE_NR_SAREA_CLIPRECTS)
         nbox = SAVAGE_NR_SAREA_CLIPRECTS;
     savageDMAFlush (imesa);
-    
+
     if(imesa->IsFullScreen)
     { /* full screen*/
         unsigned int tmp0;
-        tmp0 = imesa->savageScreen->frontOffset; 
+        tmp0 = imesa->savageScreen->frontOffset;
         imesa->savageScreen->frontOffset = imesa->savageScreen->backOffset;
         imesa->savageScreen->backOffset = tmp0;
-        
+
         if(imesa->toggle == TARGET_BACK)
             imesa->toggle = TARGET_FRONT;
         else
-            imesa->toggle = TARGET_BACK; 
-        
+            imesa->toggle = TARGET_BACK;
+
         driFlipRenderbuffers(imesa->glCtx->DrawBuffer,
                              imesa->toggle != TARGET_FRONT);
 
@@ -259,18 +259,18 @@ static void savage_BCI_swap(savageContextPtr imesa)
         imesa->dirty |= SAVAGE_UPLOAD_GLOBAL;
         bciptr = SAVAGE_GET_BCI_POINTER(imesa,3);
         *(bciptr) = 0x960100B0;
-        *(bciptr) = (imesa->savageScreen->frontOffset); 
+        *(bciptr) = (imesa->savageScreen->frontOffset);
         *(bciptr) = 0xA0000000;
-    } 
-    
+    }
+
     else
     {  /* Use bitblt copy from back to front buffer*/
-        
+
         for (i = 0 ; i < nbox; i++, pbox++)
         {
             unsigned int w = pbox->x2 - pbox->x1;
             unsigned int h = pbox->y2 - pbox->y1;
-            
+
             if (pbox->x1 > pbox->x2 ||
                 pbox->y1 > pbox->y2 ||
                 pbox->x2 > imesa->savageScreen->width ||
@@ -278,16 +278,16 @@ static void savage_BCI_swap(savageContextPtr imesa)
                 continue;
 
             bciptr = SAVAGE_GET_BCI_POINTER(imesa,6);
-            
+
             *(bciptr) = 0x4BCC00C0;
-            
+
             *(bciptr) = imesa->savageScreen->backOffset;
             *(bciptr) = imesa->savageScreen->backBitmapDesc;
             *(bciptr) = (pbox->y1 <<16) | pbox->x1;   /*x0, y0*/
             *(bciptr) = (pbox->y1 <<16) | pbox->x1;
             *(bciptr) = (h << 16) | w;
         }
-        
+
     }
 }
 #endif
@@ -388,7 +388,7 @@ static void savageDDClear( struct gl_context *ctx, GLbitfield mask )
 	  (imesa->savageScreen->zpp == 2) ? 0xffffffff : 0x00ffffff;
       mask &= ~BUFFER_BIT_DEPTH;
    }
-   
+
    if((mask & BUFFER_BIT_STENCIL) && imesa->hw_stencil)
    {
       flags |= SAVAGE_DEPTH;
@@ -424,12 +424,12 @@ static void savageDDClear( struct gl_context *ctx, GLbitfield mask )
        }
    }
 
-   if (mask) 
+   if (mask)
       _swrast_Clear( ctx, mask );
 }
 
 /*
- * Copy the back buffer to the front buffer. 
+ * Copy the back buffer to the front buffer.
  */
 void savageSwapBuffers( __DRIdrawable *dPriv )
 {
@@ -625,7 +625,7 @@ void savageFlushCmdBufLocked( savageContextPtr imesa, GLboolean discard )
 }
 
 
-void savageFlushCmdBuf( savageContextPtr imesa, GLboolean discard ) 
+void savageFlushCmdBuf( savageContextPtr imesa, GLboolean discard )
 {
     if (SAVAGE_DEBUG & DEBUG_VERBOSE_MSG)
 	fprintf (stderr, "%s\n", __FUNCTION__);
@@ -644,7 +644,7 @@ static void savageDDFlush( struct gl_context *ctx )
     savageFlushCmdBuf(imesa, GL_FALSE);
 }
 
-static void savageDDFinish( struct gl_context *ctx  ) 
+static void savageDDFinish( struct gl_context *ctx  )
 {
     savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
     if (SAVAGE_DEBUG & DEBUG_VERBOSE_MSG)

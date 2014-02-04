@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -61,7 +61,7 @@ stipple_stage(struct draw_stage *stage)
 
 
 /**
- * Compute interpolated vertex attributes for 'dst' at position 't' 
+ * Compute interpolated vertex attributes for 'dst' at position 't'
  * between 'v0' and 'v1'.
  * XXX using linear interpolation for all attribs at this time.
  */
@@ -69,7 +69,7 @@ static void
 screen_interp( struct draw_context *draw,
                struct vertex_header *dst,
                float t,
-               const struct vertex_header *v0, 
+               const struct vertex_header *v0,
                const struct vertex_header *v1 )
 {
    uint attr;
@@ -160,7 +160,7 @@ stipple_line(struct draw_stage *stage, struct prim_header *header)
             /* starting an "on" segment */
 	    start = (float) i;
 	 }
-	 state = result;	   
+	 state = result;
       }
    }
 
@@ -197,7 +197,7 @@ stipple_reset_tri(struct draw_stage *stage, struct prim_header *header)
 
 
 static void
-stipple_first_line(struct draw_stage *stage, 
+stipple_first_line(struct draw_stage *stage,
 		   struct prim_header *header)
 {
    struct stipple_stage *stipple = stipple_stage(stage);
@@ -221,7 +221,7 @@ stipple_flush(struct draw_stage *stage, unsigned flags)
 
 
 
-static void 
+static void
 stipple_destroy( struct draw_stage *stage )
 {
    draw_free_temp_verts( stage );

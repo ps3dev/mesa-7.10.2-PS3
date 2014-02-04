@@ -45,14 +45,14 @@ typedef enum R700ShaderType
     R700_SHADER_INVALID = 0x5,
 } R700ShaderType;
 
-typedef struct TypedShaderList 
+typedef struct TypedShaderList
 {
 	R700ShaderInstruction * pHead;
 	R700ShaderInstruction * pTail;
 	GLuint  uNumOfNode;
 } TypedShaderList;
 
-typedef struct RealRegister 
+typedef struct RealRegister
 {
     GLuint uAddr;
     GLuint uValue;
@@ -64,7 +64,7 @@ typedef struct InstDeps
     GLint nSrcDeps[3];
 } InstDeps;
 
-typedef struct R700_Shader 
+typedef struct R700_Shader
 {
 	R700ShaderType   Type;
 
@@ -76,30 +76,30 @@ typedef struct R700_Shader
     GLboolean bLinksDirty;
 
     GLuint  uShaderBinaryDWORDSize; // in DWORDS
-    GLuint  nRegs;      
+    GLuint  nRegs;
     GLuint  nParamExports;   // VS_ EXPORT_COUNT (1 based, the actual register is 0 based!)
-    GLuint  nMemExports; 
+    GLuint  nMemExports;
     GLuint  resource;     // VS and PS _RESOURCE
     GLuint  exportMode;   // VS and PS _EXPORT_MODE
 
-    GLboolean  depthIsImported;             
+    GLboolean  depthIsImported;
 
     // Vertex program exports
-    GLboolean  positionVectorIsExported;          
+    GLboolean  positionVectorIsExported;
 
-    GLboolean  miscVectorIsExported;               
-    GLboolean  renderTargetArrayIndexIsExported;  
+    GLboolean  miscVectorIsExported;
+    GLboolean  renderTargetArrayIndexIsExported;
 
-    GLboolean  ccDist0VectorIsExported;  
-    GLboolean  ccDist1VectorIsExported;  
+    GLboolean  ccDist0VectorIsExported;
+    GLboolean  ccDist1VectorIsExported;
 
     // Pixel program exports
-    GLboolean  depthIsExported;             
-    GLboolean  stencilRefIsExported;        
-    GLboolean  coverageToMaskIsExported;    
-    GLboolean  maskIsExported;              
+    GLboolean  depthIsExported;
+    GLboolean  stencilRefIsExported;
+    GLboolean  coverageToMaskIsExported;
+    GLboolean  maskIsExported;
 
-    GLboolean  killIsUsed;                  
+    GLboolean  killIsUsed;
 
     GLuint  uStartAddr;
     GLuint  uCFOffset;
@@ -123,7 +123,7 @@ typedef struct R700_Shader
 
 	// -------- constants
 	GLfloat   ConstantArray[SQ_ALU_CONSTANT_PS_COUNT * 4];
-	
+
 	GLboolean bSurfAllocated;
 } R700_Shader;
 

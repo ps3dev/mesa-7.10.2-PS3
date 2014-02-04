@@ -66,7 +66,7 @@ extern void GLAPIENTRY
 _mesa_ResizeBuffersMESA( void );
 
 
-extern void 
+extern void
 _mesa_update_draw_buffer_bounds(struct gl_context *ctx);
 
 extern void

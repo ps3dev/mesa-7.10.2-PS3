@@ -77,7 +77,7 @@ Subdivider::drawCurves( void )
 
 
 /*--------------------------------------------------------------------------
- * samplingSplit - recursively subdivide patch, cull check each subpatch  
+ * samplingSplit - recursively subdivide patch, cull check each subpatch
  *--------------------------------------------------------------------------
  */
 

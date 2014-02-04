@@ -86,7 +86,7 @@ static const unsigned  a_shift_table[3] = {
  * 4x shift levels, which need to be programed for DOT3.  Maybe newer
  * hardware fixes these issues.
  *
- * \bug 
+ * \bug
  * KW: needs attention to the case where texunit 1 is enabled but
  * texunit 0 is not.
  */
@@ -110,7 +110,7 @@ viaTexCombineState( struct via_context *vmesa,
    unsigned constant_alpha[3];
    unsigned bias_alpha = 0;
    unsigned abc_alpha = 0;
-   const struct gl_texture_unit * texUnit = 
+   const struct gl_texture_unit * texUnit =
       &vmesa->glCtx->Texture.Unit[unit];
    unsigned env_color[4];
 
@@ -143,23 +143,23 @@ viaTexCombineState( struct via_context *vmesa,
 
 	 switch( op ) {
 	 case 0:		/* GL_SRC_COLOR */
-	    constant_color[i] = ((env_color[0] << 16) | 
-				 (env_color[1] << 8) | 
+	    constant_color[i] = ((env_color[0] << 16) |
+				 (env_color[1] << 8) |
 				 env_color[2]);
 	    break;
 	 case 1:		/* GL_ONE_MINUS_SRC_COLOR */
-	    constant_color[i] = ~((env_color[0] << 16) | 
-				  (env_color[1] << 8) | 
+	    constant_color[i] = ~((env_color[0] << 16) |
+				  (env_color[1] << 8) |
 				  env_color[2]) & 0x00ffffff;
 	    break;
 	 case 2:		/* GL_SRC_ALPHA */
-	    constant_color[i] = ((env_color[3] << 16) | 
-				 (env_color[3] << 8) | 
+	    constant_color[i] = ((env_color[3] << 16) |
+				 (env_color[3] << 8) |
 				 env_color[3]);
 	    break;
 	 case 3:		/* GL_ONE_MINUS_SRC_ALPHA */
-	    constant_color[i] = ~((env_color[3] << 16) | 
-				  (env_color[3] << 8) | 
+	    constant_color[i] = ~((env_color[3] << 16) |
+				  (env_color[3] << 8) |
 				  env_color[3]) & 0x00ffffff;
 	    break;
 	 }
@@ -174,12 +174,12 @@ viaTexCombineState( struct via_context *vmesa,
 	 break;
       }
    }
-	
-   
+
+
    /* On the Unichrome, all combine operations take on some form of:
     *
     *     (xA * (xB op xC) + xBias) << xShift
-    * 
+    *
     * 'op' can be selected as add, subtract, min, max, or mask.  The min, max
     * and mask modes are currently unused.  With the exception of DOT3, all
     * standard GL_COMBINE modes can be implemented simply by selecting the
@@ -195,14 +195,14 @@ viaTexCombineState( struct via_context *vmesa,
    case GL_REPLACE:
       color |= ((CONST_ONE << INPUT_A_SHIFT) |
 		(color_arg[0] << INPUT_B_SHIFT));
-		
+
       ordered_constant_color[1] = constant_color[0];
       break;
-      
+
    /* Ca = arg[0], Cb = arg[1], Cc = 0, Cbias = 0
     */
    case GL_MODULATE:
-      color |= ((color_arg[0] << INPUT_A_SHIFT) | 
+      color |= ((color_arg[0] << INPUT_A_SHIFT) |
 		(color_arg[1] << INPUT_B_SHIFT));
 
       ordered_constant_color[0] = constant_color[0];
@@ -229,7 +229,7 @@ viaTexCombineState( struct via_context *vmesa,
     */
    case GL_ADD_SIGNED:
       color |= ((CONST_ONE << INPUT_A_SHIFT) |
-		(color_arg[0] << INPUT_B_SHIFT) | 
+		(color_arg[0] << INPUT_B_SHIFT) |
 		(color_arg[1] << INPUT_C_SHIFT));
 
       bias |= HC_HTXnTBLCbias_HTXnTBLRC;
@@ -314,8 +314,8 @@ viaTexCombineState( struct via_context *vmesa,
       case GL_PREVIOUS:
 	 alpha_arg[i] = (unit == 0) ? HC_XTA_Adif : HC_XTA_Acur;
 	 alpha_arg[i] += alpha_operand_modifier[op];
-	 bias_alpha_arg[i] = (unit == 0 ? 
-			      HC_HTXnTBLAbias_Adif : 
+	 bias_alpha_arg[i] = (unit == 0 ?
+			      HC_HTXnTBLAbias_Adif :
 			      HC_HTXnTBLAbias_Acur);
 	 bias_alpha_arg[i] += bias_alpha_operand_modifier[op];
 	 break;
@@ -334,12 +334,12 @@ viaTexCombineState( struct via_context *vmesa,
       bias |= bias_alpha_arg[0];
       bias_alpha = constant_alpha[0] >> 1;
       break;
-      
+
    /* Aa = arg[0], Ab = arg[1], Ac = 0, Abias = 0
     */
    case GL_MODULATE:
-      alpha |= ((alpha_arg[1] << INPUT_A_SHIFT) | 
-		(alpha_arg[0] << INPUT_B_SHIFT) | 
+      alpha |= ((alpha_arg[1] << INPUT_A_SHIFT) |
+		(alpha_arg[0] << INPUT_B_SHIFT) |
 		(HC_XTA_HTXnTBLRA << INPUT_C_SHIFT));
 
       abc_alpha = ((constant_alpha[1] << HC_HTXnTBLRAa_SHIFT) |
@@ -374,7 +374,7 @@ viaTexCombineState( struct via_context *vmesa,
     */
    case GL_ADD_SIGNED:
       alpha |= ((HC_XTA_HTXnTBLRA << INPUT_A_SHIFT) |
-		(alpha_arg[0] << INPUT_B_SHIFT) | 
+		(alpha_arg[0] << INPUT_B_SHIFT) |
 		(alpha_arg[1] << INPUT_C_SHIFT));
       abc_alpha = ((0xff << HC_HTXnTBLRAa_SHIFT) |
 		   (constant_alpha[0] << HC_HTXnTBLRAb_SHIFT) |
@@ -400,7 +400,7 @@ viaTexCombineState( struct via_context *vmesa,
       bias_alpha = constant_alpha[1] >> 1;
       break;
    }
-   
+
 
    op |= c_shift_table[ c_shift ] | a_shift_table[ a_shift ];
 

@@ -24,7 +24,7 @@
 
 /**
  * \file via_context.c
- * 
+ *
  * \author John Sheng (presumably of either VIA Technologies or S3 Graphics)
  * \author Others at VIA Technologies?
  * \author Others at S3 Graphics?
@@ -98,7 +98,7 @@ static const GLubyte *viaGetString(struct gl_context *ctx, GLenum name)
       struct via_context *vmesa = VIA_CONTEXT(ctx);
       unsigned id = vmesa->viaScreen->deviceID;
 
-      offset = driGetRendererString( buffer, 
+      offset = driGetRendererString( buffer,
 				     chipset_names[(id > VIA_PM800) ? 0 : id],
 				     DRIVER_DATE, 0 );
       return (GLubyte *)buffer;
@@ -116,7 +116,7 @@ static const GLubyte *viaGetString(struct gl_context *ctx, GLenum name)
  * 16 pixels.
  *
  * \param width  Minimum buffer width, in pixels.
- * 
+ *
  * \returns A pixel width that meets the alignment requirements.
  */
 static INLINE unsigned
@@ -194,11 +194,11 @@ viaInitRenderbuffer(struct via_renderbuffer *vrb, GLenum format,
 /**
  * Calculate the framebuffer parameters for all buffers (front, back, depth,
  * and stencil) associated with the specified context.
- * 
+ *
  * \warning
  * This function also calls \c AllocateBuffer to actually allocate the
  * buffers.
- * 
+ *
  * \sa AllocateBuffer
  */
 static GLboolean
@@ -278,7 +278,7 @@ calculate_buffer_parameters(struct via_context *vmesa,
       vmesa->front.bpp = vmesa->viaScreen->bitsPerPixel;
       vmesa->front.pitch = buffer_align( w ) << shift; /* bytes, not pixels */
       vmesa->front.size = vmesa->front.pitch * h;
-      if (getenv("ALTERNATE_SCREEN")) 
+      if (getenv("ALTERNATE_SCREEN"))
         vmesa->front.offset = vmesa->front.size;
       else
       	vmesa->front.offset = 0;
@@ -311,7 +311,7 @@ calculate_buffer_parameters(struct via_context *vmesa,
       if (vmesa->depth.bpp == 24)
 	 vmesa->depth.bpp = 32;
 
-      vmesa->depth.pitch = (buffer_align( vmesa->driDrawable->w ) * 
+      vmesa->depth.pitch = (buffer_align( vmesa->driDrawable->w ) *
 			    (vmesa->depth.bpp/8)) + extra;
       vmesa->depth.size = vmesa->depth.pitch * vmesa->driDrawable->h;
 
@@ -338,7 +338,7 @@ calculate_buffer_parameters(struct via_context *vmesa,
    vmesa->stencil.orig = vmesa->depth.orig;
    vmesa->stencil.origMap = vmesa->depth.origMap;
 
-   if( vmesa->viaScreen->width == vmesa->driDrawable->w && 
+   if( vmesa->viaScreen->width == vmesa->driDrawable->w &&
        vmesa->viaScreen->height == vmesa->driDrawable->h ) {
       vmesa->doPageFlip = vmesa->allowPageFlip;
       if (vmesa->hasBack) {
@@ -426,7 +426,7 @@ AllocateDmaBuffer(struct via_context *vmesa)
 {
     if (vmesa->dma)
         via_free_dma_buffer(vmesa);
-    
+
     if (!via_alloc_dma_buffer(vmesa))
         return GL_FALSE;
 
@@ -484,9 +484,9 @@ viaCreateContext(gl_api api,
     vmesa->hasBack = visual->doubleBufferMode;
 
     switch(visual->depthBits) {
-    case 0:			
+    case 0:
        vmesa->hasDepth = GL_FALSE;
-       vmesa->depthBits = 0; 
+       vmesa->depthBits = 0;
        vmesa->depth_max = 1.0;
        break;
     case 16:
@@ -524,7 +524,7 @@ viaCreateContext(gl_api api,
        vmesa->polygon_offset_scale = 2.0 / vmesa->depth_max;
        break;
     default:
-       assert(0); 
+       assert(0);
        break;
     }
 
@@ -544,9 +544,9 @@ viaCreateContext(gl_api api,
 
     vmesa->glCtx = _mesa_create_context(visual, shareCtx, &functions,
 					(void*) vmesa);
-    
+
     vmesa->shareCtx = shareCtx;
-    
+
     if (!vmesa->glCtx) {
         FREE(vmesa);
         return GL_FALSE;
@@ -650,7 +650,7 @@ viaCreateContext(gl_api api,
     viaInitSpanFuncs(ctx);
     viaInitIoctlFuncs(ctx);
     viaInitState(ctx);
-        
+
     if (getenv("VIA_DEBUG"))
        VIA_DEBUG = driParseDebugString( getenv( "VIA_DEBUG" ),
 					debug_control );
@@ -738,13 +738,13 @@ void viaXMesaWindowMoved(struct via_context *vmesa)
 
    draw_buffer =  (struct via_renderbuffer *) drawable->driverPrivate;
    read_buffer =  (struct via_renderbuffer *) readable->driverPrivate;
-   
+
    switch (vmesa->glCtx->DrawBuffer->_ColorDrawBufferIndexes[0]) {
-   case BUFFER_BACK_LEFT: 
+   case BUFFER_BACK_LEFT:
       if (drawable->numBackClipRects == 0) {
 	 vmesa->numClipRects = drawable->numClipRects;
 	 vmesa->pClipRects = drawable->pClipRects;
-      } 
+      }
       else {
 	 vmesa->numClipRects = drawable->numBackClipRects;
 	 vmesa->pClipRects = drawable->pBackClipRects;
@@ -759,7 +759,7 @@ void viaXMesaWindowMoved(struct via_context *vmesa)
       break;
    }
 
-   if ((draw_buffer->drawW != drawable->w) 
+   if ((draw_buffer->drawW != drawable->w)
        || (draw_buffer->drawH != drawable->h)) {
       calculate_buffer_parameters(vmesa, vmesa->glCtx->DrawBuffer,
 				  drawable);
@@ -771,7 +771,7 @@ void viaXMesaWindowMoved(struct via_context *vmesa)
    draw_buffer->drawH = drawable->h;
 
    if (drawable != readable) {
-      if ((read_buffer->drawW != readable->w) 
+      if ((read_buffer->drawW != readable->w)
 	  || (read_buffer->drawH != readable->h)) {
 	 calculate_buffer_parameters(vmesa, vmesa->glCtx->ReadBuffer,
 				     readable);
@@ -783,12 +783,12 @@ void viaXMesaWindowMoved(struct via_context *vmesa)
       read_buffer->drawH = readable->h;
    }
 
-   vmesa->front.orig = (vmesa->front.offset + 
-			draw_buffer->drawY * vmesa->front.pitch + 
+   vmesa->front.orig = (vmesa->front.offset +
+			draw_buffer->drawY * vmesa->front.pitch +
 			draw_buffer->drawX * bytePerPixel);
 
-   vmesa->front.origMap = (vmesa->front.map + 
-			draw_buffer->drawY * vmesa->front.pitch + 
+   vmesa->front.origMap = (vmesa->front.map +
+			draw_buffer->drawY * vmesa->front.pitch +
 			draw_buffer->drawX * bytePerPixel);
 
    vmesa->back.orig = (vmesa->back.offset +
@@ -801,7 +801,7 @@ void viaXMesaWindowMoved(struct via_context *vmesa)
 
    vmesa->depth.orig = (vmesa->depth.offset +
 			draw_buffer->drawY * vmesa->depth.pitch +
-			draw_buffer->drawX * bytePerPixel);   
+			draw_buffer->drawX * bytePerPixel);
 
    vmesa->depth.origMap = (vmesa->depth.map +
 			draw_buffer->drawY * vmesa->depth.pitch +
@@ -823,12 +823,12 @@ viaMakeCurrent(__DRIcontext *driContextPriv,
 {
     if (VIA_DEBUG & DEBUG_DRI) {
 	fprintf(stderr, "driContextPriv = %016lx\n", (unsigned long)driContextPriv);
-	fprintf(stderr, "driDrawPriv = %016lx\n", (unsigned long)driDrawPriv);    
+	fprintf(stderr, "driDrawPriv = %016lx\n", (unsigned long)driDrawPriv);
 	fprintf(stderr, "driReadPriv = %016lx\n", (unsigned long)driReadPriv);
-    }	
+    }
 
     if (driContextPriv) {
-        struct via_context *vmesa = 
+        struct via_context *vmesa =
 	   (struct via_context *)driContextPriv->driverPrivate;
 	struct gl_context *ctx = vmesa->glCtx;
         struct gl_framebuffer *drawBuffer, *readBuffer;
@@ -850,7 +850,7 @@ viaMakeCurrent(__DRIcontext *driContextPriv,
 	  vmesa->driDrawable = driDrawPriv;
 	  vmesa->driReadable = driReadPriv;
 
-	  if ((drawBuffer->Width != driDrawPriv->w) 
+	  if ((drawBuffer->Width != driDrawPriv->w)
 	      || (drawBuffer->Height != driDrawPriv->h)) {
 	     _mesa_resize_framebuffer(ctx, drawBuffer,
 				      driDrawPriv->w, driDrawPriv->h);
@@ -878,7 +878,7 @@ viaMakeCurrent(__DRIcontext *driContextPriv,
         _mesa_make_current(vmesa->glCtx, drawBuffer, readBuffer);
 
 	ctx->Driver.DrawBuffer( ctx, ctx->Color.DrawBuffer[0] );
-	   
+
         viaXMesaWindowMoved(vmesa);
 	ctx->Driver.Scissor(vmesa->glCtx,
 			    vmesa->glCtx->Scissor.X,
@@ -889,7 +889,7 @@ viaMakeCurrent(__DRIcontext *driContextPriv,
     else {
         _mesa_make_current(NULL, NULL, NULL);
     }
-        
+
     return GL_TRUE;
 }
 
@@ -930,10 +930,10 @@ viaSwapBuffers(__DRIdrawable *drawablePrivate)
 {
     __DRIdrawable *dPriv = (__DRIdrawable *)drawablePrivate;
 
-    if (dPriv && 
-	dPriv->driContextPriv && 
+    if (dPriv &&
+	dPriv->driContextPriv &&
 	dPriv->driContextPriv->driverPrivate) {
-        struct via_context *vmesa = 
+        struct via_context *vmesa =
 	   (struct via_context *)dPriv->driContextPriv->driverPrivate;
         struct gl_context *ctx = vmesa->glCtx;
 

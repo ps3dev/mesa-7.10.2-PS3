@@ -184,7 +184,7 @@ _mesa_parse_arb_vertex_program(struct gl_context *ctx, GLenum target,
    if (program->Base.String != NULL)
       free(program->Base.String);
 
-   /* Copy the relevant contents of the arb_program struct into the 
+   /* Copy the relevant contents of the arb_program struct into the
     * vertex_program struct.
     */
    program->Base.String          = prog.String;
@@ -210,7 +210,7 @@ _mesa_parse_arb_vertex_program(struct gl_context *ctx, GLenum target,
 
    if (program->Base.Parameters)
       _mesa_free_parameter_list(program->Base.Parameters);
-   program->Base.Parameters = prog.Parameters; 
+   program->Base.Parameters = prog.Parameters;
 
 #if DEBUG_VP
    printf("____________Vertex program %u __________\n", program->Base.Id);

@@ -82,7 +82,7 @@ copy_indirect_accessed_array(struct gl_program_parameter_list *src,
 	 j = dst->NumParameters;
       } else {
 	 for (j = 0; j < dst->NumParameters; j++) {
-	    if (memcmp(dst->Parameters[j].StateIndexes, curr->StateIndexes, 
+	    if (memcmp(dst->Parameters[j].StateIndexes, curr->StateIndexes,
 		       sizeof(curr->StateIndexes)) == 0) {
 	       return -1;
 	    }
@@ -188,7 +188,7 @@ _mesa_layout_parameters(struct asm_parser_state *state)
 	    inst->Base.SrcReg[i].Index =
 	       _mesa_add_unnamed_constant(layout, v, p->Size, & swizzle);
 
-	    inst->Base.SrcReg[i].Swizzle = 
+	    inst->Base.SrcReg[i].Swizzle =
 	       _mesa_combine_swizzles(swizzle, inst->Base.SrcReg[i].Swizzle);
 	    break;
 	 }

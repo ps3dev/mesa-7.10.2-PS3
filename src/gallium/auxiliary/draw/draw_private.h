@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -63,7 +63,7 @@ struct tgsi_sampler;
 
 /**
  * Basic vertex info.
- * Carry some useful information around with the vertices in the prim pipe.  
+ * Carry some useful information around with the vertices in the prim pipe.
  */
 struct vertex_header {
    unsigned clipmask:12;
@@ -96,7 +96,7 @@ struct draw_context
    struct {
       struct draw_stage *first;  /**< one of the following */
 
-      struct draw_stage *validate; 
+      struct draw_stage *validate;
 
       /* stages (in logical order) */
       struct draw_stage *flatshade;
@@ -160,18 +160,18 @@ struct draw_context
          int eltBias;
          unsigned min_index;
          unsigned max_index;
-         
+
          /** vertex arrays */
          const void *vbuffer[PIPE_MAX_ATTRIBS];
-         
+
          /** constant buffers (for vertex/geometry shader) */
          const void *vs_constants[PIPE_MAX_CONSTANT_BUFFERS];
          unsigned vs_constants_size[PIPE_MAX_CONSTANT_BUFFERS];
          const void *gs_constants[PIPE_MAX_CONSTANT_BUFFERS];
          unsigned gs_constants_size[PIPE_MAX_CONSTANT_BUFFERS];
-         
+
          /* pointer to planes */
-         float (*planes)[12][4]; 
+         float (*planes)[12][4];
       } user;
 
       boolean test_fse;         /* enable FSE even though its not correct (eg for softpipe) */
@@ -225,7 +225,7 @@ struct draw_context
 
       /* Here's another one:
        */
-      struct aos_machine *aos_machine; 
+      struct aos_machine *aos_machine;
 
 
       const void *aligned_constants[PIPE_MAX_CONSTANT_BUFFERS];
@@ -340,7 +340,7 @@ boolean draw_init(struct draw_context *draw);
 boolean draw_vs_init( struct draw_context *draw );
 void draw_vs_destroy( struct draw_context *draw );
 
-void draw_vs_set_viewport( struct draw_context *, 
+void draw_vs_set_viewport( struct draw_context *,
                            const struct pipe_viewport_state * );
 
 void
@@ -384,7 +384,7 @@ void draw_pt_reset_vertex_ids( struct draw_context *draw );
 
 
 /*******************************************************************************
- * Primitive processing (pipeline) code: 
+ * Primitive processing (pipeline) code:
  */
 
 boolean draw_pipeline_init( struct draw_context *draw );
@@ -415,13 +415,13 @@ void draw_pipeline_run_linear( struct draw_context *draw,
 
 
 
-void draw_pipeline_flush( struct draw_context *draw, 
+void draw_pipeline_flush( struct draw_context *draw,
                           unsigned flags );
 
 
 
 /*******************************************************************************
- * Flushing 
+ * Flushing
  */
 
 #define DRAW_FLUSH_STATE_CHANGE              0x8

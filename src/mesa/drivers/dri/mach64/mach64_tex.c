@@ -413,7 +413,7 @@ static void mach64DDTexEnv( struct gl_context *ctx, GLenum target,
 	 if ( mmesa->env_color != 0x00000000 &&
 	      mmesa->env_color != 0xff000000 &&
 	      mmesa->env_color != 0x00ffffff &&
-	      mmesa->env_color != 0xffffffff )) {	
+	      mmesa->env_color != 0xffffffff )) {
 	    mmesa->blend_flags |= MACH64_BLEND_ENV_COLOR;
 	 }
       }
@@ -473,7 +473,7 @@ static void mach64DDTexParameter( struct gl_context *ctx, GLenum target,
        * This isn't the most efficient solution but there doesn't appear to
        * be a nice alternative.  Since there's no LOD clamping,
        * we just have to rely on loading the right subset of mipmap levels
-       * to simulate a clamped LOD.  
+       * to simulate a clamped LOD.
        *
        * For mach64 we're only concerned with the base level
        * since that's the only texture we upload.

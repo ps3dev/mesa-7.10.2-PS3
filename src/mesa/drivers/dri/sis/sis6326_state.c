@@ -91,7 +91,7 @@ sis6326DDAlphaFunc( struct gl_context *ctx, GLenum func, GLfloat ref )
 }
 
 static void
-sis6326DDBlendFuncSeparate( struct gl_context *ctx, 
+sis6326DDBlendFuncSeparate( struct gl_context *ctx,
 			    GLenum sfactorRGB, GLenum dfactorRGB,
 			    GLenum sfactorA,   GLenum dfactorA )
 {
@@ -338,7 +338,7 @@ static void sis6326DDColorMask( struct gl_context *ctx,
 				GLboolean b, GLboolean a )
 {
    sisContextPtr smesa = SIS_CONTEXT(ctx);
-	
+
    if (r && g && b && ((ctx->Visual.alphaBits == 0) || a)) {
       FALLBACK(smesa, SIS_FALLBACK_WRITEMASK, 0);
    } else {
@@ -678,7 +678,7 @@ void sis6326DDInitState( sisContextPtr smesa )
 
    /* Src blend is BLEND_ONE, Dst blend is D3DBLEND_ZERO */
    current->hwDstSrcBlend = S_SBLEND_ONE | S_DBLEND_ZERO;
-   
+
    switch (smesa->bytesPerPixel)
    {
    case 2:

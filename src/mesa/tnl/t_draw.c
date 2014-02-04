@@ -42,7 +42,7 @@ static GLubyte *get_space(struct gl_context *ctx, GLuint bytes)
 {
    TNLcontext *tnl = TNL_CONTEXT(ctx);
    GLubyte *space = malloc(bytes);
-   
+
    tnl->block[tnl->nr_blocks++] = space;
    return space;
 }
@@ -181,32 +181,32 @@ static void _tnl_import_array( struct gl_context *ctx,
       GLfloat *fptr = (GLfloat *)buf;
 
       switch (input->Type) {
-      case GL_BYTE: 
-	 CONVERT(GLbyte, BYTE_TO_FLOAT); 
+      case GL_BYTE:
+	 CONVERT(GLbyte, BYTE_TO_FLOAT);
 	 break;
-      case GL_UNSIGNED_BYTE: 
+      case GL_UNSIGNED_BYTE:
          if (input->Format == GL_BGRA) {
             /* See GL_EXT_vertex_array_bgra */
             convert_bgra_to_float(input, ptr, fptr, count);
          }
          else {
-            CONVERT(GLubyte, UBYTE_TO_FLOAT); 
+            CONVERT(GLubyte, UBYTE_TO_FLOAT);
          }
 	 break;
-      case GL_SHORT: 
-	 CONVERT(GLshort, SHORT_TO_FLOAT); 
+      case GL_SHORT:
+	 CONVERT(GLshort, SHORT_TO_FLOAT);
 	 break;
-      case GL_UNSIGNED_SHORT: 
-	 CONVERT(GLushort, USHORT_TO_FLOAT); 
+      case GL_UNSIGNED_SHORT:
+	 CONVERT(GLushort, USHORT_TO_FLOAT);
 	 break;
-      case GL_INT: 
-	 CONVERT(GLint, INT_TO_FLOAT); 
+      case GL_INT:
+	 CONVERT(GLint, INT_TO_FLOAT);
 	 break;
-      case GL_UNSIGNED_INT: 
-	 CONVERT(GLuint, UINT_TO_FLOAT); 
+      case GL_UNSIGNED_INT:
+	 CONVERT(GLuint, UINT_TO_FLOAT);
 	 break;
-      case GL_DOUBLE: 
-	 CONVERT(GLdouble, (GLfloat)); 
+      case GL_DOUBLE:
+	 CONVERT(GLdouble, (GLfloat));
 	 break;
       case GL_HALF_FLOAT:
 	 convert_half_to_float(input, ptr, fptr, count, sz);
@@ -230,12 +230,12 @@ static void _tnl_import_array( struct gl_context *ctx,
    VB->AttribPtr[attrib]->stride = stride;
    VB->AttribPtr[attrib]->size = input->Size;
 
-   /* This should die, but so should the whole GLvector4f concept: 
+   /* This should die, but so should the whole GLvector4f concept:
     */
-   VB->AttribPtr[attrib]->flags = (((1<<input->Size)-1) | 
+   VB->AttribPtr[attrib]->flags = (((1<<input->Size)-1) |
 				   VEC_NOT_WRITEABLE |
 				   (stride == 4*sizeof(GLfloat) ? 0 : VEC_BAD_STRIDE));
-   
+
    VB->AttribPtr[attrib]->storage = NULL;
 }
 
@@ -261,7 +261,7 @@ static GLboolean *_tnl_import_edgeflag( struct gl_context *ctx,
 }
 
 
-static void bind_inputs( struct gl_context *ctx, 
+static void bind_inputs( struct gl_context *ctx,
 			 const struct gl_client_array *inputs[],
 			 GLint count,
 			 struct gl_buffer_object **bo,
@@ -276,18 +276,18 @@ static void bind_inputs( struct gl_context *ctx,
    for (i = 0; i < VERT_ATTRIB_MAX; i++) {
       const void *ptr;
 
-      if (inputs[i]->BufferObj->Name) { 
+      if (inputs[i]->BufferObj->Name) {
 	 if (!inputs[i]->BufferObj->Pointer) {
 	    bo[*nr_bo] = inputs[i]->BufferObj;
 	    (*nr_bo)++;
-	    ctx->Driver.MapBuffer(ctx, 
+	    ctx->Driver.MapBuffer(ctx,
 				  GL_ARRAY_BUFFER,
 				  GL_READ_ONLY_ARB,
 				  inputs[i]->BufferObj);
-	    
+
 	    assert(inputs[i]->BufferObj->Pointer);
 	 }
-	 
+
 	 ptr = ADD_POINTERS(inputs[i]->BufferObj->Pointer,
 			    inputs[i]->Ptr);
       }
@@ -295,7 +295,7 @@ static void bind_inputs( struct gl_context *ctx,
 	 ptr = inputs[i]->Ptr;
 
       /* Just make sure the array is floating point, otherwise convert to
-       * temporary storage.  
+       * temporary storage.
        *
        * XXX: remove the GLvector4f type at some stage and just use
        * client arrays.
@@ -319,7 +319,7 @@ static void bind_inputs( struct gl_context *ctx,
    if (ctx->Polygon.FrontMode != GL_FILL ||
        ctx->Polygon.BackMode != GL_FILL)
    {
-      VB->EdgeFlag = _tnl_import_edgeflag( ctx, 
+      VB->EdgeFlag = _tnl_import_edgeflag( ctx,
 					   VB->AttribPtr[_TNL_ATTRIB_EDGEFLAG],
 					   VB->Count );
    }
@@ -350,7 +350,7 @@ static void bind_indices( struct gl_context *ctx,
    if (ib->obj->Name && !ib->obj->Pointer) {
       bo[*nr_bo] = ib->obj;
       (*nr_bo)++;
-      ctx->Driver.MapBuffer(ctx, 
+      ctx->Driver.MapBuffer(ctx,
 			    GL_ELEMENT_ARRAY_BUFFER,
 			    GL_READ_ONLY_ARB,
 			    ib->obj);
@@ -374,12 +374,12 @@ static void bind_indices( struct gl_context *ctx,
       }
       else if (ib->type == GL_UNSIGNED_SHORT) {
 	 const GLushort *in = (GLushort *)ptr;
-	 for (i = 0; i < ib->count; i++) 
+	 for (i = 0; i < ib->count; i++)
 	    *elts++ = (GLuint)(*in++) + VB->Primitive[0].basevertex;
       }
       else {
 	 const GLubyte *in = (GLubyte *)ptr;
-	 for (i = 0; i < ib->count; i++) 
+	 for (i = 0; i < ib->count; i++)
 	    *elts++ = (GLuint)(*in++) + VB->Primitive[0].basevertex;
       }
    }
@@ -401,8 +401,8 @@ static void unmap_vbos( struct gl_context *ctx,
 			GLuint nr_bo )
 {
    GLuint i;
-   for (i = 0; i < nr_bo; i++) { 
-      ctx->Driver.UnmapBuffer(ctx, 
+   for (i = 0; i < nr_bo; i++) {
+      ctx->Driver.UnmapBuffer(ctx,
 			      0, /* target -- I don't see why this would be needed */
 			      bo[i]);
    }
@@ -455,16 +455,16 @@ void _tnl_draw_prims( struct gl_context *ctx,
    {
       printf("%s %d..%d\n", __FUNCTION__, min_index, max_index);
       for (i = 0; i < nr_prims; i++)
-	 printf("prim %d: %s start %d count %d\n", i, 
+	 printf("prim %d: %s start %d count %d\n", i,
 		_mesa_lookup_enum_by_nr(prim[i].mode),
 		prim[i].start,
 		prim[i].count);
    }
 
    if (min_index) {
-      /* We always translate away calls with min_index != 0. 
+      /* We always translate away calls with min_index != 0.
        */
-      vbo_rebase_prims( ctx, arrays, prim, nr_prims, ib, 
+      vbo_rebase_prims( ctx, arrays, prim, nr_prims, ib,
 			min_index, max_index,
 			_tnl_vbo_draw_prims );
       return;
@@ -482,7 +482,7 @@ void _tnl_draw_prims( struct gl_context *ctx,
       /* This will split the buffers one way or another and
        * recursively call back into this function.
        */
-      vbo_split_prims( ctx, arrays, prim, nr_prims, ib, 
+      vbo_split_prims( ctx, arrays, prim, nr_prims, ib,
 		       0, max_index + prim->basevertex,
 		       _tnl_vbo_draw_prims,
 		       &limits );

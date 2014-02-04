@@ -396,7 +396,7 @@ lp_build_init(void)
    LLVMLinkInJIT();
 
    util_cpu_detect();
- 
+
    gallivm_initialized = TRUE;
 
 #if 0
@@ -441,7 +441,7 @@ gallivm_destroy(struct gallivm_state *gallivm)
 
 
 
-/* 
+/*
  * Hack to allow the linking of release LLVM static libraries on a debug build.
  *
  * See also:

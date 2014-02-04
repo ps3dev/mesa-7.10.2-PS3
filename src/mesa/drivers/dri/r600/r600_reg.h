@@ -35,7 +35,7 @@
 
 
 /* SET_*_REG offsets + ends */
-enum 
+enum
 {
     SET_CONFIG_REG_offset                = 0x00008000,
     SET_CONFIG_REG_end                   = 0x0000ac00,
@@ -56,7 +56,7 @@ enum
 };
 
 /* packet3 IT_SURFACE_BASE_UPDATE bits */
-enum 
+enum
 {
     DEPTH_BASE                           = (1 << 0),
     COLOR0_BASE                          = (1 << 1),
@@ -76,7 +76,7 @@ enum
 };
 
 /* Packet3 commands */
-enum 
+enum
 {
     IT_NOP                               = 0x10,
     IT_INDIRECT_BUFFER_END               = 0x17,

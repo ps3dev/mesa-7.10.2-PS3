@@ -80,7 +80,7 @@ lp_setup_get_empty_scene(struct lp_setup_context *setup)
    }
 
    lp_scene_begin_binning(setup->scene, &setup->fb);
-   
+
 }
 
 
@@ -208,8 +208,8 @@ begin_binning( struct lp_setup_context *setup )
 
    if (setup->fb.nr_cbufs) {
       if (setup->clear.flags & PIPE_CLEAR_COLOR) {
-         ok = lp_scene_bin_everywhere( scene, 
-                                       LP_RAST_OP_CLEAR_COLOR, 
+         ok = lp_scene_bin_everywhere( scene,
+                                       LP_RAST_OP_CLEAR_COLOR,
                                        setup->clear.color );
          if (!ok)
             return FALSE;
@@ -249,7 +249,7 @@ begin_binning( struct lp_setup_context *setup )
 
 
 /* This basically bins and then flushes any outstanding full-screen
- * clears.  
+ * clears.
  *
  * TODO: fast path for fullscreen clears and no triangles.
  */
@@ -277,7 +277,7 @@ set_scene_state( struct lp_setup_context *setup,
 
    if (old_state == new_state)
       return TRUE;
-   
+
    if (LP_DEBUG & DEBUG_SCENE) {
       debug_printf("%s old %s new %s%s%s\n",
                    __FUNCTION__,
@@ -292,7 +292,7 @@ set_scene_state( struct lp_setup_context *setup,
 
    /* wait for a free/empty scene
     */
-   if (old_state == SETUP_FLUSHED) 
+   if (old_state == SETUP_FLUSHED)
       lp_setup_get_empty_scene(setup);
 
    switch (new_state) {
@@ -422,7 +422,7 @@ lp_setup_try_clear( struct lp_setup_context *setup,
        * a common usage.
        */
       if (flags & PIPE_CLEAR_COLOR) {
-         if (!lp_scene_bin_everywhere( scene, 
+         if (!lp_scene_bin_everywhere( scene,
                                        LP_RAST_OP_CLEAR_COLOR,
                                        color_arg ))
             return FALSE;
@@ -457,7 +457,7 @@ lp_setup_try_clear( struct lp_setup_context *setup,
                 sizeof setup->clear.color.clear_color);
       }
    }
-   
+
    return TRUE;
 }
 
@@ -480,7 +480,7 @@ lp_setup_clear( struct lp_setup_context *setup,
 
 
 
-void 
+void
 lp_setup_set_triangle_state( struct lp_setup_context *setup,
                              unsigned cull_mode,
                              boolean ccw_is_frontface,
@@ -500,7 +500,7 @@ lp_setup_set_triangle_state( struct lp_setup_context *setup,
    }
 }
 
-void 
+void
 lp_setup_set_line_state( struct lp_setup_context *setup,
 			 float line_width)
 {
@@ -509,9 +509,9 @@ lp_setup_set_line_state( struct lp_setup_context *setup,
    setup->line_width = line_width;
 }
 
-void 
+void
 lp_setup_set_point_state( struct lp_setup_context *setup,
-                          float point_size,                          
+                          float point_size,
                           boolean point_size_per_vertex,
                           uint sprite_coord_enable,
                           uint sprite_coord_origin)
@@ -529,7 +529,7 @@ lp_setup_set_setup_variant( struct lp_setup_context *setup,
 			    const struct lp_setup_variant *variant)
 {
    LP_DBG(DEBUG_SETUP, "%s\n", __FUNCTION__);
-   
+
    setup->setup.variant = variant;
 }
 
@@ -614,7 +614,7 @@ lp_setup_set_scissor( struct lp_setup_context *setup,
 }
 
 
-void 
+void
 lp_setup_set_flatshade_first( struct lp_setup_context *setup,
                               boolean flatshade_first )
 {
@@ -622,7 +622,7 @@ lp_setup_set_flatshade_first( struct lp_setup_context *setup,
 }
 
 
-void 
+void
 lp_setup_set_vertex_info( struct lp_setup_context *setup,
                           struct vertex_info *vertex_info )
 {
@@ -850,7 +850,7 @@ try_update_scene_state( struct lp_setup_context *setup )
       {
          struct lp_rast_state *stored;
          uint i;
-         
+
          /* The fs state that's been stored in the scene is different from
           * the new, current state.  So allocate a new lp_rast_state object
           * and append it to the bin's setup data buffer.
@@ -865,7 +865,7 @@ try_update_scene_state( struct lp_setup_context *setup )
                 &setup->fs.current,
                 sizeof setup->fs.current);
          setup->fs.stored = stored;
-         
+
          /* The scene now references the textures in the rasterization
           * state record.  Note that now.
           */
@@ -889,7 +889,7 @@ try_update_scene_state( struct lp_setup_context *setup )
                                       &setup->draw_region);
       }
    }
-                                      
+
    setup->dirty = 0;
 
    assert(setup->fs.stored);
@@ -918,14 +918,14 @@ lp_setup_update_state( struct lp_setup_context *setup,
 
       assert(setup->setup.variant);
 
-      /* Will probably need to move this somewhere else, just need  
+      /* Will probably need to move this somewhere else, just need
        * to know about vertex shader point size attribute.
        */
       setup->psize = lp->psize_slot;
 
       assert(lp->dirty == 0);
 
-      assert(lp->setup_variant.key.size == 
+      assert(lp->setup_variant.key.size ==
 	     setup->setup.variant->key.size);
 
       assert(memcmp(&lp->setup_variant.key,
@@ -971,7 +971,7 @@ lp_setup_update_state( struct lp_setup_context *setup,
 
 /* Only caller is lp_setup_vbuf_destroy()
  */
-void 
+void
 lp_setup_destroy( struct lp_setup_context *setup )
 {
    uint i;
@@ -1019,7 +1019,7 @@ lp_setup_create( struct pipe_context *pipe,
       return NULL;
 
    lp_setup_init_vbuf(setup);
-   
+
    /* Used only in update_state():
     */
    setup->pipe = pipe;
@@ -1041,7 +1041,7 @@ lp_setup_create( struct pipe_context *pipe,
    setup->triangle = first_triangle;
    setup->line     = first_line;
    setup->point    = first_point;
-   
+
    setup->dirty = ~0;
 
    return setup;
@@ -1066,7 +1066,7 @@ lp_setup_begin_query(struct lp_setup_context *setup,
    assert(setup->active_query == NULL);
 
    set_scene_state(setup, SETUP_ACTIVE, "begin_query");
-   
+
    if (setup->scene) {
       if (!lp_scene_bin_everywhere(setup->scene,
                                    LP_RAST_OP_BEGIN_QUERY,
@@ -1132,7 +1132,7 @@ lp_setup_flush_and_restart(struct lp_setup_context *setup)
 
    if (!set_scene_state(setup, SETUP_FLUSHED, __FUNCTION__))
       return FALSE;
-   
+
    if (!lp_setup_update_state(setup, TRUE))
       return FALSE;
 

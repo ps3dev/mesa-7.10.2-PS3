@@ -1443,12 +1443,12 @@ dump_SVGA3dCmdBlitSurfaceToScreen(const SVGA3dCmdBlitSurfaceToScreen *cmd)
 }
 
 
-void            
+void
 svga_dump_command(uint32_t cmd_id, const void *data, uint32_t size)
 {
    const uint8_t *body = (const uint8_t *)data;
    const uint8_t *next = body + size;
-  
+
    switch(cmd_id) {
    case SVGA_3D_CMD_SURFACE_DEFINE:
       _debug_printf("\tSVGA_3D_CMD_SURFACE_DEFINE\n");
@@ -1640,7 +1640,7 @@ svga_dump_command(uint32_t cmd_id, const void *data, uint32_t size)
          const SVGA3dCmdDefineShader *cmd = (const SVGA3dCmdDefineShader *)body;
          dump_SVGA3dCmdDefineShader(cmd);
          body = (const uint8_t *)&cmd[1];
-         svga_shader_dump((const uint32_t *)body, 
+         svga_shader_dump((const uint32_t *)body,
                       (unsigned)(next - body)/sizeof(uint32_t),
                       FALSE );
          body = next;
@@ -1749,14 +1749,14 @@ svga_dump_command(uint32_t cmd_id, const void *data, uint32_t size)
 }
 
 
-void            
+void
 svga_dump_commands(const void *commands, uint32_t size)
 {
    const uint8_t *next = commands;
    const uint8_t *last = next + size;
-   
+
    assert(size % sizeof(uint32_t) == 0);
-   
+
    while(next < last) {
       const uint32_t cmd_id = *(const uint32_t *)next;
 

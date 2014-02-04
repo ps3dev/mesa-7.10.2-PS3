@@ -42,12 +42,12 @@ void i810DestroyTexObj(i810ContextPtr imesa, i810TextureObjectPtr t)
 {
    /* See if it was the driver's current object.
     */
-   if ( imesa != NULL ) { 
+   if ( imesa != NULL ) {
      if (imesa->CurrentTexObj[0] == t) {
        imesa->CurrentTexObj[0] = 0;
        imesa->dirty &= ~I810_UPLOAD_TEX0;
      }
-     
+
      if (imesa->CurrentTexObj[1] == t) {
        imesa->CurrentTexObj[1] = 0;
        imesa->dirty &= ~I810_UPLOAD_TEX1;
@@ -100,7 +100,7 @@ static void i810UploadTexLevel( i810ContextPtr imesa,
    if (image->Width * texelBytes == t->Pitch) {
 	 GLubyte *dst = (GLubyte *)(t->BufAddr + t->image[hwlevel].offset);
 	 GLubyte *src = (GLubyte *)image->Data;
-	 
+
 	 memcpy( dst, src, t->Pitch * image->Height );
    }
    else {
@@ -147,29 +147,29 @@ int i810UploadTexImagesLocked( i810ContextPtr imesa, i810TextureObjectPtr t )
     */
    if (!t->base.memBlock) {
       int heap;
-       
+
       heap = driAllocateTexture( imesa->texture_heaps, imesa->nr_heaps,
 				 (driTextureObject *) t);
-      
+
       if ( heap == -1 ) {
 	return -1;
       }
-      
+
       assert(t->base.memBlock);
       ofs = t->base.memBlock->ofs;
       t->BufAddr = imesa->i810Screen->tex.map + ofs;
       t->Setup[I810_TEXREG_MI3] = imesa->i810Screen->textureOffset + ofs;
-      
+
       if (t == imesa->CurrentTexObj[0])
 	I810_STATECHANGE(imesa, I810_UPLOAD_TEX0);
-      
+
       if (t == imesa->CurrentTexObj[1])
 	 I810_STATECHANGE(imesa, I810_UPLOAD_TEX1);
-      
+
        /*      i810UpdateTexLRU( imesa, t );*/
      }
    driUpdateTextureLRU( (driTextureObject *) t );
-   
+
    if (imesa->texture_heaps[0]->timestamp >= GET_DISPATCH_AGE(imesa))
       i810WaitAgeLocked( imesa, imesa->texture_heaps[0]->timestamp );
 
@@ -181,4 +181,4 @@ int i810UploadTexImagesLocked( i810ContextPtr imesa, i810TextureObjectPtr t )
    t->base.dirty_images[0] = 0;
 
    return 0;
-}  
+}

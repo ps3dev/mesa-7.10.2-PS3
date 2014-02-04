@@ -69,7 +69,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 #	define CMD_DIR_Y_INC		0x00020000
 
 #define REG_CommandQueue		0x8240
- 
+
 #define REG_3D_TSFSa                    0x8800
 #define REG_3D_TSZa                     0x8804
 #define REG_3D_TSXa                     0x8808
@@ -685,7 +685,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define MASK_RightClip			0x00001FFF
 #define MASK_LeftClip			0x03FFE000
 
-/* 
+/*
  * REG_3D_TextureSet			(0x8A7C - 0x8A7F)
  * REG_3D_Texture1Set			(0x8ADC - 0x8ADF)
  */
@@ -787,7 +787,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define TEXEL_LUV655			0x02800000
 #define TEXEL_LUV888			0x03000000
 
-/* 
+/*
  * REG_3D_TextureMip			(0x8A80 - 0x8A83)
  * REG_3D_Texture1Mip			(0x8AE0 - 0x8AE3)
  */
@@ -807,7 +807,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define TEXTURE_FILTER_LINEAR_MIP_NEAREST	0x0000c000
 #define TEXTURE_FILTER_LINEAR_MIP_LINEAR	0x00014000
 
-/* 
+/*
  * REG_3D_TextureTransparencyColorHigh	(0x8A84 - 0x8A87)
  * REG_3D_Texture1TransparencyColorHigh	(0x8AE4 - 0x8AE7)
  */
@@ -816,7 +816,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define MASK_TextureTransparencyColorHighR	0x00FF0000
 #define MASK_TextureAlphaTransparencyMode	0x08000000
 
-/* 
+/*
  * REG_3D_TextureTransparencyColorLow	(0x8A88 - 0x8A8B)
  * REG_3D_Texture1TransparencyColorLow	(0x8AE8 - 0x8AEB)
  */
@@ -826,7 +826,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define MASK_TextureBlockHeight			0x07000000
 #define MASK_TextureBlockWidth			0x70000000
 
-/* 
+/*
  * REG_3D_TextureTransparencyColorLow	(0x8A8C - 0x8A8F)
  * REG_3D_Texture1TransparencyColorLow	(0x8AEC - 0x8AEF)
  */

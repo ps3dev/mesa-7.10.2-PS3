@@ -45,10 +45,10 @@ static inline unsigned int r600_bc_get_num_operands(struct r600_bc_alu *alu)
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_KILLGT:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_KILLGE:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_KILLNE:
-	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MUL: 
+	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MUL:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MAX:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MIN:
-	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_SETE: 
+	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_SETE:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_SETNE:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_SETGT:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_SETGE:
@@ -61,7 +61,7 @@ static inline unsigned int r600_bc_get_num_operands(struct r600_bc_alu *alu)
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_CUBE:
 		return 2;
 
-	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MOV: 
+	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MOV:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_MOVA_FLOOR:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_FRACT:
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_FLOOR:
@@ -76,7 +76,7 @@ static inline unsigned int r600_bc_get_num_operands(struct r600_bc_alu *alu)
 	case V_SQ_ALU_WORD1_OP2_SQ_OP2_INST_COS:
 		return 1;
 	default: R600_ERR(
-		"Need instruction operand number for 0x%x.\n", alu->inst); 
+		"Need instruction operand number for 0x%x.\n", alu->inst);
 	};
 
 	return 3;
@@ -365,8 +365,8 @@ static int check_scalar(struct r600_bc *bc, struct r600_bc_alu *alu)
 		alu->bank_swizzle = alu->bank_swizzle_force;
 		return 0;
 	}
-	swizzle_key = (is_const(alu->src[0].sel) ? 4 : 0 ) + 
-		(is_const(alu->src[1].sel) ? 2 : 0 ) + 
+	swizzle_key = (is_const(alu->src[0].sel) ? 4 : 0 ) +
+		(is_const(alu->src[1].sel) ? 2 : 0 ) +
 		(is_const(alu->src[2].sel) ? 1 : 0 );
 
 	alu->bank_swizzle = bank_swizzle_scl[swizzle_key];
@@ -381,8 +381,8 @@ static int check_vector(struct r600_bc *bc, struct r600_bc_alu *alu)
 		alu->bank_swizzle = alu->bank_swizzle_force;
 		return 0;
 	}
-	swizzle_key = (is_const(alu->src[0].sel) ? 4 : 0 ) + 
-		(is_const(alu->src[1].sel) ? 2 : 0 ) + 
+	swizzle_key = (is_const(alu->src[0].sel) ? 4 : 0 ) +
+		(is_const(alu->src[1].sel) ? 2 : 0 ) +
 		(is_const(alu->src[2].sel) ? 1 : 0 );
 
 	alu->bank_swizzle = bank_swizzle_vec[swizzle_key];
@@ -402,7 +402,7 @@ static int check_and_set_bank_swizzle(struct r600_bc *bc, struct r600_bc_alu *al
 
 	if (num_instr == 1) {
 		check_scalar(bc, alu_first);
-		
+
 	} else {
 /*		check_read_slots(bc, bc->cf_last->curr_bs_head);*/
 		check_vector(bc, alu_first);

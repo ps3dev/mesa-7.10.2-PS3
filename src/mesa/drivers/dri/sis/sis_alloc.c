@@ -59,7 +59,7 @@ sisAllocFB( sisContextPtr smesa, GLuint size, void **handle )
 
    fb.context = smesa->hHWContext;
    fb.size = size;
-   if (drmCommandWriteRead( smesa->driFd, DRM_SIS_FB_ALLOC, &fb, 
+   if (drmCommandWriteRead( smesa->driFd, DRM_SIS_FB_ALLOC, &fb,
       sizeof(drm_sis_mem_t) ) || fb.offset == 0)
    {
       return NULL;
@@ -67,8 +67,8 @@ sisAllocFB( sisContextPtr smesa, GLuint size, void **handle )
    *handle = (void *)fb.free;
 
    if (SIS_VERBOSE & VERBOSE_SIS_MEMORY) {
-      fprintf(stderr, "sisAllocFB: size=%d, offset=%lu, pid=%d, count=%d\n", 
-              size, fb.offset, (GLint)getpid(), 
+      fprintf(stderr, "sisAllocFB: size=%d, offset=%lu, pid=%d, count=%d\n",
+              size, fb.offset, (GLint)getpid(),
               ++_total_video_memory_count);
    }
 
@@ -81,7 +81,7 @@ sisFreeFB( sisContextPtr smesa, void *handle )
    drm_sis_mem_t fb;
 
    if (SIS_VERBOSE & VERBOSE_SIS_MEMORY) {
-      fprintf(stderr, "sisFreeFB: free=%p, pid=%d, count=%d\n", 
+      fprintf(stderr, "sisFreeFB: free=%p, pid=%d, count=%d\n",
               handle, (GLint)getpid(), --_total_video_memory_count);
    }
 
@@ -94,7 +94,7 @@ void *
 sisAllocAGP( sisContextPtr smesa, GLuint size, void **handle )
 {
    drm_sis_mem_t agp;
-   
+
    if (smesa->AGPSize == 0)
       return NULL;
 
@@ -108,8 +108,8 @@ sisAllocAGP( sisContextPtr smesa, GLuint size, void **handle )
    *handle = (void *)agp.free;
 
    if (SIS_VERBOSE & VERBOSE_SIS_MEMORY) {
-      fprintf(stderr, "sisAllocAGP: size=%u, offset=%lu, pid=%d, count=%d\n", 
-              size, agp.offset, (GLint)getpid(), 
+      fprintf(stderr, "sisAllocAGP: size=%u, offset=%lu, pid=%d, count=%d\n",
+              size, agp.offset, (GLint)getpid(),
               ++_total_video_memory_count);
    }
 
@@ -122,10 +122,10 @@ sisFreeAGP( sisContextPtr smesa, void *handle )
    drm_sis_mem_t agp;
 
    if (SIS_VERBOSE & VERBOSE_SIS_MEMORY) {
-      fprintf(stderr, "sisFreeAGP: free=%p, pid=%d, count=%d\n", 
+      fprintf(stderr, "sisFreeAGP: free=%p, pid=%d, count=%d\n",
               handle, (GLint)getpid(), --_total_video_memory_count);
    }
-  
+
    agp.context = smesa->hHWContext;
    agp.free = handle;
    drmCommandWrite( smesa->driFd, DRM_SIS_AGP_FREE, &agp,
@@ -165,8 +165,8 @@ void
 sisFreeZStencilBuffer( sisContextPtr smesa )
 {
    sisFreeFB(smesa, smesa->depth.handle);
-   smesa->depth.map = NULL; 
-   smesa->depth.offset = 0; 
+   smesa->depth.map = NULL;
+   smesa->depth.offset = 0;
 }
 
 void
@@ -193,6 +193,6 @@ void
 sisFreeBackbuffer( sisContextPtr smesa )
 {
    sisFreeFB(smesa, smesa->back.handle);
-   smesa->back.map = NULL; 
-   smesa->back.offset = 0; 
+   smesa->back.map = NULL;
+   smesa->back.offset = 0;
 }

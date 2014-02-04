@@ -150,7 +150,7 @@ simplified_access_mode(GLbitfield access)
  * \sa glBufferSubDataARB, glGetBufferSubDataARB
  */
 static struct gl_buffer_object *
-buffer_object_subdata_range_good( struct gl_context * ctx, GLenum target, 
+buffer_object_subdata_range_good( struct gl_context * ctx, GLenum target,
                                   GLintptrARB offset, GLsizeiptrARB size,
                                   const char *caller )
 {
@@ -192,7 +192,7 @@ buffer_object_subdata_range_good( struct gl_context * ctx, GLenum target,
 
 /**
  * Allocate and initialize a new buffer object.
- * 
+ *
  * Default callback for the \c dd_function_table::NewBufferObject() hook.
  */
 static struct gl_buffer_object *
@@ -210,7 +210,7 @@ _mesa_new_buffer_object( struct gl_context *ctx, GLuint name, GLenum target )
 
 /**
  * Delete a buffer object.
- * 
+ *
  * Default callback for the \c dd_function_table::DeleteBuffer() hook.
  */
 static void
@@ -483,7 +483,7 @@ _mesa_buffer_map_range( struct gl_context *ctx, GLenum target, GLintptr offset,
  * Called via glFlushMappedBufferRange().
  */
 static void
-_mesa_buffer_flush_mapped_range( struct gl_context *ctx, GLenum target, 
+_mesa_buffer_flush_mapped_range( struct gl_context *ctx, GLenum target,
                                  GLintptr offset, GLsizeiptr length,
                                  struct gl_buffer_object *obj )
 {
@@ -628,7 +628,7 @@ bind_buffer_object(struct gl_context *ctx, GLenum target, GLuint buffer)
          _mesa_HashInsert(ctx->Shared->BufferObjects, buffer, newBufObj);
       }
    }
-   
+
    /* bind new buffer */
    _mesa_reference_buffer_object(ctx, bindTarget, newBufObj);
 
@@ -640,7 +640,7 @@ bind_buffer_object(struct gl_context *ctx, GLenum target, GLuint buffer)
 
 /**
  * Update the default buffer objects in the given context to reference those
- * specified in the shared state and release those referencing the old 
+ * specified in the shared state and release those referencing the old
  * shared state.
  */
 void
@@ -974,7 +974,7 @@ _mesa_BindBufferARB(GLenum target, GLuint buffer)
 
 /**
  * Delete a set of buffer objects.
- * 
+ *
  * \param n      Number of buffer objects to delete.
  * \param ids    Array of \c n buffer object IDs.
  */
@@ -1050,7 +1050,7 @@ _mesa_DeleteBuffersARB(GLsizei n, const GLuint *ids)
 
 /**
  * Generate a set of unique buffer object IDs and store them in \c buffer.
- * 
+ *
  * \param n       Number of IDs to generate.
  * \param buffer  Array of \c n locations to store the IDs.
  */
@@ -1091,9 +1091,9 @@ _mesa_GenBuffersARB(GLsizei n, GLuint *buffer)
 
 /**
  * Determine if ID is the name of a buffer object.
- * 
+ *
  * \param id  ID of the potential buffer object.
- * \return  \c GL_TRUE if \c id is the name of a buffer object, 
+ * \return  \c GL_TRUE if \c id is the name of a buffer object,
  *          \c GL_FALSE otherwise.
  */
 GLboolean GLAPIENTRY
@@ -1150,13 +1150,13 @@ _mesa_BufferDataARB(GLenum target, GLsizeiptrARB size,
       _mesa_error(ctx, GL_INVALID_OPERATION, "glBufferDataARB(buffer 0)" );
       return;
    }
-   
+
    if (_mesa_bufferobj_mapped(bufObj)) {
       /* Unmap the existing buffer.  We'll replace it now.  Not an error. */
       ctx->Driver.UnmapBuffer(ctx, target, bufObj);
       bufObj->AccessFlags = DEFAULT_ACCESS;
       ASSERT(bufObj->Pointer == NULL);
-   }  
+   }
 
    FLUSH_VERTICES(ctx, _NEW_BUFFER_OBJECT);
 
@@ -1669,7 +1669,7 @@ _mesa_MapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length,
                   "glMapBufferRange(buffer already mapped)");
       return NULL;
    }
-      
+
    ASSERT(ctx->Driver.MapBufferRange);
    map = ctx->Driver.MapBufferRange(ctx, target, offset, length,
                                     access, bufObj);

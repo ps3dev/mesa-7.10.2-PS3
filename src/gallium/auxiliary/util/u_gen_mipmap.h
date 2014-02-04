@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-   
+
 struct pipe_context;
 struct pipe_resource;
 struct cso_context;
@@ -53,7 +53,7 @@ util_destroy_gen_mipmap(struct gen_mipmap_state *ctx);
 /* Release vertex buffer at end of frame to avoid synchronous
  * rendering.
  */
-extern void 
+extern void
 util_gen_mipmap_flush( struct gen_mipmap_state *ctx );
 
 

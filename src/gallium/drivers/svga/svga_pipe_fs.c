@@ -38,7 +38,7 @@
 
 
 /***********************************************************************
- * Fragment shaders 
+ * Fragment shaders
  */
 
 static void *
@@ -61,7 +61,7 @@ svga_create_fs_state(struct pipe_context *pipe,
 
    fs->base.id = svga->debug.shader_id++;
    fs->base.use_sm30 = svgascreen->use_ps30;
-   
+
    if (SVGA_DEBUG & DEBUG_TGSI || 0) {
       debug_printf("%s id: %u, inputs: %u, outputs: %u\n",
                    __FUNCTION__, fs->base.id,
@@ -94,12 +94,12 @@ void svga_delete_fs_state(struct pipe_context *pipe, void *shader)
    for (result = fs->base.results; result; result = tmp ) {
       tmp = result->next;
 
-      ret = SVGA3D_DestroyShader(svga->swc, 
+      ret = SVGA3D_DestroyShader(svga->swc,
                                  result->id,
                                  SVGA3D_SHADERTYPE_PS );
       if(ret != PIPE_OK) {
          svga_context_flush(svga, NULL);
-         ret = SVGA3D_DestroyShader(svga->swc, 
+         ret = SVGA3D_DestroyShader(svga->swc,
                                     result->id,
                                     SVGA3D_SHADERTYPE_PS );
          assert(ret == PIPE_OK);

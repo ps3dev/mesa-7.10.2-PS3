@@ -60,7 +60,7 @@ stw_init(const struct stw_winsys *stw_winsys)
    struct pipe_screen *screen;
 
    debug_printf("%s\n", __FUNCTION__);
-   
+
    assert(!stw_dev);
 
    stw_tls_init();
@@ -71,7 +71,7 @@ stw_init(const struct stw_winsys *stw_winsys)
 #ifdef DEBUG
    stw_dev->memdbg_no = debug_memory_begin();
 #endif
-   
+
    stw_dev->stw_winsys = stw_winsys;
 
    _glthread_INIT_MUTEX(OneTimeLock);
@@ -142,7 +142,7 @@ stw_cleanup(void)
 
    if (!stw_dev)
       return;
-   
+
    /*
     * Abort cleanup if there are still active contexts. In some situations
     * this DLL may be unloaded before the DLL that is using GL contexts is.
@@ -159,10 +159,10 @@ stw_cleanup(void)
    handle_table_destroy(stw_dev->ctx_table);
 
    stw_framebuffer_cleanup();
-   
+
    pipe_mutex_destroy( stw_dev->fb_mutex );
    pipe_mutex_destroy( stw_dev->ctx_mutex );
-   
+
    FREE(stw_dev->smapi);
    stw_dev->stapi->destroy(stw_dev->stapi);
 

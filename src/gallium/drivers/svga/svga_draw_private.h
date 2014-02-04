@@ -37,7 +37,7 @@ struct u_upload_mgr;
 
 /* Should include polygon?
  */
-static const unsigned svga_hw_prims = 
+static const unsigned svga_hw_prims =
    ((1 << PIPE_PRIM_POINTS) |
     (1 << PIPE_PRIM_LINES) |
     (1 << PIPE_PRIM_LINE_STRIP) |
@@ -46,7 +46,7 @@ static const unsigned svga_hw_prims =
     (1 << PIPE_PRIM_TRIANGLE_FAN));
 
 
-static INLINE unsigned svga_translate_prim(unsigned mode, 
+static INLINE unsigned svga_translate_prim(unsigned mode,
                                            unsigned count,
                                            unsigned *out_count)
 {
@@ -57,23 +57,23 @@ static INLINE unsigned svga_translate_prim(unsigned mode,
 
    case PIPE_PRIM_LINES:
       *out_count = count / 2;
-      return SVGA3D_PRIMITIVE_LINELIST; 
+      return SVGA3D_PRIMITIVE_LINELIST;
 
    case PIPE_PRIM_LINE_STRIP:
       *out_count = count - 1;
-      return SVGA3D_PRIMITIVE_LINESTRIP; 
+      return SVGA3D_PRIMITIVE_LINESTRIP;
 
    case PIPE_PRIM_TRIANGLES:
       *out_count = count / 3;
-      return SVGA3D_PRIMITIVE_TRIANGLELIST; 
+      return SVGA3D_PRIMITIVE_TRIANGLELIST;
 
    case PIPE_PRIM_TRIANGLE_STRIP:
       *out_count = count - 2;
-      return SVGA3D_PRIMITIVE_TRIANGLESTRIP; 
+      return SVGA3D_PRIMITIVE_TRIANGLESTRIP;
 
    case PIPE_PRIM_TRIANGLE_FAN:
       *out_count = count - 2;
-      return SVGA3D_PRIMITIVE_TRIANGLEFAN; 
+      return SVGA3D_PRIMITIVE_TRIANGLEFAN;
 
    default:
       assert(0);
@@ -87,7 +87,7 @@ struct index_cache {
    u_generate_func generate;
    unsigned gen_nr;
 
-   /* If non-null, this buffer is filled by calling 
+   /* If non-null, this buffer is filled by calling
     *   generate(nr, map(buffer))
     */
    struct pipe_resource *buffer;
@@ -114,7 +114,7 @@ struct draw_cmd {
 struct svga_hwtnl {
    struct svga_context *svga;
    struct u_upload_mgr *upload_ib;
-   
+
    /* Flatshade information:
     */
    unsigned api_pv;
@@ -136,7 +136,7 @@ struct svga_hwtnl {
 /***********************************************************************
  * Internal functions
  */
-enum pipe_error 
+enum pipe_error
 svga_hwtnl_prim( struct svga_hwtnl *hwtnl,
                  const SVGA3dPrimitiveRange *range,
                  unsigned min_index,
@@ -150,7 +150,7 @@ svga_hwtnl_simple_draw_range_elements( struct svga_hwtnl *hwtnl,
                                        int index_bias,
                                        unsigned min_index,
                                        unsigned max_index,
-                                       unsigned prim, 
+                                       unsigned prim,
                                        unsigned start,
                                        unsigned count );
 

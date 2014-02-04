@@ -1,18 +1,18 @@
 /*
  * (C) Copyright IBM Corporation 2004, 2005
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation
  * the rights to use, copy, modify, merge, publish, distribute, sub license,
  * and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the next
  * paragraph) shall be included in all copies or substantial portions of the
  * Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.  IN NO EVENT SHALL
@@ -196,14 +196,14 @@ struct array_state_vector
    struct array_state *arrays;
 
     /**
-     * Number of currently enabled client-side arrays.  The value of this 
+     * Number of currently enabled client-side arrays.  The value of this
      * field is only valid if \c array_info_cache_valid is true.
      */
    size_t enabled_client_array_count;
 
     /**
      * \name ARRAY_INFO cache.
-     * 
+     *
      * These fields track the state of the ARRAY_INFO cache.  The
      * \c array_info_cache_size is the size of the actual data stored in
      * \c array_info_cache.  \c array_info_cache_buffer_size is the size of
@@ -238,7 +238,7 @@ struct array_state_vector
      * of this protocol is disabled with really old servers (i.e., servers
      * that don't support GL 1.1 or EXT_vertex_arrays) or when an environment
      * variable is set.
-     * 
+     *
      * \todo
      * GL 1.1 and EXT_vertex_arrays use identical protocol, but have different
      * opcodes for \c glDrawArrays.  For servers that advertise one or the
@@ -249,7 +249,7 @@ struct array_state_vector
     /**
      * Is it possible to use the new GL X.X / ARB_vertex_buffer_object
      * protocol?
-     * 
+     *
      * \todo
      * This protocol has not yet been defined by the ARB, but is currently a
      * work in progress.  This field is a place-holder.
@@ -258,7 +258,7 @@ struct array_state_vector
 
     /**
      * Active texture unit set by \c glClientActiveTexture.
-     * 
+     *
      * \sa __glXGetActiveTextureUnit
      */
    unsigned active_texture_unit;
@@ -268,7 +268,7 @@ struct array_state_vector
      * GL 1.3 are not supported, this will be at least 1.  When multitexture
      * is supported, this will be the value queried by calling
      * \c glGetIntegerv with \c GL_MAX_TEXTURE_UNITS.
-     * 
+     *
      * \todo
      * Investigate if this should be the value of \c GL_MAX_TEXTURE_COORDS
      * instead (if GL 2.0 / ARB_fragment_shader / ARB_fragment_program /
@@ -286,14 +286,14 @@ struct array_state_vector
 
     /**
      * \n Methods for implementing various GL functions.
-     * 
+     *
      * These method pointers are only valid \c array_info_cache_valid is set.
      * When each function starts, it much check \c array_info_cache_valid.
      * If it is not set, it must call \c fill_array_info_cache and call
      * the new method.
-     * 
+     *
      * \sa fill_array_info_cache
-     * 
+     *
      * \todo
      * Write code to plug these functions directly into the dispatch table.
      */

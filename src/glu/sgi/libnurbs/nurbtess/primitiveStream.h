@@ -30,7 +30,7 @@
 /*
 */
 
-/*we do not use the constans GL_... so that this file is independent of 
+/*we do not use the constans GL_... so that this file is independent of
  *<GL/gl.h>
  */
 
@@ -52,13 +52,13 @@ class primStream {
   Int index_vertices;
   Int size_vertices;
 
-  /*the vertex is inserted one by one. counter is used to 
-   *count the number of vertices which have been inserted so far in 
+  /*the vertex is inserted one by one. counter is used to
+   *count the number of vertices which have been inserted so far in
    *the current primitive
    */
   Int counter;
 
-public:  
+public:
   primStream(Int sizeLengths, Int sizeVertices);
   ~primStream();
 
@@ -76,16 +76,16 @@ public:
     }
   Real* get_vertices() {return vertices;}
 
-  /*the begining of inserting a new primitive. 
+  /*the begining of inserting a new primitive.
    *reset counter to be 0.
    */
   void begin();
   void insert(Real u, Real v);
   void insert(Real v[2]) {insert(v[0], v[1]);}
   void end(Int type);
-  
+
   Int num_triangles();
-  
+
   void triangle(Real A[2], Real B[2], Real C[2])
     {
       begin();
@@ -103,7 +103,7 @@ public:
 
 
 
-  
+
 
 #endif
 

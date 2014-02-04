@@ -55,8 +55,8 @@ void draw_pt_emit_prepare( struct pt_emit *emit,
    struct translate_key hw_key;
    unsigned i;
    boolean ok;
-   
-   /* XXX: need to flush to get prim_vbuf.c to release its allocation?? 
+
+   /* XXX: need to flush to get prim_vbuf.c to release its allocation??
     */
    draw_do_flush( draw, DRAW_FLUSH_BACKEND );
 
@@ -118,7 +118,7 @@ void draw_pt_emit_prepare( struct pt_emit *emit,
       emit->translate = translate_cache_find(emit->cache, &hw_key);
    }
 
-   *max_vertices = (draw->render->max_vertex_buffer_bytes / 
+   *max_vertices = (draw->render->max_vertex_buffer_bytes /
                     (vinfo->size * 4));
 }
 
@@ -137,7 +137,7 @@ void draw_pt_emit( struct pt_emit *emit,
    unsigned start, i;
    void *hw_verts;
 
-   /* XXX: need to flush to get prim_vbuf.c to release its allocation?? 
+   /* XXX: need to flush to get prim_vbuf.c to release its allocation??
     */
    draw_do_flush( draw, DRAW_FLUSH_BACKEND );
 
@@ -162,27 +162,27 @@ void draw_pt_emit( struct pt_emit *emit,
       return;
    }
 
-   translate->set_buffer(translate, 
-			 0, 
+   translate->set_buffer(translate,
+			 0,
 			 vertex_data,
 			 stride,
 			 ~0);
 
-   translate->set_buffer(translate, 
-			 1, 
+   translate->set_buffer(translate,
+			 1,
 			 &draw->rasterizer->point_size,
 			 0,
 			 ~0);
 
    /* fetch/translate vertex attribs to fill hw_verts[] */
    translate->run( translate,
-		   0, 
+		   0,
 		   vertex_count,
                    draw->instance_id,
 		   hw_verts );
 
-   render->unmap_vertices( render, 
-                           0, 
+   render->unmap_vertices( render,
+                           0,
                            vertex_count - 1 );
 
    for (start = i = 0;
@@ -214,14 +214,14 @@ void draw_pt_emit_linear(struct pt_emit *emit,
 #if 0
    debug_printf("Linear emit\n");
 #endif
-   /* XXX: need to flush to get prim_vbuf.c to release its allocation?? 
+   /* XXX: need to flush to get prim_vbuf.c to release its allocation??
     */
    draw_do_flush( draw, DRAW_FLUSH_BACKEND );
 
    /* XXX: and work out some way to coordinate the render primitive
     * between vbuf.c and here...
     */
-   if (!draw->render->set_primitive(draw->render, emit->prim)) 
+   if (!draw->render->set_primitive(draw->render, emit->prim))
       goto fail;
 
    if (!render->allocate_vertices(render,
@@ -250,8 +250,8 @@ void draw_pt_emit_linear(struct pt_emit *emit,
       unsigned i;
       for (i = 0; i < count; i++) {
          debug_printf("\n\n%s vertex %d:\n", __FUNCTION__, i);
-         draw_dump_emitted_vertex( emit->vinfo, 
-                                   (const uint8_t *)hw_verts + 
+         draw_dump_emitted_vertex( emit->vinfo,
+                                   (const uint8_t *)hw_verts +
                                    translate->key.output_stride * i );
       }
    }

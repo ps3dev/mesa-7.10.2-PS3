@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -165,7 +165,7 @@ void draw_destroy( struct draw_context *draw )
    }
 
    /* Not so fast -- we're just borrowing this at the moment.
-    * 
+    *
    if (draw->render)
       draw->render->destroy( draw->render );
    */
@@ -229,7 +229,7 @@ void draw_set_rasterizer_state( struct draw_context *draw,
 }
 
 /* With a little more work, llvmpipe will be able to turn this off and
- * do its own x/y clipping.  
+ * do its own x/y clipping.
  *
  * Some hardware can turn off clipping altogether - in particular any
  * hardware with a TNL unit can do its own clipping, even if it is
@@ -247,7 +247,7 @@ void draw_set_driver_clipping( struct draw_context *draw,
 }
 
 
-/** 
+/**
  * Plug in the primitive rendering/rasterization stage (which is the last
  * stage in the drawing pipeline).
  * This is provided by the device driver.
@@ -562,7 +562,7 @@ draw_texture_samplers(struct draw_context *draw,
 
 
 
-void draw_set_render( struct draw_context *draw, 
+void draw_set_render( struct draw_context *draw,
 		      struct vbuf_render *render )
 {
    draw->render = render;
@@ -604,7 +604,7 @@ void draw_do_flush( struct draw_context *draw, unsigned flags )
       draw_pipeline_flush( draw, flags );
 
       draw->reduced_prim = ~0; /* is reduced_prim needed any more? */
-      
+
       draw->flushing = FALSE;
    }
 }

@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                 
+
 
 #include "brw_context.h"
 #include "brw_wm.h"
@@ -99,11 +99,11 @@ static void pass0_set_fpreg_ref( struct brw_wm_compile *c,
    c->pass0_fp_reg[file][idx][component] = src_ref;
 }
 
-static const struct brw_wm_ref *get_param_ref( struct brw_wm_compile *c, 
+static const struct brw_wm_ref *get_param_ref( struct brw_wm_compile *c,
 					       const GLfloat *param_ptr )
 {
    GLuint i = c->prog_data.nr_params++;
-   
+
    if (i >= BRW_WM_MAX_PARAM) {
       printf("%s: out of params\n", __FUNCTION__);
       c->prog_data.error = 1;
@@ -138,7 +138,7 @@ static const struct brw_wm_ref *get_const_ref( struct brw_wm_compile *c,
    /* Search for an existing const value matching the request:
     */
    for (i = 0; i < c->nr_constrefs; i++) {
-      if (c->constref[i].constval == *constval) 
+      if (c->constref[i].constval == *constval)
 	 return c->constref[i].ref;
    }
 
@@ -193,13 +193,13 @@ static const struct brw_wm_ref *pass0_get_reg( struct brw_wm_compile *c,
       case PROGRAM_CONSTANT:
       case PROGRAM_NAMED_PARAM: {
 	 struct gl_program_parameter_list *plist = c->fp->program.Base.Parameters;
-	 
+
 	 /* There's something really hokey about parameters parsed in
 	  * arb programs - they all end up in here, whether they be
 	  * state values, parameters or constants.  This duplicates the
 	  * structure above & also seems to subvert the limits set for
 	  * each type of constant/param.
-	  */ 
+	  */
 	 switch (plist->Parameters[idx].Type) {
 	 case PROGRAM_NAMED_PARAM:
 	 case PROGRAM_CONSTANT:
@@ -270,11 +270,11 @@ static const struct brw_wm_ref *get_fp_src_reg_ref( struct brw_wm_compile *c,
    static const GLfloat const_zero = 0.0;
    static const GLfloat const_one = 1.0;
 
-   if (component == SWIZZLE_ZERO) 
+   if (component == SWIZZLE_ZERO)
       src_ref = get_const_ref(c, &const_zero);
-   else if (component == SWIZZLE_ONE) 
+   else if (component == SWIZZLE_ONE)
       src_ref = get_const_ref(c, &const_one);
-   else 
+   else
       src_ref = pass0_get_reg(c, src.File, src.Index, component);
 
    return src_ref;
@@ -346,7 +346,7 @@ translate_insn(struct brw_wm_compile *c,
 
 /***********************************************************************
  * Optimize moves and swizzles away:
- */ 
+ */
 static void pass0_precalc_mov( struct brw_wm_compile *c,
 			       const struct prog_instruction *inst )
 {
@@ -366,7 +366,7 @@ static void pass0_precalc_mov( struct brw_wm_compile *c,
       refs[i] = get_new_ref(c, inst->SrcReg[0], i, NULL);
    }
    for (i = 0; i < 4; i++) {
-      if (writemask & (1 << i)) {	    
+      if (writemask & (1 << i)) {
          pass0_set_fpreg_ref( c, dst->File, dst->Index, i, refs[i]);
       }
    }
@@ -381,7 +381,7 @@ static void pass0_init_payload( struct brw_wm_compile *c )
 
    for (i = 0; i < 4; i++) {
       GLuint j = i >= (c->nr_payload_regs + 1) / 2 ? 0 : i;
-      pass0_set_fpreg_value( c, PROGRAM_PAYLOAD, PAYLOAD_DEPTH, i, 
+      pass0_set_fpreg_value( c, PROGRAM_PAYLOAD, PAYLOAD_DEPTH, i,
 			     &c->payload.depth[j] );
    }
 
@@ -393,10 +393,10 @@ static void pass0_init_payload( struct brw_wm_compile *c )
       pass0_set_fpreg_value(c, PROGRAM_INPUT, FRAG_ATTRIB_WPOS, 2,
 			    &c->payload.depth[c->key.source_depth_reg/2]);
 #endif
-   
+
    for (i = 0; i < FRAG_ATTRIB_MAX; i++)
-      pass0_set_fpreg_value( c, PROGRAM_PAYLOAD, i, 0, 
-			     &c->payload.input_interp[i] );      
+      pass0_set_fpreg_value( c, PROGRAM_PAYLOAD, i, 0,
+			     &c->payload.input_interp[i] );
 }
 
 
@@ -423,10 +423,10 @@ void brw_wm_pass0( struct brw_wm_compile *c )
       const struct prog_instruction *inst = &c->prog_instructions[insn];
 
       /* Optimize away moves, otherwise emit translated instruction:
-       */      
+       */
       switch (inst->Opcode) {
-      case OPCODE_MOV: 
-      case OPCODE_SWZ: 
+      case OPCODE_MOV:
+      case OPCODE_SWZ:
 	 if (!inst->SaturateMode) {
 	    pass0_precalc_mov(c, inst);
 	 }
@@ -439,7 +439,7 @@ void brw_wm_pass0( struct brw_wm_compile *c )
 	 break;
       }
    }
- 
+
    if (unlikely(INTEL_DEBUG & DEBUG_WM)) {
       brw_wm_print_program(c, "pass0");
    }

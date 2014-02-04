@@ -49,7 +49,7 @@ enum translate_element_type {
    TRANSLATE_ELEMENT_INSTANCE_ID
 };
 
-struct translate_element 
+struct translate_element
 {
    enum translate_element_type type;
    enum pipe_format input_format;

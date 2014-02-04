@@ -95,7 +95,7 @@ static void mgaDmaPrimitive( struct gl_context *ctx, GLenum prim )
 }
 
 
-#define LOCAL_VARS mgaContextPtr mmesa = MGA_CONTEXT(ctx) 
+#define LOCAL_VARS mgaContextPtr mmesa = MGA_CONTEXT(ctx)
 #define INIT( prim ) do {			\
    if (0) fprintf(stderr, "%s\n", __FUNCTION__);	\
    FLUSH_BATCH(mmesa);				\
@@ -113,7 +113,7 @@ static void mgaDmaPrimitive( struct gl_context *ctx, GLenum prim )
 #define EMIT_VERTS( ctx, j, nr, buf ) \
    mga_emit_contiguous_verts(ctx, j, (j)+(nr), buf)
 
- 
+
 #define TAG(x) mga_##x
 #include "tnl_dd/t_dd_dmatmp.h"
 
@@ -129,18 +129,18 @@ static GLboolean mga_run_render( struct gl_context *ctx,
 {
    mgaContextPtr mmesa = MGA_CONTEXT(ctx);
    TNLcontext *tnl = TNL_CONTEXT(ctx);
-   struct vertex_buffer *VB = &tnl->vb; 
+   struct vertex_buffer *VB = &tnl->vb;
    GLuint i;
 
    /* Don't handle clipping or indexed vertices or vertex manipulations.
     */
-   if (mmesa->RenderIndex != 0 || 
+   if (mmesa->RenderIndex != 0 ||
        !mga_validate_render( ctx, VB )) {
       return GL_TRUE;
    }
-   
+
    tnl->Driver.Render.Start( ctx );
-   mmesa->SetupNewInputs = ~0;      
+   mmesa->SetupNewInputs = ~0;
 
    for (i = 0 ; i < VB->PrimitiveCount ; i++)
    {
@@ -151,9 +151,9 @@ static GLboolean mga_run_render( struct gl_context *ctx,
       if (!length)
 	 continue;
 
-      mga_render_tab_verts[prim & PRIM_MODE_MASK]( ctx, start, start + length, 
+      mga_render_tab_verts[prim & PRIM_MODE_MASK]( ctx, start, start + length,
 						   prim);
-   } 
+   }
 
    tnl->Driver.Render.Finish( ctx );
 
@@ -161,10 +161,10 @@ static GLboolean mga_run_render( struct gl_context *ctx,
 }
 
 
-const struct tnl_pipeline_stage _mga_render_stage = 
-{ 
+const struct tnl_pipeline_stage _mga_render_stage =
+{
    "mga render",
-   NULL, 
+   NULL,
    NULL,
    NULL,
    NULL,

@@ -28,7 +28,7 @@
 /**
  * \file
  * Allocate buffers from two alternative buffer providers.
- * 
+ *
  * \author Jose Fonseca <jrfonseca@tungstengraphics.com>
  */
 
@@ -59,17 +59,17 @@ pb_alt_manager(struct pb_manager *mgr)
 
 
 static struct pb_buffer *
-pb_alt_manager_create_buffer(struct pb_manager *_mgr, 
+pb_alt_manager_create_buffer(struct pb_manager *_mgr,
                              pb_size size,
                              const struct pb_desc *desc)
 {
    struct pb_alt_manager *mgr = pb_alt_manager(_mgr);
    struct pb_buffer *buf;
-   
+
    buf = mgr->provider1->create_buffer(mgr->provider1, size, desc);
    if(buf)
       return buf;
-   
+
    buf = mgr->provider2->create_buffer(mgr->provider2, size, desc);
    return buf;
 }
@@ -79,11 +79,11 @@ static void
 pb_alt_manager_flush(struct pb_manager *_mgr)
 {
    struct pb_alt_manager *mgr = pb_alt_manager(_mgr);
-   
+
    assert(mgr->provider1->flush);
    if(mgr->provider1->flush)
       mgr->provider1->flush(mgr->provider1);
-   
+
    assert(mgr->provider2->flush);
    if(mgr->provider2->flush)
       mgr->provider2->flush(mgr->provider2);
@@ -98,14 +98,14 @@ pb_alt_manager_destroy(struct pb_manager *mgr)
 
 
 struct pb_manager *
-pb_alt_manager_create(struct pb_manager *provider1, 
+pb_alt_manager_create(struct pb_manager *provider1,
                       struct pb_manager *provider2)
 {
    struct pb_alt_manager *mgr;
 
    if(!provider1 || !provider2)
       return NULL;
-   
+
    mgr = CALLOC_STRUCT(pb_alt_manager);
    if (!mgr)
       return NULL;
@@ -115,6 +115,6 @@ pb_alt_manager_create(struct pb_manager *provider1,
    mgr->base.flush = pb_alt_manager_flush;
    mgr->provider1 = provider1;
    mgr->provider2 = provider2;
-      
+
    return &mgr->base;
 }

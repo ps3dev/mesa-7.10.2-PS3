@@ -151,10 +151,10 @@ void _mesa_check_os_sse_support( void )
    }
 #elif defined(WIN32)
    LPTOP_LEVEL_EXCEPTION_FILTER oldFilter;
-   
+
    /* Install our ExceptionFilter */
    oldFilter = SetUnhandledExceptionFilter( ExceptionFilter );
-   
+
    if ( cpu_has_xmm ) {
       _mesa_debug(NULL, "Testing OS support for SSE...\n");
 

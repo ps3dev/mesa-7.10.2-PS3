@@ -51,8 +51,8 @@ static enum pipe_error generate_indices( struct svga_hwtnl *hwtnl,
    struct pipe_resource *dst = NULL;
    void *dst_map = NULL;
 
-   dst = pipe_buffer_create( pipe->screen, 
-			     PIPE_BIND_INDEX_BUFFER, 
+   dst = pipe_buffer_create( pipe->screen,
+			     PIPE_BIND_INDEX_BUFFER,
 			     size );
    if (dst == NULL)
       goto fail;
@@ -76,7 +76,7 @@ fail:
 
    if (dst)
       pipe->screen->resource_destroy( pipe->screen, dst );
-   
+
    return PIPE_ERROR_OUT_OF_MEMORY;
 }
 
@@ -110,18 +110,18 @@ static enum pipe_error retrieve_or_generate_indices( struct svga_hwtnl *hwtnl,
             pipe_resource_reference( out_buf,
                                    hwtnl->index_cache[prim][i].buffer );
 
-            if (DBG) 
+            if (DBG)
                debug_printf("%s retrieve %d/%d\n", __FUNCTION__, i, gen_nr);
 
             return PIPE_OK;
          }
-         else if (gen_type == U_GENERATE_REUSABLE) 
+         else if (gen_type == U_GENERATE_REUSABLE)
          {
             pipe_resource_reference( &hwtnl->index_cache[prim][i].buffer,
                                    NULL );
 
-            if (DBG) 
-               debug_printf("%s discard %d/%d\n", __FUNCTION__, 
+            if (DBG)
+               debug_printf("%s discard %d/%d\n", __FUNCTION__,
                             i, hwtnl->index_cache[prim][i].gen_nr);
 
             break;
@@ -133,7 +133,7 @@ static enum pipe_error retrieve_or_generate_indices( struct svga_hwtnl *hwtnl,
    {
       unsigned smallest = 0;
       unsigned smallest_size = ~0;
-      
+
       for (i = 0; i < IDX_CACHE_MAX && smallest_size; i++) {
          if (hwtnl->index_cache[prim][i].buffer == NULL)
          {
@@ -153,14 +153,14 @@ static enum pipe_error retrieve_or_generate_indices( struct svga_hwtnl *hwtnl,
                              NULL );
 
       if (DBG)
-         debug_printf("%s discard smallest %d/%d\n", __FUNCTION__, 
+         debug_printf("%s discard smallest %d/%d\n", __FUNCTION__,
                       smallest, smallest_size);
-      
+
       i = smallest;
    }
-      
-      
-   ret = generate_indices( hwtnl, 
+
+
+   ret = generate_indices( hwtnl,
                            gen_nr,
                            gen_size,
                            generate,
@@ -175,7 +175,7 @@ static enum pipe_error retrieve_or_generate_indices( struct svga_hwtnl *hwtnl,
                           *out_buf );
 
    if (DBG)
-      debug_printf("%s cache %d/%d\n", __FUNCTION__, 
+      debug_printf("%s cache %d/%d\n", __FUNCTION__,
                    i, hwtnl->index_cache[prim][i].gen_nr);
 
    return PIPE_OK;
@@ -194,7 +194,7 @@ simple_draw_arrays( struct svga_hwtnl *hwtnl,
    hw_prim = svga_translate_prim(prim, count, &hw_count);
    if (hw_count == 0)
       return PIPE_ERROR_BAD_INPUT;
-      
+
    range.primType = hw_prim;
    range.primitiveCount = hw_count;
    range.indexArray.surfaceId = SVGA3D_INVALID_ID;
@@ -220,18 +220,18 @@ simple_draw_arrays( struct svga_hwtnl *hwtnl,
 
 
 
-enum pipe_error 
+enum pipe_error
 svga_hwtnl_draw_arrays( struct svga_hwtnl *hwtnl,
-                        unsigned prim, 
-                        unsigned start, 
+                        unsigned prim,
+                        unsigned start,
                         unsigned count)
 {
    unsigned gen_prim, gen_size, gen_nr, gen_type;
    u_generate_func gen_func;
    enum pipe_error ret = PIPE_OK;
 
-   if (hwtnl->api_fillmode != PIPE_POLYGON_MODE_FILL && 
-       prim >= PIPE_PRIM_TRIANGLES) 
+   if (hwtnl->api_fillmode != PIPE_POLYGON_MODE_FILL &&
+       prim >= PIPE_PRIM_TRIANGLES)
    {
       gen_type = u_unfilled_generator( prim,
                                        start,
@@ -261,7 +261,7 @@ svga_hwtnl_draw_arrays( struct svga_hwtnl *hwtnl,
    else {
       struct pipe_resource *gen_buf = NULL;
 
-      /* Need to draw as indexed primitive. 
+      /* Need to draw as indexed primitive.
        * Potentially need to run the gen func to build an index buffer.
        */
       ret = retrieve_or_generate_indices( hwtnl,

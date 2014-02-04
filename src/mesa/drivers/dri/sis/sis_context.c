@@ -184,7 +184,7 @@ sisCreateContext( gl_api api,
    /* Allocate the Mesa context */
    if (sharedContextPrivate)
       shareCtx = ((sisContextPtr)sharedContextPrivate)->glCtx;
-   else 
+   else
       shareCtx = NULL;
    smesa->glCtx = _mesa_create_context( glVisual, shareCtx,
                                         &functions, (void *) smesa);
@@ -204,7 +204,7 @@ sisCreateContext( gl_api api,
    smesa->hHWContext = driContextPriv->hHWContext;
    smesa->driHwLock = &sPriv->pSAREA->lock;
    smesa->driFd = sPriv->fd;
-  
+
    smesa->virtualX = sisScreen->screenX;
    smesa->virtualY = sisScreen->screenY;
    smesa->bytesPerPixel = sisScreen->cpp;
@@ -268,7 +268,7 @@ sisCreateContext( gl_api api,
    smesa->AGPAddr = sisScreen->agpBaseOffset;
 
    /* Create AGP command buffer */
-   if (smesa->AGPSize != 0 && 
+   if (smesa->AGPSize != 0 &&
       !driQueryOptionb(&smesa->optionCache, "agp_disable"))
    {
       smesa->vb = sisAllocAGP(smesa, 64 * 1024, &smesa->vb_agp_handle);
@@ -441,7 +441,7 @@ sis_update_render_state( sisContextPtr smesa )
 
    /* Line Setting */
 #if 0
-   if (smesa->GlobalFlag & GFLAG_LINESETTING) 
+   if (smesa->GlobalFlag & GFLAG_LINESETTING)
       MMIO(REG_3D_LinePattern, prev->hwLinePattern);
 #endif
 

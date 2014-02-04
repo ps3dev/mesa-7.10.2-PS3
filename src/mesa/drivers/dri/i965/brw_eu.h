@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-   
+
 
 #ifndef BRW_EU_H
 #define BRW_EU_H
@@ -70,7 +70,7 @@ struct brw_reg
    GLuint address_mode:1;	/* relative addressing, hopefully! */
    GLuint pad0:1;
 
-   union {      
+   union {
       struct {
 	 GLuint swizzle:8;		/* src only, align16 only */
 	 GLuint writemask:4;		/* dest only, align16 only */
@@ -81,7 +81,7 @@ struct brw_reg
       GLfloat f;
       GLint   d;
       GLuint ud;
-   } dw1;      
+   } dw1;
 };
 
 
@@ -295,7 +295,7 @@ static INLINE struct brw_reg retype( struct brw_reg reg,
 
 static INLINE struct brw_reg suboffset( struct brw_reg reg,
 					  GLuint delta )
-{   
+{
    reg.subnr += delta * type_sz(reg.type);
    return reg;
 }
@@ -317,7 +317,7 @@ static INLINE struct brw_reg byte_offset( struct brw_reg reg,
    reg.subnr = newoffset % REG_SIZE;
    return reg;
 }
-   
+
 
 /** Construct unsigned word[16] register */
 static INLINE struct brw_reg brw_uw16_reg( GLuint file,
@@ -353,7 +353,7 @@ static INLINE struct brw_reg brw_imm_reg( GLuint type )
 		   BRW_WIDTH_1,
 		   BRW_HORIZONTAL_STRIDE_0,
 		   0,
-		   0);      
+		   0);
 }
 
 /** Construct float immediate register */
@@ -426,8 +426,8 @@ static INLINE struct brw_reg brw_imm_vf( GLuint v )
 #define VF_ONE  0x30
 #define VF_NEG  (1<<7)
 
-static INLINE struct brw_reg brw_imm_vf4( GLuint v0, 
-					    GLuint v1, 
+static INLINE struct brw_reg brw_imm_vf4( GLuint v0,
+					    GLuint v1,
 					    GLuint v2,
 					    GLuint v3)
 {
@@ -487,15 +487,15 @@ static INLINE struct brw_reg brw_uw16_grf( GLuint nr, GLuint subnr )
 /** Construct null register (usually used for setting condition codes) */
 static INLINE struct brw_reg brw_null_reg( void )
 {
-   return brw_vec8_reg(BRW_ARCHITECTURE_REGISTER_FILE, 
-		       BRW_ARF_NULL, 
+   return brw_vec8_reg(BRW_ARCHITECTURE_REGISTER_FILE,
+		       BRW_ARF_NULL,
 		       0);
 }
 
 static INLINE struct brw_reg brw_address_reg( GLuint subnr )
 {
-   return brw_uw1_reg(BRW_ARCHITECTURE_REGISTER_FILE, 
-		      BRW_ARF_ADDRESS, 
+   return brw_uw1_reg(BRW_ARCHITECTURE_REGISTER_FILE,
+		      BRW_ARF_ADDRESS,
 		      subnr);
 }
 
@@ -505,8 +505,8 @@ static INLINE struct brw_reg brw_address_reg( GLuint subnr )
  */
 static INLINE struct brw_reg brw_ip_reg( void )
 {
-   return brw_reg(BRW_ARCHITECTURE_REGISTER_FILE, 
-		  BRW_ARF_IP, 
+   return brw_reg(BRW_ARCHITECTURE_REGISTER_FILE,
+		  BRW_ARF_IP,
 		  0,
 		  BRW_REGISTER_TYPE_UD,
 		  BRW_VERTICAL_STRIDE_4, /* ? */
@@ -518,8 +518,8 @@ static INLINE struct brw_reg brw_ip_reg( void )
 
 static INLINE struct brw_reg brw_acc_reg( void )
 {
-   return brw_vec8_reg(BRW_ARCHITECTURE_REGISTER_FILE, 
-		       BRW_ARF_ACCUMULATOR, 
+   return brw_vec8_reg(BRW_ARCHITECTURE_REGISTER_FILE,
+		       BRW_ARF_ACCUMULATOR,
 		       0);
 }
 
@@ -632,7 +632,7 @@ static INLINE struct brw_reg get_element_ud( struct brw_reg reg, GLuint elt )
 
 static INLINE struct brw_reg brw_swizzle( struct brw_reg reg,
 					    GLuint x,
-					    GLuint y, 
+					    GLuint y,
 					    GLuint z,
 					    GLuint w)
 {
@@ -937,15 +937,15 @@ void brw_dp_READ_4_vs_relative(struct brw_compile *p,
 /* If/else/endif.  Works by manipulating the execution flags on each
  * channel.
  */
-struct brw_instruction *brw_IF(struct brw_compile *p, 
+struct brw_instruction *brw_IF(struct brw_compile *p,
 			       GLuint execute_size);
 struct brw_instruction *brw_IF_gen6(struct brw_compile *p, uint32_t conditional,
 				    struct brw_reg src0, struct brw_reg src1);
 
-struct brw_instruction *brw_ELSE(struct brw_compile *p, 
+struct brw_instruction *brw_ELSE(struct brw_compile *p,
 				 struct brw_instruction *if_insn);
 
-void brw_ENDIF(struct brw_compile *p, 
+void brw_ENDIF(struct brw_compile *p,
 	       struct brw_instruction *if_or_else_insn);
 
 
@@ -954,7 +954,7 @@ void brw_ENDIF(struct brw_compile *p,
 struct brw_instruction *brw_DO(struct brw_compile *p,
 			       GLuint execute_size);
 
-struct brw_instruction *brw_WHILE(struct brw_compile *p, 
+struct brw_instruction *brw_WHILE(struct brw_compile *p,
 	       struct brw_instruction *patch_insn);
 
 struct brw_instruction *brw_BREAK(struct brw_compile *p, int pop_count);
@@ -963,7 +963,7 @@ struct brw_instruction *brw_CONT_gen6(struct brw_compile *p,
 struct brw_instruction *brw_CONT(struct brw_compile *p, int pop_count);
 /* Forward jumps:
  */
-void brw_land_fwd_jump(struct brw_compile *p, 
+void brw_land_fwd_jump(struct brw_compile *p,
 		       struct brw_instruction *jmp_insn);
 
 
@@ -984,7 +984,7 @@ void brw_CMP(struct brw_compile *p,
 void brw_print_reg( struct brw_reg reg );
 
 
-/*********************************************************************** 
+/***********************************************************************
  * brw_eu_util.c:
  */
 
@@ -1008,7 +1008,7 @@ void brw_copy8(struct brw_compile *p,
 	       struct brw_reg src,
 	       GLuint count);
 
-void brw_math_invert( struct brw_compile *p, 
+void brw_math_invert( struct brw_compile *p,
 		      struct brw_reg dst,
 		      struct brw_reg src);
 

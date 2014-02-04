@@ -73,20 +73,20 @@ void
 lp_setup_bind_framebuffer( struct lp_setup_context *setup,
                            const struct pipe_framebuffer_state *fb );
 
-void 
+void
 lp_setup_set_triangle_state( struct lp_setup_context *setup,
                              unsigned cullmode,
                              boolean front_is_ccw,
                              boolean scissor,
                              boolean gl_rasterization_rules );
 
-void 
+void
 lp_setup_set_line_state( struct lp_setup_context *setup,
                          float line_width);
 
-void 
+void
 lp_setup_set_point_state( struct lp_setup_context *setup,
-                          float point_size,                          
+                          float point_size,
                           boolean point_size_per_vertex,
                           uint sprite_coord_enable,
                           uint sprite_coord_origin);
@@ -135,11 +135,11 @@ lp_setup_is_resource_referenced( const struct lp_setup_context *setup,
                                 const struct pipe_resource *texture );
 
 void
-lp_setup_set_flatshade_first( struct lp_setup_context *setup, 
+lp_setup_set_flatshade_first( struct lp_setup_context *setup,
                               boolean flatshade_first );
 
 void
-lp_setup_set_vertex_info( struct lp_setup_context *setup, 
+lp_setup_set_vertex_info( struct lp_setup_context *setup,
                           struct vertex_info *info );
 
 void

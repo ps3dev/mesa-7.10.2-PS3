@@ -22,7 +22,7 @@
  *
  *
  */
- 
+
 
 #include "main/glheader.h"
 #include "main/mtypes.h"

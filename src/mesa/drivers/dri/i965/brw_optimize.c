@@ -139,7 +139,7 @@ brw_is_grf_written(const struct brw_instruction *inst,
    if (inst->header.opcode == BRW_OPCODE_SEND) {
       if (gen >= 5)
          length = inst->bits3.generic_gen5.response_length*REG_SIZE;
-      else 
+      else
          length = inst->bits3.generic.response_length*REG_SIZE;
    }
    else {
@@ -268,7 +268,7 @@ brw_is_mrf_read(const struct brw_instruction *inst,
    int length, read_start, read_end;
    if (gen >= 5)
       length = inst->bits3.generic_gen5.msg_length*REG_SIZE;
-   else 
+   else
       length = inst->bits3.generic.msg_length*REG_SIZE;
 
    /* Look if SEND uses an implicit mov. In that case, we read one less register

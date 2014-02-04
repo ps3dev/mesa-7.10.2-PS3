@@ -1,7 +1,7 @@
 /**
  * \file server/radeon_dri.h
  * \brief Radeon server-side structures.
- * 
+ *
  * \author Kevin E. Martin <martin@xfree86.org>
  * \author Rickard E. Faith <faith@valinux.com>
  */

@@ -1,20 +1,20 @@
 /* A Bison parser, made by GNU Bison 2.4.3.  */
 
 /* Skeleton implementation for Bison's Yacc-like parsers in C
-   
+
       Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
    2009, 2010 Free Software Foundation, Inc.
-   
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -27,7 +27,7 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
@@ -1894,7 +1894,7 @@ yyreduce:
 		    parser->skip_stack->type == SKIP_NO_SKIP)
 		{
 			_glcpp_parser_expand_if (parser, IF_EXPANDED, (yyvsp[(2) - (3)].token_list));
-		}	
+		}
 		else
 		{
 			_glcpp_parser_skip_stack_push_if (parser, & (yylsp[(1) - (3)]), 0);
@@ -1914,7 +1914,7 @@ yyreduce:
 		    parser->skip_stack->type == SKIP_NO_SKIP)
 		{
 			glcpp_error(& (yylsp[(1) - (2)]), parser, "#if with no expression");
-		}	
+		}
 		_glcpp_parser_skip_stack_push_if (parser, & (yylsp[(1) - (2)]), 0);
 	;}
     break;
@@ -2289,7 +2289,7 @@ yyreduce:
 /* Line 1464 of yacc.c  */
 #line 432 "glcpp/glcpp-parse.y"
     {
-		(yyval.string_list) = (yyvsp[(1) - (3)].string_list);	
+		(yyval.string_list) = (yyvsp[(1) - (3)].string_list);
 		_string_list_append_item ((yyval.string_list), (yyvsp[(3) - (3)].str));
 		ralloc_steal ((yyval.string_list), (yyvsp[(3) - (3)].str));
 	;}
@@ -3206,7 +3206,7 @@ _token_list_equal_ignoring_space (token_list_t *a, token_list_t *b)
 
 		switch (node_a->token->type) {
 		case INTEGER:
-			if (node_a->token->value.ival != 
+			if (node_a->token->value.ival !=
 			    node_b->token->value.ival)
 			{
 				return 0;
@@ -3494,7 +3494,7 @@ typedef enum function_status
  *
  *   FUNCTION_STATUS_SUCCESS:
  *
- *	Successfully parsed a set of function arguments.	
+ *	Successfully parsed a set of function arguments.
  *
  *   FUNCTION_NOT_A_FUNCTION:
  *
@@ -3613,7 +3613,7 @@ static token_list_t *
 _glcpp_parser_expand_function (glcpp_parser_t *parser,
 			       token_node_t *node,
 			       token_node_t **last)
-			       
+
 {
 	macro_t *macro;
 	const char *identifier;
@@ -3647,7 +3647,7 @@ _glcpp_parser_expand_function (glcpp_parser_t *parser,
 		return _token_list_create_with_one_space (parser);
 	}
 
-	if (! ((_argument_list_length (arguments) == 
+	if (! ((_argument_list_length (arguments) ==
 		_string_list_length (macro->parameters)) ||
 	       (_string_list_length (macro->parameters) == 0 &&
 		_argument_list_length (arguments) == 1 &&
@@ -3914,7 +3914,7 @@ _glcpp_parser_expand_token_list (glcpp_parser_t *parser,
 			parser->active = _active_list_push (parser->active,
 							    node->token->value.str,
 							    last->next);
-			
+
 			/* Splice expansion into list, supporting a
 			 * simple deletion if the expansion is
 			 * empty. */

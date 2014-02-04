@@ -65,7 +65,7 @@ CachingEvaluator::beginOutput( ServiceMode, int )
 void
 CachingEvaluator::endOutput( void )
 {
-} 
+}
 
 void
 CachingEvaluator::discardRecording( int )

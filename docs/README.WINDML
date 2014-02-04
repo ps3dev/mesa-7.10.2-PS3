@@ -5,8 +5,8 @@
 Requirements
 ------------
 
-Tornado 2 + WindML, Cumulative Patchs are recommended. 
-  
+Tornado 2 + WindML, Cumulative Patchs are recommended.
+
 I suppose you have a valid WindML installation. Double buffer hardware
 gives better performance than double buffer software so if you can
 compile your WindML driver with this option, just do it. I/O
@@ -32,7 +32,7 @@ Installation
 set MESA_BASE=C:\Mesa
 
 OR copy the new torVars.bat in your bin path:
-c:/Mesa/src/ugl/tornado/torVars.sample -> 
+c:/Mesa/src/ugl/tornado/torVars.sample ->
 /mnt/nt/Tornado/host/x86-win32/bin/torVars (for example)
 
 3. In a command prompt:

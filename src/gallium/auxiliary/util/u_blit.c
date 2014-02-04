@@ -28,7 +28,7 @@
 /**
  * @file
  * Copy/blit pixel rect between surfaces
- *  
+ *
  * @author Brian Paul
  */
 
@@ -193,7 +193,7 @@ get_next_slot( struct blit_state *ctx )
 {
    const unsigned max_slots = 4096 / sizeof ctx->vertices;
 
-   if (ctx->vbuf_slot >= max_slots) 
+   if (ctx->vbuf_slot >= max_slots)
       util_blit_flush( ctx );
 
    if (!ctx->vbuf) {
@@ -201,7 +201,7 @@ get_next_slot( struct blit_state *ctx )
                                      PIPE_BIND_VERTEX_BUFFER,
                                      max_slots * sizeof ctx->vertices);
    }
-   
+
    return ctx->vbuf_slot++ * sizeof ctx->vertices;
 }
 
@@ -357,7 +357,7 @@ util_blit_pixels_writemask(struct blit_state *ctx,
     * is anything other than a 2d texture.
     * XXX should just use appropriate shader to access 1d / 3d slice / cube face,
     * much like the u_blitter code does (should be pretty trivial).
-    * 
+    *
     * This can still be improved upon.
     */
    if ((src_tex == dst->texture &&
@@ -608,7 +608,7 @@ void util_blit_flush( struct blit_state *ctx )
 {
    pipe_resource_reference(&ctx->vbuf, NULL);
    ctx->vbuf_slot = 0;
-} 
+}
 
 
 
@@ -722,7 +722,7 @@ util_blit_pixels_tex(struct blit_state *ctx,
                                   s0, t0, s1, t1,
                                   z);
 
-   util_draw_vertex_buffer(ctx->pipe, 
+   util_draw_vertex_buffer(ctx->pipe,
                            ctx->vbuf, offset,
                            PIPE_PRIM_TRIANGLE_FAN,
                            4,  /* verts */

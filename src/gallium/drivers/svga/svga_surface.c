@@ -114,7 +114,7 @@ svga_texture_view_surface(struct pipe_context *pipe,
    uint32_t i, j;
    unsigned z_offset = 0;
 
-   SVGA_DBG(DEBUG_PERF, 
+   SVGA_DBG(DEBUG_PERF,
             "svga: Create surface view: face %d zslice %d mips %d..%d\n",
             face_pick, zslice_pick, start_mip, start_mip+num_mip-1);
 
@@ -126,7 +126,7 @@ svga_texture_view_surface(struct pipe_context *pipe,
    key->size.depth = zslice_pick < 0 ? u_minify(tex->b.b.depth0, start_mip) : 1;
    key->cachable = 1;
    assert(key->size.depth == 1);
-   
+
    if(tex->b.b.target == PIPE_TEXTURE_CUBE && face_pick < 0) {
       key->flags |= SVGA3D_SURFACE_CUBEMAP;
       key->numFaces = 6;
@@ -162,9 +162,9 @@ svga_texture_view_surface(struct pipe_context *pipe,
                               1);
 
             svga_texture_copy_handle(svga_context(pipe),
-                                     tex->handle, 
-                                     0, 0, z_offset, 
-                                     i + start_mip, 
+                                     tex->handle,
+                                     0, 0, z_offset,
+                                     i + start_mip,
                                      j + face_pick,
                                      handle, 0, 0, 0, i, j,
                                      u_minify(tex->b.b.width0, i + start_mip),
@@ -230,7 +230,7 @@ svga_create_surface(struct pipe_context *pipe,
       view = TRUE;
 
    /* Currently only used for compressed textures */
-   if (render && 
+   if (render &&
        format != svga_translate_format(surf_tmpl->format)) {
       view = TRUE;
    }
@@ -287,7 +287,7 @@ svga_surface_destroy(struct pipe_context *pipe,
 }
 
 
-static INLINE void 
+static INLINE void
 svga_mark_surface_dirty(struct pipe_surface *surf)
 {
    struct svga_surface *s = svga_surface(surf);

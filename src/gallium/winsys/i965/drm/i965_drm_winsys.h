@@ -33,7 +33,7 @@ i965_libdrm_winsys(struct brw_winsys_screen *iws)
 void i965_libdrm_winsys_init_buffer_functions(struct i965_libdrm_winsys *idws);
 
 
-/* Buffer.  
+/* Buffer.
  */
 struct i965_libdrm_buffer {
    struct brw_winsys_buffer base;

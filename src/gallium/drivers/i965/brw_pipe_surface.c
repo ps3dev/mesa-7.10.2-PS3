@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -89,7 +89,7 @@ static boolean need_linear_view( struct brw_screen *brw_screen,
 
    /* Tiled 3d textures don't have subsets that look like 2d surfaces:
     */
-   
+
    /* Everything else should be fine to render to in-place:
     */
    return GL_FALSE;
@@ -108,7 +108,7 @@ void brw_update_texture( struct brw_screen *brw_screen,
 /* Create a new surface with linear layout to serve as a render-target
  * where it would be illegal (perhaps due to tiling constraints) to do
  * this in-place.
- * 
+ *
  * Currently not implemented, not sure if it's needed.
  */
 static struct brw_surface *create_linear_view( struct brw_screen *brw_screen,
@@ -200,7 +200,7 @@ static struct brw_surface *create_in_place_view( struct brw_screen *brw_screen,
    return surface;
 }
 
-/* Get a surface which is view into a texture 
+/* Get a surface which is view into a texture
  */
 static struct pipe_surface *brw_create_surface(struct pipe_context *pipe,
                                                struct pipe_resource *pt,
@@ -221,7 +221,7 @@ static struct pipe_surface *brw_create_surface(struct pipe_context *pipe,
    else
       type = BRW_VIEW_IN_PLACE;
 
-   
+
    foreach (surface, &tex->views[type]) {
       if (id.value == surface->id.value)
 	 return &surface->base;

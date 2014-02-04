@@ -111,7 +111,7 @@ i810FillInModes( __DRIscreen *psp,
     return (const __DRIconfig **) configs;
 }
 
-     
+
 /*  static int i810_malloc_proxy_buf(drmBufMapPtr buffers) */
 /*  { */
 /*     char *buffer; */

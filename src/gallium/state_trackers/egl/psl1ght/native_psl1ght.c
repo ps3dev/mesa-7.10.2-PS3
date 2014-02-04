@@ -446,7 +446,7 @@ psl1ght_display_add_modes(struct native_connector *nconn,
       return FALSE;
    for (i=0; i<ARRAY_SIZE(rates); i++)
       if (vmode->refreshRates & rates[i].from)
-	 if (!psl1ght_display_add_mode(nconn, vmode, &vres, rates[i].from, 
+	 if (!psl1ght_display_add_mode(nconn, vmode, &vres, rates[i].from,
 				       rates[i].to, rates[i].name))
 	    return FALSE;
    return TRUE;
@@ -465,7 +465,7 @@ psl1ght_display_init_connector(struct native_connector *nconn, u32 videoOut)
     for(i=0; i<psconn->deviceInfo.availableModeCount; i++)
        if (!psl1ght_display_add_modes(nconn, &psconn->deviceInfo.availableModes[i]))
 	  return FALSE;
-    
+
     return TRUE;
 }
 

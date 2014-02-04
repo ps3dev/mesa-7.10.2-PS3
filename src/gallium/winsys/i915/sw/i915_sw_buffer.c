@@ -29,7 +29,7 @@ err:
 
 static struct i915_winsys_buffer *
 i915_sw_buffer_create_tiled(struct i915_winsys *iws,
-                      unsigned *stride, unsigned height, 
+                      unsigned *stride, unsigned height,
                       enum i915_winsys_buffer_tile *tiling,
                       enum i915_winsys_buffer_type type)
 {

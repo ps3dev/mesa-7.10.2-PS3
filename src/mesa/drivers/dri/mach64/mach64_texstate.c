@@ -127,7 +127,7 @@ static void mach64UpdateTextureEnv( struct gl_context *ctx, int unit )
  * ALPHA           C = Cf   C = Cf     undef              C = Cf
  *                 A = At   A = AfAt                      A = AfAt
  *
- * LUMINANCE       C = Ct   C = CfCt   undef              C = Cf(1-Ct)+CcCt 
+ * LUMINANCE       C = Ct   C = CfCt   undef              C = Cf(1-Ct)+CcCt
  *                 A = Af   A = Af                        A = Af
  *
  * LUMINANCE_ALPHA C = Ct   C = CfCt   undef              C = Cf(1-Ct)+CcCt
@@ -140,14 +140,14 @@ static void mach64UpdateTextureEnv( struct gl_context *ctx, int unit )
  *                 A = Af   A = Af     A = Af             A = Af
  *
  * RGBA            C = Ct   C = CfCt   C = Cf(1-At)+CtAt  C = Cf(1-Ct)+CcCt
- *                 A = At   A = AfAt   A = Af             A = AfAt 
+ *                 A = At   A = AfAt   A = Af             A = AfAt
  */
 
 
    if ( unit == 0 ) {
       s &= ~MACH64_TEX_LIGHT_FCN_MASK;
 
-      /* Set the texture environment state 
+      /* Set the texture environment state
        * Need to verify these are working correctly, but the
        * texenv Mesa demo seems to work.
        */
@@ -191,7 +191,7 @@ static void mach64UpdateTextureEnv( struct gl_context *ctx, int unit )
 	 break;
       case GL_DECAL:
 	 switch ( format ) {
-	 case GL_RGBA: 
+	 case GL_RGBA:
 	    s |= MACH64_TEX_LIGHT_FCN_ALPHA_DECAL;
 	    break;
 	 case GL_RGB:
@@ -329,12 +329,12 @@ static void mach64UpdateTextureUnit( struct gl_context *ctx, int unit )
       if ( unit == 0 ) {
          d &= ~MACH64_SCALE_PIX_WIDTH_MASK;
          d |= (t->textureFormat << 28);
-   
+
          s &= ~(MACH64_TEXTURE_DISABLE |
 		MACH64_TEX_CACHE_SPLIT |
 		MACH64_TEX_BLEND_FCN_MASK |
 		MACH64_TEX_MAP_AEN);
-   
+
          if ( mmesa->multitex ) {
 	    s |= MACH64_TEX_BLEND_FCN_TRILINEAR | MACH64_TEX_CACHE_SPLIT;
          } else if ( t->BilinearMin ) {
@@ -347,39 +347,39 @@ static void mach64UpdateTextureUnit( struct gl_context *ctx, int unit )
          } else {
 	    s &= ~MACH64_BILINEAR_TEX_EN;
          }
-   
+
          if ( t->hasAlpha ) {
 	    s |= MACH64_TEX_MAP_AEN;
          }
-   
+
          mmesa->setup.tex_cntl &= ~(MACH64_TEXTURE_CLAMP_S |
 				    MACH64_TEXTURE_CLAMP_T |
 				    MACH64_SECONDARY_STW);
-   
+
          if ( t->ClampS ) {
 	    mmesa->setup.tex_cntl |= MACH64_TEXTURE_CLAMP_S;
          }
          if ( t->ClampT ) {
 	    mmesa->setup.tex_cntl |= MACH64_TEXTURE_CLAMP_T;
          }
-   
+
          mmesa->setup.tex_size_pitch |= ((t->widthLog2  << 0) |
 					 (t->maxLog2    << 4) |
 					 (t->heightLog2 << 8));
       } else {
-         
+
          /* Enable texture mapping mode */
          s &= ~MACH64_TEXTURE_DISABLE;
-   
+
          d &= ~MACH64_COMPOSITE_PIX_WIDTH_MASK;
          d |= (t->textureFormat << 4);
-   
+
          mmesa->setup.tex_cntl &= ~(MACH64_COMP_ALPHA |
 				    MACH64_SEC_TEX_CLAMP_S |
 				    MACH64_SEC_TEX_CLAMP_T);
          mmesa->setup.tex_cntl |= (MACH64_TEXTURE_COMPOSITE |
 				   MACH64_SECONDARY_STW);
-   
+
          if ( t->BilinearMin ) {
 	    mmesa->setup.tex_cntl |= MACH64_COMP_BLEND_BILINEAR;
          } else {
@@ -390,7 +390,7 @@ static void mach64UpdateTextureUnit( struct gl_context *ctx, int unit )
          } else {
 	    mmesa->setup.tex_cntl &= ~MACH64_COMP_FILTER_BILINEAR;
          }
-         
+
          if ( t->hasAlpha ) {
 	    mmesa->setup.tex_cntl |= MACH64_COMP_ALPHA;
          }
@@ -400,21 +400,21 @@ static void mach64UpdateTextureUnit( struct gl_context *ctx, int unit )
          if ( t->ClampT ) {
 	    mmesa->setup.tex_cntl |= MACH64_SEC_TEX_CLAMP_T;
          }
-   
+
          mmesa->setup.tex_size_pitch |= ((t->widthLog2  << 16) |
 					 (t->maxLog2    << 20) |
 					 (t->heightLog2 << 24));
       }
-   
+
       if ( mmesa->setup.scale_3d_cntl != s ) {
          mmesa->setup.scale_3d_cntl = s;
          mmesa->dirty |= MACH64_UPLOAD_SCALE_3D_CNTL;
       }
-   
+
       if ( mmesa->setup.dp_pix_width != d ) {
          mmesa->setup.dp_pix_width = d;
          mmesa->dirty |= MACH64_UPLOAD_DP_PIX_WIDTH;
-      }  
+      }
    }
    else if (texUnit->_ReallyEnabled) {
       /* 3D or cube map texture enabled - fallback */
@@ -473,7 +473,7 @@ void mach64UpdateTextureState( struct gl_context *ctx )
 	  mach64UpdateTextureEnv( ctx, 0 );
        }
    } else if (ctx->Texture._EnabledUnits & 0x1) {
-      /* only unit 0 enabled */ 
+      /* only unit 0 enabled */
       mach64UpdateTextureUnit( ctx, 0 );
       mach64UpdateTextureEnv( ctx, 0 );
    }

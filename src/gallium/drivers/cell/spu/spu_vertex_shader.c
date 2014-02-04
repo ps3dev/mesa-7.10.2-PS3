@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -83,7 +83,7 @@ compute_clipmask(const float *clip, /*const*/ float plane[][4], unsigned nr)
    /* Followed by any remaining ones:
     */
    for (i = 6; i < nr; i++) {
-      if (dot4(clip, plane[i]) < 0) 
+      if (dot4(clip, plane[i]) < 0)
          mask |= (1<<i);
    }
 
@@ -138,7 +138,7 @@ run_vertex_program(struct spu_vs_context *draw,
       struct vertex_header *const tmpOut =
           (struct vertex_header *) buffer;
       const unsigned vert_size = ROUNDUP16(sizeof(struct vertex_header)
-                                           + (sizeof(float) * 4 
+                                           + (sizeof(float) * 4
                                               * draw->num_vs_outputs));
 
       mfc_get(tmpOut, vOut[j], vert_size, TAG_VERTEX_BUFFER, 0, 0);
@@ -196,10 +196,10 @@ spu_bind_vertex_shader(struct spu_vs_context *draw,
 		       struct cell_shader_info *vs)
 {
    const unsigned immediate_addr = vs->immediates;
-   const unsigned immediate_size = 
+   const unsigned immediate_size =
        ROUNDUP16((sizeof(float) * 4 * vs->num_immediates)
 		 + (immediate_addr & 0x0f));
- 
+
 
    mfc_get(immediates, immediate_addr & ~0x0f, immediate_size,
            TAG_VERTEX_BUFFER, 0, 0);

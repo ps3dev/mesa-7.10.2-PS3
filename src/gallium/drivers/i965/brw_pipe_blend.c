@@ -52,17 +52,17 @@ static int translate_logicop(unsigned logicop)
 static unsigned translate_blend_equation( unsigned mode )
 {
    switch (mode) {
-   case PIPE_BLEND_ADD: 
-      return BRW_BLENDFUNCTION_ADD; 
-   case PIPE_BLEND_MIN: 
-      return BRW_BLENDFUNCTION_MIN; 
-   case PIPE_BLEND_MAX: 
-      return BRW_BLENDFUNCTION_MAX; 
-   case PIPE_BLEND_SUBTRACT: 
-      return BRW_BLENDFUNCTION_SUBTRACT; 
-   case PIPE_BLEND_REVERSE_SUBTRACT: 
-      return BRW_BLENDFUNCTION_REVERSE_SUBTRACT; 
-   default: 
+   case PIPE_BLEND_ADD:
+      return BRW_BLENDFUNCTION_ADD;
+   case PIPE_BLEND_MIN:
+      return BRW_BLENDFUNCTION_MIN;
+   case PIPE_BLEND_MAX:
+      return BRW_BLENDFUNCTION_MAX;
+   case PIPE_BLEND_SUBTRACT:
+      return BRW_BLENDFUNCTION_SUBTRACT;
+   case PIPE_BLEND_REVERSE_SUBTRACT:
+      return BRW_BLENDFUNCTION_REVERSE_SUBTRACT;
+   default:
       assert(0);
       return BRW_BLENDFUNCTION_ADD;
    }
@@ -71,40 +71,40 @@ static unsigned translate_blend_equation( unsigned mode )
 static unsigned translate_blend_factor( unsigned factor )
 {
    switch(factor) {
-   case PIPE_BLENDFACTOR_ZERO: 
-      return BRW_BLENDFACTOR_ZERO; 
-   case PIPE_BLENDFACTOR_SRC_ALPHA: 
-      return BRW_BLENDFACTOR_SRC_ALPHA; 
-   case PIPE_BLENDFACTOR_ONE: 
-      return BRW_BLENDFACTOR_ONE; 
-   case PIPE_BLENDFACTOR_SRC_COLOR: 
-      return BRW_BLENDFACTOR_SRC_COLOR; 
-   case PIPE_BLENDFACTOR_INV_SRC_COLOR: 
-      return BRW_BLENDFACTOR_INV_SRC_COLOR; 
-   case PIPE_BLENDFACTOR_DST_COLOR: 
-      return BRW_BLENDFACTOR_DST_COLOR; 
-   case PIPE_BLENDFACTOR_INV_DST_COLOR: 
-      return BRW_BLENDFACTOR_INV_DST_COLOR; 
+   case PIPE_BLENDFACTOR_ZERO:
+      return BRW_BLENDFACTOR_ZERO;
+   case PIPE_BLENDFACTOR_SRC_ALPHA:
+      return BRW_BLENDFACTOR_SRC_ALPHA;
+   case PIPE_BLENDFACTOR_ONE:
+      return BRW_BLENDFACTOR_ONE;
+   case PIPE_BLENDFACTOR_SRC_COLOR:
+      return BRW_BLENDFACTOR_SRC_COLOR;
+   case PIPE_BLENDFACTOR_INV_SRC_COLOR:
+      return BRW_BLENDFACTOR_INV_SRC_COLOR;
+   case PIPE_BLENDFACTOR_DST_COLOR:
+      return BRW_BLENDFACTOR_DST_COLOR;
+   case PIPE_BLENDFACTOR_INV_DST_COLOR:
+      return BRW_BLENDFACTOR_INV_DST_COLOR;
    case PIPE_BLENDFACTOR_INV_SRC_ALPHA:
-      return BRW_BLENDFACTOR_INV_SRC_ALPHA; 
-   case PIPE_BLENDFACTOR_DST_ALPHA: 
-      return BRW_BLENDFACTOR_DST_ALPHA; 
+      return BRW_BLENDFACTOR_INV_SRC_ALPHA;
+   case PIPE_BLENDFACTOR_DST_ALPHA:
+      return BRW_BLENDFACTOR_DST_ALPHA;
    case PIPE_BLENDFACTOR_INV_DST_ALPHA:
-      return BRW_BLENDFACTOR_INV_DST_ALPHA; 
-   case PIPE_BLENDFACTOR_SRC_ALPHA_SATURATE: 
+      return BRW_BLENDFACTOR_INV_DST_ALPHA;
+   case PIPE_BLENDFACTOR_SRC_ALPHA_SATURATE:
       return BRW_BLENDFACTOR_SRC_ALPHA_SATURATE;
    case PIPE_BLENDFACTOR_CONST_COLOR:
-      return BRW_BLENDFACTOR_CONST_COLOR; 
+      return BRW_BLENDFACTOR_CONST_COLOR;
    case PIPE_BLENDFACTOR_INV_CONST_COLOR:
       return BRW_BLENDFACTOR_INV_CONST_COLOR;
    case PIPE_BLENDFACTOR_CONST_ALPHA:
-      return BRW_BLENDFACTOR_CONST_ALPHA; 
+      return BRW_BLENDFACTOR_CONST_ALPHA;
    case PIPE_BLENDFACTOR_INV_CONST_ALPHA:
       return BRW_BLENDFACTOR_INV_CONST_ALPHA;
    default:
       assert(0);
       return BRW_BLENDFACTOR_ZERO;
-   }   
+   }
 }
 
 static void *brw_create_blend_state( struct pipe_context *pipe,
@@ -117,7 +117,7 @@ static void *brw_create_blend_state( struct pipe_context *pipe,
    if (templ->logicop_enable) {
       blend->cc2.logicop_enable = 1;
       blend->cc5.logicop_func = translate_logicop(templ->logicop_func);
-   } 
+   }
    else if (templ->rt[0].blend_enable) {
       blend->cc6.dest_blend_factor = translate_blend_factor(templ->rt[0].rgb_dst_factor);
       blend->cc6.src_blend_factor = translate_blend_factor(templ->rt[0].rgb_src_factor);
@@ -128,7 +128,7 @@ static void *brw_create_blend_state( struct pipe_context *pipe,
       blend->cc5.ia_blend_function = translate_blend_equation(templ->rt[0].alpha_func);
 
       blend->cc3.blend_enable = 1;
-      blend->cc3.ia_blend_enable = 
+      blend->cc3.ia_blend_enable =
 	 (blend->cc6.dest_blend_factor != blend->cc5.ia_dest_blend_factor ||
 	  blend->cc6.src_blend_factor != blend->cc5.ia_src_blend_factor ||
 	  blend->cc6.blend_function != blend->cc5.ia_blend_function);
@@ -196,7 +196,7 @@ void brw_pipe_blend_init( struct brw_context *brw )
    {
       struct brw_blend_constant_color *bcc = &brw->curr.bcc;
 
-      memset(bcc, 0, sizeof(*bcc));      
+      memset(bcc, 0, sizeof(*bcc));
       bcc->header.opcode = CMD_BLEND_CONSTANT_COLOR;
       bcc->header.length = sizeof(*bcc)/4-2;
    }

@@ -220,18 +220,18 @@ __GLSiSHardware;
 typedef struct sis_context sisContextRec;
 typedef struct sis_context *sisContextPtr;
 
-typedef void (*sis_quad_func)( sisContextPtr, 
+typedef void (*sis_quad_func)( sisContextPtr,
 			       sisVertex *,
 			       sisVertex *,
 			       sisVertex *,
 			       sisVertex * );
 
-typedef void (*sis_tri_func)( sisContextPtr, 
+typedef void (*sis_tri_func)( sisContextPtr,
 			      sisVertex *,
 			      sisVertex *,
 			      sisVertex * );
 
-typedef void (*sis_line_func)( sisContextPtr, 
+typedef void (*sis_line_func)( sisContextPtr,
 			       sisVertex *,
 			       sisVertex * );
 
@@ -298,7 +298,7 @@ struct sis_context
   unsigned int clearColorPattern;
   unsigned int clearZStencilPattern;
 
-  /* Fallback rasterization functions 
+  /* Fallback rasterization functions
    */
   sis_point_func draw_point;
   sis_line_func draw_line;
@@ -311,12 +311,12 @@ struct sis_context
 
   /* DRM fd */
   int driFd;
-  
+
   /* AGP Memory */
   unsigned int AGPSize;
   unsigned char *AGPBase;
   unsigned int AGPAddr;
-  
+
   /* register 0x89F4 */
   GLint AGPParseSet;
 

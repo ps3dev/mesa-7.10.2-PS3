@@ -27,7 +27,7 @@
 
  /**
   * @file
-  * 
+  *
   * Wrap the cso cache & hash mechanisms in a simplified
   * pipe-driver-specific interface.
   *
@@ -267,7 +267,7 @@ struct cso_context *cso_create_context( struct pipe_context *pipe )
    return ctx;
 
 out:
-   cso_destroy_context( ctx );      
+   cso_destroy_context( ctx );
    return NULL;
 }
 
@@ -278,7 +278,7 @@ out:
 void cso_release_all( struct cso_context *ctx )
 {
    unsigned i;
-   
+
    if (ctx->pipe) {
       ctx->pipe->bind_blend_state( ctx->pipe, NULL );
       ctx->pipe->bind_rasterizer_state( ctx->pipe, NULL );
@@ -491,7 +491,7 @@ void cso_single_sampler_done( struct cso_context *ctx )
    if (ctx->hw.nr_samplers != ctx->nr_samplers ||
        memcmp(ctx->hw.samplers,
               ctx->samplers,
-              ctx->nr_samplers * sizeof(void *)) != 0) 
+              ctx->nr_samplers * sizeof(void *)) != 0)
    {
       memcpy(ctx->hw.samplers, ctx->samplers, ctx->nr_samplers * sizeof(void *));
       ctx->hw.nr_samplers = ctx->nr_samplers;
@@ -516,7 +516,7 @@ cso_single_vertex_sampler_done(struct cso_context *ctx)
    if (ctx->hw.nr_vertex_samplers != ctx->nr_vertex_samplers ||
        memcmp(ctx->hw.vertex_samplers,
               ctx->vertex_samplers,
-              ctx->nr_vertex_samplers * sizeof(void *)) != 0) 
+              ctx->nr_vertex_samplers * sizeof(void *)) != 0)
    {
       memcpy(ctx->hw.vertex_samplers,
              ctx->vertex_samplers,
@@ -628,7 +628,7 @@ enum pipe_error cso_set_depth_stencil_alpha(struct cso_context *ctx,
    unsigned key_size = sizeof(struct pipe_depth_stencil_alpha_state);
    unsigned hash_key = cso_construct_key((void*)templ, key_size);
    struct cso_hash_iter iter = cso_find_state_template(ctx->cache,
-                                                       hash_key, 
+                                                       hash_key,
                                                        CSO_DEPTH_STENCIL_ALPHA,
                                                        (void*)templ, key_size);
    void *handle;
@@ -766,7 +766,7 @@ enum pipe_error cso_set_fragment_shader(struct cso_context *ctx,
    size_t tokens_size = num_tokens*sizeof(struct tgsi_token);
    unsigned hash_key = cso_construct_key((void*)tokens, tokens_size);
    struct cso_hash_iter iter = cso_find_state_template(ctx->cache,
-                                                       hash_key, 
+                                                       hash_key,
                                                        CSO_FRAGMENT_SHADER,
                                                        (void*)tokens,
                                                        sizeof(*templ)); /* XXX correct? tokens_size? */

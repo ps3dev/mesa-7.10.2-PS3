@@ -62,7 +62,7 @@ void insert_wpos_code(struct gl_context *ctx, struct gl_fragment_program *fprog)
     inst = fprog->Base.Instructions;
     for (i = 0; i < fprog->Base.NumInstructions; i++) {
         for (j=0; j < 3; j++) {
-            if(inst->SrcReg[j].File == PROGRAM_INPUT && 
+            if(inst->SrcReg[j].File == PROGRAM_INPUT &&
                inst->SrcReg[j].Index == FRAG_ATTRIB_WPOS) {
                 inst->SrcReg[j].File = PROGRAM_TEMPORARY;
                 inst->SrcReg[j].Index = wpos_temp;
@@ -95,7 +95,7 @@ void insert_wpos_code(struct gl_context *ctx, struct gl_fragment_program *fprog)
 //TODO : Validate FP input with VP output.
 void Map_Fragment_Program(r700_AssemblerBase         *pAsm,
 						  struct gl_fragment_program *mesa_fp,
-                          struct gl_context *ctx) 
+                          struct gl_context *ctx)
 {
 	unsigned int unBit;
     unsigned int i;
@@ -104,10 +104,10 @@ void Map_Fragment_Program(r700_AssemblerBase         *pAsm,
     struct r700_vertex_program_cont *vpc =
 		       (struct r700_vertex_program_cont *)ctx->VertexProgram._Current;
     GLbitfield OutputsWritten = vpc->mesa_program.Base.OutputsWritten;
-    
+
 	pAsm->number_used_registers = 0;
 
-//Input mapping : mesa_fp->Base.InputsRead set the flag, set in 
+//Input mapping : mesa_fp->Base.InputsRead set the flag, set in
 	//The flags parsed in parse_attrib_binding. FRAG_ATTRIB_COLx, FRAG_ATTRIB_TEXx, ...
 	//MUST match order in Map_Vertex_Output
 	unBit = 1 << FRAG_ATTRIB_WPOS;
@@ -142,8 +142,8 @@ void Map_Fragment_Program(r700_AssemblerBase         *pAsm,
 			pAsm->uiFP_AttributeMap[FRAG_ATTRIB_TEX0 + i] = pAsm->number_used_registers++;
 		}
 	}
- 
-/* order has been taken care of */ 
+
+/* order has been taken care of */
 #if 1
     for(i=VERT_RESULT_VAR0; i<VERT_RESULT_MAX; i++)
 	{
@@ -179,12 +179,12 @@ void Map_Fragment_Program(r700_AssemblerBase         *pAsm,
                 pPsParam = PsVarying->Parameters + j;
 
                 for(k=0; k<VsVarying->NumParameters; k++)
-                {					
+                {
                     pVsParam = VsVarying->Parameters + k;
 
 			        if( strcmp(pPsParam->Name, pVsParam->Name) == 0)
                     {
-                        pAsm->uiFP_AttributeMap[i] = pAsm->number_used_registers + k;                  
+                        pAsm->uiFP_AttributeMap[i] = pAsm->number_used_registers + k;
                         if(k > unMaxVarying)
                         {
                             unMaxVarying = k;
@@ -305,7 +305,7 @@ GLboolean Find_Instruction_Dependencies_fp(struct r700_fragment_program *fp,
 
     fp->r700AsmCode.pInstDeps = pInstDeps;
 
-    //Find dep for tex inst    
+    //Find dep for tex inst
     for(i=0; i<mesa_fp->Base.NumInstructions; i++)
     {
         pILInst = &(mesa_fp->Base.Instructions[i]);
@@ -339,7 +339,7 @@ GLboolean Find_Instruction_Dependencies_fp(struct r700_fragment_program *fp,
                 {
                     pInstDeps[nDepInstID].nDstDep = i;
                 }
- 
+
             }
 
         }
@@ -353,9 +353,9 @@ GLboolean Find_Instruction_Dependencies_fp(struct r700_fragment_program *fp,
 
 GLboolean r700TranslateFragmentShader(struct r700_fragment_program *fp,
 							     struct gl_fragment_program   *mesa_fp,
-                                 struct gl_context *ctx) 
+                                 struct gl_context *ctx)
 {
-    context_t *context = R700_CONTEXT(ctx);      
+    context_t *context = R700_CONTEXT(ctx);
     R700_CHIP_CONTEXT *r700 = (R700_CHIP_CONTEXT*)(&context->hw);
 
 	GLuint    number_of_colors_exported;
@@ -395,14 +395,14 @@ GLboolean r700TranslateFragmentShader(struct r700_fragment_program *fp,
             {
                 shadow_unit = inst->TexSrcUnit;
                 shadow_ambient[2] = shadow_unit;
-                fp->r700AsmCode.shadow_regs[shadow_unit] = 
+                fp->r700AsmCode.shadow_regs[shadow_unit] =
                     _mesa_add_state_reference(mesa_fp->Base.Parameters, shadow_ambient);
             }
             inst++;
         }
     }
 
-    Map_Fragment_Program(&(fp->r700AsmCode), mesa_fp, ctx); 
+    Map_Fragment_Program(&(fp->r700AsmCode), mesa_fp, ctx);
 
     if( GL_FALSE == Find_Instruction_Dependencies_fp(fp, mesa_fp) )
 	{
@@ -410,7 +410,7 @@ GLboolean r700TranslateFragmentShader(struct r700_fragment_program *fp,
     }
 
     InitShaderProgram(&(fp->r700AsmCode));
-	
+
     for(i=0; i < MAX_SAMPLERS; i++)
     {
          fp->r700AsmCode.SamplerUnits[i] = fp->mesa_program.Base.SamplerUnits[i];
@@ -421,7 +421,7 @@ GLboolean r700TranslateFragmentShader(struct r700_fragment_program *fp,
 	if( GL_FALSE == AssembleInstr(0,
                                   0,
                                   mesa_fp->Base.NumInstructions,
-                                  &(mesa_fp->Base.Instructions[0]), 
+                                  &(mesa_fp->Base.Instructions[0]),
                                   &(fp->r700AsmCode)) )
 	{
 		return GL_FALSE;
@@ -437,7 +437,7 @@ GLboolean r700TranslateFragmentShader(struct r700_fragment_program *fp,
         return GL_FALSE;
     }
 
-    fp->r700Shader.nRegs = (fp->r700AsmCode.number_used_registers == 0) ? 0 
+    fp->r700Shader.nRegs = (fp->r700AsmCode.number_used_registers == 0) ? 0
                          : (fp->r700AsmCode.number_used_registers - 1);
 
 	fp->r700Shader.nParamExports = fp->r700AsmCode.number_of_exports;
@@ -477,7 +477,7 @@ void r700SelectFragmentShader(struct gl_context *ctx)
     }
 
     if (GL_FALSE == fp->translated)
-	    r700TranslateFragmentShader(fp, &(fp->mesa_program), ctx); 
+	    r700TranslateFragmentShader(fp, &(fp->mesa_program), ctx);
 }
 
 void * r700GetActiveFpShaderBo(struct gl_context * ctx)
@@ -634,7 +634,7 @@ GLboolean r700SetupFragmentProgram(struct gl_context * ctx)
     struct r700_vertex_program_cont *vpc =
 		       (struct r700_vertex_program_cont *)ctx->VertexProgram._Current;
     GLbitfield OutputsWritten = vpc->mesa_program.Base.OutputsWritten;
-    
+
     for(ui = 0; ui < R700_MAX_SHADER_EXPORTS; ui++)
         r700->SPI_PS_INPUT_CNTL[ui].u32All = 0;
 
@@ -764,7 +764,7 @@ GLboolean r700SetupFragmentProgram(struct gl_context * ctx)
     /* sent out shader constants. */
     paramList = fp->mesa_program.Base.Parameters;
 
-    if(NULL != paramList) 
+    if(NULL != paramList)
     {
 	    _mesa_load_state_parameters(ctx, paramList);
 

@@ -28,7 +28,7 @@ LIBS = \
 	$(TOP)/src/gallium/drivers/trace/libtrace.a \
 	$(TOP)/src/mapi/glapi/libglapi.a \
 	$(TOP)/src/mesa/libmesagallium.a \
-	$(GALLIUM_AUXILIARIES) 
+	$(GALLIUM_AUXILIARIES)
 
 .c.o:
 	$(CC) -c $(INCLUDE_DIRS) $(DEFINES) $(CFLAGS) $< -o $@

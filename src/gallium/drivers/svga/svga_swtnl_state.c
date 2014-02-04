@@ -61,7 +61,7 @@ static void set_draw_viewport( struct svga_context *svga )
        * going to be drawn with triangles, but we're not catching all
        * cases where that will happen.
        */
-      if (svga->curr.rast->templ.line_width > 1.0) 
+      if (svga->curr.rast->templ.line_width > 1.0)
       {
          adjx = SVGA_LINE_ADJ_X + 0.175;
          adjy = SVGA_LINE_ADJ_Y - 0.175;
@@ -88,26 +88,26 @@ static int update_swtnl_draw( struct svga_context *svga,
 {
    draw_flush( svga->swtnl.draw );
 
-   if (dirty & SVGA_NEW_VS) 
+   if (dirty & SVGA_NEW_VS)
       draw_bind_vertex_shader(svga->swtnl.draw,
                               svga->curr.vs->draw_shader);
 
    if (dirty & SVGA_NEW_VBUFFER)
-      draw_set_vertex_buffers(svga->swtnl.draw, 
-                              svga->curr.num_vertex_buffers, 
+      draw_set_vertex_buffers(svga->swtnl.draw,
+                              svga->curr.num_vertex_buffers,
                               svga->curr.vb);
 
    if (dirty & SVGA_NEW_VELEMENT)
-      draw_set_vertex_elements(svga->swtnl.draw, 
-                               svga->curr.velems->count, 
+      draw_set_vertex_elements(svga->swtnl.draw,
+                               svga->curr.velems->count,
                                svga->curr.velems->velem );
 
    if (dirty & SVGA_NEW_CLIP)
-      draw_set_clip_state(svga->swtnl.draw, 
+      draw_set_clip_state(svga->swtnl.draw,
                           &svga->curr.clip);
 
    if (dirty & (SVGA_NEW_VIEWPORT |
-                SVGA_NEW_REDUCED_PRIMITIVE | 
+                SVGA_NEW_REDUCED_PRIMITIVE |
                 SVGA_NEW_RAST))
       set_draw_viewport( svga );
 
@@ -117,7 +117,7 @@ static int update_swtnl_draw( struct svga_context *svga,
                                 (void *) svga->curr.rast);
 
    if (dirty & SVGA_NEW_FRAME_BUFFER)
-      draw_set_mrd(svga->swtnl.draw, 
+      draw_set_mrd(svga->swtnl.draw,
                    svga->curr.depthscale);
 
    return 0;

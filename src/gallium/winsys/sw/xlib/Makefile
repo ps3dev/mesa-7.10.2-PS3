@@ -10,7 +10,7 @@ LIBRARY_INCLUDES = \
 	$(X11_CFLAGS)
 
 C_SOURCES = \
-	xlib_sw_winsys.c 
+	xlib_sw_winsys.c
 
 include ../../../Makefile.template
 

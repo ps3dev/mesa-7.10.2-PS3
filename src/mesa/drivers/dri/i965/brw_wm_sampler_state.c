@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                   
+
 
 #include "brw_context.h"
 #include "brw_state.h"
@@ -51,17 +51,17 @@
 static GLuint translate_wrap_mode( GLenum wrap )
 {
    switch( wrap ) {
-   case GL_REPEAT: 
+   case GL_REPEAT:
       return BRW_TEXCOORDMODE_WRAP;
-   case GL_CLAMP:  
+   case GL_CLAMP:
       return BRW_TEXCOORDMODE_CLAMP;
-   case GL_CLAMP_TO_EDGE: 
+   case GL_CLAMP_TO_EDGE:
       return BRW_TEXCOORDMODE_CLAMP; /* conform likes it this way */
-   case GL_CLAMP_TO_BORDER: 
+   case GL_CLAMP_TO_BORDER:
       return BRW_TEXCOORDMODE_CLAMP_BORDER;
-   case GL_MIRRORED_REPEAT: 
+   case GL_MIRRORED_REPEAT:
       return BRW_TEXCOORDMODE_MIRROR;
-   default: 
+   default:
       return BRW_TEXCOORDMODE_WRAP;
    }
 }
@@ -169,10 +169,10 @@ static void brw_update_sampler_state(struct brw_context *brw,
       break;
    }
 
-   /* Set Anisotropy: 
+   /* Set Anisotropy:
     */
    if (key->max_aniso > 1.0) {
-      sampler->ss0.min_filter = BRW_MAPFILTER_ANISOTROPIC; 
+      sampler->ss0.min_filter = BRW_MAPFILTER_ANISOTROPIC;
       sampler->ss0.mag_filter = BRW_MAPFILTER_ANISOTROPIC;
 
       if (key->max_aniso > 2.0) {
@@ -190,7 +190,7 @@ static void brw_update_sampler_state(struct brw_context *brw,
 	 break;
       default:
 	 break;
-      }  
+      }
    }
 
    sampler->ss1.r_wrap_mode = translate_wrap_mode(key->wrap_r);
@@ -225,7 +225,7 @@ static void brw_update_sampler_state(struct brw_context *brw,
    }
 
 
-   /* Set shadow function: 
+   /* Set shadow function:
     */
    if (key->comparemode == GL_COMPARE_R_TO_TEXTURE_ARB) {
       /* Shadowing is "enabled" by emitting a particular sampler
@@ -236,14 +236,14 @@ static void brw_update_sampler_state(struct brw_context *brw,
 	 intel_translate_shadow_compare_func(key->comparefunc);
    }
 
-   /* Set LOD bias: 
+   /* Set LOD bias:
     */
    sampler->ss0.lod_bias = S_FIXED(CLAMP(key->lod_bias, -16, 15), 6);
 
    sampler->ss0.lod_preclamp = 1; /* OpenGL mode */
    sampler->ss0.default_color_mode = 0; /* OpenGL/DX10 mode */
 
-   /* Set BaseMipLevel, MaxLOD, MinLOD: 
+   /* Set BaseMipLevel, MaxLOD, MinLOD:
     *
     * XXX: I don't think that using firstLevel, lastLevel works,
     * because we always setup the surface state as if firstLevel ==
@@ -254,7 +254,7 @@ static void brw_update_sampler_state(struct brw_context *brw,
 
    sampler->ss1.max_lod = U_FIXED(CLAMP(key->maxlod, 0, 13), 6);
    sampler->ss1.min_lod = U_FIXED(CLAMP(key->minlod, 0, 13), 6);
-   
+
    sampler->ss2.default_color_pointer = sdc_bo->offset >> 5; /* reloc */
 }
 
@@ -266,7 +266,7 @@ brw_wm_sampler_populate_key(struct brw_context *brw,
 {
    struct gl_context *ctx = &brw->intel.ctx;
    int unit;
-   char *last_entry_end = ((char*)&key->sampler_count) + 
+   char *last_entry_end = ((char*)&key->sampler_count) +
       sizeof(key->sampler_count);
 
    key->sampler_count = 0;
@@ -280,7 +280,7 @@ brw_wm_sampler_populate_key(struct brw_context *brw,
 	 struct gl_texture_image *firstImage =
 	    texObj->Image[0][intelObj->firstLevel];
 
-	 memset(last_entry_end, 0, 
+	 memset(last_entry_end, 0,
 		(char*)entry - last_entry_end + sizeof(*entry));
 	 last_entry_end = ((char*)entry) + sizeof(*entry);
 

@@ -27,7 +27,7 @@
 /**
  * \file tdfx_dd.c
  * Device driver interface functions for 3Dfx based cards.
- * 
+ *
  * \author Gareth Hughes <gareth@valinux.com> (Original rewrite 29 Sep - 1 Oct 2000)
  * \author Brian Paul <brianp@valinux.com>
  */
@@ -135,7 +135,7 @@ tdfxEndQuery(struct gl_context *ctx, struct gl_query_object *q)
       fxMesa->Glide.grGet(GR_STATS_PIXELS_IN, sizeof(FxI32), &total_pixels);
 
       q->Result = total_pixels - z_fail_pixels;
-      
+
       /* Apparently, people have seen z_fail_pixels > total_pixels under
        * some conditions on some 3Dfx hardware.  The occlusion query spec
        * requires that we clamp to 0.

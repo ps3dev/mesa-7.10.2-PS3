@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -76,7 +76,7 @@ st_renderbuffer_alloc_storage(struct gl_context * ctx, struct gl_renderbuffer *r
       format = strb->format;
    else
       format = st_choose_renderbuffer_format(screen, internalFormat, rb->NumSamples);
-      
+
    if (format == PIPE_FORMAT_NONE) {
       return FALSE;
    }
@@ -92,21 +92,21 @@ st_renderbuffer_alloc_storage(struct gl_context * ctx, struct gl_renderbuffer *r
 
    if (strb->software) {
       size_t size;
-      
+
       free(strb->data);
 
       assert(strb->format != PIPE_FORMAT_NONE);
-      
+
       strb->stride = util_format_get_stride(strb->format, width);
       size = util_format_get_2d_size(strb->format, strb->stride, height);
-      
+
       strb->data = malloc(size);
-      
+
       return strb->data != NULL;
    }
    else {
       struct pipe_resource template;
-    
+
       /* Free the old surface and texture
        */
       pipe_surface_reference( &strb->surface, NULL );
@@ -134,7 +134,7 @@ st_renderbuffer_alloc_storage(struct gl_context * ctx, struct gl_renderbuffer *r
 
       strb->texture = screen->resource_create(screen, &template);
 
-      if (!strb->texture) 
+      if (!strb->texture)
          return FALSE;
 
       memset(&surf_tmpl, 0, sizeof(surf_tmpl));
@@ -240,7 +240,7 @@ st_new_renderbuffer_fb(enum pipe_format format, int samples, boolean sw)
    strb->Base.DataType = st_format_datatype(format);
    strb->format = format;
    strb->software = sw;
-   
+
    switch (format) {
    case PIPE_FORMAT_R8G8B8A8_UNORM:
    case PIPE_FORMAT_B8G8R8A8_UNORM:
@@ -318,7 +318,7 @@ st_bind_framebuffer(struct gl_context *ctx, GLenum target,
  * Called by ctx->Driver.FramebufferRenderbuffer
  */
 static void
-st_framebuffer_renderbuffer(struct gl_context *ctx, 
+st_framebuffer_renderbuffer(struct gl_context *ctx,
                             struct gl_framebuffer *fb,
                             GLenum attachment,
                             struct gl_renderbuffer *rb)
@@ -346,7 +346,7 @@ st_render_texture(struct gl_context *ctx,
    struct pipe_surface surf_tmpl;
 
    /* When would this fail?  Perhaps assert? */
-   if (!pt) 
+   if (!pt)
       return;
 
    /* get pointer to texture image we're rendeing to */
@@ -495,7 +495,7 @@ st_is_depth_stencil_combined(const struct gl_renderbuffer_attachment *depth,
 
    return GL_FALSE;
 }
- 
+
 
 /**
  * Check that the framebuffer configuration is valid in terms of what

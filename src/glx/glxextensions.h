@@ -260,7 +260,7 @@ extern void
 __glXEnableDirectExtension(struct glx_screen *psc, const char *name);
 
 /* Source-level backwards compatibility with old drivers. They won't
- * find the respective functions, though. 
+ * find the respective functions, though.
  */
 typedef void (*PFNGLXENABLEEXTENSIONPROC) (const char *name,
                                            GLboolean force_client);

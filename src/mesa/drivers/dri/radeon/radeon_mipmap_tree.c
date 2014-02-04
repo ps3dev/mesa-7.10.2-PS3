@@ -628,7 +628,7 @@ int radeon_validate_texture_miptree(struct gl_context * ctx, struct gl_texture_o
 			radeon_print(RADEON_TEXTURE, RADEON_TRACE,
 				"Checking image level %d, face %d, mt %p ... ",
 				level, face, img->mt);
-			
+
 			if (img->mt != t->mt) {
 				radeon_print(RADEON_TEXTURE, RADEON_TRACE,
 					"MIGRATING\n");

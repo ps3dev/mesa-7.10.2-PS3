@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -50,7 +50,7 @@ static int calculate_curbe_offsets( struct brw_context *brw )
 {
    /* CACHE_NEW_WM_PROG */
    const GLuint nr_fp_regs = brw->wm.prog_data->curb_read_length;
-   
+
    /* BRW_NEW_VERTEX_PROGRAM */
    const GLuint nr_vp_regs = brw->vs.prog_data->curb_read_length;
    GLuint nr_clip_regs = 0;
@@ -80,7 +80,7 @@ static int calculate_curbe_offsets( struct brw_context *brw )
 
       GLuint reg = 0;
 
-      /* Calculate a new layout: 
+      /* Calculate a new layout:
        */
       reg = 0;
       brw->curbe.wm_start = reg;
@@ -185,7 +185,7 @@ static enum pipe_error prepare_curbe_buffer(struct brw_context *brw)
 
       nr_immediate = fs->immediates.nr;
       if (nr_immediate) {
-         memcpy(&buf[offset], 
+         memcpy(&buf[offset],
                 fs->immediates.data,
                 nr_immediate * 4 * sizeof(float));
 
@@ -240,7 +240,7 @@ static enum pipe_error prepare_curbe_buffer(struct brw_context *brw)
 
       nr_immediate = vs->immediates.nr;
       if (nr_immediate) {
-         memcpy(&buf[offset], 
+         memcpy(&buf[offset],
                 vs->immediates.data,
                 nr_immediate * 4 * sizeof(float));
 
@@ -253,7 +253,7 @@ static enum pipe_error prepare_curbe_buffer(struct brw_context *brw)
           * buffer objects.  If we want to keep on putting them into the
           * curbe, makes sense to treat constbuf's specially with malloc.
           */
-         
+
          /* XXX: what if user's constant buffer is too small?
           */
 	 pipe_buffer_read(&brw->base,
@@ -265,7 +265,7 @@ static enum pipe_error prepare_curbe_buffer(struct brw_context *brw)
    }
 
    if (BRW_DEBUG & DEBUG_CURBE) {
-      for (i = 0; i < sz*16; i+=4) 
+      for (i = 0; i < sz*16; i+=4)
 	 debug_printf("curbe %d.%d: %f %f %f %f\n", i/8, i&4,
 		      buf[i+0], buf[i+1], buf[i+2], buf[i+3]);
 
@@ -281,7 +281,7 @@ static enum pipe_error prepare_curbe_buffer(struct brw_context *brw)
        memcmp(buf, brw->curbe.last_buf, bufsz) == 0) {
       /* constants have not changed */
       FREE(buf);
-   } 
+   }
    else {
       /* constants have changed */
       FREE(brw->curbe.last_buf);
@@ -302,7 +302,7 @@ static enum pipe_error prepare_curbe_buffer(struct brw_context *brw)
 	  * discard the curbe buffer after the batch is flushed to
 	  * avoid synchronous updates.
 	  */
-	 ret = brw->sws->bo_alloc(brw->sws, 
+	 ret = brw->sws->bo_alloc(brw->sws,
                                   BRW_BUFFER_TYPE_CURBE,
                                   4096, 1 << 6,
                                   &brw->curbe.curbe_bo);
@@ -374,7 +374,7 @@ const struct brw_tracked_state brw_curbe_buffer = {
 	       BRW_NEW_PSP | /* Implicit - hardware requires this, not used above */
 	       BRW_NEW_CURBE_OFFSETS |
 	       BRW_NEW_BATCH),
-      .cache = (CACHE_NEW_WM_PROG) 
+      .cache = (CACHE_NEW_WM_PROG)
    },
    .prepare = prepare_curbe_buffer,
    .emit = emit_curbe_buffer,

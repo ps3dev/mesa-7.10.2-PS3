@@ -38,7 +38,7 @@ extern void *
 rtasm_exec_malloc( size_t size );
 
 
-extern void 
+extern void
 rtasm_exec_free( void *addr );
 
 

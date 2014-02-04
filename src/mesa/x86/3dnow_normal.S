@@ -399,10 +399,10 @@ ALIGNTEXT32
 LLBL (G3TRNR_rescale):
 
     PREFETCHW  ( REGIND(EAX) )
-	
+
     MOVQ       ( REGIND(EDX), MM4 )     /* x1            | x0                 */
     MOVD       ( REGOFF(8, EDX), MM5 )  /*               | x2                 */
-	
+
     PFMUL      ( MM0, MM4 )             /* x1*m5         | x0*m0              */
     ADD_L      ( STRIDE, EDX )          /* next normal                        */
 
@@ -846,7 +846,7 @@ LLBL (G3R_end):
     RET
 
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

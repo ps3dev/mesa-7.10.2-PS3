@@ -185,7 +185,7 @@ store_colortable_entries(struct gl_context *ctx, struct gl_color_table *table,
 			 GLfloat bScale, GLfloat bBias,
 			 GLfloat aScale, GLfloat aBias)
 {
-   data = _mesa_map_validate_pbo_source(ctx, 
+   data = _mesa_map_validate_pbo_source(ctx,
                                         1, &ctx->Unpack, count, 1, 1,
                                         format, type, data,
                                         "glColor[Sub]Table");
@@ -641,7 +641,7 @@ _mesa_GetColorTable( GLenum target, GLenum format,
       return;
    }
 
-   data = _mesa_map_validate_pbo_dest(ctx, 
+   data = _mesa_map_validate_pbo_dest(ctx,
                                       1, &ctx->Pack, table->Size, 1, 1,
                                       format, type, data,
                                       "glGetColorTable");

@@ -129,7 +129,7 @@ enum value_extra {
    EXTRA_VERSION_31,
    EXTRA_VERSION_32,
    EXTRA_VERSION_ES2,
-   EXTRA_NEW_BUFFERS, 
+   EXTRA_NEW_BUFFERS,
    EXTRA_VALID_DRAW_BUFFER,
    EXTRA_VALID_TEXTURE_UNIT,
    EXTRA_FLUSH_CURRENT,
@@ -767,7 +767,7 @@ static const struct value_desc values[] = {
    { GL_GREEN_SCALE, CONTEXT_FLOAT(Pixel.GreenScale), NO_EXTRA },
    { GL_INDEX_BITS, BUFFER_INT(Visual.indexBits), extra_new_buffers },
    { GL_INDEX_CLEAR_VALUE, CONTEXT_INT(Color.ClearIndex), NO_EXTRA },
-   { GL_INDEX_MODE, CONST(0) , NO_EXTRA}, 
+   { GL_INDEX_MODE, CONST(0) , NO_EXTRA},
    { GL_INDEX_OFFSET, CONTEXT_INT(Pixel.IndexOffset), NO_EXTRA },
    { GL_INDEX_SHIFT, CONTEXT_INT(Pixel.IndexShift), NO_EXTRA },
    { GL_INDEX_WRITEMASK, CONTEXT_INT(Color.IndexMask), NO_EXTRA },
@@ -1048,13 +1048,13 @@ static const struct value_desc values[] = {
      extra_NV_light_max_exponent },
    { GL_MAX_SPOT_EXPONENT_NV, CONTEXT_FLOAT(Const.MaxSpotExponent),
      extra_NV_light_max_exponent },
-     
+
    /* GL_NV_primitive_restart */
    { GL_PRIMITIVE_RESTART_NV, CONTEXT_BOOL(Array.PrimitiveRestart),
      extra_NV_primitive_restart },
    { GL_PRIMITIVE_RESTART_INDEX_NV, CONTEXT_INT(Array.RestartIndex),
      extra_NV_primitive_restart },
- 
+
    /* GL_ARB_vertex_buffer_object */
    { GL_INDEX_ARRAY_BUFFER_BINDING_ARB, LOC_CUSTOM, TYPE_INT,
      offsetof(struct gl_array_object, Index.BufferObj), NO_EXTRA },
@@ -1147,7 +1147,7 @@ static const struct value_desc values[] = {
    /* GL_EXT_framebuffer_object */
    { GL_MAX_COLOR_ATTACHMENTS_EXT, CONTEXT_INT(Const.MaxColorAttachments),
      extra_EXT_framebuffer_object },
-   
+
    /* GL_EXT_framebuffer_blit
     * NOTE: GL_DRAW_FRAMEBUFFER_BINDING_EXT == GL_FRAMEBUFFER_BINDING_EXT */
    { GL_READ_FRAMEBUFFER_BINDING_EXT, LOC_CUSTOM, TYPE_INT, 0,
@@ -1245,7 +1245,7 @@ static const struct value_desc values[] = {
      extra_version_31 },
    { GL_PRIMITIVE_RESTART_INDEX, CONTEXT_INT(Array.RestartIndex),
      extra_version_31 },
- 
+
 
    /* GL 3.2 */
    { GL_CONTEXT_PROFILE_MASK, CONTEXT_INT(Const.ProfileMask),
@@ -1309,7 +1309,7 @@ print_table_stats(void)
 #endif
 
 /**
- * Initialize the enum hash for a given API 
+ * Initialize the enum hash for a given API
  *
  * This is called from one_time_init() to insert the enum values that
  * are valid for the API in question into the enum hash table.
@@ -1538,7 +1538,7 @@ find_custom_value(struct gl_context *ctx, const struct value_desc *d, union valu
       v->value_int = _mesa_get_compressed_formats(ctx, NULL, GL_FALSE);
       break;
    case GL_COMPRESSED_TEXTURE_FORMATS_ARB:
-      v->value_int_n.n = 
+      v->value_int_n.n =
 	 _mesa_get_compressed_formats(ctx, v->value_int_n.ints, GL_FALSE);
       ASSERT(v->value_int_n.n <= 100);
       break;
@@ -1593,7 +1593,7 @@ find_custom_value(struct gl_context *ctx, const struct value_desc *d, union valu
       break;
 
    case GL_FRAGMENT_PROGRAM_BINDING_NV:
-      v->value_int = 
+      v->value_int =
 	 ctx->FragmentProgram.Current ? ctx->FragmentProgram.Current->Base.Id : 0;
       break;
    case GL_VERTEX_PROGRAM_BINDING_NV:
@@ -1640,7 +1640,7 @@ find_custom_value(struct gl_context *ctx, const struct value_desc *d, union valu
    case GL_MAX_FRAGMENT_UNIFORM_VECTORS:
       v->value_int = ctx->Const.FragmentProgram.MaxUniformComponents / 4;
       break;
-   }   
+   }
 }
 
 /**
@@ -1737,7 +1737,7 @@ static const struct value_desc error_value =
 
 /**
  * Find the struct value_desc corresponding to the enum 'pname'.
- * 
+ *
  * We hash the enum value to get an index into the 'table' array,
  * which holds the index in the 'values' array of struct value_desc.
  * Once we've found the entry, we do the extra checks, if any, then
@@ -1746,7 +1746,7 @@ static const struct value_desc error_value =
  * If the value has to be computed (for example, it's the result of a
  * function call or we need to add 1 to it), we use the tmp 'v' to
  * store the result.
- * 
+ *
  * \param func name of glGet*v() func for error reporting
  * \param pname the enum value we're looking up
  * \param p is were we return the pointer to the value
@@ -1879,7 +1879,7 @@ _mesa_GetBooleanv(GLenum pname, GLboolean *params)
 
    case TYPE_BOOLEAN:
       params[0] = ((GLboolean*) p)[0];
-      break;		
+      break;
 
    case TYPE_MATRIX:
       m = *(GLmatrix **) p;
@@ -1963,7 +1963,7 @@ _mesa_GetFloatv(GLenum pname, GLfloat *params)
 
    case TYPE_BOOLEAN:
       params[0] = BOOLEAN_TO_FLOAT(*(GLboolean*) p);
-      break;		
+      break;
 
    case TYPE_MATRIX:
       m = *(GLmatrix **) p;
@@ -2053,7 +2053,7 @@ _mesa_GetIntegerv(GLenum pname, GLint *params)
 
    case TYPE_BOOLEAN:
       params[0] = BOOLEAN_TO_INT(*(GLboolean*) p);
-      break;		
+      break;
 
    case TYPE_MATRIX:
       m = *(GLmatrix **) p;
@@ -2144,7 +2144,7 @@ _mesa_GetInteger64v(GLenum pname, GLint64 *params)
 
    case TYPE_BOOLEAN:
       params[0] = ((GLboolean*) p)[0];
-      break;		
+      break;
 
    case TYPE_MATRIX:
       m = *(GLmatrix **) p;
@@ -2229,7 +2229,7 @@ _mesa_GetDoublev(GLenum pname, GLdouble *params)
 
    case TYPE_BOOLEAN:
       params[0] = *(GLboolean*) p;
-      break;		
+      break;
 
    case TYPE_MATRIX:
       m = *(GLmatrix **) p;
@@ -2372,7 +2372,7 @@ _mesa_GetInteger64Indexedv( GLenum pname, GLuint index, GLint64 *params )
 {
    union value v;
    enum value_type type =
-      find_value_indexed("glGetIntegerIndexedv", pname, index, &v);      
+      find_value_indexed("glGetIntegerIndexedv", pname, index, &v);
 
    switch (type) {
    case TYPE_INT:
@@ -2452,7 +2452,7 @@ _mesa_GetFixedv(GLenum pname, GLfixed *params)
 
    case TYPE_BOOLEAN:
       params[0] = BOOLEAN_TO_FIXED(((GLboolean*) p)[0]);
-      break;		
+      break;
 
    case TYPE_MATRIX:
       m = *(GLmatrix **) p;

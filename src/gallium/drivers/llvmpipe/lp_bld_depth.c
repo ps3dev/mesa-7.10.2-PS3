@@ -38,7 +38,7 @@
  *
  * We are free to use a different pixel layout though. Since our basic
  * processing unit is a quad (2x2 pixel block) we store the depth/stencil
- * values tiled, a quad at time. That is, a depth buffer containing 
+ * values tiled, a quad at time. That is, a depth buffer containing
  *
  *  Z11 Z12 Z13 Z14 ...
  *  Z21 Z22 Z23 Z24 ...
@@ -342,7 +342,7 @@ get_z_shift_and_mask(const struct util_format_description *format_desc,
    unsigned z_swizzle;
    unsigned chan;
    unsigned padding_left, padding_right;
-   
+
    assert(format_desc->colorspace == UTIL_FORMAT_COLORSPACE_ZS);
    assert(format_desc->block.width == 1);
    assert(format_desc->block.height == 1);

@@ -62,7 +62,7 @@ const char *data_types[BRW_DATA_MAX] =
    "(untyped)"
 };
 
-static enum pipe_error 
+static enum pipe_error
 i965_libdrm_bo_alloc(struct brw_winsys_screen *sws,
                      enum brw_buffer_type type,
                      unsigned size,
@@ -102,9 +102,9 @@ i965_libdrm_bo_alloc(struct brw_winsys_screen *sws,
       break;
    }
 
-   buf->bo = drm_intel_bo_alloc(idws->gem, 
-                                names[type], 
-                                size, 
+   buf->bo = drm_intel_bo_alloc(idws->gem,
+                                names[type],
+                                size,
                                 alignment);
 
    if (!buf->bo)
@@ -195,7 +195,7 @@ i965_libdrm_bo_get_handle(struct brw_winsys_buffer *buffer,
    return PIPE_OK;
 }
 
-static void 
+static void
 i965_libdrm_bo_destroy(struct brw_winsys_buffer *buffer)
 {
    struct i965_libdrm_buffer *buf = i965_libdrm_buffer(buffer);
@@ -221,7 +221,7 @@ i965_libdrm_bo_emit_reloc(struct brw_winsys_buffer *buffer,
 
    if (BRW_DUMP)
       debug_printf("%s buf %p offset %x delta %x buf2 %p/%s/%s\n",
-		   __FUNCTION__, (void *)buffer, 
+		   __FUNCTION__, (void *)buffer,
 		   offset, delta,
 		   (void *)buffer2, names[buf2->data_type], usages[usage]);
 
@@ -279,7 +279,7 @@ i965_libdrm_bo_emit_reloc(struct brw_winsys_buffer *buffer,
    return 0;
 }
 
-static enum pipe_error 
+static enum pipe_error
 i965_libdrm_bo_exec(struct brw_winsys_buffer *buffer,
                     unsigned bytes_used)
 {
@@ -315,16 +315,16 @@ i965_libdrm_bo_subdata(struct brw_winsys_buffer *buffer,
    (void)data_type;
 
    if (BRW_DUMP)
-      debug_printf("%s buf %p off %d sz %d %s relocs: %d\n", 
-		   __FUNCTION__, 
-		   (void *)buffer, offset, size, 
+      debug_printf("%s buf %p off %d sz %d %s relocs: %d\n",
+		   __FUNCTION__,
+		   (void *)buffer, offset, size,
 		   data_types[data_type],
 		   nr_reloc);
 
    if (BRW_DUMP)
       brw_dump_data( idws->base.pci_id,
 		     data_type,
-		     buf->bo->offset + offset, 
+		     buf->bo->offset + offset,
 		     data, size );
 
    /* XXX: use bo_map_gtt/memcpy/unmap_gtt under some circumstances???
@@ -332,7 +332,7 @@ i965_libdrm_bo_subdata(struct brw_winsys_buffer *buffer,
    ret = drm_intel_bo_subdata(buf->bo, offset, size, (void*)data);
    if (ret)
       return PIPE_ERROR;
-  
+
    for (i = 0; i < nr_reloc; i++) {
       i965_libdrm_bo_emit_reloc(buffer, reloc[i].usage, reloc[i].delta,
                                 reloc[i].offset, reloc[i].bo);
@@ -341,7 +341,7 @@ i965_libdrm_bo_subdata(struct brw_winsys_buffer *buffer,
    return PIPE_OK;
 }
 
-static boolean 
+static boolean
 i965_libdrm_bo_is_busy(struct brw_winsys_buffer *buffer)
 {
    struct i965_libdrm_buffer *buf = i965_libdrm_buffer(buffer);
@@ -358,7 +358,7 @@ i965_libdrm_bo_is_busy(struct brw_winsys_buffer *buffer)
    return ret;
 }
 
-static boolean 
+static boolean
 i965_libdrm_bo_references(struct brw_winsys_buffer *a,
                           struct brw_winsys_buffer *b)
 {
@@ -424,7 +424,7 @@ i965_libdrm_bo_map(struct brw_winsys_buffer *buffer,
 
 
    if (BRW_DUMP)
-      debug_printf("%s %p %s %s\n", __FUNCTION__, (void *)buffer, 
+      debug_printf("%s %p %s %s\n", __FUNCTION__, (void *)buffer,
 		   write ? "read/write" : "read",
 		   write ? data_types[data_type] : "");
 
@@ -462,12 +462,12 @@ i965_libdrm_bo_flush_range(struct brw_winsys_buffer *buffer,
    if (BRW_DUMP)
       brw_dump_data( idws->base.pci_id,
 		     buf->data_type,
-		     buf->bo->offset + offset, 
-		     (char*)buf->bo->virtual + offset, 
+		     buf->bo->offset + offset,
+		     (char*)buf->bo->virtual + offset,
 		     length );
 }
 
-static void 
+static void
 i965_libdrm_bo_unmap(struct brw_winsys_buffer *buffer)
 {
    struct i965_libdrm_buffer *buf = i965_libdrm_buffer(buffer);

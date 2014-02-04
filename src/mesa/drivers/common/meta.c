@@ -676,7 +676,7 @@ _mesa_meta_end(struct gl_context *ctx)
       if (ctx->Extensions.ARB_vertex_program) {
          _mesa_set_enable(ctx, GL_VERTEX_PROGRAM_ARB,
                           save->VertexProgramEnabled);
-         _mesa_reference_vertprog(ctx, &ctx->VertexProgram.Current, 
+         _mesa_reference_vertprog(ctx, &ctx->VertexProgram.Current,
                                   save->VertexProgram);
 	 _mesa_reference_vertprog(ctx, &save->VertexProgram, NULL);
       }
@@ -1935,7 +1935,7 @@ _mesa_meta_DrawPixels(struct gl_context *ctx,
       _mesa_StencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
       _mesa_StencilFunc(GL_ALWAYS, 0, 255);
       _mesa_DrawArrays(GL_TRIANGLE_FAN, 0, 4);
-  
+
       /* set stencil bits to 1 where needed */
       _mesa_StencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
@@ -2417,7 +2417,7 @@ _mesa_meta_GenerateMipmap(struct gl_context *ctx, GLenum target,
       verts[2].y = 1.0F;
       verts[3].x = 0.0F;
       verts[3].y = 1.0F;
-      
+
       /* upload new vertex data */
       _mesa_BufferSubDataARB(GL_ARRAY_BUFFER_ARB, 0, sizeof(verts), verts);
    }

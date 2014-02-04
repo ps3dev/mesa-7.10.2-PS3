@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/mtypes.h"
@@ -247,7 +247,7 @@ i915_update_tex_unit(struct intel_context *intel, GLuint unit, GLuint ss3)
           lodbias = -256;
       if (lodbias > 255)
           lodbias = 255;
-      state[I915_TEXREG_SS2] = ((lodbias << SS2_LOD_BIAS_SHIFT) & 
+      state[I915_TEXREG_SS2] = ((lodbias << SS2_LOD_BIAS_SHIFT) &
                                 SS2_LOD_BIAS_MASK);
 
       /* YUV conversion:
@@ -260,7 +260,7 @@ i915_update_tex_unit(struct intel_context *intel, GLuint unit, GLuint ss3)
        */
       if (tObj->CompareMode == GL_COMPARE_R_TO_TEXTURE_ARB &&
           tObj->Target != GL_TEXTURE_3D) {
-         if (tObj->Target == GL_TEXTURE_1D) 
+         if (tObj->Target == GL_TEXTURE_1D)
             return GL_FALSE;
 
          state[I915_TEXREG_SS2] |=
@@ -292,8 +292,8 @@ i915_update_tex_unit(struct intel_context *intel, GLuint unit, GLuint ss3)
 
       /* 3D textures don't seem to respect the border color.
        * Fallback if there's ever a danger that they might refer to
-       * it.  
-       * 
+       * it.
+       *
        * Effectively this means fallback on 3D clamp or
        * clamp_to_border.
        */
@@ -307,7 +307,7 @@ i915_update_tex_unit(struct intel_context *intel, GLuint unit, GLuint ss3)
            wt == GL_CLAMP_TO_BORDER || wr == GL_CLAMP_TO_BORDER))
          return GL_FALSE;
 
-      /* Only support TEXCOORDMODE_CLAMP_EDGE and TEXCOORDMODE_CUBE (not 
+      /* Only support TEXCOORDMODE_CLAMP_EDGE and TEXCOORDMODE_CUBE (not
        * used) when using cube map texture coordinates
        */
       if (tObj->Target == GL_TEXTURE_CUBE_MAP_ARB &&

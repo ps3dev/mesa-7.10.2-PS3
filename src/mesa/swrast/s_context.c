@@ -664,7 +664,7 @@ _swrast_validate_derived( struct gl_context *ctx )
                               _NEW_TEXTURE))
          _swrast_update_active_attribs(ctx);
 
-      if (swrast->NewState & (_NEW_FOG | 
+      if (swrast->NewState & (_NEW_FOG |
                               _NEW_PROGRAM |
                               _NEW_LIGHT |
                               _NEW_TEXTURE))
@@ -903,7 +903,7 @@ _swrast_render_start( struct gl_context *ctx )
       swrast->Driver.SpanRenderStart( ctx );
    swrast->PointSpan.end = 0;
 }
- 
+
 void
 _swrast_render_finish( struct gl_context *ctx )
 {

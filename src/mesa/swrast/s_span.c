@@ -66,7 +66,7 @@ _swrast_span_default_attribs(struct gl_context *ctx, SWspan *span)
       if (ctx->DrawBuffer->Visual.depthBits <= 16)
          span->z = FloatToFixed(ctx->Current.RasterPos[2] * depthMax + 0.5F);
       else {
-         GLfloat tmpf = ctx->Current.RasterPos[2] * depthMax; 
+         GLfloat tmpf = ctx->Current.RasterPos[2] * depthMax;
          tmpf = MIN2(tmpf, depthMax);
          span->z = (GLint)tmpf;
       }
@@ -379,7 +379,7 @@ _swrast_span_interpolate_z( const struct gl_context *ctx, SWspan *span )
 
    if (ctx->DrawBuffer->Visual.depthBits <= 16) {
       GLfixed zval = span->z;
-      GLuint *z = span->array->z; 
+      GLuint *z = span->array->z;
       for (i = 0; i < n; i++) {
          z[i] = FixedToInt(zval);
          zval += span->zStep;
@@ -1212,7 +1212,7 @@ _swrast_write_rgba_span( struct gl_context *ctx, SWspan *span)
    {
       const GLuint numBuffers = fb->_NumColorDrawBuffers;
       const struct gl_fragment_program *fp = ctx->FragmentProgram._Current;
-      const GLboolean multiFragOutputs = 
+      const GLboolean multiFragOutputs =
          (fp && fp->Base.OutputsWritten >= (1 << FRAG_RESULT_DATA0));
       GLuint buf;
 

@@ -238,7 +238,7 @@ static void sisCopyBuffer( __DRIdrawable *dPriv )
 
       mWait3DCmdQueue(10);
       MMIO(REG_SRC_ADDR, smesa->back.offset);
-      MMIO(REG_SRC_PITCH, smesa->back.pitch | ((smesa->bytesPerPixel == 4) ? 
+      MMIO(REG_SRC_PITCH, smesa->back.pitch | ((smesa->bytesPerPixel == 4) ?
 			   BLIT_DEPTH_32 : BLIT_DEPTH_16));
       MMIO(REG_SRC_X_Y, ((box->x1 - dPriv->x) << 16) | (box->y1 - dPriv->y));
       MMIO(REG_DST_X_Y, ((box->x1 - dPriv->x) << 16) | (box->y1 - dPriv->y));
@@ -250,7 +250,7 @@ static void sisCopyBuffer( __DRIdrawable *dPriv )
    }
 
    *(GLint *)(smesa->IOBase+0x8a2c) = *smesa->FrameCountPtr;
-   (*smesa->FrameCountPtr)++;  
+   (*smesa->FrameCountPtr)++;
 
    UNLOCK_HARDWARE ();
 }
@@ -277,7 +277,7 @@ sisSwapBuffers(__DRIdrawable *dPriv)
 
 /**
  * This is the driver specific part of the createNewScreen entry point.
- * 
+ *
  * \todo maybe fold this into intelInitDriver
  *
  * \return the struct gl_config supported by this driver

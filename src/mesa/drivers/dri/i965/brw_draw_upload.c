@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -169,7 +169,7 @@ static GLuint get_surface_type( GLenum type, GLuint size,
                                 GLenum format, GLboolean normalized )
 {
    if (unlikely(INTEL_DEBUG & DEBUG_VERTS))
-      printf("type %s size %d normalized %d\n", 
+      printf("type %s size %d normalized %d\n",
 		   _mesa_lookup_enum_by_nr(type), size, normalized);
 
    if (normalized) {
@@ -192,7 +192,7 @@ static GLuint get_surface_type( GLenum type, GLuint size,
             return ubyte_types_norm[size];
          }
       default: assert(0); return 0;
-      }      
+      }
    }
    else {
       assert(format == GL_RGBA); /* sanity check */
@@ -207,7 +207,7 @@ static GLuint get_surface_type( GLenum type, GLuint size,
       case GL_UNSIGNED_SHORT: return ushort_types_scale[size];
       case GL_UNSIGNED_BYTE: return ubyte_types_scale[size];
       default: assert(0); return 0;
-      }      
+      }
    }
 }
 
@@ -225,10 +225,10 @@ static GLuint get_size( GLenum type )
    case GL_UNSIGNED_SHORT: return sizeof(GLushort);
    case GL_UNSIGNED_BYTE: return sizeof(GLubyte);
    default: return 0;
-   }      
+   }
 }
 
-static GLuint get_index_type(GLenum type) 
+static GLuint get_index_type(GLenum type)
 {
    switch (type) {
    case GL_UNSIGNED_BYTE:  return BRW_INDEX_BYTE;
@@ -315,7 +315,7 @@ static void brw_prepare_vertices(struct brw_context *brw)
 {
    struct gl_context *ctx = &brw->intel.ctx;
    struct intel_context *intel = intel_context(ctx);
-   GLbitfield vs_inputs = brw->vs.prog_data->inputs_read; 
+   GLbitfield vs_inputs = brw->vs.prog_data->inputs_read;
    GLuint i;
    const unsigned char *ptr = NULL;
    GLuint interleave = 0;

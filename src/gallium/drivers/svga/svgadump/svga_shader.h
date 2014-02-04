@@ -26,7 +26,7 @@
 /**
  * @file
  * SVGA Shader Token Definitions
- * 
+ *
  * @author Michal Krol <michal@vmware.com>
  */
 

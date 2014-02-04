@@ -123,7 +123,7 @@ sisDDClear( struct gl_context * ctx, GLbitfield mask )
    if ((smesa->current.hwCapEnable2 & (MASK_AlphaMaskWriteEnable |
       MASK_ColorMaskWriteEnable) &&
       (mask & (BUFFER_BIT_BACK_LEFT | BUFFER_BIT_FRONT_LEFT)) != 0) ||
-      ((ctx->Stencil.WriteMask[0] & 0xff) != 0xff && 
+      ((ctx->Stencil.WriteMask[0] & 0xff) != 0xff &&
        (mask & BUFFER_BIT_STENCIL) != 0) )
    {
       mask = sis_3D_Clear( ctx, mask, x1, y1, width1, height1 );
@@ -280,7 +280,7 @@ sis_3D_Clear( struct gl_context * ctx, GLbitfield mask,
       MMIO(REG_3D_ClipLeftRight, ((GLint)left << 13) | (GLint)right);
 
       /* the first triangle */
-      dwPrimitiveSet = OP_3D_TRIANGLE_DRAW | OP_3D_FIRE_TSARGBc | 
+      dwPrimitiveSet = OP_3D_TRIANGLE_DRAW | OP_3D_FIRE_TSARGBc |
                         SHADE_FLAT_VertexC;
       MMIO(REG_3D_PrimitiveSet, dwPrimitiveSet);
 
@@ -335,7 +335,7 @@ sis_clear_color_buffer( struct gl_context *ctx, GLenum mask, GLint x, GLint y,
    /* Clear back buffer */
    if (mask & BUFFER_BIT_BACK_LEFT) {
       mWait3DCmdQueue (8);
-      MMIO(REG_SRC_PITCH, (smesa->bytesPerPixel == 4) ? 
+      MMIO(REG_SRC_PITCH, (smesa->bytesPerPixel == 4) ?
 			   BLIT_DEPTH_32 : BLIT_DEPTH_16);
       MMIO(REG_DST_X_Y, (x << 16) | y);
       MMIO(REG_DST_ADDR, smesa->back.offset);
@@ -345,7 +345,7 @@ sis_clear_color_buffer( struct gl_context *ctx, GLenum mask, GLint x, GLint y,
       MMIO(REG_BLIT_CMD, CMD_DIR_X_INC | CMD_DIR_Y_INC | CMD_ROP_PAT);
       MMIO(REG_CommandQueue, -1);
    }
-  
+
    if ((mask & BUFFER_BIT_FRONT_LEFT) == 0)
       return;
 
@@ -376,7 +376,7 @@ sis_clear_color_buffer( struct gl_context *ctx, GLenum mask, GLint x, GLint y,
 	continue;
 
       mWait3DCmdQueue (8);
-      MMIO(REG_SRC_PITCH, (smesa->bytesPerPixel == 4) ? 
+      MMIO(REG_SRC_PITCH, (smesa->bytesPerPixel == 4) ?
 			   BLIT_DEPTH_32 : BLIT_DEPTH_16);
       MMIO(REG_DST_X_Y, (x << 16) | y);
       MMIO(REG_DST_ADDR, smesa->front.offset);

@@ -520,7 +520,7 @@ void spe_allocate_register_set(struct spe_function *p)
 {
    uint i;
 
-   /* Keep track of the set count.  If it ever wraps around to 0, 
+   /* Keep track of the set count.  If it ever wraps around to 0,
     * we're in trouble.
     */
    p->set_count++;
@@ -843,7 +843,7 @@ spe_and_uint(struct spe_function *p, int rT, int rA, uint ui)
       spe_andi(p, rT, rA, ui & 0x000003ff);
       return;
    }
-   
+
    /* If the ui field is symmetric along halfword boundaries and
     * the upper 7 bits of each halfword are all 0s or 1s, we
     * can use And Halfword Immediate
@@ -878,10 +878,10 @@ spe_and_uint(struct spe_function *p, int rT, int rA, uint ui)
 void
 spe_xor_uint(struct spe_function *p, int rT, int rA, uint ui)
 {
-   /* If we can, emit a single instruction, either Exclusive Or Byte 
-    * Immediate (which uses the same constant across each byte), Exclusive 
-    * Or Halfword Immediate (which sign-extends a 10-bit immediate to 
-    * 16 bits and uses that across each halfword), or Exclusive Or Word 
+   /* If we can, emit a single instruction, either Exclusive Or Byte
+    * Immediate (which uses the same constant across each byte), Exclusive
+    * Or Halfword Immediate (which sign-extends a 10-bit immediate to
+    * 16 bits and uses that across each halfword), or Exclusive Or Word
     * Immediate (which sign-extends a 10-bit immediate to 32 bits).
     *
     * Otherwise, we'll need to use a temporary register.
@@ -896,7 +896,7 @@ spe_xor_uint(struct spe_function *p, int rT, int rA, uint ui)
       spe_xori(p, rT, rA, ui & 0x000003ff);
       return;
    }
-   
+
    /* If the ui field is symmetric along halfword boundaries and
     * the upper 7 bits of each halfword are all 0s or 1s, we
     * can use Exclusive Or Halfword Immediate
@@ -1025,7 +1025,7 @@ spe_splat_word(struct spe_function *p, int rT, int rA, int word)
 /**
  * For each 32-bit float element of rA and rB, choose the smaller of the
  * two, compositing them into the rT register.
- * 
+ *
  * The Float Compare Greater Than (fcgt) instruction will put 1s into
  * compare_reg where rA > rB, and 0s where rA <= rB.
  *
@@ -1038,7 +1038,7 @@ spe_splat_word(struct spe_function *p, int rT, int rA, int word)
  * rT == rA || rt == rB.  But since this is common in constructions
  * like "x = min(x, a)", we always allocate a new register to be safe.
  */
-void 
+void
 spe_float_min(struct spe_function *p, int rT, int rA, int rB)
 {
    int compare_reg = spe_allocate_available_register(p);
@@ -1050,12 +1050,12 @@ spe_float_min(struct spe_function *p, int rT, int rA, int rB)
 /**
  * For each 32-bit float element of rA and rB, choose the greater of the
  * two, compositing them into the rT register.
- * 
+ *
  * The logic is similar to that of spe_float_min() above; the only
  * difference is that the registers on spe_selb() have been reversed,
  * so that the larger of the two is selected instead of the smaller.
  */
-void 
+void
 spe_float_max(struct spe_function *p, int rT, int rA, int rB)
 {
    int compare_reg = spe_allocate_available_register(p);

@@ -71,10 +71,10 @@ _mesa_init_attrib_dispatch(struct _glapi_table *disp)
 
 #endif /* FEATURE_attrib_stack */
 
-extern void 
+extern void
 _mesa_init_attrib( struct gl_context *ctx );
 
-extern void 
+extern void
 _mesa_free_attrib_data( struct gl_context *ctx );
 
 #endif /* ATTRIB_H */

@@ -108,7 +108,7 @@ applegl_create_context(struct glx_screen *psc,
    gc->do_destroy = False;
 
    /* TODO: darwin: Integrate with above to do indirect */
-   if(apple_glx_create_context(&gc->driContext, dpy, screen, fbconfig, 
+   if(apple_glx_create_context(&gc->driContext, dpy, screen, fbconfig,
 			       shareList ? shareList->driContext : NULL,
 			       &errorcode, &x11error)) {
       __glXSendError(dpy, errorcode, 0, X_GLXCreateContext, x11error);

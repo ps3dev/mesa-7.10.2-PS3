@@ -87,7 +87,7 @@ static const struct svga_tracked_state *swtnl_draw_state[] =
 /* Flattens the graph of state dependencies.  Could swap the positions
  * of hw_clear_state and need_swtnl_state without breaking anything.
  */
-static const struct svga_tracked_state **state_levels[] = 
+static const struct svga_tracked_state **state_levels[] =
 {
    need_swtnl_state,
    hw_clear_state,
@@ -136,15 +136,15 @@ static int update_state( struct svga_context *svga,
        * state flags which are generated and checked to help ensure
        * state atoms are ordered correctly in the list.
        */
-      unsigned examined, prev;      
+      unsigned examined, prev;
 
       examined = 0;
       prev = *state;
 
-      for (i = 0; atoms[i] != NULL; i++) {	 
+      for (i = 0; atoms[i] != NULL; i++) {
 	 unsigned generated;
 
-	 assert(atoms[i]->dirty); 
+	 assert(atoms[i]->dirty);
 	 assert(atoms[i]->update);
 
 	 if (check_state(*state, atoms[i]->dirty)) {
@@ -161,17 +161,17 @@ static int update_state( struct svga_context *svga,
 	  */
 	 xor_states(&generated, prev, *state);
 	 if (check_state(examined, generated)) {
-	    debug_printf("state atom %s generated state already examined\n", 
+	    debug_printf("state atom %s generated state already examined\n",
                          atoms[i]->name);
 	    assert(0);
 	 }
-			 
+
 	 prev = *state;
 	 accumulate_state(&examined, atoms[i]->dirty);
       }
    }
    else {
-      for (i = 0; atoms[i] != NULL; i++) {	 
+      for (i = 0; atoms[i] != NULL; i++) {
 	 if (check_state(*state, atoms[i]->dirty)) {
 	    ret = atoms[i]->update( svga, *state );
             if (ret != 0)
@@ -205,8 +205,8 @@ int svga_update_state( struct svga_context *svga,
       svga->dirty |= svga->state.dirty[i];
 
       if (svga->dirty) {
-         ret = update_state( svga, 
-                             state_levels[i], 
+         ret = update_state( svga,
+                             state_levels[i],
                              &svga->dirty );
          if (ret != 0)
             return ret;
@@ -214,8 +214,8 @@ int svga_update_state( struct svga_context *svga,
          svga->state.dirty[i] = 0;
       }
    }
-   
-   for (; i < SVGA_STATE_MAX; i++) 
+
+   for (; i < SVGA_STATE_MAX; i++)
       svga->state.dirty[i] |= svga->dirty;
 
    svga->dirty = 0;
@@ -269,7 +269,7 @@ enum pipe_error svga_emit_initial_state( struct svga_context *svga )
     */
    EMIT_RS(rs, count, SVGA3D_RS_COORDINATETYPE, SVGA3D_COORDINATE_LEFTHANDED );
    EMIT_RS(rs, count, SVGA3D_RS_FRONTWINDING, SVGA3D_FRONTWINDING_CW );
-   
+
    assert( COUNT == count );
    SVGA_FIFOCommitAll( svga->swc );
 

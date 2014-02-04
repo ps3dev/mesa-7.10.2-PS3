@@ -181,7 +181,7 @@ private:
     *GLU_U_STEP: number of u-segments per unit u length of domain
     *GLU_V_STEP: number of v-segments per unit v length of domain
     *These two numbers are normally stored in mapdesc->maxs(t)rate.
-    *I (ZL) put these two numbers here so that I can optimize the untrimmed 
+    *I (ZL) put these two numbers here so that I can optimize the untrimmed
     *case in the case of domain distance sampling.
     *These two numbers are set by set_domain_distance_u_rate() and ..._v_..().
     */
@@ -191,7 +191,7 @@ private:
 };
 
 inline void
-Subdivider::beginLoop( void ) 
+Subdivider::beginLoop( void )
 {
     pjarc = 0;
 }

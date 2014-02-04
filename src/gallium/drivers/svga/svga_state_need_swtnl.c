@@ -35,7 +35,7 @@
 /***********************************************************************
  */
 
-static INLINE SVGA3dDeclType 
+static INLINE SVGA3dDeclType
 svga_translate_vertex_format(enum pipe_format format)
 {
    switch (format) {
@@ -89,11 +89,11 @@ static int update_need_swvfetch( struct svga_context *svga,
       svga->state.sw.need_swvfetch = need_swvfetch;
       svga->dirty |= SVGA_NEW_NEED_SWVFETCH;
    }
-   
+
    return 0;
 }
 
-struct svga_tracked_state svga_update_need_swvfetch = 
+struct svga_tracked_state svga_update_need_swvfetch =
 {
    "update need_swvfetch",
    ( SVGA_NEW_VELEMENT ),
@@ -101,13 +101,13 @@ struct svga_tracked_state svga_update_need_swvfetch =
 };
 
 
-/*********************************************************************** 
+/***********************************************************************
  */
 
 static int update_need_pipeline( struct svga_context *svga,
                                  unsigned dirty )
 {
-   
+
    boolean need_pipeline = FALSE;
    struct svga_vertex_shader *vs = svga->curr.vs;
 
@@ -128,7 +128,7 @@ static int update_need_pipeline( struct svga_context *svga,
       need_pipeline = TRUE;
    }
 
-   /* SVGA_NEW_CLIP 
+   /* SVGA_NEW_CLIP
     */
    if (svga->curr.clip.nr) {
       SVGA_DBG(DEBUG_SWTNL, "%s: userclip\n", __FUNCTION__);
@@ -144,7 +144,7 @@ static int update_need_pipeline( struct svga_context *svga,
 }
 
 
-struct svga_tracked_state svga_update_need_pipeline = 
+struct svga_tracked_state svga_update_need_pipeline =
 {
    "need pipeline",
    (SVGA_NEW_RAST |
@@ -155,7 +155,7 @@ struct svga_tracked_state svga_update_need_pipeline =
 };
 
 
-/*********************************************************************** 
+/***********************************************************************
  */
 
 static int update_need_swtnl( struct svga_context *svga,
@@ -186,7 +186,7 @@ static int update_need_swtnl( struct svga_context *svga,
       svga->dirty |= SVGA_NEW_NEED_SWTNL;
       svga->swtnl.new_vdecl = TRUE;
    }
-  
+
    return 0;
 }
 

@@ -103,7 +103,7 @@ New Tokens
 
     Accepted by the <target> parameter of TexImage2D, TexSubImage2D,
     CopyTexImage2D, CopyTexSubImage2D, CompressedTexImage2D,
-    CompressedTexSubImage2D, GetTexLevelParameteriv, and 
+    CompressedTexSubImage2D, GetTexLevelParameteriv, and
     GetTexLevelParameterfv:
 
         TEXTURE_1D_ARRAY_EXT
@@ -189,7 +189,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
 
        Change the fourth paragraph on page 156 to say (spec changes identical
        to EXT_texture_array):
-       
+
        "The command
 
          void TexImage2D(enum target, int level,
@@ -213,7 +213,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
        of 1, except that
 
          * The border depth, d_b, is zero, and the depth of the image is
-           always 1 regardless of the value of border. 
+           always 1 regardless of the value of border.
 
          * The border height, h_b, is zero if <target> is
            TEXTURE_1D_ARRAY_EXT, and <border> otherwise.
@@ -264,7 +264,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
        specified or changed, and when applied to a fragment. Each parameter is
        set by calling
 
-         void TexParameter{if}(enum target, enum pname, T param); 
+         void TexParameter{if}(enum target, enum pname, T param);
          void TexParameter{if}v(enum target, enum pname, T params);
 
        target is the target, either TEXTURE_1D, TEXTURE_2D, TEXTURE_3D,
@@ -289,7 +289,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
     -- Section 3.8.8 "Texture Minification" in the section "Mipmapping"
 
        Change the third paragraph (page 174) to say:
-       
+
        "For a two-dimensional texture, two-dimensional array texture, or
        cube map texture,"
 
@@ -369,7 +369,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
 
     -- Section 3.8.12 "Texture Objects"
 
-       Change section (page 180) to say (spec changes identical to 
+       Change section (page 180) to say (spec changes identical to
        EXT_texture_array):
 
        "In addition to the default textures TEXTURE_1D, TEXTURE_2D,
@@ -421,18 +421,18 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
        TEXTURE_2D_ARRAY_EXT respectively while 0 is bound to the corresponding
        targets.
 
-       Change second paragraph on page 181 to say (spec changes identical to 
+       Change second paragraph on page 181 to say (spec changes identical to
        EXT_texture_array):
-       
+
        "...  If a texture that is currently bound to one of the targets
        TEXTURE_1D, TEXTURE_2D, TEXTURE_3D, TEXTURE_CUBE_MAP,
        TEXTURE_1D_ARRAY_EXT, or TEXTURE_2D_ARRAY_EXT is deleted, it is as
        though BindTexture had been executed with the same target and texture
        zero. ..."
 
-       Change second paragraph on page 182 to say (spec changes identical to 
+       Change second paragraph on page 182 to say (spec changes identical to
        EXT_texture_array):
-       
+
        "The texture object name space, including the initial one-, two-, and
        three dimensional, cube map, and one- and two-dimensional array texture
        objects, is shared among all texture units. ..."
@@ -473,7 +473,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
        three-dimensional texture is used.  If the cube map texture and any of
        the three-, two-, or one-dimensional textures is enabled, then cube map
        texturing is used.  If one-dimensional array texture is enabled and any
-       of cube map, three-, two-, or one-dimensional textures is enabled, 
+       of cube map, three-, two-, or one-dimensional textures is enabled,
        one-dimensional array texturing is used.  If two-dimensional array
        texture is enabled and any of cube map, three-, two-, one-dimensional
        textures or one-dimensional array texture is enabled, two-dimensional
@@ -524,7 +524,7 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
        rectangle, ARRAY1D, ARRAY2D).  These texture instructions specify
        how the 4-tuple is mapped into the coordinates used for sampling.  The
        following function is used to describe the texture sampling in the
-       descriptions below: 
+       descriptions below:
 
          vec4 TextureSample(vec4 coord, float lodBias, int texImageUnit,
                             enum texTarget);
@@ -556,9 +556,9 @@ Additions to Chapter 3 of the OpenGL 2.0 Specification (Rasterization)
          texture comparisons."
 
     -- Section 3.11.6.2 "TXP: Project coordinate and map to color"
-    
+
        Add to the end of the section:
-       
+
        "A program will fail to load if the TXP instruction is used in
        conjunction with the SHADOWARRAY2D target."
 
@@ -595,7 +595,7 @@ Additions to Chapter 4 of the OpenGL 2.0 Specification (Per-Fragment Operations)
       identical to EXT_texture_array):
 
         "* If FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT is TEXTURE and
-           FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT names a one- or 
+           FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT names a one- or
            two-dimensional array texture, then
            FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT must be smaller than the
            number of layers in the texture."
@@ -630,7 +630,7 @@ Additions to Chapter 6 of the OpenGL 2.0 Specification (State and State Requests
        attachment point.  Otherwise, <params> will contain the value zero."
 
     -- Section 6.1.4 "Texture Queries"
-    
+
        Change the first three paragraphs (page 248) to say (spec changes
        identical to EXT_texture_array):
 
@@ -766,9 +766,9 @@ Issues
         RESOLVED.  A new query is added.
 
     (5) How are array textures exposed in GLSL?
-    
+
         RESOLVED.  Use GL_EXT_texture_array.
-        
+
     (6) Should a 1D array texture also be exposed?
 
         RESOLVED.  For orthogonality, yes.
@@ -781,7 +781,7 @@ Issues
         two-dimensional texture.
 
     (8) How is this extension related to GL_EXT_texture_array?
-    
+
         This extension adapats GL_MESAX_texture_stack to the notation,
         indexing, and FBO access of GL_EXT_texture_array.  This extension
         replaces the GLSL support of GL_EXT_texture_array with

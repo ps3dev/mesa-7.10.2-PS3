@@ -32,7 +32,7 @@
 
 
 
-struct vmw_fence_ops 
+struct vmw_fence_ops
 {
    struct pb_fence_ops base;
 
@@ -87,7 +87,7 @@ vmw_fence_ops_destroy(struct pb_fence_ops *ops)
 
 
 struct pb_fence_ops *
-vmw_fence_ops_create(struct vmw_winsys_screen *vws) 
+vmw_fence_ops_create(struct vmw_winsys_screen *vws)
 {
    struct vmw_fence_ops *ops;
 

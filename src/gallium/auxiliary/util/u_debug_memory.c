@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,36 +22,36 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
  * @file
  * Memory debugging.
- * 
+ *
  * @author José Fonseca <jrfonseca@tungstengraphics.com>
  */
 
-#include "pipe/p_config.h" 
+#include "pipe/p_config.h"
 
 #define DEBUG_MEMORY_IMPLEMENTATION
 
 #include "os/os_memory.h"
 #include "os/os_memory_debug.h"
 
-#include "util/u_debug.h" 
-#include "util/u_debug_stack.h" 
-#include "util/u_double_list.h" 
+#include "util/u_debug.h"
+#include "util/u_debug_stack.h"
+#include "util/u_double_list.h"
 
 
-#define DEBUG_MEMORY_MAGIC 0x6e34090aU 
+#define DEBUG_MEMORY_MAGIC 0x6e34090aU
 #define DEBUG_MEMORY_STACK 0 /* XXX: disabled until we have symbol lookup */
 
 
-struct debug_memory_header 
+struct debug_memory_header
 {
    struct list_head head;
-   
+
    unsigned long no;
    const char *file;
    unsigned line;
@@ -60,7 +60,7 @@ struct debug_memory_header
    struct debug_stack_frame backtrace[DEBUG_MEMORY_STACK];
 #endif
    size_t size;
-   
+
    unsigned magic;
 };
 
@@ -105,11 +105,11 @@ footer_from_header(struct debug_memory_header *hdr)
 
 void *
 debug_malloc(const char *file, unsigned line, const char *function,
-             size_t size) 
+             size_t size)
 {
    struct debug_memory_header *hdr;
    struct debug_memory_footer *ftr;
-   
+
    hdr = os_malloc(sizeof(*hdr) + size + sizeof(*ftr));
    if(!hdr) {
       debug_printf("%s:%u:%s: out of memory when trying to allocate %lu bytes\n",
@@ -117,7 +117,7 @@ debug_malloc(const char *file, unsigned line, const char *function,
                    (long unsigned)size);
       return NULL;
    }
- 
+
    hdr->no = last_no++;
    hdr->file = file;
    hdr->line = line;
@@ -131,22 +131,22 @@ debug_malloc(const char *file, unsigned line, const char *function,
 
    ftr = footer_from_header(hdr);
    ftr->magic = DEBUG_MEMORY_MAGIC;
-   
+
    LIST_ADDTAIL(&hdr->head, &list);
-   
+
    return data_from_header(hdr);
 }
 
 void
 debug_free(const char *file, unsigned line, const char *function,
-           void *ptr) 
+           void *ptr)
 {
    struct debug_memory_header *hdr;
    struct debug_memory_footer *ftr;
-   
+
    if(!ptr)
       return;
-   
+
    hdr = header_from_data(ptr);
    if(hdr->magic != DEBUG_MEMORY_MAGIC) {
       debug_printf("%s:%u:%s: freeing bad or corrupted memory %p\n",
@@ -167,7 +167,7 @@ debug_free(const char *file, unsigned line, const char *function,
    LIST_DEL(&hdr->head);
    hdr->magic = 0;
    ftr->magic = 0;
-   
+
    os_free(hdr);
 }
 
@@ -188,15 +188,15 @@ debug_realloc(const char *file, unsigned line, const char *function,
    struct debug_memory_header *old_hdr, *new_hdr;
    struct debug_memory_footer *old_ftr, *new_ftr;
    void *new_ptr;
-   
+
    if(!old_ptr)
       return debug_malloc( file, line, function, new_size );
-   
+
    if(!new_size) {
       debug_free( file, line, function, old_ptr );
       return NULL;
    }
-   
+
    old_hdr = header_from_data(old_ptr);
    if(old_hdr->magic != DEBUG_MEMORY_MAGIC) {
       debug_printf("%s:%u:%s: reallocating bad or corrupted memory %p\n",
@@ -205,7 +205,7 @@ debug_realloc(const char *file, unsigned line, const char *function,
       debug_assert(0);
       return NULL;
    }
-   
+
    old_ftr = footer_from_header(old_hdr);
    if(old_ftr->magic != DEBUG_MEMORY_MAGIC) {
       debug_printf("%s:%u:%s: buffer overflow %p\n",
@@ -228,10 +228,10 @@ debug_realloc(const char *file, unsigned line, const char *function,
    new_hdr->function = old_hdr->function;
    new_hdr->size = new_size;
    new_hdr->magic = DEBUG_MEMORY_MAGIC;
-   
+
    new_ftr = footer_from_header(new_hdr);
    new_ftr->magic = DEBUG_MEMORY_MAGIC;
-   
+
    LIST_REPLACE(&old_hdr->head, &new_hdr->head);
 
    /* copy data */
@@ -252,7 +252,7 @@ debug_memory_begin(void)
    return last_no;
 }
 
-void 
+void
 debug_memory_end(unsigned long start_no)
 {
    size_t total_size = 0;

@@ -1,19 +1,19 @@
 /*
  * Mesa 3-D graphics library
  * Version:  6.1
- * 
+ *
  * Copyright (C) 1999-2004  Brian Paul   All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation
  * the rights to use, copy, modify, merge, publish, distribute, sublicense,
  * and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
@@ -88,7 +88,7 @@ extern "C" {
   							(color[BCOMP] << 24) | 0xFF000000)
 #endif
 
-#define FLIP(coord) (LIBGGI_MODE(ggi_ctx->ggi_visual)->visible.y-(coord) - 1) 
+#define FLIP(coord) (LIBGGI_MODE(ggi_ctx->ggi_visual)->visible.y-(coord) - 1)
 
 const char * color_space_name(color_space space);
 
@@ -104,7 +104,7 @@ friend class BGLView;
 public:
 	MesaDriver();
 	~MesaDriver();
-	
+
 	void 		Init(BGLView * bglview, struct gl_context * c, struct gl_config * v, struct gl_framebuffer * b);
 
 	void 		LockGL();
@@ -132,7 +132,7 @@ private:
 	GLint 			m_bottom;           // used for flipping Y coords
 	GLuint 			m_width;
 	GLuint			m_height;
-	
+
    // Mesa Device Driver callback functions
    static void 		UpdateState(struct gl_context *ctx, GLuint new_state);
    static void 		ClearIndex(struct gl_context *ctx, GLuint index);
@@ -288,7 +288,7 @@ BGLView::BGLView(BRect rect, char *name,
 	m_options = options | BGL_INDIRECT;
 
    struct dd_function_table functions;
- 
+
    if (!rgbFlag) {
       fprintf(stderr, "Mesa Warning: color index mode not supported\n");
    }
@@ -531,33 +531,33 @@ status_t BGLView::GetSupportedSuites(BMessage *data)
 void BGLView::DirectConnected( direct_buffer_info *info )
 {
 #if 0
-	if (! m_direct_connected && m_direct_connection_disabled) 
-		return; 
+	if (! m_direct_connected && m_direct_connection_disabled)
+		return;
 
-	direct_info_locker->Lock(); 
-	switch(info->buffer_state & B_DIRECT_MODE_MASK) { 
-	case B_DIRECT_START: 
+	direct_info_locker->Lock();
+	switch(info->buffer_state & B_DIRECT_MODE_MASK) {
+	case B_DIRECT_START:
 		m_direct_connected = true;
-	case B_DIRECT_MODIFY: 
-		// Get clipping information 
+	case B_DIRECT_MODIFY:
+		// Get clipping information
 		if (m_clip_list)
-			free(m_clip_list); 
-		m_clip_list_count = info->clip_list_count; 
-		m_clip_list = (clipping_rect *) malloc(m_clip_list_count*sizeof(clipping_rect)); 
-		if (m_clip_list) { 
+			free(m_clip_list);
+		m_clip_list_count = info->clip_list_count;
+		m_clip_list = (clipping_rect *) malloc(m_clip_list_count*sizeof(clipping_rect));
+		if (m_clip_list) {
 			memcpy(m_clip_list, info->clip_list, m_clip_list_count*sizeof(clipping_rect));
-			fBits = (uint8 *) info->bits; 
-			fRowBytes = info->bytes_per_row; 
-			fFormat = info->pixel_format; 
-			fBounds = info->window_bounds; 
-			fDirty = true; 
-		} 
-		break; 
-	case B_DIRECT_STOP: 
-		fConnected = false; 
-		break; 
-	} 
-	direct_info_locker->Unlock(); 
+			fBits = (uint8 *) info->bits;
+			fRowBytes = info->bytes_per_row;
+			fFormat = info->pixel_format;
+			fBounds = info->window_bounds;
+			fDirty = true;
+		}
+		break;
+	case B_DIRECT_STOP:
+		fConnected = false;
+		break;
+	}
+	direct_info_locker->Unlock();
 #endif
 }
 
@@ -663,7 +663,7 @@ MesaDriver::~MesaDriver()
    _mesa_destroy_visual(m_glvisual);
    _mesa_destroy_framebuffer(m_glframebuffer);
    _mesa_destroy_context(m_glcontext);
-   
+
    delete m_bitmap;
 }
 
@@ -685,7 +685,7 @@ void MesaDriver::Init(BGLView * bglview, struct gl_context * ctx, struct gl_conf
 
 	// Use default TCL pipeline
 	tnl->Driver.RunPipeline = _tnl_run_pipeline;
- 
+
 	swdd->SetBuffer = this->SetBuffer;
 }
 
@@ -746,15 +746,15 @@ status_t MesaDriver::CopyPixelsOut(BPoint location, BBitmap *bitmap)
 			color_space_name(dcs));
 		return B_BAD_TYPE;
 	}
-	
+
 	// debugger("CopyPixelsOut()");
-	
+
 	BRect sr = m_bitmap->Bounds();
 	BRect dr = bitmap->Bounds();
 
 	sr = sr & dr.OffsetBySelf(location);
-	dr = sr.OffsetByCopy(-location.x, -location.y); 
-	
+	dr = sr.OffsetByCopy(-location.x, -location.y);
+
 	uint8 *ps = (uint8 *) m_bitmap->Bits();
 	uint8 *pd = (uint8 *) bitmap->Bits();
 	uint32 *s, *d;
@@ -762,10 +762,10 @@ status_t MesaDriver::CopyPixelsOut(BPoint location, BBitmap *bitmap)
 	for (y = (uint32) sr.top; y <= (uint32) sr.bottom; y++) {
 		s = (uint32 *) (ps + y * m_bitmap->BytesPerRow());
 		s += (uint32) sr.left;
-		
+
 		d = (uint32 *) (pd + (y + (uint32) (dr.top - sr.top)) * bitmap->BytesPerRow());
 		d += (uint32) dr.left;
-		
+
 		memcpy(d, s, dr.IntegerWidth() * 4);
 	}
 	return B_OK;
@@ -782,15 +782,15 @@ status_t MesaDriver::CopyPixelsIn(BBitmap *bitmap, BPoint location)
 			color_space_name(dcs));
 		return B_BAD_TYPE;
 	}
-	
+
 	// debugger("CopyPixelsIn()");
 
 	BRect sr = bitmap->Bounds();
 	BRect dr = m_bitmap->Bounds();
 
 	sr = sr & dr.OffsetBySelf(location);
-	dr = sr.OffsetByCopy(-location.x, -location.y); 
-	
+	dr = sr.OffsetByCopy(-location.x, -location.y);
+
 	uint8 *ps = (uint8 *) bitmap->Bits();
 	uint8 *pd = (uint8 *) m_bitmap->Bits();
 	uint32 *s, *d;
@@ -798,10 +798,10 @@ status_t MesaDriver::CopyPixelsIn(BBitmap *bitmap, BPoint location)
 	for (y = (uint32) sr.top; y <= (uint32) sr.bottom; y++) {
 		s = (uint32 *) (ps + y * bitmap->BytesPerRow());
 		s += (uint32) sr.left;
-		
+
 		d = (uint32 *) (pd + (y + (uint32) (dr.top - sr.top)) * m_bitmap->BytesPerRow());
 		d += (uint32) dr.left;
-		
+
 		memcpy(d, s, dr.IntegerWidth() * 4);
 	}
 	return B_OK;
@@ -881,7 +881,7 @@ void MesaDriver::ClearColor(struct gl_context *ctx, const GLfloat color[4])
    CLAMPED_FLOAT_TO_CHAN(md->m_clear_color[BE_RCOMP], color[0]);
    CLAMPED_FLOAT_TO_CHAN(md->m_clear_color[BE_GCOMP], color[1]);
    CLAMPED_FLOAT_TO_CHAN(md->m_clear_color[BE_BCOMP], color[2]);
-   CLAMPED_FLOAT_TO_CHAN(md->m_clear_color[BE_ACOMP], color[3]); 
+   CLAMPED_FLOAT_TO_CHAN(md->m_clear_color[BE_ACOMP], color[3]);
    assert(md->m_bglview);
 }
 
@@ -1270,7 +1270,7 @@ void MesaDriver::WriteRGBASpanBack(const struct gl_context *ctx, GLuint n,
 	int row = md->m_bottom - y;
 	uint8 * ptr = (uint8 *) bitmap->Bits() + (row * bitmap->BytesPerRow()) + x * 4;
  	uint32 * pixel = (uint32 *) ptr;
-	
+
 	if (mask) {
 		while(n--) {
 			if (*mask++)
@@ -1300,7 +1300,7 @@ void MesaDriver::WriteRGBSpanBack(const struct gl_context *ctx, GLuint n,
 	int row = md->m_bottom - y;
 	uint8 * ptr = (uint8 *) bitmap->Bits() + (row * bitmap->BytesPerRow()) + x * 4;
  	uint32 * pixel = (uint32 *) ptr;
-	
+
 	if (mask) {
 		while(n--) {
 			if (*mask++)
@@ -1332,7 +1332,7 @@ void MesaDriver::WriteMonoRGBASpanBack(const struct gl_context *ctx, GLuint n,
 	uint8 * ptr = (uint8 *) bitmap->Bits() + (row * bitmap->BytesPerRow()) + x * 4;
  	uint32 * pixel = (uint32 *) ptr;
 	uint32 pixel_color = PACK_B_RGBA32(color);
-	
+
 	if (mask) {
 		while(n--) {
 			if (*mask++)
@@ -1405,7 +1405,7 @@ void MesaDriver::WriteMonoRGBAPixelsBack(const struct gl_context *ctx, GLuint n,
 	assert(bitmap);
 
 	uint32 pixel_color = PACK_B_RGBA32(color);
-#if 0	
+#if 0
 	while(n--) {
 		if (*mask++) {
 			int row = md->m_bottom - *y;

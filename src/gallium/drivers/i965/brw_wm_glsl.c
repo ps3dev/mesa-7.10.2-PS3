@@ -90,7 +90,7 @@ num_grf_used(const struct brw_wm_compile *c)
 /**
  * Record the mapping of a Mesa register to a hardware register.
  */
-static void set_reg(struct brw_wm_compile *c, int file, int index, 
+static void set_reg(struct brw_wm_compile *c, int file, int index,
 	int component, struct brw_reg reg)
 {
     c->wm_regs[file][index][component].reg = reg;
@@ -151,14 +151,14 @@ static void release_tmps(struct brw_wm_compile *c, int mark)
  * \param neg  negate value?
  * \param abs  take absolute value?
  */
-static struct brw_reg 
+static struct brw_reg
 get_reg(struct brw_wm_compile *c, int file, int index, int component,
         int nr, GLuint neg, GLuint abs)
 {
     struct brw_reg reg;
     switch (file) {
 	case TGSI_FILE_NULL:
-	    return brw_null_reg();	
+	    return brw_null_reg();
 
 	case TGSI_FILE_CONSTANT:
 	case TGSI_FILE_TEMPORARY:
@@ -331,7 +331,7 @@ static void prealloc_reg(struct brw_wm_compile *c)
     c->first_free_grf = 0;
 
     for (i = 0; i < 4; i++) {
-        if (i < c->key.nr_depth_regs) 
+        if (i < c->key.nr_depth_regs)
             reg = brw_vec8_grf(i * 2, 0);
         else
             reg = brw_vec8_grf(0, 0);
@@ -361,7 +361,7 @@ static void prealloc_reg(struct brw_wm_compile *c)
            c->prog_data.nr_params = 0;
         }
         else {
-           const struct gl_program_parameter_list *plist = 
+           const struct gl_program_parameter_list *plist =
               c->fp->program.Base.Parameters;
            int index = 0;
 
@@ -500,7 +500,7 @@ static void fetch_constants(struct brw_wm_compile *c,
 /**
  * Convert Mesa dst register to brw register.
  */
-static struct brw_reg get_dst_reg(struct brw_wm_compile *c, 
+static struct brw_reg get_dst_reg(struct brw_wm_compile *c,
                                   const struct brw_fp_instruction *inst,
                                   GLuint component)
 {
@@ -552,7 +552,7 @@ get_src_reg_const(struct brw_wm_compile *c,
 /**
  * Convert Mesa src register to brw register.
  */
-static struct brw_reg get_src_reg(struct brw_wm_compile *c, 
+static struct brw_reg get_src_reg(struct brw_wm_compile *c,
                                   const struct brw_fp_instruction *inst,
                                   GLuint srcRegIndex, GLuint channel)
 {
@@ -576,7 +576,7 @@ static struct brw_reg get_src_reg(struct brw_wm_compile *c,
     }
     else {
        /* other type of source register */
-       return get_reg(c, src->File, src->Index, component, nr, 
+       return get_reg(c, src->File, src->Index, component, nr,
                       src->Negate, src->Abs);
     }
 }
@@ -589,9 +589,9 @@ static struct brw_reg get_src_reg(struct brw_wm_compile *c,
  * For instructions with more than one operand, only the second can be a
  * immediate.  This means that we treat some immediates as constants
  * (which why TGSI_FILE_IMMEDIATE is checked in fetch_constants()).
- * 
+ *
  */
-static struct brw_reg get_src_reg_imm(struct brw_wm_compile *c, 
+static struct brw_reg get_src_reg_imm(struct brw_wm_compile *c,
                                       const struct brw_fp_instruction *inst,
                                       GLuint srcRegIndex, GLuint channel)
 {
@@ -633,7 +633,7 @@ static void invoke_subroutine( struct brw_wm_compile *c,
     struct brw_compile *p = &c->func;
 
     assert( subroutine < BRW_WM_MAX_SUBROUTINE );
-    
+
     if( c->subroutines[ subroutine ] ) {
 	/* subroutine previously emitted: reuse existing instructions */
 
@@ -641,7 +641,7 @@ static void invoke_subroutine( struct brw_wm_compile *c,
 	struct brw_reg return_address = retype( alloc_tmp( c ),
 						BRW_REGISTER_TYPE_UD );
 	int here = p->nr_insn;
-	
+
 	brw_push_insn_state(p);
 	brw_set_mask_control(p, BRW_MASK_DISABLE);
 	brw_ADD( p, return_address, brw_ip_reg(), brw_imm_ud( 2 << 4 ) );
@@ -654,29 +654,29 @@ static void invoke_subroutine( struct brw_wm_compile *c,
 	release_tmps( c, mark );
     } else {
 	/* previously unused subroutine: emit, and mark for later reuse */
-	
+
 	int mark = mark_tmps( c );
 	struct brw_reg return_address = retype( alloc_tmp( c ),
 						BRW_REGISTER_TYPE_UD );
 	struct brw_instruction *calc;
 	int base = p->nr_insn;
-	
+
 	brw_push_insn_state(p);
 	brw_set_mask_control(p, BRW_MASK_DISABLE);
 	calc = brw_ADD( p, return_address, brw_ip_reg(), brw_imm_ud( 0 ) );
 	brw_pop_insn_state(p);
-	
+
 	c->subroutines[ subroutine ] = p->nr_insn;
 
 	emit( c );
-	
+
 	brw_push_insn_state(p);
 	brw_set_mask_control(p, BRW_MASK_DISABLE);
 	brw_MOV( p, brw_ip_reg(), return_address );
 	brw_pop_insn_state(p);
 
 	brw_set_src1( calc, brw_imm_ud( ( p->nr_insn - base ) << 4 ) );
-	
+
 	release_tmps( c, mark );
     }
 }
@@ -803,7 +803,7 @@ static void fire_fb_write( struct brw_wm_compile *c,
 	    retype(vec8(brw_null_reg()), BRW_REGISTER_TYPE_UW),
 	    base_reg,
 	    retype(brw_vec8_grf(0, 0), BRW_REGISTER_TYPE_UW),
-	    target,              
+	    target,
 	    nr,
 	    0,
 	    eot);
@@ -988,7 +988,7 @@ static void emit_pinterp(struct brw_wm_compile *c,
 	if (mask & (1<<i)) {
 	    dst = get_dst_reg(c, inst, i);
 	    brw_LINE(p, brw_null_reg(), interp[i], delta0);
-	    brw_MAC(p, dst, suboffset(interp[i],1), 
+	    brw_MAC(p, dst, suboffset(interp[i],1),
 		    delta1);
 	    brw_MUL(p, dst, dst, w);
 	}
@@ -1225,7 +1225,7 @@ static void emit_arl(struct brw_wm_compile *c,
     struct brw_compile *p = &c->func;
     struct brw_reg src0, addr_reg;
     brw_set_saturate(p, (inst->SaturateMode != SATURATE_OFF) ? 1 : 0);
-    addr_reg = brw_uw8_reg(BRW_ARCHITECTURE_REGISTER_FILE, 
+    addr_reg = brw_uw8_reg(BRW_ARCHITECTURE_REGISTER_FILE,
                            BRW_ARF_ADDRESS, 0);
     src0 = get_src_reg(c, inst, 0, 0); /* channel 0 */
     brw_MOV(p, addr_reg, src0);
@@ -1527,7 +1527,7 @@ static INLINE struct brw_reg odd_bytes( struct brw_reg reg )
 }
 
 
-    
+
 static void emit_wpos_xy(struct brw_wm_compile *c,
                          const struct brw_fp_instruction *inst)
 {
@@ -1562,7 +1562,7 @@ static void emit_wpos_xy(struct brw_wm_compile *c,
 
 /* TODO
    BIAS on SIMD8 not working yet...
- */	
+ */
 static void emit_txb(struct brw_wm_compile *c,
                      const struct brw_fp_instruction *inst)
 {
@@ -1577,7 +1577,7 @@ static void emit_txb(struct brw_wm_compile *c,
 
     payload_reg = get_reg(c, TGSI_FILE_PAYLOAD, PAYLOAD_DEPTH, 0, 1, 0, 0);
 
-    for (i = 0; i < 4; i++) 
+    for (i = 0; i < 4; i++)
 	dst[i] = get_dst_reg(c, inst, i);
     for (i = 0; i < 4; i++)
 	src[i] = get_src_reg(c, inst, 0, i);
@@ -1626,7 +1626,7 @@ static void emit_txb(struct brw_wm_compile *c,
                4,                                           /* msg_length */
                0,                                           /* eot */
                1,
-               BRW_SAMPLER_SIMD_MODE_SIMD8);	
+               BRW_SAMPLER_SIMD_MODE_SIMD8);
 }
 
 
@@ -1647,7 +1647,7 @@ static void emit_tex(struct brw_wm_compile *c,
 
     payload_reg = get_reg(c, TGSI_FILE_PAYLOAD, PAYLOAD_DEPTH, 0, 1, 0, 0);
 
-    for (i = 0; i < 4; i++) 
+    for (i = 0; i < 4; i++)
 	dst[i] = get_dst_reg(c, inst, i);
     for (i = 0; i < 4; i++)
 	src[i] = get_src_reg(c, inst, 0, i);
@@ -1697,7 +1697,7 @@ static void emit_tex(struct brw_wm_compile *c,
         /* Does it work for shadow on SIMD8 ? */
         msg_type = BRW_SAMPLER_MESSAGE_SIMD8_SAMPLE;
     }
-    
+
     brw_SAMPLE(p,
                retype(vec8(dst[0]), BRW_REGISTER_TYPE_UW), /* dest */
                1,                                          /* msg_reg_nr */
@@ -1710,7 +1710,7 @@ static void emit_tex(struct brw_wm_compile *c,
                shadow ? 6 : 4,                             /* msg_length */
                0,                                          /* eot */
                1,
-               BRW_SAMPLER_SIMD_MODE_SIMD8);	
+               BRW_SAMPLER_SIMD_MODE_SIMD8);
 
     if (shadow)
 	brw_MOV(p, dst[3], brw_imm_f(1.0));
@@ -1785,12 +1785,12 @@ static void brw_wm_emit_branching_shader(struct brw_context *brw, struct brw_wm_
 	    case WM_PIXELXY:
 		emit_pixel_xy(c, inst);
 		break;
-	    case WM_DELTAXY: 
+	    case WM_DELTAXY:
 		emit_delta_xy(c, inst);
 		break;
 	    case WM_PIXELW:
 		emit_pixel_w(c, inst);
-		break;	
+		break;
 	    case WM_LINTERP:
 		emit_linterp(c, inst);
 		break;
@@ -1860,8 +1860,8 @@ static void brw_wm_emit_branching_shader(struct brw_context *brw, struct brw_wm_
 	    case OPCODE_LG2:
 		emit_lg2(c, inst);
 		break;
-	    case OPCODE_MIN:	
-	    case OPCODE_MAX:	
+	    case OPCODE_MIN:
+	    case OPCODE_MAX:
 		emit_min_max(c, inst);
 		break;
 	    case OPCODE_DDX:
@@ -1929,7 +1929,7 @@ static void brw_wm_emit_branching_shader(struct brw_context *brw, struct brw_wm_
 	    case OPCODE_ENDSUB:
 		/* no-op */
 		break;
-	    case OPCODE_CAL: 
+	    case OPCODE_CAL:
 		brw_push_insn_state(p);
 		brw_set_mask_control(p, BRW_MASK_DISABLE);
                 brw_set_access_mode(p, BRW_ALIGN_1);
@@ -1965,14 +1965,14 @@ static void brw_wm_emit_branching_shader(struct brw_context *brw, struct brw_wm_
 		brw_CONT(p);
 		brw_set_predicate_control(p, BRW_PREDICATE_NONE);
 		break;
-	    case OPCODE_ENDLOOP: 
+	    case OPCODE_ENDLOOP:
                {
                   struct brw_instruction *inst0, *inst1;
                   GLuint br = 1;
 
                   if (BRW_IS_IGDNG(brw))
                      br = 2;
- 
+
                   loop_depth--;
                   inst0 = inst1 = brw_WHILE(p, loop_inst[loop_depth]);
                   /* patch all the BREAK/CONT instructions from last BGNLOOP */
@@ -2009,7 +2009,7 @@ static void brw_wm_emit_branching_shader(struct brw_context *brw, struct brw_wm_
 
 /**
  * Do GPU code generation for shaders that use GLSL features such as
- * flow control.  Other shaders will be compiled with the 
+ * flow control.  Other shaders will be compiled with the
  */
 void brw_wm_branching_shader_emit(struct brw_context *brw, struct brw_wm_compile *c)
 {

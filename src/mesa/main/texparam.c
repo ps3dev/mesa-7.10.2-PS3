@@ -23,7 +23,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/** 
+/**
  * \file texparam.c
  *
  * glTexParameter-related functions
@@ -46,7 +46,7 @@
  * Check if a coordinate wrap mode is supported for the texture target.
  * \return GL_TRUE if legal, GL_FALSE otherwise
  */
-static GLboolean 
+static GLboolean
 validate_texture_wrap_mode(struct gl_context * ctx, GLenum target, GLenum wrap)
 {
    const struct gl_extensions * const e = & ctx->Extensions;
@@ -1126,7 +1126,7 @@ _mesa_GetTexParameterfv( GLenum target, GLenum pname, GLfloat *params )
          if (ctx->Extensions.ARB_shadow_ambient) {
             *params = obj->CompareFailValue;
          }
-	 else 
+	 else
 	    error = GL_TRUE;
          break;
       case GL_GENERATE_MIPMAP_SGIS:
@@ -1136,28 +1136,28 @@ _mesa_GetTexParameterfv( GLenum target, GLenum pname, GLfloat *params )
          if (ctx->Extensions.ARB_shadow) {
             *params = (GLfloat) obj->CompareMode;
          }
-	 else 
+	 else
 	    error = GL_TRUE;
          break;
       case GL_TEXTURE_COMPARE_FUNC_ARB:
          if (ctx->Extensions.ARB_shadow) {
             *params = (GLfloat) obj->CompareFunc;
          }
-	 else 
+	 else
 	    error = GL_TRUE;
          break;
       case GL_DEPTH_TEXTURE_MODE_ARB:
          if (ctx->Extensions.ARB_depth_texture) {
             *params = (GLfloat) obj->DepthMode;
          }
-	 else 
+	 else
 	    error = GL_TRUE;
          break;
       case GL_TEXTURE_LOD_BIAS:
          if (ctx->Extensions.EXT_texture_lod_bias) {
             *params = obj->LodBias;
          }
-	 else 
+	 else
 	    error = GL_TRUE;
          break;
 #if FEATURE_OES_draw_texture
@@ -1376,7 +1376,7 @@ _mesa_GetTexParameterIiv(GLenum target, GLenum pname, GLint *params)
    ASSERT_OUTSIDE_BEGIN_END(ctx);
 
    texObj = get_texobj(ctx, target, GL_TRUE);
-   
+
    switch (pname) {
    case GL_TEXTURE_BORDER_COLOR:
       COPY_4V(params, texObj->BorderColor.i);
@@ -1396,7 +1396,7 @@ _mesa_GetTexParameterIuiv(GLenum target, GLenum pname, GLuint *params)
    ASSERT_OUTSIDE_BEGIN_END(ctx);
 
    texObj = get_texobj(ctx, target, GL_TRUE);
-   
+
    switch (pname) {
    case GL_TEXTURE_BORDER_COLOR:
       COPY_4V(params, texObj->BorderColor.i);
@@ -1406,7 +1406,7 @@ _mesa_GetTexParameterIuiv(GLenum target, GLenum pname, GLuint *params)
          GLint ip[4];
          _mesa_GetTexParameteriv(target, pname, ip);
          params[0] = ip[0];
-         if (pname == GL_TEXTURE_SWIZZLE_RGBA_EXT || 
+         if (pname == GL_TEXTURE_SWIZZLE_RGBA_EXT ||
              pname == GL_TEXTURE_CROP_RECT_OES) {
             params[1] = ip[1];
             params[2] = ip[2];

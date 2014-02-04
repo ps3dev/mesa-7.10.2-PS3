@@ -67,7 +67,7 @@ static void tdfxUpdateAlphaMode( struct gl_context *ctx )
    GrAlphaBlendFnc_t srcRGB, dstRGB, srcA, dstA;
    GrAlphaBlendOp_t eqRGB, eqA;
    GrAlpha_t ref = (GLint) (ctx->Color.AlphaRef * 255.0);
-   
+
    GLboolean isNapalm = TDFX_IS_NAPALM(fxMesa);
    GLboolean have32bpp = (ctx->Visual.greenBits == 8);
    GLboolean haveAlpha = fxMesa->haveHwAlpha;
@@ -291,7 +291,7 @@ static void tdfxDDAlphaFunc( struct gl_context *ctx, GLenum func, GLfloat ref )
    fxMesa->new_state |= TDFX_NEW_ALPHA;
 }
 
-static void tdfxDDBlendEquationSeparate( struct gl_context *ctx, 
+static void tdfxDDBlendEquationSeparate( struct gl_context *ctx,
 					 GLenum modeRGB, GLenum modeA )
 {
    tdfxContextPtr fxMesa = TDFX_CONTEXT( ctx );
@@ -354,7 +354,7 @@ static void tdfxUpdateZMode( struct gl_context *ctx )
    FxI32 bias;
    FxBool mask;
 
-   if ( TDFX_DEBUG & DEBUG_VERBOSE_API ) 
+   if ( TDFX_DEBUG & DEBUG_VERBOSE_API )
       fprintf( stderr, "%s()\n", __FUNCTION__ );
 
 

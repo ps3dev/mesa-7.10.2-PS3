@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * Copyright 2010 VMware, Inc.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -132,7 +132,7 @@ interpolate_quad_depth( struct quad_header *quad )
  * Compute the depth_data::qzzzz[] values from the float fragment Z values.
  */
 static void
-convert_quad_depth( struct depth_data *data, 
+convert_quad_depth( struct depth_data *data,
                     const struct quad_header *quad )
 {
    unsigned j;
@@ -192,7 +192,7 @@ convert_quad_depth( struct depth_data *data,
  * Compute the depth_data::shader_stencil_refs[] values from the float fragment stencil values.
  */
 static void
-convert_quad_stencil( struct depth_data *data, 
+convert_quad_stencil( struct depth_data *data,
                       const struct quad_header *quad )
 {
    unsigned j;
@@ -306,7 +306,7 @@ do_stencil_test(struct depth_data *data,
    for (j = 0; j < QUAD_SIZE; j++) {
       if (data->use_shader_stencil_refs)
          refs[j] = data->shader_stencil_refs[j] & valMask;
-      else 
+      else
          refs[j] = ref & valMask;
    }
 
@@ -470,7 +470,7 @@ apply_stencil_op(struct depth_data *data,
    }
 }
 
-   
+
 
 /**
  * To increase efficiency, we should probably have multiple versions
@@ -478,7 +478,7 @@ apply_stencil_op(struct depth_data *data,
  * Try to effectively do that with codegen...
  */
 static boolean
-depth_test_quad(struct quad_stage *qs, 
+depth_test_quad(struct quad_stage *qs,
                 struct depth_data *data,
                 struct quad_header *quad)
 {
@@ -491,41 +491,41 @@ depth_test_quad(struct quad_stage *qs,
       /* zmask = 0 */
       break;
    case PIPE_FUNC_LESS:
-      /* Note this is pretty much a single sse or cell instruction.  
+      /* Note this is pretty much a single sse or cell instruction.
        * Like this:  quad->mask &= (quad->outputs.depth < zzzz);
        */
       for (j = 0; j < QUAD_SIZE; j++) {
-	 if (data->qzzzz[j] < data->bzzzz[j]) 
+	 if (data->qzzzz[j] < data->bzzzz[j])
 	    zmask |= 1 << j;
       }
       break;
    case PIPE_FUNC_EQUAL:
       for (j = 0; j < QUAD_SIZE; j++) {
-	 if (data->qzzzz[j] == data->bzzzz[j]) 
+	 if (data->qzzzz[j] == data->bzzzz[j])
 	    zmask |= 1 << j;
       }
       break;
    case PIPE_FUNC_LEQUAL:
       for (j = 0; j < QUAD_SIZE; j++) {
-	 if (data->qzzzz[j] <= data->bzzzz[j]) 
+	 if (data->qzzzz[j] <= data->bzzzz[j])
 	    zmask |= (1 << j);
       }
       break;
    case PIPE_FUNC_GREATER:
       for (j = 0; j < QUAD_SIZE; j++) {
-	 if (data->qzzzz[j] > data->bzzzz[j]) 
+	 if (data->qzzzz[j] > data->bzzzz[j])
 	    zmask |= (1 << j);
       }
       break;
    case PIPE_FUNC_NOTEQUAL:
       for (j = 0; j < QUAD_SIZE; j++) {
-	 if (data->qzzzz[j] != data->bzzzz[j]) 
+	 if (data->qzzzz[j] != data->bzzzz[j])
 	    zmask |= (1 << j);
       }
       break;
    case PIPE_FUNC_GEQUAL:
       for (j = 0; j < QUAD_SIZE; j++) {
-	 if (data->qzzzz[j] >= data->bzzzz[j]) 
+	 if (data->qzzzz[j] >= data->bzzzz[j])
 	    zmask |= (1 << j);
       }
       break;
@@ -562,7 +562,7 @@ depth_test_quad(struct quad_stage *qs,
  * depth testing.
  */
 static void
-depth_stencil_test_quad(struct quad_stage *qs, 
+depth_stencil_test_quad(struct quad_stage *qs,
                         struct depth_data *data,
                         struct quad_header *quad)
 {
@@ -668,8 +668,8 @@ ALPHATEST( GEQUAL,   >= )
 /* XXX: Incorporate into shader using KILP.
  */
 static int
-alpha_test_quads(struct quad_stage *qs, 
-                 struct quad_header *quads[], 
+alpha_test_quads(struct quad_stage *qs,
+                 struct quad_header *quads[],
                  unsigned nr)
 {
    switch (qs->softpipe->depth_stencil->alpha.func) {
@@ -695,7 +695,7 @@ alpha_test_quads(struct quad_stage *qs,
 }
 
 
-static unsigned mask_count[16] = 
+static unsigned mask_count[16] =
 {
    0,                           /* 0x0 */
    1,                           /* 0x1 */
@@ -721,7 +721,7 @@ static unsigned mask_count[16] =
  * General depth/stencil test function.  Used when there's no fast-path.
  */
 static void
-depth_test_quads_fallback(struct quad_stage *qs, 
+depth_test_quads_fallback(struct quad_stage *qs,
                           struct quad_header *quads[],
                           unsigned nr)
 {
@@ -743,8 +743,8 @@ depth_test_quads_fallback(struct quad_stage *qs,
 
       data.ps = qs->softpipe->framebuffer.zsbuf;
       data.format = data.ps->format;
-      data.tile = sp_get_cached_tile(qs->softpipe->zsbuf_cache, 
-                                     quads[0]->input.x0, 
+      data.tile = sp_get_cached_tile(qs->softpipe->zsbuf_cache,
+                                     quads[0]->input.x0,
                                      quads[0]->input.y0);
 
       for (i = 0; i < nr; i++) {
@@ -760,7 +760,7 @@ depth_test_quads_fallback(struct quad_stage *qs,
          if (qs->softpipe->depth_stencil->stencil[0].enabled) {
             if (shader_stencil_ref)
                convert_quad_stencil(&data, quads[i]);
-            
+
             depth_stencil_test_quad(qs, &data, quads[i]);
             write_depth_stencil_values(&data, quads[i]);
          }
@@ -779,7 +779,7 @@ depth_test_quads_fallback(struct quad_stage *qs,
    }
 
    if (qs->softpipe->active_query_count) {
-      for (i = 0; i < nr; i++) 
+      for (i = 0; i < nr; i++)
          qs->softpipe->occlusion_count += mask_count[quads[i]->inout.mask];
    }
 
@@ -823,7 +823,7 @@ depth_test_quads_fallback(struct quad_stage *qs,
 
 
 static void
-depth_noop(struct quad_stage *qs, 
+depth_noop(struct quad_stage *qs,
            struct quad_header *quads[],
            unsigned nr)
 {
@@ -833,7 +833,7 @@ depth_noop(struct quad_stage *qs,
 
 
 static void
-choose_depth_test(struct quad_stage *qs, 
+choose_depth_test(struct quad_stage *qs,
                   struct quad_header *quads[],
                   unsigned nr)
 {
@@ -864,12 +864,12 @@ choose_depth_test(struct quad_stage *qs,
        !stencil) {
       qs->run = depth_noop;
    }
-   else if (!alpha && 
-            interp_depth && 
-            depth && 
-            depthwrite && 
+   else if (!alpha &&
+            interp_depth &&
+            depth &&
+            depthwrite &&
             !occlusion &&
-            !stencil) 
+            !stencil)
    {
       if (qs->softpipe->framebuffer.zsbuf->format == PIPE_FORMAT_Z16_UNORM) {
          switch (depthfunc) {

@@ -1,4 +1,4 @@
-# Configuration for Linux with x86 code, but no gcc optimizations and 
+# Configuration for Linux with x86 code, but no gcc optimizations and
 # debugging enabled.
 
 include $(TOP)/configs/linux-x86

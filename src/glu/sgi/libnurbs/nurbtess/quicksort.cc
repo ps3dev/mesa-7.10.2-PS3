@@ -6,21 +6,21 @@
 ** this file except in compliance with the License. You may obtain a copy
 ** of the License at Silicon Graphics, Inc., attn: Legal Services, 1600
 ** Amphitheatre Parkway, Mountain View, CA 94043-1351, or at:
-** 
+**
 ** http://oss.sgi.com/projects/FreeB
-** 
+**
 ** Note that, as provided in the License, the Software is distributed on an
 ** "AS IS" basis, with ALL EXPRESS AND IMPLIED WARRANTIES AND CONDITIONS
 ** DISCLAIMED, INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTIES AND
 ** CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A
 ** PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
-** 
+**
 ** Original Code. The Original Code is: OpenGL Sample Implementation,
 ** Version 1.2.1, released January 26, 2000, developed by Silicon Graphics,
 ** Inc. The Original Code is Copyright (c) 1991-2000 Silicon Graphics, Inc.
 ** Copyright in any portions created by third parties is as indicated
 ** elsewhere herein. All Rights Reserved.
-** 
+**
 ** Additional Notice Provisions: The application programming interfaces
 ** established by SGI in conjunction with the Original Code are The
 ** OpenGL(R) Graphics System: A Specification (Version 1.2.1), released
@@ -54,7 +54,7 @@ static void swap(void *v[], int i, int j)
  *  if( *i1 < * i2) return -1;
  *  else return 1;
  *}
- *and an array of pointers to integers: 
+ *and an array of pointers to integers:
  * int *v[100] (allocate space for where  each v[i] points to).
  *then you can call:
  * quicksort( (void**)v, left, right, (int (*)(void *, void *))comp)
@@ -65,7 +65,7 @@ void quicksort(void *v[], int left, int right,
   int i, last;
   if(left >= right) /*do nothing if array contains */
     return;         /*fewer than two elements*/
-  
+
   swap(v, left, (left+right)/2);
   last = left;
   for(i=left+1; i<=right; i++)

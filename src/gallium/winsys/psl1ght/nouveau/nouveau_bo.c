@@ -277,13 +277,13 @@ nouveau_bo_handle_get(struct nouveau_bo *bo, uint32_t *handle)
 	struct nouveau_device_priv *nvdev = nouveau_device(bo->device);
 	struct nouveau_bo_priv *nvbo = nouveau_bo(bo);
 	int ret;
- 
+
 	if (!bo || !handle)
 		return -EINVAL;
 
 	if (!nvbo->global_handle) {
 		struct drm_gem_flink req;
- 
+
 		ret = nouveau_bo_kalloc(nvbo, NULL);
 		if (ret)
 			return ret;
@@ -297,7 +297,7 @@ nouveau_bo_handle_get(struct nouveau_bo *bo, uint32_t *handle)
 
 		nvbo->global_handle = req.name;
 	}
- 
+
 	*handle = nvbo->global_handle;
 #else
 	printf("nouveau_bo_handle_get not implemented\n");
@@ -305,7 +305,7 @@ nouveau_bo_handle_get(struct nouveau_bo *bo, uint32_t *handle)
 #endif
 	return 0;
 }
- 
+
 int
 nouveau_bo_handle_ref(struct nouveau_device *dev, uint32_t handle,
 		      struct nouveau_bo **bo)
@@ -336,7 +336,7 @@ nouveau_bo_handle_ref(struct nouveau_device *dev, uint32_t handle,
 	abort();
 #endif
 	return 0;
-} 
+}
 
 static void
 nouveau_bo_del(struct nouveau_bo **bo)

@@ -23,7 +23,7 @@ SOURCES = m_debug_clip.c m_debug_norm.c m_debug_xform.c m_eval.c m_matrix.c\
 
 OBJECTS = m_debug_clip.obj,m_debug_norm.obj,m_debug_xform.obj,m_eval.obj,\
 	m_matrix.obj,m_translate.obj,m_vector.obj,m_xform.obj
- 
+
 ##### RULES #####
 
 VERSION=Mesa V3.4

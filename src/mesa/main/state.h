@@ -31,7 +31,7 @@
 extern void
 _mesa_update_state(struct gl_context *ctx);
 
-/* As above but can only be called between _mesa_lock_context_textures() and 
+/* As above but can only be called between _mesa_lock_context_textures() and
  * _mesa_unlock_context_textures().
  */
 extern void

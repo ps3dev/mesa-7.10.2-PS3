@@ -692,7 +692,7 @@ fenced_buffer_map(struct pb_buffer *buf,
          ((fenced_buf->flags & PB_USAGE_GPU_READ) &&
           (flags & PB_USAGE_CPU_WRITE))) {
 
-      /* 
+      /*
        * Don't wait for the GPU to finish accessing it, if blocking is forbidden.
        */
       if((flags & PB_USAGE_DONTBLOCK) &&

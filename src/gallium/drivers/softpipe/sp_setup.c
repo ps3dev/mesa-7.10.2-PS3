@@ -371,8 +371,8 @@ setup_sort_vertices(struct setup_context *setup,
     *  - two-sided stencil test
     * 0 = front-facing, 1 = back-facing
     */
-   setup->facing = 
-      ((det < 0.0) ^ 
+   setup->facing =
+      ((det < 0.0) ^
        (setup->softpipe->rasterizer->front_ccw));
 
    {
@@ -808,7 +808,7 @@ sp_setup_tri(struct setup_context *setup,
 
    if (setup->softpipe->no_rast)
       return;
-   
+
    det = calc_det(v0, v1, v2);
    /*
    debug_printf("%s\n", __FUNCTION__ );

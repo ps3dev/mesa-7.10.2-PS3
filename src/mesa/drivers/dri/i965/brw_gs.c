@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-      
+
 #include "main/glheader.h"
 #include "main/macros.h"
 #include "main/enums.h"
@@ -53,7 +53,7 @@ static void compile_gs_prog( struct brw_context *brw,
    GLuint program_size;
 
    memset(&c, 0, sizeof(c));
-   
+
    c.key = *key;
    /* Need to locate the two positions present in vertex + header.
     * These are currently hardcoded:
@@ -67,7 +67,7 @@ static void compile_gs_prog( struct brw_context *brw,
 
    c.nr_bytes = c.nr_regs * REG_SIZE;
 
-   
+
    /* Begin the compilation:
     */
    brw_init_compile(brw, &c.func);
@@ -75,7 +75,7 @@ static void compile_gs_prog( struct brw_context *brw,
    c.func.single_program_flow = 1;
 
    /* For some reason the thread is spawned with only 4 channels
-    * unmasked.  
+    * unmasked.
     */
    brw_set_mask_control(&c.func, BRW_MASK_DISABLE);
 
@@ -121,7 +121,7 @@ static void compile_gs_prog( struct brw_context *brw,
       else {
 	 return;
       }
-      break;      
+      break;
    default:
       return;
    }
@@ -152,7 +152,7 @@ static void compile_gs_prog( struct brw_context *brw,
 						   &brw->gs.prog_data);
 }
 
-static const GLenum gs_prim[GL_POLYGON+1] = {  
+static const GLenum gs_prim[GL_POLYGON+1] = {
    GL_POINTS,
    GL_LINES,
    GL_LINE_LOOP,
@@ -181,7 +181,7 @@ static void populate_key( struct brw_context *brw,
    key->primitive = gs_prim[brw->primitive];
 
    key->hint_gs_always = 0;	/* debug code? */
-   
+
    /* _NEW_LIGHT */
    key->pv_first = (ctx->Light.ProvokingVertex == GL_FIRST_VERTEX_CONVENTION);
    if (key->primitive == GL_QUADS && ctx->Light.ShadeModel != GL_FLAT) {

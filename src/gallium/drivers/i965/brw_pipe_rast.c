@@ -53,14 +53,14 @@ calculate_clip_key_rast( const struct brw_context *brw,
    if (!(templ->cull_face & PIPE_FACE_FRONT)) {
       if (templ->front_ccw)
          key->fill_ccw = translate_fill(templ->fill_front);
-      else 
+      else
          key->fill_cw = translate_fill(templ->fill_front);
    }
 
    if (!(templ->cull_face & PIPE_FACE_BACK)) {
       if (templ->front_ccw)
          key->fill_cw = translate_fill(templ->fill_back);
-      else 
+      else
          key->fill_ccw = translate_fill(templ->fill_back);
    }
 
@@ -96,10 +96,10 @@ calculate_clip_key_rast( const struct brw_context *brw,
       break;
    }
 
-   if (templ->light_twoside && key->fill_cw != CLIP_CULL) 
+   if (templ->light_twoside && key->fill_cw != CLIP_CULL)
       key->copy_bfc_cw = 1;
-   
-   if (templ->light_twoside && key->fill_ccw != CLIP_CULL) 
+
+   if (templ->light_twoside && key->fill_ccw != CLIP_CULL)
       key->copy_bfc_ccw = 1;
 }
 
@@ -131,7 +131,7 @@ static void *brw_create_rasterizer_state( struct pipe_context *pipe,
    rast->templ = *templ;
 
    calculate_clip_key_rast( brw, templ, rast, &rast->clip_key );
-   
+
    if (templ->line_stipple_enable)
       calculate_line_stipple_rast( templ, &rast->bls );
 

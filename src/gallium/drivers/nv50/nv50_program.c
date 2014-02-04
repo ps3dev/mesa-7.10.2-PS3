@@ -455,7 +455,7 @@ nv50_fragprog_prepare(struct nv50_translation_info *ti)
 
       if (sn[i] == TGSI_SEMANTIC_COLOR)
          p->vp.bfc[si[i]] = j;
-	   
+
       p->in[j].linear = (ti->interp_mode[i] & NV50_INTERP_LINEAR) ? 1 : 0;
       p->in[j].id = i;
       p->in[j].sn = sn[i];

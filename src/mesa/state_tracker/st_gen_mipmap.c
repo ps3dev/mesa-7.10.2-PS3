@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -288,7 +288,7 @@ compute_num_levels(struct gl_context *ctx,
       return 1;
    }
    else {
-      const struct gl_texture_image *baseImage = 
+      const struct gl_texture_image *baseImage =
          _mesa_get_tex_image(ctx, texObj, target, texObj->BaseLevel);
       GLuint size, numLevels;
 
@@ -397,7 +397,7 @@ st_generate_mipmap(struct gl_context *ctx, GLenum target,
       struct st_texture_image *stImage;
       uint dstWidth = u_minify(pt->width0, dstLevel);
       uint dstHeight = u_minify(pt->height0, dstLevel);
-      uint dstDepth = u_minify(pt->depth0, dstLevel); 
+      uint dstDepth = u_minify(pt->depth0, dstLevel);
       uint border = srcImage->Border;
 
       dstImage = _mesa_get_tex_image(ctx, texObj, target, dstLevel);

@@ -61,7 +61,7 @@ struct spe_function
     */
    unsigned char set_count;
 
-   /** 
+   /**
     * Flags for used and unused registers.  Each byte corresponds to a
     * register; a 0 in that byte means that the register is available.
     * A value of 1 means that the register was allocated in the current
@@ -70,7 +70,7 @@ struct spe_function
      *
      * \sa
      * spe_allocate_register, spe_allocate_available_register,
-     * spe_allocate_register_set, spe_release_register_set, spe_release_register, 
+     * spe_allocate_register_set, spe_release_register_set, spe_release_register,
      */
     unsigned char regs[SPE_NUM_REGS];
 

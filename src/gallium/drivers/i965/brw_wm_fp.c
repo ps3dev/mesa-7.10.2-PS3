@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-               
+
 
 #include "pipe/p_shader_tokens.h"
 
@@ -114,7 +114,7 @@ static int match_or_expand_immediate( const float *v,
                                       unsigned *swizzle )
 {
    unsigned i, j;
-   
+
    *swizzle = 0;
 
    for (i = 0; i < nr; i++) {
@@ -128,7 +128,7 @@ static int match_or_expand_immediate( const float *v,
       }
 
       if (!found) {
-         if (*nr2 >= 4) 
+         if (*nr2 >= 4)
             return FALSE;
 
          v2[*nr2] = v[i];
@@ -144,8 +144,8 @@ static int match_or_expand_immediate( const float *v,
 
 /* Internally generated immediates: overkill...
  */
-static struct brw_fp_src src_imm( struct brw_wm_compile *c, 
-				  const GLfloat *v, 
+static struct brw_fp_src src_imm( struct brw_wm_compile *c,
+				  const GLfloat *v,
 				  unsigned nr)
 {
    unsigned i, j;
@@ -156,10 +156,10 @@ static struct brw_fp_src src_imm( struct brw_wm_compile *c,
     */
 
    for (i = 0; i < c->nr_immediates; i++) {
-      if (match_or_expand_immediate( v, 
+      if (match_or_expand_immediate( v,
                                      nr,
                                      c->immediate[i].v,
-                                     &c->immediate[i].nr, 
+                                     &c->immediate[i].nr,
                                      &swizzle ))
          goto out;
    }
@@ -169,7 +169,7 @@ static struct brw_fp_src src_imm( struct brw_wm_compile *c,
       if (match_or_expand_immediate( v,
                                      nr,
                                      c->immediate[i].v,
-                                     &c->immediate[i].nr, 
+                                     &c->immediate[i].nr,
                                      &swizzle ))
          goto out;
    }
@@ -268,7 +268,7 @@ static void release_temp( struct brw_wm_compile *c, struct brw_fp_dst temp )
 
 
 /***********************************************************************
- * Instructions 
+ * Instructions
  */
 
 static struct brw_fp_instruction *get_fp_inst(struct brw_wm_compile *c)
@@ -305,7 +305,7 @@ static struct brw_fp_instruction * emit_tex_op(struct brw_wm_compile *c,
 
    return inst;
 }
-   
+
 
 static INLINE void emit_op3(struct brw_wm_compile *c,
 			    GLuint op,
@@ -384,11 +384,11 @@ static struct brw_fp_src get_pixel_xy( struct brw_wm_compile *c )
    if (src_is_undef(c->fp_pixel_xy)) {
       struct brw_fp_dst pixel_xy = get_temp(c);
       struct brw_fp_src payload_r0_depth = src_reg(BRW_FILE_PAYLOAD, PAYLOAD_DEPTH);
-      
-      
+
+
       /* Emit the out calculations, and hold onto the results.  Use
        * two instructions as a temporary is required.
-       */   
+       */
       /* pixel_xy.xy = PIXELXY payload[0];
        */
       emit_op1(c,
@@ -408,16 +408,16 @@ static struct brw_fp_src get_delta_xy( struct brw_wm_compile *c )
       struct brw_fp_dst delta_xy = get_temp(c);
       struct brw_fp_src pixel_xy = get_pixel_xy(c);
       struct brw_fp_src payload_r0_depth = src_reg(BRW_FILE_PAYLOAD, PAYLOAD_DEPTH);
-      
+
       /* deltas.xy = DELTAXY pixel_xy, payload[0]
        */
       emit_op3(c,
 	      WM_DELTAXY,
 	      dst_mask(delta_xy, BRW_WRITEMASK_XY),
-	      pixel_xy, 
+	      pixel_xy,
 	      payload_r0_depth,
 	      src_undef());
-      
+
       c->fp_delta_xy = src_reg_from_dst(delta_xy);
    }
 
@@ -430,7 +430,7 @@ static struct brw_fp_src get_pixel_w( struct brw_wm_compile *c )
       struct brw_fp_dst pixel_w = get_temp(c);
       struct brw_fp_src deltas = get_delta_xy(c);
 
-      /* XXX: assuming position is always first -- valid? 
+      /* XXX: assuming position is always first -- valid?
        */
       struct brw_fp_src interp_wpos = src_reg(BRW_FILE_PAYLOAD, 0);
 
@@ -440,9 +440,9 @@ static struct brw_fp_src get_pixel_w( struct brw_wm_compile *c )
 	       WM_PIXELW,
 	       dst_mask(pixel_w, BRW_WRITEMASK_W),
 	       interp_wpos,
-	       deltas, 
+	       deltas,
 	       src_undef());
-      
+
 
       c->fp_pixel_w = src_reg_from_dst(pixel_w);
    }
@@ -476,7 +476,7 @@ static void emit_interp( struct brw_wm_compile *c,
 	      WM_WPOSXY,
 	      dst_mask(dst, BRW_WRITEMASK_XY),
 	      get_pixel_xy(c));
-      
+
       /* TGSI_FILE_INPUT.attr.xyzw = INTERP payload.interp[attr].x, deltas.xyw
        */
       emit_op2(c,
@@ -536,7 +536,7 @@ static void emit_interp( struct brw_wm_compile *c,
       emit_op0(c,
 	       WM_FRONTFACING,
 	       dst_mask(dst, BRW_WRITEMASK_X));
-      
+
       emit_op1(c,
 	      TGSI_OPCODE_MOV,
 	      dst_mask(dst, BRW_WRITEMASK_YZ),
@@ -568,7 +568,7 @@ static void emit_interp( struct brw_wm_compile *c,
 	      src_imm1f(c, 1.0f));
       break;
 
-   default: 
+   default:
       switch (interp_mode) {
       case TGSI_INTERPOLATE_CONSTANT:
 	 emit_op1(c,
@@ -600,14 +600,14 @@ static void emit_interp( struct brw_wm_compile *c,
 
 
 /***********************************************************************
- * Expand various instructions here to simpler forms.  
+ * Expand various instructions here to simpler forms.
  */
 static void precalc_dst( struct brw_wm_compile *c,
 			 struct brw_fp_dst dst,
 			 struct brw_fp_src src0,
 			 struct brw_fp_src src1 )
 {
-   if (dst.writemask & BRW_WRITEMASK_Y) {      
+   if (dst.writemask & BRW_WRITEMASK_Y) {
       /* dst.y = mul src0.y, src1.y
        */
       emit_op2(c,
@@ -693,7 +693,7 @@ static void precalc_tex( struct brw_wm_compile *c,
       tmpsrc = src_reg_from_dst(tmp);
 
       /* tmp = abs(src0) */
-      emit_op1(c, 
+      emit_op1(c,
 	       TGSI_OPCODE_MOV,
 	       tmp,
 	       src_abs(src0));
@@ -745,10 +745,10 @@ static void precalc_tex( struct brw_wm_compile *c,
       struct brw_fp_src tmpsrc = src_reg_from_dst(tmp);
       struct brw_fp_src C0 = src_imm4f( c,  -.5, -.0625, -.5, 1.164 );
       struct brw_fp_src C1 = src_imm4f( c, 1.596, -0.813, 2.018, -.391 );
-     
+
       /* tmp     = TEX ...
        */
-      emit_tex_op(c, 
+      emit_tex_op(c,
                   TGSI_OPCODE_TEX,
                   dst_saturate(tmp, dst.saturate),
                   unit,
@@ -772,7 +772,7 @@ static void precalc_tex( struct brw_wm_compile *c,
 	       tmpsrc,
 	       src_scalar(C0, W));
 
-      /* 
+      /*
        * if (UV swaped)
        *     RGB.xyz = MAD YUV.zzx, C1, YUV.y
        * else
@@ -781,8 +781,8 @@ static void precalc_tex( struct brw_wm_compile *c,
 
       emit_op3(c, TGSI_OPCODE_MAD,
 	       dst_mask(dst, BRW_WRITEMASK_XYZ),
-	       ( swap_uv ? 
-		 src_swizzle(tmpsrc, Z,Z,X,X) : 
+	       ( swap_uv ?
+		 src_swizzle(tmpsrc, Z,Z,X,X) :
 		 src_swizzle(tmpsrc, X,X,Z,Z)),
 	       C1,
 	       src_scalar(tmpsrc, Y));
@@ -800,7 +800,7 @@ static void precalc_tex( struct brw_wm_compile *c,
    }
    else {
       /* ordinary RGBA tex instruction */
-      emit_tex_op(c, 
+      emit_tex_op(c,
                   TGSI_OPCODE_TEX,
                   dst,
                   unit,
@@ -826,7 +826,7 @@ static void precalc_tex( struct brw_wm_compile *c,
  * Check if the given TXP instruction really needs the divide-by-W step.
  */
 static GLboolean projtex( struct brw_wm_compile *c,
-			  unsigned target, 
+			  unsigned target,
 			  struct brw_fp_src src )
 {
    /* Only try to detect the simplest cases.  Could detect (later)
@@ -838,8 +838,8 @@ static GLboolean projtex( struct brw_wm_compile *c,
     */
    if (target == TGSI_TEXTURE_CUBE)
       return GL_FALSE;  /* ut2004 gun rendering !?! */
-   
-   if (src.file == TGSI_FILE_INPUT && 
+
+   if (src.file == TGSI_FILE_INPUT &&
        BRW_GET_SWZ(src.swizzle, W) == W &&
        c->fp->info.input_interpolate[src.index] != TGSI_INTERPOLATE_PERSPECTIVE)
       return GL_FALSE;
@@ -878,7 +878,7 @@ static void precalc_txp( struct brw_wm_compile *c,
 
       /* dst = TEX tmp0
        */
-      precalc_tex(c, 
+      precalc_tex(c,
 		  dst,
 		  target,
 		  unit,
@@ -931,7 +931,7 @@ static void emit_fb_write( struct brw_wm_compile *c )
 
    for (i = 0 ; i < c->key.nr_cbufs; i++) {
       struct brw_fp_src outcolor;
-      
+
       outcolor = find_output_by_semantic(c, TGSI_SEMANTIC_COLOR, i);
 
       /* Use emit_tex_op so that we can specify the inst->target
@@ -961,12 +961,12 @@ static struct brw_fp_dst translate_dst( struct brw_wm_compile *c,
    out.writemask = dst->Register.WriteMask;
    out.indirect = dst->Register.Indirect;
    out.saturate = (saturate == TGSI_SAT_ZERO_ONE);
-   
+
    if (out.indirect) {
       assert(dst->Indirect.File == TGSI_FILE_ADDRESS);
       assert(dst->Indirect.Index == 0);
    }
-   
+
    return out;
 }
 
@@ -984,7 +984,7 @@ static struct brw_fp_src translate_src( struct brw_wm_compile *c,
 		  (src->Register.SwizzleY << 2) |
 		  (src->Register.SwizzleZ << 4) |
 		  (src->Register.SwizzleW << 6));
-   
+
    switch (tgsi_util_get_full_src_register_sign_mode( src, 0 )) {
    case TGSI_UTIL_SIGN_CLEAR:
       out.abs = 1;
@@ -1012,7 +1012,7 @@ static struct brw_fp_src translate_src( struct brw_wm_compile *c,
       assert(src->Indirect.File == TGSI_FILE_ADDRESS);
       assert(src->Indirect.Index == 0);
    }
-   
+
    return out;
 }
 
@@ -1031,27 +1031,27 @@ static void emit_insn( struct brw_wm_compile *c,
 
    for (i = 0; i < inst->Instruction.NumSrcRegs; i++)
       src[i] = translate_src( c, &inst->Src[i] );
-   
+
    switch (opcode) {
    case TGSI_OPCODE_ABS:
       emit_op1(c, TGSI_OPCODE_MOV,
-	       dst, 
+	       dst,
 	       src_abs(src[0]));
       break;
 
-   case TGSI_OPCODE_SUB: 
+   case TGSI_OPCODE_SUB:
       emit_op2(c, TGSI_OPCODE_ADD,
 	       dst,
 	       src[0],
 	       src_negate(src[1]));
       break;
 
-   case TGSI_OPCODE_SCS: 
+   case TGSI_OPCODE_SCS:
       emit_op1(c, TGSI_OPCODE_SCS,
 	       dst_mask(dst, BRW_WRITEMASK_XY),
 	       src[0]);
       break;
-	 
+
    case TGSI_OPCODE_DST:
       precalc_dst(c, dst, src[0], src[1]);
       break;
@@ -1086,14 +1086,14 @@ static void emit_insn( struct brw_wm_compile *c,
                   src[1]);
       break;
 
-   case TGSI_OPCODE_XPD: 
+   case TGSI_OPCODE_XPD:
       emit_op2(c, TGSI_OPCODE_XPD,
 	       dst_mask(dst, BRW_WRITEMASK_XYZ),
-	       src[0], 
+	       src[0],
 	       src[1]);
       break;
 
-   case TGSI_OPCODE_KIL: 
+   case TGSI_OPCODE_KIL:
       emit_op1(c, TGSI_OPCODE_KIL,
 	       dst_mask(dst_undef(), 0),
 	       src[0]);
@@ -1128,7 +1128,7 @@ int brw_wm_pass_fp( struct brw_wm_compile *c )
 
    if (BRW_DEBUG & DEBUG_WM) {
       debug_printf("pre-fp:\n");
-      tgsi_dump(fs->tokens, 0); 
+      tgsi_dump(fs->tokens, 0);
    }
 
    c->fp_pixel_xy = src_undef();
@@ -1173,13 +1173,13 @@ int brw_wm_pass_fp( struct brw_wm_compile *c )
             mask = decl->Declaration.UsageMask;
 
             for (attrib = first; attrib <= last; attrib++) {
-	       emit_interp(c, 
-			   attrib, 
+	       emit_interp(c,
+			   attrib,
 			   decl->Semantic.Name,
 			   decl->Declaration.Interpolate );
             }
          }
-	 
+
          break;
 
       case TGSI_TOKEN_TYPE_IMMEDIATE:

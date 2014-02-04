@@ -41,7 +41,7 @@ extern "C" {
 
 
 struct trace_screen;
-   
+
 struct trace_context
 {
    struct pipe_context base;

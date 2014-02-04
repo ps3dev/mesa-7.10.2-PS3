@@ -82,7 +82,7 @@ sis6326DDClear(struct gl_context *ctx, GLbitfield mask)
    y1 = Y_FLIP(y1 + height1 - 1);
 
    /* XXX: Scissoring */
-   
+
    fprintf(stderr, "Clear\n");
 
    /* Mask out any non-existent buffers */
@@ -140,7 +140,7 @@ sis_clear_back_buffer(struct gl_context *ctx, GLenum mask, GLint x, GLint y,
 		      GLint width, GLint height)
 {
    sisContextPtr smesa = SIS_CONTEXT(ctx);
-   
+
    /* XXX: The order of writing these registers seems to matter, while
     * it actually shouldn't.
     */
@@ -166,7 +166,7 @@ sis_clear_front_buffer(struct gl_context *ctx, GLenum mask, GLint x, GLint y,
    sisContextPtr smesa = SIS_CONTEXT(ctx);
    int count;
    drm_clip_rect_t *pExtents = NULL;
-   
+
    pExtents = smesa->driDrawable->pClipRects;
    count = smesa->driDrawable->numClipRects;
 

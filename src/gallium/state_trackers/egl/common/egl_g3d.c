@@ -412,7 +412,7 @@ egl_g3d_invalid_surface(struct native_display *ndpy,
    /* XXX not thread safe? */
    struct egl_g3d_surface *gsurf = egl_g3d_surface(nsurf->user_data);
    struct egl_g3d_context *gctx;
-   
+
    /*
     * Some functions such as egl_g3d_copy_buffers create a temporary native
     * surface.  There is no gsurf associated with it.

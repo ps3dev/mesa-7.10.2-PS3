@@ -55,13 +55,13 @@ void evergreen_insert_wpos_code(struct gl_context *ctx, struct gl_fragment_progr
 
 void evergreen_Map_Fragment_Program(r700_AssemblerBase         *pAsm,
 			  struct gl_fragment_program *mesa_fp,
-                          struct gl_context *ctx); 
+                          struct gl_context *ctx);
 GLboolean evergreen_Find_Instruction_Dependencies_fp(struct evergreen_fragment_program *fp,
 					   struct gl_fragment_program   *mesa_fp);
 
 GLboolean evergreenTranslateFragmentShader(struct evergreen_fragment_program *fp,
 				      struct gl_fragment_program   *mesa_vp,
-                                      struct gl_context *ctx); 
+                                      struct gl_context *ctx);
 
 /* Interface */
 extern void evergreenSelectFragmentShader(struct gl_context *ctx);

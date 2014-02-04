@@ -503,7 +503,7 @@ radeon_make_renderbuffer_current(radeonContextPtr radeon,
 static unsigned
 radeon_bits_per_pixel(const struct radeon_renderbuffer *rb)
 {
-   return _mesa_get_format_bytes(rb->base.Format) * 8; 
+   return _mesa_get_format_bytes(rb->base.Format) * 8;
 }
 
 /*

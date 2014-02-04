@@ -51,7 +51,7 @@ extern void radeonEmitVbufPrim( r100ContextPtr rmesa,
 				GLuint vertex_nr );
 
 extern void radeonFlushElts( struct gl_context *ctx );
-			    
+
 
 extern GLushort *radeonAllocEltsOpenEnded( r100ContextPtr rmesa,
 					   GLuint vertex_format,
@@ -118,7 +118,7 @@ static INLINE int RADEON_DB_STATECHANGE(r100ContextPtr rmesa,
       RADEON_NEWPRIM( rmesa );
       atom->dirty = GL_TRUE;
       rmesa->radeon.hw.is_dirty = GL_TRUE;
-      tmp = atom->cmd; 
+      tmp = atom->cmd;
       atom->cmd = atom->lastcmd;
       atom->lastcmd = tmp;
       return 1;

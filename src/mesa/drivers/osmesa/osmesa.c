@@ -683,7 +683,7 @@ osmesa_choose_triangle_function( struct gl_context *ctx )
    if (osmesa->format != OSMESA_RGBA &&
        osmesa->format != OSMESA_BGRA &&
        osmesa->format != OSMESA_ARGB)   return (swrast_tri_func) NULL;
-   if (ctx->Polygon.CullFlag && 
+   if (ctx->Polygon.CullFlag &&
        ctx->Polygon.CullFaceMode == GL_FRONT_AND_BACK)
                                         return (swrast_tri_func) NULL;
 
@@ -1215,7 +1215,7 @@ OSMesaCreateContextExt( GLenum format, GLint depthBits, GLint stencilBits,
             free(osmesa);
             return NULL;
          }
-	
+
 	 _swsetup_Wakeup( ctx );
 
          /* use default TCL pipeline */
@@ -1334,7 +1334,7 @@ OSMesaMakeCurrent( OSMesaContext osmesa, void *buffer, GLenum type,
       assert(osmesa->rb->RefCount == 2);
    }
 
-   /* Set renderbuffer fields.  Set width/height = 0 to force 
+   /* Set renderbuffer fields.  Set width/height = 0 to force
     * osmesa_renderbuffer_storage() being called by _mesa_resize_framebuffer()
     */
    osmesa->rb->Data = buffer;

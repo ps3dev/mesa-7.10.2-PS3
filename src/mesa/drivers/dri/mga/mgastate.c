@@ -126,7 +126,7 @@ static void updateBlendLogicOp(struct gl_context *ctx)
              mmesa->hw.blend_func == (AC_src_src_alpha_sat | AC_dst_zero) );
 }
 
-static void mgaDDBlendEquationSeparate(struct gl_context *ctx, 
+static void mgaDDBlendEquationSeparate(struct gl_context *ctx,
 				       GLenum modeRGB, GLenum modeA)
 {
    assert( modeRGB == modeA );
@@ -277,11 +277,11 @@ static void mgaDDFogfv(struct gl_context *ctx, GLenum pname, const GLfloat *para
    mgaContextPtr mmesa = MGA_CONTEXT(ctx);
 
    if (pname == GL_FOG_COLOR) {
-      GLuint color = PACK_COLOR_888((GLubyte)(ctx->Fog.Color[0]*255.0F), 
-				    (GLubyte)(ctx->Fog.Color[1]*255.0F), 
+      GLuint color = PACK_COLOR_888((GLubyte)(ctx->Fog.Color[0]*255.0F),
+				    (GLubyte)(ctx->Fog.Color[1]*255.0F),
 				    (GLubyte)(ctx->Fog.Color[2]*255.0F));
 
-      MGA_STATECHANGE(mmesa, MGA_UPLOAD_CONTEXT);   
+      MGA_STATECHANGE(mmesa, MGA_UPLOAD_CONTEXT);
       mmesa->setup.fogcolor = color;
    }
 }
@@ -343,8 +343,8 @@ static void mgaDDCullFaceFrontFace(struct gl_context *ctx, GLenum unused)
    mgaContextPtr mmesa = MGA_CONTEXT(ctx);
 
    MGA_STATECHANGE( mmesa, MGA_UPLOAD_CONTEXT );
-   if (ctx->Polygon.CullFlag && 
-       ctx->Polygon.CullFaceMode != GL_FRONT_AND_BACK) 
+   if (ctx->Polygon.CullFlag &&
+       ctx->Polygon.CullFaceMode != GL_FRONT_AND_BACK)
    {
       mmesa->hw.cull = _CULL_NEGATIVE;
 
@@ -368,8 +368,8 @@ static void mgaDDCullFaceFrontFace(struct gl_context *ctx, GLenum unused)
  * Masks
  */
 
-static void mgaDDColorMask(struct gl_context *ctx, 
-			   GLboolean r, GLboolean g, 
+static void mgaDDColorMask(struct gl_context *ctx,
+			   GLboolean r, GLboolean g,
 			   GLboolean b, GLboolean a )
 {
    mgaContextPtr mmesa = MGA_CONTEXT( ctx );
@@ -385,7 +385,7 @@ static void mgaDDColorMask(struct gl_context *ctx,
 
    if (mmesa->setup.plnwt != mask) {
       MGA_STATECHANGE( mmesa, MGA_UPLOAD_CONTEXT );
-      mmesa->setup.plnwt = mask;      
+      mmesa->setup.plnwt = mask;
    }
 }
 
@@ -427,7 +427,7 @@ static void mgaDDPolygonStipple( struct gl_context *ctx, const GLubyte *mask )
    const GLubyte *m = mask;
    GLubyte p[4];
    int i,j,k;
-   int active = (ctx->Polygon.StippleFlag && 
+   int active = (ctx->Polygon.StippleFlag &&
 		 mmesa->raster_primitive == GL_TRIANGLES);
    GLuint stipple;
 
@@ -462,7 +462,7 @@ static void mgaDDPolygonStipple( struct gl_context *ctx, const GLubyte *mask )
 	 mmesa->haveHwStipple = 1;
 	 break;
       }
-   
+
    if (active) {
       mmesa->setup.dwgctl &= ~(0xf<<20);
       mmesa->setup.dwgctl |= mmesa->poly_stipple;
@@ -666,7 +666,7 @@ mgaDDStencilOpSeparate(struct gl_context *ctx, GLenum face, GLenum fail, GLenum 
    }
 
    MGA_STATECHANGE( mmesa, MGA_UPLOAD_CONTEXT );
-   mmesa->hw.stencilctl &= (SC_sfailop_MASK & SC_szfailop_MASK 
+   mmesa->hw.stencilctl &= (SC_sfailop_MASK & SC_szfailop_MASK
 			    & SC_szpassop_MASK);
    mmesa->hw.stencilctl |= stencilctl;
 }
@@ -694,14 +694,14 @@ void mgaCalcViewport( struct gl_context *ctx )
    mmesa->SetupNewInputs = ~0;
 }
 
-static void mgaViewport( struct gl_context *ctx, 
-			  GLint x, GLint y, 
+static void mgaViewport( struct gl_context *ctx,
+			  GLint x, GLint y,
 			  GLsizei width, GLsizei height )
 {
    mgaCalcViewport( ctx );
 }
 
-static void mgaDepthRange( struct gl_context *ctx, 
+static void mgaDepthRange( struct gl_context *ctx,
 			    GLclampd nearval, GLclampd farval )
 {
    mgaCalcViewport( ctx );
@@ -712,7 +712,7 @@ static void mgaDepthRange( struct gl_context *ctx,
  * Miscellaneous
  */
 
-static void mgaDDClearColor(struct gl_context *ctx, 
+static void mgaDDClearColor(struct gl_context *ctx,
 			    const GLfloat color[4] )
 {
    mgaContextPtr mmesa = MGA_CONTEXT(ctx);
@@ -777,7 +777,7 @@ void mgaUpdateRects( mgaContextPtr mmesa, GLuint buffers )
    __DRIdrawable *const driDrawable = mmesa->driDrawable;
    __DRIdrawable *const driReadable = mmesa->driReadable;
 
-   mmesa->dirty_cliprects = 0;	
+   mmesa->dirty_cliprects = 0;
 
    driUpdateFramebufferSize(mmesa->glCtx, driDrawable);
    if (driDrawable != driReadable) {
@@ -869,7 +869,7 @@ static void mgaDDEnable(struct gl_context *ctx, GLenum cap, GLboolean state)
 
    case GL_FOG:
       MGA_STATECHANGE( mmesa, MGA_UPLOAD_CONTEXT );
-      if (ctx->Fog.Enabled) 
+      if (ctx->Fog.Enabled)
 	 mmesa->setup.maccess |= MA_fogen_enable;
       else
 	 mmesa->setup.maccess &= ~MA_fogen_enable;
@@ -949,7 +949,7 @@ void mgaEmitHwStateLocked( mgaContextPtr mmesa )
 	 }
       }
 
-      mmesa->setup.stencil = mmesa->hw.stencil 
+      mmesa->setup.stencil = mmesa->hw.stencil
 	  & mmesa->hw.stencil_enable;
       mmesa->setup.stencilctl = mmesa->hw.stencilctl
 	  & mmesa->hw.stencil_enable;
@@ -967,7 +967,7 @@ void mgaEmitHwStateLocked( mgaContextPtr mmesa )
 
       mmesa->setup.alphactrl &= AC_src_MASK & AC_dst_MASK & AC_atmode_MASK
 	 & AC_atref_MASK & AC_alphasel_MASK;
-      mmesa->setup.alphactrl |= 
+      mmesa->setup.alphactrl |=
 	 (mmesa->hw.alpha_func & mmesa->hw.alpha_func_enable) |
 	 (mmesa->hw.blend_func & mmesa->hw.blend_func_enable) |
 	 ((AC_src_one | AC_dst_zero) & ~mmesa->hw.blend_func_enable) |
@@ -1120,7 +1120,7 @@ void mgaInitState( mgaContextPtr mmesa )
    mmesa->hw.zmode = DC_zmode_zlt | DC_atype_zi;
    mmesa->hw.stencil = MGA_FIELD( S_sref, 0x00) | MGA_FIELD( S_smsk, 0xff ) |
       MGA_FIELD( S_swtmsk, 0xff );
-   mmesa->hw.stencilctl = SC_smode_salways | SC_sfailop_keep 
+   mmesa->hw.stencilctl = SC_smode_salways | SC_sfailop_keep
       | SC_szfailop_keep | SC_szpassop_keep;
    mmesa->hw.stencil_enable = 0;
    mmesa->hw.cull = _CULL_DISABLE;

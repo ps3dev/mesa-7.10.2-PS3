@@ -61,7 +61,7 @@ cell_vertex_shader_queue_flush(struct draw_context *draw)
 
    assert(draw->vs.queue_nr != 0);
 
-   /* XXX: do this on statechange: 
+   /* XXX: do this on statechange:
     */
    draw_update_vertex_fetch(draw);
    cell_update_vertex_fetch(draw);
@@ -71,7 +71,7 @@ cell_vertex_shader_queue_flush(struct draw_context *draw)
    batch[0] = CELL_CMD_STATE_ATTRIB_FETCH;
    cf = (struct cell_attribute_fetch_code *) (&batch[1]);
    cf->base = (uint64_t) cell->attrib_fetch.store;
-   cf->size = ROUNDUP16((unsigned)((void *) cell->attrib_fetch.csr 
+   cf->size = ROUNDUP16((unsigned)((void *) cell->attrib_fetch.csr
 				   - (void *) cell->attrib_fetch.store));
 
 

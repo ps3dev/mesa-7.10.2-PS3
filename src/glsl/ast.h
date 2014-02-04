@@ -309,7 +309,7 @@ public:
    virtual void print(void) const;
 
    char *identifier;
-   
+
    int is_array;
    ast_expression *array_size;
 
@@ -439,7 +439,7 @@ public:
    ast_type_specifier(int specifier);
 
    /** Construct a type specifier from a type name */
-   ast_type_specifier(const char *name) 
+   ast_type_specifier(const char *name)
       : type_specifier(ast_type_name), type_name(name), structure(NULL),
 	is_array(false), array_size(NULL), precision(ast_precision_none),
 	is_precision_statement(false)
@@ -661,7 +661,7 @@ public:
       ast_while,
       ast_do_while
    } mode;
-   
+
 
    ast_node *init_statement;
    ast_node *condition;

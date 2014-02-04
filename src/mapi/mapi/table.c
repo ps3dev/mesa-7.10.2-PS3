@@ -36,7 +36,7 @@ static void
 noop_warn(const char *name)
 {
    static int debug = -1;
-   
+
    if (debug < 0)
       debug = (getenv("MESA_DEBUG") || getenv("LIBGL_DEBUG"));
 

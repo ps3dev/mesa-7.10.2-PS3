@@ -115,7 +115,7 @@ nv50_surface_set(struct nv50_screen *screen, struct pipe_surface *ps, int dst)
  		OUT_RELOCh(chan, bo, ((struct nv50_surface *)ps)->offset, flags);
  		OUT_RELOCl(chan, bo, ((struct nv50_surface *)ps)->offset, flags);
  	}
- 
+
 #if 0
  	if (dst) {
  		BEGIN_RING(chan, eng2d, NV50_2D_CLIP_X, 4);
@@ -125,7 +125,7 @@ nv50_surface_set(struct nv50_screen *screen, struct pipe_surface *ps, int dst)
  		OUT_RING  (chan, surf->height);
  	}
 #endif
-  
+
  	return 0;
 }
 

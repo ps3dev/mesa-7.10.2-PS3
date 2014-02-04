@@ -93,7 +93,7 @@ mach64FillInModes( __DRIscreen *psp,
 
     depth_bits_array[0] = depth_bits;
     depth_bits_array[1] = depth_bits;
-    
+
     /* Just like with the accumulation buffer, always provide some modes
      * with a stencil buffer.  It will be a sw fallback, but some apps won't
      * care about that.
@@ -153,7 +153,7 @@ mach64CreateScreen( __DRIscreen *sPriv )
       return GL_FALSE;
    }
 
-   if ( MACH64_DEBUG & DEBUG_VERBOSE_DRI ) 
+   if ( MACH64_DEBUG & DEBUG_VERBOSE_DRI )
       fprintf( stderr, "%s\n", __FUNCTION__ );
 
    /* Allocate the private area */
@@ -276,7 +276,7 @@ mach64DestroyScreen( __DRIscreen *driScreen )
    if ( !mach64Screen )
       return;
 
-   if ( MACH64_DEBUG & DEBUG_VERBOSE_DRI ) 
+   if ( MACH64_DEBUG & DEBUG_VERBOSE_DRI )
       fprintf( stderr, "%s\n", __FUNCTION__ );
 
    if ( !mach64Screen->IsPCI ) {
@@ -411,7 +411,7 @@ mach64InitDriver( __DRIscreen *driScreen )
 
 /**
  * This is the driver specific part of the createNewScreen entry point.
- * 
+ *
  * \todo maybe fold this into intelInitDriver
  *
  * \return the struct gl_config supported by this driver
@@ -430,7 +430,7 @@ mach64InitScreen(__DRIscreen *psp)
 				      &psp->drm_version, & drm_expected ) ) {
       return NULL;
    }
-   
+
    if (!mach64InitDriver(psp))
       return NULL;
 

@@ -67,7 +67,7 @@ extern void r200InitIoctlFuncs( struct dd_function_table *functions );
 extern GLboolean r200IsGartMemory( r200ContextPtr rmesa, const GLvoid *pointer,
 				   GLint size );
 
-extern GLuint r200GartOffsetFromVirtual( r200ContextPtr rmesa, 
+extern GLuint r200GartOffsetFromVirtual( r200ContextPtr rmesa,
 					 const GLvoid *pointer );
 
 void r200SetUpAtomList( r200ContextPtr rmesa );
@@ -108,7 +108,7 @@ do {								\
    memcpy( rmesa->hw.ATOM.lastcmd, rmesa->hw.ATOM.cmd,	\
 	   rmesa->hw.ATOM.cmd_size * 4)
 
-static INLINE int R200_DB_STATECHANGE( 
+static INLINE int R200_DB_STATECHANGE(
    r200ContextPtr rmesa,
    struct radeon_state_atom *atom )
 {
@@ -117,7 +117,7 @@ static INLINE int R200_DB_STATECHANGE(
       R200_NEWPRIM( rmesa );
       atom->dirty = GL_TRUE;
       rmesa->radeon.hw.is_dirty = GL_TRUE;
-      tmp = atom->cmd; 
+      tmp = atom->cmd;
       atom->cmd = atom->lastcmd;
       atom->lastcmd = tmp;
       return 1;

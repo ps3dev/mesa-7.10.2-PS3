@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-            
+
 
 #include "main/macros.h"
 #include "brw_context.h"
@@ -103,7 +103,7 @@ static GLubyte get_active( struct tracker *t,
    if (src.RelAddr)
       return 0xf;
 
-   for (i = 0; i < 4; i++) 
+   for (i = 0; i < 4; i++)
       active |= get_active_component(t, src.File, src.Index, i,
 				     GET_SWZ(src.Swizzle, i));
 
@@ -133,10 +133,10 @@ static void calc_sizes( struct tracker *t )
    GLint vertRes;
 
    if (t->twoside) {
-      t->active[PROGRAM_OUTPUT][VERT_RESULT_COL0] |= 
+      t->active[PROGRAM_OUTPUT][VERT_RESULT_COL0] |=
 	 t->active[PROGRAM_OUTPUT][VERT_RESULT_BFC0];
 
-      t->active[PROGRAM_OUTPUT][VERT_RESULT_COL1] |= 
+      t->active[PROGRAM_OUTPUT][VERT_RESULT_COL1] |=
 	 t->active[PROGRAM_OUTPUT][VERT_RESULT_BFC1];
    }
 
@@ -205,14 +205,14 @@ static void calc_wm_input_sizes( struct brw_context *brw )
    if (ctx->Light.Model.TwoSide)
       t.twoside = 1;
 
-   for (i = 0; i < VERT_ATTRIB_MAX; i++) 
+   for (i = 0; i < VERT_ATTRIB_MAX; i++)
       if (vp->program.Base.InputsRead & (1<<i))
-	 set_active_component(&t, PROGRAM_INPUT, i, 
+	 set_active_component(&t, PROGRAM_INPUT, i,
 			      szflag[get_input_size(brw, i)]);
-      
+
    for (insn = 0; insn < vp->program.Base.NumInstructions; insn++) {
       struct prog_instruction *inst = &vp->program.Base.Instructions[insn];
-      
+
       switch (inst->Opcode) {
       case OPCODE_ARL:
 	 break;

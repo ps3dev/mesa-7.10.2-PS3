@@ -66,7 +66,7 @@ lp_jit_create_types(struct llvmpipe_context *lp)
       elem_types[LP_JIT_TEXTURE_MIN_LOD] =
       elem_types[LP_JIT_TEXTURE_MAX_LOD] =
       elem_types[LP_JIT_TEXTURE_LOD_BIAS] = LLVMFloatTypeInContext(lc);
-      elem_types[LP_JIT_TEXTURE_BORDER_COLOR] = 
+      elem_types[LP_JIT_TEXTURE_BORDER_COLOR] =
          LLVMArrayType(LLVMFloatTypeInContext(lc), 4);
 
       texture_type = LLVMStructTypeInContext(lc, elem_types,

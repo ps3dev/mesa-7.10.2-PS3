@@ -272,7 +272,7 @@ static void dump_depth_stencil_state(struct brw_context *brw)
 		ds->ds2.depth_test_enable ? "en" : "dis",
 		ds->ds2.depth_test_func,
 		ds->ds2.depth_write_enable ? "en" : "dis");
-   drm_intel_bo_unmap(brw->cc.depth_stencil_state_bo); 
+   drm_intel_bo_unmap(brw->cc.depth_stencil_state_bo);
 }
 
 static void dump_cc_state(struct brw_context *brw)
@@ -299,7 +299,7 @@ static void dump_cc_state(struct brw_context *brw)
    state_out(name, cc, cc_off, 3, "constant green %f\n", cc->constant_g);
    state_out(name, cc, cc_off, 4, "constant blue %f\n", cc->constant_b);
    state_out(name, cc, cc_off, 5, "constant alpha %f\n", cc->constant_a);
-   
+
    drm_intel_bo_unmap(brw->cc.state_bo);
 
 }

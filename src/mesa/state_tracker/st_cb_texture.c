@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #include "main/mfeatures.h"
@@ -117,7 +117,7 @@ st_NewTextureObject(struct gl_context * ctx, GLuint name, GLenum target)
 }
 
 /** called via ctx->Driver.DeleteTextureObject() */
-static void 
+static void
 st_DeleteTextureObject(struct gl_context *ctx,
                        struct gl_texture_object *texObj)
 {
@@ -195,7 +195,7 @@ __memcpy(void *to, const void *from, size_t n)
  *
  * The sse_memcpy seems to have a slight cliff at 64/32 bytes, but
  * isn't much faster than x86_memcpy for agp copies.
- * 
+ *
  * TODO: switch dynamically.
  */
 static void *
@@ -313,7 +313,7 @@ guess_and_alloc_texture(struct st_context *st,
       if (depth != 1)
          depth <<= 1;
       level--;
-   }      
+   }
 
    assert(level == 0);
 
@@ -591,7 +591,7 @@ st_TexImage(struct gl_context * ctx,
 
    _mesa_set_fetch_functions(texImage, dims);
 
-   /* Release the reference to a potentially orphaned buffer.   
+   /* Release the reference to a potentially orphaned buffer.
     * Release any old malloced memory.
     */
    if (stImage->pt) {
@@ -755,9 +755,9 @@ st_TexImage(struct gl_context * ctx,
       const GLubyte *src = (const GLubyte *) pixels;
 
       for (i = 0; i < depth; i++) {
-	 if (!_mesa_texstore(ctx, dims, 
-                             texImage->_BaseFormat, 
-                             texImage->TexFormat, 
+	 if (!_mesa_texstore(ctx, dims,
+                             texImage->_BaseFormat,
+                             texImage->TexFormat,
                              texImage->Data,
                              0, 0, 0, /* dstX/Y/Zoffset */
                              dstRowStride,
@@ -1119,7 +1119,7 @@ st_TexSubimage(struct gl_context *ctx, GLint dims, GLenum target, GLint level,
       else
          transfer_usage = PIPE_TRANSFER_WRITE;
 
-      texImage->Data = st_texture_image_map(st, stImage, zoffset, 
+      texImage->Data = st_texture_image_map(st, stImage, zoffset,
                                             transfer_usage,
                                             xoffset, yoffset,
                                             width, height);
@@ -1243,11 +1243,11 @@ st_CompressedTexSubImage2D(struct gl_context *ctx, GLenum target, GLint level,
    if (stImage->pt) {
       pformat = stImage->pt->format;
 
-      texImage->Data = st_texture_image_map(st, stImage, 0, 
+      texImage->Data = st_texture_image_map(st, stImage, 0,
                                             PIPE_TRANSFER_WRITE,
                                             xoffset, yoffset,
                                             width, height);
-      
+
       srcBlockStride = util_format_get_stride(pformat, width);
       dstBlockStride = stImage->transfer->stride;
    } else {
@@ -1396,8 +1396,8 @@ fallback_copy_texsubimage(struct gl_context *ctx, GLenum target, GLint level,
           * need to fill-in/override the alpha channel with 1.0.
           */
          _mesa_texstore(ctx, dims,
-                        texImage->_BaseFormat, 
-                        texImage->TexFormat, 
+                        texImage->_BaseFormat,
+                        texImage->TexFormat,
                         texDest,
                         0, 0, 0,
                         dstRowStride,
@@ -1474,7 +1474,7 @@ compatible_src_dst_formats(struct gl_context *ctx,
    else {
       if (ST_DEBUG & DEBUG_FALLBACK)
          debug_printf("%s failed for src %s, dst %s\n",
-                      __FUNCTION__, 
+                      __FUNCTION__,
                       _mesa_lookup_enum_by_nr(srcFormat),
                       _mesa_lookup_enum_by_nr(dstFormat));
 
@@ -1520,7 +1520,7 @@ st_copy_texsubimage(struct gl_context *ctx,
    struct pipe_surface *dest_surface = NULL;
    GLboolean do_flip = (st_fb_orientation(ctx->ReadBuffer) == Y_0_TOP);
 
-   /* make sure finalize_textures has been called? 
+   /* make sure finalize_textures has been called?
     */
    if (0) st_validate_state(st);
 
@@ -1694,7 +1694,7 @@ st_CopyTexImage1D(struct gl_context * ctx, GLenum target, GLint level,
       _mesa_select_tex_image(ctx, texObj, target, level);
 
    /* Setup or redefine the texture object, texture and texture
-    * image.  Don't populate yet.  
+    * image.  Don't populate yet.
     */
    ctx->Driver.TexImage1D(ctx, target, level, internalFormat,
                           width, border,
@@ -1721,7 +1721,7 @@ st_CopyTexImage2D(struct gl_context * ctx, GLenum target, GLint level,
       _mesa_select_tex_image(ctx, texObj, target, level);
 
    /* Setup or redefine the texture object, texture and texture
-    * image.  Don't populate yet.  
+    * image.  Don't populate yet.
     */
    ctx->Driver.TexImage2D(ctx, target, level, internalFormat,
                           width, height, border,
@@ -1805,7 +1805,7 @@ copy_image_data_to_texture(struct st_context *st,
                             stImage->face,
                             dstLevel,
                             stImage->base.Data,
-                            stImage->base.RowStride * 
+                            stImage->base.RowStride *
                             util_format_get_blocksize(stObj->pt->format),
                             stImage->base.RowStride *
                             stImage->base.Height *

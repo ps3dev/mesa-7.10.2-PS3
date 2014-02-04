@@ -7,11 +7,11 @@ env.ParseConfig('pkg-config --cflags libdrm')
 if env['gcc']:
     env.Append(CCFLAGS = ['-fvisibility=hidden'])
     env.Append(CPPDEFINES = [
-        'HAVE_STDINT_H', 
+        'HAVE_STDINT_H',
         'HAVE_SYS_TYPES_H',
         '-D_FILE_OFFSET_BITS=64',
     ])
-    
+
 env.Prepend(CPPPATH = [
     'include',
     '#/src/gallium/drivers/svga',

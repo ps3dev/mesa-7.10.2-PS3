@@ -95,7 +95,7 @@ while(INREG(MGAREG_DWGSYNC) != MGA_SYNC_XTAG) ; \
 		  (pMga->Chipset == PCI_CHIP_MGAG200) || \
 		  (pMga->Chipset == PCI_CHIP_MGAG400) || \
 		  (pMga->Chipset == PCI_CHIP_MGAG550))
-    
+
 #define MGA_HAL(x) { \
 	MGAPtr pMga = MGAPTR(pScrn); \
 	if (pMga->HALLoaded && HAL_CHIPSETS) { x; } \

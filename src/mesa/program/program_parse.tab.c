@@ -2,20 +2,20 @@
 /* A Bison parser, made by GNU Bison 2.4.1.  */
 
 /* Skeleton implementation for Bison's Yacc-like parsers in C
-   
+
       Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
    Free Software Foundation, Inc.
-   
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -28,7 +28,7 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
@@ -2861,7 +2861,7 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 849 "program_parse.y"
     {
-           gl_register_file file = ((yyvsp[(1) - (1)].temp_sym).name != NULL) 
+           gl_register_file file = ((yyvsp[(1) - (1)].temp_sym).name != NULL)
 	      ? (yyvsp[(1) - (1)].temp_sym).param_binding_type
 	      : PROGRAM_CONSTANT;
            set_src_reg_swz(& (yyval.src_reg), file, (yyvsp[(1) - (1)].temp_sym).param_binding_begin,
@@ -3380,7 +3380,7 @@ yyreduce:
     {
 	   if (((yyvsp[(4) - (6)].integer) != 0) && ((unsigned) (yyvsp[(4) - (6)].integer) != (yyvsp[(6) - (6)].temp_sym).param_binding_length)) {
 	      free((yyvsp[(2) - (6)].string));
-	      yyerror(& (yylsp[(4) - (6)]), state, 
+	      yyerror(& (yylsp[(4) - (6)]), state,
 		      "parameter array size and number of bindings must match");
 	      YYERROR;
 	   } else {
@@ -4744,7 +4744,7 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 2088 "program_parse.y"
     {
-	   (yyval.integer) = 0; 
+	   (yyval.integer) = 0;
 	;}
     break;
 
@@ -5412,7 +5412,7 @@ int add_state_reference(struct gl_program_parameter_list *param_list,
 
 int
 initialize_symbol_from_state(struct gl_program *prog,
-			     struct asm_symbol *param_var, 
+			     struct asm_symbol *param_var,
 			     const gl_state_index tokens[STATE_LENGTH])
 {
    int idx = -1;
@@ -5464,7 +5464,7 @@ initialize_symbol_from_state(struct gl_program *prog,
 
 int
 initialize_symbol_from_param(struct gl_program *prog,
-			     struct asm_symbol *param_var, 
+			     struct asm_symbol *param_var,
 			     const gl_state_index tokens[STATE_LENGTH])
 {
    int idx = -1;
@@ -5529,7 +5529,7 @@ initialize_symbol_from_param(struct gl_program *prog,
  */
 int
 initialize_symbol_from_const(struct gl_program *prog,
-			     struct asm_symbol *param_var, 
+			     struct asm_symbol *param_var,
 			     const struct asm_vector *vec,
                              GLboolean allowSwizzle)
 {
@@ -5669,7 +5669,7 @@ _mesa_parse_arb_program(struct gl_context *ctx, GLenum target, const GLubyte *st
    }
 
 
-   
+
    /* Add one instruction to store the "END" instruction.
     */
    state->prog->Instructions =

@@ -24,7 +24,7 @@ for prog in progs:
         target = prog,
         source = prog + '.c',
     )
-    
+
     env.InstallProgram(prog)
 
     # http://www.scons.org/wiki/UnitTests

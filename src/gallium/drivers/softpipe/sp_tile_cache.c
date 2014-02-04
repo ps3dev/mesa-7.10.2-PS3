@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -65,7 +65,7 @@ is_clear_flag_set(const uint *bitvec, union tile_address addr)
    bit = bitvec[pos / 32] & (1 << (pos & 31));
    return bit;
 }
-   
+
 
 /**
  * Mark the tile at (x,y) as not cleared.
@@ -78,7 +78,7 @@ clear_clear_flag(uint *bitvec, union tile_address addr)
    assert(pos / 32 < (MAX_WIDTH / TILE_SIZE) * (MAX_HEIGHT / TILE_SIZE) / 32);
    bitvec[pos / 32] &= ~(1 << (pos & 31));
 }
-   
+
 
 struct softpipe_tile_cache *
 sp_create_tile_cache( struct pipe_context *pipe )
@@ -440,11 +440,11 @@ sp_alloc_tile(struct softpipe_tile_cache *tc)
  * \param x, y  position of tile, in pixels
  */
 struct softpipe_cached_tile *
-sp_find_cached_tile(struct softpipe_tile_cache *tc, 
+sp_find_cached_tile(struct softpipe_tile_cache *tc,
                     union tile_address addr )
 {
    struct pipe_transfer *pt = tc->transfer;
-   
+
    /* cache pos/entry: */
    const int pos = CACHE_POS(addr.bits.x,
                              addr.bits.y);

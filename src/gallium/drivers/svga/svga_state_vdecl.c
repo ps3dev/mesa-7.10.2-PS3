@@ -45,12 +45,12 @@ upload_user_buffers( struct svga_context *svga )
    int i;
    int nr;
 
-   if (0) 
+   if (0)
       debug_printf("%s: %d\n", __FUNCTION__, svga->curr.num_vertex_buffers);
 
    nr = svga->curr.num_vertex_buffers;
 
-   for (i = 0; i < nr; i++) 
+   for (i = 0; i < nr; i++)
    {
       if (svga_buffer_is_user_buffer(svga->curr.vb[i].buffer))
       {
@@ -102,7 +102,7 @@ static int emit_hw_vs_vdecl( struct svga_context *svga,
    assert(svga->curr.velems->count >=
           svga->curr.vs->base.info.file_count[TGSI_FILE_INPUT]);
 
-   svga_hwtnl_reset_vdecl( svga->hwtnl, 
+   svga_hwtnl_reset_vdecl( svga->hwtnl,
                            svga->curr.velems->count );
 
    for (i = 0; i < svga->curr.velems->count; i++) {
@@ -160,7 +160,7 @@ static int emit_hw_vdecl( struct svga_context *svga,
 }
 
 
-struct svga_tracked_state svga_hw_vdecl = 
+struct svga_tracked_state svga_hw_vdecl =
 {
    "hw vertex decl state (hwtnl version)",
    ( SVGA_NEW_NEED_SWTNL |

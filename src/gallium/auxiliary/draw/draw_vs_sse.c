@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -58,7 +58,7 @@ struct draw_sse_vertex_shader {
    struct x86_function sse2_program;
 
    tgsi_sse2_vs_func func;
-   
+
    struct tgsi_exec_machine *machine;
 };
 
@@ -134,7 +134,7 @@ static void
 vs_sse_delete( struct draw_vertex_shader *base )
 {
    struct draw_sse_vertex_shader *shader = (struct draw_sse_vertex_shader *)base;
-   
+
    x86_release_func( &shader->sse2_program );
 
    align_free( (void *) shader->base.immediates );
@@ -154,7 +154,7 @@ draw_create_vs_sse(struct draw_context *draw,
       return NULL;
 
    vs = CALLOC_STRUCT( draw_sse_vertex_shader );
-   if (vs == NULL) 
+   if (vs == NULL)
       return NULL;
 
    /* we make a private copy of the tokens */
@@ -172,32 +172,32 @@ draw_create_vs_sse(struct draw_context *draw,
    vs->base.prepare = vs_sse_prepare;
    vs->base.run_linear = vs_sse_run_linear;
    vs->base.delete = vs_sse_delete;
-   
+
    vs->base.immediates = align_malloc(TGSI_EXEC_NUM_IMMEDIATES * 4 *
                                       sizeof(float), 16);
 
    vs->machine = draw->vs.machine;
-   
+
    x86_init_func( &vs->sse2_program );
 
    if (!tgsi_emit_sse2( (struct tgsi_token *) vs->base.state.tokens,
-			&vs->sse2_program, 
-                        (float (*)[4])vs->base.immediates, 
-                        TRUE )) 
+			&vs->sse2_program,
+                        (float (*)[4])vs->base.immediates,
+                        TRUE ))
       goto fail;
-      
+
    vs->func = (tgsi_sse2_vs_func) x86_get_func( &vs->sse2_program );
    if (!vs->func) {
       goto fail;
    }
-   
+
    return &vs->base;
 
 fail:
    debug_error("tgsi_emit_sse2() failed, falling back to interpreter\n");
 
    x86_release_func( &vs->sse2_program );
-   
+
    FREE(vs);
    return NULL;
 }

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -54,13 +54,13 @@ static GLuint SerialNo = 1;
  * fragment program.
  */
 static void st_bind_program( struct gl_context *ctx,
-			     GLenum target, 
+			     GLenum target,
 			     struct gl_program *prog )
 {
    struct st_context *st = st_context(ctx);
 
    switch (target) {
-   case GL_VERTEX_PROGRAM_ARB: 
+   case GL_VERTEX_PROGRAM_ARB:
       st->dirty.st |= ST_NEW_VERTEX_PROGRAM;
       break;
    case GL_FRAGMENT_PROGRAM_ARB:
@@ -102,9 +102,9 @@ static struct gl_program *st_new_program( struct gl_context *ctx,
 
       prog->serialNo = SerialNo++;
 
-      return _mesa_init_vertex_program( ctx, 
+      return _mesa_init_vertex_program( ctx,
 					&prog->Base,
-					target, 
+					target,
 					id );
    }
 
@@ -114,9 +114,9 @@ static struct gl_program *st_new_program( struct gl_context *ctx,
 
       prog->serialNo = SerialNo++;
 
-      return _mesa_init_fragment_program( ctx, 
+      return _mesa_init_fragment_program( ctx,
 					  &prog->Base,
-					  target, 
+					  target,
 					  id );
    }
 
@@ -173,7 +173,7 @@ st_delete_program(struct gl_context *ctx, struct gl_program *prog)
             cso_delete_fragment_shader(st->cso_context, stfp->driver_shader);
             stfp->driver_shader = NULL;
          }
-         
+
          if (stfp->tgsi.tokens) {
             st_free_tokens(stfp->tgsi.tokens);
             stfp->tgsi.tokens = NULL;
@@ -196,7 +196,7 @@ st_delete_program(struct gl_context *ctx, struct gl_program *prog)
 
 
 static GLboolean st_is_program_native( struct gl_context *ctx,
-				       GLenum target, 
+				       GLenum target,
 				       struct gl_program *prog )
 {
    return GL_TRUE;

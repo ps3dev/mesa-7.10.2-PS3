@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * Copyright (c) 2008-2010 VMware, Inc.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -362,7 +362,7 @@ st_pipe_format_to_mesa_format(enum pipe_format format)
  * Return first supported format from the given list.
  */
 static enum pipe_format
-find_supported_format(struct pipe_screen *screen, 
+find_supported_format(struct pipe_screen *screen,
                       const enum pipe_format formats[],
                       uint num_formats,
                       enum pipe_texture_target target,
@@ -385,7 +385,7 @@ find_supported_format(struct pipe_screen *screen,
  * Find an RGBA format supported by the context/winsys.
  */
 static enum pipe_format
-default_rgba_format(struct pipe_screen *screen, 
+default_rgba_format(struct pipe_screen *screen,
                     enum pipe_texture_target target,
                     unsigned sample_count,
                     unsigned tex_usage,
@@ -406,7 +406,7 @@ default_rgba_format(struct pipe_screen *screen,
  * Find an RGB format supported by the context/winsys.
  */
 static enum pipe_format
-default_rgb_format(struct pipe_screen *screen, 
+default_rgb_format(struct pipe_screen *screen,
                    enum pipe_texture_target target,
                    unsigned sample_count,
                    unsigned tex_usage,
@@ -429,7 +429,7 @@ default_rgb_format(struct pipe_screen *screen,
  * Find an sRGBA format supported by the context/winsys.
  */
 static enum pipe_format
-default_srgba_format(struct pipe_screen *screen, 
+default_srgba_format(struct pipe_screen *screen,
                     enum pipe_texture_target target,
                     unsigned sample_count,
                     unsigned tex_usage,
@@ -927,7 +927,7 @@ st_ChooseTextureFormat_renderable(struct gl_context *ctx, GLint internalFormat,
       if (_mesa_is_depth_format(internalFormat) ||
 	  _mesa_is_depth_or_stencil_format(internalFormat))
 	 bindings |= PIPE_BIND_DEPTH_STENCIL;
-      else 
+      else
 	 bindings |= PIPE_BIND_RENDER_TARGET;
    }
 

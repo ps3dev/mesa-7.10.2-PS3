@@ -571,7 +571,7 @@ st_context_teximage(struct st_context_iface *stctxi, enum st_texture_type target
        */
       if (!st_sampler_compat_formats(tex->format, internal_format))
 	 internal_format = tex->format;
-     
+
       if (util_format_get_component_bits(internal_format,
                UTIL_FORMAT_COLORSPACE_RGB, 3) > 0)
          internalFormat = GL_RGBA;
@@ -612,7 +612,7 @@ st_context_teximage(struct st_context_iface *stctxi, enum st_texture_type target
 
    _mesa_dirty_texobj(ctx, texObj, GL_TRUE);
    _mesa_unlock_texture(ctx, texObj);
-   
+
    return TRUE;
 }
 

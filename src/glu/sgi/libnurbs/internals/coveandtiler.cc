@@ -384,7 +384,7 @@ CoveAndTiler::coveLowerRight( void )
     GridVertex gv( bot.uend, top.vindex );
 
     right.last();
-    backend.bgntmesh( "coveLowerRight" );       
+    backend.bgntmesh( "coveLowerRight" );
     output( bgv );
     output( right.prev() );
     output( gv );

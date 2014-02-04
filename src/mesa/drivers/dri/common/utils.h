@@ -48,7 +48,7 @@ struct dri_extension {
      * Name of the extension.
      */
     const char * name;
-    
+
 
     /**
      * Pointer to a list of \c dri_extension_function structures.  The list
@@ -78,7 +78,7 @@ extern unsigned driParseDebugString( const char * debug,
 extern unsigned driGetRendererString( char * buffer,
     const char * hardware_name, const char * driver_date, GLuint agp_mode );
 
-extern void driInitExtensions( struct gl_context * ctx, 
+extern void driInitExtensions( struct gl_context * ctx,
     const struct dri_extension * card_extensions, GLboolean enable_imaging );
 
 extern void driInitSingleExtension( struct gl_context * ctx,

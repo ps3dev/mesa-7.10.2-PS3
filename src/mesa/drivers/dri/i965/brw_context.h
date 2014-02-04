@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -50,7 +50,7 @@
  *
  * VUE - vertex URB entry.  An urb entry holding a vertex and usually
  * a vertex header.  The header contains control information and
- * things like primitive type, Begin/end flags and clip codes.  
+ * things like primitive type, Begin/end flags and clip codes.
  *
  * PUE - primitive URB entry.  An urb entry produced by the setup (SF)
  * unit holding rasterization and interpolation parameters.
@@ -286,7 +286,7 @@ struct brw_vs_ouput_sizes {
  * to surface binding table indexes, for WM.
  */
 #define SURF_INDEX_DRAW(d)           (d)
-#define SURF_INDEX_FRAG_CONST_BUFFER (BRW_MAX_DRAW_BUFFERS) 
+#define SURF_INDEX_FRAG_CONST_BUFFER (BRW_MAX_DRAW_BUFFERS)
 #define SURF_INDEX_TEXTURE(t)        (BRW_MAX_DRAW_BUFFERS + 1 + (t))
 
 /**
@@ -342,7 +342,7 @@ struct brw_cache_item {
    drm_intel_bo *bo;
 
    struct brw_cache_item *next;
-};   
+};
 
 
 
@@ -400,7 +400,7 @@ struct brw_cached_batch_item {
    GLuint sz;
    struct brw_cached_batch_item *next;
 };
-   
+
 
 
 /* Protect against a future where VERT_ATTRIB_MAX > 32.  Wouldn't life
@@ -446,7 +446,7 @@ struct brw_query_object {
 /**
  * brw_context is derived from intel_context.
  */
-struct brw_context 
+struct brw_context
 {
    struct intel_context intel;  /**< base class, must be first field */
    GLuint primitive;
@@ -523,7 +523,7 @@ struct brw_context
       unsigned int start_vertex_offset;
    } ib;
 
-   /* Active vertex program: 
+   /* Active vertex program:
     */
    const struct gl_vertex_program *vertex_program;
    const struct gl_fragment_program *fragment_program;
@@ -570,8 +570,8 @@ struct brw_context
       GLuint size; /* Hardware URB size, in KB. */
    } urb;
 
-   
-   /* BRW_NEW_CURBE_OFFSETS: 
+
+   /* BRW_NEW_CURBE_OFFSETS:
     */
    struct {
       GLuint wm_start;  /**< pos of first wm const in CURBE buffer */
@@ -616,7 +616,7 @@ struct brw_context
       uint32_t bind_bo_offset;
       drm_intel_bo *surf_bo[BRW_VS_MAX_SURF];
       uint32_t surf_offset[BRW_VS_MAX_SURF];
-      GLuint nr_surfaces;      
+      GLuint nr_surfaces;
    } vs;
 
    struct {
@@ -657,7 +657,7 @@ struct brw_context
       drm_intel_bo *sdc_bo[BRW_MAX_TEX_UNIT];
 
       GLuint render_surf;
-      GLuint nr_surfaces;      
+      GLuint nr_surfaces;
 
       GLuint max_threads;
       drm_intel_bo *scratch_bo;

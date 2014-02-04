@@ -26,7 +26,7 @@ struct spu_vs_context {
       spu_full_fetch_func fetch_func;
       void *code;
    } vertex_fetch;
-   
+
    /* Clip derived state:
     */
    float plane[12][4];
@@ -49,7 +49,7 @@ static INLINE void spu_vertex_fetch(struct spu_vs_context *draw,
       spu_update_vertex_fetch(draw);
       draw->vertex_fetch.dirty = 0;
    }
-   
+
    (*draw->vertex_fetch.fetch_func)(draw, machine, elts, count);
 }
 

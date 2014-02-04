@@ -21,7 +21,7 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
- 
+
 /**
  * \file read_rgba_span_x86.S
  * Optimized routines to transfer pixel data from the framebuffer to a
@@ -70,7 +70,7 @@
 
 /**
  * MMX optimized version of the BGRA8888_REV to RGBA copy routine.
- * 
+ *
  * \warning
  * This function assumes that the caller will issue the EMMS instruction
  * at the correct places.
@@ -221,7 +221,7 @@ _generic_read_RGBA_span_BGRA8888_REV_SSE:
 
 	movq	%mm0, %mm3
 	movq	%mm0, %mm4
-	
+
 	pand	%mm2, %mm3
 	psllq	$16, %mm4
 	psrlq	$16, %mm3
@@ -303,7 +303,7 @@ _generic_read_RGBA_span_BGRA8888_REV_SSE:
 
 	movq	%mm0, %mm3
 	movq	%mm0, %mm4
-	
+
 	pand	%mm2, %mm3
 	psllq	$16, %mm4
 	psrlq	$16, %mm3
@@ -369,7 +369,7 @@ _generic_read_RGBA_span_BGRA8888_REV_SSE2:
 	testl	$1, %esi
 	je	.L41
 
-	DO_ONE_PIXEL()  
+	DO_ONE_PIXEL()
 .L41:
 	testl	$2, %esi
 	je	.L40
@@ -435,7 +435,7 @@ _generic_read_RGBA_span_BGRA8888_REV_SSE2:
 
 	movq	(%ebx), %xmm0
 	addl	$8, %ebx
-        
+
 	movdqa	%xmm0, %xmm3
 	movdqa	%xmm0, %xmm4
 	andps	%xmm1, %xmm0
@@ -449,13 +449,13 @@ _generic_read_RGBA_span_BGRA8888_REV_SSE2:
 	orps	%xmm3, %xmm0
 
 	movq	%xmm0, (%ecx)
-	addl	$8, %ecx        
+	addl	$8, %ecx
 .L47:
 
 	testl	$1, %edx
 	je	.L46
 
-	DO_ONE_LAST_PIXEL()  
+	DO_ONE_LAST_PIXEL()
 .L46:
 
 	popl	%ebx
@@ -672,7 +672,7 @@ _generic_read_RGBA_span_RGB565_MMX:
 #endif
 	ret
 #endif /* !defined(__DJGPP__) && !defined(__MINGW32__) && !defined(__APPLE__) */
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

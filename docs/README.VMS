@@ -27,7 +27,7 @@ To get a static library make it by typing MMS/MACRO=(NOSHARE=1).
 On VAX platforms only static libraries can be build.
 
 23-sep-2005
-changed default compilation to use /float=ieee/ieee=denorm. The reason for 
+changed default compilation to use /float=ieee/ieee=denorm. The reason for
 this is that it makes Mesa on OpenVMS better compatible with other platforms
 and other packages for VMS that I maintain.
 For more information see

@@ -400,10 +400,10 @@ _mesa_fetch_state(struct gl_context *ctx, const gl_state_index state[],
          return;
 
       case STATE_NORMAL_SCALE:
-         ASSIGN_4V(value, 
-                   ctx->_ModelViewInvScale, 
-                   ctx->_ModelViewInvScale, 
-                   ctx->_ModelViewInvScale, 
+         ASSIGN_4V(value,
+                   ctx->_ModelViewInvScale,
+                   ctx->_ModelViewInvScale,
+                   ctx->_ModelViewInvScale,
                    1);
          return;
 
@@ -594,7 +594,7 @@ _mesa_fetch_state(struct gl_context *ctx, const gl_state_index state[],
          {
             const int unit = (int) state[2];
             GLfloat *rotMat22 = ctx->Texture.Unit[unit].RotMatrix;
-            value[0] = rotMat22[0]; 
+            value[0] = rotMat22[0];
             value[1] = rotMat22[2];
             value[2] = 0.0;
             value[3] = 0.0;
@@ -612,7 +612,7 @@ _mesa_fetch_state(struct gl_context *ctx, const gl_state_index state[],
          }
          return;
 
-      /* XXX: make sure new tokens added here are also handled in the 
+      /* XXX: make sure new tokens added here are also handled in the
        * _mesa_program_state_flags() switch, below.
        */
       default:

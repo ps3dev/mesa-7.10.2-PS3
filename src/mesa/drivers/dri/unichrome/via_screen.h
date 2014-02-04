@@ -38,13 +38,13 @@ typedef struct {
     int height;
     int mem;
 
-    int cpp;                    
+    int cpp;
     int bitsPerPixel;
     int bytesPerPixel;
     int fbFormat;
     int fbOffset;
     int fbSize;
-    
+
     int fbStride;
 
     int backOffset;
@@ -56,7 +56,7 @@ typedef struct {
     int textureOffset;
     int textureSize;
     int logTextureGranularity;
-    
+
     drmAddress reg;
     drmAddress agpLinearStart;
     GLuint agpBase;

@@ -577,7 +577,7 @@ static void presub_replace_inv(
  * of the add instruction must have the constatnt 1 swizzle.  This function
  * does not check const registers to see if their value is 1.0, so it should
  * be called after the constant_folding optimization.
- * @return 
+ * @return
  * 	0 if the ADD instruction is still part of the program.
  * 	1 if the ADD instruction is no longer part of the program.
  */

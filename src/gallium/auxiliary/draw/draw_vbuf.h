@@ -28,7 +28,7 @@
 /**
  * \file
  * Vertex buffer drawing stage.
- * 
+ *
  * \author Keith Whitwell <keith@tungstengraphics.com>
  * \author Jose Fonseca <jrfonsec@tungstengraphics.com>
  */
@@ -70,11 +70,11 @@ struct vbuf_render {
 
    /**
     * Get the hardware vertex format.
-    * 
+    *
     * XXX: have this in draw_context instead?
-    */ 
+    */
    const struct vertex_info *(*get_vertex_info)( struct vbuf_render * );
-	 
+
    /**
     * Request a destination for vertices.
     * Hardware renderers will use ttm memory, others will just malloc
@@ -83,9 +83,9 @@ struct vbuf_render {
    boolean (*allocate_vertices)( struct vbuf_render *,
                                  ushort vertex_size,
                                  ushort nr_vertices );
-   
+
    void *(*map_vertices)( struct vbuf_render * );
-   void (*unmap_vertices)( struct vbuf_render *, 
+   void (*unmap_vertices)( struct vbuf_render *,
                            ushort min_index,
                            ushort max_index );
 

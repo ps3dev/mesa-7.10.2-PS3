@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2009 VMware, Inc.  All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -173,8 +173,8 @@ draw_quad(struct st_context *st,
                                            st->clear.vertices);
 
    /* draw */
-   util_draw_vertex_buffer(pipe, 
-                           st->clear.vbuf, 
+   util_draw_vertex_buffer(pipe,
+                           st->clear.vbuf,
                            st->clear.vbuf_slot * sizeof(st->clear.vertices),
                            PIPE_PRIM_TRIANGLE_FAN,
                            4,  /* verts */
@@ -206,7 +206,7 @@ clear_with_quad(struct gl_context *ctx,
    float clearColor[4];
 
    /*
-   printf("%s %s%s%s %f,%f %f,%f\n", __FUNCTION__, 
+   printf("%s %s%s%s %f,%f %f,%f\n", __FUNCTION__,
 	  color ? "color, " : "",
 	  depth ? "depth, " : "",
 	  stencil ? "stencil" : "",
@@ -412,7 +412,7 @@ check_clear_stencil_with_quad(struct gl_context *ctx, struct gl_renderbuffer *rb
           rb->Format == MESA_FORMAT_Z24_S8 ||
           rb->Format == MESA_FORMAT_S8_Z24);
 
-   if (maskStencil) 
+   if (maskStencil)
       return GL_TRUE;
 
    if (ctx->Scissor.Enabled &&
@@ -447,7 +447,7 @@ st_flush_clear(struct st_context *st)
    pipe_resource_reference(&st->clear.vbuf, NULL);
    st->clear.vbuf_slot = 0;
 }
- 
+
 
 
 /**

@@ -110,7 +110,7 @@ CXX_SOURCES = \
 	brw_fs_reg_allocate.cpp \
 	brw_fs_vector_splitting.cpp
 
-ASM_SOURCES = 
+ASM_SOURCES =
 
 DRIVER_DEFINES = -I../intel
 

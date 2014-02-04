@@ -68,7 +68,7 @@ get_texel_array(SWcontext *swrast, GLuint unit)
  * \param n            number of fragments to process (span width)
  * \param primary_rgba incoming fragment color array
  * \param texelBuffer  pointer to texel colors for all texture units
- * 
+ *
  * \param rgba         incoming/result fragment colors
  */
 static void

@@ -325,7 +325,7 @@ compute_coveragef(const struct LineInfo *info,
 
 typedef void (*plot_func)(struct gl_context *ctx, struct LineInfo *line,
                           int ix, int iy);
-                         
+
 
 
 /*

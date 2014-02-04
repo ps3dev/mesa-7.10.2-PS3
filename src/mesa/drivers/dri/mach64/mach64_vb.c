@@ -107,7 +107,7 @@ static struct {
    const GLfloat sz = 1.0 / mmesa->depth_scale
 
 #if MACH64_NATIVE_VTXFMT
-   
+
 #define UNVIEWPORT_X(x)    ((GLfloat)(x) / 4.0)  +  dx
 #define UNVIEWPORT_Y(y)  - ((GLfloat)(y) / 4.0)  +  dy
 #define UNVIEWPORT_Z(z)    (GLfloat)((z) >> 15)  *  sz
@@ -562,7 +562,7 @@ void mach64ChooseVertexState( struct gl_context *ctx )
    TNLcontext *tnl = TNL_CONTEXT(ctx);
    mach64ContextPtr mmesa = MACH64_CONTEXT( ctx );
    GLuint ind = MACH64_XYZW_BIT|MACH64_RGBA_BIT;
-   
+
    if (ctx->_TriangleCaps & DD_SEPARATE_SPECULAR)
       ind |= MACH64_SPEC_BIT;
 

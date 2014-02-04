@@ -35,14 +35,14 @@
 
 #include "sampleMonoPoly.h"
 
-void findBotLeftSegment(vertexArray* leftChain, 
+void findBotLeftSegment(vertexArray* leftChain,
 			Int leftEnd,
 			Int leftCorner,
 			Real u,
 			Int& ret_index_mono,
 			Int& ret_index_pass);
 
-void findBotRightSegment(vertexArray* rightChain, 
+void findBotRightSegment(vertexArray* rightChain,
 			 Int rightEnd,
 			 Int rightCorner,
 			 Real u,
@@ -63,7 +63,7 @@ void sampleBotRightWithGridLinePost(Real* botVertex,
 				    primStream* pStream);
 
 
-void sampleBotRightWithGridLine(Real* botVertex, 
+void sampleBotRightWithGridLine(Real* botVertex,
 				vertexArray* rightChain,
 				Int rightEnd,
 				Int rightCorner,
@@ -82,7 +82,7 @@ void sampleBotLeftWithGridLinePost(Real* botVertex,
 				   Int leftCorner,
 				   gridWrap* grid,
 				   Int gridV,
-				   Int leftU, 
+				   Int leftU,
 				   Int rightU,
 				   primStream* pStream);
 

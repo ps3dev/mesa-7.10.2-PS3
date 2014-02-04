@@ -110,7 +110,7 @@ static void sisRenderPrimitive( struct gl_context *ctx, GLenum prim );
    sisContextPtr smesa = SIS_CONTEXT(ctx);			\
    const char *vertptr = smesa->verts;
 #define VERT(x) (sisVertex *)(vertptr + (x * vertsize * sizeof(int)))
-#define VERTEX sisVertex 
+#define VERTEX sisVertex
 #undef TAG
 #define TAG(x) sis_##x
 #include "tnl_dd/t_dd_triemit.h"
@@ -835,7 +835,7 @@ do {									\
    smesa->vertex_attrs[smesa->vertex_attr_count].offset = (N);		\
    smesa->vertex_attr_count++;						\
 } while (0)
-				
+
 static void sisRenderStart( struct gl_context *ctx )
 {
    TNLcontext *tnl = TNL_CONTEXT(ctx);
@@ -847,7 +847,7 @@ static void sisRenderStart( struct gl_context *ctx )
 
    RENDERINPUTS_COPY( index_bitset, tnl->render_inputs_bitset );
 
-   if (ctx->DrawBuffer->_ColorDrawBufferIndexes[0] == BUFFER_FRONT_LEFT && 
+   if (ctx->DrawBuffer->_ColorDrawBufferIndexes[0] == BUFFER_FRONT_LEFT &&
       smesa->driDrawable->numClipRects != 0)
    {
       multipass_cliprect(ctx, 0);
@@ -919,7 +919,7 @@ static void sisRenderStart( struct gl_context *ctx )
    if (!RENDERINPUTS_EQUAL( smesa->last_tcl_state_bitset, index_bitset )) {
       smesa->AGPParseSet = AGPParseSet;
 
-      smesa->vertex_size =  _tnl_install_attrs( ctx, smesa->vertex_attrs, 
+      smesa->vertex_size =  _tnl_install_attrs( ctx, smesa->vertex_attrs,
 	 smesa->vertex_attr_count, smesa->hw_viewport, 0 );
 
       smesa->vertex_size >>= 2;
@@ -1071,10 +1071,10 @@ void sisFallback( struct gl_context *ctx, GLuint bit, GLboolean mode )
 
 	 _tnl_invalidate_vertex_state( ctx, ~0 );
 	 _tnl_invalidate_vertices( ctx, ~0 );
-	 _tnl_install_attrs( ctx, 
-			     smesa->vertex_attrs, 
+	 _tnl_install_attrs( ctx,
+			     smesa->vertex_attrs,
 			     smesa->vertex_attr_count,
-			     smesa->hw_viewport, 0 ); 
+			     smesa->hw_viewport, 0 );
 
 	 smesa->NewGLState |= _SIS_NEW_RENDER_STATE;
          if (SIS_DEBUG & DEBUG_FALLBACKS) {
@@ -1147,7 +1147,7 @@ void sisInitTriFuncs( struct gl_context *ctx )
    tnl->Driver.Render.CopyPV = _tnl_copy_pv;
    tnl->Driver.Render.Interp = _tnl_interp;
 
-   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12, 
+   _tnl_init_vertices( ctx, ctx->Const.MaxArrayLockSize + 12,
 		       (6 + 2*ctx->Const.MaxTextureUnits) * sizeof(GLfloat) );
 
    smesa->verts = (char *)tnl->clipspace.vertex_buf;

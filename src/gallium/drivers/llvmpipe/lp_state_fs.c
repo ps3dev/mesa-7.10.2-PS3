@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2009 VMware, Inc.
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -107,7 +107,7 @@ static unsigned fs_no = 0;
 
 
 /**
- * Expand the relevent bits of mask_input to a 4-dword mask for the 
+ * Expand the relevent bits of mask_input to a 4-dword mask for the
  * four pixels in a 2x2 quad.  This will set the four elements of the
  * quad mask vector to 0 or ~0.
  *
@@ -171,7 +171,7 @@ generate_quad_mask(struct gallivm_state *gallivm,
    bits[1] = LLVMConstInt(i32t, 1 << 1, 0);
    bits[2] = LLVMConstInt(i32t, 1 << 4, 0);
    bits[3] = LLVMConstInt(i32t, 1 << 5, 0);
-   
+
    mask = LLVMBuildAnd(builder, mask, LLVMConstVector(bits, 4), "");
 
    /*
@@ -332,7 +332,7 @@ generate_fs(struct gallivm_state *gallivm,
    }
 
    lp_build_interp_soa_update_inputs(interp, gallivm, i);
-   
+
    /* Build the actual shader */
    lp_build_tgsi_soa(gallivm, tokens, type, &mask,
                      consts_ptr, interp->pos, interp->inputs,
@@ -358,11 +358,11 @@ generate_fs(struct gallivm_state *gallivm,
    }
 
    /* Late Z test */
-   if (depth_mode & LATE_DEPTH_TEST) { 
+   if (depth_mode & LATE_DEPTH_TEST) {
       int pos0 = find_output_by_semantic(&shader->info.base,
                                          TGSI_SEMANTIC_POSITION,
                                          0);
-         
+
       if (pos0 != -1 && outputs[pos0][2]) {
          z = LLVMBuildLoad(builder, outputs[pos0][2], "output.z");
       }
@@ -578,7 +578,7 @@ generate_fragment(struct llvmpipe_context *lp,
    blend_type.width = 8;        /* 8-bit ubyte values */
    blend_type.length = 16;      /* 16 elements per vector */
 
-   /* 
+   /*
     * Generate the function prototype. Any change here must be reflected in
     * lp_jit.h's lp_jit_frag_func function pointer type, and vice-versa.
     */
@@ -588,7 +588,7 @@ generate_fragment(struct llvmpipe_context *lp,
 
    blend_vec_type = lp_build_vec_type(gallivm, blend_type);
 
-   util_snprintf(func_name, sizeof(func_name), "fs%u_variant%u_%s", 
+   util_snprintf(func_name, sizeof(func_name), "fs%u_variant%u_%s",
 		 shader->no, variant->no, partial_mask ? "partial" : "whole");
 
    arg_types[0] = lp_jit_get_context_type(lp);         /* context */
@@ -658,7 +658,7 @@ generate_fragment(struct llvmpipe_context *lp,
     * shader key, but everything it derives from (TGSI, and flatshade) is
     * already included in the shader key.
     */
-   lp_build_interp_soa_init(&interp, 
+   lp_build_interp_soa_init(&interp,
                             gallivm,
                             shader->info.base.num_inputs,
                             inputs,
@@ -712,12 +712,12 @@ generate_fragment(struct llvmpipe_context *lp,
       LLVMValueRef blend_in_color[NUM_CHANNELS];
       unsigned rt;
 
-      /* 
-       * Convert the fs's output color and mask to fit to the blending type. 
+      /*
+       * Convert the fs's output color and mask to fit to the blending type.
        */
       for(chan = 0; chan < NUM_CHANNELS; ++chan) {
          LLVMValueRef fs_color_vals[LP_MAX_VECTOR_LENGTH];
-         
+
          for (i = 0; i < num_fs; i++) {
             fs_color_vals[i] =
                LLVMBuildLoad(builder, fs_out_color[cbuf][chan][i], "fs_color_vals");
@@ -739,7 +739,7 @@ generate_fragment(struct llvmpipe_context *lp,
          blend_mask = lp_build_const_int_vec(lp->gallivm, blend_type, ~0);
       }
 
-      color_ptr = LLVMBuildLoad(builder, 
+      color_ptr = LLVMBuildLoad(builder,
 				LLVMBuildGEP(builder, color_ptr_ptr, &index, 1, ""),
 				"");
       lp_build_name(color_ptr, "color_ptr%d", cbuf);
@@ -895,7 +895,7 @@ dump_fs_variant_key(const struct lp_fragment_shader_variant_key *key)
 void
 lp_debug_fs_variant(const struct lp_fragment_shader_variant *variant)
 {
-   debug_printf("llvmpipe: Fragment shader #%u variant #%u:\n", 
+   debug_printf("llvmpipe: Fragment shader #%u variant #%u:\n",
                 variant->shader->no, variant->no);
    tgsi_dump(variant->shader->base.tokens, 0);
    dump_fs_variant_key(&variant->key);
@@ -1311,7 +1311,7 @@ make_variant_key(struct llvmpipe_context *lp,
  * Update fragment shader state.  This is called just prior to drawing
  * something when some fragment-related state has changed.
  */
-void 
+void
 llvmpipe_update_fs(struct llvmpipe_context *lp)
 {
    struct lp_fragment_shader *shader = lp->fs;

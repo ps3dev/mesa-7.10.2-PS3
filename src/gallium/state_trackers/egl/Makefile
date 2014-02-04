@@ -70,7 +70,7 @@ default: depend libegl.a
 libegl.a: $(EGL_OBJECTS) Makefile
 	$(MKLIB) -o egl -static $(EGL_OBJECTS)
 
-depend: 
+depend:
 	rm -f depend
 	touch depend
 	$(MKDEP) $(MKDEP_OPTIONS) $(ALL_INCLUDES) $(ALL_SOURCES) 2> /dev/null

@@ -85,7 +85,7 @@ svga_create_depth_stencil_state(struct pipe_context *pipe,
       ds->stencil[0].fail  = svga_translate_stencil_op(templ->stencil[0].fail_op);
       ds->stencil[0].zfail = svga_translate_stencil_op(templ->stencil[0].zfail_op);
       ds->stencil[0].pass  = svga_translate_stencil_op(templ->stencil[0].zpass_op);
-      
+
       /* SVGA3D has one ref/mask/writemask triple shared between front &
        * back face stencil.  We really need two:
        */

@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -122,11 +122,11 @@ print_header_flags(unsigned flags)
 }
 
 
-/* Unfilled tri:  
+/* Unfilled tri:
  *
  * Note edgeflags in the vertex struct is not sufficient as we will
- * need to manipulate them when decomposing primitives.  
- * 
+ * need to manipulate them when decomposing primitives.
+ *
  * We currently keep the vertex edgeflag and primitive edgeflag mask
  * separate until the last possible moment.
  */
@@ -136,7 +136,7 @@ static void unfilled_tri( struct draw_stage *stage,
    struct unfilled_stage *unfilled = unfilled_stage(stage);
    unsigned cw = header->det >= 0.0;
    unsigned mode = unfilled->mode[cw];
-  
+
    if (0)
       print_header_flags(header->flags);
 
@@ -152,11 +152,11 @@ static void unfilled_tri( struct draw_stage *stage,
       break;
    default:
       assert(0);
-   }   
+   }
 }
 
 
-static void unfilled_first_tri( struct draw_stage *stage, 
+static void unfilled_first_tri( struct draw_stage *stage,
 				struct prim_header *header )
 {
    struct unfilled_stage *unfilled = unfilled_stage(stage);

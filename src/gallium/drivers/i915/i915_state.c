@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -57,7 +57,7 @@ translate_wrap_mode(unsigned wrap)
       return TEXCOORDMODE_CLAMP_EDGE;
    case PIPE_TEX_WRAP_CLAMP_TO_BORDER:
       return TEXCOORDMODE_CLAMP_BORDER;
-   /*         
+   /*
    case PIPE_TEX_WRAP_MIRRORED_REPEAT:
       return TEXCOORDMODE_MIRROR;
     */
@@ -228,7 +228,7 @@ i915_create_sampler_state(struct pipe_context *pipe,
    mipFilt = translate_mip_filter(sampler->min_mip_filter);
    minFilt = translate_img_filter( sampler->min_img_filter );
    magFilt = translate_img_filter( sampler->mag_img_filter );
-   
+
    if (sampler->max_anisotropy > 1)
       minFilt = magFilt = FILTER_ANISOTROPIC;
 
@@ -244,7 +244,7 @@ i915_create_sampler_state(struct pipe_context *pipe,
 
    /* Shadow:
     */
-   if (sampler->compare_mode == PIPE_TEX_COMPARE_R_TO_TEXTURE) 
+   if (sampler->compare_mode == PIPE_TEX_COMPARE_R_TO_TEXTURE)
    {
       cso->state[0] |= (SS2_SHADOW_ENABLE |
                         i915_translate_compare_func(sampler->compare_func));
@@ -688,13 +688,13 @@ i915_create_rasterizer_state(struct pipe_context *pipe,
    case PIPE_FACE_FRONT:
       if (rasterizer->front_ccw)
          cso->LIS4 |= S4_CULLMODE_CCW;
-      else 
+      else
          cso->LIS4 |= S4_CULLMODE_CW;
       break;
    case PIPE_FACE_BACK:
       if (rasterizer->front_ccw)
          cso->LIS4 |= S4_CULLMODE_CW;
-      else 
+      else
          cso->LIS4 |= S4_CULLMODE_CCW;
       break;
    case PIPE_FACE_FRONT_AND_BACK:

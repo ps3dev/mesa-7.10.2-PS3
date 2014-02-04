@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -43,14 +43,14 @@
  * draw_vs_aos.c as there is no intermingling of generated code...
  * That may have to change, we'll see.
  */
-static void emit_load_R32G32B32A32( struct aos_compilation *cp, 			   
+static void emit_load_R32G32B32A32( struct aos_compilation *cp,
 				    struct x86_reg data,
 				    struct x86_reg src_ptr )
 {
    sse_movups(cp->func, data, src_ptr);
 }
 
-static void emit_load_R32G32B32( struct aos_compilation *cp, 			   
+static void emit_load_R32G32B32( struct aos_compilation *cp,
 				 struct x86_reg data,
 				 struct x86_reg src_ptr )
 {
@@ -75,7 +75,7 @@ static void emit_load_R32G32B32( struct aos_compilation *cp,
 #endif
 }
 
-static void emit_load_R32G32( struct aos_compilation *cp, 
+static void emit_load_R32G32( struct aos_compilation *cp,
 			   struct x86_reg data,
 			   struct x86_reg src_ptr )
 {
@@ -84,7 +84,7 @@ static void emit_load_R32G32( struct aos_compilation *cp,
 }
 
 
-static void emit_load_R32( struct aos_compilation *cp, 
+static void emit_load_R32( struct aos_compilation *cp,
 			   struct x86_reg data,
 			   struct x86_reg src_ptr )
 {
@@ -107,7 +107,7 @@ static void emit_load_R8G8B8A8_UNORM( struct aos_compilation *cp,
 
 
 /* Extended swizzles?  Maybe later.
- */  
+ */
 static void emit_swizzle( struct aos_compilation *cp,
 			  struct x86_reg dest,
 			  struct x86_reg src,
@@ -124,13 +124,13 @@ static boolean get_buffer_ptr( struct aos_compilation *cp,
                                struct x86_reg elt,
                                struct x86_reg ptr)
 {
-   struct x86_reg buf = x86_make_disp(aos_get_x86( cp, 0, X86_BUFFERS ), 
+   struct x86_reg buf = x86_make_disp(aos_get_x86( cp, 0, X86_BUFFERS ),
                                       buf_idx * sizeof(struct aos_buffer));
 
-   struct x86_reg buf_stride = x86_make_disp(buf, 
+   struct x86_reg buf_stride = x86_make_disp(buf,
                                              Offset(struct aos_buffer, stride));
    if (linear) {
-      struct x86_reg buf_ptr = x86_make_disp(buf, 
+      struct x86_reg buf_ptr = x86_make_disp(buf,
                                              Offset(struct aos_buffer, ptr));
 
 
@@ -143,7 +143,7 @@ static boolean get_buffer_ptr( struct aos_compilation *cp,
       x86_mov(cp->func, buf_ptr, elt);
    }
    else {
-      struct x86_reg buf_base_ptr = x86_make_disp(buf, 
+      struct x86_reg buf_base_ptr = x86_make_disp(buf,
                                                   Offset(struct aos_buffer, base_ptr));
 
 
@@ -221,7 +221,7 @@ static boolean load_inputs( struct aos_compilation *cp,
          cp->insn_counter++;
       }
    }
-   
+
    return TRUE;
 }
 
@@ -229,10 +229,10 @@ boolean aos_init_inputs( struct aos_compilation *cp, boolean linear )
 {
    unsigned i;
    for (i = 0; i < cp->vaos->nr_vb; i++) {
-      struct x86_reg buf = x86_make_disp(aos_get_x86( cp, 0, X86_BUFFERS ), 
+      struct x86_reg buf = x86_make_disp(aos_get_x86( cp, 0, X86_BUFFERS ),
                                          i * sizeof(struct aos_buffer));
 
-      struct x86_reg buf_base_ptr = x86_make_disp(buf, 
+      struct x86_reg buf_base_ptr = x86_make_disp(buf,
                                                   Offset(struct aos_buffer, base_ptr));
 
       if (cp->vaos->base.key.const_vbuffers & (1<<i)) {
@@ -243,7 +243,7 @@ boolean aos_init_inputs( struct aos_compilation *cp, boolean linear )
          /* Load all inputs for this constant vertex buffer
           */
          load_inputs( cp, i, x86_deref(ptr) );
-         
+
          /* Then just force them out to aos_machine.input[]
           */
          aos_spill_all( cp );
@@ -254,10 +254,10 @@ boolean aos_init_inputs( struct aos_compilation *cp, boolean linear )
          struct x86_reg elt = cp->idx_EBX;
          struct x86_reg ptr = cp->tmp_EAX;
 
-         struct x86_reg buf_stride = x86_make_disp(buf, 
+         struct x86_reg buf_stride = x86_make_disp(buf,
                                                    Offset(struct aos_buffer, stride));
 
-         struct x86_reg buf_ptr = x86_make_disp(buf, 
+         struct x86_reg buf_ptr = x86_make_disp(buf,
                                                 Offset(struct aos_buffer, ptr));
 
 
@@ -271,7 +271,7 @@ boolean aos_init_inputs( struct aos_compilation *cp, boolean linear )
          /* In the linear case, keep the buffer pointer instead of the
           * index number.
           */
-         if (cp->vaos->nr_vb == 1) 
+         if (cp->vaos->nr_vb == 1)
             x86_mov( cp->func, elt, ptr );
          else
             x86_mov( cp->func, buf_ptr, ptr );
@@ -312,8 +312,8 @@ boolean aos_fetch_inputs( struct aos_compilation *cp, boolean linear )
 boolean aos_incr_inputs( struct aos_compilation *cp, boolean linear )
 {
    if (linear && cp->vaos->nr_vb == 1) {
-      struct x86_reg stride = x86_make_disp(aos_get_x86( cp, 0, X86_BUFFERS ), 
-                                            (0 * sizeof(struct aos_buffer) + 
+      struct x86_reg stride = x86_make_disp(aos_get_x86( cp, 0, X86_BUFFERS ),
+                                            (0 * sizeof(struct aos_buffer) +
                                              Offset(struct aos_buffer, stride)));
 
       x86_add(cp->func, cp->idx_EBX, stride);
@@ -321,7 +321,7 @@ boolean aos_incr_inputs( struct aos_compilation *cp, boolean linear )
    }
    else if (linear) {
       /* Nothing to do */
-   } 
+   }
    else {
       x86_lea(cp->func, cp->idx_EBX, x86_make_disp(cp->idx_EBX, 4));
    }
@@ -334,14 +334,14 @@ boolean aos_incr_inputs( struct aos_compilation *cp, boolean linear )
 
 
 
-static void emit_store_R32G32B32A32( struct aos_compilation *cp, 			   
+static void emit_store_R32G32B32A32( struct aos_compilation *cp,
 				     struct x86_reg dst_ptr,
 				     struct x86_reg dataXMM )
 {
    sse_movups(cp->func, dst_ptr, dataXMM);
 }
 
-static void emit_store_R32G32B32( struct aos_compilation *cp, 
+static void emit_store_R32G32B32( struct aos_compilation *cp,
 				  struct x86_reg dst_ptr,
 				  struct x86_reg dataXMM )
 {
@@ -350,14 +350,14 @@ static void emit_store_R32G32B32( struct aos_compilation *cp,
    sse_movss(cp->func, x86_make_disp(dst_ptr,8), dataXMM);
 }
 
-static void emit_store_R32G32( struct aos_compilation *cp, 
+static void emit_store_R32G32( struct aos_compilation *cp,
 			       struct x86_reg dst_ptr,
 			       struct x86_reg dataXMM )
 {
    sse_movlps(cp->func, dst_ptr, dataXMM);
 }
 
-static void emit_store_R32( struct aos_compilation *cp, 
+static void emit_store_R32( struct aos_compilation *cp,
 			    struct x86_reg dst_ptr,
 			    struct x86_reg dataXMM )
 {
@@ -383,7 +383,7 @@ static void emit_store_R8G8B8A8_UNORM( struct aos_compilation *cp,
 
 static boolean emit_output( struct aos_compilation *cp,
                             struct x86_reg ptr,
-                            struct x86_reg dataXMM, 
+                            struct x86_reg dataXMM,
                             unsigned format )
 {
    switch (format) {
@@ -420,7 +420,7 @@ static boolean emit_output( struct aos_compilation *cp,
 boolean aos_emit_outputs( struct aos_compilation *cp )
 {
    unsigned i;
-   
+
    for (i = 0; i < cp->vaos->base.key.nr_outputs; i++) {
       unsigned format = cp->vaos->base.key.element[i].out.format;
       unsigned offset = cp->vaos->base.key.element[i].out.offset;
@@ -432,7 +432,7 @@ boolean aos_emit_outputs( struct aos_compilation *cp )
          data = aos_get_internal_xmm( cp, IMM_PSIZE );
       }
       else {
-         data = aos_get_shader_reg( cp, 
+         data = aos_get_shader_reg( cp,
                                     TGSI_FILE_OUTPUT,
                                     vs_output );
       }
@@ -442,10 +442,10 @@ boolean aos_emit_outputs( struct aos_compilation *cp )
          sse_movaps(cp->func, tmp, data);
          data = tmp;
       }
-      
-      if (!emit_output( cp, 
+
+      if (!emit_output( cp,
                         x86_make_disp( cp->outbuf_ECX, offset ),
-                        data, 
+                        data,
                         format ))
          return FALSE;
 

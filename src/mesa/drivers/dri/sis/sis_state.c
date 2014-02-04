@@ -94,7 +94,7 @@ sisDDAlphaFunc( struct gl_context * ctx, GLenum func, GLfloat ref )
 }
 
 static void
-sisDDBlendFuncSeparate( struct gl_context *ctx, 
+sisDDBlendFuncSeparate( struct gl_context *ctx,
 			GLenum sfactorRGB, GLenum dfactorRGB,
 			GLenum sfactorA,   GLenum dfactorA )
 {
@@ -391,7 +391,7 @@ static void sisDDColorMask( struct gl_context *ctx,
 			   (b) ? smesa->blueMask : 0 |
 			   (a) ? smesa->alphaMask : 0;
    }
-   
+
    if (current->hwDstMask != prev->hwDstMask) {
       prev->hwDstMask = current->hwDstMask;
       smesa->GlobalFlag |= GFLAG_DESTSETTING;
@@ -751,7 +751,7 @@ void sisDDInitState( sisContextPtr smesa )
    /* Stenciling disabled, function ALWAYS, ref value zero, mask all ones */
    prev->hwStSetting = STENCIL_FORMAT_8 | SiS_STENCIL_ALWAYS | 0xff;
    /* Op is KEEP for all three operations */
-   prev->hwStSetting2 = SiS_SFAIL_KEEP | SiS_SPASS_ZFAIL_KEEP | 
+   prev->hwStSetting2 = SiS_SFAIL_KEEP | SiS_SPASS_ZFAIL_KEEP |
       SiS_SPASS_ZPASS_KEEP;
 
    /* Texture mapping mode is Tile */
@@ -768,7 +768,7 @@ void sisDDInitState( sisContextPtr smesa )
    prev->hwTexBlendColor1 = STAGE1_C_CF;
    prev->hwTexBlendAlpha0 = STAGE0_A_AF;
    prev->hwTexBlendAlpha1 = STAGE1_A_AF;
-   
+
    switch (smesa->bytesPerPixel)
    {
    case 2:

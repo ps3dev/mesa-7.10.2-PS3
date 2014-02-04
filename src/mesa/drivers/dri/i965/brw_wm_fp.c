@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-               
+
 
 #include "main/glheader.h"
 #include "main/macros.h"
@@ -56,7 +56,7 @@
 #define W    3
 
 
-static const char *wm_opcode_strings[] = {   
+static const char *wm_opcode_strings[] = {
    "PIXELXY",
    "DELTAXY",
    "PIXELW",
@@ -69,7 +69,7 @@ static const char *wm_opcode_strings[] = {
 };
 
 #if 0
-static const char *wm_file_strings[] = {   
+static const char *wm_file_strings[] = {
    "PAYLOAD"
 };
 #endif
@@ -178,7 +178,7 @@ static void release_temp( struct brw_wm_compile *c, struct prog_dst_register tem
 
 
 /***********************************************************************
- * Instructions 
+ * Instructions
  */
 
 static struct prog_instruction *get_fp_inst(struct brw_wm_compile *c)
@@ -209,7 +209,7 @@ static struct prog_instruction * emit_tex_op(struct brw_wm_compile *c,
 				       struct prog_src_register src2 )
 {
    struct prog_instruction *inst = get_fp_inst(c);
-      
+
    assert(tex_src_unit < BRW_MAX_TEX_UNIT ||
           tex_src_unit == TEX_UNIT_NONE);
    assert(tex_src_target < NUM_TEXTURE_TARGETS ||
@@ -223,7 +223,7 @@ static struct prog_instruction * emit_tex_op(struct brw_wm_compile *c,
 
    inst->Opcode = op;
    inst->DstReg = dest;
-   inst->SaturateMode = saturate;   
+   inst->SaturateMode = saturate;
    inst->TexSrcUnit = tex_src_unit;
    inst->TexSrcTarget = tex_src_target;
    inst->TexShadow = tex_shadow;
@@ -232,7 +232,7 @@ static struct prog_instruction * emit_tex_op(struct brw_wm_compile *c,
    inst->SrcReg[2] = src2;
    return inst;
 }
-   
+
 
 static struct prog_instruction * emit_op(struct brw_wm_compile *c,
 				       GLuint op,
@@ -292,11 +292,11 @@ static struct prog_src_register get_pixel_xy( struct brw_wm_compile *c )
    if (src_is_undef(c->pixel_xy)) {
       struct prog_dst_register pixel_xy = get_temp(c);
       struct prog_src_register payload_r0_depth = src_reg(PROGRAM_PAYLOAD, PAYLOAD_DEPTH);
-      
-      
+
+
       /* Emit the out calculations, and hold onto the results.  Use
        * two instructions as a temporary is required.
-       */   
+       */
       /* pixel_xy.xy = PIXELXY payload[0];
        */
       emit_op(c,
@@ -319,17 +319,17 @@ static struct prog_src_register get_delta_xy( struct brw_wm_compile *c )
       struct prog_dst_register delta_xy = get_temp(c);
       struct prog_src_register pixel_xy = get_pixel_xy(c);
       struct prog_src_register payload_r0_depth = src_reg(PROGRAM_PAYLOAD, PAYLOAD_DEPTH);
-      
+
       /* deltas.xy = DELTAXY pixel_xy, payload[0]
        */
       emit_op(c,
 	      WM_DELTAXY,
 	      dst_mask(delta_xy, WRITEMASK_XY),
 	      0,
-	      pixel_xy, 
+	      pixel_xy,
 	      payload_r0_depth,
 	      src_undef());
-      
+
       c->delta_xy = src_reg_from_dst(delta_xy);
    }
 
@@ -358,9 +358,9 @@ static struct prog_src_register get_pixel_w( struct brw_wm_compile *c )
 	      dst_mask(pixel_w, WRITEMASK_W),
 	      0,
 	      interp_wpos,
-	      deltas, 
+	      deltas,
 	      src_undef());
-      
+
 
       c->pixel_w = src_reg_from_dst(pixel_w);
    }
@@ -392,7 +392,7 @@ static void emit_interp( struct brw_wm_compile *c,
 	      get_pixel_xy(c),
 	      src_undef(),
 	      src_undef());
-      
+
       dst = dst_mask(dst, WRITEMASK_ZW);
 
       /* PROGRAM_INPUT.attr.xyzw = INTERP payload.interp[attr].x, deltas.xyw
@@ -517,7 +517,7 @@ static void emit_interp( struct brw_wm_compile *c,
  * harm and it's not as if the parameter handling isn't a big hack
  * anyway.
  */
-static struct prog_src_register search_or_add_param5(struct brw_wm_compile *c, 
+static struct prog_src_register search_or_add_param5(struct brw_wm_compile *c,
                                                      GLint s0,
                                                      GLint s1,
                                                      GLint s2,
@@ -539,7 +539,7 @@ static struct prog_src_register search_or_add_param5(struct brw_wm_compile *c,
 }
 
 
-static struct prog_src_register search_or_add_const4f( struct brw_wm_compile *c, 
+static struct prog_src_register search_or_add_const4f( struct brw_wm_compile *c,
 						     GLfloat s0,
 						     GLfloat s1,
 						     GLfloat s2,
@@ -566,7 +566,7 @@ static struct prog_src_register search_or_add_const4f( struct brw_wm_compile *c,
 
 
 /***********************************************************************
- * Expand various instructions here to simpler forms.  
+ * Expand various instructions here to simpler forms.
  */
 static void precalc_dst( struct brw_wm_compile *c,
 			       const struct prog_instruction *inst )
@@ -574,8 +574,8 @@ static void precalc_dst( struct brw_wm_compile *c,
    struct prog_src_register src0 = inst->SrcReg[0];
    struct prog_src_register src1 = inst->SrcReg[1];
    struct prog_dst_register dst = inst->DstReg;
-   
-   if (dst.WriteMask & WRITEMASK_Y) {      
+
+   if (dst.WriteMask & WRITEMASK_Y) {
       /* dst.y = mul src0.y, src1.y
        */
       emit_op(c,
@@ -622,7 +622,7 @@ static void precalc_lit( struct brw_wm_compile *c,
 {
    struct prog_src_register src0 = inst->SrcReg[0];
    struct prog_dst_register dst = inst->DstReg;
-   
+
    if (dst.WriteMask & WRITEMASK_XW) {
       struct prog_instruction *swz;
 
@@ -724,9 +724,9 @@ static void precalc_tex( struct brw_wm_compile *c,
        release_temp(c, tmp1);
    }
    else if (inst->TexSrcTarget == TEXTURE_RECT_INDEX) {
-      struct prog_src_register scale = 
-	 search_or_add_param5( c, 
-			       STATE_INTERNAL, 
+      struct prog_src_register scale =
+	 search_or_add_param5( c,
+			       STATE_INTERNAL,
 			       STATE_TEXRECT_SCALE,
 			       unit,
 			       0,0 );
@@ -762,7 +762,7 @@ static void precalc_tex( struct brw_wm_compile *c,
       /* convert ycbcr to RGBA */
       GLboolean  swap_uv = c->key.yuvtex_swap_mask & (1<<unit);
 
-      /* 
+      /*
 	 CONST C0 = { -.5, -.0625,  -.5, 1.164 }
 	 CONST C1 = { 1.596, -0.813, 2.018, -.391 }
 	 UYV     = TEX ...
@@ -771,7 +771,7 @@ static void precalc_tex( struct brw_wm_compile *c,
  	 if (UV swaped)
 	    RGB.xyz = MAD UYV.zzx, C1,   UYV.y
 	 else
-	    RGB.xyz = MAD UYV.xxz, C1,   UYV.y 
+	    RGB.xyz = MAD UYV.xxz, C1,   UYV.y
 	 RGB.y   = MAD UYV.z,   C1.w, RGB.y
       */
       struct prog_dst_register dst = inst->DstReg;
@@ -779,10 +779,10 @@ static void precalc_tex( struct brw_wm_compile *c,
       struct prog_src_register tmpsrc = src_reg_from_dst(tmp);
       struct prog_src_register C0 = search_or_add_const4f( c,  -.5, -.0625, -.5, 1.164 );
       struct prog_src_register C1 = search_or_add_const4f( c, 1.596, -0.813, 2.018, -.391 );
-     
+
       /* tmp     = TEX ...
        */
-      emit_tex_op(c, 
+      emit_tex_op(c,
                   OPCODE_TEX,
                   tmp,
                   inst->SaturateMode,
@@ -814,7 +814,7 @@ static void precalc_tex( struct brw_wm_compile *c,
 	      src_swizzle1(C0, W),
 	      src_undef());
 
-      /* 
+      /*
        * if (UV swaped)
        *     RGB.xyz = MAD YUV.zzx, C1, YUV.y
        * else
@@ -843,7 +843,7 @@ static void precalc_tex( struct brw_wm_compile *c,
    }
    else {
       /* ordinary RGBA tex instruction */
-      emit_tex_op(c, 
+      emit_tex_op(c,
                   OPCODE_TEX,
                   inst->DstReg,
                   inst->SaturateMode,
@@ -893,7 +893,7 @@ static GLboolean projtex( struct brw_wm_compile *c,
     */
    if (inst->TexSrcTarget == TEXTURE_CUBE_INDEX)
       retVal = GL_FALSE;  /* ut2004 gun rendering !?! */
-   else if (src.File == PROGRAM_INPUT && 
+   else if (src.File == PROGRAM_INPUT &&
 	    GET_SWZ(src.Swizzle, W) == W &&
             (c->key.proj_attrib_mask & (1 << src.Index)) == 0)
       retVal = GL_FALSE;
@@ -984,7 +984,7 @@ static void emit_render_target_writes( struct brw_wm_compile *c )
       /* if gl_FragData[0] is written, use it, else use gl_FragColor */
       if (c->fp->program.Base.OutputsWritten & BITFIELD64_BIT(FRAG_RESULT_DATA0))
          outcolor = src_reg(PROGRAM_OUTPUT, FRAG_RESULT_DATA0);
-      else 
+      else
          outcolor = src_reg(PROGRAM_OUTPUT, FRAG_RESULT_COLOR);
 
       inst = emit_op(c, WM_FB_WRITE, dst_mask(dst_undef(),0),
@@ -1015,7 +1015,7 @@ static void validate_src_regs( struct brw_wm_compile *c,
       }
    }
 }
-	 
+
 static void validate_dst_regs( struct brw_wm_compile *c,
 			       const struct prog_instruction *inst )
 {
@@ -1040,7 +1040,7 @@ static void print_insns( const struct prog_instruction *insn,
 	 _mesa_fprint_alu_instruction(stdout, insn, wm_opcode_strings[idx],
 				      3, PROG_PRINT_DEBUG, NULL);
       }
-      else 
+      else
 	 printf("965 Opcode %d\n", insn->Opcode);
    }
 }
@@ -1098,11 +1098,11 @@ void brw_wm_pass_fp( struct brw_wm_compile *c )
        */
 
       switch (inst->Opcode) {
-      case OPCODE_SWZ: 
+      case OPCODE_SWZ:
 	 out = emit_insn(c, inst);
 	 out->Opcode = OPCODE_MOV;
 	 break;
-	 
+
       case OPCODE_ABS:
 	 out = emit_insn(c, inst);
 	 out->Opcode = OPCODE_MOV;
@@ -1110,19 +1110,19 @@ void brw_wm_pass_fp( struct brw_wm_compile *c )
 	 out->SrcReg[0].Abs = 1;
 	 break;
 
-      case OPCODE_SUB: 
+      case OPCODE_SUB:
 	 out = emit_insn(c, inst);
 	 out->Opcode = OPCODE_ADD;
 	 out->SrcReg[1].Negate ^= NEGATE_XYZW;
 	 break;
 
-      case OPCODE_SCS: 
+      case OPCODE_SCS:
 	 out = emit_insn(c, inst);
-	 /* This should probably be done in the parser. 
+	 /* This should probably be done in the parser.
 	  */
 	 out->DstReg.WriteMask &= WRITEMASK_XY;
 	 break;
-	 
+
       case OPCODE_DST:
 	 precalc_dst(c, inst);
 	 break;
@@ -1150,16 +1150,16 @@ void brw_wm_pass_fp( struct brw_wm_compile *c )
          assert(out->TexSrcUnit < BRW_MAX_TEX_UNIT);
 	 break;
 
-      case OPCODE_XPD: 
+      case OPCODE_XPD:
 	 out = emit_insn(c, inst);
-	 /* This should probably be done in the parser. 
+	 /* This should probably be done in the parser.
 	  */
 	 out->DstReg.WriteMask &= WRITEMASK_XYZ;
 	 break;
 
-      case OPCODE_KIL: 
+      case OPCODE_KIL:
 	 out = emit_insn(c, inst);
-	 /* This should probably be done in the parser. 
+	 /* This should probably be done in the parser.
 	  */
 	 out->DstReg.WriteMask = 0;
 	 break;

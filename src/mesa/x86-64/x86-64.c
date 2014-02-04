@@ -118,7 +118,7 @@ void _mesa_init_all_x86_64_transform_asm(void)
 
    }
 
-   
+
 #ifdef DEBUG_MATH
    _math_test_all_transform_functions("x86_64");
    _math_test_all_cliptest_functions("x86_64");

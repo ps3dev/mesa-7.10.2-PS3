@@ -100,7 +100,7 @@ sp_vbuf_allocate_vertices(struct vbuf_render *vbr,
 
    cvbr->vertex_size = vertex_size;
    cvbr->nr_vertices = nr_vertices;
-   
+
    return cvbr->vertex_buffer != NULL;
 }
 
@@ -120,8 +120,8 @@ sp_vbuf_map_vertices(struct vbuf_render *vbr)
 }
 
 
-static void 
-sp_vbuf_unmap_vertices(struct vbuf_render *vbr, 
+static void
+sp_vbuf_unmap_vertices(struct vbuf_render *vbr,
                        ushort min_index,
                        ushort max_index )
 {
@@ -137,7 +137,7 @@ sp_vbuf_set_primitive(struct vbuf_render *vbr, unsigned prim)
 {
    struct softpipe_vbuf_render *cvbr = softpipe_vbuf_render(vbr);
    struct setup_context *setup_ctx = cvbr->setup;
-   
+
    sp_setup_prepare( setup_ctx );
 
    cvbr->softpipe->reduced_prim = u_reduced_prim(prim);
@@ -259,7 +259,7 @@ sp_vbuf_draw_elements(struct vbuf_render *vbr, const ushort *indices, uint nr)
 
    case PIPE_PRIM_QUADS:
       /* GL quads don't follow provoking vertex convention */
-      if (flatshade_first) { 
+      if (flatshade_first) {
          /* emit last quad vertex as first triangle vertex */
          for (i = 3; i < nr; i += 4) {
             sp_setup_tri( setup,
@@ -291,7 +291,7 @@ sp_vbuf_draw_elements(struct vbuf_render *vbr, const ushort *indices, uint nr)
 
    case PIPE_PRIM_QUAD_STRIP:
       /* GL quad strips don't follow provoking vertex convention */
-      if (flatshade_first) { 
+      if (flatshade_first) {
          /* emit last quad vertex as first triangle vertex */
          for (i = 3; i < nr; i += 2) {
             sp_setup_tri( setup,
@@ -323,7 +323,7 @@ sp_vbuf_draw_elements(struct vbuf_render *vbr, const ushort *indices, uint nr)
       /* Almost same as tri fan but the _first_ vertex specifies the flat
        * shading color.
        */
-      if (flatshade_first) { 
+      if (flatshade_first) {
          /* emit first polygon  vertex as first triangle vertex */
          for (i = 2; i < nr; i += 1) {
             sp_setup_tri( setup,
@@ -455,7 +455,7 @@ sp_vbuf_draw_arrays(struct vbuf_render *vbr, uint start, uint nr)
 
    case PIPE_PRIM_QUADS:
       /* GL quads don't follow provoking vertex convention */
-      if (flatshade_first) { 
+      if (flatshade_first) {
          /* emit last quad vertex as first triangle vertex */
          for (i = 3; i < nr; i += 4) {
             sp_setup_tri( setup,
@@ -485,7 +485,7 @@ sp_vbuf_draw_arrays(struct vbuf_render *vbr, uint start, uint nr)
 
    case PIPE_PRIM_QUAD_STRIP:
       /* GL quad strips don't follow provoking vertex convention */
-      if (flatshade_first) { 
+      if (flatshade_first) {
          /* emit last quad vertex as first triangle vertex */
          for (i = 3; i < nr; i += 2) {
             sp_setup_tri( setup,
@@ -517,7 +517,7 @@ sp_vbuf_draw_arrays(struct vbuf_render *vbr, uint start, uint nr)
       /* Almost same as tri fan but the _first_ vertex specifies the flat
        * shading color.
        */
-      if (flatshade_first) { 
+      if (flatshade_first) {
          /* emit first polygon  vertex as first triangle vertex */
          for (i = 2; i < nr; i += 1) {
             sp_setup_tri( setup,

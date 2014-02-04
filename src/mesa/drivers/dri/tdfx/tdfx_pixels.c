@@ -601,7 +601,7 @@ tdfx_drawpixels_R8G8B8A8(struct gl_context * ctx, GLint x, GLint y,
 
    if ((!(format == GL_BGRA && type == GL_UNSIGNED_INT_8_8_8_8) &&
 	!(format == GL_BGRA && type == GL_UNSIGNED_BYTE)) ||
-       ctx->Pixel.ZoomX != 1.0F || 
+       ctx->Pixel.ZoomX != 1.0F ||
        ctx->Pixel.ZoomY != 1.0F ||
        (ctx->_ImageTransferState & (IMAGE_SCALE_BIAS_BIT|
 				    IMAGE_MAP_COLOR_BIT)) ||
@@ -616,11 +616,11 @@ tdfx_drawpixels_R8G8B8A8(struct gl_context * ctx, GLint x, GLint y,
        !ctx->Color.ColorMask[0][3] ||
        ctx->Color.ColorLogicOpEnabled ||
        ctx->Texture._EnabledUnits ||
-       fxMesa->Fallback)       
+       fxMesa->Fallback)
    {
-      _swrast_DrawPixels( ctx, x, y, width, height, format, type, 
+      _swrast_DrawPixels( ctx, x, y, width, height, format, type,
 			  unpack, pixels );
-      return; 
+      return;
    }
 
    {
@@ -646,7 +646,7 @@ tdfx_drawpixels_R8G8B8A8(struct gl_context * ctx, GLint x, GLint y,
       if (fxMesa->glCtx->Color.DrawBuffer[0] == GL_FRONT) {
          if (!inClipRects_Region(fxMesa, scrX, scrY, width, height)) {
             UNLOCK_HARDWARE(fxMesa);
-	    _swrast_DrawPixels( ctx, x, y, width, height, format, type, 
+	    _swrast_DrawPixels( ctx, x, y, width, height, format, type,
 				unpack, pixels );
             return;
          }

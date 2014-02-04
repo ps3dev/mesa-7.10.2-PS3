@@ -401,7 +401,7 @@ LLBL(ctp4_np_finish):
 	POP_L( ESI )
 
 	RET
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

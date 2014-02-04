@@ -471,7 +471,7 @@ LLBL( G3TPIR_4 ):
     POP_L     ( ESI )
     RET
 #endif
-	
+
 #if defined (__ELF__) && defined (__linux__)
 	.section .note.GNU-stack,"",%progbits
 #endif

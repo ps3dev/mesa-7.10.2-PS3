@@ -99,12 +99,12 @@ typedef struct r128_context *r128ContextPtr;
 #define SUBPIXEL_Y  (0.125F)
 
 
-typedef void (*r128_tri_func)( r128ContextPtr, 
+typedef void (*r128_tri_func)( r128ContextPtr,
 				 r128Vertex *,
 				 r128Vertex *,
 				 r128Vertex * );
 
-typedef void (*r128_line_func)( r128ContextPtr, 
+typedef void (*r128_line_func)( r128ContextPtr,
 				  r128Vertex *,
 				  r128Vertex * );
 
@@ -158,8 +158,8 @@ struct r128_context {
    r128TexObjPtr CurrentTexObj[2];
 
    int texture_depth;
- 
-   /* Fallback rasterization functions 
+
+   /* Fallback rasterization functions
     */
    r128_point_func draw_point;
    r128_line_func draw_line;

@@ -325,7 +325,7 @@ fetch_vector4_deriv(struct gl_context * ctx,
       result[1] = deriv[GET_SWZ(source->Swizzle, 1)];
       result[2] = deriv[GET_SWZ(source->Swizzle, 2)];
       result[3] = deriv[GET_SWZ(source->Swizzle, 3)];
-      
+
       if (source->Abs) {
          result[0] = FABSF(result[0]);
          result[1] = FABSF(result[1]);
@@ -895,7 +895,7 @@ _mesa_execute_program(struct gl_context * ctx,
             }
             else {
                q[0] = LDEXPF(1.0, (int) floor_t0);
-               /* Note: GL_NV_vertex_program expects 
+               /* Note: GL_NV_vertex_program expects
                 * result.z = result.x * APPX(result.y)
                 * We do what the ARB extension says.
                 */

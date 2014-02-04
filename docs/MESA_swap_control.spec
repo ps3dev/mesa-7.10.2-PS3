@@ -83,9 +83,9 @@ Additions to the GLX 1.3 Specification
     takes effect when glXSwapBuffers is first called subsequent to the
     glXSwapIntervalMESA call.
 
-    A video frame period is the time required by the monitor to display a 
+    A video frame period is the time required by the monitor to display a
     full frame of video data.  In the case of an interlaced monitor,
-    this is typically the time required to display both the even and odd 
+    this is typically the time required to display both the even and odd
     fields of a frame of video data.
 
     If <interval> is set to a value of 0, buffer swaps are not synchron-

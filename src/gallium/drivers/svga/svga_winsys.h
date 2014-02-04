@@ -26,9 +26,9 @@
 /**
  * @file
  * VMware SVGA specific winsys interface.
- * 
+ *
  * @author Jose Fonseca <jfonseca@vmware.com>
- * 
+ *
  * Documentation taken from the VMware SVGA DDK.
  */
 
@@ -78,49 +78,49 @@ struct svga_winsys_context
    void
    (*destroy)(struct svga_winsys_context *swc);
 
-   void *       
-   (*reserve)(struct svga_winsys_context *swc, 
+   void *
+   (*reserve)(struct svga_winsys_context *swc,
 	      uint32_t nr_bytes, uint32_t nr_relocs );
-   
+
    /**
     * Emit a relocation for a host surface.
-    * 
+    *
     * @param flags bitmask of SVGA_RELOC_* flags
-    * 
+    *
     * NOTE: Order of this call does matter. It should be the same order
     * as relocations appear in the command buffer.
     */
    void
-   (*surface_relocation)(struct svga_winsys_context *swc, 
-	                 uint32 *sid, 
+   (*surface_relocation)(struct svga_winsys_context *swc,
+	                 uint32 *sid,
 	                 struct svga_winsys_surface *surface,
 	                 unsigned flags);
-   
+
    /**
     * Emit a relocation for a guest memory region.
-    * 
+    *
     * @param flags bitmask of SVGA_RELOC_* flags
-    * 
+    *
     * NOTE: Order of this call does matter. It should be the same order
     * as relocations appear in the command buffer.
     */
    void
-   (*region_relocation)(struct svga_winsys_context *swc, 
-	                struct SVGAGuestPtr *ptr, 
+   (*region_relocation)(struct svga_winsys_context *swc,
+	                struct SVGAGuestPtr *ptr,
 	                struct svga_winsys_buffer *buffer,
 	                uint32 offset,
                         unsigned flags);
 
    void
    (*commit)(struct svga_winsys_context *swc);
-   
+
    enum pipe_error
-   (*flush)(struct svga_winsys_context *swc, 
+   (*flush)(struct svga_winsys_context *swc,
 	    struct pipe_fence_handle **pfence);
 
-   /** 
+   /**
     * Context ID used to fill in the commands
-    * 
+    *
     * Context IDs are arbitrary small non-negative integers,
     * global to the entire SVGA device.
     */
@@ -135,12 +135,12 @@ struct svga_winsys_screen
 {
    void
    (*destroy)(struct svga_winsys_screen *sws);
-   
+
    boolean
    (*get_cap)(struct svga_winsys_screen *sws,
               SVGA3dDevCapIndex index,
               SVGA3dDevCapResult *result);
-   
+
    /**
     * Create a new context.
     *
@@ -153,8 +153,8 @@ struct svga_winsys_screen
     */
    struct svga_winsys_context *
    (*context_create)(struct svga_winsys_screen *sws);
-   
-   
+
+
    /**
     * This creates a "surface" object in the SVGA3D device,
     * and returns the surface ID (sid). Surfaces are generic
@@ -222,7 +222,7 @@ struct svga_winsys_screen
     * Reference a SVGA3D surface object. This allows sharing of a
     * surface between different objects.
     */
-   void 
+   void
    (*surface_reference)(struct svga_winsys_screen *sws,
 			struct svga_winsys_surface **pdst,
 			struct svga_winsys_surface *src);
@@ -236,25 +236,25 @@ struct svga_winsys_screen
     * SSE instructions.
     */
    struct svga_winsys_buffer *
-   (*buffer_create)( struct svga_winsys_screen *sws, 
-	             unsigned alignment, 
+   (*buffer_create)( struct svga_winsys_screen *sws,
+	             unsigned alignment,
 	             unsigned usage,
 	             unsigned size );
 
-   /** 
+   /**
     * Map the entire data store of a buffer object into the client's address.
     * flags is a bitmaks of PIPE_TRANSFER_*
     */
    void *
-   (*buffer_map)( struct svga_winsys_screen *sws, 
+   (*buffer_map)( struct svga_winsys_screen *sws,
 	          struct svga_winsys_buffer *buf,
 		  unsigned flags );
-   
-   void 
-   (*buffer_unmap)( struct svga_winsys_screen *sws, 
+
+   void
+   (*buffer_unmap)( struct svga_winsys_screen *sws,
                     struct svga_winsys_buffer *buf );
 
-   void 
+   void
    (*buffer_destroy)( struct svga_winsys_screen *sws,
 	              struct svga_winsys_buffer *buf );
 

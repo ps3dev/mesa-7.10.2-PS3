@@ -298,7 +298,7 @@ static void r300_buffer_transfer_inline_write(struct pipe_context *pipe,
     r300_buffer_transfer_destroy(pipe, transfer);
 }
 
-struct u_resource_vtbl r300_buffer_vtbl = 
+struct u_resource_vtbl r300_buffer_vtbl =
 {
    u_default_resource_get_handle,      /* get_handle */
    r300_buffer_destroy,                /* resource_destroy */

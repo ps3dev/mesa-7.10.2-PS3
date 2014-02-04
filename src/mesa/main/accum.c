@@ -114,7 +114,7 @@ _mesa_init_accum_dispatch(struct _glapi_table *disp)
 #endif /* FEATURE_accum */
 
 
-void 
+void
 _mesa_init_accum( struct gl_context *ctx )
 {
    /* Accumulate buffer group */

@@ -65,7 +65,7 @@ class rectBlockArray{
 public:
   rectBlockArray(Int s);
   ~rectBlockArray();//delete avarything including the blocks
-  
+
   Int get_n_elements() {return n_elements;}
   rectBlock* get_element(Int i) {return array[i];}
   void insert(rectBlock* newBlock); //only take the pointer, not ther cotent
@@ -75,7 +75,7 @@ public:
   void print();
   void draw(Real* u_values, Real* v_values);
 };
-  
+
 
 
 #endif

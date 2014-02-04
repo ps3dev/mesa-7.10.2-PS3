@@ -30,8 +30,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *   Keith Whitwell <keith@tungstengraphics.com>
  *
  *   based on the i740 driver by
- *        Kevin E. Martin <kevin@precisioninsight.com> 
- *   
+ *        Kevin E. Martin <kevin@precisioninsight.com>
+ *
  *
  */
 
@@ -62,14 +62,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define EXT_HORIZ_TOTAL      0x35 /* p261 */
 #define EXT_HORIZ_BLANK      0x39 /* p261 */
 #define EXT_START_ADDR       0x40 /* p262 */
-#define EXT_START_ADDR_ENABLE    0x80 
+#define EXT_START_ADDR_ENABLE    0x80
 #define EXT_OFFSET           0x41 /* p263 */
 #define EXT_START_ADDR_HI    0x42 /* p263 */
 #define INTERLACE_CNTL       0x70 /* p264 */
-#define INTERLACE_ENABLE         0x80 
-#define INTERLACE_DISABLE        0x00 
+#define INTERLACE_ENABLE         0x80
+#define INTERLACE_DISABLE        0x00
 
-/* Miscellaneous Output Register 
+/* Miscellaneous Output Register
  */
 #define MSR_R          0x3CC	/* p207 */
 #define MSR_W          0x3C2	/* p207 */
@@ -103,7 +103,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define COLEXP_RESERVED        0x30
 #define BITBLT_STATUS          0x01
 
-/* p375. 
+/* p375.
  */
 #define DISPLAY_CNTL       0x70008
 #define VGA_WRAP_MODE          0x02
@@ -272,11 +272,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define VCO_LOOP_DIV_BY_16M    0x04
 
 
-/* Instruction Parser Mode Register 
+/* Instruction Parser Mode Register
  *    - p281
  *    - 2 new bits.
  */
-#define INST_PM                  0x20c0	
+#define INST_PM                  0x20c0
 #define AGP_SYNC_PACKET_FLUSH_ENABLE 0x20 /* reserved */
 #define SYNC_PACKET_FLUSH_ENABLE     0x10
 #define TWO_D_INST_DISABLE           0x08
@@ -305,7 +305,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define ERROR_RESERVED            0xffc6
 
 
-/* Interrupt Control Registers 
+/* Interrupt Control Registers
  *   - new bits for i810
  *   - new register hwstam (mask)
  */
@@ -338,7 +338,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				  HOST_PORT_EVENT |	\
 				  CAPTURE_EVENT )
 
-/* FIFO Watermark and Burst Length Control Register 
+/* FIFO Watermark and Burst Length Control Register
  *
  * - different offset and contents on i810 (p299) (fewer bits per field)
  * - some overlay fields added
@@ -445,7 +445,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define I830_RING_START_MASK	0xFFFFF000
 
 #define RING_LEN       0x0C
-#define RING_NR_PAGES       0x000FF000 
+#define RING_NR_PAGES       0x000FF000
 #define I830_RING_NR_PAGES	0x001FF000
 #define RING_REPORT_MASK    0x00000006
 #define RING_REPORT_64K     0x00000002
@@ -530,7 +530,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 /* Registers in the i810 host-pci bridge pci config space which affect
- * the i810 graphics operations.  
+ * the i810 graphics operations.
  */
 #define SMRAM_MISCC         0x70
 #define GMS                    0x000000c0
@@ -538,11 +538,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define GMS_ENABLE_BARE        0x00000040
 #define GMS_ENABLE_512K        0x00000080
 #define GMS_ENABLE_1M          0x000000c0
-#define USMM                   0x00000030 
+#define USMM                   0x00000030
 #define USMM_DISABLE           0x00000000
 #define USMM_TSEG_ZERO         0x00000010
 #define USMM_TSEG_512K         0x00000020
-#define USMM_TSEG_1M           0x00000030  
+#define USMM_TSEG_1M           0x00000030
 #define GFX_MEM_WIN_SIZE       0x00010000
 #define GFX_MEM_WIN_32M        0x00010000
 #define GFX_MEM_WIN_64M        0x00000000

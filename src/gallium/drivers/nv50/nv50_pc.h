@@ -208,7 +208,7 @@ struct nv_range {
 };
 
 struct nv_value {
-   struct nv_reg reg; 
+   struct nv_reg reg;
    struct nv_instruction *insn;
    struct nv_value *join;
    int n;

@@ -110,7 +110,7 @@ nouveau_grobj_free(struct nouveau_grobj **grobj)
 		f.channel = chan->drm.channel;
 		f.handle  = nvgrobj->base.handle;
 		drmCommandWrite(nvdev->fd, DRM_NOUVEAU_GPUOBJ_FREE,
-				&f, sizeof(f));	
+				&f, sizeof(f));
 	}
 	free(nvgrobj);
 #else

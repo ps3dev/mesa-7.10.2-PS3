@@ -235,7 +235,7 @@ control_line:
 		    parser->skip_stack->type == SKIP_NO_SKIP)
 		{
 			_glcpp_parser_expand_if (parser, IF_EXPANDED, $2);
-		}	
+		}
 		else
 		{
 			_glcpp_parser_skip_stack_push_if (parser, & @1, 0);
@@ -249,7 +249,7 @@ control_line:
 		    parser->skip_stack->type == SKIP_NO_SKIP)
 		{
 			glcpp_error(& @1, parser, "#if with no expression");
-		}	
+		}
 		_glcpp_parser_skip_stack_push_if (parser, & @1, 0);
 	}
 |	HASH_IFDEF IDENTIFIER junk NEWLINE {
@@ -430,7 +430,7 @@ identifier_list:
 		ralloc_steal ($$, $1);
 	}
 |	identifier_list ',' IDENTIFIER {
-		$$ = $1;	
+		$$ = $1;
 		_string_list_append_item ($$, $3);
 		ralloc_steal ($$, $3);
 	}
@@ -881,7 +881,7 @@ _token_list_equal_ignoring_space (token_list_t *a, token_list_t *b)
 
 		switch (node_a->token->type) {
 		case INTEGER:
-			if (node_a->token->value.ival != 
+			if (node_a->token->value.ival !=
 			    node_b->token->value.ival)
 			{
 				return 0;
@@ -1169,7 +1169,7 @@ typedef enum function_status
  *
  *   FUNCTION_STATUS_SUCCESS:
  *
- *	Successfully parsed a set of function arguments.	
+ *	Successfully parsed a set of function arguments.
  *
  *   FUNCTION_NOT_A_FUNCTION:
  *
@@ -1288,7 +1288,7 @@ static token_list_t *
 _glcpp_parser_expand_function (glcpp_parser_t *parser,
 			       token_node_t *node,
 			       token_node_t **last)
-			       
+
 {
 	macro_t *macro;
 	const char *identifier;
@@ -1322,7 +1322,7 @@ _glcpp_parser_expand_function (glcpp_parser_t *parser,
 		return _token_list_create_with_one_space (parser);
 	}
 
-	if (! ((_argument_list_length (arguments) == 
+	if (! ((_argument_list_length (arguments) ==
 		_string_list_length (macro->parameters)) ||
 	       (_string_list_length (macro->parameters) == 0 &&
 		_argument_list_length (arguments) == 1 &&
@@ -1589,7 +1589,7 @@ _glcpp_parser_expand_token_list (glcpp_parser_t *parser,
 			parser->active = _active_list_push (parser->active,
 							    node->token->value.str,
 							    last->next);
-			
+
 			/* Splice expansion into list, supporting a
 			 * simple deletion if the expansion is
 			 * empty. */

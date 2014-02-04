@@ -78,7 +78,7 @@ static boolean svga_shader_expand( struct svga_shader_emitter *emit )
    emit->ptr = new_buf + (emit->ptr - emit->buf);
    emit->buf = new_buf;
    return TRUE;
-}   
+}
 
 static INLINE boolean reserve(  struct svga_shader_emitter *emit,
                                 unsigned nr_dwords )
@@ -126,11 +126,11 @@ boolean svga_shader_emit_opcode( struct svga_shader_emitter *emit,
    here->value = opcode;
 
    if (emit->insn_offset) {
-      SVGA3dShaderInstToken *prev = (SVGA3dShaderInstToken *)(emit->buf + 
+      SVGA3dShaderInstToken *prev = (SVGA3dShaderInstToken *)(emit->buf +
                                                               emit->insn_offset);
       prev->size = (here - prev) - 1;
    }
-   
+
    emit->insn_offset = emit->ptr - emit->buf;
    emit->ptr += sizeof(unsigned);
    return TRUE;
@@ -153,7 +153,7 @@ static boolean svga_shader_emit_header( struct svga_shader_emitter *emit )
       header.value = emit->use_sm30 ? SVGA3D_VS_30 : SVGA3D_VS_2X;
       break;
    }
- 
+
    return svga_shader_emit_dword( emit, header.value );
 }
 
@@ -162,7 +162,7 @@ static boolean svga_shader_emit_header( struct svga_shader_emitter *emit )
 
 
 /* Parse TGSI shader and translate to SVGA/DX9 serialized
- * representation.  
+ * representation.
  *
  * In this function SVGA shader is emitted to an in-memory buffer that
  * can be dynamically grown.  Once we've finished and know how large
@@ -194,7 +194,7 @@ svga_tgsi_translate( const struct svga_shader *shader,
    tgsi_scan_shader( shader->tokens, &emit.info);
 
    emit.imm_start = emit.info.file_max[TGSI_FILE_CONSTANT] + 1;
-   
+
    if (unit == PIPE_SHADER_FRAGMENT)
       emit.imm_start += key.fkey.num_unnormalized_coords;
 
@@ -213,7 +213,7 @@ svga_tgsi_translate( const struct svga_shader *shader,
 
    if (!svga_shader_emit_instructions( &emit, shader->tokens ))
       goto fail;
-   
+
    result = CALLOC_STRUCT(svga_shader_result);
    if (result == NULL)
       goto fail;
@@ -224,7 +224,7 @@ svga_tgsi_translate( const struct svga_shader *shader,
    memcpy(&result->key, &key, sizeof key);
    result->id = UTIL_BITMASK_INVALID_INDEX;
 
-   if (SVGA_DEBUG & DEBUG_TGSI) 
+   if (SVGA_DEBUG & DEBUG_TGSI)
    {
       debug_printf( "#####################################\n" );
       debug_printf( "Shader %u below\n", shader->id );
@@ -256,7 +256,7 @@ svga_translate_fragment_program( const struct svga_fragment_shader *fs,
    union svga_compile_key key;
    memcpy(&key.fkey, fkey, sizeof *fkey);
 
-   return svga_tgsi_translate( &fs->base, 
+   return svga_tgsi_translate( &fs->base,
                                key,
                                PIPE_SHADER_FRAGMENT );
 }
@@ -268,7 +268,7 @@ svga_translate_vertex_program( const struct svga_vertex_shader *vs,
    union svga_compile_key key;
    memcpy(&key.vkey, vkey, sizeof *vkey);
 
-   return svga_tgsi_translate( &vs->base, 
+   return svga_tgsi_translate( &vs->base,
                                key,
                                PIPE_SHADER_VERTEX );
 }

@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-               
+
 
 #include "main/macros.h"
 #include "brw_context.h"
@@ -285,7 +285,7 @@ void emit_pixel_w(struct brw_wm_compile *c,
    /* Don't need this if all you are doing is interpolating color, for
     * instance.
     */
-   if (mask & WRITEMASK_W) {      
+   if (mask & WRITEMASK_W) {
       struct brw_reg interp3 = brw_vec1_grf(arg0[0].nr+1, 4);
 
       /* Calc 1/w - just linterp wpos[3] optimized by putting the
@@ -597,8 +597,8 @@ void emit_lrp(struct brw_compile *p,
    /* Uses dst as a temporary:
     */
    for (i = 0; i < 4; i++) {
-      if (mask & (1<<i)) {	
-	 /* Can I use the LINE instruction for this? 
+      if (mask & (1<<i)) {
+	 /* Can I use the LINE instruction for this?
 	  */
 	 brw_ADD(p, dst[i], negate(arg0[i]), brw_imm_f(1.0));
 	 brw_MUL(p, brw_null_reg(), dst[i], arg2[i]);
@@ -620,7 +620,7 @@ void emit_sop(struct brw_compile *p,
    GLuint i;
 
    for (i = 0; i < 4; i++) {
-      if (mask & (1<<i)) {	
+      if (mask & (1<<i)) {
 	 brw_push_insn_state(p);
 	 brw_CMP(p, brw_null_reg(), cond, arg0[i], arg1[i]);
 	 brw_set_predicate_control(p, BRW_PREDICATE_NONE);
@@ -632,7 +632,7 @@ void emit_sop(struct brw_compile *p,
    }
 }
 
-static void emit_slt( struct brw_compile *p, 
+static void emit_slt( struct brw_compile *p,
 		      const struct brw_reg *dst,
 		      GLuint mask,
 		      const struct brw_reg *arg0,
@@ -641,7 +641,7 @@ static void emit_slt( struct brw_compile *p,
    emit_sop(p, dst, mask, BRW_CONDITIONAL_L, arg0, arg1);
 }
 
-static void emit_sle( struct brw_compile *p, 
+static void emit_sle( struct brw_compile *p,
 		      const struct brw_reg *dst,
 		      GLuint mask,
 		      const struct brw_reg *arg0,
@@ -650,7 +650,7 @@ static void emit_sle( struct brw_compile *p,
    emit_sop(p, dst, mask, BRW_CONDITIONAL_LE, arg0, arg1);
 }
 
-static void emit_sgt( struct brw_compile *p, 
+static void emit_sgt( struct brw_compile *p,
 		      const struct brw_reg *dst,
 		      GLuint mask,
 		      const struct brw_reg *arg0,
@@ -659,7 +659,7 @@ static void emit_sgt( struct brw_compile *p,
    emit_sop(p, dst, mask, BRW_CONDITIONAL_G, arg0, arg1);
 }
 
-static void emit_sge( struct brw_compile *p, 
+static void emit_sge( struct brw_compile *p,
 		      const struct brw_reg *dst,
 		      GLuint mask,
 		      const struct brw_reg *arg0,
@@ -668,7 +668,7 @@ static void emit_sge( struct brw_compile *p,
    emit_sop(p, dst, mask, BRW_CONDITIONAL_GE, arg0, arg1);
 }
 
-static void emit_seq( struct brw_compile *p, 
+static void emit_seq( struct brw_compile *p,
 		      const struct brw_reg *dst,
 		      GLuint mask,
 		      const struct brw_reg *arg0,
@@ -677,7 +677,7 @@ static void emit_seq( struct brw_compile *p,
    emit_sop(p, dst, mask, BRW_CONDITIONAL_EQ, arg0, arg1);
 }
 
-static void emit_sne( struct brw_compile *p, 
+static void emit_sne( struct brw_compile *p,
 		      const struct brw_reg *dst,
 		      GLuint mask,
 		      const struct brw_reg *arg0,
@@ -696,7 +696,7 @@ void emit_cmp(struct brw_compile *p,
    GLuint i;
 
    for (i = 0; i < 4; i++) {
-      if (mask & (1<<i)) {	
+      if (mask & (1<<i)) {
 	 brw_CMP(p, brw_null_reg(), BRW_CONDITIONAL_L, arg0[i], brw_imm_f(0));
 
 	 brw_set_saturate(p, (mask & SATURATE) ? 1 : 0);
@@ -738,7 +738,7 @@ void emit_max(struct brw_compile *p,
    GLuint i;
 
    for (i = 0; i < 4; i++) {
-      if (mask & (1<<i)) {	
+      if (mask & (1<<i)) {
 	 brw_CMP(p, brw_null_reg(), BRW_CONDITIONAL_GE, arg0[i], arg1[i]);
 
 	 brw_set_saturate(p, (mask & SATURATE) ? 1 : 0);
@@ -758,7 +758,7 @@ void emit_min(struct brw_compile *p,
    GLuint i;
 
    for (i = 0; i < 4; i++) {
-      if (mask & (1<<i)) {	
+      if (mask & (1<<i)) {
 	 brw_CMP(p, brw_null_reg(), BRW_CONDITIONAL_L, arg0[i], arg1[i]);
 
 	 brw_set_saturate(p, (mask & SATURATE) ? 1 : 0);
@@ -868,7 +868,7 @@ void emit_xpd(struct brw_compile *p,
    GLuint i;
 
    assert((mask & WRITEMASK_W) != WRITEMASK_W);
-   
+
    for (i = 0 ; i < 3; i++) {
       if (mask & (1<<i)) {
 	 GLuint i2 = (i+2)%3;
@@ -1226,7 +1226,7 @@ void emit_txb(struct brw_wm_compile *c,
    brw_MOV(p, brw_message_reg(2 + 3 * mrf_per_channel), arg[3]);
    msgLength = 2 + 4 * mrf_per_channel - 1;
 
-   brw_SAMPLE(p, 
+   brw_SAMPLE(p,
 	      dst_retyped,
 	      1,
 	      retype(depth_payload, BRW_REGISTER_TYPE_UW),
@@ -1236,9 +1236,9 @@ void emit_txb(struct brw_wm_compile *c,
 	      msg_type,
 	      response_length,
 	      msgLength,
-	      0,	
+	      0,
 	      1,
-	      BRW_SAMPLER_SIMD_MODE_SIMD16);	
+	      BRW_SAMPLER_SIMD_MODE_SIMD16);
 }
 
 
@@ -1271,11 +1271,11 @@ static void emit_lit(struct brw_wm_compile *c,
     */
    brw_CMP(p, brw_null_reg(), BRW_CONDITIONAL_LE, arg0[0], brw_imm_f(0));
    {
-      if (mask & WRITEMASK_Y) 
+      if (mask & WRITEMASK_Y)
 	 brw_MOV(p, dst[1], brw_imm_f(0));
 
-      if (mask & WRITEMASK_Z) 
-	 brw_MOV(p, dst[2], brw_imm_f(0)); 
+      if (mask & WRITEMASK_Z)
+	 brw_MOV(p, dst[2], brw_imm_f(0));
    }
    brw_set_predicate_control(p, BRW_PREDICATE_NONE);
 }
@@ -1309,7 +1309,7 @@ static void emit_kil( struct brw_wm_compile *c,
 	 continue;
 
       brw_push_insn_state(p);
-      brw_CMP(p, brw_null_reg(), BRW_CONDITIONAL_GE, arg0[i], brw_imm_f(0));   
+      brw_CMP(p, brw_null_reg(), BRW_CONDITIONAL_GE, arg0[i], brw_imm_f(0));
       brw_set_predicate_control_flag_value(p, 0xff);
       brw_set_compression_control(p, BRW_COMPRESSION_NONE);
       brw_AND(p, pixelmask, brw_flag_reg(), pixelmask);
@@ -1340,7 +1340,7 @@ static void fire_fb_write( struct brw_wm_compile *c,
       brw_push_insn_state(p);
       brw_set_mask_control(p, BRW_MASK_DISABLE); /* ? */
       brw_set_compression_control(p, BRW_COMPRESSION_NONE);
-      brw_MOV(p, 
+      brw_MOV(p,
 	       brw_message_reg(base_reg + 1),
 	       brw_vec8_grf(1, 0));
       brw_pop_insn_state(p);
@@ -1353,9 +1353,9 @@ static void fire_fb_write( struct brw_wm_compile *c,
 		dst,
 		base_reg,
 		retype(brw_vec8_grf(0, 0), BRW_REGISTER_TYPE_UW),
-		target,		
+		target,
 		nr,
-		0, 
+		0,
 		eot,
 		GL_TRUE);
 }
@@ -1470,7 +1470,7 @@ void emit_fb_write(struct brw_wm_compile *c,
    {
       if (c->computes_depth)
 	 brw_MOV(p, brw_message_reg(nr), arg2[2]);
-      else 
+      else
 	 brw_MOV(p, brw_message_reg(nr), arg1[1]); /* ? */
 
       nr += 2;
@@ -1524,13 +1524,13 @@ void emit_fb_write(struct brw_wm_compile *c,
       struct brw_reg v1_null_ud = vec1(retype(brw_null_reg(), BRW_REGISTER_TYPE_UD));
       struct brw_reg ip = brw_ip_reg();
       struct brw_instruction *jmp;
-      
+
       brw_set_compression_control(p, BRW_COMPRESSION_NONE);
       brw_set_conditionalmod(p, BRW_CONDITIONAL_Z);
-      brw_AND(p, 
-	      v1_null_ud, 
-	      get_element_ud(brw_vec8_grf(1,0), 6), 
-	      brw_imm_ud(1<<26)); 
+      brw_AND(p,
+	      v1_null_ud,
+	      get_element_ud(brw_vec8_grf(1,0), 6),
+	      brw_imm_ud(1<<26));
 
       jmp = brw_JMPI(p, ip, ip, brw_imm_w(0));
       {
@@ -1547,7 +1547,7 @@ void emit_fb_write(struct brw_wm_compile *c,
 }
 
 /**
- * Move a GPR to scratch memory. 
+ * Move a GPR to scratch memory.
  */
 static void emit_spill( struct brw_wm_compile *c,
 			struct brw_reg reg,
@@ -1569,7 +1569,7 @@ static void emit_spill( struct brw_wm_compile *c,
 
 
 /**
- * Load a GPR from scratch memory. 
+ * Load a GPR from scratch memory.
  */
 static void emit_unspill( struct brw_wm_compile *c,
 			  struct brw_reg reg,
@@ -1629,7 +1629,7 @@ static void spill_values( struct brw_wm_compile *c,
    GLuint i;
 
    for (i = 0; i < nr; i++)
-      if (values[i].spill_slot) 
+      if (values[i].spill_slot)
 	 emit_spill(c, values[i].hw_reg, values[i].spill_slot);
 }
 
@@ -1651,17 +1651,17 @@ void brw_wm_emit( struct brw_wm_compile *c )
    spill_values(c, c->payload.depth, 4);
    spill_values(c, c->creg, c->nr_creg);
    spill_values(c, c->payload.input_interp, FRAG_ATTRIB_MAX);
-   
+
 
    for (insn = 0; insn < c->nr_insns; insn++) {
 
       struct brw_wm_instruction *inst = &c->instruction[insn];
       struct brw_reg args[3][4], dst[4];
       GLuint i, dst_flags;
-      
+
       /* Get argument regs:
        */
-      for (i = 0; i < 3; i++) 
+      for (i = 0; i < 3; i++)
 	 get_argument_regs(c, inst->src[i], args[i]);
 
       /* Get dest regs:
@@ -1671,11 +1671,11 @@ void brw_wm_emit( struct brw_wm_compile *c )
 	    dst[i] = inst->dst[i]->hw_reg;
 	 else
 	    dst[i] = brw_null_reg();
-      
+
       /* Flags
        */
       dst_flags = inst->writemask;
-      if (inst->saturate) 
+      if (inst->saturate)
 	 dst_flags |= SATURATE;
 
       switch (inst->opcode) {
@@ -1767,7 +1767,7 @@ void brw_wm_emit( struct brw_wm_compile *c )
 	 emit_lrp(p, dst, dst_flags, args[0], args[1], args[2]);
 	 break;
 
-      case OPCODE_MAD:	
+      case OPCODE_MAD:
 	 emit_mad(p, dst, dst_flags, args[0], args[1], args[2]);
 	 break;
 
@@ -1889,11 +1889,11 @@ void brw_wm_emit( struct brw_wm_compile *c )
 		_mesa_opcode_string(inst->opcode) :
 		"unknown");
       }
-      
+
       for (i = 0; i < 4; i++)
-	if (inst->dst[i] && inst->dst[i]->spill_slot) 
-	   emit_spill(c, 
-		      inst->dst[i]->hw_reg, 
+	if (inst->dst[i] && inst->dst[i]->spill_slot)
+	   emit_spill(c,
+		      inst->dst[i]->hw_reg,
 		      inst->dst[i]->spill_slot);
    }
 

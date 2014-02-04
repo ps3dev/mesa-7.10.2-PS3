@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -42,14 +42,14 @@
 /**
  * Use our own pseudo random generator to ensure consistent runs among
  * multiple runs and platforms.
- * 
+ *
  * @sa http://en.wikipedia.org/wiki/Linear_congruential_generator
  */
 static uint32_t st_random(void) {
    static uint64_t seed = UINT64_C(0xbb9a063afb0a739d);
 
    seed = UINT64_C(134775813) * seed + UINT64_C(1);
-   
+
    return (uint32_t)(seed >> 32);
 }
 
@@ -57,7 +57,7 @@ static uint32_t st_random(void) {
 /**
  * We don't want to include the patent-encumbered DXT code here, so instead
  * we store several uncompressed/compressed data pairs for hardware testing
- * purposes. 
+ * purposes.
  */
 struct dxt_data
 {
@@ -66,7 +66,7 @@ struct dxt_data
 };
 
 
-static const struct dxt_data 
+static const struct dxt_data
 dxt1_rgb_data[] = {
    {
       {
@@ -155,7 +155,7 @@ dxt1_rgb_data[] = {
 };
 
 
-static const struct dxt_data 
+static const struct dxt_data
 dxt1_rgba_data[] = {
    {
       {
@@ -244,7 +244,7 @@ dxt1_rgba_data[] = {
 };
 
 
-static const struct dxt_data 
+static const struct dxt_data
 dxt3_rgba_data[] = {
    {
       {
@@ -333,7 +333,7 @@ dxt3_rgba_data[] = {
 };
 
 
-static const struct dxt_data 
+static const struct dxt_data
 dxt5_rgba_data[] = {
    {
       {
@@ -422,17 +422,17 @@ dxt5_rgba_data[] = {
 };
 
 
-static INLINE void 
-st_sample_dxt_pixel_block(enum pipe_format format, 
+static INLINE void
+st_sample_dxt_pixel_block(enum pipe_format format,
                           uint8_t *raw,
-                          float *rgba, unsigned rgba_stride, 
+                          float *rgba, unsigned rgba_stride,
                           unsigned w, unsigned h)
 {
    const struct dxt_data *data;
    unsigned n;
    unsigned i;
    unsigned x, y, ch;
-   
+
    switch(format) {
    case PIPE_FORMAT_DXT1_RGB:
       data = dxt1_rgb_data;
@@ -454,20 +454,20 @@ st_sample_dxt_pixel_block(enum pipe_format format,
       assert(0);
       return;
    }
-   
+
    i = st_random() % n;
-   
+
    for(y = 0; y < h; ++y)
       for(x = 0; x < w; ++x)
          for(ch = 0; ch < 4; ++ch)
             rgba[y*rgba_stride + x*4 + ch] = (float)(data[i].rgba[y*4*4 + x*4 + ch])/255.0f;
-   
+
    memcpy(raw, data[i].raw, util_format_get_blocksize(format));
 }
 
 
-static INLINE void 
-st_sample_generic_pixel_block(enum pipe_format format, 
+static INLINE void
+st_sample_generic_pixel_block(enum pipe_format format,
                               uint8_t *raw,
                               float *rgba, unsigned rgba_stride,
                               unsigned w, unsigned h,
@@ -476,7 +476,7 @@ st_sample_generic_pixel_block(enum pipe_format format,
    unsigned i;
    unsigned x, y, ch;
    int blocksize = util_format_get_blocksize(format);
-   
+
    if (norm) {
       for (y = 0; y < h; ++y) {
          for (x = 0; x < w; ++x) {
@@ -518,7 +518,7 @@ st_sample_generic_pixel_block(enum pipe_format format,
 /**
  * Randomly sample pixels.
  */
-void 
+void
 st_sample_pixel_block(enum pipe_format format,
                       void *raw,
                       float *rgba, unsigned rgba_stride,

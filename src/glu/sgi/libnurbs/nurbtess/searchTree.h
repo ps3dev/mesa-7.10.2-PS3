@@ -37,13 +37,13 @@ typedef struct treeNode{
   void *key;
   struct treeNode* parent;
   struct treeNode* left; /*children*/
-  struct treeNode* right; 
+  struct treeNode* right;
 } treeNode;
 
 treeNode* TreeNodeMake(void *key);
 void TreeNodeDeleteSingleNode(treeNode* node);
 void TreeNodeDeleteWholeTree(treeNode* node);
-void TreeNodePrint(treeNode* node, 
+void TreeNodePrint(treeNode* node,
 		   void (*keyPrint) (void*));
 int TreeNodeDepth(treeNode* root);
 treeNode* TreeNodeMinimum(treeNode* node);

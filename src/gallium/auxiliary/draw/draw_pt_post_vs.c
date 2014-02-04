@@ -128,7 +128,7 @@ void draw_pt_post_vs_prepare( struct pt_post_vs *pvs,
 
    if (clip_xy)
       pvs->flags |= DO_CLIP_XY;
-   
+
    if (clip_z && opengl) {
       pvs->flags |= DO_CLIP_FULL_Z;
       ASSIGN_4V( pvs->draw->plane[4],  0,  0,  1, 1 );
@@ -179,7 +179,7 @@ void draw_pt_post_vs_prepare( struct pt_post_vs *pvs,
          DO_VIEWPORT | DO_EDGEFLAG):
       pvs->run = do_cliptest_xy_fullz_user_viewport_edgeflag;
       break;
-      
+
    default:
       pvs->run = do_cliptest_generic;
       break;

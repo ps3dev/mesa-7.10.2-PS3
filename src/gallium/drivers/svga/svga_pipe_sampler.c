@@ -38,27 +38,27 @@ static INLINE unsigned
 translate_wrap_mode(unsigned wrap)
 {
    switch (wrap) {
-   case PIPE_TEX_WRAP_REPEAT: 
+   case PIPE_TEX_WRAP_REPEAT:
       return SVGA3D_TEX_ADDRESS_WRAP;
 
-   case PIPE_TEX_WRAP_CLAMP: 
+   case PIPE_TEX_WRAP_CLAMP:
       return SVGA3D_TEX_ADDRESS_CLAMP;
 
-   case PIPE_TEX_WRAP_CLAMP_TO_EDGE: 
+   case PIPE_TEX_WRAP_CLAMP_TO_EDGE:
       /* Unfortunately SVGA3D_TEX_ADDRESS_EDGE not respected by
        * hardware.
        */
       return SVGA3D_TEX_ADDRESS_CLAMP;
 
-   case PIPE_TEX_WRAP_CLAMP_TO_BORDER: 
+   case PIPE_TEX_WRAP_CLAMP_TO_BORDER:
       return SVGA3D_TEX_ADDRESS_BORDER;
 
-   case PIPE_TEX_WRAP_MIRROR_REPEAT: 
+   case PIPE_TEX_WRAP_MIRROR_REPEAT:
       return SVGA3D_TEX_ADDRESS_MIRROR;
 
-   case PIPE_TEX_WRAP_MIRROR_CLAMP:  
-   case PIPE_TEX_WRAP_MIRROR_CLAMP_TO_EDGE:   
-   case PIPE_TEX_WRAP_MIRROR_CLAMP_TO_BORDER: 
+   case PIPE_TEX_WRAP_MIRROR_CLAMP:
+   case PIPE_TEX_WRAP_MIRROR_CLAMP_TO_EDGE:
+   case PIPE_TEX_WRAP_MIRROR_CLAMP_TO_BORDER:
       return SVGA3D_TEX_ADDRESS_MIRRORONCE;
 
    default:
@@ -96,7 +96,7 @@ svga_create_sampler_state(struct pipe_context *pipe,
 {
    struct svga_context *svga = svga_context(pipe);
    struct svga_sampler_state *cso = CALLOC_STRUCT( svga_sampler_state );
-   
+
    cso->mipfilter = translate_mip_filter(sampler->min_mip_filter);
    cso->magfilter = translate_img_filter( sampler->mag_img_filter );
    cso->minfilter = translate_img_filter( sampler->min_img_filter );
@@ -243,12 +243,12 @@ static void svga_set_sampler_views(struct pipe_context *pipe,
    svga->dirty |= SVGA_NEW_TEXTURE_BINDING;
 
    if (flag_srgb != svga->curr.tex_flags.flag_srgb ||
-       flag_1d != svga->curr.tex_flags.flag_1d) 
+       flag_1d != svga->curr.tex_flags.flag_1d)
    {
       svga->dirty |= SVGA_NEW_TEXTURE_FLAGS;
       svga->curr.tex_flags.flag_1d = flag_1d;
       svga->curr.tex_flags.flag_srgb = flag_srgb;
-   }  
+   }
 }
 
 

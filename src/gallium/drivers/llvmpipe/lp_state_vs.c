@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2009 VMware, Inc.
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -46,7 +46,7 @@ llvmpipe_create_vs_state(struct pipe_context *pipe,
    struct lp_vertex_shader *state;
 
    state = CALLOC_STRUCT(lp_vertex_shader);
-   if (state == NULL ) 
+   if (state == NULL )
       goto fail;
 
    /* copy shader tokens, the ones passed in will go away.
@@ -56,7 +56,7 @@ llvmpipe_create_vs_state(struct pipe_context *pipe,
       goto fail;
 
    state->draw_data = draw_create_vertex_shader(llvmpipe->draw, templ);
-   if (state->draw_data == NULL) 
+   if (state->draw_data == NULL)
       goto fail;
 
    if (LP_DEBUG & DEBUG_TGSI) {
@@ -85,7 +85,7 @@ llvmpipe_bind_vs_state(struct pipe_context *pipe, void *_vs)
    if (llvmpipe->vs == vs)
       return;
 
-   draw_bind_vertex_shader(llvmpipe->draw, 
+   draw_bind_vertex_shader(llvmpipe->draw,
                            vs ? vs->draw_data : NULL);
 
    llvmpipe->vs = vs;

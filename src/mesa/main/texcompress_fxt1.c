@@ -699,7 +699,7 @@ fxt1_quantize_ALPHA1 (GLuint *cc,
            }
            sumL += sum;
        }
-       
+
        nn_comp--;
    }
 
@@ -774,7 +774,7 @@ fxt1_quantize_ALPHA1 (GLuint *cc,
          lolo <<= 2;
          lolo |= texel;
       }
-      
+
       cc[0] = lolo;
    }
 
@@ -1149,7 +1149,7 @@ fxt1_quantize_MIXED0 (GLuint *cc,
          }
          lolo = ~lolo;
       }
-      
+
       cc[0] = lolo;
    }
 

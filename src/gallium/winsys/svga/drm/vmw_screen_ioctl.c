@@ -418,14 +418,14 @@ vmw_ioctl_fence_signalled(struct vmw_winsys_screen *vws,
 {
    uint32_t expected;
    uint32_t current;
-   
+
    assert(fence);
    if(!fence)
       return 0;
-   
+
    expected = fence;
    current = vws->ioctl.fifo_map[SVGA_FIFO_FENCE];
-   
+
    if ((int32)(current - expected) >= 0)
       return 0; /* fence passed */
    else
@@ -434,7 +434,7 @@ vmw_ioctl_fence_signalled(struct vmw_winsys_screen *vws,
 
 
 static void
-vmw_ioctl_sync(struct vmw_winsys_screen *vws, 
+vmw_ioctl_sync(struct vmw_winsys_screen *vws,
 		    uint32_t fence)
 {
    uint32_t cur_fence;
@@ -466,13 +466,13 @@ vmw_ioctl_fence_finish(struct vmw_winsys_screen *vws,
                        uint32_t fence)
 {
    assert(fence);
-   
+
    if(fence) {
       if(vmw_ioctl_fence_signalled(vws, fence) != 0) {
          vmw_ioctl_sync(vws, fence);
       }
    }
-   
+
    return 0;
 }
 

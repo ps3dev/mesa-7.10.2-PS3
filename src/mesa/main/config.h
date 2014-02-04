@@ -138,8 +138,8 @@
 #define MAX_TEXTURE_UNITS ((MAX_TEXTURE_COORD_UNITS > MAX_TEXTURE_IMAGE_UNITS) ? MAX_TEXTURE_COORD_UNITS : MAX_TEXTURE_IMAGE_UNITS)
 
 
-/** 
- * Maximum viewport/image width. Must accomodate all texture sizes too. 
+/**
+ * Maximum viewport/image width. Must accomodate all texture sizes too.
  */
 
 #ifndef MAX_WIDTH
@@ -338,7 +338,7 @@
 
 /*
  * Color channel component order
- * 
+ *
  * \note Changes will almost certainly cause problems at this time.
  */
 #define RCOMP 0
@@ -348,7 +348,7 @@
 
 
 /**
- * Maximum number of temporary vertices required for clipping.  
+ * Maximum number of temporary vertices required for clipping.
  *
  * Used in array_cache and tnl modules.
  */

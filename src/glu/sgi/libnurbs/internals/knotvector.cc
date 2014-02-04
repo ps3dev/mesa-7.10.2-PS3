@@ -98,7 +98,7 @@ int Knotvector::validate( void )
 	    // decreasing knot sequence
 	    return( 4 );
 	}
-        
+
     /* check for valid multiplicity */
 
     /*	kindex is currently the index of the last knot.

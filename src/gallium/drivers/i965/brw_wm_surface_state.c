@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-                   
+
 #include "pipe/p_format.h"
 
 #include "brw_batchbuffer.h"
@@ -122,7 +122,7 @@ brw_update_render_surface(struct brw_context *brw,
                         NULL,
                         bo_out))
       return PIPE_OK;
-       
+
    ret = brw_upload_cache(&brw->surface_cache,
                           BRW_SS_SURFACE,
                           &ss, sizeof ss,
@@ -155,7 +155,7 @@ brw_wm_get_binding_table(struct brw_context *brw,
    assert(brw->wm.nr_surfaces <= BRW_WM_MAX_SURF);
    assert(brw->wm.nr_surfaces > 0);
 
-   /* Emit binding table relocations to surface state 
+   /* Emit binding table relocations to surface state
     */
    for (i = 0; i < brw->wm.nr_surfaces; i++) {
       if (brw->wm.surf_bo[i]) {
@@ -209,12 +209,12 @@ static enum pipe_error prepare_wm_surfaces(struct brw_context *brw )
     * XXX: no color buffer case
     */
    for (i = 0; i < brw->curr.fb.nr_cbufs; i++) {
-      ret = brw_update_render_surface(brw, 
-                                      brw_surface(brw->curr.fb.cbufs[i]), 
+      ret = brw_update_render_surface(brw,
+                                      brw_surface(brw->curr.fb.cbufs[i]),
                                       &brw->wm.surf_bo[BTI_COLOR_BUF(i)]);
       if (ret)
          return ret;
-      
+
       nr_surfaces = BTI_COLOR_BUF(i) + 1;
    }
 
@@ -225,8 +225,8 @@ static enum pipe_error prepare_wm_surfaces(struct brw_context *brw )
 #if 0
    if (brw->curr.fragment_constants) {
       ret = brw_update_fragment_constant_surface(
-         brw, 
-         brw->curr.fragment_constants, 
+         brw,
+         brw->curr.fragment_constants,
          &brw->wm.surf_bo[BTI_FRAGMENT_CONSTANTS]);
 
       if (ret)
@@ -235,15 +235,15 @@ static enum pipe_error prepare_wm_surfaces(struct brw_context *brw )
       nr_surfaces = BTI_FRAGMENT_CONSTANTS + 1;
    }
    else {
-      bo_reference(&brw->wm.surf_bo[SURF_FRAG_CONSTANTS], NULL);      
+      bo_reference(&brw->wm.surf_bo[SURF_FRAG_CONSTANTS], NULL);
    }
 #endif
 
 
-   /* PIPE_NEW_TEXTURE 
+   /* PIPE_NEW_TEXTURE
     */
    for (i = 0; i < brw->curr.num_fragment_sampler_views; i++) {
-      ret = brw_update_texture_surface(brw, 
+      ret = brw_update_texture_surface(brw,
                                        brw_texture(brw->curr.fragment_sampler_views[i]->texture),
                                        &brw->wm.surf_bo[BTI_TEXTURE(i)]);
       if (ret)
@@ -254,11 +254,11 @@ static enum pipe_error prepare_wm_surfaces(struct brw_context *brw )
 
    /* Clear any inactive entries:
     */
-   for (i = brw->curr.fb.nr_cbufs; i < BRW_MAX_DRAW_BUFFERS; i++) 
+   for (i = brw->curr.fb.nr_cbufs; i < BRW_MAX_DRAW_BUFFERS; i++)
       bo_reference(&brw->wm.surf_bo[BTI_COLOR_BUF(i)], NULL);
 
    if (!brw->curr.fragment_constants)
-      bo_reference(&brw->wm.surf_bo[BTI_FRAGMENT_CONSTANTS], NULL);      
+      bo_reference(&brw->wm.surf_bo[BTI_FRAGMENT_CONSTANTS], NULL);
 
    /* XXX: no pipe_max_textures define?? */
    for (i = brw->curr.num_fragment_sampler_views; i < PIPE_MAX_SAMPLERS; i++)

@@ -31,34 +31,34 @@ enum {
     /* CB_BLEND_CONTROL */
         EG_CB_BLENDX_CONTROL_ENABLE_bit = 1 << 30,
     /* PA_SC_SCREEN_SCISSOR_TL */
-        EG_PA_SC_SCREEN_SCISSOR_TL__TL_X_mask                = 0xffff << 0,	
+        EG_PA_SC_SCREEN_SCISSOR_TL__TL_X_mask                = 0xffff << 0,
 	    EG_PA_SC_SCREEN_SCISSOR_TL__TL_Y_mask                = 0xffff << 16,
     /* PA_SC_SCREEN_SCISSOR_BR */
-	    EG_PA_SC_SCREEN_SCISSOR_BR__BR_X_mask                = 0xffff << 0,	
+	    EG_PA_SC_SCREEN_SCISSOR_BR__BR_X_mask                = 0xffff << 0,
 	    EG_PA_SC_SCREEN_SCISSOR_BR__BR_Y_mask                = 0xffff << 16,
-    /* PA_SC_WINDOW_SCISSOR_TL */ 
-	    EG_PA_SC_WINDOW_SCISSOR_TL__TL_X_mask                = 0x7fff << 0,	
-	    EG_PA_SC_WINDOW_SCISSOR_TL__TL_Y_mask                = 0x7fff << 16,	
+    /* PA_SC_WINDOW_SCISSOR_TL */
+	    EG_PA_SC_WINDOW_SCISSOR_TL__TL_X_mask                = 0x7fff << 0,
+	    EG_PA_SC_WINDOW_SCISSOR_TL__TL_Y_mask                = 0x7fff << 16,
     /* PA_SC_WINDOW_SCISSOR_BR */
-	    EG_PA_SC_WINDOW_SCISSOR_BR__BR_X_mask                = 0x7fff << 0,	
+	    EG_PA_SC_WINDOW_SCISSOR_BR__BR_X_mask                = 0x7fff << 0,
 	    EG_PA_SC_WINDOW_SCISSOR_BR__BR_Y_mask                = 0x7fff << 16,
     /* PA_SC_CLIPRECT_0_TL */
-        EG_PA_SC_CLIPRECT_0_TL__TL_X_mask                    = 0x7fff << 0,	
-	    EG_PA_SC_CLIPRECT_0_TL__TL_Y_mask                    = 0x7fff << 16,	
-    /* PA_SC_CLIPRECT_0_BR */	
-	    EG_PA_SC_CLIPRECT_0_BR__BR_X_mask                    = 0x7fff << 0,	
+        EG_PA_SC_CLIPRECT_0_TL__TL_X_mask                    = 0x7fff << 0,
+	    EG_PA_SC_CLIPRECT_0_TL__TL_Y_mask                    = 0x7fff << 16,
+    /* PA_SC_CLIPRECT_0_BR */
+	    EG_PA_SC_CLIPRECT_0_BR__BR_X_mask                    = 0x7fff << 0,
 	    EG_PA_SC_CLIPRECT_0_BR__BR_Y_mask                    = 0x7fff << 16,
     /* PA_SC_GENERIC_SCISSOR_TL */
-	    EG_PA_SC_GENERIC_SCISSOR_TL__TL_X_mask               = 0x7fff << 0,	
-	    EG_PA_SC_GENERIC_SCISSOR_TL__TL_Y_mask               = 0x7fff << 16,	
+	    EG_PA_SC_GENERIC_SCISSOR_TL__TL_X_mask               = 0x7fff << 0,
+	    EG_PA_SC_GENERIC_SCISSOR_TL__TL_Y_mask               = 0x7fff << 16,
     /* PA_SC_GENERIC_SCISSOR_BR */
-	    EG_PA_SC_GENERIC_SCISSOR_BR__BR_X_mask               = 0x7fff << 0,	
+	    EG_PA_SC_GENERIC_SCISSOR_BR__BR_X_mask               = 0x7fff << 0,
 	    EG_PA_SC_GENERIC_SCISSOR_BR__BR_Y_mask               = 0x7fff << 16,
-    /* PA_SC_VPORT_SCISSOR_0_TL */	
-	    EG_PA_SC_VPORT_SCISSOR_0_TL__TL_X_mask               = 0x7fff << 0,	
-	    EG_PA_SC_VPORT_SCISSOR_0_TL__TL_Y_mask               = 0x7fff << 16,	
-    /* PA_SC_VPORT_SCISSOR_0_BR */		
-	    EG_PA_SC_VPORT_SCISSOR_0_BR__BR_X_mask               = 0x7fff << 0,	
+    /* PA_SC_VPORT_SCISSOR_0_TL */
+	    EG_PA_SC_VPORT_SCISSOR_0_TL__TL_X_mask               = 0x7fff << 0,
+	    EG_PA_SC_VPORT_SCISSOR_0_TL__TL_Y_mask               = 0x7fff << 16,
+    /* PA_SC_VPORT_SCISSOR_0_BR */
+	    EG_PA_SC_VPORT_SCISSOR_0_BR__BR_X_mask               = 0x7fff << 0,
 	    EG_PA_SC_VPORT_SCISSOR_0_BR__BR_Y_mask               = 0x7fff << 16,
     /* PA_SC_WINDOW_OFFSET */
         EG_PA_SC_WINDOW_OFFSET__WINDOW_X_OFFSET_shift        = 0,
@@ -90,7 +90,7 @@ enum {
 		                                                                 //2;
 		EG_DB_Z_INFO__BANK_HEIGHT_shift                      = 20,       //2;
         EG_DB_Z_INFO__BANK_HEIGHT_mask                       = 0x3 << 20,
-        
+
         EG_Z_INVALID                                         = 0x00000000,
         EG_Z_16                                              = 0x00000001,
         EG_Z_24                                              = 0x00000002,
@@ -104,7 +104,7 @@ enum {
 		                                                            //7;
 		EG_DB_STENCIL_INFO__TILE_SPLIT_shift                 = 8,   //3;
         EG_DB_STENCIL_INFO__TILE_SPLIT_mask                  = 0x7 << 8,
-    
+
     /* DB_DEPTH_SIZE */
         EG_DB_DEPTH_SIZE__PITCH_TILE_MAX_shift               = 0,  // 11;
         EG_DB_DEPTH_SIZE__PITCH_TILE_MAX_mask                = 0x7ff,
@@ -115,7 +115,7 @@ enum {
         EG_DB_COUNT_CONTROL__ZPASS_INCREMENT_DISABLE_shift   = 0,  //1
         EG_DB_COUNT_CONTROL__ZPASS_INCREMENT_DISABLE_bit     = 1,
         EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_shift      = 1,  //1
-        EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_bit        = 1 << 1,    
+        EG_DB_COUNT_CONTROL__PERFECT_ZPASS_COUNTS_bit        = 1 << 1,
 
     /* CB_COLOR_CONTROL */
                                                                       //3;
@@ -185,27 +185,27 @@ enum {
         EG_PA_SC_FORCE_EOV_MAX_CNTS__FORCE_EOV_MAX_REZ_CNT_mask  = 0x3fff << 16,
     /* VGT_CACHE_INVALIDATION */
         EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_shift      = 0,
-        EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_mask       = 0x3, 
+        EG_VGT_CACHE_INVALIDATION__CACHE_INVALIDATION_mask       = 0x3,
     /* CB_COLOR0_PITCH */
         EG_CB_COLOR0_PITCH__TILE_MAX_shift                       = 0,
         EG_CB_COLOR0_PITCH__TILE_MAX_mask                        = 0x7ff,
     /* CB_COLOR0_SLICE */
         EG_CB_COLOR0_SLICE__TILE_MAX_shift                       = 0,
-        EG_CB_COLOR0_SLICE__TILE_MAX_mask                        = 0x3fffff,    
+        EG_CB_COLOR0_SLICE__TILE_MAX_mask                        = 0x3fffff,
     /* SQ_VTX_CONSTANT_WORD3_0 */
         EG_SQ_VTX_CONSTANT_WORD3_0__UNCACHED_shift  = 2,
         EG_SQ_VTX_CONSTANT_WORD3_0__UNCACHED_bit    = 1 << 2,
 
-        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_X_shift = 3, 
+        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_X_shift = 3,
         EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_X_mask  = 0x7 << 3,
-     
-        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_Y_shift = 6, 
+
+        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_Y_shift = 6,
         EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_Y_mask  = 0x7 << 6,
-     
-        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_Z_shift = 9, 
+
+        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_Z_shift = 9,
         EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_Z_mask  = 0x7 << 9,
-     
-        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_W_shift = 12, 
+
+        EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_W_shift = 12,
         EG_SQ_VTX_CONSTANT_WORD3_0__DST_SEL_W_mask  = 0x7 << 12,
     /* SQ_VTX_CONSTANT_WORD4_0 */
         EG_SQ_VTX_CONSTANT_WORD4_0__NUM_ELEMENTS_shift = 0,
@@ -238,7 +238,7 @@ enum {
         EG_SQ_TEX_SAMPLER_WORD0_0__CHROMA_KEY_mask       = 0x3 << 25,
 		EG_SQ_TEX_SAMPLER_WORD0_0__ANISO_THRESHOLD_shift = 27, // 3;
         EG_SQ_TEX_SAMPLER_WORD0_0__ANISO_THRESHOLD_mask  = 0x7 << 27,
-		EG_SQ_TEX_SAMPLER_WORD0_0__Reserved_shift        = 30, // 2         
+		EG_SQ_TEX_SAMPLER_WORD0_0__Reserved_shift        = 30, // 2
         EG_SQ_TEX_SAMPLER_WORD0_0__Reserved_mask         = 0x3 << 30,
     /* SQ_TEX_SAMPLER_WORD1_0 */
         EG_SQ_TEX_SAMPLER_WORD1_0__MIN_LOD_shift         = 0, // 12;
@@ -288,11 +288,11 @@ enum {
         EG_SQ_TEX_RESOURCE_WORD1_0__ARRAY_MODE_mask        = 0xf << 28,
     /* SQ_TEX_RESOURCE_WORD6_0 */
         EG_SQ_TEX_RESOURCE_WORD6_0__MAX_ANISO_RATIO_shift  = 0, //: 3;
-        EG_SQ_TEX_RESOURCE_WORD6_0__MAX_ANISO_RATIO_mask   = 0x7,		
+        EG_SQ_TEX_RESOURCE_WORD6_0__MAX_ANISO_RATIO_mask   = 0x7,
 		EG_SQ_TEX_RESOURCE_WORD6_0__INTERLACED_shift       = 6, //1;
-        EG_SQ_TEX_RESOURCE_WORD6_0__INTERLACED_bit         = 1 << 6,		
+        EG_SQ_TEX_RESOURCE_WORD6_0__INTERLACED_bit         = 1 << 6,
 		EG_SQ_TEX_RESOURCE_WORD6_0__MIN_LOD_shift          = 8, //12;
-        EG_SQ_TEX_RESOURCE_WORD6_0__MIN_LOD_mask           = 0xfff << 8,		
+        EG_SQ_TEX_RESOURCE_WORD6_0__MIN_LOD_mask           = 0xfff << 8,
 		EG_SQ_TEX_RESOURCE_WORD6_0__TILE_SPLIT_shift       = 29,// 3;
         EG_SQ_TEX_RESOURCE_WORD6_0__TILE_SPLIT_mask        = 0x7 << 29,
     /* SQ_TEX_RESOURCE_WORD7_0 */
@@ -303,11 +303,11 @@ enum {
 		EG_SQ_TEX_RESOURCE_WORD7_0__BANK_WIDTH_shift             = 8, // 2;
         EG_SQ_TEX_RESOURCE_WORD7_0__BANK_WIDTH_mask              = 0x3 << 8,
 		EG_SQ_TEX_RESOURCE_WORD7_0__BANK_HEIGHT_shift            = 10,// 2;
-        EG_SQ_TEX_RESOURCE_WORD7_0__BANK_HEIGHT_mask             = 0x3 << 10,		
+        EG_SQ_TEX_RESOURCE_WORD7_0__BANK_HEIGHT_mask             = 0x3 << 10,
 		EG_SQ_TEX_RESOURCE_WORD7_0__DEPTH_SAMPLE_ORDER_shift     = 15,// 1;
         EG_SQ_TEX_RESOURCE_WORD7_0__DEPTH_SAMPLE_ORDER_bit       = 1 << 15,
 		EG_SQ_TEX_RESOURCE_WORD7_0__NUM_BANKS_shift              = 16,// 2;
-        EG_SQ_TEX_RESOURCE_WORD7_0__NUM_BANKS_mask               = 0x3 << 16,		
+        EG_SQ_TEX_RESOURCE_WORD7_0__NUM_BANKS_mask               = 0x3 << 16,
 		EG_SQ_TEX_RESOURCE_WORD7_0__TYPE_shift                   = 30,// 2;
         EG_SQ_TEX_RESOURCE_WORD7_0__TYPE_mask                    = 0x3 << 30,
 };

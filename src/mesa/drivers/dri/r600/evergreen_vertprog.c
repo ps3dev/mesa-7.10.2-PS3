@@ -47,7 +47,7 @@
 
 #include "evergreen_vertprog.h"
 
-unsigned int evergreen_Map_Vertex_Output(r700_AssemblerBase       *pAsm, 
+unsigned int evergreen_Map_Vertex_Output(r700_AssemblerBase       *pAsm,
 					           struct gl_vertex_program *mesa_vp,
 					           unsigned int unStart)
 {
@@ -123,7 +123,7 @@ unsigned int evergreen_Map_Vertex_Output(r700_AssemblerBase       *pAsm,
 	return (unTotal - unStart);
 }
 
-unsigned int evergreen_Map_Vertex_Input(r700_AssemblerBase       *pAsm, 
+unsigned int evergreen_Map_Vertex_Input(r700_AssemblerBase       *pAsm,
 					  struct gl_vertex_program *mesa_vp,
 					  unsigned int unStart)
 {
@@ -164,7 +164,7 @@ GLboolean evergreen_Process_Vertex_Program_Vfetch_Instructions(
 						    &vtxFetchMethod);
 		}
 	}
-	
+
 	return GL_TRUE;
 }
 
@@ -302,7 +302,7 @@ struct evergreen_vertex_program* evergreenTranslateVertexShader(struct gl_contex
 
 	vp = calloc(1, sizeof(*vp));
 	vp->mesa_program = _mesa_clone_vertex_program(ctx, mesa_vp);
-    
+
     vp->constbo0 = NULL;
 
 	if (mesa_vp->IsPositionInvariant)
@@ -325,8 +325,8 @@ struct evergreen_vertex_program* evergreenTranslateVertexShader(struct gl_contex
 
 	//Init_Program
 	Init_r700_AssemblerBase(SPT_VP, &(vp->r700AsmCode), &(vp->r700Shader) );
-        
-    vp->r700AsmCode.bUseMemConstant = GL_TRUE;  
+
+    vp->r700AsmCode.bUseMemConstant = GL_TRUE;
     vp->r700AsmCode.unAsic = 8;
 
 	evergreen_Map_Vertex_Program(ctx, vp, vp->mesa_program );
@@ -364,7 +364,7 @@ struct evergreen_vertex_program* evergreenTranslateVertexShader(struct gl_contex
         return GL_FALSE;
     }
 
-    vp->r700Shader.nRegs = (vp->r700AsmCode.number_used_registers == 0) ? 0 
+    vp->r700Shader.nRegs = (vp->r700AsmCode.number_used_registers == 0) ? 0
                          : (vp->r700AsmCode.number_used_registers - 1);
 
 	vp->r700Shader.nParamExports = vp->r700AsmCode.number_of_exports;
@@ -424,7 +424,7 @@ void evergreenSelectVertexShader(struct gl_context *ctx)
 
 int evergreen_getTypeSize(GLenum type)
 {
-    switch (type) 
+    switch (type)
     {
     case GL_DOUBLE:
         return sizeof(GLdouble);
@@ -451,12 +451,12 @@ int evergreen_getTypeSize(GLenum type)
 static void evergreenTranslateAttrib(struct gl_context *ctx, GLuint unLoc, int count, const struct gl_client_array *input)
 {
     context_t *context = EVERGREEN_CONTEXT(ctx);
-    
+
     StreamDesc * pStreamDesc = &(context->stream_desc[context->nNumActiveAos]);
 
 	GLuint stride;
 
-	stride = (input->StrideB == 0) ? evergreen_getTypeSize(input->Type) * input->Size 
+	stride = (input->StrideB == 0) ? evergreen_getTypeSize(input->Type) * input->Size
                                    : input->StrideB;
 
     if (input->Type == GL_DOUBLE || input->Type == GL_UNSIGNED_INT || input->Type == GL_INT
@@ -467,28 +467,28 @@ static void evergreenTranslateAttrib(struct gl_context *ctx, GLuint unLoc, int c
     {
         pStreamDesc->type = GL_FLOAT;
 
-        if (input->StrideB == 0) 
+        if (input->StrideB == 0)
         {
 	        pStreamDesc->stride = 0;
-        } 
-        else 
+        }
+        else
         {
 	        pStreamDesc->stride = sizeof(GLfloat) * input->Size;
         }
         pStreamDesc->dwords = input->Size;
         pStreamDesc->is_named_bo = GL_FALSE;
-    } 
-    else 
+    }
+    else
     {
         pStreamDesc->type = input->Type;
         pStreamDesc->dwords = (evergreen_getTypeSize(input->Type) * input->Size + 3)/ 4;
-        if (!input->BufferObj->Name) 
+        if (!input->BufferObj->Name)
         {
-            if (input->StrideB == 0) 
+            if (input->StrideB == 0)
             {
                 pStreamDesc->stride = 0;
-            } 
-            else 
+            }
+            else
             {
                 pStreamDesc->stride = (evergreen_getTypeSize(pStreamDesc->type) * input->Size + 3) & ~3;
             }
@@ -502,7 +502,7 @@ static void evergreenTranslateAttrib(struct gl_context *ctx, GLuint unLoc, int c
 	pStreamDesc->element = unLoc;
 	pStreamDesc->format = input->Format;
 
-	switch (pStreamDesc->type) 
+	switch (pStreamDesc->type)
 	{ //GetSurfaceFormat
 	case GL_FLOAT:
 		pStreamDesc->_signed = 0;
@@ -527,7 +527,7 @@ static void evergreenTranslateAttrib(struct gl_context *ctx, GLuint unLoc, int c
 	default:
 	case GL_INT:
 	case GL_UNSIGNED_INT:
-	case GL_DOUBLE: 
+	case GL_DOUBLE:
 		assert(0);
 		break;
 	}
@@ -550,7 +550,7 @@ void evergreenSetVertexFormat(struct gl_context *ctx, const struct gl_client_arr
         unBit |= VERT_BIT_POS;
     }
 
-    while(unBit) 
+    while(unBit)
     {
         if(unBit & 1)
         {
@@ -604,21 +604,21 @@ GLboolean evergreenSetupVertexProgram(struct gl_context * ctx)
                        (GLvoid *)(vp->r700Shader.pProgram),
                        vp->r700Shader.uShaderBinaryDWORDSize,
                        "VS");
-   
+
         vp->loaded = GL_TRUE;
     }
 
-    EVERGREEN_STATECHANGE(context, vs);      
-    
+    EVERGREEN_STATECHANGE(context, vs);
+
     /* TODO : enable this after MemUse fixed *=
     (context->chipobj.MemUse)(context, vp->shadercode.buf->id);
-    */       
+    */
 
     evergreen->SQ_PGM_RESOURCES_VS.u32All = 0;
     SETbit(evergreen->SQ_PGM_RESOURCES_VS.u32All, PGM_RESOURCES__PRIME_CACHE_ON_DRAW_bit);
-    
+
     evergreen->vs.SQ_ALU_CONST_CACHE_VS_0.u32All = 0; /* set from buffer object. */
-    
+
     evergreen->vs.SQ_PGM_START_VS.u32All = 0;
 
     SETfield(evergreen->SQ_PGM_RESOURCES_VS.u32All, vp->r700Shader.nRegs + 1,
@@ -663,10 +663,10 @@ GLboolean evergreenSetupVPconstants(struct gl_context * ctx)
     if(NULL != paramList) {
         /* vp->mesa_program was cloned, not updated by glsl shader api. */
         /* _mesa_reference_program has already checked glsl shProg is ok and set ctx->VertexProgem._Current */
-        /* so, use ctx->VertexProgem._Current */       
-        struct gl_program_parameter_list *paramListOrginal = 
+        /* so, use ctx->VertexProgem._Current */
+        struct gl_program_parameter_list *paramListOrginal =
                          ctx->VertexProgram._Current->Base.Parameters;
-         
+
 	    _mesa_load_state_parameters(ctx, paramList);
 
 	    if (paramList->NumParameters > EVERGREEN_MAX_DX9_CONSTS)
@@ -682,7 +682,7 @@ GLboolean evergreenSetupVPconstants(struct gl_context * ctx)
 	    alloc_size = ((unNumParamData * 4 * 4) + 255) & ~255;
 
 	    for(ui=0; ui<unNumParamData; ui++) {
-            if(paramList->Parameters[ui].Type == PROGRAM_UNIFORM) 
+            if(paramList->Parameters[ui].Type == PROGRAM_UNIFORM)
             {
                 evergreen->vs.consts[ui][0].f32All = paramListOrginal->ParameterValues[ui][0];
 		        evergreen->vs.consts[ui][1].f32All = paramListOrginal->ParameterValues[ui][1];
@@ -698,11 +698,11 @@ GLboolean evergreenSetupVPconstants(struct gl_context * ctx)
             }
 	    }
 
-        radeonAllocDmaRegion(&context->radeon, 
-                             &context->vp_Constbo, 
-                             &context->vp_bo_offset, 
+        radeonAllocDmaRegion(&context->radeon,
+                             &context->vp_Constbo,
+                             &context->vp_bo_offset,
 			     alloc_size,
-                             256);        
+                             256);
         r600EmitShaderConsts(ctx,
                              context->vp_Constbo,
                              context->vp_bo_offset,

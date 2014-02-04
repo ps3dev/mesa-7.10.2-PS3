@@ -93,7 +93,7 @@ typedef struct {
     * kick out your own texture or someone else's - simply eject
     * them all in LRU order.
     */
- 
+
    drmTextureRegion texList[I810_NR_TEX_REGIONS + 1];
 
    /* Last elt is sentinal */

@@ -51,7 +51,7 @@ typedef struct {
 
    unsigned int bufferSize;
 
-#if 0 
+#if 0
    int bitsPerPixel;
 #endif
    unsigned int frontFormat;
@@ -65,7 +65,7 @@ typedef struct {
    unsigned int textureSize[SAVAGE_NR_TEX_HEAPS];
    unsigned int logTextureGranularity[SAVAGE_NR_TEX_HEAPS];
    drmAddress texVirtual[SAVAGE_NR_TEX_HEAPS];
-  
+
    __DRIscreen *driScrnPriv;
 
    savageRegion aperture;
@@ -90,7 +90,7 @@ extern void savageXMesaSetClipRects(savageContextPtr imesa);
 #define GET_ENQUEUE_AGE( imesa ) imesa->sarea->last_enqueue
 
 
-/* Lock the hardware and validate our state.  
+/* Lock the hardware and validate our state.
  */
 #define LOCK_HARDWARE( imesa )				\
   do {							\
@@ -103,7 +103,7 @@ extern void savageXMesaSetClipRects(savageContextPtr imesa);
 
 
 
-/* Unlock the hardware using the global current context 
+/* Unlock the hardware using the global current context
  */
 #define UNLOCK_HARDWARE(imesa)					\
     DRM_UNLOCK(imesa->driFd, imesa->driHwLock, imesa->hHWContext);
@@ -111,7 +111,7 @@ extern void savageXMesaSetClipRects(savageContextPtr imesa);
 
 /* This is the wrong way to do it, I'm sure.  Otherwise the drm
  * bitches that I've already got the heavyweight lock.  At worst,
- * this is 3 ioctls.  The best solution probably only gets me down 
+ * this is 3 ioctls.  The best solution probably only gets me down
  * to 2 ioctls in the worst case.
  */
 #define LOCK_HARDWARE_QUIESCENT( imesa ) do {	\
@@ -137,7 +137,7 @@ extern void savageXMesaSetClipRects(savageContextPtr imesa);
 #define S3_MOBILE_TWISTER_SERIES(chip)   ((chip==S3_TWISTER)    \
                                           ||(chip==S3_PROSAVAGEDDR))
 
-/* Chip tags.  These are used to group the adapters into 
+/* Chip tags.  These are used to group the adapters into
  * related families.
  */
 

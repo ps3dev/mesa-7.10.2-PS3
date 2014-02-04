@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:
@@ -305,7 +305,7 @@ get_sampler_varient( unsigned unit,
    key.bits.unit = unit;
    key.bits.pad = 0;
 
-   if (sampler->current && 
+   if (sampler->current &&
        key.value == sampler->current->key.value) {
       v = sampler->current;
    }
@@ -321,7 +321,7 @@ get_sampler_varient( unsigned unit,
          sampler->varients = v;
       }
    }
-   
+
    sampler->current = v;
    return v;
 }
@@ -344,13 +344,13 @@ softpipe_reset_sampler_varients(struct softpipe_context *softpipe)
             texture = softpipe->vertex_sampler_views[i]->texture;
          }
 
-         softpipe->tgsi.vert_samplers_list[i] = 
+         softpipe->tgsi.vert_samplers_list[i] =
             get_sampler_varient( i,
                                  sp_sampler(softpipe->vertex_samplers[i]),
                                  texture,
                                  TGSI_PROCESSOR_VERTEX );
 
-         sp_sampler_varient_bind_texture( softpipe->tgsi.vert_samplers_list[i], 
+         sp_sampler_varient_bind_texture( softpipe->tgsi.vert_samplers_list[i],
                                           softpipe->vertex_tex_cache[i],
                                           texture );
       }
@@ -394,7 +394,7 @@ softpipe_reset_sampler_varients(struct softpipe_context *softpipe)
                                  texture,
                                  TGSI_PROCESSOR_FRAGMENT );
 
-         sp_sampler_varient_bind_texture( softpipe->tgsi.frag_samplers_list[i], 
+         sp_sampler_varient_bind_texture( softpipe->tgsi.frag_samplers_list[i],
                                           softpipe->tex_cache[i],
                                           texture );
       }

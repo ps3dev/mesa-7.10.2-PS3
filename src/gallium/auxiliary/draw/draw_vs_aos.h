@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -116,7 +116,7 @@ struct aos_machine {
    struct shine_tab shine_tab[MAX_SHINE_TAB];
    struct lit_info  lit_info[MAX_LIT_INFO];
    unsigned now;
-   
+
 
    ushort fpu_rnd_nearest;
    ushort fpu_rnd_neg_inf;
@@ -180,7 +180,7 @@ void aos_adopt_xmm_reg( struct aos_compilation *cp,
 
 void aos_spill_all( struct aos_compilation *cp );
 
-struct x86_reg aos_get_shader_reg( struct aos_compilation *cp, 
+struct x86_reg aos_get_shader_reg( struct aos_compilation *cp,
                                    unsigned file,
                                    unsigned idx );
 
@@ -251,5 +251,5 @@ struct draw_vs_varient_aos_sse {
 
 #endif
 
-#endif 
+#endif
 

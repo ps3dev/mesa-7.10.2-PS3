@@ -29,7 +29,7 @@ working.  No optimizations have been made at this time.
 * Compiling
 
 Since Mesa 6.x, it can be build under BeOS with both the R5 builtin gcc version
-or more recent gcc versions available for BeOS, like this gcc version 2.95.3 for BeOS 
+or more recent gcc versions available for BeOS, like this gcc version 2.95.3 for BeOS
 you can find at http://www.bebits.com/app/2157.
 Anyway, keep in mind that to take full advantage of Mesa x86 optimizations, you better
 want to use gcc 2.95.3 or sooner versions...
@@ -51,9 +51,9 @@ and force make to move on next target by adding the -k make option:
 $ cd progs
 $ make -k
 
-To install it as Be's default libGL.so replacement, put it in your 
-/boot/home/config/lib/ directory. All your GL/GLUT apps will use 
-the Mesa based then. 
+To install it as Be's default libGL.so replacement, put it in your
+/boot/home/config/lib/ directory. All your GL/GLUT apps will use
+the Mesa based then.
 
 By default, it build a non-debug version library.
 The x86 (MMX, SSE and 3DNOW) optimizations are also supported for x86 target.
@@ -74,11 +74,11 @@ They all should have been compiled along with the Mesa library.
 
 * GLUT
 
-A beta version of GLUT 3.7 port for BeOS, made by Jake Hamby, can be found at 
+A beta version of GLUT 3.7 port for BeOS, made by Jake Hamby, can be found at
 http://anobject.com/jehamby/Code/Glut-3.7-x86.zip.
 This is the version currently included in Mesa source code, and
 build in lib/libglut.so.
- 
+
 A previous 3.5 version of this GLUT BeOS port used to be available at
 http://home.beoscentral.com/jehamby/Glut-3.5-x86.zip.
 

@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2009 VMware, Inc.  All rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -244,7 +244,7 @@ is_register_src(struct codegen *gen, int channel,
    return FALSE;
 }
 
-  
+
 static boolean
 is_memory_dst(struct codegen *gen, int channel,
               const struct tgsi_full_dst_register *dst)
@@ -257,7 +257,7 @@ is_memory_dst(struct codegen *gen, int channel,
    }
 }
 
-  
+
 /**
  * Return the index of the SPU temporary containing the named TGSI
  * source register.  If the TGSI register is a TGSI_FILE_TEMPORARY we
@@ -743,7 +743,7 @@ emit_ABS(struct codegen *gen, const struct tgsi_full_instruction *inst)
    int ch, s1_reg[4], d_reg[4];
    const int bit31mask_reg = get_itemp(gen);
 
-   /* mask with bit 31 set, the rest cleared */  
+   /* mask with bit 31 set, the rest cleared */
    spe_load_uint(gen->f, bit31mask_reg, (1 << 31));
 
    FOR_EACH_ENABLED_CHANNEL(inst, ch) {
@@ -1065,7 +1065,7 @@ emit_CMP(struct codegen *gen, const struct tgsi_full_instruction *inst)
       int s3_reg = get_src_reg(gen, ch, &inst->Src[2]);
       int d_reg = get_dst_reg(gen, ch, &inst->Dst[0]);
       int zero_reg = get_itemp(gen);
-   
+
       spe_zero(gen->f, zero_reg);
 
       /* d = (s1 < 0) ? s2 : s3 */
@@ -1080,7 +1080,7 @@ emit_CMP(struct codegen *gen, const struct tgsi_full_instruction *inst)
 }
 
 /**
- * Emit trunc.  
+ * Emit trunc.
  * Convert float to signed int
  * Convert signed int to float
  */
@@ -1114,7 +1114,7 @@ emit_TRUNC(struct codegen *gen, const struct tgsi_full_instruction *inst)
 
 
 /**
- * Emit floor.  
+ * Emit floor.
  * If negative int subtract one
  * Convert float to signed int
  * Convert signed int to float
@@ -1127,7 +1127,7 @@ emit_FLR(struct codegen *gen, const struct tgsi_full_instruction *inst)
    zero_reg = get_itemp(gen);
    spe_zero(gen->f, zero_reg);
    one_reg = get_const_one_reg(gen);
-   
+
    FOR_EACH_ENABLED_CHANNEL(inst, ch) {
       s1_reg[ch] = get_src_reg(gen, ch, &inst->Src[0]);
       d_reg[ch] = get_dst_reg(gen, ch, &inst->Dst[0]);
@@ -1503,7 +1503,7 @@ emit_MIN_MAX(struct codegen *gen, const struct tgsi_full_instruction *inst)
       s0_reg[ch] = get_src_reg(gen, ch, &inst->Src[0]);
       s1_reg[ch] = get_src_reg(gen, ch, &inst->Src[1]);
       d_reg[ch] = get_dst_reg(gen, ch, &inst->Dst[0]);
-      tmp_reg[ch] = get_itemp(gen);         
+      tmp_reg[ch] = get_itemp(gen);
    }
 
    /* d = (s0 > s1) ? s0 : s1 */

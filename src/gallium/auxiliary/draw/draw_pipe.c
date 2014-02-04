@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -115,7 +115,7 @@ static void do_point( struct draw_context *draw,
 		      const char *v0 )
 {
    struct prim_header prim;
-   
+
    prim.flags = 0;
    prim.pad = 0;
    prim.v[0] = (struct vertex_header *)v0;
@@ -134,7 +134,7 @@ static void do_line( struct draw_context *draw,
 		     const char *v1 )
 {
    struct prim_header prim;
-   
+
    prim.flags = flags;
    prim.pad = 0;
    prim.v[0] = (struct vertex_header *)v0;
@@ -155,7 +155,7 @@ static void do_triangle( struct draw_context *draw,
 			 char *v2 )
 {
    struct prim_header prim;
-   
+
    prim.v[0] = (struct vertex_header *)v0;
    prim.v[1] = (struct vertex_header *)v1;
    prim.v[2] = (struct vertex_header *)v2;
@@ -340,7 +340,7 @@ void draw_pipeline_run_linear( struct draw_context *draw,
 }
 
 
-void draw_pipeline_flush( struct draw_context *draw, 
+void draw_pipeline_flush( struct draw_context *draw,
                           unsigned flags )
 {
    draw->pipeline.first->flush( draw->pipeline.first, flags );

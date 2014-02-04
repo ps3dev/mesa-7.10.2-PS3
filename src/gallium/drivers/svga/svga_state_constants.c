@@ -35,7 +35,7 @@
 #include "svga_hw_reg.h"
 
 /***********************************************************************
- * Hardware update 
+ * Hardware update
  */
 
 /* Convert from PIPE_SHADER_* to SVGA3D_SHADERTYPE_*
@@ -64,7 +64,7 @@ static int emit_const( struct svga_context *svga,
                       value[2],
                       value[3]);
 
-      ret = SVGA3D_SetShaderConst( svga->swc, 
+      ret = SVGA3D_SetShaderConst( svga->swc,
                                    i,
                                    svga_shader_type(unit),
                                    SVGA3D_CONST_TYPE_FLOAT,
@@ -74,7 +74,7 @@ static int emit_const( struct svga_context *svga,
 
       memcpy(svga->state.hw_draw.cb[unit][i], value, 4 * sizeof(float));
    }
-   
+
    return ret;
 }
 
@@ -114,7 +114,7 @@ done:
 
    return ret;
 }
-   
+
 static int emit_fs_consts( struct svga_context *svga,
                            unsigned dirty )
 {
@@ -162,7 +162,7 @@ static int emit_fs_consts( struct svga_context *svga,
 }
 
 
-struct svga_tracked_state svga_hw_fs_parameters = 
+struct svga_tracked_state svga_hw_fs_parameters =
 {
    "hw fs params",
    (SVGA_NEW_FS_CONST_BUFFER |
@@ -184,10 +184,10 @@ static int emit_vs_consts( struct svga_context *svga,
 
    /* SVGA_NEW_VS_RESULT
     */
-   if (result == NULL) 
+   if (result == NULL)
       return 0;
 
-   /* SVGA_NEW_VS_CONST_BUFFER 
+   /* SVGA_NEW_VS_CONST_BUFFER
     */
    ret = emit_consts( svga, 0, PIPE_SHADER_VERTEX );
    if (ret)
@@ -229,7 +229,7 @@ static int emit_vs_consts( struct svga_context *svga,
 }
 
 
-struct svga_tracked_state svga_hw_vs_parameters = 
+struct svga_tracked_state svga_hw_vs_parameters =
 {
    "hw vs params",
    (SVGA_NEW_PRESCALE |

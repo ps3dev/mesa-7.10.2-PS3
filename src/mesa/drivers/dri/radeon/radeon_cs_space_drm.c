@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright © 2009 Red Hat Inc.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -9,14 +9,14 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
  * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * The above copyright notice and this permission notice (including the
@@ -74,10 +74,10 @@ static inline int radeon_cs_setup_bo(struct radeon_cs_space_check *sc, struct ra
 	sc->new_accounted = (read_domains << 16) | write_domain;
     } else {
 	uint16_t old_read, old_write;
-	
+
 	old_read = bo->space_accounted >> 16;
 	old_write = bo->space_accounted & 0xffff;
-	
+
 	if (write_domain && (old_read & write_domain)) {
 	    sc->new_accounted = write_domain;
 	    /* moving from read to a write domain */
@@ -129,7 +129,7 @@ static int radeon_cs_do_space_check(struct radeon_cs_int *cs, struct radeon_cs_s
 	if (ret)
 	    return ret;
     }
-	
+
     if (sizes.op_read < 0)
 	    sizes.op_read = 0;
 
@@ -138,12 +138,12 @@ static int radeon_cs_do_space_check(struct radeon_cs_int *cs, struct radeon_cs_s
 	(sizes.op_vram_write > csm->vram_limit)) {
 	    return RADEON_CS_SPACE_OP_TO_BIG;
     }
-    
+
     if (((csm->vram_write_used + sizes.op_vram_write) > csm->vram_limit) ||
 	((csm->read_used + csm->gart_write_used + sizes.op_gart_write + sizes.op_read) > csm->gart_limit)) {
 	    return RADEON_CS_SPACE_FLUSH;
     }
-    
+
     csm->gart_write_used += sizes.op_gart_write;
     csm->vram_write_used += sizes.op_vram_write;
     csm->read_used += sizes.op_read;
@@ -154,7 +154,7 @@ static int radeon_cs_do_space_check(struct radeon_cs_int *cs, struct radeon_cs_s
     }
     if (new_tmp)
 	new_tmp->bo->space_accounted = new_tmp->new_accounted;
-    
+
     return RADEON_CS_SPACE_OK;
 }
 
@@ -207,7 +207,7 @@ int radeon_cs_space_check_with_bo(struct radeon_cs *cs,
     struct radeon_cs_int *csi = (struct radeon_cs_int *)cs;
     struct radeon_bo_int *boi = (struct radeon_bo_int *)bo;
     struct radeon_cs_space_check temp_bo;
-    
+
     int ret = 0;
 
     if (bo) {

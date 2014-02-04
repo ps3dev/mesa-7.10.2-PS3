@@ -104,7 +104,7 @@ GLboolean mach64CreateContext( gl_api api,
 
    /* Allocate the mach64 context */
    mmesa = (mach64ContextPtr) CALLOC( sizeof(*mmesa) );
-   if ( !mmesa ) 
+   if ( !mmesa )
       return GL_FALSE;
 
    /* Init default driver functions then plug in our Mach64-specific functions
@@ -118,9 +118,9 @@ GLboolean mach64CreateContext( gl_api api,
    /* Allocate the Mesa context */
    if (sharedContextPrivate)
       shareCtx = ((mach64ContextPtr) sharedContextPrivate)->glCtx;
-   else 
+   else
       shareCtx = NULL;
-   mmesa->glCtx = _mesa_create_context(glVisual, shareCtx, 
+   mmesa->glCtx = _mesa_create_context(glVisual, shareCtx,
 					&functions, (void *)mmesa);
    if (!mmesa->glCtx) {
       FREE(mmesa);
@@ -216,7 +216,7 @@ GLboolean mach64CreateContext( gl_api api,
       return GL_FALSE;
    mmesa->vert_used = 0;
    mmesa->vert_total = MACH64_BUFFER_SIZE;
-   
+
    /* Initialize the software rasterizer and helper modules.
     */
    _swrast_CreateContext( ctx );
@@ -292,7 +292,7 @@ void mach64DestroyContext( __DRIcontext *driContextPriv  )
       /* Free the vertex buffer */
       if ( mmesa->vert_buf )
 	 _mesa_align_free( mmesa->vert_buf );
-      
+
       /* free the Mesa context */
       mmesa->glCtx->DriverCtx = NULL;
       _mesa_destroy_context(mmesa->glCtx);
@@ -319,7 +319,7 @@ mach64MakeCurrent( __DRIcontext *driContextPriv,
 	 newMach64Ctx->dirty = MACH64_UPLOAD_ALL;
       }
 
-      
+
       if ( newMach64Ctx->driDrawable != driDrawPriv ) {
 	 if (driDrawPriv->swap_interval == (unsigned)-1) {
 	    driDrawPriv->vblFlags = (newMach64Ctx->do_irqs)

@@ -327,9 +327,9 @@ do_join_values(struct nv_pc_pass *ctx, struct nv_value *a, struct nv_value *b)
 #ifdef NV50_RA_DEBUG_JOIN
    debug_printf("joining %i to %i\n", b->n, a->n);
 #endif
-   
+
    /* make a->join the new representative */
-   for (j = 0; j < ctx->pc->num_values; ++j) 
+   for (j = 0; j < ctx->pc->num_values; ++j)
       if (ctx->pc->values[j].join == bjoin)
          ctx->pc->values[j].join = a->join;
 

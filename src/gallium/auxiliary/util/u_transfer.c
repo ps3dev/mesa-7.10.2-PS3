@@ -96,7 +96,7 @@ struct pipe_transfer * u_default_get_transfer(struct pipe_context *context,
    transfer->box = *box;
 
    /* Note strides are zero, this is ok for buffers, but not for
-    * textures 2d & higher at least. 
+    * textures 2d & higher at least.
     */
    return transfer;
 }

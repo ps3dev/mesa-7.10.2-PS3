@@ -296,8 +296,8 @@
 #       define RADEON_CRTC2_HSYNC_DIS       (1 << 28)
 #       define RADEON_CRTC2_VSYNC_DIS       (1 << 29)
 #define RADEON_CRTC_MORE_CNTL               0x27c
-#       define RADEON_CRTC_H_CUTOFF_ACTIVE_EN (1<<4)   
-#       define RADEON_CRTC_V_CUTOFF_ACTIVE_EN (1<<5)   
+#       define RADEON_CRTC_H_CUTOFF_ACTIVE_EN (1<<4)
+#       define RADEON_CRTC_V_CUTOFF_ACTIVE_EN (1<<5)
 #define RADEON_CRTC_GUI_TRIG_VLINE          0x0218
 #define RADEON_CRTC_H_SYNC_STRT_WID         0x0204
 #       define RADEON_CRTC_H_SYNC_STRT_PIX        (0x07  <<  0)

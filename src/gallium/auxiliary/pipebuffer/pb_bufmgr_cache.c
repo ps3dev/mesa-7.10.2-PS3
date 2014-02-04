@@ -28,7 +28,7 @@
 /**
  * \file
  * Buffer cache.
- * 
+ *
  * \author Jose Fonseca <jrfonseca-at-tungstengraphics-dot-com>
  * \author Thomas Hellström <thomas-at-tungstengraphics-dot-com>
  */
@@ -60,7 +60,7 @@ struct pb_cache_manager;
 struct pb_cache_buffer
 {
    struct pb_buffer base;
-   
+
    struct pb_buffer *buffer;
    struct pb_cache_manager *mgr;
 
@@ -77,9 +77,9 @@ struct pb_cache_manager
 
    struct pb_manager *provider;
    unsigned usecs;
-   
+
    pipe_mutex mutex;
-   
+
    struct list_head delayed;
    pb_size numDelayed;
 };
@@ -119,7 +119,7 @@ _pb_cache_buffer_destroy(struct pb_cache_buffer *buf)
 
 
 /**
- * Free as many cache buffers from the list head as possible. 
+ * Free as many cache buffers from the list head as possible.
  */
 static void
 _pb_cache_buffer_list_check_free(struct pb_cache_manager *mgr)
@@ -127,9 +127,9 @@ _pb_cache_buffer_list_check_free(struct pb_cache_manager *mgr)
    struct list_head *curr, *next;
    struct pb_cache_buffer *buf;
    int64_t now;
-   
+
    now = os_time_get();
-   
+
    curr = mgr->delayed.next;
    next = curr->next;
    while(curr != &mgr->delayed) {
@@ -137,10 +137,10 @@ _pb_cache_buffer_list_check_free(struct pb_cache_manager *mgr)
 
       if(!os_time_timeout(buf->start, buf->end, now))
 	 break;
-	 
+
       _pb_cache_buffer_destroy(buf);
 
-      curr = next; 
+      curr = next;
       next = curr->next;
    }
 }
@@ -149,14 +149,14 @@ _pb_cache_buffer_list_check_free(struct pb_cache_manager *mgr)
 static void
 pb_cache_buffer_destroy(struct pb_buffer *_buf)
 {
-   struct pb_cache_buffer *buf = pb_cache_buffer(_buf);   
+   struct pb_cache_buffer *buf = pb_cache_buffer(_buf);
    struct pb_cache_manager *mgr = buf->mgr;
 
    pipe_mutex_lock(mgr->mutex);
    assert(!pipe_is_referenced(&buf->base.base.reference));
-   
+
    _pb_cache_buffer_list_check_free(mgr);
-   
+
    buf->start = os_time_get();
    buf->end = buf->start + mgr->usecs;
    LIST_ADDTAIL(&buf->head, &mgr->delayed);
@@ -166,10 +166,10 @@ pb_cache_buffer_destroy(struct pb_buffer *_buf)
 
 
 static void *
-pb_cache_buffer_map(struct pb_buffer *_buf, 
+pb_cache_buffer_map(struct pb_buffer *_buf,
 		    unsigned flags, void *flush_ctx)
 {
-   struct pb_cache_buffer *buf = pb_cache_buffer(_buf);   
+   struct pb_cache_buffer *buf = pb_cache_buffer(_buf);
    return pb_map(buf->buffer, flags, flush_ctx);
 }
 
@@ -177,13 +177,13 @@ pb_cache_buffer_map(struct pb_buffer *_buf,
 static void
 pb_cache_buffer_unmap(struct pb_buffer *_buf)
 {
-   struct pb_cache_buffer *buf = pb_cache_buffer(_buf);   
+   struct pb_cache_buffer *buf = pb_cache_buffer(_buf);
    pb_unmap(buf->buffer);
 }
 
 
-static enum pipe_error 
-pb_cache_buffer_validate(struct pb_buffer *_buf, 
+static enum pipe_error
+pb_cache_buffer_validate(struct pb_buffer *_buf,
                          struct pb_validate *vl,
                          unsigned flags)
 {
@@ -193,7 +193,7 @@ pb_cache_buffer_validate(struct pb_buffer *_buf,
 
 
 static void
-pb_cache_buffer_fence(struct pb_buffer *_buf, 
+pb_cache_buffer_fence(struct pb_buffer *_buf,
                       struct pipe_fence_handle *fence)
 {
    struct pb_cache_buffer *buf = pb_cache_buffer(_buf);
@@ -211,7 +211,7 @@ pb_cache_buffer_get_base_buffer(struct pb_buffer *_buf,
 }
 
 
-const struct pb_vtbl 
+const struct pb_vtbl
 pb_cache_buffer_vtbl = {
       pb_cache_buffer_destroy,
       pb_cache_buffer_map,
@@ -223,7 +223,7 @@ pb_cache_buffer_vtbl = {
 
 
 static INLINE int
-pb_cache_is_buffer_compat(struct pb_cache_buffer *buf,  
+pb_cache_is_buffer_compat(struct pb_cache_buffer *buf,
                           pb_size size,
                           const struct pb_desc *desc)
 {
@@ -235,10 +235,10 @@ pb_cache_is_buffer_compat(struct pb_cache_buffer *buf,
    /* be lenient with size */
    if(buf->base.base.size >= 2*size)
       return 0;
-   
+
    if(!pb_check_alignment(desc->alignment, buf->base.base.alignment))
       return 0;
-   
+
    if(!pb_check_usage(desc->usage, buf->base.base.usage))
       return 0;
 
@@ -248,13 +248,13 @@ pb_cache_is_buffer_compat(struct pb_cache_buffer *buf,
    }
 
    pb_unmap(buf->buffer);
-   
+
    return 1;
 }
 
 
 static struct pb_buffer *
-pb_cache_manager_create_buffer(struct pb_manager *_mgr, 
+pb_cache_manager_create_buffer(struct pb_manager *_mgr,
                                pb_size size,
                                const struct pb_desc *desc)
 {
@@ -270,7 +270,7 @@ pb_cache_manager_create_buffer(struct pb_manager *_mgr,
    buf = NULL;
    curr = mgr->delayed.next;
    next = curr->next;
-   
+
    /* search in the expired buffers, freeing them in the process */
    now = os_time_get();
    while(curr != &mgr->delayed) {
@@ -284,7 +284,7 @@ pb_cache_manager_create_buffer(struct pb_manager *_mgr,
          break;
       if (ret == -1)
          break;
-      curr = next; 
+      curr = next;
       next = curr->next;
    }
 
@@ -304,7 +304,7 @@ pb_cache_manager_create_buffer(struct pb_manager *_mgr,
          next = curr->next;
       }
    }
-   
+
    if(buf) {
       LIST_DEL(&buf->head);
       --mgr->numDelayed;
@@ -313,32 +313,32 @@ pb_cache_manager_create_buffer(struct pb_manager *_mgr,
       pipe_reference_init(&buf->base.base.reference, 1);
       return &buf->base;
    }
-   
+
    pipe_mutex_unlock(mgr->mutex);
 
    buf = CALLOC_STRUCT(pb_cache_buffer);
    if(!buf)
       return NULL;
-   
+
    buf->buffer = mgr->provider->create_buffer(mgr->provider, size, desc);
    if(!buf->buffer) {
       FREE(buf);
       return NULL;
    }
-   
+
    assert(pipe_is_referenced(&buf->buffer->base.reference));
    assert(pb_check_alignment(desc->alignment, buf->buffer->base.alignment));
    assert(pb_check_usage(desc->usage, buf->buffer->base.usage));
    assert(buf->buffer->base.size >= size);
-   
+
    pipe_reference_init(&buf->base.base.reference, 1);
    buf->base.base.alignment = buf->buffer->base.alignment;
    buf->base.base.usage = buf->buffer->base.usage;
    buf->base.base.size = buf->buffer->base.size;
-   
+
    buf->base.vtbl = &pb_cache_buffer_vtbl;
    buf->mgr = mgr;
-   
+
    return &buf->base;
 }
 
@@ -356,11 +356,11 @@ pb_cache_manager_flush(struct pb_manager *_mgr)
    while(curr != &mgr->delayed) {
       buf = LIST_ENTRY(struct pb_cache_buffer, curr, head);
       _pb_cache_buffer_destroy(buf);
-      curr = next; 
+      curr = next;
       next = curr->next;
    }
    pipe_mutex_unlock(mgr->mutex);
-   
+
    assert(mgr->provider->flush);
    if(mgr->provider->flush)
       mgr->provider->flush(mgr->provider);
@@ -376,14 +376,14 @@ pb_cache_manager_destroy(struct pb_manager *mgr)
 
 
 struct pb_manager *
-pb_cache_manager_create(struct pb_manager *provider, 
-                     	unsigned usecs) 
+pb_cache_manager_create(struct pb_manager *provider,
+                     	unsigned usecs)
 {
    struct pb_cache_manager *mgr;
 
    if(!provider)
       return NULL;
-   
+
    mgr = CALLOC_STRUCT(pb_cache_manager);
    if (!mgr)
       return NULL;
@@ -396,6 +396,6 @@ pb_cache_manager_create(struct pb_manager *provider,
    LIST_INITHEAD(&mgr->delayed);
    mgr->numDelayed = 0;
    pipe_mutex_init(mgr->mutex);
-      
+
    return &mgr->base;
 }

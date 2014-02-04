@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -142,7 +142,7 @@ static void widepoint_point( struct draw_stage *stage,
    /* point size is either per-vertex or fixed size */
    if (wide->psize_slot >= 0) {
       half_size = header->v[0]->data[wide->psize_slot][0];
-      half_size *= 0.5f; 
+      half_size *= 0.5f;
    }
    else {
       half_size = wide->half_point_size;
@@ -190,7 +190,7 @@ static void widepoint_point( struct draw_stage *stage,
 
 
 static void
-widepoint_first_point(struct draw_stage *stage, 
+widepoint_first_point(struct draw_stage *stage,
                       struct prim_header *header)
 {
    struct widepoint_stage *wide = widepoint_stage(stage);
@@ -280,7 +280,7 @@ widepoint_first_point(struct draw_stage *stage,
          }
       }
    }
-   
+
    stage->point( stage, header );
 }
 
@@ -341,6 +341,6 @@ struct draw_stage *draw_wide_point_stage( struct draw_context *draw )
  fail:
    if (wide)
       wide->stage.destroy( &wide->stage );
-   
+
    return NULL;
 }

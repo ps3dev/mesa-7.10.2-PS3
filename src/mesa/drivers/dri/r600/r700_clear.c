@@ -24,7 +24,7 @@
  *   Richard Li <RichardZ.Li@amd.com>, <richardradeon@gmail.com>
  *   CooperYuan <cooper.yuan@amd.com>, <cooperyuan@gmail.com>
  */
- 
+
 #include "main/glheader.h"
 #include "main/context.h"
 #include "main/macros.h"

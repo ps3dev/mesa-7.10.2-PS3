@@ -76,8 +76,8 @@
 static void savageBlendFunc_s4(struct gl_context *);
 static void savageBlendFunc_s3d(struct gl_context *);
 
-static INLINE GLuint savagePackColor(GLuint format, 
-                                         GLubyte r, GLubyte g, 
+static INLINE GLuint savagePackColor(GLuint format,
+                                         GLubyte r, GLubyte g,
                                          GLubyte b, GLubyte a)
 {
     switch (format) {
@@ -86,7 +86,7 @@ static INLINE GLuint savagePackColor(GLuint format,
         case DV_PF_565:
             return SAVAGEPACKCOLOR565(r,g,b);
         default:
-            
+
             return 0;
     }
 }
@@ -106,11 +106,11 @@ static void savageDDBlendEquationSeparate(struct gl_context *ctx,
 {
     assert( modeRGB == modeA );
 
-    /* BlendEquation sets ColorLogicOpEnabled in an unexpected 
-     * manner.  
+    /* BlendEquation sets ColorLogicOpEnabled in an unexpected
+     * manner.
      */
     FALLBACK( ctx, SAVAGE_FALLBACK_LOGICOP,
-	      (ctx->Color.ColorLogicOpEnabled && 
+	      (ctx->Color.ColorLogicOpEnabled &&
 	       ctx->Color.LogicOp != GL_COPY));
 
    /* Can only do blend addition, not min, max, subtract, etc. */
@@ -233,7 +233,7 @@ static void savageBlendFunc_s4(struct gl_context *ctx)
                 break;
 
             case GL_ONE_MINUS_DST_ALPHA:
-                if (imesa->glCtx->Visual.alphaBits == 0)          
+                if (imesa->glCtx->Visual.alphaBits == 0)
                 {
                     imesa->regs.s4.drawLocalCtrl.ni.srcAlphaMode = SAM_Zero;
                 }
@@ -253,25 +253,25 @@ static void savageBlendFunc_s4(struct gl_context *ctx)
 
     /* alpha test*/
 
-    if(ctx->Color.AlphaEnabled) 
+    if(ctx->Color.AlphaEnabled)
     {
         ACmpFunc a;
 	GLubyte alphaRef;
 
 	CLAMPED_FLOAT_TO_UBYTE(alphaRef,ctx->Color.AlphaRef);
-         
-        switch(ctx->Color.AlphaFunc)  { 
+
+        switch(ctx->Color.AlphaFunc)  {
 	case GL_NEVER: a = CF_Never; break;
 	case GL_ALWAYS: a = CF_Always; break;
-	case GL_LESS: a = CF_Less; break; 
+	case GL_LESS: a = CF_Less; break;
 	case GL_LEQUAL: a = CF_LessEqual; break;
 	case GL_EQUAL: a = CF_Equal; break;
 	case GL_GREATER: a = CF_Greater; break;
 	case GL_GEQUAL: a = CF_GreaterEqual; break;
 	case GL_NOTEQUAL: a = CF_NotEqual; break;
 	default:return;
-        }   
-      
+        }
+
 	imesa->regs.s4.drawCtrl1.ni.alphaTestEn = GL_TRUE;
 	imesa->regs.s4.drawCtrl1.ni.alphaTestCmpFunc = a;
 	imesa->regs.s4.drawCtrl0.ni.alphaRefVal = alphaRef;
@@ -407,7 +407,7 @@ static void savageBlendFunc_s3d(struct gl_context *ctx)
                 break;
 
             case GL_ONE_MINUS_DST_ALPHA:
-                if (imesa->glCtx->Visual.alphaBits == 0)          
+                if (imesa->glCtx->Visual.alphaBits == 0)
                 {
                     imesa->regs.s3d.drawCtrl.ni.srcAlphaMode = SAM_Zero;
                 }
@@ -427,24 +427,24 @@ static void savageBlendFunc_s3d(struct gl_context *ctx)
 
     /* alpha test*/
 
-    if(ctx->Color.AlphaEnabled) 
+    if(ctx->Color.AlphaEnabled)
     {
         ACmpFunc a;
 	GLubyte alphaRef;
 
 	CLAMPED_FLOAT_TO_UBYTE(alphaRef,ctx->Color.AlphaRef);
-         
-        switch(ctx->Color.AlphaFunc)  { 
+
+        switch(ctx->Color.AlphaFunc)  {
 	case GL_NEVER: a = CF_Never; break;
 	case GL_ALWAYS: a = CF_Always; break;
-	case GL_LESS: a = CF_Less; break; 
+	case GL_LESS: a = CF_Less; break;
 	case GL_LEQUAL: a = CF_LessEqual; break;
 	case GL_EQUAL: a = CF_Equal; break;
 	case GL_GREATER: a = CF_Greater; break;
 	case GL_GEQUAL: a = CF_GreaterEqual; break;
 	case GL_NOTEQUAL: a = CF_NotEqual; break;
 	default:return;
-        }   
+        }
 
 	imesa->regs.s3d.drawCtrl.ni.alphaTestEn = GL_TRUE;
 	imesa->regs.s3d.drawCtrl.ni.alphaTestCmpFunc = a;
@@ -465,14 +465,14 @@ static void savageBlendFunc_s3d(struct gl_context *ctx)
 	imesa->dirty |= SAVAGE_UPLOAD_LOCAL;
 }
 
-static void savageDDBlendFuncSeparate_s4( struct gl_context *ctx, GLenum sfactorRGB, 
+static void savageDDBlendFuncSeparate_s4( struct gl_context *ctx, GLenum sfactorRGB,
 					  GLenum dfactorRGB, GLenum sfactorA,
 					  GLenum dfactorA )
 {
     assert (dfactorRGB == dfactorA && sfactorRGB == sfactorA);
     savageBlendFunc_s4( ctx );
 }
-static void savageDDBlendFuncSeparate_s3d( struct gl_context *ctx, GLenum sfactorRGB, 
+static void savageDDBlendFuncSeparate_s3d( struct gl_context *ctx, GLenum sfactorRGB,
 					   GLenum dfactorRGB, GLenum sfactorA,
 					   GLenum dfactorA )
 {
@@ -498,14 +498,14 @@ static void savageDDDepthFunc_s4(struct gl_context *ctx, GLenum func)
     switch(func)  { /* reversed (see savageCalcViewport) */
     case GL_NEVER: zmode = CF_Never; break;
     case GL_ALWAYS: zmode = CF_Always; break;
-    case GL_LESS: zmode = CF_Greater; break; 
+    case GL_LESS: zmode = CF_Greater; break;
     case GL_LEQUAL: zmode = CF_GreaterEqual; break;
     case GL_EQUAL: zmode = CF_Equal; break;
     case GL_GREATER: zmode = CF_Less; break;
     case GL_GEQUAL: zmode = CF_LessEqual; break;
     case GL_NOTEQUAL: zmode = CF_NotEqual; break;
     default:return;
-    } 
+    }
     if (ctx->Depth.Test)
     {
 
@@ -561,20 +561,20 @@ static void savageDDDepthFunc_s3d(struct gl_context *ctx, GLenum func)
     switch(func)  { /* reversed (see savageCalcViewport) */
     case GL_NEVER: zmode = CF_Never; break;
     case GL_ALWAYS: zmode = CF_Always; break;
-    case GL_LESS: zmode = CF_Greater; break; 
+    case GL_LESS: zmode = CF_Greater; break;
     case GL_LEQUAL: zmode = CF_GreaterEqual; break;
     case GL_EQUAL: zmode = CF_Equal; break;
     case GL_GREATER: zmode = CF_Less; break;
     case GL_GEQUAL: zmode = CF_LessEqual; break;
     case GL_NOTEQUAL: zmode = CF_NotEqual; break;
     default:return;
-    } 
+    }
     if (ctx->Depth.Test)
     {
 	imesa->regs.s3d.zBufCtrl.ni.zBufEn = GL_TRUE;
 	imesa->regs.s3d.zBufCtrl.ni.zCmpFunc = zmode;
 	imesa->regs.s3d.zBufCtrl.ni.zUpdateEn = ctx->Depth.Mask;
-	
+
 	imesa->regs.s3d.drawCtrl.ni.flushPdZbufWrites = GL_TRUE;
     }
     else
@@ -592,7 +592,7 @@ static void savageDDDepthFunc_s3d(struct gl_context *ctx, GLenum func)
 	imesa->regs.s3d.zBufCtrl.ni.zUpdateEn = GL_FALSE;
 	imesa->regs.s3d.drawCtrl.ni.flushPdZbufWrites = GL_FALSE;
     }
-  
+
     if (drawCtrl != imesa->regs.s3d.drawCtrl.ui ||
 	zBufCtrl != imesa->regs.s3d.zBufCtrl.ui)
 	imesa->dirty |= SAVAGE_UPLOAD_LOCAL;
@@ -617,7 +617,7 @@ static void savageDDDepthMask_s3d(struct gl_context *ctx, GLboolean flag)
  */
 
 
-static void savageDDScissor( struct gl_context *ctx, GLint x, GLint y, 
+static void savageDDScissor( struct gl_context *ctx, GLint x, GLint y,
                              GLsizei w, GLsizei h )
 {
     savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
@@ -658,7 +658,7 @@ static void savageDDDrawBuffer(struct gl_context *ctx, GLenum mode )
 	FALLBACK( ctx, SAVAGE_FALLBACK_DRAW_BUFFER, GL_TRUE );
 	return;
     }
-    
+
     imesa->NotFirstFrame = GL_FALSE;
     savageXMesaSetClipRects(imesa);
     FALLBACK(ctx, SAVAGE_FALLBACK_DRAW_BUFFER, GL_FALSE);
@@ -673,7 +673,7 @@ static void savageDDReadBuffer(struct gl_context *ctx, GLenum mode )
 }
 
 #if 0
-static void savageDDSetColor(struct gl_context *ctx, 
+static void savageDDSetColor(struct gl_context *ctx,
                              GLubyte r, GLubyte g,
                              GLubyte b, GLubyte a )
 {
@@ -712,14 +712,14 @@ void savageCalcViewport( struct gl_context *ctx )
    imesa->SetupNewInputs = ~0;
 }
 
-static void savageViewport( struct gl_context *ctx, 
-			    GLint x, GLint y, 
+static void savageViewport( struct gl_context *ctx,
+			    GLint x, GLint y,
 			    GLsizei width, GLsizei height )
 {
    savageCalcViewport( ctx );
 }
 
-static void savageDepthRange( struct gl_context *ctx, 
+static void savageDepthRange( struct gl_context *ctx,
 			      GLclampd nearval, GLclampd farval )
 {
    savageCalcViewport( ctx );
@@ -730,7 +730,7 @@ static void savageDepthRange( struct gl_context *ctx,
  * Miscellaneous
  */
 
-static void savageDDClearColor(struct gl_context *ctx, 
+static void savageDDClearColor(struct gl_context *ctx,
 			       const GLfloat color[4] )
 {
     savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
@@ -761,7 +761,7 @@ static void savageRenderMode( struct gl_context *ctx, GLenum mode )
 static void savageDDCullFaceFrontFace(struct gl_context *ctx, GLenum unused)
 {
     savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
-    GLuint cullMode=imesa->LcsCullMode;        
+    GLuint cullMode=imesa->LcsCullMode;
     switch (ctx->Polygon.CullFaceMode)
     {
         case GL_FRONT:
@@ -788,7 +788,7 @@ static void savageDDCullFaceFrontFace(struct gl_context *ctx, GLenum unused)
             }
             break;
     }
-    imesa->LcsCullMode = cullMode;    
+    imesa->LcsCullMode = cullMode;
     imesa->new_state |= SAVAGE_NEW_CULL;
 }
 #endif /* end #if HW_CULL */
@@ -829,8 +829,8 @@ static void savageUpdateCull( struct gl_context *ctx )
  * to have any effect. If only some channels are masked we need a
  * software fallback on all chips.
  */
-static void savageDDColorMask_s4(struct gl_context *ctx, 
-				 GLboolean r, GLboolean g, 
+static void savageDDColorMask_s4(struct gl_context *ctx,
+				 GLboolean r, GLboolean g,
 				 GLboolean b, GLboolean a )
 {
     savageContextPtr imesa = SAVAGE_CONTEXT( ctx );
@@ -855,8 +855,8 @@ static void savageDDColorMask_s4(struct gl_context *ctx,
 	imesa->dirty |= SAVAGE_UPLOAD_LOCAL;
     }
 }
-static void savageDDColorMask_s3d(struct gl_context *ctx, 
-				  GLboolean r, GLboolean g, 
+static void savageDDColorMask_s3d(struct gl_context *ctx,
+				  GLboolean r, GLboolean g,
 				  GLboolean b, GLboolean a )
 {
     if (ctx->Visual.alphaBits)
@@ -893,12 +893,12 @@ static void savageUpdateSpecular_s3d(struct gl_context *ctx) {
 	imesa->dirty |= SAVAGE_UPLOAD_LOCAL;
 }
 
-static void savageDDLightModelfv_s4(struct gl_context *ctx, GLenum pname, 
+static void savageDDLightModelfv_s4(struct gl_context *ctx, GLenum pname,
 				    const GLfloat *param)
 {
     savageUpdateSpecular_s4 (ctx);
 }
-static void savageDDLightModelfv_s3d(struct gl_context *ctx, GLenum pname, 
+static void savageDDLightModelfv_s3d(struct gl_context *ctx, GLenum pname,
 				     const GLfloat *param)
 {
     savageUpdateSpecular_s3d (ctx);
@@ -909,8 +909,8 @@ static void savageDDShadeModel_s4(struct gl_context *ctx, GLuint mod)
     savageContextPtr imesa = SAVAGE_CONTEXT( ctx );
     uint32_t drawLocalCtrl = imesa->regs.s4.drawLocalCtrl.ui;
 
-    if (mod == GL_SMOOTH)  
-    {    
+    if (mod == GL_SMOOTH)
+    {
 	imesa->regs.s4.drawLocalCtrl.ni.flatShadeEn = GL_FALSE;
     }
     else
@@ -926,8 +926,8 @@ static void savageDDShadeModel_s3d(struct gl_context *ctx, GLuint mod)
     savageContextPtr imesa = SAVAGE_CONTEXT( ctx );
     uint32_t drawCtrl = imesa->regs.s3d.drawCtrl.ui;
 
-    if (mod == GL_SMOOTH)  
-    {    
+    if (mod == GL_SMOOTH)
+    {
 	imesa->regs.s3d.drawCtrl.ni.flatShadeEn = GL_FALSE;
     }
     else
@@ -961,12 +961,12 @@ static void savageDDFogfv(struct gl_context *ctx, GLenum pname, const GLfloat *p
 	imesa->regs.s4.fogCtrl.ni.fogEn  = GL_TRUE;
         /*cheap fog*/
 	imesa->regs.s4.fogCtrl.ni.fogMode  = GL_TRUE;
-	imesa->regs.s4.fogCtrl.ni.fogClr = fogClr;    
-    }    
+	imesa->regs.s4.fogCtrl.ni.fogClr = fogClr;
+    }
     else
     {
         /*No fog*/
-        
+
 	imesa->regs.s4.fogCtrl.ni.fogEn     = 0;
 	imesa->regs.s4.fogCtrl.ni.fogMode   = 0;
     }
@@ -992,7 +992,7 @@ savageDDStencilFuncSeparate(struct gl_context *ctx, GLenum face, GLenum func,
     {
     case GL_NEVER: a = CF_Never; break;
     case GL_ALWAYS: a = CF_Always; break;
-    case GL_LESS: a = CF_Less; break; 
+    case GL_LESS: a = CF_Less; break;
     case GL_LEQUAL: a = CF_LessEqual; break;
     case GL_EQUAL: a = CF_Equal; break;
     case GL_GREATER: a = CF_Greater; break;
@@ -1059,7 +1059,7 @@ savageDDStencilOpSeparate(struct gl_context *ctx, GLenum face, GLenum fail,
 
 static void savageDDEnable_s4(struct gl_context *ctx, GLenum cap, GLboolean state)
 {
-   
+
     savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
     switch(cap) {
         case GL_ALPHA_TEST:
@@ -1070,10 +1070,10 @@ static void savageDDEnable_s4(struct gl_context *ctx, GLenum cap, GLboolean stat
             /*add the savageBlendFunc 2001/11/25
              * if call no such function, then glDisable(GL_BLEND) will do noting,
              *our chip has no disable bit
-             */ 
+             */
             savageBlendFunc_s4(ctx);
         case GL_COLOR_LOGIC_OP:
-            /* Fall through: 
+            /* Fall through:
 	     * For some reason enable(GL_BLEND) affects ColorLogicOpEnabled.
              */
 	    FALLBACK (ctx, SAVAGE_FALLBACK_LOGICOP,
@@ -1104,7 +1104,7 @@ static void savageDDEnable_s4(struct gl_context *ctx, GLenum cap, GLboolean stat
 	    }
             break;
         case GL_FOG:
-            savageDDFogfv(ctx,0,0);	
+            savageDDFogfv(ctx,0,0);
             break;
         case GL_CULL_FACE:
 #if HW_CULL
@@ -1126,31 +1126,31 @@ static void savageDDEnable_s4(struct gl_context *ctx, GLenum cap, GLboolean stat
                 {
                     imesa->regs.s4.drawCtrl1.ni.ditherEn=GL_TRUE;
                 }
-            }   
+            }
             if (!ctx->Color.DitherFlag )
             {
                 imesa->regs.s4.drawCtrl1.ni.ditherEn=GL_FALSE;
             }
             imesa->dirty |= SAVAGE_UPLOAD_GLOBAL;
             break;
- 
+
         case GL_LIGHTING:
 	    savageUpdateSpecular_s4 (ctx);
             break;
-        case GL_TEXTURE_1D:      
-        case GL_TEXTURE_3D:      
+        case GL_TEXTURE_1D:
+        case GL_TEXTURE_3D:
             imesa->new_state |= SAVAGE_NEW_TEXTURE;
             break;
-        case GL_TEXTURE_2D:      
+        case GL_TEXTURE_2D:
             imesa->new_state |= SAVAGE_NEW_TEXTURE;
             break;
         default:
-            ; 
-    }    
+            ;
+    }
 }
 static void savageDDEnable_s3d(struct gl_context *ctx, GLenum cap, GLboolean state)
 {
-   
+
     savageContextPtr imesa = SAVAGE_CONTEXT(ctx);
     switch(cap) {
         case GL_ALPHA_TEST:
@@ -1161,10 +1161,10 @@ static void savageDDEnable_s3d(struct gl_context *ctx, GLenum cap, GLboolean sta
             /*add the savageBlendFunc 2001/11/25
              * if call no such function, then glDisable(GL_BLEND) will do noting,
              *our chip has no disable bit
-             */ 
+             */
             savageBlendFunc_s3d(ctx);
         case GL_COLOR_LOGIC_OP:
-            /* Fall through: 
+            /* Fall through:
 	     * For some reason enable(GL_BLEND) affects ColorLogicOpEnabled.
              */
 	    FALLBACK (ctx, SAVAGE_FALLBACK_LOGICOP,
@@ -1182,7 +1182,7 @@ static void savageDDEnable_s3d(struct gl_context *ctx, GLenum cap, GLboolean sta
 	    FALLBACK (ctx, SAVAGE_FALLBACK_STENCIL, state);
 	    break;
         case GL_FOG:
-            savageDDFogfv(ctx,0,0);	
+            savageDDFogfv(ctx,0,0);
             break;
         case GL_CULL_FACE:
 #if HW_CULL
@@ -1211,20 +1211,20 @@ static void savageDDEnable_s3d(struct gl_context *ctx, GLenum cap, GLboolean sta
             }
             imesa->dirty |= SAVAGE_UPLOAD_LOCAL;
             break;
- 
+
         case GL_LIGHTING:
 	    savageUpdateSpecular_s3d (ctx);
             break;
-        case GL_TEXTURE_1D:      
-        case GL_TEXTURE_3D:      
+        case GL_TEXTURE_1D:
+        case GL_TEXTURE_3D:
             imesa->new_state |= SAVAGE_NEW_TEXTURE;
             break;
-        case GL_TEXTURE_2D:      
+        case GL_TEXTURE_2D:
             imesa->new_state |= SAVAGE_NEW_TEXTURE;
             break;
         default:
-            ; 
-    }    
+            ;
+    }
 }
 
 void savageDDUpdateHwState( struct gl_context *ctx )
@@ -1246,7 +1246,7 @@ void savageDDUpdateHwState( struct gl_context *ctx )
 
 static void savageDDPrintDirty( const char *msg, GLuint state )
 {
-    fprintf(stderr, "%s (0x%x): %s%s%s%s%s%s\n",	   
+    fprintf(stderr, "%s (0x%x): %s%s%s%s%s%s\n",
             msg,
             (unsigned int) state,
             (state & SAVAGE_UPLOAD_LOCAL)      ? "upload-local, " : "",
@@ -1649,13 +1649,13 @@ void savageDDInitState( savageContextPtr imesa ) {
 
     imesa->regs.s4.zBufOffset.ni.offset=imesa->savageScreen->depthOffset>>11;
     if(imesa->savageScreen->zpp == 2) {
-        imesa->regs.s4.zBufOffset.ni.zBufWidthInTiles = 
+        imesa->regs.s4.zBufOffset.ni.zBufWidthInTiles =
             (imesa->savageScreen->width+63)>>6;
         imesa->regs.s4.zBufOffset.ni.zDepthSelect = 0;
-    } else {   
-        imesa->regs.s4.zBufOffset.ni.zBufWidthInTiles = 
+    } else {
+        imesa->regs.s4.zBufOffset.ni.zBufWidthInTiles =
             (imesa->savageScreen->width+31)>>5;
-        imesa->regs.s4.zBufOffset.ni.zDepthSelect = 1;      
+        imesa->regs.s4.zBufOffset.ni.zDepthSelect = 1;
     }
 
     memcpy (imesa->oldRegs.ui, imesa->regs.ui, SAVAGE_NR_REGS*sizeof(uint32_t));

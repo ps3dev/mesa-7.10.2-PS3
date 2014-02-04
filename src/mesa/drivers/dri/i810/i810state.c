@@ -76,7 +76,7 @@ static void i810BlendEquationSeparate(struct gl_context *ctx,
    assert( modeRGB == modeA );
 
    /* Can only do GL_ADD equation in hardware */
-   FALLBACK( I810_CONTEXT(ctx), I810_FALLBACK_BLEND_EQ, 
+   FALLBACK( I810_CONTEXT(ctx), I810_FALLBACK_BLEND_EQ,
 	     modeRGB != GL_FUNC_ADD);
 
    /* BlendEquation sets ColorLogicOpEnabled in an unexpected
@@ -287,7 +287,7 @@ void i810DrawBuffer(struct gl_context *ctx, GLenum mode )
 {
    i810ContextPtr imesa = I810_CONTEXT(ctx);
    int front = 0;
-  
+
    if (ctx->DrawBuffer->_NumColorDrawBuffers != 1) {
       /* GL_NONE or GL_FRONT_AND_BACK or stereo left&right, etc */
       FALLBACK( imesa, I810_FALLBACK_DRAW_BUFFER, GL_TRUE );
@@ -306,9 +306,9 @@ void i810DrawBuffer(struct gl_context *ctx, GLenum mode )
       return;
    }
 
-   if ( imesa->sarea->pf_current_page == 1 ) 
+   if ( imesa->sarea->pf_current_page == 1 )
      front ^= 1;
- 
+
    FALLBACK( imesa, I810_FALLBACK_DRAW_BUFFER, GL_FALSE );
    I810_FIREVERTICES(imesa);
    I810_STATECHANGE(imesa, I810_UPLOAD_BUFFERS);

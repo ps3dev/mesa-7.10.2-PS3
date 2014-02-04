@@ -42,10 +42,10 @@ via_alloc_draw_buffer(struct via_context *vmesa, struct via_renderbuffer *buf)
    mem.offset = 0;
    mem.index = 0;
 
-   if (ioctl(vmesa->driFd, DRM_IOCTL_VIA_ALLOCMEM, &mem)) 
+   if (ioctl(vmesa->driFd, DRM_IOCTL_VIA_ALLOCMEM, &mem))
       return GL_FALSE;
-    
-    
+
+
    buf->offset = mem.offset;
    buf->map = (char *)vmesa->driScreen->pFB + mem.offset;
    buf->index = mem.index;
@@ -76,23 +76,23 @@ via_alloc_dma_buffer(struct via_context *vmesa)
    drm_via_dma_init_t init;
 
    vmesa->dma = (GLubyte *) malloc(VIA_DMA_BUFSIZ);
-    
+
    /*
     * Check whether AGP DMA has been initialized.
     */
    memset(&init, 0, sizeof(init));
    init.func = VIA_DMA_INITIALIZED;
 
-   vmesa->useAgp = 
-     ( 0 == drmCommandWrite(vmesa->driFd, DRM_VIA_DMA_INIT, 
+   vmesa->useAgp =
+     ( 0 == drmCommandWrite(vmesa->driFd, DRM_VIA_DMA_INIT,
 			     &init, sizeof(init)));
    if (VIA_DEBUG & DEBUG_DMA) {
-      if (vmesa->useAgp) 
+      if (vmesa->useAgp)
          fprintf(stderr, "unichrome_dri.so: Using AGP.\n");
       else
          fprintf(stderr, "unichrome_dri.so: Using PCI.\n");
    }
-      
+
    return ((vmesa->dma) ? GL_TRUE : GL_FALSE);
 }
 
@@ -102,7 +102,7 @@ via_free_dma_buffer(struct via_context *vmesa)
     if (!vmesa) return;
     free(vmesa->dma);
     vmesa->dma = 0;
-} 
+}
 
 
 /* These functions now allocate and free the via_tex_buffer struct as well:
@@ -113,7 +113,7 @@ via_alloc_texture(struct via_context *vmesa,
 		  GLuint memType)
 {
    struct via_tex_buffer *t = CALLOC_STRUCT(via_tex_buffer);
-   
+
    if (!t)
       goto cleanup;
 
@@ -121,7 +121,7 @@ via_alloc_texture(struct via_context *vmesa,
    t->memType = memType;
    insert_at_tail(&vmesa->tex_image_list[memType], t);
 
-   if (t->memType == VIA_MEM_AGP || 
+   if (t->memType == VIA_MEM_AGP ||
        t->memType == VIA_MEM_VIDEO) {
       drm_via_mem_t fb;
 
@@ -131,8 +131,8 @@ via_alloc_texture(struct via_context *vmesa,
       fb.offset = 0;
       fb.index = 0;
 
-      if (ioctl(vmesa->driFd, DRM_IOCTL_VIA_ALLOCMEM, &fb) != 0 || 
-	  fb.index == 0) 
+      if (ioctl(vmesa->driFd, DRM_IOCTL_VIA_ALLOCMEM, &fb) != 0 ||
+	  fb.index == 0)
 	 goto cleanup;
 
       if (0)
@@ -140,10 +140,10 @@ via_alloc_texture(struct via_context *vmesa,
 
       t->offset = fb.offset;
       t->index = fb.index;
-      
+
       if (t->memType == VIA_MEM_AGP) {
 	 t->bufAddr = (GLubyte *)((unsigned long)vmesa->viaScreen->agpLinearStart +
-				  fb.offset); 	
+				  fb.offset);
 	 t->texBase = vmesa->agpBase + fb.offset;
       }
       else {
@@ -155,8 +155,8 @@ via_alloc_texture(struct via_context *vmesa,
       return t;
    }
    else if (t->memType == VIA_MEM_SYSTEM) {
-      
-      t->bufAddr = malloc(t->size);      
+
+      t->bufAddr = malloc(t->size);
       if (!t->bufAddr)
 	 goto cleanup;
 
@@ -200,21 +200,21 @@ via_do_free_texture(struct via_context *vmesa, struct via_tex_buffer *t)
 /* Release textures which were potentially still being referenced by
  * hardware at the time when they were originally freed.
  */
-void 
+void
 via_release_pending_textures( struct via_context *vmesa )
 {
    struct via_tex_buffer *s, *tmp;
-   
+
    foreach_s( s, tmp, &vmesa->freed_tex_buffers ) {
       if (!VIA_GEQ_WRAP(s->lastUsed, vmesa->lastBreadcrumbRead)) {
 	 if (VIA_DEBUG & DEBUG_TEXTURE)
 	    fprintf(stderr, "%s: release tex sz %d lastUsed %x\n",
-		    __FUNCTION__, s->size, s->lastUsed); 
+		    __FUNCTION__, s->size, s->lastUsed);
 	 via_do_free_texture(vmesa, s);
       }
    }
 }
-      
+
 
 
 void
@@ -235,7 +235,7 @@ via_free_texture(struct via_context *vmesa, struct via_tex_buffer *t)
    else {
       /* Close current breadcrumb so that we can free this eventually:
        */
-      if (t->lastUsed == vmesa->lastBreadcrumbWrite) 
+      if (t->lastUsed == vmesa->lastBreadcrumbWrite)
 	 viaEmitBreadcrumb(vmesa);
 
       move_to_tail( &vmesa->freed_tex_buffers, t );

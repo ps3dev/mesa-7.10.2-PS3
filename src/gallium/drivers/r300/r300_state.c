@@ -754,7 +754,7 @@ static void
     r300->validate_buffers = TRUE;
 
     r300->z_compression = false;
-    
+
     if (state->zsbuf) {
         blocksize = util_format_get_blocksize(state->zsbuf->texture->format);
         switch (blocksize) {
@@ -775,7 +775,7 @@ static void
 
             /* work out whether we can support hiz on this buffer */
             r300_hiz_alloc_block(r300, zs_surf);
-        
+
             /* work out whether we can support zmask features on this buffer */
             r300_zmask_alloc_block(r300, zs_surf, compress);
 
@@ -997,7 +997,7 @@ static void* r300_create_rs_state(struct pipe_context* pipe,
     }
 
     /* Front face */
-    if (state->front_ccw) 
+    if (state->front_ccw)
         cull_mode = R300_FRONT_FACE_CCW;
     else
         cull_mode = R300_FRONT_FACE_CW;

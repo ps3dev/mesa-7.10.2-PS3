@@ -391,7 +391,7 @@ static int mach64AllocateMultiTex( mach64ContextPtr mmesa,
  * local or AGP memory, so we need a "buddy system" to make sure that allocation
  * succeeds or fails for both textures.
  */
-void mach64UploadMultiTexImages( mach64ContextPtr mmesa, 
+void mach64UploadMultiTexImages( mach64ContextPtr mmesa,
 				 mach64TexObjPtr t0,
 				 mach64TexObjPtr t1 )
 {
@@ -502,7 +502,7 @@ void mach64UploadMultiTexImages( mach64ContextPtr mmesa,
 			       t1->base.tObj->Image[0][j1]->Width,
 			       t1->base.tObj->Image[0][j1]->Height );
       }
-      
+
       mmesa->setup.tex_cntl |= MACH64_TEX_CACHE_FLUSH;
       t1->base.dirty_images[0] = 0;
    }

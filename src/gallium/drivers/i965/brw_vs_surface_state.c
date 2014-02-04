@@ -59,7 +59,7 @@ brw_vs_update_constant_buffer(struct brw_context *brw)
    if (!vp->use_const_buffer)
       return NULL;
 
-   const_buffer = brw->sws->bo_alloc(brw->sws, 
+   const_buffer = brw->sws->bo_alloc(brw->sws,
 				     BRW_BUFFER_TYPE_SHADER_CONSTANTS,
 				     size, 64);
 
@@ -131,7 +131,7 @@ brw_update_vs_constant_surface( struct brw_context *brw,
                                      &brw->vs.surf_bo[surf]);
    if (ret)
       return ret;
-   
+
    return PIPE_OK;
 }
 #endif
@@ -157,8 +157,8 @@ brw_vs_get_binding_table(struct brw_context *brw,
                  i * 4,
                  brw->vs.surf_bo[i]);
    }
-   
-   ret = brw_cache_data( &brw->surface_cache, 
+
+   ret = brw_cache_data( &brw->surface_cache,
                          BRW_SS_SURF_BIND,
                          NULL, 0,
                          reloc, nr_reloc,

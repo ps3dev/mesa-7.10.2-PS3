@@ -82,7 +82,7 @@ struct svga_shader_result
    /* SVGA Shader ID:
     */
    unsigned id;
-   
+
    /* Next compilation result:
     */
    struct svga_shader_result *next;

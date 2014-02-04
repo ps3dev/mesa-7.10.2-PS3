@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2010 VMware, Inc.  All rights reserved.
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #ifndef SP_TEX_SAMPLE_H
@@ -38,7 +38,7 @@ typedef void (*wrap_nearest_func)(const float s[4],
                                   unsigned size,
                                   int icoord[4]);
 
-typedef void (*wrap_linear_func)(const float s[4], 
+typedef void (*wrap_linear_func)(const float s[4],
                                  unsigned size,
                                  int icoord0[4],
                                  int icoord1[4],
@@ -97,7 +97,7 @@ struct sp_sampler_varient
    unsigned level;
 
    unsigned faces[4];
-   
+
    wrap_nearest_func nearest_texcoord_s;
    wrap_nearest_func nearest_texcoord_t;
    wrap_nearest_func nearest_texcoord_p;
@@ -113,7 +113,7 @@ struct sp_sampler_varient
 
    filter_func mip_filter;
    filter_func compare;
-   
+
    /* Linked list:
     */
    struct sp_sampler_varient *next;
@@ -121,7 +121,7 @@ struct sp_sampler_varient
 
 struct sp_sampler;
 
-/* Create a sampler varient for a given set of non-orthogonal state.  Currently the 
+/* Create a sampler varient for a given set of non-orthogonal state.  Currently the
  */
 struct sp_sampler_varient *
 sp_create_sampler_varient( const struct pipe_sampler_state *sampler,

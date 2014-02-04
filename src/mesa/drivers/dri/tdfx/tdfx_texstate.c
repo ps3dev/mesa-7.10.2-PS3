@@ -2032,7 +2032,7 @@ tdfxUpdateTextureState( struct gl_context *ctx )
       setupTextureSingleTMU(ctx, 0);
       UNLOCK_HARDWARE( fxMesa );
    }
-   else if (ctx->Texture.Unit[0]._ReallyEnabled == 0 && 
+   else if (ctx->Texture.Unit[0]._ReallyEnabled == 0 &&
             ctx->Texture.Unit[1]._ReallyEnabled & (TEXTURE_1D_BIT|TEXTURE_2D_BIT)) {
       LOCK_HARDWARE( fxMesa );
       setupTextureSingleTMU(ctx, 1);
@@ -2173,7 +2173,7 @@ tdfxUpdateTextureBinding( struct gl_context *ctx )
          }
       }
    }
-   else if (ctx->Texture.Unit[0]._ReallyEnabled == 0 && 
+   else if (ctx->Texture.Unit[0]._ReallyEnabled == 0 &&
             ctx->Texture.Unit[0]._ReallyEnabled & (TEXTURE_1D_BIT|TEXTURE_2D_BIT)) {
       /* Only unit 1 2D enabled */
       if (shared->umaTexMemory) {
@@ -2182,7 +2182,7 @@ tdfxUpdateTextureBinding( struct gl_context *ctx )
          fxMesa->TexSource[0].Info = &(ti1->info);
       }
    }
-   else if (ctx->Texture.Unit[0]._ReallyEnabled & (TEXTURE_1D_BIT|TEXTURE_2D_BIT) && 
+   else if (ctx->Texture.Unit[0]._ReallyEnabled & (TEXTURE_1D_BIT|TEXTURE_2D_BIT) &&
             ctx->Texture.Unit[0]._ReallyEnabled & (TEXTURE_1D_BIT|TEXTURE_2D_BIT)) {
       /* Both 2D enabled */
       if (shared->umaTexMemory) {

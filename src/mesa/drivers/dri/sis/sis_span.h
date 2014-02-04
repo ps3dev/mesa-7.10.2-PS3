@@ -30,7 +30,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef __SIS_SPAN_H__
 #define __SIS_SPAN_H__
- 
+
 #include "drirenderbuffer.h"
 
 

@@ -34,15 +34,15 @@
  *A and B such that each chain is Y-monotonic that is the intersection of any
  *horizontal line intersects each chain has at most one connected componenets
  * (empty, single point or a single line).
- * 
- * A vertex is a cusp if both its ajacent vertices are either at or above v, 
+ *
+ * A vertex is a cusp if both its ajacent vertices are either at or above v,
  *or both at or below v. In addition, at least one of the ajacent verteces is
- *strictly below or above v. 
- * A vertex is a relex vertex if the internals angle is strictly greater than 
+ *strictly below or above v.
+ * A vertex is a relex vertex if the internals angle is strictly greater than
  *180. In other words, if the signed area is negative:
- *(x1, y1), (x2, y2), (x3, y3) are the three vertices along a polygon, the 
+ *(x1, y1), (x2, y2), (x3, y3) are the three vertices along a polygon, the
  *order is such that left hand side is inside the polygon. Then (x2,y2) is
- *reflex if: 
+ *reflex if:
  *  (x2-x1, y2-y1) cross (x3-x1, y3-y1) <0.
  *A vertex is an interior cusp if it is a cusp and a reflex.
  *A vertex is an exterior cusp if it is a cusp but not a reflex.
@@ -71,7 +71,7 @@ typedef struct sweepRange{
   directedLine *left;
   Int leftType; /*either a vertex (leftType=0) or an edge (leftType =1) */
   directedLine *right;
-  Int rightType; /*either a vertex (rightType=0) or an edge (rightType =1) */  
+  Int rightType; /*either a vertex (rightType=0) or an edge (rightType =1) */
 } sweepRange;
 
 sweepRange* sweepRangeMake(directedLine* left, Int leftType,
@@ -80,7 +80,7 @@ sweepRange* sweepRangeMake(directedLine* left, Int leftType,
 void sweepRangeDelete(sweepRange* range);
 Int sweepRangeEqual(sweepRange* sr1, sweepRange* sr2);
 
-/*given a set of simple polygons where the interior 
+/*given a set of simple polygons where the interior
  *is decided by left-hand principle,
  *return a range (sight) for each vertex. This is called
  *Trapezoidalization.

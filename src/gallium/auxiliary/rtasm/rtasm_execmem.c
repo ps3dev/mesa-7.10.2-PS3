@@ -73,10 +73,10 @@ init_heap(void)
 {
    if (!exec_heap)
       exec_heap = u_mmInit( 0, EXEC_HEAP_SIZE );
-   
+
    if (!exec_mem)
-      exec_mem = (unsigned char *) mmap(0, EXEC_HEAP_SIZE, 
-					PROT_EXEC | PROT_READ | PROT_WRITE, 
+      exec_mem = (unsigned char *) mmap(0, EXEC_HEAP_SIZE,
+					PROT_EXEC | PROT_READ | PROT_WRITE,
 					MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 }
 
@@ -98,23 +98,23 @@ rtasm_exec_malloc(size_t size)
 
    if (block)
       addr = exec_mem + block->ofs;
-   else 
+   else
       debug_printf("rtasm_exec_malloc failed\n");
-   
+
    pipe_mutex_unlock(exec_mutex);
-   
+
    return addr;
 }
 
- 
-void 
+
+void
 rtasm_exec_free(void *addr)
 {
    pipe_mutex_lock(exec_mutex);
 
    if (exec_heap) {
       struct mem_block *block = u_mmFindBlock(exec_heap, (unsigned char *)addr - exec_mem);
-   
+
       if (block)
 	 u_mmFreeMem(block);
    }
@@ -157,8 +157,8 @@ rtasm_exec_malloc(size_t size)
    return MALLOC( size );
 }
 
- 
-void 
+
+void
 rtasm_exec_free(void *addr)
 {
    FREE(addr);

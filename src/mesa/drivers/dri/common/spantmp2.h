@@ -271,7 +271,7 @@
 #endif /* GET_VALUE */
 
 # define INIT_MONO_PIXEL(p, color)                       \
-     p = PACK_COLOR_8888(color[3], color[0], color[1], color[2]) 
+     p = PACK_COLOR_8888(color[3], color[0], color[1], color[2])
 
 # define WRITE_RGBA(_x, _y, r, g, b, a)                                 \
    PUT_VALUE(_x, _y, ((r << 16) |					\
@@ -326,7 +326,7 @@
 #endif /* GET_VALUE */
 
 # define INIT_MONO_PIXEL(p, color)                       \
-     p = PACK_COLOR_8888(color[2], color[1], color[0], color[3]) 
+     p = PACK_COLOR_8888(color[2], color[1], color[0], color[3])
 
 # define WRITE_RGBA(_x, _y, r, g, b, a)                                 \
    PUT_VALUE(_x, _y, ((r << 8) |					\
@@ -709,9 +709,9 @@ static void TAG(WriteRGBAPixels)( struct gl_context *ctx,
 }
 
 
-static void TAG(WriteMonoRGBASpan)( struct gl_context *ctx,	
+static void TAG(WriteMonoRGBASpan)( struct gl_context *ctx,
                                     struct gl_renderbuffer *rb,
-				    GLuint n, GLint x, GLint y, 
+				    GLuint n, GLint x, GLint y,
 				    const void *value, const GLubyte mask[] )
 {
    HW_WRITE_LOCK()
@@ -753,7 +753,7 @@ static void TAG(WriteMonoRGBAPixels)( struct gl_context *ctx,
 				      GLuint n,
 				      const GLint x[], const GLint y[],
 				      const void *value,
-				      const GLubyte mask[] ) 
+				      const GLubyte mask[] )
 {
    HW_WRITE_LOCK()
       {

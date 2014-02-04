@@ -58,10 +58,10 @@ info:
 > uses the libc5 libraries in /usr/i486-linux-libc5/lib for programs
 > linked against libc5 while it uses the glibc libraries in /lib and
 > /usr/lib for programs linked against glibc.
-> 
+>
 > Anyway I changed line 41 of mklib.glide to
 >     GLIDELIBS="-L/usr/local/glide/lib -lglide2x -L/usr/i486-linux-libc5/lib"
-> 
+>
 > And I started quake2 up with a script like this
 > #!/bin/csh
 > setenv LD_LIBRARY_PATH /usr/i486-linux-libc5/lib
@@ -90,7 +90,7 @@ libc5 libraries.
 What can you do about it? Well there's a package called gcc5 that does
 MOST of the right stuff to compile with libc5. (It brings back older
 header files, makes appropriate symbolic links for libraries, and sets
-up the compiler to use the correct directories) You can find gcc5 here: 
+up the compiler to use the correct directories) You can find gcc5 here:
 ftp://ecg.mit.edu/pub/linux/gcc5-1.0-1.i386.rpm
 
 No, this isn't quite enough. There are still a few tricks to getting
@@ -102,7 +102,7 @@ to use the glibc version of things)
 If you get all the stuff correctly compiled with gcc5 it should work.
 I've run Mesa 3.0B6  and its demos in a window with my Rush on a Red Hat
 5.1 system. It is a big hassle, but it can be done. I've only made Quake
-segfault, but I think that's from my libRush using the wrong libc. 
+segfault, but I think that's from my libRush using the wrong libc.
 
 Yes, mixing libc5 and glibc is a major pain. I've been working to get
 all my libraries compiling correctly with this setup. Someone should

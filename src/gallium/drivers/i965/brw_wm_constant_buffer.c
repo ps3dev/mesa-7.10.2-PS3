@@ -23,7 +23,7 @@ brw_create_constant_surface( struct brw_context *brw,
               offsetof(struct brw_surface_state, ss1),
               key->bo);
 
-   
+
    memset(&surf, 0, sizeof(surf));
 
    surf.ss0.mipmap_layout_mode = BRW_SURFACE_MIPMAPLAYOUT_BELOW;
@@ -37,7 +37,7 @@ brw_create_constant_surface( struct brw_context *brw,
    surf.ss3.depth = (w >> 20) & 0x7f;    /* bits 26:20 of size or width */
    surf.ss3.pitch = (key->pitch * key->cpp) - 1; /* ignored?? */
    brw_set_surface_tiling(&surf, key->tiling); /* tiling now allowed */
- 
+
    ret = brw_upload_cache(&brw->surface_cache, BRW_SS_SURFACE,
                           key, sizeof(*key),
                           reloc, Elements(reloc),

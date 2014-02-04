@@ -1525,7 +1525,7 @@ static void _ae_update_state( struct gl_context *ctx )
       }
    }
 
-   /* generic vertex attribute arrays */   
+   /* generic vertex attribute arrays */
    for (i = 1; i < Elements(arrayObj->VertexAttrib); i++) {  /* skip zero! */
       struct gl_client_array *attribArray = &arrayObj->VertexAttrib[i];
       if (attribArray->Enabled) {
@@ -1592,7 +1592,7 @@ void _ae_map_vbos( struct gl_context *ctx )
 {
    AEcontext *actx = AE_CONTEXT(ctx);
    GLuint i;
-   
+
    if (actx->mapped_vbos)
       return;
 
@@ -1653,7 +1653,7 @@ void GLAPIENTRY _ae_ArrayElement( GLint elt )
 
    if (do_map)
       _ae_map_vbos(ctx);
-   
+
    /* emit generic attribute elements */
    for (at = actx->attribs; at->func; at++) {
       const GLubyte *src
@@ -1667,7 +1667,7 @@ void GLAPIENTRY _ae_ArrayElement( GLint elt )
       const GLubyte *src
          = ADD_POINTERS(aa->array->BufferObj->Pointer, aa->array->Ptr)
          + elt * aa->array->StrideB;
-      CALL_by_offset( disp, (array_func), aa->offset, 
+      CALL_by_offset( disp, (array_func), aa->offset,
 		      ((const void *) src) );
    }
 
@@ -1680,12 +1680,12 @@ void _ae_invalidate_state( struct gl_context *ctx, GLuint new_state )
 {
    AEcontext *actx = AE_CONTEXT(ctx);
 
-   
+
    /* Only interested in this subset of mesa state.  Need to prune
     * this down as both tnl/ and the drivers can raise statechanges
     * for arcane reasons in the middle of seemingly atomic operations
     * like DrawElements, over which we'd like to keep a known set of
-    * arrays and vbo's mapped.  
+    * arrays and vbo's mapped.
     *
     * Luckily, neither the drivers nor tnl muck with the state that
     * concerns us here:

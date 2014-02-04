@@ -37,7 +37,7 @@ struct gl_program;
 extern void GLAPIENTRY
 _mesa_ExecuteProgramNV(GLenum target, GLuint id, const GLfloat *params);
 
-extern GLboolean GLAPIENTRY 
+extern GLboolean GLAPIENTRY
 _mesa_AreProgramsResidentNV(GLsizei n, const GLuint *ids, GLboolean *residences);
 
 extern void GLAPIENTRY

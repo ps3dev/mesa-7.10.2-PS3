@@ -61,7 +61,7 @@ public:
   void tessellateAll(Real u_reso, Real v_reso);
 
   void print();
-  
+
   sampledLine* next;
 };
 

@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /* Authors:  Keith Whitwell <keith@tungstengraphics.com>
@@ -65,10 +65,10 @@ draw_need_pipeline(const struct draw_context *draw,
                    const struct pipe_rasterizer_state *rasterizer,
                    unsigned int prim )
 {
-   /* If the driver has overridden this, use that version: 
+   /* If the driver has overridden this, use that version:
     */
    if (draw->render &&
-       draw->render->need_pipeline) 
+       draw->render->need_pipeline)
    {
       return draw->render->need_pipeline( draw->render,
                                           rasterizer,
@@ -79,7 +79,7 @@ draw_need_pipeline(const struct draw_context *draw,
     * and triggering the pipeline, because we have to trigger the
     * pipeline *anyway* if unfilled mode is active.
     */
-   if (lines(prim)) 
+   if (lines(prim))
    {
       /* line stipple */
       if (rasterizer->line_stipple_enable && draw->pipeline.line_stipple)
@@ -115,7 +115,7 @@ draw_need_pipeline(const struct draw_context *draw,
    }
 
 
-   if (triangles(prim)) 
+   if (triangles(prim))
    {
       /* polygon stipple */
       if (rasterizer->poly_stipple_enable && draw->pipeline.pstipple)
@@ -125,7 +125,7 @@ draw_need_pipeline(const struct draw_context *draw,
       if (rasterizer->fill_front != PIPE_POLYGON_MODE_FILL ||
           rasterizer->fill_back != PIPE_POLYGON_MODE_FILL)
          return TRUE;
-      
+
       /* polygon offset */
       if (rasterizer->offset_point ||
           rasterizer->offset_line ||
@@ -139,7 +139,7 @@ draw_need_pipeline(const struct draw_context *draw,
 
    /* polygon cull - this is difficult - hardware can cull just fine
     * most of the time (though sometimes CULL_NEITHER is unsupported.
-    * 
+    *
     * Generally this isn't a reason to require the pipeline, though.
     *
    if (rasterizer->cull_mode)
@@ -236,7 +236,7 @@ static struct draw_stage *validate_pipeline( struct draw_stage *stage )
       draw->pipeline.flatshade->next = next;
       next = draw->pipeline.flatshade;
    }
-	 
+
    if (rast->offset_point ||
        rast->offset_line ||
        rast->offset_tri) {
@@ -252,7 +252,7 @@ static struct draw_stage *validate_pipeline( struct draw_stage *stage )
    }
 
    /* Always run the cull stage as we calculate determinant there
-    * also.  
+    * also.
     *
     * This can actually be a win as culling out the triangles can lead
     * to less work emitting vertices, smaller vertex buffers, etc.
@@ -271,34 +271,34 @@ static struct draw_stage *validate_pipeline( struct draw_stage *stage )
       next = draw->pipeline.clip;
    }
 
-   
+
    draw->pipeline.first = next;
 
    if (0) {
       debug_printf("draw pipeline:\n");
-      for (next = draw->pipeline.first; next ; next = next->next ) 
+      for (next = draw->pipeline.first; next ; next = next->next )
          debug_printf("   %s\n", next->name);
       debug_printf("\n");
    }
-   
+
    return draw->pipeline.first;
 }
 
-static void validate_tri( struct draw_stage *stage, 
+static void validate_tri( struct draw_stage *stage,
 			  struct prim_header *header )
 {
    struct draw_stage *pipeline = validate_pipeline( stage );
    pipeline->tri( pipeline, header );
 }
 
-static void validate_line( struct draw_stage *stage, 
+static void validate_line( struct draw_stage *stage,
 			   struct prim_header *header )
 {
    struct draw_stage *pipeline = validate_pipeline( stage );
    pipeline->line( pipeline, header );
 }
 
-static void validate_point( struct draw_stage *stage, 
+static void validate_point( struct draw_stage *stage,
 			    struct prim_header *header )
 {
    struct draw_stage *pipeline = validate_pipeline( stage );
@@ -311,7 +311,7 @@ static void validate_reset_stipple_counter( struct draw_stage *stage )
    pipeline->reset_stipple_counter( pipeline );
 }
 
-static void validate_flush( struct draw_stage *stage, 
+static void validate_flush( struct draw_stage *stage,
 			    unsigned flags )
 {
    /* May need to pass a backend flush on to the rasterize stage.

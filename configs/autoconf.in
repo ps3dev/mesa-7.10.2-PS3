@@ -100,7 +100,7 @@ GALLIUM_AUXILIARIES = $(TOP)/src/gallium/auxiliary/libgallium.a
 GALLIUM_DRIVERS = $(foreach DIR,$(GALLIUM_DRIVERS_DIRS),$(TOP)/src/gallium/drivers/$(DIR)/lib$(DIR).a)
 
 # Driver specific build vars
-DRI_DIRS = @DRI_DIRS@ 
+DRI_DIRS = @DRI_DIRS@
 EGL_PLATFORMS = @EGL_PLATFORMS@
 EGL_CLIENT_APIS = @EGL_CLIENT_APIS@
 

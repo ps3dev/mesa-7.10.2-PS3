@@ -183,7 +183,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	    w = 1.0;
 	 }
 #endif
-	 
+
 #if DO_TEX1
 #if DO_PTEX
 	 if (tc1_size == 4) {
@@ -195,7 +195,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	    float rhw = 1.0 / tc1[0][3];
 	    LE32_OUT_FLOAT( p++, rhw*tc1[0][0] );	/* VERTEX_?_SECONDARY_S */
 	    LE32_OUT_FLOAT( p++, rhw*tc1[0][1] );	/* VERTEX_?_SECONDARY_T */
-	    LE32_OUT_FLOAT( p++, w*tc1[0][3] );		/* VERTEX_?_SECONDARY_W */	
+	    LE32_OUT_FLOAT( p++, w*tc1[0][3] );		/* VERTEX_?_SECONDARY_W */
 #endif /* !MACH64_PREMULT_TEXCOORDS */
 	 } else {
 #endif /* DO_PTEX */
@@ -215,7 +215,7 @@ static void TAG(emit)( struct gl_context *ctx,
 #else /* !DO_TEX1 */
 	 p += 3;
 #endif /* !DO_TEX1 */
-	    
+
 #if DO_TEX0
 #if DO_PTEX
 	 if (tc0_size == 4) {
@@ -227,7 +227,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	    float rhw = 1.0 / tc0[0][3];
 	    LE32_OUT_FLOAT( p++, rhw*tc0[0][0] );		/* VERTEX_?_S */
 	    LE32_OUT_FLOAT( p++, rhw*tc0[0][1] );		/* VERTEX_?_T */
-	    LE32_OUT_FLOAT( p++, w*tc0[0][3] );			/* VERTEX_?_W */	
+	    LE32_OUT_FLOAT( p++, w*tc0[0][3] );			/* VERTEX_?_W */
 #endif /* !MACH64_PREMULT_TEXCOORDS */
 	 } else {
 #endif /* DO_PTEX */
@@ -261,7 +261,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	 STRIDE_4F(fog, fog_stride);
 #endif
 	 p++;
-	    
+
 #if DO_XYZW
 	 if (mask[i] == 0) {
 	    /* unclipped */
@@ -290,7 +290,7 @@ static void TAG(emit)( struct gl_context *ctx,
 	    LE32_OUT( p,
 		      (VIEWPORT_X( coord[0][0] ) << 16) |	/* VERTEX_?_X */
 		      (VIEWPORT_Y( coord[0][1] ) & 0xffff) );	/* VERTEX_?_Y */
-	    
+
 	    if (MACH64_DEBUG & DEBUG_VERBOSE_PRIMS) {
 	       fprintf( stderr, "%s: vert %d: %.2f %.2f %.2f %x\n",
 			__FUNCTION__,
@@ -305,7 +305,7 @@ static void TAG(emit)( struct gl_context *ctx,
 #if DO_TEX1 || DO_TEX0 || DO_XYZW
 	 STRIDE_4F(coord, coord_stride);
 #endif
-	 
+
 	 assert( p + 1 - (CARD32 *)v == 10 );
       }
 }
@@ -377,26 +377,26 @@ static void TAG(interp)( struct gl_context *ctx,
 
       INTERP_F( t, qdst, qout, qin );
       rqdst = 1.0 / qdst;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp*rqdst );			/* VERTEX_?_SECONDARY_S */
       dst++; out++; in++;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp*rqdst );			/* VERTEX_?_SECONDARY_T */
       dst++; out++; in++;
-      
+
       LE32_OUT_FLOAT( dst, w*rqdst );				/* VERTEX_?_SECONDARY_W */
       dst++; out++; in++;
 #else /* !DO_PTEX */
 #ifdef MACH64_PREMULT_TEXCOORDS
       GLfloat qout = w / LE32_IN_FLOAT( out + 2 );
       GLfloat qin = w / LE32_IN_FLOAT( in + 2 );
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_SECONDARY_S */
       dst++; out++; in++;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_SECONDARY_T */
       dst++; out++; in++;
@@ -404,7 +404,7 @@ static void TAG(interp)( struct gl_context *ctx,
       INTERP_F( t, temp, LE32_IN_FLOAT( out ), LE32_IN_FLOAT( in ) );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_SECONDARY_S */
       dst++; out++; in++;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ), LE32_IN_FLOAT( in ) );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_SECONDARY_T */
       dst++; out++; in++;
@@ -429,26 +429,26 @@ static void TAG(interp)( struct gl_context *ctx,
 
       INTERP_F( t, qdst, qout, qin );
       rqdst = 1.0 / qdst;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp*rqdst );			/* VERTEX_?_S */
       dst++; out++; in++;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp*rqdst );			/* VERTEX_?_T */
       dst++; out++; in++;
-      
+
       LE32_OUT_FLOAT( dst, w*rqdst );				/* VERTEX_?_W */
       dst++; out++; in++;
 #else /* !DO_PTEX */
 #ifdef MACH64_PREMULT_TEXCOORDS
       GLfloat qout = w / LE32_IN_FLOAT( out + 2 );
       GLfloat qin = w / LE32_IN_FLOAT( in + 2 );
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_S */
       dst++; out++; in++;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ) * qout, LE32_IN_FLOAT( in ) * qin );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_T */
       dst++; out++; in++;
@@ -456,7 +456,7 @@ static void TAG(interp)( struct gl_context *ctx,
       INTERP_F( t, temp, LE32_IN_FLOAT( out ), LE32_IN_FLOAT( in ) );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_S */
       dst++; out++; in++;
-      
+
       INTERP_F( t, temp, LE32_IN_FLOAT( out ), LE32_IN_FLOAT( in ) );
       LE32_OUT_FLOAT( dst, temp );				/* VERTEX_?_T */
       dst++; out++; in++;
@@ -468,13 +468,13 @@ static void TAG(interp)( struct gl_context *ctx,
 #else /* !DO_TEX0 */
    dst += 3; out += 3; in += 3;
 #endif /* !DO_TEX0 */
-   
+
 #if DO_SPEC
    INTERP_UB( t, ((GLubyte *)dst)[0], ((GLubyte *)out)[0], ((GLubyte *)in)[0] );	/* VERTEX_?_SPEC_B */
    INTERP_UB( t, ((GLubyte *)dst)[1], ((GLubyte *)out)[1], ((GLubyte *)in)[1] );	/* VERTEX_?_SPEC_G */
    INTERP_UB( t, ((GLubyte *)dst)[2], ((GLubyte *)out)[2], ((GLubyte *)in)[2] );	/* VERTEX_?_SPEC_R */
 #endif
-   
+
 #if DO_FOG
    INTERP_UB( t, ((GLubyte *)dst)[3], ((GLubyte *)out)[3], ((GLubyte *)in)[3] );	/* VERTEX_?_SPEC_A */
 #endif /* DO_FOG */
@@ -483,7 +483,7 @@ static void TAG(interp)( struct gl_context *ctx,
 
    LE32_OUT( dst, VIEWPORT_Z( dstclip[2] * w ) );		/* VERTEX_?_Z */
    dst++; out++; in++;
-  
+
    INTERP_UB( t, ((GLubyte *)dst)[0], ((GLubyte *)out)[0], ((GLubyte *)in)[0] );	/* VERTEX_?_B */
    INTERP_UB( t, ((GLubyte *)dst)[1], ((GLubyte *)out)[1], ((GLubyte *)in)[1] );	/* VERTEX_?_G */
    INTERP_UB( t, ((GLubyte *)dst)[2], ((GLubyte *)out)[2], ((GLubyte *)in)[2] );	/* VERTEX_?_R */
@@ -514,7 +514,7 @@ static void TAG(interp)( struct gl_context *ctx,
 static void TAG(copy_pv)( struct gl_context *ctx, GLuint edst, GLuint esrc )
 {
 #if DO_SPEC || DO_FOG || DO_RGBA
-   LOCALVARS   
+   LOCALVARS
    GLubyte *verts = GET_VERTEX_STORE();
    GLuint size = GET_VERTEX_SIZE();
    GLuint *dst = (GLuint *)(verts + (edst * size));

@@ -151,7 +151,7 @@ directedLine* directedLine::deleteDegenerateLines()
 	      first = temp;
 	      break;
 	    }
-        
+
 	}
     }
 
@@ -169,11 +169,11 @@ directedLine* directedLine::deleteDegenerateLines()
 /*
       if(temp->head()[0] == temp->tail()[0] &&
 	 temp->head()[1] == temp->tail()[1])
-*/      
+*/
 
       if(myequal(temp->head(), temp->tail()))
 	deleteSingleLine(temp);
-    }   
+    }
   return first;
 }
 
@@ -190,7 +190,7 @@ directedLine* directedLine::deleteDegenerateLinesAllPolygons()
       if(ret == NULL)
 	{
 	  ret = retEnd = temp->deleteDegenerateLines();
-        
+
 	}
       else
 	{

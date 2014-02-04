@@ -9,7 +9,7 @@ LIBRARY_INCLUDES = \
 	-I$(TOP)/src/gallium/auxiliary
 
 C_SOURCES = \
-	null_sw_winsys.c 
+	null_sw_winsys.c
 
 include ../../../Makefile.template
 

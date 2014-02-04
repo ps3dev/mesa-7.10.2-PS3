@@ -44,10 +44,10 @@ class directedLine {
   directedLine* next; /*double linked list*/
   directedLine* prev; /*double linked list*/
 
-  /*in case we need a list of polygons each 
+  /*in case we need a list of polygons each
    *consisting of a double linked list
    */
-  directedLine* nextPolygon; 
+  directedLine* nextPolygon;
 
   /*optimization make cutoff polygon faster*/
 /*  directedLine* prevPolygon;*/
@@ -65,7 +65,7 @@ public:
   ~directedLine();
 
   void init(short dir, sampledLine* sl);
-  
+
   Real* head(); /*points[0] if INCREASING, points[n-1] otherwise*/
   Real* tail(); /*points[n-1] if INCREASING, points[0] otherwise*/
   Real* getVertex(Int i); /*points[i] if INCREASING, points[n-1-i] otherwise*/
@@ -101,13 +101,13 @@ public:
   /*check to see if the list forms a closed polygon
    *return 1 if yes
    */
-  short isPolygon(); 
-  
+  short isPolygon();
+
   Int compInY(directedLine* nl);
   Int compInX(directedLine* nl);
 
   /*return an array of pointers.
-   *the 
+   *the
    */
   directedLine** sortAllPolygons();
 
@@ -115,7 +115,7 @@ public:
   Int numEdgesAllPolygons();
   Int numPolygons();
 
-  /*check if the head of this edge is connected to 
+  /*check if the head of this edge is connected to
    *the tail of the prev
    */
   short isConnected();
@@ -126,7 +126,7 @@ public:
   void printList();
   void printAllPolygons();
   void writeAllPolygons(char* filename);
-  
+
 
   /*insert a polygon: using nextPolygon*/
   directedLine* insertPolygon(directedLine* newpolygon);
@@ -135,15 +135,15 @@ public:
   Int toArraySinglePolygon(directedLine** array, Int index);
   directedLine** toArrayAllPolygons(Int& total_num_edges);
 
-  void connectDiagonal(directedLine* v1, directedLine* v2, 
-			   directedLine** ret_p1, 
+  void connectDiagonal(directedLine* v1, directedLine* v2,
+			   directedLine** ret_p1,
 			   directedLine** ret_p2,
 			   sampledLine** generatedLine, directedLine* list);
 
   /*generate two slines
    */
-  void connectDiagonal_2slines(directedLine* v1, directedLine* v2, 
-			   directedLine** ret_p1, 
+  void connectDiagonal_2slines(directedLine* v1, directedLine* v2,
+			   directedLine** ret_p1,
 			   directedLine** ret_p2,
 			   directedLine* list);
 

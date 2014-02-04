@@ -48,17 +48,17 @@ static void init( void )
     * Also, no easy way of querying supported formats if the screen
     * cannot be created first.
     */
-   for (i = 0; 
+   for (i = 0;
         window == NULL && formats[i] != PIPE_FORMAT_NONE;
         i++) {
-      
+
       screen = graw_create_window_and_screen(0,0,300,300,
                                              formats[i],
                                              &window);
    }
    if (window == NULL)
       exit(2);
-   
+
    ctx = screen->context_create(screen, NULL);
    if (ctx == NULL)
       exit(3);
@@ -73,7 +73,7 @@ static void init( void )
    templat.nr_samples = 1;
    templat.bind = (PIPE_BIND_RENDER_TARGET |
                    PIPE_BIND_DISPLAY_TARGET);
-   
+
    tex = screen->resource_create(screen,
                                  &templat);
    if (tex == NULL)

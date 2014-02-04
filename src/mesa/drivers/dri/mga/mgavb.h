@@ -41,8 +41,8 @@
 
 extern void mgaChooseVertexState( struct gl_context *ctx );
 extern void mgaCheckTexSizes( struct gl_context *ctx );
-extern void mgaBuildVertices( struct gl_context *ctx, 
-			      GLuint start, 
+extern void mgaBuildVertices( struct gl_context *ctx,
+			      GLuint start,
 			      GLuint count,
 			      GLuint newinputs );
 
@@ -56,8 +56,8 @@ extern void *mga_emit_contiguous_verts( struct gl_context *ctx,
 					GLuint count,
 					void *dest );
 
-extern void mga_translate_vertex(struct gl_context *ctx, 
-				 const mgaVertex *src, 
+extern void mga_translate_vertex(struct gl_context *ctx,
+				 const mgaVertex *src,
 				 SWvertex *dst);
 
 extern void mga_print_vertex( struct gl_context *ctx, const mgaVertex *v );

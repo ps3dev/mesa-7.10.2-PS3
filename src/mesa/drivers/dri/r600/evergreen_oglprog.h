@@ -21,7 +21,7 @@
 
 /*
  * Authors:
- *   Richard Li <RichardZ.Li@amd.com>, <richardradeon@gmail.com> 
+ *   Richard Li <RichardZ.Li@amd.com>, <richardradeon@gmail.com>
  */
 
 #ifndef _EVERGREEN_OGLPROG_H_

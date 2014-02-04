@@ -15,9 +15,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
@@ -37,13 +37,13 @@ typedef struct i810_texture_object_t *i810TextureObjectPtr;
 #include "i810tex.h"
 
 
-/* Reasons to disable hardware rasterization. 
+/* Reasons to disable hardware rasterization.
  */
 #define I810_FALLBACK_TEXTURE        0x1
 #define I810_FALLBACK_DRAW_BUFFER    0x2
 #define I810_FALLBACK_READ_BUFFER    0x4
-#define I810_FALLBACK_COLORMASK      0x8  
-#define I810_FALLBACK_SPECULAR       0x20 
+#define I810_FALLBACK_COLORMASK      0x8
+#define I810_FALLBACK_SPECULAR       0x20
 #define I810_FALLBACK_LOGICOP        0x40
 #define I810_FALLBACK_RENDERMODE     0x80
 #define I810_FALLBACK_STENCIL        0x100
@@ -51,11 +51,11 @@ typedef struct i810_texture_object_t *i810TextureObjectPtr;
 #define I810_FALLBACK_BLEND_FUNC     0x400
 
 
-#ifndef PCI_CHIP_I810				 
+#ifndef PCI_CHIP_I810
 #define PCI_CHIP_I810              0x7121
 #define PCI_CHIP_I810_DC100        0x7123
-#define PCI_CHIP_I810_E            0x7125 
-#define PCI_CHIP_I815              0x1132 
+#define PCI_CHIP_I810_E            0x7125
+#define PCI_CHIP_I815              0x1132
 #endif
 
 #define IS_I810(imesa) (imesa->i810Screen->deviceID == PCI_CHIP_I810 ||	\
@@ -78,7 +78,7 @@ typedef void (*i810_line_func)( i810ContextPtr, i810Vertex *, i810Vertex * );
 typedef void (*i810_point_func)( i810ContextPtr, i810Vertex * );
 
 struct i810_context_t {
-   GLint refcount;   
+   GLint refcount;
    struct gl_context *glCtx;
 
    /* Texture object bookkeeping
@@ -111,17 +111,17 @@ struct i810_context_t {
    GLuint vertex_low;
    GLuint vertex_high;
    GLuint vertex_last_prim;
-   
+
    GLboolean upload_cliprects;
 
 
-   /* Fallback rasterization functions 
+   /* Fallback rasterization functions
     */
    i810_point_func draw_point;
    i810_line_func draw_line;
    i810_tri_func draw_tri;
 
-   /* Hardware state 
+   /* Hardware state
     */
    GLuint dirty;		/* I810_UPLOAD_* */
    GLuint Setup[I810_CTX_SETUP_SIZE];
@@ -160,8 +160,8 @@ struct i810_context_t {
    int texAge;
    int ctxAge;
    int dirtyAge;
-  
- 
+
+
    GLboolean scissor;
    drm_clip_rect_t draw_rect;
    drm_clip_rect_t scissor_rect;
@@ -172,7 +172,7 @@ struct i810_context_t {
 
    __DRIdrawable *driDrawable;
    __DRIscreen *driScreen;
-   i810ScreenPrivate *i810Screen; 
+   i810ScreenPrivate *i810Screen;
    I810SAREAPtr sarea;
 };
 
@@ -183,7 +183,7 @@ struct i810_context_t {
 #define GET_ENQUEUE_AGE( imesa ) imesa->sarea->last_enqueue
 
 
-/* Lock the hardware and validate our state.  
+/* Lock the hardware and validate our state.
  */
 #define LOCK_HARDWARE( imesa )				\
   do {							\
@@ -199,12 +199,12 @@ struct i810_context_t {
 /* Release the kernel lock.
  */
 #define UNLOCK_HARDWARE(imesa)					\
-    DRM_UNLOCK(imesa->driFd, imesa->driHwLock, imesa->hHWContext);	
+    DRM_UNLOCK(imesa->driFd, imesa->driHwLock, imesa->hHWContext);
 
 
 /* This is the wrong way to do it, I'm sure.  Otherwise the drm
  * bitches that I've already got the heavyweight lock.  At worst,
- * this is 3 ioctls.  The best solution probably only gets me down 
+ * this is 3 ioctls.  The best solution probably only gets me down
  * to 2 ioctls in the worst case.
  */
 #define LOCK_HARDWARE_QUIESCENT( imesa ) do {	\

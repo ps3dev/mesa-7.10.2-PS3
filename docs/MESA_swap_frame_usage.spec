@@ -45,7 +45,7 @@ Overview
     call to enable the statistic) to when the next buffer swap completes, tf
     is the entire time for a frame which may be multiple screen refreshes
     depending on the swap interval as set by the GLX_SGI_swap_control or
-    GLX_OML_sync_control extensions. 
+    GLX_OML_sync_control extensions.
 
     The value, percent, indicates the amount of time spent between the
     completion of the two swaps.  If the value is in the range [0,1], the
@@ -115,7 +115,7 @@ Additions to the GLX 1.3 Specification
     MESA_swap_control are supported, the swap period is the vertical refresh
     time multiplied by the swap interval (or one if the swap interval is set
     to zero).
-    
+
     If OML_sync_control is supported, the swap period is the vertical
     refresh time multiplied by the divisor parameter to
     glXSwapBuffersMscOML.  The frame usage in this case is less than 1.0 if

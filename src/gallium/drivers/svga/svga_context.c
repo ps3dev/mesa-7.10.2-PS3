@@ -55,9 +55,9 @@ static void svga_destroy( struct pipe_context *pipe )
    svga_hwtnl_destroy( svga->hwtnl );
 
    svga_cleanup_vertex_state(svga);
-   
+
    svga->swc->destroy(svga->swc);
-   
+
    svga_destroy_swtnl( svga );
 
    u_upload_destroy( svga->upload_vb );
@@ -153,11 +153,11 @@ struct pipe_context *svga_context_create( struct pipe_screen *screen,
    ret = svga_emit_initial_state( svga );
    if (ret)
       goto no_state;
-   
+
    /* Avoid shortcircuiting state with initial value of zero.
     */
    memset(&svga->state.hw_clear, 0xcd, sizeof(svga->state.hw_clear));
-   memset(&svga->state.hw_clear.framebuffer, 0x0, 
+   memset(&svga->state.hw_clear.framebuffer, 0x0,
           sizeof(svga->state.hw_clear.framebuffer));
 
    memset(&svga->state.hw_draw, 0xcd, sizeof(svga->state.hw_draw));
@@ -191,7 +191,7 @@ no_svga:
 }
 
 
-void svga_context_flush( struct svga_context *svga, 
+void svga_context_flush( struct svga_context *svga,
                          struct pipe_fence_handle **pfence )
 {
    struct svga_screen *svgascreen = svga_screen(svga->pipe.screen);
@@ -199,7 +199,7 @@ void svga_context_flush( struct svga_context *svga,
 
    svga->curr.nr_fbs = 0;
 
-   /* Unmap upload manager buffers: 
+   /* Unmap upload manager buffers:
     */
    u_upload_flush(svga->upload_vb);
    u_upload_flush(svga->upload_ib);

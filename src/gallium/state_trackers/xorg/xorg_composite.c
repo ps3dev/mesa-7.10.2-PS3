@@ -547,7 +547,7 @@ boolean xorg_solid_bind_state(struct exa_context *exa,
    vs_traits = VS_SOLID_FILL;
    fs_traits = FS_SOLID_FILL;
 
-   renderer_bind_destination(exa->renderer, dst_surf, 
+   renderer_bind_destination(exa->renderer, dst_surf,
                              pixmap->width, pixmap->height);
    bind_blend_state(exa, PictOpSrc, NULL, NULL, NULL);
    cso_set_samplers(exa->renderer->cso, 0, NULL);

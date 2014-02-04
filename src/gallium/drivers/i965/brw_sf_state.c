@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,13 +22,13 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
   *   Keith Whitwell <keith@tungstengraphics.com>
   */
-   
+
 #include "util/u_math.h"
 
 #include "pipe/p_state.h"
@@ -72,7 +72,7 @@ static enum pipe_error upload_sf_vp(struct brw_context *brw)
 
 const struct brw_tracked_state brw_sf_vp = {
    .dirty = {
-      .mesa  = (PIPE_NEW_VIEWPORT | 
+      .mesa  = (PIPE_NEW_VIEWPORT |
 		PIPE_NEW_SCISSOR),
       .brw   = 0,
       .cache = 0
@@ -84,7 +84,7 @@ struct brw_sf_unit_key {
    unsigned int total_grf;
    unsigned int urb_entry_read_length;
    unsigned int nr_urb_entries, urb_size, sfsize;
-   
+
    unsigned scissor:1;
    unsigned line_smooth:1;
    unsigned point_sprite:1;
@@ -158,8 +158,8 @@ sf_unit_create_from_key(struct brw_context *brw,
    sf.thread4.nr_urb_entries = key->nr_urb_entries;
    sf.thread4.urb_entry_allocation_size = key->sfsize - 1;
 
-   /* Each SF thread produces 1 PUE, and there can be up to 24(Pre-IGDNG) or 
-    * 48(IGDNG) threads 
+   /* Each SF thread produces 1 PUE, and there can be up to 24(Pre-IGDNG) or
+    * 48(IGDNG) threads
     */
    if (BRW_IS_IGDNG(brw))
       chipset_max_threads = 48;
@@ -265,7 +265,7 @@ sf_unit_create_from_key(struct brw_context *brw,
    if (ret)
       return ret;
 
-   
+
    return PIPE_OK;
 }
 
@@ -279,7 +279,7 @@ static enum pipe_error upload_sf_unit( struct brw_context *brw )
    enum pipe_error ret;
 
    sf_unit_populate_key(brw, &key);
-   
+
    /* XXX: cut this crap and pre calculate the key:
     */
    total_grf = (align(key.total_grf, 16) / 16 - 1);

@@ -53,7 +53,7 @@ _mesa_Viewport(GLint x, GLint y, GLsizei width, GLsizei height)
 /**
  * Set new viewport parameters and update derived state (the _WindowMap
  * matrix).  Usually called from _mesa_Viewport().
- * 
+ *
  * \param ctx GL context.
  * \param x, y coordinates of the lower left corner of the viewport rectangle.
  * \param width width of the viewport rectangle.
@@ -151,7 +151,7 @@ _mesa_DepthRangef(GLclampf nearval, GLclampf farval)
    _mesa_DepthRange(nearval, farval);
 }
 
-/** 
+/**
  * Initialize the context viewport attribute group.
  * \param ctx  the GL context.
  */
@@ -173,7 +173,7 @@ void _mesa_init_viewport(struct gl_context *ctx)
 }
 
 
-/** 
+/**
  * Free the context viewport attribute group data.
  * \param ctx  the GL context.
  */

@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Red Hat Inc.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -169,8 +169,8 @@ radeon_alloc_renderbuffer_storage(struct gl_context * ctx, struct gl_renderbuffe
 
   if (rrb->bo)
     radeon_bo_unref(rrb->bo);
-  
-    
+
+
    if (software_buffer) {
       return _mesa_soft_renderbuffer_storage(ctx, rb, internalFormat,
                                              width, height);
@@ -195,8 +195,8 @@ radeon_alloc_renderbuffer_storage(struct gl_context * ctx, struct gl_renderbuffe
      rb->Width = width;
      rb->Height = height;
        return GL_TRUE;
-   }    
-   
+   }
+
 }
 
 #if FEATURE_OES_EGL_image
@@ -452,7 +452,7 @@ radeon_framebuffer_renderbuffer(struct gl_context * ctx,
 }
 
 static GLboolean
-radeon_update_wrapper(struct gl_context *ctx, struct radeon_renderbuffer *rrb, 
+radeon_update_wrapper(struct gl_context *ctx, struct radeon_renderbuffer *rrb,
 		     struct gl_texture_image *texImage)
 {
 	radeon_print(RADEON_TEXTURE, RADEON_TRACE,
@@ -485,7 +485,7 @@ radeon_update_wrapper(struct gl_context *ctx, struct radeon_renderbuffer *rrb,
 			rrb->base.DataType = GL_UNSIGNED_INT_24_8_EXT;
 			break;
 	}
-		
+
 	rrb->cpp = _mesa_get_format_bytes(texImage->TexFormat);
 	rrb->pitch = texImage->Width * rrb->cpp;
 	rrb->base.Format = texImage->TexFormat;
@@ -527,7 +527,7 @@ radeon_wrap_texture(struct gl_context * ctx, struct gl_texture_image *texImage)
    }
 
    return rrb;
-  
+
 }
 static void
 radeon_render_texture(struct gl_context * ctx,
@@ -670,7 +670,7 @@ void radeon_fbo_init(struct radeon_context *radeon)
 #endif
 }
 
-  
+
 void radeon_renderbuffer_set_bo(struct radeon_renderbuffer *rb,
 				struct radeon_bo *bo)
 {

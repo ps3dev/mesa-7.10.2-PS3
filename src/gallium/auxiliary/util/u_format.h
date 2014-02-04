@@ -80,7 +80,7 @@ struct util_format_block
 {
    /** Block width in pixels */
    unsigned width;
-   
+
    /** Block height in pixels */
    unsigned height;
 
@@ -323,7 +323,7 @@ struct util_format_description
 };
 
 
-extern const struct util_format_description 
+extern const struct util_format_description
 util_format_description_table[];
 
 
@@ -376,7 +376,7 @@ util_format_is_plain(enum pipe_format format)
    return desc->layout == UTIL_FORMAT_LAYOUT_PLAIN ? TRUE : FALSE;
 }
 
-static INLINE boolean 
+static INLINE boolean
 util_format_is_compressed(enum pipe_format format)
 {
    const struct util_format_description *desc = util_format_description(format);
@@ -396,7 +396,7 @@ util_format_is_compressed(enum pipe_format format)
    }
 }
 
-static INLINE boolean 
+static INLINE boolean
 util_format_is_s3tc(enum pipe_format format)
 {
    const struct util_format_description *desc = util_format_description(format);
@@ -409,7 +409,7 @@ util_format_is_s3tc(enum pipe_format format)
    return desc->layout == UTIL_FORMAT_LAYOUT_S3TC ? TRUE : FALSE;
 }
 
-static INLINE boolean 
+static INLINE boolean
 util_format_is_depth_or_stencil(enum pipe_format format)
 {
    const struct util_format_description *desc = util_format_description(format);
@@ -422,7 +422,7 @@ util_format_is_depth_or_stencil(enum pipe_format format)
    return desc->colorspace == UTIL_FORMAT_COLORSPACE_ZS ? TRUE : FALSE;
 }
 
-static INLINE boolean 
+static INLINE boolean
 util_format_is_depth_and_stencil(enum pipe_format format)
 {
    const struct util_format_description *desc = util_format_description(format);
@@ -727,26 +727,26 @@ util_format_get_nr_components(enum pipe_format format)
 
 void
 util_format_read_4f(enum pipe_format format,
-                    float *dst, unsigned dst_stride, 
-                    const void *src, unsigned src_stride, 
+                    float *dst, unsigned dst_stride,
+                    const void *src, unsigned src_stride,
                     unsigned x, unsigned y, unsigned w, unsigned h);
 
 void
 util_format_write_4f(enum pipe_format format,
-                     const float *src, unsigned src_stride, 
-                     void *dst, unsigned dst_stride, 
+                     const float *src, unsigned src_stride,
+                     void *dst, unsigned dst_stride,
                      unsigned x, unsigned y, unsigned w, unsigned h);
 
 void
 util_format_read_4ub(enum pipe_format format,
-                     uint8_t *dst, unsigned dst_stride, 
-                     const void *src, unsigned src_stride, 
+                     uint8_t *dst, unsigned dst_stride,
+                     const void *src, unsigned src_stride,
                      unsigned x, unsigned y, unsigned w, unsigned h);
 
 void
 util_format_write_4ub(enum pipe_format format,
-                      const uint8_t *src, unsigned src_stride, 
-                      void *dst, unsigned dst_stride, 
+                      const uint8_t *src, unsigned src_stride,
+                      void *dst, unsigned dst_stride,
                       unsigned x, unsigned y, unsigned w, unsigned h);
 
 /*

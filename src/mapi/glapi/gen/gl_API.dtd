@@ -124,13 +124,13 @@ glx:
          reply) commands
      large - set to "true" of the render command can use RenderLarge protocol.
      doubles_in_order - older commands always put GLdouble data at the
-         start of the render packet.  Newer commands (e.g., 
+         start of the render packet.  Newer commands (e.g.,
          ProgramEnvParameter4dvARB) put the in the order that they appear
          in the parameter list.
      always_array - some single commands take reply data as an array or as
          return value data (e.g., glGetLightfv).  Other single commands take
          reply data only as an array (e.g., glGetClipPlane).
-     handcode - some functions are just too complicated to generate 
+     handcode - some functions are just too complicated to generate
          (e.g., glSeperableFilter2D) or operate only on client-side data
          (e.g., glVertexPointer) and must be handcoded.
      ignore - some functions have an entry in the dispatch table, but aren't

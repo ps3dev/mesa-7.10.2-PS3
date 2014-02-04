@@ -100,8 +100,8 @@ lp_build_const_int_vec(struct gallivm_state *gallivm,
 
 
 LLVMValueRef
-lp_build_const_aos(struct gallivm_state *gallivm, struct lp_type type, 
-                   double r, double g, double b, double a, 
+lp_build_const_aos(struct gallivm_state *gallivm, struct lp_type type,
+                   double r, double g, double b, double a,
                    const unsigned char *swizzle);
 
 

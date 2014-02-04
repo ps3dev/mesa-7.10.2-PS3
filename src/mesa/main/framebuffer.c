@@ -253,7 +253,7 @@ _mesa_reference_framebuffer(struct gl_framebuffer **ptr,
       oldFb->RefCount--;
       deleteFlag = (oldFb->RefCount == 0);
       _glthread_UNLOCK_MUTEX(oldFb->Mutex);
-      
+
       if (deleteFlag)
          oldFb->Delete(oldFb);
 
@@ -542,7 +542,7 @@ _mesa_update_framebuffer_visual(struct gl_framebuffer *fb)
          const struct gl_renderbuffer *rb = fb->Attachment[i].Renderbuffer;
          const GLenum baseFormat = _mesa_get_format_base_format(rb->Format);
          const gl_format fmt = rb->Format;
-         
+
          if (baseFormat == GL_RGBA || baseFormat == GL_RGB ||
 	     baseFormat == GL_ALPHA) {
             fb->Visual.redBits = _mesa_get_format_bits(fmt, GL_RED_BITS);
@@ -793,7 +793,7 @@ update_framebuffer(struct gl_context *ctx, struct gl_framebuffer *fb)
                            ctx->Color.DrawBuffer, NULL);
       }
       if (fb->ColorReadBuffer != ctx->Pixel.ReadBuffer) {
-         
+
       }
    }
    else {

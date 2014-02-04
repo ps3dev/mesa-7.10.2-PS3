@@ -33,19 +33,19 @@
 #include "vbo_exec.h"
 
 
-static void clear_active_eval1( struct vbo_exec_context *exec, GLuint attr ) 
+static void clear_active_eval1( struct vbo_exec_context *exec, GLuint attr )
 {
    assert(attr < Elements(exec->eval.map1));
    exec->eval.map1[attr].map = NULL;
 }
 
-static void clear_active_eval2( struct vbo_exec_context *exec, GLuint attr ) 
+static void clear_active_eval2( struct vbo_exec_context *exec, GLuint attr )
 {
    assert(attr < Elements(exec->eval.map2));
    exec->eval.map2[attr].map = NULL;
 }
 
-static void set_active_eval1( struct vbo_exec_context *exec, GLuint attr, GLuint dim, 
+static void set_active_eval1( struct vbo_exec_context *exec, GLuint attr, GLuint dim,
 			      struct gl_1d_map *map )
 {
    assert(attr < Elements(exec->eval.map1));
@@ -53,9 +53,9 @@ static void set_active_eval1( struct vbo_exec_context *exec, GLuint attr, GLuint
       exec->eval.map1[attr].map = map;
       exec->eval.map1[attr].sz = dim;
    }
-} 
+}
 
-static void set_active_eval2( struct vbo_exec_context *exec, GLuint attr, GLuint dim, 
+static void set_active_eval2( struct vbo_exec_context *exec, GLuint attr, GLuint dim,
 			      struct gl_2d_map *map )
 {
    assert(attr < Elements(exec->eval.map2));
@@ -63,7 +63,7 @@ static void set_active_eval2( struct vbo_exec_context *exec, GLuint attr, GLuint
       exec->eval.map2[attr].map = map;
       exec->eval.map2[attr].sz = dim;
    }
-} 
+}
 
 void vbo_exec_eval_update( struct vbo_exec_context *exec )
 {
@@ -77,44 +77,44 @@ void vbo_exec_eval_update( struct vbo_exec_context *exec )
       clear_active_eval2( exec, attr );
    }
 
-   if (ctx->Eval.Map1Color4) 
+   if (ctx->Eval.Map1Color4)
       set_active_eval1( exec, VBO_ATTRIB_COLOR0, 4, &ctx->EvalMap.Map1Color4 );
-      
-   if (ctx->Eval.Map2Color4) 
+
+   if (ctx->Eval.Map2Color4)
       set_active_eval2( exec, VBO_ATTRIB_COLOR0, 4, &ctx->EvalMap.Map2Color4 );
 
-   if (ctx->Eval.Map1TextureCoord4) 
+   if (ctx->Eval.Map1TextureCoord4)
       set_active_eval1( exec, VBO_ATTRIB_TEX0, 4, &ctx->EvalMap.Map1Texture4 );
-   else if (ctx->Eval.Map1TextureCoord3) 
+   else if (ctx->Eval.Map1TextureCoord3)
       set_active_eval1( exec, VBO_ATTRIB_TEX0, 3, &ctx->EvalMap.Map1Texture3 );
-   else if (ctx->Eval.Map1TextureCoord2) 
+   else if (ctx->Eval.Map1TextureCoord2)
       set_active_eval1( exec, VBO_ATTRIB_TEX0, 2, &ctx->EvalMap.Map1Texture2 );
-   else if (ctx->Eval.Map1TextureCoord1) 
+   else if (ctx->Eval.Map1TextureCoord1)
       set_active_eval1( exec, VBO_ATTRIB_TEX0, 1, &ctx->EvalMap.Map1Texture1 );
 
-   if (ctx->Eval.Map2TextureCoord4) 
+   if (ctx->Eval.Map2TextureCoord4)
       set_active_eval2( exec, VBO_ATTRIB_TEX0, 4, &ctx->EvalMap.Map2Texture4 );
-   else if (ctx->Eval.Map2TextureCoord3) 
+   else if (ctx->Eval.Map2TextureCoord3)
       set_active_eval2( exec, VBO_ATTRIB_TEX0, 3, &ctx->EvalMap.Map2Texture3 );
-   else if (ctx->Eval.Map2TextureCoord2) 
+   else if (ctx->Eval.Map2TextureCoord2)
       set_active_eval2( exec, VBO_ATTRIB_TEX0, 2, &ctx->EvalMap.Map2Texture2 );
-   else if (ctx->Eval.Map2TextureCoord1) 
+   else if (ctx->Eval.Map2TextureCoord1)
       set_active_eval2( exec, VBO_ATTRIB_TEX0, 1, &ctx->EvalMap.Map2Texture1 );
 
-   if (ctx->Eval.Map1Normal) 
+   if (ctx->Eval.Map1Normal)
       set_active_eval1( exec, VBO_ATTRIB_NORMAL, 3, &ctx->EvalMap.Map1Normal );
 
-   if (ctx->Eval.Map2Normal) 
+   if (ctx->Eval.Map2Normal)
       set_active_eval2( exec, VBO_ATTRIB_NORMAL, 3, &ctx->EvalMap.Map2Normal );
 
-   if (ctx->Eval.Map1Vertex4) 
+   if (ctx->Eval.Map1Vertex4)
       set_active_eval1( exec, VBO_ATTRIB_POS, 4, &ctx->EvalMap.Map1Vertex4 );
-   else if (ctx->Eval.Map1Vertex3) 
+   else if (ctx->Eval.Map1Vertex3)
       set_active_eval1( exec, VBO_ATTRIB_POS, 3, &ctx->EvalMap.Map1Vertex3 );
 
-   if (ctx->Eval.Map2Vertex4) 
+   if (ctx->Eval.Map2Vertex4)
       set_active_eval2( exec, VBO_ATTRIB_POS, 4, &ctx->EvalMap.Map2Vertex4 );
-   else if (ctx->Eval.Map2Vertex3) 
+   else if (ctx->Eval.Map2Vertex3)
       set_active_eval2( exec, VBO_ATTRIB_POS, 3, &ctx->EvalMap.Map2Vertex3 );
 
    /* _NEW_PROGRAM */
@@ -125,11 +125,11 @@ void vbo_exec_eval_update( struct vbo_exec_context *exec )
       for (attr = 0; attr < 16; attr++) {
          /* _NEW_EVAL */
          assert(attr < Elements(ctx->Eval.Map1Attrib));
-         if (ctx->Eval.Map1Attrib[attr]) 
+         if (ctx->Eval.Map1Attrib[attr])
             set_active_eval1( exec, attr, 4, &ctx->EvalMap.Map1Attrib[attr] );
 
          assert(attr < Elements(ctx->Eval.Map2Attrib));
-         if (ctx->Eval.Map2Attrib[attr]) 
+         if (ctx->Eval.Map2Attrib[attr])
             set_active_eval2( exec, attr, 4, &ctx->EvalMap.Map2Attrib[attr] );
       }
    }
@@ -151,8 +151,8 @@ void vbo_exec_do_EvalCoord1f(struct vbo_exec_context *exec, GLfloat u)
 
 	 ASSIGN_4V(data, 0, 0, 0, 1);
 
-	 _math_horner_bezier_curve(map->Points, data, uu, 
-				   exec->eval.map1[attr].sz, 
+	 _math_horner_bezier_curve(map->Points, data, uu,
+				   exec->eval.map1[attr].sz,
 				   map->Order);
 
 	 COPY_SZ_4V( exec->vtx.attrptr[attr],
@@ -170,22 +170,22 @@ void vbo_exec_do_EvalCoord1f(struct vbo_exec_context *exec, GLfloat u)
 
       ASSIGN_4V(vertex, 0, 0, 0, 1);
 
-      _math_horner_bezier_curve(map->Points, vertex, uu, 
-				exec->eval.map1[0].sz, 
+      _math_horner_bezier_curve(map->Points, vertex, uu,
+				exec->eval.map1[0].sz,
 				map->Order);
 
-      if (exec->eval.map1[0].sz == 4) 
+      if (exec->eval.map1[0].sz == 4)
 	 CALL_Vertex4fv(GET_DISPATCH(), ( vertex ));
       else
-	 CALL_Vertex3fv(GET_DISPATCH(), ( vertex )); 
+	 CALL_Vertex3fv(GET_DISPATCH(), ( vertex ));
    }
 }
 
 
 
-void vbo_exec_do_EvalCoord2f( struct vbo_exec_context *exec, 
+void vbo_exec_do_EvalCoord2f( struct vbo_exec_context *exec,
 			      GLfloat u, GLfloat v )
-{   
+{
    GLuint attr;
 
    for (attr = 1; attr <= VBO_ATTRIB_TEX7; attr++) {
@@ -197,10 +197,10 @@ void vbo_exec_do_EvalCoord2f( struct vbo_exec_context *exec,
 
 	 ASSIGN_4V(data, 0, 0, 0, 1);
 
-	 _math_horner_bezier_surf(map->Points, 
-				  data, 
-				  uu, vv, 
-				  exec->eval.map2[attr].sz, 
+	 _math_horner_bezier_surf(map->Points,
+				  data,
+				  uu, vv,
+				  exec->eval.map2[attr].sz,
 				  map->Uorder, map->Vorder);
 
 	 COPY_SZ_4V( exec->vtx.attrptr[attr],
@@ -223,7 +223,7 @@ void vbo_exec_do_EvalCoord2f( struct vbo_exec_context *exec,
 	 GLfloat normal[4];
          GLfloat du[4], dv[4];
 
-         _math_de_casteljau_surf(map->Points, vertex, du, dv, uu, vv, 
+         _math_de_casteljau_surf(map->Points, vertex, du, dv, uu, vv,
 				 exec->eval.map2[0].sz,
 				 map->Uorder, map->Vorder);
 
@@ -231,7 +231,7 @@ void vbo_exec_do_EvalCoord2f( struct vbo_exec_context *exec,
 	    du[0] = du[0]*vertex[3] - du[3]*vertex[0];
 	    du[1] = du[1]*vertex[3] - du[3]*vertex[1];
 	    du[2] = du[2]*vertex[3] - du[3]*vertex[2];
-	 
+
 	    dv[0] = dv[0]*vertex[3] - dv[3]*vertex[0];
 	    dv[1] = dv[1]*vertex[3] - dv[3]*vertex[1];
 	    dv[2] = dv[2]*vertex[3] - dv[3]*vertex[2];
@@ -248,15 +248,15 @@ void vbo_exec_do_EvalCoord2f( struct vbo_exec_context *exec,
 
       }
       else {
-         _math_horner_bezier_surf(map->Points, vertex, uu, vv, 
+         _math_horner_bezier_surf(map->Points, vertex, uu, vv,
 				  exec->eval.map2[0].sz,
 				  map->Uorder, map->Vorder);
       }
 
-      if (exec->vtx.attrsz[0] == 4) 
+      if (exec->vtx.attrsz[0] == 4)
 	 CALL_Vertex4fv(GET_DISPATCH(), ( vertex ));
       else
-	 CALL_Vertex3fv(GET_DISPATCH(), ( vertex )); 
+	 CALL_Vertex3fv(GET_DISPATCH(), ( vertex ));
    }
 }
 

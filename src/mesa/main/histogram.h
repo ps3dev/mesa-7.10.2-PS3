@@ -1,7 +1,7 @@
 /**
  * \file histogram.h
  * Histogram.
- * 
+ *
  * \if subset
  * (No-op)
  *

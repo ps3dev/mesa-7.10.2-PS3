@@ -1,9 +1,9 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  * Copyright 2009 VMware, Inc.  All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -11,11 +11,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -23,7 +23,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -240,7 +240,7 @@ gen_alpha_test(const struct pipe_depth_stencil_alpha_state *dsa,
 
 /**
  * This pair of functions is used inline to allocate and deallocate
- * optional constant registers.  Once a constant is discovered to be 
+ * optional constant registers.  Once a constant is discovered to be
  * needed, we will likely need it again, so we don't want to deallocate
  * it and have to allocate and load it again unnecessarily.
  */
@@ -417,7 +417,7 @@ gen_blend(const struct pipe_blend_state *blend,
    /*
     * Compute Src RGB terms.  We're actually looking for the value
     * of (the appropriate RGB factors) * (the incoming source RGB color),
-    * because in some cases (like PIPE_BLENDFACTOR_ONE and 
+    * because in some cases (like PIPE_BLENDFACTOR_ONE and
     * PIPE_BLENDFACTOR_ZERO) we can avoid doing unnecessary math.
     */
    switch (blend->rt[0].rgb_src_factor) {
@@ -446,7 +446,7 @@ gen_blend(const struct pipe_blend_state *blend,
       spe_fm(f, term1B_reg, fragB_reg, fragA_reg);
       break;
    case PIPE_BLENDFACTOR_INV_SRC_COLOR:
-      /* factors = (1-R,1-G,1-B), so term = (R*(1-R), G*(1-G), B*(1-B)) 
+      /* factors = (1-R,1-G,1-B), so term = (R*(1-R), G*(1-G), B*(1-B))
        * or in other words term = (R-R*R, G-G*G, B-B*B)
        * fnms(a,b,c,d) computes a = d - b*c
        */
@@ -485,7 +485,7 @@ gen_blend(const struct pipe_blend_state *blend,
       spe_fm(f, term1B_reg, fragB_reg, fbA_reg);
       break;
    case PIPE_BLENDFACTOR_INV_DST_ALPHA:
-      /* factors = (1-Afb, 1-Afb, 1-Afb), so term = (R*(1-Afb),G*(1-Afb),B*(1-Afb)) 
+      /* factors = (1-Afb, 1-Afb, 1-Afb), so term = (R*(1-Afb),G*(1-Afb),B*(1-Afb))
        * or term = (R-R*Afb,G-G*Afb,b-B*Afb)
        * fnms(a,b,c,d) computes a = d - b*c
        */
@@ -516,7 +516,7 @@ gen_blend(const struct pipe_blend_state *blend,
       setup_const_register(f, &constR_reg, blend_color->color[0]);
       setup_const_register(f, &constG_reg, blend_color->color[1]);
       setup_const_register(f, &constB_reg, blend_color->color[2]);
-      /* factor = (1-Rc,1-Gc,1-Bc), so term = (R*(1-Rc),G*(1-Gc),B*(1-Bc)) 
+      /* factor = (1-Rc,1-Gc,1-Bc), so term = (R*(1-Rc),G*(1-Gc),B*(1-Bc))
        * or term = (R-R*Rc, G-G*Gc, B-B*Bc)
        * fnms(a,b,c,d) computes a = d - b*c
        */
@@ -540,7 +540,7 @@ gen_blend(const struct pipe_blend_state *blend,
    case PIPE_BLENDFACTOR_SRC_ALPHA_SATURATE:
       /* We'll need the optional {1,1,1,1} register */
       setup_const_register(f, &one_reg, 1.0f);
-      /* factor = (min(A,1-Afb),min(A,1-Afb),min(A,1-Afb)), so 
+      /* factor = (min(A,1-Afb),min(A,1-Afb),min(A,1-Afb)), so
        * term = (R*min(A,1-Afb), G*min(A,1-Afb), B*min(A,1-Afb))
        * We could expand the term (as a*min(b,c) == min(a*b,a*c)
        * as long as a is positive), but then we'd have to do three
@@ -668,7 +668,7 @@ gen_blend(const struct pipe_blend_state *blend,
       spe_fm(f, term2B_reg, fbB_reg, fragB_reg);
       break;
    case PIPE_BLENDFACTOR_INV_SRC_COLOR:
-      /* factors = (1-R,1-G,1-B), so term = (Rfb*(1-R), Gfb*(1-G), Bfb*(1-B)) 
+      /* factors = (1-R,1-G,1-B), so term = (Rfb*(1-R), Gfb*(1-G), Bfb*(1-B))
        * or in other words term = (Rfb-Rfb*R, Gfb-Gfb*G, Bfb-Bfb*B)
        * fnms(a,b,c,d) computes a = d - b*c
        */
@@ -712,7 +712,7 @@ gen_blend(const struct pipe_blend_state *blend,
       spe_fm(f, term2B_reg, fbB_reg, fbA_reg);
       break;
    case PIPE_BLENDFACTOR_INV_DST_ALPHA:
-      /* factors = (1-Afb, 1-Afb, 1-Afb), so term = (Rfb*(1-Afb),Gfb*(1-Afb),Bfb*(1-Afb)) 
+      /* factors = (1-Afb, 1-Afb, 1-Afb), so term = (Rfb*(1-Afb),Gfb*(1-Afb),Bfb*(1-Afb))
        * or term = (Rfb-Rfb*Afb,Gfb-Gfb*Afb,Bfb-Bfb*Afb)
        * fnms(a,b,c,d) computes a = d - b*c
        */
@@ -743,7 +743,7 @@ gen_blend(const struct pipe_blend_state *blend,
       setup_const_register(f, &constR_reg, blend_color->color[0]);
       setup_const_register(f, &constG_reg, blend_color->color[1]);
       setup_const_register(f, &constB_reg, blend_color->color[2]);
-      /* factor = (1-Rc,1-Gc,1-Bc), so term = (Rfb*(1-Rc),Gfb*(1-Gc),Bfb*(1-Bc)) 
+      /* factor = (1-Rc,1-Gc,1-Bc), so term = (Rfb*(1-Rc),Gfb*(1-Gc),Bfb*(1-Bc))
        * or term = (Rfb-Rfb*Rc, Gfb-Gfb*Gc, Bfb-Bfb*Bc)
        * fnms(a,b,c,d) computes a = d - b*c
        */
@@ -1114,8 +1114,8 @@ gen_colormask(struct spe_function *f,
          ASSERT(0);
    }
 
-   /* For each R, G, B, and A component we're supposed to mask out, 
-    * clear its bits.   Then our mask operation later will work 
+   /* For each R, G, B, and A component we're supposed to mask out,
+    * clear its bits.   Then our mask operation later will work
     * as expected.
     */
    if (!(colormask & PIPE_MASK_R)) {
@@ -1144,7 +1144,7 @@ gen_colormask(struct spe_function *f,
    /* Use the mask register to select between the fragment color
     * values and the frame buffer color values.  Wherever the
     * mask has a 0 bit, the current frame buffer color should override
-    * the fragment color.  Wherever the mask has a 1 bit, the 
+    * the fragment color.  Wherever the mask has a 1 bit, the
     * fragment color should persevere.  The Select Bits (selb rt, rA, rB, rM)
     * instruction will select bits from its first operand rA wherever the
     * the mask bits rM are 0, and from its second operand rB wherever the
@@ -1162,7 +1162,7 @@ gen_colormask(struct spe_function *f,
  * This function is annoyingly similar to gen_depth_test(), above, except
  * that instead of comparing two varying values (i.e. fragment and buffer),
  * we're comparing a varying value with a static value.  As such, we have
- * access to the Compare Immediate instructions where we don't in 
+ * access to the Compare Immediate instructions where we don't in
  * gen_depth_test(), which is what makes us very different.
  *
  * There's some added complexity if there's a non-trivial state->mask
@@ -1179,7 +1179,7 @@ gen_stencil_test(struct spe_function *f,
                  const unsigned ref_value,
                  uint stencil_max_value,
                  int fragment_mask_reg,
-                 int fbS_reg, 
+                 int fbS_reg,
                  int stencil_pass_reg)
 {
    /* Generate code that puts the set of passing fragments into the
@@ -1242,8 +1242,8 @@ gen_stencil_test(struct spe_function *f,
       if (state->valuemask == stencil_max_value) {
          /* stencil_pass = fragment_mask & (reference > s) */
          /* There's no convenient Compare Less Than Immediate instruction, so
-          * we'll have to do this one the harder way, by loading a register and 
-          * comparing directly.  Compare Logical Greater Than Word (clgt) 
+          * we'll have to do this one the harder way, by loading a register and
+          * comparing directly.  Compare Logical Greater Than Word (clgt)
           * treats its operands as unsigned - no sign extension.
           */
          int tmp_reg = spe_allocate_available_register(f);
@@ -1267,7 +1267,7 @@ gen_stencil_test(struct spe_function *f,
 
    case PIPE_FUNC_GEQUAL:
       if (state->valuemask == stencil_max_value) {
-         /* stencil_pass = fragment_mask & (reference >= s) 
+         /* stencil_pass = fragment_mask & (reference >= s)
           *              = fragment_mask & ~(s > reference) */
          spe_compare_greater_uint(f, stencil_pass_reg, fbS_reg,
                                   ref_value);
@@ -1353,9 +1353,9 @@ gen_stencil_values(struct spe_function *f,
    ASSERT(fbS_reg != newS_reg);
 
    /* The code also assumes that the stencil_max_value is of the form
-    * 2^n-1 and can therefore be used as a mask for the valid bits in 
+    * 2^n-1 and can therefore be used as a mask for the valid bits in
     * addition to a maximum.  Make sure this is the case as well.
-    * The clever math below exploits the fact that incrementing a 
+    * The clever math below exploits the fact that incrementing a
     * binary number serves to flip all the bits of a number starting at
     * the LSB and continuing to (and including) the first zero bit
     * found.  That means that a number and its increment will always
@@ -1411,7 +1411,7 @@ gen_stencil_values(struct spe_function *f,
    }
    case PIPE_STENCIL_OP_INCR_WRAP:
       /* newS = (s == max ? 0 : s + 1), but since max is 2^n-1, we can
-       * do a normal add and mask off the correct bits 
+       * do a normal add and mask off the correct bits
        */
       spe_ai(f, newS_reg, fbS_reg, 1);
       spe_and_uint(f, newS_reg, newS_reg, stencil_max_value);
@@ -1443,7 +1443,7 @@ gen_stencil_values(struct spe_function *f,
  * and calculates a new set of values based on the stencil operation,
  * or it reuses a register allocation and calculation done for an
  * earlier (matching) operation, or it reuses the fbS_reg register
- * (if the stencil operation is KEEP, which doesn't change the 
+ * (if the stencil operation is KEEP, which doesn't change the
  * stencil buffer).
  *
  * Since this function allocates a variable number of registers,
@@ -1456,9 +1456,9 @@ gen_get_stencil_values(struct spe_function *f,
                        const struct pipe_stencil_state *stencil,
                        const unsigned ref_value,
                        const uint depth_enabled,
-                       int fbS_reg, 
+                       int fbS_reg,
                        int *fail_reg,
-                       int *zfail_reg, 
+                       int *zfail_reg,
                        int *zpass_reg)
 {
    uint zfail_op;
@@ -1490,7 +1490,7 @@ gen_get_stencil_values(struct spe_function *f,
    }
    else {
       *fail_reg = spe_allocate_available_register(f);
-      gen_stencil_values(f, stencil->fail_op, ref_value, 
+      gen_stencil_values(f, stencil->fail_op, ref_value,
          0xff, fbS_reg, *fail_reg);
    }
 
@@ -1503,7 +1503,7 @@ gen_get_stencil_values(struct spe_function *f,
    }
    else {
       *zfail_reg = spe_allocate_available_register(f);
-      gen_stencil_values(f, stencil->zfail_op, ref_value, 
+      gen_stencil_values(f, stencil->zfail_op, ref_value,
          0xff, fbS_reg, *zfail_reg);
    }
 
@@ -1518,7 +1518,7 @@ gen_get_stencil_values(struct spe_function *f,
    }
    else {
       *zpass_reg = spe_allocate_available_register(f);
-      gen_stencil_values(f, stencil->zpass_op, ref_value, 
+      gen_stencil_values(f, stencil->zpass_op, ref_value,
          0xff, fbS_reg, *zpass_reg);
    }
 }
@@ -1529,11 +1529,11 @@ gen_get_stencil_values(struct spe_function *f,
  * the register if depth is not enabled.
  */
 static boolean
-gen_stencil_depth_test(struct spe_function *f, 
+gen_stencil_depth_test(struct spe_function *f,
                        const struct pipe_depth_stencil_alpha_state *dsa,
                        const struct pipe_stencil_ref *stencil_ref,
                        const uint facing,
-                       const int mask_reg, const int fragZ_reg, 
+                       const int mask_reg, const int fragZ_reg,
                        const int fbZ_reg, const int fbS_reg)
 {
    /* True if we've generated code that could require writeback to the
@@ -1556,17 +1556,17 @@ gen_stencil_depth_test(struct spe_function *f,
    int newS_reg;
    unsigned ref_value;
 
-   /* Stenciling is quite complex: up to six different configurable stencil 
+   /* Stenciling is quite complex: up to six different configurable stencil
     * operations/calculations can be required (three each for front-facing
-    * and back-facing fragments).  Many of those operations will likely 
-    * be identical, so there's good reason to try to avoid calculating 
-    * the same values more than once (which unfortunately makes the code less 
+    * and back-facing fragments).  Many of those operations will likely
+    * be identical, so there's good reason to try to avoid calculating
+    * the same values more than once (which unfortunately makes the code less
     * straightforward).
     *
-    * To make register management easier, we start a new 
+    * To make register management easier, we start a new
     * register set; we can release all the registers in the set at
     * once, and avoid having to keep track of exactly which registers
-    * we allocate.  We can still allocate and free registers as 
+    * we allocate.  We can still allocate and free registers as
     * desired (if we know we no longer need a register), but we don't
     * have to spend the complexity to track the more difficult variant
     * register usage scenarios.
@@ -1654,7 +1654,7 @@ gen_stencil_depth_test(struct spe_function *f,
     * the mask of valid fragments that failed the stencil test.  We
     * have to do this before we run a depth test (because the
     * depth test should not be performed on fragments that failed the
-    * stencil test, and because the depth test will update the 
+    * stencil test, and because the depth test will update the
     * mask of valid fragments based on the results of the depth test).
     */
    spe_comment(f, 0, "Computing stencil fail mask and updating fragment mask");
@@ -1684,12 +1684,12 @@ gen_stencil_depth_test(struct spe_function *f,
       spe_comment(f, 0, facing == CELL_FACING_FRONT
                   ? "Computing front-facing stencil values"
                   : "Computing back-facing stencil values");
-      gen_get_stencil_values(f, stencil, ref_value, dsa->depth.enabled, fbS_reg, 
-         &stencil_fail_values, &stencil_pass_depth_fail_values, 
+      gen_get_stencil_values(f, stencil, ref_value, dsa->depth.enabled, fbS_reg,
+         &stencil_fail_values, &stencil_pass_depth_fail_values,
          &stencil_pass_depth_pass_values);
-   }  
+   }
 
-   /* We now have all the stencil values we need.  We also need 
+   /* We now have all the stencil values we need.  We also need
     * the results of the depth test to figure out which
     * stencil values will become the new stencil values.  (Even if
     * we aren't actually calculating stencil values, we need to apply
@@ -1943,7 +1943,7 @@ gen_depth_stencil(struct cell_context *cell,
       spe_comment(f, 0, "Perform stencil test");
 
       /* Note that fbZ_reg may not be set on entry, if stenciling
-       * is enabled but there's no Z-buffer.  The 
+       * is enabled but there's no Z-buffer.  The
        * gen_stencil_depth_test() function must ignore the
        * fbZ_reg register if depth is not enabled.
        */
@@ -2023,7 +2023,7 @@ gen_depth_stencil(struct cell_context *cell,
  * should be much faster.
  *
  * \param cell  the rendering context (in)
- * \param facing whether the generated code is for front-facing or 
+ * \param facing whether the generated code is for front-facing or
  *              back-facing fragments
  * \param f     the generated function (in/out); on input, the function
  *              must already have been initialized.  On exit, whatever
@@ -2182,7 +2182,7 @@ cell_gen_fragment_function(struct cell_context *cell,
 
    if (cell->debug_flags & CELL_DEBUG_ASM) {
       char buffer[1024];
-      sprintf(buffer, "End %s-facing per-fragment ops: %d instructions", 
+      sprintf(buffer, "End %s-facing per-fragment ops: %d instructions",
          facing == CELL_FACING_FRONT ? "front" : "back", f->num_inst);
       spe_comment(f, -4, buffer);
    }

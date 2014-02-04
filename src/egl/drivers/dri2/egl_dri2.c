@@ -190,7 +190,7 @@ dri2_add_config(_EGLDisplay *disp, const __DRIconfig *dri_config, int id,
 
    dri2_dpy = disp->DriverData;
    _eglInitConfig(&base, disp, id);
-   
+
    i = 0;
    double_buffer = 0;
    bind_to_texture_rgb = 0;
@@ -206,7 +206,7 @@ dri2_add_config(_EGLDisplay *disp, const __DRIconfig *dri_config, int id,
 	 else
 	    /* not valid */;
 	 _eglSetConfigKey(&base, EGL_COLOR_BUFFER_TYPE, value);
-	 break;	 
+	 break;
 
       case __DRI_ATTRIB_CONFIG_CAVEAT:
          if (value & __DRI_ATTRIB_NON_CONFORMANT_CONFIG)
@@ -351,7 +351,7 @@ dri2_get_buffers(__DRIdrawable * driDrawable,
    *out_count = reply->count;
    dri2_surf->base.Width = *width = reply->width;
    dri2_surf->base.Height = *height = reply->height;
-   dri2_process_buffers(dri2_surf, buffers, *out_count);		       
+   dri2_process_buffers(dri2_surf, buffers, *out_count);
 
    free(reply);
 
@@ -430,7 +430,7 @@ dri2_get_buffers_with_format(__DRIdrawable * driDrawable,
    dri2_surf->base.Width = *width = reply->width;
    dri2_surf->base.Height = *height = reply->height;
    *out_count = reply->count;
-   dri2_process_buffers(dri2_surf, buffers, *out_count);		       
+   dri2_process_buffers(dri2_surf, buffers, *out_count);
 
    free(reply);
 
@@ -478,7 +478,7 @@ dri2_bind_extensions(struct dri2_egl_display *dri2_dpy,
 	 }
       }
    }
-   
+
    for (j = 0; matches[j].name; j++) {
       field = ((char *) dri2_dpy + matches[j].offset);
       if (*(const __DRIextension **) field == NULL) {
@@ -524,7 +524,7 @@ dri2_connect(struct dri2_egl_display *dri2_dpy)
    xfixes_query_cookie = xcb_xfixes_query_version(dri2_dpy->conn,
 						  XCB_XFIXES_MAJOR_VERSION,
 						  XCB_XFIXES_MINOR_VERSION);
-   
+
    dri2_query_cookie = xcb_dri2_query_version (dri2_dpy->conn,
 					       XCB_DRI2_MAJOR_VERSION,
 					       XCB_DRI2_MINOR_VERSION);
@@ -533,7 +533,7 @@ dri2_connect(struct dri2_egl_display *dri2_dpy)
    connect_cookie = xcb_dri2_connect_unchecked (dri2_dpy->conn,
 						s.data->root,
 						XCB_DRI2_DRIVER_TYPE_DRI);
-   
+
    xfixes_query =
       xcb_xfixes_query_version_reply (dri2_dpy->conn,
 				      xfixes_query_cookie, &error);
@@ -566,7 +566,7 @@ dri2_connect(struct dri2_egl_display *dri2_dpy)
    dri2_dpy->device_name =
       dri2_strndup(xcb_dri2_connect_device_name (connect),
 		   xcb_dri2_connect_device_name_length (connect));
-		   
+
    dri2_dpy->driver_name =
       dri2_strndup(xcb_dri2_connect_driver_name (connect),
 		   xcb_dri2_connect_driver_name_length (connect));
@@ -653,7 +653,7 @@ dri2_add_configs_for_visuals(struct dri2_egl_display *dri2_dpy,
 	 }
       }
 
-      xcb_depth_next(&d);      
+      xcb_depth_next(&d);
    }
 
    if (!_eglGetArraySize(disp->Configs)) {
@@ -833,7 +833,7 @@ dri2_initialize_x11(_EGLDriver *drv, _EGLDisplay *disp,
       dri2_dpy->loader_extension.flushFrontBuffer = dri2_flush_front_buffer;
       dri2_dpy->loader_extension.getBuffersWithFormat = NULL;
    }
-      
+
    dri2_dpy->extensions[0] = &dri2_dpy->loader_extension.base;
    dri2_dpy->extensions[1] = &image_lookup_extension.base;
    dri2_dpy->extensions[2] = NULL;
@@ -1567,14 +1567,14 @@ dri2_create_context(_EGLDriver *drv, _EGLDisplay *disp, _EGLConfig *conf,
 	 dri2_dpy->dri2->createNewContextForAPI(dri2_dpy->dri_screen,
 						api,
 						dri_config,
-						dri2_ctx_shared ? 
+						dri2_ctx_shared ?
 						dri2_ctx_shared->dri_context : NULL,
 						dri2_ctx);
    } else if (api == __DRI_API_OPENGL) {
       dri2_ctx->dri_context =
 	 dri2_dpy->dri2->createNewContext(dri2_dpy->dri_screen,
 					  dri2_config->dri_config,
-					  dri2_ctx_shared ? 
+					  dri2_ctx_shared ?
 					  dri2_ctx_shared->dri_context : NULL,
 					  dri2_ctx);
    } else {
@@ -1603,7 +1603,7 @@ dri2_destroy_surface(_EGLDriver *drv, _EGLDisplay *disp, _EGLSurface *surf)
       return EGL_TRUE;
 
    (*dri2_dpy->core->destroyDrawable)(dri2_surf->dri_drawable);
-   
+
    xcb_dri2_destroy_drawable (dri2_dpy->conn, dri2_surf->drawable);
 
    if (surf->Type == EGL_PBUFFER_BIT)
@@ -1700,7 +1700,7 @@ dri2_create_surface(_EGLDriver *drv, _EGLDisplay *disp, EGLint type,
       _eglError(EGL_BAD_ALLOC, "dri2_create_surface");
       return NULL;
    }
-   
+
    if (!_eglInitSurface(&dri2_surf->base, disp, type, conf, attrib_list))
       goto cleanup_surf;
 
@@ -1715,7 +1715,7 @@ dri2_create_surface(_EGLDriver *drv, _EGLDisplay *disp, EGLint type,
       dri2_surf->drawable = window;
    }
 
-   dri2_surf->dri_drawable = 
+   dri2_surf->dri_drawable =
       (*dri2_dpy->dri2->createNewDrawable) (dri2_dpy->dri_screen,
 					    dri2_conf->dri_config, dri2_surf);
    if (dri2_surf->dri_drawable == NULL) {
@@ -2103,7 +2103,7 @@ dri2_create_image_khr_renderbuffer(_EGLDisplay *disp, _EGLContext *ctx,
    if (!_eglInitImage(&dri2_img->base, disp))
       return EGL_NO_IMAGE_KHR;
 
-   dri2_img->dri_image = 
+   dri2_img->dri_image =
       dri2_dpy->image->createImageFromRenderbuffer(dri2_ctx->dri_context,
 						   renderbuffer,
 						   dri2_img);
@@ -2259,7 +2259,7 @@ dri2_create_drm_image_mesa(_EGLDriver *drv, _EGLDisplay *disp,
 
    valid_mask =
       EGL_DRM_BUFFER_USE_SCANOUT_MESA |
-      EGL_DRM_BUFFER_USE_SHARE_MESA; 
+      EGL_DRM_BUFFER_USE_SHARE_MESA;
    if (attrs.DRMBufferUseMESA & ~valid_mask) {
       _eglLog(_EGL_WARNING, "bad image use bit 0x%04x",
             attrs.DRMBufferUseMESA & ~valid_mask);
@@ -2272,7 +2272,7 @@ dri2_create_drm_image_mesa(_EGLDriver *drv, _EGLDisplay *disp,
    if (attrs.DRMBufferUseMESA & EGL_DRM_BUFFER_USE_SCANOUT_MESA)
       dri_use |= __DRI_IMAGE_USE_SCANOUT;
 
-   dri2_img->dri_image = 
+   dri2_img->dri_image =
       dri2_dpy->image->createImage(dri2_dpy->dri_screen,
 				   attrs.Width, attrs.Height,
                                    format, dri_use, dri2_img);

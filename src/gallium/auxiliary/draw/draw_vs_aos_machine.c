@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -68,9 +68,9 @@ void PIPE_CDECL aos_do_lit( struct aos_machine *machine,
                             const float *in,
                             unsigned count )
 {
-   if (in[0] > 0) 
+   if (in[0] > 0)
    {
-      if (in[1] <= 0.0) 
+      if (in[1] <= 0.0)
       {
          result[0] = 1.0F;
          result[1] = in[0];
@@ -79,7 +79,7 @@ void PIPE_CDECL aos_do_lit( struct aos_machine *machine,
       }
       else
       {
-         const float epsilon = 1.0F / 256.0F;    
+         const float epsilon = 1.0F / 256.0F;
          float exponent = CLAMP(in[3], -(128.0F - epsilon), (128.0F - epsilon));
          result[0] = 1.0F;
          result[1] = in[0];
@@ -87,7 +87,7 @@ void PIPE_CDECL aos_do_lit( struct aos_machine *machine,
          result[3] = 1.0;
       }
    }
-   else 
+   else
    {
       result[0] = 1.0F;
       result[1] = 0.0;
@@ -102,9 +102,9 @@ static void PIPE_CDECL do_lit_lut( struct aos_machine *machine,
                                    const float *in,
                                    unsigned count )
 {
-   if (in[0] > 0) 
+   if (in[0] > 0)
    {
-      if (in[1] <= 0.0) 
+      if (in[1] <= 0.0)
       {
          result[0] = 1.0F;
          result[1] = in[0];
@@ -112,7 +112,7 @@ static void PIPE_CDECL do_lit_lut( struct aos_machine *machine,
          result[3] = 1.0F;
          return;
       }
-      
+
       if (machine->lit_info[count].shine_tab->exponent != in[3]) {
          machine->lit_info[count].func = aos_do_lit;
          goto no_luck;
@@ -124,17 +124,17 @@ static void PIPE_CDECL do_lit_lut( struct aos_machine *machine,
          float f = in[1] * 256;
          int k = (int)f;
          float frac = f - (float)k;
-         
+
          result[0] = 1.0F;
          result[1] = in[0];
          result[2] = tab[k] + frac*(tab[k+1]-tab[k]);
          result[3] = 1.0;
          return;
       }
-      
+
    no_luck:
       {
-         const float epsilon = 1.0F / 256.0F;    
+         const float epsilon = 1.0F / 256.0F;
          float exponent = CLAMP(in[3], -(128.0F - epsilon), (128.0F - epsilon));
          result[0] = 1.0F;
          result[1] = in[0];
@@ -142,7 +142,7 @@ static void PIPE_CDECL do_lit_lut( struct aos_machine *machine,
          result[3] = 1.0;
       }
    }
-   else 
+   else
    {
       result[0] = 1.0F;
       result[1] = 0.0;
@@ -155,17 +155,17 @@ static void PIPE_CDECL do_lit_lut( struct aos_machine *machine,
 static void do_populate_lut( struct shine_tab *tab,
                              float unclamped_exponent )
 {
-   const float epsilon = 1.0F / 256.0F;    
+   const float epsilon = 1.0F / 256.0F;
    float exponent = CLAMP(unclamped_exponent, -(128.0F - epsilon), (128.0F - epsilon));
    unsigned i;
 
    tab->exponent = unclamped_exponent; /* for later comparison */
-   
+
    tab->values[0] = 0;
    if (exponent == 0) {
       for (i = 1; i < 258; i++) {
          tab->values[i] = 1.0;
-      }      
+      }
    }
    else {
       for (i = 1; i < 258; i++) {
@@ -285,7 +285,7 @@ struct aos_machine *draw_vs_aos_machine( void )
                                X87_CW_PRECISION_DOUBLE_EXT);
 
    assert(machine->fpu_rnd_nearest == 0x37f);
-                               
+
    machine->fpu_rnd_neg_inf = (X87_CW_EXCEPTION_INV_OP |
                                X87_CW_EXCEPTION_DENORM_OP |
                                X87_CW_EXCEPTION_ZERO_DIVIDE |

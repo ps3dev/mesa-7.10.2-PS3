@@ -95,15 +95,15 @@ struct via_renderbuffer {
    GLuint pitch;
    GLuint bpp;
    char *map;
-   GLuint orig;		/* The drawing origin, 
+   GLuint orig;		/* The drawing origin,
 			 * at (drawX,drawY) in screen space.
 			 */
    char *origMap;
 
    int drawX;                   /* origin of drawable in draw buffer */
-   int drawY;    
-   int drawW;                  
-   int drawH;    
+   int drawY;
+   int drawW;
+   int drawH;
 
    __DRIdrawable *dPriv;
 };
@@ -117,7 +117,7 @@ struct via_tex_buffer {
    unsigned long index;
    unsigned long offset;
    GLuint size;
-   GLuint memType;    
+   GLuint memType;
    unsigned char *bufAddr;
    GLuint texBase;
    GLuint lastUsed;
@@ -147,12 +147,12 @@ struct via_texture_object {
    } regTexBaseAndPitch[12];
 
    GLint firstLevel, lastLevel;  /* upload tObj->Image[first .. lastLevel] */
-};              
+};
 
 
 
 struct via_context {
-   GLint refcount;   
+   GLint refcount;
    struct gl_context *glCtx;
    struct gl_context *shareCtx;
 
@@ -179,7 +179,7 @@ struct via_context {
 
    GLubyte    *dma;
    viaRegion tex;
-    
+
    /* Bit flag to keep 0track of fallbacks.
     */
    GLuint Fallback;
@@ -207,9 +207,9 @@ struct via_context {
    GLuint dmaCliprectAddr;
    GLuint dmaLastPrim;
    GLboolean useAgp;
-   
 
-   /* Fallback rasterization functions 
+
+   /* Fallback rasterization functions
     */
    via_point_func drawPoint;
    via_line_func drawLine;
@@ -246,7 +246,7 @@ struct via_context {
 
    GLuint regHLP;
    GLuint regHLPRF;
-   
+
    GLuint regHTXnCLOD[2];
    GLuint regHTXnTB[2];
    GLuint regHTXnMPMD[2];
@@ -336,12 +336,12 @@ struct via_context {
    GLuint lastBreadcrumbWrite;
    GLuint lastSwap[2];
    GLuint lastDma;
-   
+
    GLuint total_alloc[VIA_MEM_SYSTEM+1];
 
    struct via_tex_buffer tex_image_list[VIA_MEM_SYSTEM+1];
    struct via_tex_buffer freed_tex_buffers;
-   
+
 };
 
 
@@ -350,7 +350,7 @@ struct via_context {
 
 
 
-/* Lock the hardware and validate our state.  
+/* Lock the hardware and validate our state.
  */
 #define LOCK_HARDWARE(vmesa)                                	\
 	do {                                                    \
@@ -365,9 +365,9 @@ struct via_context {
 /* Release the kernel lock.
  */
 #define UNLOCK_HARDWARE(vmesa)                                  	\
-	DRM_UNLOCK(vmesa->driFd, vmesa->driHwLock, vmesa->hHWContext);	
+	DRM_UNLOCK(vmesa->driFd, vmesa->driHwLock, vmesa->hHWContext);
 
-	
+
 
 extern GLuint VIA_DEBUG;
 
@@ -398,7 +398,7 @@ extern void viaReAllocateBuffers(struct gl_context *ctx, struct gl_framebuffer *
 extern void viaXMesaWindowMoved(struct via_context *vmesa);
 
 extern GLboolean viaTexCombineState(struct via_context *vmesa,
-				    const struct gl_tex_env_combine_state * combine, 
+				    const struct gl_tex_env_combine_state * combine,
 				    unsigned unit );
 
 /* Via hw already adjusted for GL pixel centers:

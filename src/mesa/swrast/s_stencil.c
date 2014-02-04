@@ -499,9 +499,9 @@ stencil_and_ztest_span(struct gl_context *ctx, SWspan *span, GLuint face)
    if (!rb->GetPointer(ctx, rb, 0, 0)) {
       rb->PutRow(ctx, rb, n, x, y, stencil, NULL);
    }
-   
+
    span->writeAll = GL_FALSE;
-   
+
    return GL_TRUE;  /* one or more fragments passed both tests */
 }
 
@@ -918,7 +918,7 @@ stencil_and_ztest_pixels( struct gl_context *ctx, SWspan *span, GLuint face )
       ASSERT(rb->DataType == GL_UNSIGNED_BYTE);
       _swrast_get_values(ctx, rb, n, x, y, stencil, sizeof(GLubyte));
 
-      memcpy(origMask, mask, n * sizeof(GLubyte));          
+      memcpy(origMask, mask, n * sizeof(GLubyte));
 
       (void) do_stencil_test(ctx, face, n, stencil, mask);
 
@@ -927,7 +927,7 @@ stencil_and_ztest_pixels( struct gl_context *ctx, SWspan *span, GLuint face )
                           n, stencil, mask);
       }
       else {
-         GLubyte tmpMask[MAX_WIDTH]; 
+         GLubyte tmpMask[MAX_WIDTH];
          memcpy(tmpMask, mask, n * sizeof(GLubyte));
 
          _swrast_depth_test_span(ctx, span);

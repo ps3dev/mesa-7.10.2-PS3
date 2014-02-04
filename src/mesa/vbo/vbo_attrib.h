@@ -2,7 +2,7 @@
  Copyright (C) Intel Corp.  2006.  All Rights Reserved.
  Intel funded Tungsten Graphics (http://www.tungstengraphics.com) to
  develop this 3D driver.
- 
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice (including the
  next paragraph) shall be included in all copies or substantial
  portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,7 +22,7 @@
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  **********************************************************************/
  /*
   * Authors:
@@ -50,8 +50,8 @@ enum {
 	VBO_ATTRIB_COLOR0 = 3,
 	VBO_ATTRIB_COLOR1 = 4,
 	VBO_ATTRIB_FOG = 5,
-	VBO_ATTRIB_INDEX = 6,        
-	VBO_ATTRIB_EDGEFLAG = 7,     
+	VBO_ATTRIB_INDEX = 6,
+	VBO_ATTRIB_EDGEFLAG = 7,
 	VBO_ATTRIB_TEX0 = 8,
 	VBO_ATTRIB_TEX1 = 9,
 	VBO_ATTRIB_TEX2 = 10,
@@ -83,7 +83,7 @@ enum {
 	 * (whether it is a fixed-function emulation) to
 	 * differentiate.  Here we must keep them apart instead.
 	 */
-	VBO_ATTRIB_MAT_FRONT_AMBIENT = 32, 
+	VBO_ATTRIB_MAT_FRONT_AMBIENT = 32,
 	VBO_ATTRIB_MAT_BACK_AMBIENT = 33,
 	VBO_ATTRIB_MAT_FRONT_DIFFUSE = 34,
 	VBO_ATTRIB_MAT_BACK_DIFFUSE = 35,
@@ -94,7 +94,7 @@ enum {
 	VBO_ATTRIB_MAT_FRONT_SHININESS = 40,
 	VBO_ATTRIB_MAT_BACK_SHININESS = 41,
 	VBO_ATTRIB_MAT_FRONT_INDEXES = 42,
-	VBO_ATTRIB_MAT_BACK_INDEXES = 43, 
+	VBO_ATTRIB_MAT_BACK_INDEXES = 43,
 
 	VBO_ATTRIB_MAX = 44
 };

@@ -123,7 +123,7 @@ struct evergreen_hw_state {
 	struct radeon_state_atom db;
 	struct radeon_state_atom cb;
     struct radeon_state_atom vtx;
-	struct radeon_state_atom cp;	
+	struct radeon_state_atom cp;
     struct radeon_state_atom timestamp;
 };
 
@@ -132,7 +132,7 @@ typedef struct StreamDesc
 	GLint   size;   //number of data element
 	GLenum  type;  //data element type
 	GLsizei stride;
-	GLenum  format; // GL_RGBA,GLBGRA 
+	GLenum  format; // GL_RGBA,GLBGRA
 
 	struct radeon_bo *bo;
 	GLint  bo_offset;

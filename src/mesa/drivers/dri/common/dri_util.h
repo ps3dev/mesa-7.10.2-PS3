@@ -1,7 +1,7 @@
 /*
  * Copyright 1998-1999 Precision Insight, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -9,11 +9,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -31,7 +31,7 @@
  * driver doesn't really \e have to use any of this - it's optional.  But, some
  * useful stuff is done here that otherwise would have to be duplicated in most
  * drivers.
- * 
+ *
  * Basically, these utility functions take care of some of the dirty details of
  * screen initialization, context creation, context binding, DRM setup, etc.
  *
@@ -39,7 +39,7 @@
  * about them.
  *
  * \sa dri_util.c.
- * 
+ *
  * \author Kevin E. Martin <kevin@precisioninsight.com>
  * \author Brian Paul <brian@precisioninsight.com>
  */
@@ -131,7 +131,7 @@ do {								\
  *
  * Each DRI driver must have one of these structures with all the pointers set
  * to appropriate functions within the driver.
- * 
+ *
  * When glXCreateContext() is called, for example, it'll call a helper function
  * dri_util.c which in turn will jump through the \a CreateContext pointer in
  * this structure.
@@ -146,7 +146,7 @@ struct __DriverAPIRec {
 
     /**
      * Context creation callback
-     */	    	    
+     */
     GLboolean (*CreateContext)(gl_api api,
 			       const struct gl_config *glVis,
 			       __DRIcontext *driContextPriv,
@@ -164,14 +164,14 @@ struct __DriverAPIRec {
                               __DRIdrawable *driDrawPriv,
                               const struct gl_config *glVis,
                               GLboolean pixmapBuffer);
-    
+
     /**
      * Buffer (drawable) destruction callback
      */
     void (*DestroyBuffer)(__DRIdrawable *driDrawPriv);
 
     /**
-     * Buffer swapping callback 
+     * Buffer swapping callback
      */
     void (*SwapBuffers)(__DRIdrawable *driDrawPriv);
 
@@ -186,7 +186,7 @@ struct __DriverAPIRec {
      * Context unbinding callback
      */
     GLboolean (*UnbindContext)(__DRIcontext *driContextPriv);
-  
+
     /**
      * Retrieves statistics about buffer swap operations.  Required if
      * GLX_OML_sync_control or GLX_MESA_swap_frame_usage is supported.
@@ -198,7 +198,7 @@ struct __DriverAPIRec {
      * These are required if GLX_OML_sync_control is supported.
      */
     /*@{*/
-    int (*WaitForMSC)( __DRIdrawable *priv, int64_t target_msc, 
+    int (*WaitForMSC)( __DRIdrawable *priv, int64_t target_msc,
 		       int64_t divisor, int64_t remainder,
 		       int64_t * msc );
     int (*WaitForSBC)( __DRIdrawable *priv, int64_t target_sbc,
@@ -229,8 +229,8 @@ extern const struct __DriverAPIRec driDriverAPI;
 
 
 struct __DRIswapInfoRec {
-    /** 
-     * Number of swapBuffers operations that have been *completed*. 
+    /**
+     * Number of swapBuffers operations that have been *completed*.
      */
     uint64_t swap_count;
 
@@ -250,7 +250,7 @@ struct __DRIswapInfoRec {
 
     /**
      * Amount of time used by the last swap that missed its deadline.  This
-     * is calculated as (__glXGetUST() - swap_ust) / (swap_interval * 
+     * is calculated as (__glXGetUST() - swap_ust) / (swap_interval *
      * time_for_single_vrefresh)).  If the actual value of swap_interval is
      * 0, then 1 is used instead.  If swap_missed_count is non-zero, this
      * should be greater-than 1.0.
@@ -269,7 +269,7 @@ struct __DRIdrawableRec {
     drm_drawable_t hHWDrawable;
 
     /**
-     * Driver's private drawable information.  
+     * Driver's private drawable information.
      *
      * This structure is opaque.
      */
@@ -283,7 +283,7 @@ struct __DRIdrawableRec {
 
     /**
      * Reference count for number of context's currently bound to this
-     * drawable.  
+     * drawable.
      *
      * Once it reaches zero, the drawable can be destroyed.
      *
@@ -312,7 +312,7 @@ struct __DRIdrawableRec {
     unsigned int lastStamp;
 
     /**
-     * \name Drawable 
+     * \name Drawable
      *
      * Drawable information used in software fallbacks.
      */
@@ -466,7 +466,7 @@ struct __DRIscreenRec {
 
     /**
      * File descriptor returned when the kernel device driver is opened.
-     * 
+     *
      * Used to:
      *   - authenticate client to kernel
      *   - map the frame buffer, SAREA, etc.
@@ -475,7 +475,7 @@ struct __DRIscreenRec {
     int fd;
 
     /**
-     * SAREA pointer 
+     * SAREA pointer
      *
      * Used to access:
      *   - the device lock
@@ -484,7 +484,7 @@ struct __DRIscreenRec {
     drm_sarea_t *pSAREA;
 
     /**
-     * \name Direct frame buffer access information 
+     * \name Direct frame buffer access information
      * Used for software fallbacks.
      */
     /*@{*/
@@ -509,7 +509,7 @@ struct __DRIscreenRec {
 
     /**
      * Device-dependent private information (not stored in the SAREA).
-     * 
+     *
      * This pointer is never touched by the DRI layer.
      */
 #ifdef __cplusplus

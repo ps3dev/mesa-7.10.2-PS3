@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 
@@ -41,7 +41,7 @@ spu_pack_R8G8B8A8(vector float rgba)
   vector unsigned int out = spu_convtu(rgba, 32);
 
   out = spu_shuffle(out, out, ((vector unsigned char) {
-                                  0, 4, 8, 12, 0, 0, 0, 0, 
+                                  0, 4, 8, 12, 0, 0, 0, 0,
                                   0, 0, 0, 0, 0, 0, 0, 0 }) );
 
   return spu_extract(out, 0);
@@ -53,7 +53,7 @@ spu_pack_A8R8G8B8(vector float rgba)
 {
   vector unsigned int out = spu_convtu(rgba, 32);
   out = spu_shuffle(out, out, ((vector unsigned char) {
-                                  12, 0, 4, 8, 0, 0, 0, 0, 
+                                  12, 0, 4, 8, 0, 0, 0, 0,
                                   0, 0, 0, 0, 0, 0, 0, 0}) );
   return spu_extract(out, 0);
 }
@@ -64,7 +64,7 @@ spu_pack_B8G8R8A8(vector float rgba)
 {
   vector unsigned int out = spu_convtu(rgba, 32);
   out = spu_shuffle(out, out, ((vector unsigned char) {
-                                  8, 4, 0, 12, 0, 0, 0, 0, 
+                                  8, 4, 0, 12, 0, 0, 0, 0,
                                   0, 0, 0, 0, 0, 0, 0, 0}) );
   return spu_extract(out, 0);
 }

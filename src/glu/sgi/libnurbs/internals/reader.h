@@ -40,7 +40,7 @@
 #include "types.h"
 
 enum Curvetype { ct_nurbscurve, ct_pwlcurve, ct_none };
-    
+
 struct Property;
 struct O_surface;
 struct O_nurbssurface;
@@ -63,7 +63,7 @@ struct O_curve : public PooledObj {
     int			used;		/* curve called in cur surf	*/
     int			save;		/* 1 if in display list		*/
     long		nuid;
-    			O_curve() { next = 0; used = 0; owner = 0; 
+    			O_curve() { next = 0; used = 0; owner = 0;
 				    curve.o_pwlcurve = 0; curvetype = ct_none; save = 0; nuid = 0; }
     };
 
@@ -76,10 +76,10 @@ struct O_nurbscurve : public PooledObj {
     int			used;		/* curve called in cur surf	*/
     int			save;		/* 1 if in display list		*/
     O_curve *		owner;		/* owning curve 		*/
-			O_nurbscurve( long _type ) 
+			O_nurbscurve( long _type )
 			   { bezier_curves = 0; type = _type; tesselation = 0; method = 0; next = 0; used = 0; save = 0; owner = 0; }
     };
- 
+
 class O_pwlcurve : public PooledObj {
 public:
     TrimVertex		*pts;		/* array of trim vertices	*/
@@ -105,7 +105,7 @@ struct O_nurbssurface : public PooledObj {
     O_nurbssurface *	next;		/* next surface in chain	*/
     int			save;		/* 1 if in display list		*/
     int			used;		/* 1 if prev called in block	*/
-			O_nurbssurface( long _type ) 
+			O_nurbssurface( long _type )
 			   { bezier_patches = 0; type = _type; owner = 0; next = 0; save = 0; used = 0; }
     };
 

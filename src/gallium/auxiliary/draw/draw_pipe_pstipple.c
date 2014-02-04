@@ -1,5 +1,5 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2008 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
  *
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -231,7 +231,7 @@ pstip_transform_inst(struct tgsi_transform_context *ctx,
          decl.Declaration.Semantic = 1;
          decl.Semantic.Name = TGSI_SEMANTIC_POSITION;
          decl.Semantic.Index = 0;
-         decl.Range.First = 
+         decl.Range.First =
             decl.Range.Last = wincoordInput;
          ctx->emit_declaration(ctx, &decl);
       }
@@ -239,14 +239,14 @@ pstip_transform_inst(struct tgsi_transform_context *ctx,
       /* declare new sampler */
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_SAMPLER;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = pctx->freeSampler;
       ctx->emit_declaration(ctx, &decl);
 
       /* declare new temp regs */
       decl = tgsi_default_full_declaration();
       decl.Declaration.File = TGSI_FILE_TEMPORARY;
-      decl.Range.First = 
+      decl.Range.First =
       decl.Range.Last = pctx->texTemp;
       ctx->emit_declaration(ctx, &decl);
 
@@ -269,7 +269,7 @@ pstip_transform_inst(struct tgsi_transform_context *ctx,
       pctx->firstInstruction = FALSE;
 
 
-      /* 
+      /*
        * Insert new MUL/TEX/KILP instructions at start of program
        * Take gl_FragCoord, divide by 32 (stipple size), sample the
        * texture and kill fragment if needed.
@@ -363,7 +363,7 @@ generate_pstip_fs(struct pstip_stage *pstip)
    assert(pstip->fs->sampler_unit < PIPE_MAX_SAMPLERS);
 
    pstip->fs->pstip_fs = pstip->driver_create_fs_state(pstip->pipe, &pstip_fs);
-   
+
    FREE((void *)pstip_fs.tokens);
 
    if (!pstip->fs->pstip_fs)
@@ -386,7 +386,7 @@ pstip_update_texture(struct pstip_stage *pstip)
    uint i, j;
    ubyte *data;
 
-   /* XXX: want to avoid flushing just because we use stipple: 
+   /* XXX: want to avoid flushing just because we use stipple:
     *
     * Flush should no longer be necessary if driver is properly
     * interleaving drawing and transfers on a given context:
@@ -484,7 +484,7 @@ pstip_create_sampler(struct pstip_stage *pstip)
    pstip->sampler_cso = pipe->create_sampler_state(pipe, &sampler);
    if (pstip->sampler_cso == NULL)
       return FALSE;
-   
+
    return TRUE;
 }
 
@@ -531,7 +531,7 @@ pstip_first_tri(struct draw_stage *stage, struct prim_header *header)
       stage->tri(stage, header);
       return;
    }
-      
+
 
    /* how many samplers? */
    /* we'll use sampler/texture[pstip->sampler_unit] for the stipple */

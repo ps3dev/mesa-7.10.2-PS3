@@ -52,7 +52,7 @@ Uarray::Uarray( void )
 
 Uarray::~Uarray( void )
 {
-    if( uarray ) delete[] uarray;		
+    if( uarray ) delete[] uarray;
 }
 
 long
@@ -61,7 +61,7 @@ Uarray::init( REAL delta, Arc_ptr lo, Arc_ptr hi )
     ulines = (long) ((hi->tail()[0] - lo->tail()[0])/delta) + 3;
     if( size < ulines ) {
 	size = ulines * 2;
-	if( uarray ) delete[] uarray;		
+	if( uarray ) delete[] uarray;
 	uarray = new REAL[size];
 	assert( uarray != 0);
     }

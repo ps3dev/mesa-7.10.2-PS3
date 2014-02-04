@@ -40,7 +40,7 @@
  * Clip a point against the view volume.
  *
  * \param v vertex vector describing the point to clip.
- * 
+ *
  * \return zero if outside view volume, or one if inside.
  */
 static GLuint
@@ -60,7 +60,7 @@ viewclip_point_xy( const GLfloat v[] )
  * Clip a point against the far/near Z clipping planes.
  *
  * \param v vertex vector describing the point to clip.
- * 
+ *
  * \return zero if outside view volume, or one if inside.
  */
 static GLuint
@@ -77,10 +77,10 @@ viewclip_point_z( const GLfloat v[] )
 
 /**
  * Clip a point against the user clipping planes.
- * 
+ *
  * \param ctx GL context.
  * \param v vertex vector describing the point to clip.
- * 
+ *
  * \return zero if the point was clipped, or one otherwise.
  */
 static GLuint
@@ -128,7 +128,7 @@ shade_rastpos(struct gl_context *ctx,
    _mesa_validate_all_lighting_tables( ctx );
 
    COPY_3V(diffuseColor, base[0]);
-   diffuseColor[3] = CLAMP( 
+   diffuseColor[3] = CLAMP(
       ctx->Light.Material.Attrib[MAT_ATTRIB_FRONT_DIFFUSE][3], 0.0F, 1.0F );
    ASSIGN_4V(specularColor, 0.0, 0.0, 0.0, 1.0);
 

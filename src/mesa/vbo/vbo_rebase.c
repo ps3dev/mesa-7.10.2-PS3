@@ -39,7 +39,7 @@
  *
  * If we just upload the new data, however, the indices will be
  * incorrect as we tend to upload each set of vertex data to a new
- * region.  
+ * region.
  *
  * This file provides a helper to adjust the arrays, primitives and
  * indices of a draw call so that it can be re-issued with a min_index
@@ -76,7 +76,7 @@ REBASE(GLubyte)
 GLboolean vbo_all_varyings_in_vbos( const struct gl_client_array *arrays[] )
 {
    GLuint i;
-   
+
    for (i = 0; i < VERT_ATTRIB_MAX; i++)
       if (arrays[i]->StrideB &&
 	  arrays[i]->BufferObj->Name == 0)
@@ -105,7 +105,7 @@ GLboolean vbo_any_varyings_in_vbos( const struct gl_client_array *arrays[] )
  *      min_index will be transformed.
  *
  * Hardware tnl:
- *    - if ib != NULL and min_index != 0, otherwise vertices lower than 
+ *    - if ib != NULL and min_index != 0, otherwise vertices lower than
  *      min_index will be uploaded.  Requires adjusting index values.
  *
  *    - if ib == NULL and min_index != 0, just for convenience so this doesn't
@@ -160,8 +160,8 @@ void vbo_rebase_prims( struct gl_context *ctx,
       GLboolean map_ib = ib->obj->Name && !ib->obj->Pointer;
       void *ptr;
 
-      if (map_ib) 
-	 ctx->Driver.MapBuffer(ctx, 
+      if (map_ib)
+	 ctx->Driver.MapBuffer(ctx,
 			       GL_ELEMENT_ARRAY_BUFFER,
 			       GL_READ_ONLY_ARB,
 			       ib->obj);
@@ -173,19 +173,19 @@ void vbo_rebase_prims( struct gl_context *ctx,
        * GLuints here.  Others wouldn't...
        */
       switch (ib->type) {
-      case GL_UNSIGNED_INT: 
+      case GL_UNSIGNED_INT:
 	 tmp_indices = rebase_GLuint( ptr, ib->count, min_index );
 	 break;
-      case GL_UNSIGNED_SHORT: 
+      case GL_UNSIGNED_SHORT:
 	 tmp_indices = rebase_GLushort( ptr, ib->count, min_index );
 	 break;
-      case GL_UNSIGNED_BYTE: 
+      case GL_UNSIGNED_BYTE:
 	 tmp_indices = rebase_GLubyte( ptr, ib->count, min_index );
 	 break;
-      }      
+      }
 
-      if (map_ib) 
-	 ctx->Driver.UnmapBuffer(ctx, 
+      if (map_ib)
+	 ctx->Driver.UnmapBuffer(ctx,
 				 GL_ELEMENT_ARRAY_BUFFER,
 				 ib->obj);
 
@@ -228,21 +228,21 @@ void vbo_rebase_prims( struct gl_context *ctx,
       tmp_arrays[i].Ptr += min_index * tmp_arrays[i].StrideB;
       tmp_array_pointers[i] = &tmp_arrays[i];
    }
-   
+
    /* Re-issue the draw call.
     */
-   draw( ctx, 
-	 tmp_array_pointers, 
-	 prim, 
-	 nr_prims, 
-	 ib, 
+   draw( ctx,
+	 tmp_array_pointers,
+	 prim,
+	 nr_prims,
+	 ib,
 	 GL_TRUE,
-	 0, 
+	 0,
 	 max_index - min_index );
-   
+
    if (tmp_indices)
       free(tmp_indices);
-   
+
    if (tmp_prims)
       free(tmp_prims);
 }

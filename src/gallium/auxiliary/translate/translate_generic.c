@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
  /*
@@ -59,7 +59,7 @@ struct translate_generic {
 
       emit_func emit;
       unsigned output_offset;
-      
+
       const uint8_t *input_ptr;
       unsigned input_stride;
       unsigned max_index;
@@ -215,7 +215,7 @@ emit_B8G8R8A8_UNORM( const float *attrib, void *ptr)
    out[3] = TO_8_UNORM(attrib[3]);
 }
 
-static void 
+static void
 emit_NULL( const float *attrib, void *ptr )
 {
    /* do nothing is the only sensible option */
@@ -357,7 +357,7 @@ static emit_func get_emit_func( enum pipe_format format )
       return &emit_A8R8G8B8_UNORM;
 
    default:
-      assert(0); 
+      assert(0);
       return &emit_NULL;
    }
 }
@@ -490,7 +490,7 @@ static void PIPE_CDECL generic_run( struct translate *translate,
 }
 
 
-			       
+
 static void generic_set_buffer( struct translate *translate,
 				unsigned buf,
 				const void *ptr,

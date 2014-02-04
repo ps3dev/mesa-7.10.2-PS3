@@ -64,7 +64,7 @@ typedef struct {
 /* XXX why is this here?
  * It should probaby be somewhere in src/mesa/drivers/windows/
  */
-#if defined(_WIN32) && !defined(_WINGDI_) && !defined(_WINGDI_H) && !defined(_GNU_H_WINDOWS32_DEFINES) && !defined(OPENSTEP) && !defined(BUILD_FOR_SNAP) 
+#if defined(_WIN32) && !defined(_WINGDI_) && !defined(_WINGDI_H) && !defined(_GNU_H_WINDOWS32_DEFINES) && !defined(OPENSTEP) && !defined(BUILD_FOR_SNAP)
 #	define WGL_FONT_LINES      0
 #	define WGL_FONT_POLYGONS   1
 #ifndef _GNU_H_WINDOWS32_FUNCTIONS

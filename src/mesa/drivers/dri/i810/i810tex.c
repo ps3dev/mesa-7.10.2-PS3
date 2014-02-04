@@ -15,9 +15,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * KEITH WHITWELL, OR ANY OTHER CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
@@ -94,8 +94,8 @@ static void i810SetTexWrapping(i810TextureObjectPtr tex,
 }
 
 
-static void i810SetTexFilter(i810ContextPtr imesa, 
-			     i810TextureObjectPtr t, 
+static void i810SetTexFilter(i810ContextPtr imesa,
+			     i810TextureObjectPtr t,
 			     GLenum minf, GLenum magf,
                              GLfloat bias)
 {
@@ -121,9 +121,9 @@ static void i810SetTexFilter(i810ContextPtr imesa,
       t->Setup[I810_TEXREG_MF] |= MF_MIN_LINEAR | MF_MIP_NEAREST;
       break;
    case GL_NEAREST_MIPMAP_LINEAR:
-      if (IS_I815(imesa)) 
+      if (IS_I815(imesa))
 	 t->Setup[I810_TEXREG_MF] |= MF_MIN_NEAREST | MF_MIP_LINEAR;
-      else 
+      else
 	 t->Setup[I810_TEXREG_MF] |= MF_MIN_NEAREST | MF_MIP_DITHER;
       /*
       if (magf == GL_LINEAR) {
@@ -135,7 +135,7 @@ static void i810SetTexFilter(i810ContextPtr imesa,
    case GL_LINEAR_MIPMAP_LINEAR:
       if (IS_I815(imesa))
 	 t->Setup[I810_TEXREG_MF] |= MF_MIN_LINEAR | MF_MIP_LINEAR;
-      else 
+      else
 	 t->Setup[I810_TEXREG_MF] |= MF_MIN_LINEAR | MF_MIP_DITHER;
       break;
    default:
@@ -143,13 +143,13 @@ static void i810SetTexFilter(i810ContextPtr imesa,
    }
 
    switch (magf) {
-   case GL_NEAREST: 
-      t->Setup[I810_TEXREG_MF] |= MF_MAG_NEAREST; 
+   case GL_NEAREST:
+      t->Setup[I810_TEXREG_MF] |= MF_MAG_NEAREST;
       break;
-   case GL_LINEAR: 
-      t->Setup[I810_TEXREG_MF] |= MF_MAG_LINEAR; 
+   case GL_LINEAR:
+      t->Setup[I810_TEXREG_MF] |= MF_MAG_LINEAR;
       break;
-   default: 
+   default:
       return;
    }
 
@@ -179,9 +179,9 @@ i810AllocTexObj( struct gl_context *ctx, struct gl_texture_object *texObj )
        */
       t->base.tObj = texObj;
       t->Setup[I810_TEXREG_MI0] = GFX_OP_MAP_INFO;
-      t->Setup[I810_TEXREG_MI1] = MI1_MAP_0; 
+      t->Setup[I810_TEXREG_MI1] = MI1_MAP_0;
       t->Setup[I810_TEXREG_MI2] = MI2_DIMENSIONS_ARE_LOG2;
-      t->Setup[I810_TEXREG_MLC] = (GFX_OP_MAP_LOD_CTL | 
+      t->Setup[I810_TEXREG_MLC] = (GFX_OP_MAP_LOD_CTL |
 				   MLC_MAP_0 |
 				   /*MLC_DITHER_WEIGHT_FULL |*/
 				   MLC_DITHER_WEIGHT_12 |
@@ -201,7 +201,7 @@ i810AllocTexObj( struct gl_context *ctx, struct gl_texture_object *texObj )
 				  MF_UPDATE_MIP_FILTER |
 				  MF_UPDATE_MAG_FILTER |
 				  MF_UPDATE_MIN_FILTER);
-      
+
       make_empty_list( & t->base );
 
       i810SetTexWrapping( t, texObj->WrapS, texObj->WrapT );
@@ -231,7 +231,7 @@ static void i810TexParameter( struct gl_context *ctx, GLenum target,
     * vertices or not.  Setting imesa->new_state means that
     * i810UpdateTextureState() will be called before any triangles are
     * rendered.  If a statechange has occurred, it will be detected at
-    * that point, and buffered vertices flushed.  
+    * that point, and buffered vertices flushed.
     */
    switch (pname) {
    case GL_TEXTURE_MIN_FILTER:
@@ -246,7 +246,7 @@ static void i810TexParameter( struct gl_context *ctx, GLenum target,
    case GL_TEXTURE_WRAP_T:
       i810SetTexWrapping( t, tObj->WrapS, tObj->WrapT );
       break;
-  
+
    case GL_TEXTURE_BORDER_COLOR:
       i810SetTexBorderColor( t, tObj->BorderColor.f );
       break;
@@ -280,12 +280,12 @@ static void i810TexParameter( struct gl_context *ctx, GLenum target,
 
 /**
  * Setup hardware bits for new texture environment settings.
- * 
+ *
  * \todo
  * Determine whether or not \c param can be used instead of
  * \c texUnit->EnvColor in the \c GL_TEXTURE_ENV_COLOR case.
  */
-static void i810TexEnv( struct gl_context *ctx, GLenum target, 
+static void i810TexEnv( struct gl_context *ctx, GLenum target,
 			GLenum pname, const GLfloat *param )
 {
    i810ContextPtr imesa = I810_CONTEXT( ctx );
@@ -293,7 +293,7 @@ static void i810TexEnv( struct gl_context *ctx, GLenum target,
    const struct gl_texture_unit *texUnit = &ctx->Texture.Unit[unit];
 
    /* Only one env color.  Need a fallback if env colors are different
-    * and texture setup references env color in both units.  
+    * and texture setup references env color in both units.
     */
    switch (pname) {
    case GL_TEXTURE_ENV_COLOR: {
@@ -328,7 +328,7 @@ static void i810TexEnv( struct gl_context *ctx, GLenum target,
    default:
       break;
    }
-} 
+}
 
 
 
@@ -336,7 +336,7 @@ static void i810TexEnv( struct gl_context *ctx, GLenum target,
 static void i810TexImage1D( struct gl_context *ctx, GLenum target, GLint level,
 			    GLint internalFormat,
 			    GLint width, GLint border,
-			    GLenum format, GLenum type, 
+			    GLenum format, GLenum type,
 			    const GLvoid *pixels,
 			    const struct gl_pixelstore_attrib *pack,
 			    struct gl_texture_object *texObj,
@@ -348,9 +348,9 @@ static void i810TexImage1D( struct gl_context *ctx, GLenum target, GLint level,
    }
 }
 
-static void i810TexSubImage1D( struct gl_context *ctx, 
+static void i810TexSubImage1D( struct gl_context *ctx,
 			       GLenum target,
-			       GLint level,	
+			       GLint level,
 			       GLint xoffset,
 			       GLsizei width,
 			       GLenum format, GLenum type,
@@ -388,9 +388,9 @@ static void i810TexImage2D( struct gl_context *ctx, GLenum target, GLint level,
 			   pixels, packing, texObj, texImage );
 }
 
-static void i810TexSubImage2D( struct gl_context *ctx, 
+static void i810TexSubImage2D( struct gl_context *ctx,
 			       GLenum target,
-			       GLint level,	
+			       GLint level,
 			       GLint xoffset, GLint yoffset,
 			       GLsizei width, GLsizei height,
 			       GLenum format, GLenum type,
@@ -404,7 +404,7 @@ static void i810TexSubImage2D( struct gl_context *ctx,
      I810_FIREVERTICES( I810_CONTEXT(ctx) );
      driSwapOutTextureObject( t );
    }
-   _mesa_store_texsubimage2d(ctx, target, level, xoffset, yoffset, width, 
+   _mesa_store_texsubimage2d(ctx, target, level, xoffset, yoffset, width,
 			     height, format, type, pixels, packing, texObj,
 			     texImage);
 }
@@ -432,7 +432,7 @@ static void i810DeleteTexture( struct gl_context *ctx, struct gl_texture_object 
 
 /**
  * Choose a Mesa texture format to match the requested format.
- * 
+ *
  * The i810 only supports 5 texture modes that are useful to Mesa.  That
  * makes this routine pretty simple.
  */

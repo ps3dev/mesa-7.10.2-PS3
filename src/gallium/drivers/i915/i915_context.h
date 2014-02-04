@@ -1,8 +1,8 @@
  /**************************************************************************
- * 
+ *
  * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 #ifndef I915_CONTEXT_H
@@ -47,18 +47,18 @@ struct i915_winsys_batchbuffer;
 
 #define I915_DYNAMIC_MODES4       0
 #define I915_DYNAMIC_DEPTHSCALE_0 1 /* just the header */
-#define I915_DYNAMIC_DEPTHSCALE_1 2 
+#define I915_DYNAMIC_DEPTHSCALE_1 2
 #define I915_DYNAMIC_IAB          3
 #define I915_DYNAMIC_BC_0         4 /* just the header */
 #define I915_DYNAMIC_BC_1         5
-#define I915_DYNAMIC_BFO_0        6 
+#define I915_DYNAMIC_BFO_0        6
 #define I915_DYNAMIC_BFO_1        7
-#define I915_DYNAMIC_STP_0        8 
-#define I915_DYNAMIC_STP_1        9 
-#define I915_DYNAMIC_SC_ENA_0     10 
-#define I915_DYNAMIC_SC_RECT_0    11 
-#define I915_DYNAMIC_SC_RECT_1    12 
-#define I915_DYNAMIC_SC_RECT_2    13 
+#define I915_DYNAMIC_STP_0        8
+#define I915_DYNAMIC_STP_1        9
+#define I915_DYNAMIC_SC_ENA_0     10
+#define I915_DYNAMIC_SC_RECT_0    11
+#define I915_DYNAMIC_SC_RECT_1    12
+#define I915_DYNAMIC_SC_RECT_2    13
 #define I915_MAX_DYNAMIC          14
 
 
@@ -75,7 +75,7 @@ struct i915_winsys_batchbuffer;
 /* These must mach the order of LI0_STATE_* bits, as they will be used
  * to generate hardware packets:
  */
-#define I915_CACHE_STATIC         0 
+#define I915_CACHE_STATIC         0
 #define I915_CACHE_DYNAMIC        1 /* handled specially */
 #define I915_CACHE_SAMPLER        2
 #define I915_CACHE_MAP            3
@@ -127,9 +127,9 @@ struct i915_fragment_shader
 struct i915_cache_context;
 
 /* Use to calculate differences between state emitted to hardware and
- * current driver-calculated state.  
+ * current driver-calculated state.
  */
-struct i915_state 
+struct i915_state
 {
    unsigned immediate[I915_MAX_IMMEDIATE];
    unsigned dynamic[I915_MAX_DYNAMIC];
@@ -276,33 +276,33 @@ struct i915_context {
 
 
 /***********************************************************************
- * i915_prim_emit.c: 
+ * i915_prim_emit.c:
  */
 struct draw_stage *i915_draw_render_stage( struct i915_context *i915 );
 
 
 /***********************************************************************
- * i915_prim_vbuf.c: 
+ * i915_prim_vbuf.c:
  */
 struct draw_stage *i915_draw_vbuf_stage( struct i915_context *i915 );
 
 
 /***********************************************************************
- * i915_state_emit.c: 
+ * i915_state_emit.c:
  */
 void i915_emit_hardware_state(struct i915_context *i915 );
 
 
 
 /***********************************************************************
- * i915_clear.c: 
+ * i915_clear.c:
  */
 void i915_clear( struct pipe_context *pipe, unsigned buffers, const float *rgba,
                  double depth, unsigned stencil);
 
 
 /***********************************************************************
- * 
+ *
  */
 void i915_init_state_functions( struct i915_context *i915 );
 void i915_init_flush_functions( struct i915_context *i915 );

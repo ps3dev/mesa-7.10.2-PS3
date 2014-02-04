@@ -1,8 +1,8 @@
 /**************************************************************************
- * 
+ *
  * Copyright 2007 Tungsten Graphics, Inc., Cedar Park, Texas.
  * All Rights Reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,11 +10,11 @@
  * distribute, sub license, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice (including the
  * next paragraph) shall be included in all copies or substantial portions
  * of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
@@ -22,7 +22,7 @@
  * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  **************************************************************************/
 
 /**
@@ -117,14 +117,14 @@ setup_pos_vector(const struct tgsi_interp_coef *coef,
 /* TODO: hide the machine struct in here somewhere, remove from this
  * interface:
  */
-static unsigned 
+static unsigned
 exec_run( const struct sp_fragment_shader *base,
 	  struct tgsi_exec_machine *machine,
 	  struct quad_header *quad )
 {
    /* Compute X, Y, Z, W vals for this quad */
-   setup_pos_vector(quad->posCoef, 
-                    (float)quad->input.x0, (float)quad->input.y0, 
+   setup_pos_vector(quad->posCoef,
+                    (float)quad->input.x0, (float)quad->input.y0,
                     &machine->QuadPos);
 
    /* convert 0 to 1.0 and 1 to -1.0 */
@@ -179,7 +179,7 @@ exec_run( const struct sp_fragment_shader *base,
 }
 
 
-static void 
+static void
 exec_delete( struct sp_fragment_shader *base )
 {
    FREE((void *) base->shader.tokens);

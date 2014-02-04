@@ -235,7 +235,7 @@ DRI2QueryVersion(Display * dpy, int *major, int *minor)
 	   nevents = 2;
 	   break;
    }
-	
+
    for (i = 0; i < nevents; i++) {
        XESetWireToEvent (dpy, info->codes->first_event + i, DRI2WireToEvent);
        XESetEventToWire (dpy, info->codes->first_event + i, DRI2EventToWire);
